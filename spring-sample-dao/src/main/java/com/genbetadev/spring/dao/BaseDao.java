@@ -12,7 +12,7 @@ import org.hibernate.criterion.DetachedCriteria;
  * @since 2011
  *
  */
-public interface BaseDao<T extends Serializable, E> {
+public interface BaseDao<T extends Serializable, E> { // bn bh bh
 
     public void deleteAll(Collection<T> instances) throws Exception;
 
