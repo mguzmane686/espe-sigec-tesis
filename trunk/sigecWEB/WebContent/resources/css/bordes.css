@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+.roundCorner{
+	/*roberto*/	
+	width:auto;
+	border.radius: 10px; 
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	
+	height:auto;
+	background:#E1E5DE;
+	
+	border-right:1px solid #888; 
+	border-left:1px solid #888;
+	border-bottom:1px solid #888; 
+	border-top:1px solid #888;
+	height: 50px;
+}

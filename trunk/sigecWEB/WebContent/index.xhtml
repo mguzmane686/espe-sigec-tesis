@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<body>
+	<ui:composition template="/templates/template.xhtml">
+
+		<ui:define name="title">Login</ui:define>
+
+		<ui:define name="body">
+
+			<h:outputStylesheet library="css" name="stylelog.css"></h:outputStylesheet>
+			<h:form prependId="false">
+				<h:inputHidden value="#{homeSessionController.allowNavigate}" />
+				<h:panelGroup layout="block" id="layer01_holder">
+					<div id="left"></div>
+					<div id="center"></div>
+					<div id="right"></div>
+				</h:panelGroup>
+
+				<h:panelGroup layout="block" id="layer02_holder">
+					<div id="left"></div>
+					<div id="center"></div>
+					<div id="right"></div>
+				</h:panelGroup>
+
+				<h:panelGroup layout="block" id="layer03_holder">
+					<div id="left"></div>
+					<div id="center">
+						
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td height="40">LOGIN</td>
+							</tr>
+							<tr>
+								<td><h:panelGrid columns="2">
+										<h:outputLabel value="Usuario" />
+										<h:inputText value="#{loginController.usuario.identificador}" required="true" id="textfield" size="30"/>
+
+										<h:outputLabel value="Clave" />
+										<h:inputText value="#{loginController.usuario.clave}" required="true" id="textfield2" style="margin-top:5px;" size="30"/>
+									</h:panelGrid> 
+									<a4j:commandButton actionListener="#{loginController.btnSignIn}" value="Sign In" id="button"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div id="right"></div>
+				</h:panelGroup>
+
+				<h:panelGroup layout="block" id="layer04_holder">
+					<h:panelGroup layout="block" id="left"/>
+					<h:panelGroup layout="block" id="center">
+						<h:outputLabel value="Si no tiene una cuenta creela" />
+						<a4j:commandLink value="&nbsp; aqui" actionListener="${loginController.btnCreateAccount}" immediate="true"></a4j:commandLink> 
+					</h:panelGroup>
+					<h:panelGroup layout="block" id="right"/>
+				</h:panelGroup>
+
+				
+				
+
+				<a4j:outputPanel ajaxRendered="true">
+					<rich:notify sticky="false" stayTime="1000"
+						detail="El usuario o clave no existen" showShadow="true">
+					</rich:notify>
+				</a4j:outputPanel>
+
+			</h:form>
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

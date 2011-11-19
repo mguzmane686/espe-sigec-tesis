@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="cssLayout.css"> </h:outputStylesheet>
+        <h:outputStylesheet library="css" name="default.css"> </h:outputStylesheet>
+        <h:outputStylesheet library="css" name="stylelog.css"></h:outputStylesheet>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <h:panelGroup layout="block" id="top" style="text-align:center; width:100%">
+        	<h:panelGrid columns="2" style="text-align:center">
+        		<h:outputLabel value="Sistema de educacion continua" style="font-size:24px"/>
+            	<a4j:commandButton value="Cerrar Cesion" action="#{homeSessionController.btnLogOut}" execute="@this" style="float:right;"/>
+        	</h:panelGrid>
+            
+        </h:panelGroup>>
+        
+        <div>
+            <h:panelGroup layout="block" id="left">
+            	
+                <ui:insert name="left">
+                	menu sigec
+                </ui:insert>
+            </h:panelGroup>
+            <div id="content" class="left_content">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+	<a4j:status onstart="#{rich:component('statusPanel')}.show();" onstop="#{rich:component('statusPanel')}.hide();" />
+    
+    <rich:popupPanel id="statusPanel" autosized="true">
+		<h:graphicImage library="images" name="ajax_status.gif" />
+	</rich:popupPanel>
+    </h:body>
+
+</html>
