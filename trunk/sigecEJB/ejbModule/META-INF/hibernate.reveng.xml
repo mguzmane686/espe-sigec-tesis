@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-name="asistencia_estudiante"/>
+  <table-filter match-name="aula"/>
+  <table-filter match-name="calificacion_estudiante"/>
+  <table-filter match-name="curso"/>
+  <table-filter match-name="curso_estudiante"/>
+  <table-filter match-name="curso_periodo"/>
+  <table-filter match-name="desempenio_profesor"/>
+  <table-filter match-name="estudiante"/>
+  <table-filter match-name="historico_curso_estado"/>
+  <table-filter match-name="material_didactico"/>
+  <table-filter match-name="pensum_academico"/>
+  <table-filter match-name="perfil"/>
+  <table-filter match-name="periodo_academico"/>
+  <table-filter match-name="persona"/>
+  <table-filter match-name="presupuesto"/>
+  <table-filter match-name="profesor"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="usuario_perfil"/>
+</hibernate-reverse-engineering>
