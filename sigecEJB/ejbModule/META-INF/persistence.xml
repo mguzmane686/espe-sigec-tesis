@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="prjSigecEJBTestPU" transaction-type="JTA">
+		
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+<!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
+		<jta-data-source>jdbc/sigec_pool</jta-data-source>
+		<class>org.espe.sigec.model.entities.Usuario</class>
+		<class>org.espe.sigec.model.entities.Profesor</class>
+		<class>org.espe.sigec.model.entities.Presupuesto</class>
+		<class>org.espe.sigec.model.entities.Persona</class>
+		<class>org.espe.sigec.model.entities.PeriodoAcademico</class>
+		<class>org.espe.sigec.model.entities.Perfil</class>
+		<class>org.espe.sigec.model.entities.PensumAcademico</class>
+		<class>org.espe.sigec.model.entities.Opcion</class>
+		<class>org.espe.sigec.model.entities.Modulo</class>
+		<class>org.espe.sigec.model.entities.MaterialDidactico</class>
+		<class>org.espe.sigec.model.entities.HistoricoCursoEstado</class>
+		<class>org.espe.sigec.model.entities.Estudiante</class>
+		<class>org.espe.sigec.model.entities.DesempenioProfesorPK</class>
+		<class>org.espe.sigec.model.entities.DesempenioProfesor</class>
+		<class>org.espe.sigec.model.entities.CursoPeriodo</class>
+		<class>org.espe.sigec.model.entities.CursoEstudiantePK</class>
+		<class>org.espe.sigec.model.entities.CursoEstudiante</class>
+		<class>org.espe.sigec.model.entities.Curso</class>
+		<class>org.espe.sigec.model.entities.CalificacionEstudiante</class>
+		<class>org.espe.sigec.model.entities.Aula</class>
+		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
+		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
+		<class>org.espe.sigec.model.entities.UsuarioPerfil</class>
+		
+		<properties>
+		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
+		</properties>
+	</persistence-unit>
+</persistence>
