@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    <!-- ui:define name="left">
+    	<sigecComp:menu_sigec></sigecComp:menu_sigec>
+    </ui:define>
+    
+    <ui:define name="content"-->
+    	<h:outputStylesheet library="css" name="textos.css"/>
+        <h:form>
+        	<rich:panel header="Registro de docente">
+        	
+        	<fieldset>
+        		<legend>
+        			<h:outputLabel value="Usuario" styleClass="titulo"/>
+        		</legend>
+        		<h:panelGrid columns="2">
+        			<h:outputLabel value="Identificador" styleClass="label-bold espacioDetalle" />
+        			<h:inputText value="#{inscripcion.estudiante.persona.usuario.identificador}" />
+        			
+        			<h:outputLabel value="Clave" styleClass="label-bold"/>
+        			<h:inputText value="#{inscripcion.estudiante.persona.usuario.clave}" />
+        		</h:panelGrid>
+        	</fieldset>
+        	
+        	<fieldset>
+        		<legend>
+        			<h:outputLabel value="Datos Personales" styleClass="titulo"/>
+        		</legend>
+	        	<h:panelGrid columns="2">
+	        		<h:outputLabel value="Cedula" styleClass="label-bold" style="padding-right:50px"/>
+	        		<h:inputText value="#{inscripcion.estudiante.persona.cedula}" />
+	        		
+	        		<h:outputLabel value="Nombres" styleClass="label-bold"/>
+	        		<h:panelGrid columns="2">
+	        			<h:inputText value="#{inscripcion.estudiante.persona.primerNombre}" />
+	        			<h:inputText value="#{inscripcion.estudiante.persona.segundoNombre}" />
+	        		</h:panelGrid>
+	        		
+	        		
+	        		<h:outputLabel value="Apellido" styleClass="label-bold"/>
+	        		<h:panelGrid columns="2">
+	        			<h:inputText value="#{inscripcion.estudiante.persona.primerApellido}" />
+	        			<h:inputText value="#{inscripcion.estudiante.persona.segundoApellido}" />
+	        		</h:panelGrid>
+	        		
+	        		<h:outputLabel value="Fecha nacimiento" styleClass="label-bold"/>
+	        		<rich:calendar value="#{inscripcion.estudiante.persona.fechaNacimiento}"></rich:calendar>
+	        		
+	        		<h:outputLabel value="Nacionalidad" styleClass="label-bold"/>
+	        		<h:inputText value="#{inscripcion.estudiante.persona.nacionalidad}" />
+	        		
+	        		<h:outputLabel value="Direccion" styleClass="label-bold"/>
+	        		<h:inputText value="#{inscripcion.estudiante.persona.direccion}" />
+	        		
+	        		<h:outputLabel value="e-mail" styleClass="label-bold"/>
+	        		<h:inputText value="#{inscripcion.estudiante.persona.mail}" />
+	        		
+	        		<h:outputLabel value="Celular" styleClass="label-bold"/>
+	        		<h:inputText value="#{inscripcion.estudiante.persona.telefonoCelular}" />
+	        		
+	        	</h:panelGrid>
+        	</fieldset>
+        	
+        	<fieldset>
+        		<legend>
+        			<h:outputLabel value="Titulos" styleClass="titulo"/>
+        		</legend>
+        		<h:panelGrid columns="2">
+	        		<h:outputLabel value="Tiutlo de 3er nivel" styleClass="label-bold" style="padding-right:50px"/>
+	        		<h:selectOneRadio>
+	        			<f:selectItem itemLabel="Si" itemValue="1"/>
+	        			<f:selectItem itemLabel="No" itemValue="0"/>
+	        		</h:selectOneRadio>
+	        	</h:panelGrid>
+        	</fieldset>
+        	
+        	<a4j:commandButton value="Guardar" actionListener="#{inscripcion.btnGuardarEstudiante}" render="@form"></a4j:commandButton>
+        	</rich:panel>
+        </h:form>
+    <!-- /ui:define-->
+
+
+</ui:composition>

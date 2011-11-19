@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+input[type='submit'].saveAjax {
+	height: 34px;
+	width: 100px;
+	border: 1px solid #006;
+	border-style: outset;
+	/*background-color: SkyBlue;*/
+	background-color: none repeat scroll 0 0 #FFFFFF;
+	padding-left: 4px;
+	padding-right: 4px;
+	background-repeat: no-repeat;
+	background-image: url('#{resource['images:save.png']}');
+	background-position: left;
+	/*text-indent: 20px;*/
+	text-align:justify;
+	cursor:pointer;
+	font-weight: bold;
+	font-style: oblique;
+	
+	
+	border-radius: 34px 14px 34px 14px;
+}

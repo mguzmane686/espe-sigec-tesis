@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+    
+    	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>    
+    	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
+    	
+        <h:form id="frmPlanearCurso">
+        	<rich:panel header="Creacion de curso">
+        		<h:panelGroup layout="block" styleClass="roundCorner">
+        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+        				<a4j:commandButton value="Guardar" image="/resources/images/save.png"/>
+        				<h:outputLabel value="Guardar" />
+        			</h:panelGrid>
+        		</h:panelGroup>
+        	</rich:panel>
+        	
+        	<rich:panel header="Planificar curso">
+        	
+        	<fieldset>
+        		<legend>
+        			<h:outputLabel value="Fecha de curso" styleClass="titulo"/>
+        		</legend>
+        		<h:panelGrid columns="2">
+        			<h:outputLabel value="Fecha inicio" />
+        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaInicio}" />
+        			
+        			<h:outputLabel value="Fecha Finalizacion" />
+        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaFin}" />
+        		</h:panelGrid>
+        	</fieldset>
+        	
+        	<fieldset>
+        		<legend>
+        			<h:outputLabel value="Datos Especificos" styleClass="titulo"/>
+        		</legend>
+        		
+        		<a4j:outputPanel ajaxRendered="true">
+        			<h:panelGrid columns="2">
+        				<h:outputLabel value="Curso"/>
+        				<rich:select defaultLabel="start typing for select" enableManualInput="true">
+        					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
+        				</rich:select>
+        				
+        				<h:outputLabel value="Inicio Inscripciones" />
+        				<rich:calendar/>
+        				
+        				
+        				<h:outputLabel value="Minimo estudiantes" />
+        				<rich:inputNumberSpinner/>
+        				<h:outputLabel value="Maximo estudiantes" />
+        				<rich:inputNumberSpinner/>
+        				
+        				<h:outputLabel value="Tipo curso" />
+        				<h:selectOneRadio>
+        					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
+        					<f:selectItem itemLabel="Individual" itemValue="IND"/>
+        				</h:selectOneRadio>
+        			</h:panelGrid>
+        		</a4j:outputPanel>
+        	</fieldset>	
+        	</rich:panel>
+        	
+        </h:form>
+    
+
+
+</ui:composition>
