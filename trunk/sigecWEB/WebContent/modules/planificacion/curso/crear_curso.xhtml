@@ -97,7 +97,7 @@
 		        </h:panelGrid>
 		        
 		        <h:panelGroup layout="block">
-		        	<a4j:commandButton actionListener="#{cursoController.btnAddTemaPensum}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoTema')}.hide()"/>
+		        	<a4j:commandButton value="#{msg['etiqueta_aniadir_Tema']}" actionListener="#{cursoController.btnAddTemaPensum}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoTema')}.hide()"/>
 		        </h:panelGroup>
 		        </h:form>
 		    </rich:popupPanel>
