@@ -15,14 +15,36 @@
 </composite:interface>
 <composite:implementation>
 	<!-- rich:panelMenu binding="#{cc.attrs.controller}" /-->
-	<rich:panelMenu itemMode="client" groupMode="client" rendered="false"
+	<rich:panelMenu itemMode="client" groupMode="client" rendered="true"
        groupExpandedLeftIcon="triangleUp"
        groupCollapsedLeftIcon="triangleDown"
        topGroupExpandedRightIcon="chevronUp"
        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
-       <rich:panelMenuGroup label="Group 1">
-           <rich:panelMenuItem name="Item_1_1"/>
-       </rich:panelMenuGroup>
+       <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}">
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="Crear Curso" action="creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+            
+            
+            
+            
+            
+            
+        </rich:panelMenuGroup>
+        
+        <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}">
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="Abrir curso"></a4j:commandLink>
+            </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="Registro nuevo docente"></a4j:commandLink>
+            </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="Presupuesto" action="presupuestos.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+        </rich:panelMenuGroup>
    </rich:panelMenu>
 </composite:implementation>
 </body>
