@@ -39,6 +39,7 @@ public class CursoController extends CommonController{
 	public void btnAddTemaPensum(ActionEvent e){
 		System.out.println("nuevo tema");
 		getLstPensumAcademicos().add(pensumAcademicoNuevo);
+		pensumAcademicoNuevo = new PensumAcademico();
 	}
 
 	public void btnSaveCurso(ActionEvent e){
@@ -48,6 +49,8 @@ public class CursoController extends CommonController{
 				pensumAcademicoTMP.setCurso(getCurso());
 				pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
 			}
+			FacesUtils.addInfoMessage("Curso creado satisfactoriamente");
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
