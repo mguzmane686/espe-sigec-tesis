@@ -38,7 +38,7 @@
         	
         	<fieldset>
         		<legend>
-        			<h:outputLabel value="Datos Especificos" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
         		</legend>
         		
         		<a4j:outputPanel ajaxRendered="true">
@@ -51,17 +51,20 @@
         				<h:outputLabel value="Inicio Inscripciones" />
         				<rich:calendar/>
         				
-        				
-        				<h:outputLabel value="Minimo estudiantes" />
+        				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner/>
-        				<h:outputLabel value="Maximo estudiantes" />
+        				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
         				<rich:inputNumberSpinner/>
         				
-        				<h:outputLabel value="Tipo curso" />
+        				<h:outputLabel value="#{msg['tipo_curso']}" />
         				<h:selectOneRadio>
         					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
-        					<f:selectItem itemLabel="Individual" itemValue="IND"/>
+        					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
+        				
+        				<h:outputLabel value="Lugar" />
+        				<h:inputText value="" />
+        				
         			</h:panelGrid>
         		</a4j:outputPanel>
         	</fieldset>	
