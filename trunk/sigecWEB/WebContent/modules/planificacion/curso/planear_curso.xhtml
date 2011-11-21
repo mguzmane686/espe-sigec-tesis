@@ -4,24 +4,25 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
-	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	xmlns:rich="http://richfaces.org/rich">
     
     
-    	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>    
-    	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
     	
         <h:form id="frmPlanearCurso">
         	<rich:panel header="Creacion de curso">
         		<h:panelGroup layout="block" styleClass="roundCorner">
         			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-        				<a4j:commandButton value="Guardar" image="/resources/images/save.png"/>
-        				<h:outputLabel value="Guardar" />
+        				<a4j:commandButton value="#{msg['guardar']}" actionListener="#{planearCursoController.btnSaveAbrirCurso}" image="/resources/images/save.png">
+        				</a4j:commandButton>
+        				<h:outputLabel value="#{msg['guardar']}" />
         			</h:panelGrid>
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="Planificar curso">
+        	<rich:panel header="Planificar curso" id="pnlLanCur">
         	
         	<fieldset>
         		<legend>
@@ -41,37 +42,34 @@
         			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
         		</legend>
         		
-        		<a4j:outputPanel ajaxRendered="true">
+        		
         			<h:panelGrid columns="2">
         				<h:outputLabel value="Curso"/>
-        				<rich:select defaultLabel="start typing for select" enableManualInput="true">
+        				<rich:select defaultLabel="Seleccione" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.curso.idCurso}">
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
         				</rich:select>
         				
         				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar/>
+        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}"/>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
-        				<rich:inputNumberSpinner/>
+        				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
-        				<rich:inputNumberSpinner/>
+        				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				
         				<h:outputLabel value="#{msg['tipo_curso']}" />
-        				<h:selectOneRadio>
+        				<h:selectOneRadio value="#{planearCursoController.cursoPeriodo.tipoCurso}">
         					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
         					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
         				
         				<h:outputLabel value="Lugar" />
-        				<h:inputText value="" />
+        				<h:inputText />
         				
         			</h:panelGrid>
-        		</a4j:outputPanel>
+        		
         	</fieldset>	
         	</rich:panel>
         	
         </h:form>
-    
-
-
 </ui:composition>
