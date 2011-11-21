@@ -14,32 +14,32 @@
     	<h:outputStylesheet library="css" name="botones.css"/>
     	
         <h:form id="frmCurso">
-        	<rich:panel header="Creacion de curso">
+        	<rich:panel header="#{msg['creacion_curso']}">
         		<h:panelGroup layout="block" styleClass="roundCorner">
         			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-        				<a4j:commandButton value="Guardar" actionListener="#{cursoController.btnSaveCurso}" image="/resources/images/save.png"/>
+        				<a4j:commandButton value="#{msg['guardar']}" actionListener="#{cursoController.btnSaveCurso}" image="/resources/images/save.png"/>
         				<h:outputLabel value="Guardar" />
         			</h:panelGrid>
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="Creacion de curso">
+        	<rich:panel header="#{msg['creacion_curso']}">
         	
         	<fieldset>
         		<legend>
-        			<h:outputLabel value="Datos Curso" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg#{msg['datos_curso']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="Nombre" />
+        			<h:outputLabel value="#{msg['nombre']}" />
         			<h:inputText value="#{cursoController.curso.nombreCurso}" />
-        			<h:outputLabel value="Descripcion" />
+        			<h:outputLabel value="#{msg['descripcion']}" />
         			<h:inputTextarea value="#{cursoController.curso.descripcionCurso}" />
         		</h:panelGrid>
         	</fieldset>
         	
         	<fieldset>
         		<legend>
-        			<h:outputLabel value="Temas del curso" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg['temas_curso']}" styleClass="titulo"/>
         		</legend>
         		
         		<a4j:outputPanel ajaxRendered="true">
@@ -63,7 +63,7 @@
         			
         			<rich:column>
 	        			<f:facet name="header">
-	        				<h:outputLabel value="Descripcion" />
+	        				<h:outputLabel value="#{msg['descripcion']}" />
 	        			</f:facet>
 	        			<h:inputText value="#{temario.descripcion}" />
         			</rich:column>
