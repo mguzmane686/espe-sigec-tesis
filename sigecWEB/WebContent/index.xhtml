@@ -61,18 +61,14 @@
 					<h:panelGroup layout="block" id="right"/>
 				</h:panelGroup>
 
-				
-				
-
 				<a4j:outputPanel ajaxRendered="true">
-					<rich:notify sticky="false" stayTime="1000"
+					<rich:notify sticky="false" stayTime="1000" rendered="false"
 						detail="El usuario o clave no existen" showShadow="true">
 					</rich:notify>
 				</a4j:outputPanel>
 
 			</h:form>
-
-
+			
 		</ui:define>
 	</ui:composition>
 </body>
