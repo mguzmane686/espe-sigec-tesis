@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -49,6 +50,9 @@ public class Curso implements Serializable {
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     private Collection<CursoPeriodo> cursoPeriodoCollection;
 
+    @Transient
+    private boolean showCursoPeriodoCollection;
+    
     public Curso() {
     }
 
@@ -120,5 +124,13 @@ public class Curso implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.Curso[ idCurso=" + idCurso + " ]";
     }
+
+	public boolean isShowCursoPeriodoCollection() {
+		return showCursoPeriodoCollection;
+	}
+
+	public void setShowCursoPeriodoCollection(boolean showCursoPeriodoCollection) {
+		this.showCursoPeriodoCollection = showCursoPeriodoCollection;
+	}
     
 }
