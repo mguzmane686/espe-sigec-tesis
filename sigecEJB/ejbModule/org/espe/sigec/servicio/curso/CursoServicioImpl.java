@@ -5,8 +5,10 @@ import java.util.Collection;
 import javax.ejb.EJB;
 
 import org.espe.sigec.model.entities.Curso;
+import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
 
 /**
@@ -21,6 +23,9 @@ public class CursoServicioImpl implements CursoServicio{
 	@EJB
 	private PensumAcademicoFacadeLocal pensumAcademicoFacadeLocal;
 	
+	@EJB
+	private CursoPeriodoFacadeLocal periodoFacadeLocal;
+	
 	@Override
 	public Collection<Curso> findCursos() {
 		return cursoFacadeLocal.findAll();
@@ -29,6 +34,11 @@ public class CursoServicioImpl implements CursoServicio{
 	@Override
 	public Collection<PensumAcademico> findTemasCurso(Integer idCurso) {
 		return pensumAcademicoFacadeLocal.findTemasCurso(idCurso);
+	}
+
+	@Override
+	public Collection<CursoPeriodo> findCursoAbierto() {
+		return periodoFacadeLocal.findCursoAbierto();
 	}
 
 }
