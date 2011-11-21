@@ -4,10 +4,16 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.Session;
 
 /**
  *
@@ -25,5 +31,14 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     public CursoPeriodoFacade() {
         super(CursoPeriodo.class);
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<CursoPeriodo> findCursoAbierto() {
+		Criteria crit = null;
+    	crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
+    	crit.setFetchMode("curso", FetchMode.JOIN);
+    	return crit.list();
+	}
     
 }
