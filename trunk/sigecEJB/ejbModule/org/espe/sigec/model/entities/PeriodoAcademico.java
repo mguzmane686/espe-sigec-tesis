@@ -38,8 +38,8 @@ public class PeriodoAcademico implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_per_academico")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="peraca_sec")
-    @SequenceGenerator(name="peraca_sec", sequenceName="peraca_sec", allocationSize = 1)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="peraca_seq")
+    @SequenceGenerator(name="peraca_seq", sequenceName="peraca_seq", allocationSize = 1)
     private Integer idPerAcademico;
     @Column(name = "fecha_inicio")
     @Temporal(TemporalType.DATE)
