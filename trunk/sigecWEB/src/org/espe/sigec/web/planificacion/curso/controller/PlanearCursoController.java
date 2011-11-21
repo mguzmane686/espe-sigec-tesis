@@ -7,15 +7,17 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.richfaces.component.UIPanelMenu;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="planearCursoController")
@@ -23,15 +25,21 @@ import org.richfaces.component.UIPanelMenu;
 public class PlanearCursoController extends CommonController{
 	@EJB
 	private CursoFacadeLocal cursoFacadeLocal;
+	@EJB
+	private PeriodoAcademicoFacadeLocal academicoFacadeLocal;
+	@EJB
+	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
+	
 	private Collection<SelectItem> itemCursos;
 	
 	private PeriodoAcademico periodoAcademico;
 	private CursoPeriodo cursoPeriodo;
 	
 	public PlanearCursoController() {
-		setUiPanelMenu((UIPanelMenu) FacesUtils.getFlashObject("menuSigec"));
-		periodoAcademico = new PeriodoAcademico();
-		cursoPeriodo = new CursoPeriodo();
+//		setUiPanelMenu((UIPanelMenu) FacesUtils.getFlashObject("menuSigec"));
+		setPeriodoAcademico(new PeriodoAcademico());
+		setCursoPeriodo(new CursoPeriodo());
+		getCursoPeriodo().setCurso(new Curso());
 //		cargarCursos();
 	}
 	@PostConstruct
@@ -40,10 +48,19 @@ public class PlanearCursoController extends CommonController{
 		for(Curso curso: cursoFacadeLocal.findAll()){
 			itemCursos.add(new SelectItem(String.valueOf(curso.getIdCurso()), curso.getNombreCurso()));
 		}
-//		FacesUtils.refresh();
 	}
 	
-
+	public void btnSaveAbrirCurso(ActionEvent e){
+		try {
+			academicoFacadeLocal.create(getPeriodoAcademico());
+			getCursoPeriodo().setPeriodoAcademico(getPeriodoAcademico());
+			cursoPeriodoFacadeLocal.create(getCursoPeriodo());
+			FacesUtils.addInfoMessage("El curso fue abierto");
+		} catch (Exception e1) {
+			FacesUtils.addErrorMessage("No se pudo abrir el curso");
+		}
+	}
+	
 	public Collection<SelectItem> getItemCursos() {
 		return itemCursos;
 	}
