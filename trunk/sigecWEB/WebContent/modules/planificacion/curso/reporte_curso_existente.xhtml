@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+        <h:form id="frmRepCurso">
+        	<rich:panel header="#{msg['cursos_disponibles']}">
+        	
+	        	<fieldset>
+	        		<legend>
+	        			<h:outputLabel value="#{msg['cursos_disponibles']}" styleClass="titulo"/>
+	        		</legend>
+	        		
+	        		<a4j:outputPanel ajaxRendered="true">
+	        		
+		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="temario" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
+		        			<f:facet name="header">
+		        				<h:outputLabel value="Pensum" />
+		        			</f:facet>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Tema" />
+			        			</f:facet>
+			        			<h:inputText value="#{temario.tema}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['descripcion']}" />
+			        			</f:facet>
+			        			<h:inputText value="#{temario.descripcion}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<a4j:commandButton value="Guardar"></a4j:commandButton>
+		        			</rich:column>
+		        		</rich:dataTable>
+		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
+	        		</a4j:outputPanel>
+	        	</fieldset>	
+        	</rich:panel>
+        	
+        </h:form>
+        
+</ui:composition>
