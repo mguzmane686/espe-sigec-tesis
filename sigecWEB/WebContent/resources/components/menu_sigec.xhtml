@@ -23,7 +23,10 @@
        <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}">
             <rich:panelMenuItem>
             	<a4j:commandLink value="#{msg['crear_curso']}" action="creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
-            	<a4j:commandLink value="#{msg['cursos_existentes']}" action="reporte_curso_existente.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg['cursos_existentes']}" action="reporte_cursos.jsf?faces-redirect=true"></a4j:commandLink>
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
