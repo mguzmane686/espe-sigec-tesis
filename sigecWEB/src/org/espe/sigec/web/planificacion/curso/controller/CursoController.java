@@ -9,7 +9,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
 import org.espe.sigec.model.entities.Curso;
-import org.espe.sigec.model.entities.Modulo;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
