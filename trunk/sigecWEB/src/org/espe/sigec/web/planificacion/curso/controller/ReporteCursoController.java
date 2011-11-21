@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -26,10 +27,10 @@ public class ReporteCursoController implements Serializable{
 
 	public ReporteCursoController() {
 		lstCursos = new ArrayList<Curso>();
-		loadCursos();
 	}
 
-	private void loadCursos(){
+	@PostConstruct
+	public void loadCursos(){
 		setLstCursos(cursoServicio.findCursos());
 	}
 	public Collection<Curso> getLstCursos() {
