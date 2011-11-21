@@ -21,30 +21,27 @@
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="temario" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
+		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoController.lstCursos}" var="curso" rows="5" rendered="#{!empty reporteCursoController.lstCursos}">
 		        			<f:facet name="header">
-		        				<h:outputLabel value="Pensum" />
+		        				<h:outputLabel value="Cursos" />
 		        			</f:facet>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
-			        				<h:outputLabel value="Tema" />
+			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<h:inputText value="#{temario.tema}" />
+			        			<h:outputText value="#{curso.nombreCurso}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['descripcion']}" />
 			        			</f:facet>
-			        			<h:inputText value="#{temario.descripcion}" />
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<a4j:commandButton value="Guardar"></a4j:commandButton>
+			        			<h:outputText value="#{curso.descripcionCurso}" />
 		        			</rich:column>
 		        		</rich:dataTable>
-		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
+		        		
+		        		<rich:dataScroller for="tblCursos" renderIfSinglePage="false"/>
 	        		</a4j:outputPanel>
 	        	</fieldset>	
         	</rich:panel>
