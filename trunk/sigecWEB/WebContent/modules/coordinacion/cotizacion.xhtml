@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+    	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>    
+    	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
+    	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+    	
+        <h:form id="frmCotizacion">
+        	<rich:panel header="Presupuestos" styleClass="titulo">
+        		<h:panelGroup layout="block" styleClass="roundCorner">
+        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+        				<a4j:commandButton value="Guardar" image="/resources/images/save.png"/>
+        				<h:outputLabel value="Guardar" />
+        			</h:panelGrid>
+        		</h:panelGroup>
+        	</rich:panel>
+        	
+        	<rich:panel header="Datos Presupuesto">
+        		<fieldset>
+        			<legend>
+        				<h:outputLabel value="Identificacion Curso" styleClass="titulo" />
+        			</legend>
+        			
+        			<h:panelGrid columns="2">
+        				<h:outputLabel value="Curso:" />
+        				<rich:select defaultLabel="Escribir para seleccionar" enableManualInput="true">
+        					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
+        				</rich:select>
+        			</h:panelGrid>
+        		</fieldset>
+        		
+        		<fieldset>
+        			<legend>
+        				<h:outputLabel value="Costos y Gastos Generales" styleClass="titulo" />
+        			</legend>
+        			
+        			<h:panelGrid columns="2">
+        				<h:outputLabel value="No. participantes:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>	
+        			</h:panelGrid>
+        			<br />
+        			
+        			<h:panelGrid columns="7">
+        				<h:outputLabel value="Descripcion" styleClass="label-bold" />
+        				<h:outputLabel value="Cantidad" styleClass="label-bold" />
+        				<h:outputLabel value="Unidad" styleClass="label-bold" />
+        				<h:outputLabel value="Costo Unitario" styleClass="label-bold" />
+        				<h:outputLabel value="Costo Total" styleClass="label-bold" />
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				
+        				<h:outputLabel value="Instructores:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Precio X Participante:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Transporte:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Total" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Utilidad E.S.P.E. 30%:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Arrendamiento de aulas:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Total" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Precio X Participante:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Alojamiento:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Total" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Precio Variable:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Gastos administrativos:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Ingresos Totales:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Depreciacion equipos computacion:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Ingresos Referenciales:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Depreciacion de edificios:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Valor Hora Clase X Participante:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Electricidad,Agua,Telefono,Otros:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Utilidad:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Manuales:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Participantes" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Utilidad Referencial:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Publicidad:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Total" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Margen de Utilidad:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Refrigerio:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Unidades" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Margen de Utilidad Referencial:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Certificados:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Total" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				
+        				<h:outputLabel value="Suministros de oficina (Hasta 15%):" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Total" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				<h:outputLabel value="Costo Total:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        			</h:panelGrid>
+        		</fieldset>
+        		
+        		<fieldset>
+        			<legend>
+        				<h:outputLabel value="Gastos Administrativos" styleClass="titulo" />
+        			</legend>
+        			
+        			<h:panelGrid columns="5">
+        				<h:outputLabel value="Descripcion" styleClass="label-bold" />
+        				<h:outputLabel value="Cantidad" styleClass="label-bold" />
+        				<h:outputLabel value="Unidad" styleClass="label-bold" />
+        				<h:outputLabel value="Costo Unitario" styleClass="label-bold" />
+        				<h:outputLabel value="Costo Total" styleClass="label-bold" />
+        				
+        				<h:outputLabel value="Director:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Asistente:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Secretaria:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Coordinador:" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Otros(Materiales):" />
+        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:outputLabel value="Horas" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				<h:outputLabel value="Costo Total:" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        		
+        			</h:panelGrid>
+        		</fieldset>
+        		
+        		<fieldset>
+        			<legend>
+        				<h:outputLabel value="Analisis Punto de Equilibrio" styleClass="titulo" />
+        			</legend>
+        			
+        			<h:panelGrid columns="5">
+        				<h:outputLabel value="Analisis" styleClass="label-bold" />
+        				<h:column></h:column>
+        				<h:column></h:column>
+        				<h:outputLabel value="Verificacion" styleClass="label-bold" />
+        				<br />
+        				        				
+        				<h:outputLabel value="Costos Fijos" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>
+        				<h:outputLabel value="Ingresos" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Costos Variables" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>
+        				<h:outputLabel value="Costos Variables" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Costo Variable Unitario" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>
+        				<h:outputLabel value="Costos Fijos" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        				<h:outputLabel value="Precio" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:column></h:column>
+        				<h:outputLabel value="Utilidad" />
+        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				
+        			</h:panelGrid>
+        		</fieldset>
+        			
+        			
+        		<fieldset>	
+	        		<h:panelGrid columns="2">
+	    				<h:outputLabel value="Cantidad 1"/>
+	    				<h:inputText styleClass="txtn1" value="#{presupuestoController.n1}"/>
+	    				<h:outputLabel value="Cantidad 2" />
+	    				<h:inputText styleClass="txtn2" value="#{presupuestoController.n2}" onblur="sumarCajas()"/>
+	    				<h:outputLabel value="Total"/>
+	    				<h:inputText styleClass="txtTotal" value="#{presupuestoController.total}"  />    			
+	        		</h:panelGrid>
+	        	</fieldset>
+	        		        	
+	        	<a4j:commandButton action="#{presupuestoController.sumar}" render="txtTotal">
+	        		
+	        	</a4j:commandButton>
+	        	
+	        	<script>
+					function sumarCajas(){
+						jQuery(document).ready(function(){
+							var er = parseInt($('.txtn1').val()) + parseInt($('.txtn2').val());
+							$('.txtTotal').attr('value',er);
+						});
+					}
+	        	</script>
+	        	
+    		</rich:panel>    	
+        </h:form>
+    
+</ui:composition>
