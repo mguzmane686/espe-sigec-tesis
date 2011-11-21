@@ -4,10 +4,16 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.espe.sigec.model.entities.PensumAcademico;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -25,5 +31,14 @@ public class PensumAcademicoFacade extends AbstractFacade<PensumAcademico> imple
     public PensumAcademicoFacade() {
         super(PensumAcademico.class);
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<PensumAcademico> findTemasCurso(Integer idCurso) {
+		Criteria crit = null;
+    	crit = ((Session)getEntityManager().getDelegate()).createCriteria(PensumAcademico.class);
+    	crit.add(Restrictions.eq("curso.idCurso", idCurso));
+    	return crit.list();
+	}
     
 }
