@@ -10,5 +10,5 @@ import org.espe.sigec.model.entities.Curso;
  */
 @QCurso
 public interface CursoServicio {
-	public Collection<Curso> findCursos();
+	Collection<Curso> findCursos();
 }
