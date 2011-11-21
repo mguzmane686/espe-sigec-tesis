@@ -27,7 +27,7 @@
         	
         	<fieldset>
         		<legend>
-        			<h:outputLabel value="#{msg#{msg['datos_curso']}" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="#{msg['nombre']}" />
@@ -47,7 +47,7 @@
    					<a4j:commandButton value="Nuevo tema" onclick="#{rich:component('popupNuevoTema')}.show()"></a4j:commandButton>
    				</h:panelGroup>
         		<rich:panel rendered="#{empty cursoController.lstPensumAcademicos}">
-        			aun no se an aniadido temas al curso
+        			#{msg.etiqueta_curso_no_tema}
         		</rich:panel>
         		<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="temario" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
         			<f:facet name="header">
@@ -79,7 +79,7 @@
         	
         </h:form>
         
-        <rich:popupPanel id="popupNuevoTema" modal="true" resizeable="true">
+        <rich:popupPanel id="popupNuevoTema" modal="true" resizeable="false" autosized="true">
 		        <f:facet name="header">
 		            <h:outputText value="Nuevo tema" />
 		        </f:facet>
@@ -92,11 +92,11 @@
 		        <h:panelGrid columns="2" id="pgDatosTema">
 		        	<h:outputLabel value="Tema" />
 		        	<h:inputText value="#{cursoController.pensumAcademicoNuevo.tema}" />
-		        	<h:outputLabel value="Descripcion" />
+		        	<h:outputLabel value="#{msg['descripcion']}" />
 		        	<h:inputText value="#{cursoController.pensumAcademicoNuevo.descripcion}" />
 		        </h:panelGrid>
 		        
-		        <h:panelGroup layout="block">
+		        <h:panelGroup layout="block" style="text-align:right; width:100%">
 		        	<a4j:commandButton value="#{msg['etiqueta_aniadir_Tema']}" actionListener="#{cursoController.btnAddTemaPensum}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoTema')}.hide()"/>
 		        </h:panelGroup>
 		        </h:form>
