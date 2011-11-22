@@ -68,6 +68,10 @@ public class CursoPeriodo implements Serializable {
     private Integer maximoEstudiantes;
     @Column(name = "lugar_capacitacion")
     private String lugarCapacitacion;
+    @Column(name = "hora_inicio_clase")
+    private String horaInicioClase;
+    @Column(name = "hora_fin_clase")
+    private String horaFinClase;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Presupuesto presupuesto;
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
@@ -245,5 +249,19 @@ public class CursoPeriodo implements Serializable {
 		this.lugarCapacitacion = lugarCapacitacion;
 	}
 
-    
+	public String getHoraInicioClase() {
+		return horaInicioClase;
+	}
+
+	public void setHoraInicioClase(String horaInicioClase) {
+		this.horaInicioClase = horaInicioClase;
+	}
+
+	public String getHoraFinClase() {
+		return horaFinClase;
+	}
+
+	public void setHoraFinClase(String horaFinClase) {
+		this.horaFinClase = horaFinClase;
+	}    
 }
