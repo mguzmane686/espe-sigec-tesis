@@ -80,6 +80,15 @@
 			        			</f:facet>
 			        			<h:outputText value="#{curso.lugarCapacitacion}" />
 		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Horario" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" />
+			        			</center>
+		        			</rich:column>
 		        		</rich:dataTable>
 		        		<center>
 		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
