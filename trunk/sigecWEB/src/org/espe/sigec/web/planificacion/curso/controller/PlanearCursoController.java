@@ -18,6 +18,7 @@ import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SigecConstantes;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="planearCursoController")
@@ -36,11 +37,15 @@ public class PlanearCursoController extends CommonController{
 	private CursoPeriodo cursoPeriodo;
 	
 	public PlanearCursoController() {
-//		setUiPanelMenu((UIPanelMenu) FacesUtils.getFlashObject("menuSigec"));
 		setPeriodoAcademico(new PeriodoAcademico());
 		setCursoPeriodo(new CursoPeriodo());
 		getCursoPeriodo().setCurso(new Curso());
-//		cargarCursos();
+		loadParametrosGenerales();
+	}
+	
+	private void loadParametrosGenerales(){
+		getCursoPeriodo().setMinimoEstudiantes(SigecConstantes.MINIMO_ESTUDIANTES);
+		getCursoPeriodo().setMaximoEstudiantes(SigecConstantes.MAXIMO_ESTUDIANTES);
 	}
 	@PostConstruct
 	public void cargarCursos(){
