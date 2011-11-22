@@ -15,13 +15,13 @@
 		<rich:panel header="#{msg['creacion_curso']}">
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{registroDocenteController.btnSaveProfesor}" image="/resources/images/save.png" />
+					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{registroDocenteController.btnSaveProfesor}" image="/resources/images/save.png" render="pnlDocente"/>
 					<h:outputLabel value="#{msg['guardar']}" />
 				</h:panelGrid>
 			</h:panelGroup>
 		</rich:panel>
 
-		<rich:panel header="#{msg['registro_de_docente']}">
+		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
 			
 			<fieldset>
 				<legend>
@@ -68,12 +68,14 @@
 					<h:outputLabel value="#{msg['titulos']}" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Titulo de 3er nivel" styleClass="label-bold"
-						style="padding-right:50px" />
-					<h:selectOneRadio>
+					<h:outputLabel value="Titulo de 3er nivel" styleClass="label-bold" style="padding-right:50px" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.tituloNivelTres}">
 						<f:selectItem itemLabel="Si" itemValue="1" />
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>
+					
+					<h:outputLabel value="Experiencia" styleClass="label-bold" style="padding-right:50px" />
+					<h:inputText value="#{registroDocenteController.profesor.experiencia}" />
 				</h:panelGrid>
 			</fieldset>
 
