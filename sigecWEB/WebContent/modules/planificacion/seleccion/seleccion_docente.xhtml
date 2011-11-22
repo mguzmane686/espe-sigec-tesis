@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+        <h:form id="frmRepCurso">
+        	<rich:panel header="#{msg['cursos_disponibles']}">
+        	
+	        	<fieldset>
+	        		<legend>
+	        			<h:outputLabel value="#{msg['cursos_disponibles']}" styleClass="titulo"/>
+	        		</legend>
+	        		
+	        		<a4j:outputPanel ajaxRendered="true">
+	        		
+		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="5" rendered="#{!empty reporteCursoController.lstCursos}">
+		        			<f:facet name="header">
+		        				<h:outputLabel value="Cursos" />
+		        			</f:facet>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['nombre']}" />
+			        			</f:facet>
+			        			<h:outputText value="#{curso.curso.nombreCurso}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['descripcion']}" />
+			        			</f:facet>
+			        			<h:outputText value="#{curso.curso.descripcionCurso}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Inicio del curso" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}">
+			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
+			        				</h:outputText>
+			        			</center>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Fin del curso" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.periodoAcademico.fechaFin}">
+			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
+			        				</h:outputText>
+			        			</center>
+		        			</rich:column>
+		        			
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Inicio Inscripciones" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.fechaInicioInscripcion}">
+			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
+			        				</h:outputText>
+			        			</center>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Lugar" />
+			        			</f:facet>
+			        			<h:outputText value="#{curso.lugarCapacitacion}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Horario" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" />
+			        			</center>
+		        			</rich:column>
+		        		</rich:dataTable>
+		        		<center>
+		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
+		        		</center>
+	        		</a4j:outputPanel>
+	        	</fieldset>	
+        	</rich:panel>
+        	
+        </h:form>
+        
+</ui:composition>
