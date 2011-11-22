@@ -53,8 +53,15 @@
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
+        				
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.maximoEstudiantes}"/>
+        				
+        				<h:outputLabel value="Hora inicio" />
+        				<h:inputText value="#{planearCursoController.cursoPeriodo.horaInicioClase}"/>
+        				
+        				<h:outputLabel value="Hora fin" />
+        				<h:inputText value="#{planearCursoController.cursoPeriodo.horaFinClase}"/>
         				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
         				<h:selectOneRadio value="#{planearCursoController.cursoPeriodo.tipoCurso}">
