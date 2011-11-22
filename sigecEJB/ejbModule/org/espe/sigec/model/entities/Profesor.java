@@ -46,6 +46,10 @@ public class Profesor implements Serializable {
     @Size(max = 250)
     @Column(name = "titulo")
     private String titulo;
+    @Column(name = "titulo_nivel_tres")
+    private String tituloNivelTres;
+    @Column(name = "experiencia")
+    private Double experiencia;
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
@@ -125,5 +129,21 @@ public class Profesor implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.Profesor[ idProfesor=" + idProfesor + " ]";
     }
+
+	public String getTituloNivelTres() {
+		return tituloNivelTres;
+	}
+
+	public void setTituloNivelTres(String tituloNivelTres) {
+		this.tituloNivelTres = tituloNivelTres;
+	}
+
+	public Double getExperiencia() {
+		return experiencia;
+	}
+
+	public void setExperiencia(Double experiencia) {
+		this.experiencia = experiencia;
+	}
     
 }
