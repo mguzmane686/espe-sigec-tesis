@@ -14,6 +14,7 @@ import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SigecConstantes;
 
 /**
  * @author Roberto
@@ -39,6 +40,8 @@ public class RegistroDocenteController implements Serializable{
 
 	private void initEntities(){
 		setProfesor(new Profesor());
+		getProfesor().setTituloNivelTres(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
+		getProfesor().setExperiencia((double) 2);
 		getProfesor().setPersona(new Persona());
 		setUsuario(new Usuario());
 	}
