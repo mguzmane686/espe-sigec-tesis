@@ -38,6 +38,7 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 		Criteria crit = null;
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
     	crit.setFetchMode("curso", FetchMode.JOIN);
+    	crit.setFetchMode("periodoAcademico", FetchMode.JOIN);
     	return crit.list();
 	}
     
