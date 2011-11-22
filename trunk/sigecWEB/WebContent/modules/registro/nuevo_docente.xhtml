@@ -3,87 +3,80 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
-    <!-- ui:define name="left">
-    	<sigecComp:menu_sigec></sigecComp:menu_sigec>
-    </ui:define>
-    
-    <ui:define name="content"-->
-    	<h:outputStylesheet library="css" name="textos.css"/>
-        <h:form>
-        	<rich:panel header="#{msg['registro_de_docente']}">
-        	
-        	<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['usuario']}" styleClass="titulo"/>
-        		</legend>
-        		<h:panelGrid columns="2">
-        			<h:outputLabel value="#{msg['identificador']}" styleClass="label-bold espacioDetalle" />
-        			<h:inputText value="#{inscripcion.estudiante.persona.usuario.identificador}" />
-        			
-        			<h:outputLabel value="#{msg['clave']}" styleClass="label-bold"/>
-        			<h:inputText value="#{inscripcion.estudiante.persona.usuario.clave}" />
-        		</h:panelGrid>
-        	</fieldset>
-        	
-        	<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo"/>
-        		</legend>
-	        	<h:panelGrid columns="2">
-	        		<h:outputLabel value="#{msg['cedula']}" styleClass="label-bold" style="padding-right:50px"/>
-	        		<h:inputText value="#{inscripcion.estudiante.persona.cedula}" />
-	        		
-	        		<h:outputLabel value="#{msg['nombres']}" styleClass="label-bold"/>
-	        		<h:panelGrid columns="2">
-	        			<h:inputText value="#{inscripcion.estudiante.persona.primerNombre}" />
-	        			<h:inputText value="#{inscripcion.estudiante.persona.segundoNombre}" />
-	        		</h:panelGrid>
-	        		
-	        		
-	        		<h:outputLabel value="#{msg['apellidos']}" styleClass="label-bold"/>
-	        		<h:panelGrid columns="2">
-	        			<h:inputText value="#{inscripcion.estudiante.persona.primerApellido}" />
-	        			<h:inputText value="#{inscripcion.estudiante.persona.segundoApellido}" />
-	        		</h:panelGrid>
-	        		
-	        		<h:outputLabel value="#{msg['fecha_nacimiento']}" styleClass="label-bold"/>
-	        		<rich:calendar value="#{inscripcion.estudiante.persona.fechaNacimiento}"></rich:calendar>
-	        		
-	        		<h:outputLabel value="#{msg['nacionalidad']}" styleClass="label-bold"/>
-	        		<h:inputText value="#{inscripcion.estudiante.persona.nacionalidad}" />
-	        		
-	        		<h:outputLabel value="#{msg['direccion']}" styleClass="label-bold"/>
-	        		<h:inputText value="#{inscripcion.estudiante.persona.direccion}" />
-	        		
-	        		<h:outputLabel value="#{msg['e_mail']}" styleClass="label-bold"/>
-	        		<h:inputText value="#{inscripcion.estudiante.persona.mail}" />
-	        		
-	        		<h:outputLabel value="#{msg['celular']}" styleClass="label-bold"/>
-	        		<h:inputText value="#{inscripcion.estudiante.persona.telefonoCelular}" />
-	        		
-	        	</h:panelGrid>
-        	</fieldset>
-        	
-        	<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['titulos']}" styleClass="titulo"/>
-        		</legend>
-        		<h:panelGrid columns="2">
-	        		<h:outputLabel value="Titulo de 3er nivel" styleClass="label-bold" style="padding-right:50px"/>
-	        		<h:selectOneRadio>
-	        			<f:selectItem itemLabel="Si" itemValue="1"/>
-	        			<f:selectItem itemLabel="No" itemValue="0"/>
-	        		</h:selectOneRadio>
-	        	</h:panelGrid>
-        	</fieldset>
-        	
-        	<a4j:commandButton value="#{msg['guardar']}" actionListener="#{inscripcion.btnGuardarEstudiante}" render="@form"></a4j:commandButton>
-        	</rich:panel>
-        </h:form>
-    <!-- /ui:define-->
+
+	<h:outputStylesheet library="css" name="textos.css" />    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+
+	<h:form>
+		<rich:panel header="#{msg['creacion_curso']}">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{registroDocenteController.btnSaveProfesor}" image="/resources/images/save.png" />
+					<h:outputLabel value="#{msg['guardar']}" />
+				</h:panelGrid>
+			</h:panelGroup>
+		</rich:panel>
+
+		<rich:panel header="#{msg['registro_de_docente']}">
+			
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg['cedula']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" />
+
+					<h:outputLabel value="#{msg['nombres']}" styleClass="label-bold" />
+					<h:panelGrid columns="2">
+						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" />
+						<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
+					</h:panelGrid>
 
 
+					<h:outputLabel value="#{msg['apellidos']}" styleClass="label-bold" />
+					<h:panelGrid columns="2">
+						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" />
+						<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
+					</h:panelGrid>
+
+					<h:outputLabel value="#{msg['fecha_nacimiento']}"
+						styleClass="label-bold" />
+					<rich:calendar value="#{registroDocenteController.profesor.persona.fechaNacimiento}"></rich:calendar>
+
+					<h:outputLabel value="#{msg['nacionalidad']}" styleClass="label-bold" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" />
+
+					<h:outputLabel value="#{msg['direccion']}" styleClass="label-bold" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" />
+
+					<h:outputLabel value="#{msg['e_mail']}" styleClass="label-bold" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" />
+
+					<h:outputLabel value="#{msg['celular']}" styleClass="label-bold" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" />
+
+				</h:panelGrid>
+			</fieldset>
+
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['titulos']}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Titulo de 3er nivel" styleClass="label-bold"
+						style="padding-right:50px" />
+					<h:selectOneRadio>
+						<f:selectItem itemLabel="Si" itemValue="1" />
+						<f:selectItem itemLabel="No" itemValue="0" />
+					</h:selectOneRadio>
+				</h:panelGrid>
+			</fieldset>
+
+		</rich:panel>
+	</h:form>
 </ui:composition>
