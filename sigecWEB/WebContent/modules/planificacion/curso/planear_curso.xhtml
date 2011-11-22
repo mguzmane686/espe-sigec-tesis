@@ -30,10 +30,10 @@
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Fecha inicio" />
-        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaInicio}" />
+        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaInicio}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
         			
         			<h:outputLabel value="Fecha Finalizacion" />
-        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaFin}" />
+        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaFin}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de fin es obligatoria"/>
         		</h:panelGrid>
         	</fieldset>
         	
@@ -42,29 +42,28 @@
         			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
         		</legend>
         		
-        		
         			<h:panelGrid columns="2">
         				<h:outputLabel value="Curso"/>
-        				<rich:select defaultLabel="Seleccione" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.curso.idCurso}">
+        				<rich:select defaultLabel="Seleccione" required="true" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.curso.idCurso}" requiredMessage="El campo curso es obligatorio">
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
         				</rich:select>
         				
         				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}"/>
+        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				
-        				<h:outputLabel value="#{msg['tipo_curso']}" />
+        				<h:outputLabel value="#{msg['tipo_curso']}"/>
         				<h:selectOneRadio value="#{planearCursoController.cursoPeriodo.tipoCurso}">
         					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
         					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
         				
         				<h:outputLabel value="Lugar" />
-        				<h:inputText value="#{planearCursoController.cursoPeriodo.lugarCapacitacion}"/>
+        				<h:inputText value="#{planearCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
         				
         			</h:panelGrid>
         		
