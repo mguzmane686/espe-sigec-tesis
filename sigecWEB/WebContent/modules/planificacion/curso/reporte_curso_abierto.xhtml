@@ -40,6 +40,46 @@
 			        			<h:outputText value="#{curso.curso.descripcionCurso}" />
 		        			</rich:column>
 		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Inicio del curso" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}">
+			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
+			        				</h:outputText>
+			        			</center>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Fin del curso" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.periodoAcademico.fechaFin}">
+			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
+			        				</h:outputText>
+			        			</center>
+		        			</rich:column>
+		        			
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Inicio Inscripciones" />
+			        			</f:facet>
+			        			<center>
+			        				<h:outputText value="#{curso.fechaInicioInscripcion}">
+			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
+			        				</h:outputText>
+			        			</center>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Lugar" />
+			        			</f:facet>
+			        			<h:outputText value="#{curso.lugarCapacitacion}" />
+		        			</rich:column>
 		        		</rich:dataTable>
 		        		<center>
 		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
