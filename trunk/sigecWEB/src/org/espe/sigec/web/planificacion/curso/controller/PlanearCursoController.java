@@ -40,6 +40,7 @@ public class PlanearCursoController extends CommonController{
 		setPeriodoAcademico(new PeriodoAcademico());
 		setCursoPeriodo(new CursoPeriodo());
 		getCursoPeriodo().setCurso(new Curso());
+		getCursoPeriodo().setTipoCurso(SigecConstantes.TIPO_CURSO_INDIVIDUAL);
 		loadParametrosGenerales();
 	}
 	
