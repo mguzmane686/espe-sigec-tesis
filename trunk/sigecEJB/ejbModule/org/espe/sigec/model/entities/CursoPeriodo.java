@@ -66,6 +66,8 @@ public class CursoPeriodo implements Serializable {
     private Integer minimoEstudiantes;
     @Column(name = "maximo_estudiantes")
     private Integer maximoEstudiantes;
+    @Column(name = "lugar_capacitacion")
+    private String lugarCapacitacion;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Presupuesto presupuesto;
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
@@ -234,5 +236,14 @@ public class CursoPeriodo implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.CursoPeriodo[ idCursoPeriodo=" + idCursoPeriodo + " ]";
     }
+
+	public String getLugarCapacitacion() {
+		return lugarCapacitacion;
+	}
+
+	public void setLugarCapacitacion(String lugarCapacitacion) {
+		this.lugarCapacitacion = lugarCapacitacion;
+	}
+
     
 }
