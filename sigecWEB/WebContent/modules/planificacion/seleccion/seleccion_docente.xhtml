@@ -11,11 +11,7 @@
     	<h:outputStylesheet library="css" name="bordes.css"/>
     	<h:outputStylesheet library="css" name="botones.css"/>
     	
-    	<h:panelGroup layout="block" style="height:200px">
-    		Under construction 
-    	</h:panelGroup>
-    	
-        <h:form id="frmRepCurso" rendered="false">
+        <h:form id="frmSeleDocen">
         	<rich:panel header="#{msg['cursos_disponibles']}">
         	
 	        	<fieldset>
@@ -25,77 +21,47 @@
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="5" rendered="#{!empty reporteCursoController.lstCursos}">
+		        		<rich:dataTable id="tblDocentes" style="width:100%" value="#{seleccionPorfesorController.lstProfesors}" var="profesor" rows="5" rendered="#{!empty seleccionPorfesorController.lstProfesors}">
 		        			<f:facet name="header">
-		        				<h:outputLabel value="Cursos" />
+		        				<h:outputLabel value="Docentes" />
 		        			</f:facet>
-		        			
 		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['nombre']}" />
-			        			</f:facet>
-			        			<h:outputText value="#{curso.curso.nombreCurso}" />
+		        				<f:facet name="header">
+		        					<h:outputText value="#{msg['nombres']}" />
+		        				</f:facet>
+		        				<h:panelGrid columns="2">
+		        					<h:outputText value="#{profesor.persona.primerApellido}" />
+		        					<h:outputText value="#{profesor.persona.primerNombre}" />
+		        				</h:panelGrid>
+		        				
 		        			</rich:column>
 		        			
 		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['descripcion']}" />
-			        			</f:facet>
-			        			<h:outputText value="#{curso.curso.descripcionCurso}" />
+		        				<f:facet name="header">
+		        					<h:outputText value="#{msg['ponderacion']}" />
+		        				</f:facet>
+		        				
+		        				<rich:progressBar mode="client" value="#{profesor.ponderacion}"
+						            minValue="0" maxValue="100">
+						            <h:outputText value="#{profesor.ponderacion} %" />
+						        </rich:progressBar>
+						        				
 		        			</rich:column>
 		        			
 		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Inicio del curso" />
-			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}">
-			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
-			        				</h:outputText>
-			        			</center>
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Fin del curso" />
-			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.periodoAcademico.fechaFin}">
-			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
-			        				</h:outputText>
-			        			</center>
-		        			</rich:column>
-		        			
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Inicio Inscripciones" />
-			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.fechaInicioInscripcion}">
-			        					<f:convertDateTime pattern="dd/MM/yyyy"/>
-			        				</h:outputText>
-			        			</center>
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Lugar" />
-			        			</f:facet>
-			        			<h:outputText value="#{curso.lugarCapacitacion}" />
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Horario" />
-			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" />
-			        			</center>
+		        				<f:facet name="header">
+		        					<h:outputText value="Seleccionar" />
+		        				</f:facet>
+		        				<center>
+			        				<h:selectOneRadio>
+			        					<f:selectItem itemLabel="Si" itemValue="1"/>
+			        					<f:selectItem itemLabel="No" itemValue="0"/>
+			        				</h:selectOneRadio>
+		        				</center>				
 		        			</rich:column>
 		        		</rich:dataTable>
 		        		<center>
-		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
+		        			<rich:dataScroller for="tblDocentes" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 	        		</a4j:outputPanel>
 	        	</fieldset>	
