@@ -4,6 +4,7 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.Profesor;
@@ -28,5 +29,7 @@ public interface ProfesorFacadeLocal {
     List<Profesor> findRange(int[] range);
 
     int count();
+    
+    Collection<Profesor> findProfesores();
     
 }
