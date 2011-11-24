@@ -22,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -46,10 +47,17 @@ public class Profesor implements Serializable {
     @Size(max = 250)
     @Column(name = "titulo")
     private String titulo;
+    
+    @Size(max = 1)
     @Column(name = "titulo_nivel_tres")
     private String tituloNivelTres;
-    @Column(name = "experiencia")
-    private Double experiencia;
+    @Size(max = 1)
+    @Column(name = "expe_anio_docente")
+    private String expeAnioDocente;
+    @Size(max = 1)
+    @Column(name = "expe_anio_area")
+    private String expeAnioArea;
+    
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
@@ -138,12 +146,35 @@ public class Profesor implements Serializable {
 		this.tituloNivelTres = tituloNivelTres;
 	}
 
-	public Double getExperiencia() {
-		return experiencia;
+	public String getExpeAnioDocente() {
+		return expeAnioDocente;
 	}
 
-	public void setExperiencia(Double experiencia) {
-		this.experiencia = experiencia;
+	public void setExpeAnioDocente(String expeAnioDocente) {
+		this.expeAnioDocente = expeAnioDocente;
 	}
-    
+
+	public String getExpeAnioArea() {
+		return expeAnioArea;
+	}
+
+	public void setExpeAnioArea(String expeAnioArea) {
+		this.expeAnioArea = expeAnioArea;
+	}
+	@Transient
+	public double getPonderacion(){
+		double ponderacion =0;
+		if(getExpeAnioArea()!=null && getExpeAnioArea().equals("1")){
+			ponderacion =+ 33;
+		}
+		if(getExpeAnioDocente() !=null && getExpeAnioDocente().equals("1")){
+			ponderacion =+ 33;
+		}
+		if(getTituloNivelTres() !=null && getTituloNivelTres().equals("1")){
+			return ponderacion;
+		}
+		
+		ponderacion = (ponderacion*100)/100;
+		return ponderacion;
+	}
 }
