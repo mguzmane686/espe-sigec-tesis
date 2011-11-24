@@ -75,32 +75,32 @@
 
 			<fieldset>
 				<legend>
-					<h:outputLabel value="#{msg['titulos']}" styleClass="titulo" />
+					<h:outputLabel value="#{msg['ponderacion']}" styleClass="titulo" />
 				</legend>
-				<h:panelGrid columns="3" columnClasses="alinearLeft, alinearCenter, alinearCenter" border="1">
+				<h:panelGrid columns="2" columnClasses="alinearLeft, alinearCenter, alinearCenter">
 					<h:outputLabel value="#{msg['ponderacion']}" />
 					<h:outputLabel value="" />
-					<h:outputLabel value="Puntaje" />
-					<h:outputLabel value="Titulo de 3er nivel" styleClass="label-bold" style="padding-right:50px" />
+					
+					<h:outputLabel value="#{msg['titulo_nivel_tres']}" styleClass="label-bold" style="padding-right:50px" />
 					<h:selectOneRadio value="#{registroDocenteController.profesor.tituloNivelTres}">
 						<f:selectItem itemLabel="Si" itemValue="1" />
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>
-					<h:outputLabel value="5" />
 					
-					<h:outputLabel value="Experiencia como docente" styleClass="label-bold" style="padding-right:50px" />
-					<h:selectOneRadio>
+					
+					<h:outputLabel value="#{msg['experiencia_docente']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioDocente}">
 						<f:selectItem itemLabel="Si" itemValue="1" />
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>
-					<h:outputText value="3" />
 					
-					<h:outputLabel value="1 anio experiencia en el area" styleClass="label-bold" style="padding-right:50px" />
-					<h:selectOneRadio>
+					
+					<h:outputLabel value="#{msg['experiencia_area']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioArea}">
 						<f:selectItem itemLabel="Si" itemValue="1" />
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>
-					<h:outputText value="1" />
+					
 				</h:panelGrid>
 			</fieldset>
 
