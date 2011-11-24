@@ -41,7 +41,8 @@ public class RegistroDocenteController implements Serializable{
 	private void initEntities(){
 		setProfesor(new Profesor());
 		getProfesor().setTituloNivelTres(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
-		getProfesor().setExperiencia((double) 2);
+		getProfesor().setExpeAnioArea(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
+		getProfesor().setExpeAnioDocente(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
 		getProfesor().setPersona(new Persona());
 		setUsuario(new Usuario());
 	}
