@@ -165,16 +165,16 @@ public class Profesor implements Serializable {
 	public double getPonderacion(){
 		double ponderacion =0;
 		if(getExpeAnioArea()!=null && getExpeAnioArea().equals("1")){
-			ponderacion =+ 33;
+			ponderacion += 33.33;
 		}
 		if(getExpeAnioDocente() !=null && getExpeAnioDocente().equals("1")){
-			ponderacion =+ 33;
+			ponderacion += 33.33;
 		}
 		if(getTituloNivelTres() !=null && getTituloNivelTres().equals("1")){
-			return ponderacion;
+			ponderacion += 33.33;
 		}
 		
-		ponderacion = (ponderacion*100)/100;
+		ponderacion = Math.round((ponderacion*100)/100);
 		return ponderacion;
 	}
 }
