@@ -101,6 +101,24 @@
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>
 					
+					<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}"
+		                id="upload" acceptedTypes="jpg, gif, png, bmp">
+		                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+		            </rich:fileUpload>
+		            
+		            <rich:dataGrid columns="1" value="#{registroDocenteController.files}" id="info"
+                        var="file" rowKeyVar="row">
+                        <rich:panel bodyClass="rich-laguna-panel-no-header">
+                            <h:panelGrid columns="2">
+                                <a4j:mediaOutput element="img" mimeType="image/jpeg" 
+                                    createContent="#{registroDocenteController.paint}" value="#{row}"
+                                    style="width:100px; height:100px;" cacheable="false">
+                                </a4j:mediaOutput>
+                            </h:panelGrid>
+                        </rich:panel>
+                    </rich:dataGrid>
+                        
+                    
 				</h:panelGrid>
 			</fieldset>
 
