@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -76,6 +77,9 @@ public class Persona implements Serializable {
     @Size(max = 20)
     @Column(name = "telefono_convencional")
     private String telefonoConvencional;
+//    @Lob
+    @Column(name = "foto")
+    private byte[] foto;
     @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
     private Collection<Profesor> profesorCollection;
     @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
@@ -235,5 +239,13 @@ public class Persona implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.Persona[ idPersona=" + idPersona + " ]";
     }
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
+	}
     
 }
