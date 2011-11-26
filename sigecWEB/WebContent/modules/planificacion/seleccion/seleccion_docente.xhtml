@@ -30,8 +30,9 @@
 		        					<h:outputText value="#{msg['nombres']}" />
 		        				</f:facet>
 		        				<h:panelGrid columns="2">
-		        					<h:outputText value="#{profesor.persona.primerApellido}" />
-		        					<h:outputText value="#{profesor.persona.primerNombre}" />
+		        					<a4j:commandLink render="pnlFoto" value="#{profesor.persona.primerApellido} #{profesor.persona.primerNombre}">
+		        						<f:setPropertyActionListener target="#{seleccionPorfesorController.profesor}" value="#{profesor}"/>
+		        					</a4j:commandLink>
 		        				</h:panelGrid>
 		        				
 		        			</rich:column>
@@ -63,6 +64,14 @@
 		        		<center>
 		        			<rich:dataScroller for="tblDocentes" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
+		        		
+		        		<rich:panel rendered="#{seleccionPorfesorController.profesor.persona.foto==null}">
+		        			No tiene registrado una foto
+		        		</rich:panel>
+		        		<a4j:mediaOutput element="img" mimeType="image/jpeg" id="pnlFoto" rendered="#{seleccionPorfesorController.profesor.persona.foto!=null}" 
+                            createContent="#{seleccionPorfesorController.paint}" value="#{row}"
+                            style="width:100px; height:100px;" cacheable="false">
+                        </a4j:mediaOutput>
 	        		</a4j:outputPanel>
 	        	</fieldset>	
         	</rich:panel>
