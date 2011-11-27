@@ -8,13 +8,16 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -30,8 +33,11 @@ public class PlanearCursoController extends CommonController{
 	private PeriodoAcademicoFacadeLocal academicoFacadeLocal;
 	@EJB
 	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
+	@EJB
+	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	
 	private Collection<SelectItem> itemCursos;
+	private Collection<SelectItem> itemEspecialidades;
 	
 	private PeriodoAcademico periodoAcademico;
 	private CursoPeriodo cursoPeriodo;
@@ -49,13 +55,27 @@ public class PlanearCursoController extends CommonController{
 		getCursoPeriodo().setMaximoEstudiantes(SigecConstantes.MAXIMO_ESTUDIANTES);
 	}
 	@PostConstruct
-	public void cargarCursos(){
-		itemCursos = new ArrayList<SelectItem>();
-		for(Curso curso: cursoFacadeLocal.findAll()){
-			itemCursos.add(new SelectItem(String.valueOf(curso.getIdCurso()), curso.getNombreCurso()));
+	public void cargarEspecialidades(){
+		setItemEspecialidades(new ArrayList<SelectItem>());
+		for(Especialidad especialidad: especialidadFacadeLocal.findAll()){
+			getItemEspecialidades().add(new SelectItem(especialidad.getIdEspecialidad(), especialidad.getNombre()));
+		}
+		if(!getItemEspecialidades().isEmpty()){
+			Integer integer = (Integer) getItemEspecialidades().iterator().next().getValue();
+			loadCursos(integer);
 		}
 	}
-	
+	private void loadCursos(Integer especialidad){
+		setItemCursos(new ArrayList<SelectItem>());
+		Collection<Curso> lst = cursoFacadeLocal.findCursoByEspecialidad(especialidad);
+		for(Curso curso: lst){
+			getItemCursos().add(new SelectItem(curso.getIdCurso(), curso.getNombreCurso()));
+		}
+	}
+	public void somChangeEspecialidad(ValueChangeEvent e){
+		Integer integer = Integer.parseInt( e.getNewValue().toString());
+		loadCursos(integer);
+	}
 	public void btnSaveAbrirCurso(ActionEvent e){
 		try {
 			academicoFacadeLocal.create(getPeriodoAcademico());
@@ -89,6 +109,14 @@ public class PlanearCursoController extends CommonController{
 
 	public void setCursoPeriodo(CursoPeriodo cursoPeriodo) {
 		this.cursoPeriodo = cursoPeriodo;
+	}
+
+	public Collection<SelectItem> getItemEspecialidades() {
+		return itemEspecialidades;
+	}
+
+	public void setItemEspecialidades(Collection<SelectItem> itemEspecialidades) {
+		this.itemEspecialidades = itemEspecialidades;
 	}
 	
 	

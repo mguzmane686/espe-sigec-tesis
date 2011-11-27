@@ -3,18 +3,22 @@ package org.espe.sigec.web.planificacion.curso.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 
 import org.espe.sigec.model.entities.Curso;
+import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.richfaces.component.UIPanelMenu;
+import org.espe.sigec.web.utils.SigecConstantes;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="cursoController")
@@ -24,18 +28,32 @@ public class CursoController extends CommonController{
 	private PensumAcademicoFacadeLocal pensumAcademicoFacadeLocal;
 	@EJB
 	private CursoFacadeLocal cursoFacadeLocal;
+	@EJB
+	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	
 	private Collection<PensumAcademico> lstPensumAcademicos;
+	private Collection<SelectItem> itemEspecialidades;
+	
 	private PensumAcademico pensumAcademicoNuevo;
 	private Curso curso;
 	
 	public CursoController() {
-		setUiPanelMenu( (UIPanelMenu) FacesUtils.getFlashObject("menuSigec"));
-		curso = new Curso();
-		lstPensumAcademicos = new ArrayList<PensumAcademico>();
-		pensumAcademicoNuevo = new PensumAcademico();
+		initEntities();
+		setItemEspecialidades(new ArrayList<SelectItem>());
 	}
-	
+	private void initEntities(){
+		setCurso(new Curso());
+		getCurso().setEstadoCur(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
+		getCurso().setEspecialidad(new Especialidad());
+		setPensumAcademicoNuevo(new PensumAcademico());
+		setLstPensumAcademicos(new ArrayList<PensumAcademico>());
+	}
+	@PostConstruct
+	public void loadEspecialidades(){
+		for(Especialidad especialidadTMP: especialidadFacadeLocal.findAll()){
+			getItemEspecialidades().add(new SelectItem(especialidadTMP.getIdEspecialidad(), especialidadTMP.getNombre()));
+		}
+	}
 	public void btnAddTemaPensum(ActionEvent e){
 		System.out.println("nuevo tema");
 		getLstPensumAcademicos().add(pensumAcademicoNuevo);
@@ -49,10 +67,10 @@ public class CursoController extends CommonController{
 				pensumAcademicoTMP.setCurso(getCurso());
 				pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
 			}
+			initEntities();
 			FacesUtils.addInfoMessage("Curso creado satisfactoriamente");
-
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			FacesUtils.addInfoMessage("Ha ocurrido un error al crear el Curso");
 		}
 	}
 	
@@ -79,6 +97,14 @@ public class CursoController extends CommonController{
 
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public Collection<SelectItem> getItemEspecialidades() {
+		return itemEspecialidades;
+	}
+
+	public void setItemEspecialidades(Collection<SelectItem> itemEspecialidades) {
+		this.itemEspecialidades = itemEspecialidades;
 	}
 	
 }
