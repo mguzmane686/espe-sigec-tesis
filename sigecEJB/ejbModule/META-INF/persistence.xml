@@ -8,6 +8,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 <!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider> -->
 		<jta-data-source>jdbc/sigec_pool</jta-data-source>
+		<class>org.espe.sigec.model.entities.UsuarioPerfil</class>
 		<class>org.espe.sigec.model.entities.Usuario</class>
 		<class>org.espe.sigec.model.entities.Profesor</class>
 		<class>org.espe.sigec.model.entities.Presupuesto</class>
@@ -30,7 +31,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Aula</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
-		<class>org.espe.sigec.model.entities.UsuarioPerfil</class>
+		<class>org.espe.sigec.model.entities.Especialidad</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
