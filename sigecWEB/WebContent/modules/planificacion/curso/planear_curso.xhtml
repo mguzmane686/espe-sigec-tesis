@@ -43,8 +43,14 @@
         		</legend>
         		
         			<h:panelGrid columns="2">
+        				<h:outputLabel value="#{msg['etiqueta_especialidad']}"/>
+        				<h:selectOneMenu required="true" requiredMessage="El campo Especialidad es obligatorio" valueChangeListener="#{planearCursoController.somChangeEspecialidad}">
+        					<f:selectItems value="#{planearCursoController.itemEspecialidades}"/>
+        					<a4j:ajax execute="@this" event="click" render="somCurso"/>
+        				</h:selectOneMenu>
+        				
         				<h:outputLabel value="Curso"/>
-        				<rich:select defaultLabel="Seleccione" required="true" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.curso.idCurso}" requiredMessage="El campo curso es obligatorio">
+        				<rich:select id="somCurso" defaultLabel="Seleccione" required="true" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.curso.idCurso}" requiredMessage="El campo curso es obligatorio">
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
         				</rich:select>
         				
