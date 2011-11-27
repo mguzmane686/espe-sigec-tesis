@@ -18,23 +18,30 @@
         	<rich:panel header="#{msg['creacion_curso']}">
         		<h:panelGroup layout="block" styleClass="roundCorner">
         			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-        				<a4j:commandButton value="#{msg['guardar']}" actionListener="#{cursoController.btnSaveCurso}" image="/resources/images/save.png"/>
+        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" 
+        					actionListener="#{cursoController.btnSaveCurso}" image="/resources/images/save.png"/>
         				<h:outputLabel value="#{msg['guardar']}" />
         			</h:panelGrid>
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="#{msg['creacion_curso']}">
+        	<rich:panel header="#{msg['creacion_curso']}" id="pnlCurso">
         	
         	<fieldset>
         		<legend>
         			<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="#{msg['nombre']}" />
-        			<h:inputText value="#{cursoController.curso.nombreCurso}" size="70"/>
-        			<h:outputLabel value="#{msg['descripcion']}" />
-        			<h:inputTextarea value="#{cursoController.curso.descripcionCurso}" />
+        			<h:outputLabel value="#{msg['etiqueta_especialidad']}:" />
+        			<rich:select value="#{cursoController.curso.especialidad.idEspecialidad}" enableManualInput="false" defaultLabel="Seleccione una especialidad" 
+        				required="true" requiredMessage="El campo Especialidad es obligatorio">
+        				<f:selectItems value="#{cursoController.itemEspecialidades}"/>
+        			</rich:select>
+        			
+        			<h:outputLabel value="#{msg['nombre']}:"/>
+        			<h:inputText value="#{cursoController.curso.nombreCurso}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
+        			<h:outputLabel value="#{msg['descripcion']}:" />
+        			<h:inputTextarea value="#{cursoController.curso.descripcionCurso}" style="width:40em" required="true" requiredMessage="El campo Descripcion es obligatorio"/>
         		</h:panelGrid>
         	</fieldset>
         	
@@ -45,7 +52,7 @@
         		
         		<a4j:outputPanel ajaxRendered="true">
         		<h:panelGroup layout="block">
-   					<a4j:commandButton value="Nuevo tema" onclick="#{rich:component('popupNuevoTema')}.show()"></a4j:commandButton>
+   					<a4j:commandButton value="Nuevo tema" onclick="#{rich:component('popupNuevoTema')}.show()" immediate="true"/>
    				</h:panelGroup>
         		<rich:panel rendered="#{empty cursoController.lstPensumAcademicos}">
         			#{msg.etiqueta_curso_no_tema}
