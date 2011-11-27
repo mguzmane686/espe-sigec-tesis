@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.Modulo;
-import org.espe.sigec.model.entities.Perfil;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.hibernate.Criteria;
