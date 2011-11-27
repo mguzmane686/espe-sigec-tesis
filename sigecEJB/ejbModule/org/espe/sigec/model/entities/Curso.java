@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,11 +47,17 @@ public class Curso implements Serializable {
     @Size(max = 500)
     @Column(name = "descripcion_curso")
     private String descripcionCurso;
+    @Size(max = 1)
+    @Column(name = "estado_cur")
+    private String estadoCur;
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     private Collection<PensumAcademico> pensumAcademicoCollection;
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     private Collection<CursoPeriodo> cursoPeriodoCollection;
-
+    @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Especialidad especialidad;
+    
     @Transient
     private boolean showCursoPeriodoCollection;
     
@@ -131,6 +139,22 @@ public class Curso implements Serializable {
 
 	public void setShowCursoPeriodoCollection(boolean showCursoPeriodoCollection) {
 		this.showCursoPeriodoCollection = showCursoPeriodoCollection;
+	}
+
+	public Especialidad getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
+	}
+
+	public String getEstadoCur() {
+		return estadoCur;
+	}
+
+	public void setEstadoCur(String estadoCur) {
+		this.estadoCur = estadoCur;
 	}
     
 }
