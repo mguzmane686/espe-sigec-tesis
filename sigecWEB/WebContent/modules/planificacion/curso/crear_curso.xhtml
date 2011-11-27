@@ -58,6 +58,7 @@
 		   						$("#frmCurso\\:btnNuevoTema").live('click',function(){
 		   							$("#frmNuevoCurso\\:txtNomTem").attr('value','');
 		   							$("#frmNuevoCurso\\:txtDetTem").attr('value','');
+		   							$("#frmNuevoCurso\\:txtNomTem").focus();
 			   					});
 		   					</script>
 		   				</h:panelGroup>
@@ -103,10 +104,10 @@
 		        <h:form id="frmNuevoCurso">
 			        <h:panelGrid columns="2" id="pgDatosTema">
 			        	<h:outputLabel value="Tema" />
-			        	<h:inputText id="txtNomTem" value="#{cursoController.pensumAcademicoNuevo.tema}" />
+			        	<h:inputText id="txtNomTem" value="#{cursoController.pensumAcademicoNuevo.tema}" tabindex="1"/>
 			        	
 			        	<h:outputLabel value="#{msg['descripcion']}" />
-			        	<h:inputText id="txtDetTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" />
+			        	<h:inputText id="txtDetTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" tabindex="2"/>
 			        </h:panelGrid>
 			        
 			        <h:panelGroup layout="block" style="text-align:right; width:100%">
