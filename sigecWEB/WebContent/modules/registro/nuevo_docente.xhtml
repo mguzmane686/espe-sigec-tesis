@@ -38,39 +38,63 @@
 					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['cedula']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
 					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" />
 
-					<h:outputLabel value="#{msg['nombres']}" styleClass="label-bold" />
+					<h:outputLabel value="#{msg['nombres']}"  />
 					<h:panelGrid columns="2">
 						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" />
 						<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
 					</h:panelGrid>
 
 
-					<h:outputLabel value="#{msg['apellidos']}" styleClass="label-bold" />
+					<h:outputLabel value="#{msg['apellidos']}"  />
 					<h:panelGrid columns="2">
 						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" />
 						<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
 					</h:panelGrid>
 
 					<h:outputLabel value="#{msg['fecha_nacimiento']}"
-						styleClass="label-bold" />
+						 />
 					<rich:calendar value="#{registroDocenteController.profesor.persona.fechaNacimiento}"></rich:calendar>
 
-					<h:outputLabel value="#{msg['nacionalidad']}" styleClass="label-bold" />
+					<h:outputLabel value="#{msg['nacionalidad']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" />
 
-					<h:outputLabel value="#{msg['direccion']}" styleClass="label-bold" />
+					<h:outputLabel value="#{msg['direccion']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" />
 
-					<h:outputLabel value="#{msg['e_mail']}" styleClass="label-bold" />
+					<h:outputLabel value="#{msg['e_mail']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" />
 
-					<h:outputLabel value="#{msg['celular']}" styleClass="label-bold" />
+					<h:outputLabel value="#{msg['celular']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" />
-
+					
+					<h:outputLabel value="#{msg['etiqueta_observacion']}"  />
+					<h:inputText value="#{registroDocenteController.profesor.observacion}" />
+					
+					<h:outputLabel value="Tiempo completo" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioArea}">
+						<f:selectItem itemLabel="Si" itemValue="1" />
+						<f:selectItem itemLabel="No" itemValue="0" />
+					</h:selectOneRadio>	
 				</h:panelGrid>
+				<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" listHeight="20" maxFilesQuantity="1"
+	                id="upload" acceptedTypes="jpg, gif, png, bmp" >
+	                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+	            </rich:fileUpload>
+	            
+	            <rich:dataGrid columns="1" value="#{registroDocenteController.files}" id="info"
+                    var="file" rowKeyVar="row">
+                    <rich:panel bodyClass="rich-laguna-panel-no-header">
+                        <h:panelGrid columns="2">
+                            <a4j:mediaOutput element="img" mimeType="image/jpeg" 
+                                createContent="#{registroDocenteController.paint}" value="#{row}"
+                                style="width:100px; height:100px;" cacheable="false">
+                            </a4j:mediaOutput>
+                        </h:panelGrid>
+                    </rich:panel>
+                </rich:dataGrid>
 			</fieldset>
 
 			<fieldset>
@@ -78,47 +102,28 @@
 					<h:outputLabel value="#{msg['ponderacion']}" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="2" columnClasses="alinearLeft, alinearCenter, alinearCenter">
-					<h:outputLabel value="#{msg['ponderacion']}" />
-					<h:outputLabel value="" />
-					
-					<h:outputLabel value="#{msg['titulo_nivel_tres']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:outputLabel value="#{msg['titulo_nivel_tres']}"  style="padding-right:50px" />
 					<h:selectOneRadio value="#{registroDocenteController.profesor.tituloNivelTres}">
-						<f:selectItem itemLabel="Si" itemValue="1" />
-						<f:selectItem itemLabel="No" itemValue="0" />
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
 					</h:selectOneRadio>
 					
 					
-					<h:outputLabel value="#{msg['experiencia_docente']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:outputLabel value="#{msg['experiencia_docente']}"  style="padding-right:50px" />
 					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioDocente}">
-						<f:selectItem itemLabel="Si" itemValue="1" />
-						<f:selectItem itemLabel="No" itemValue="0" />
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<f:selectItem itemLabel="4" itemValue="4" />
+						<f:selectItem itemLabel="5" itemValue="5" />
 					</h:selectOneRadio>
 					
-					
-					<h:outputLabel value="#{msg['experiencia_area']}" styleClass="label-bold" style="padding-right:50px" />
+					<h:outputLabel value="#{msg['experiencia_area']}"  style="padding-right:50px" />
 					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioArea}">
-						<f:selectItem itemLabel="Si" itemValue="1" />
-						<f:selectItem itemLabel="No" itemValue="0" />
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
 					</h:selectOneRadio>
-					
-					<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}"
-		                id="upload" acceptedTypes="jpg, gif, png, bmp">
-		                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
-		            </rich:fileUpload>
-		            
-		            <rich:dataGrid columns="1" value="#{registroDocenteController.files}" id="info"
-                        var="file" rowKeyVar="row">
-                        <rich:panel bodyClass="rich-laguna-panel-no-header">
-                            <h:panelGrid columns="2">
-                                <a4j:mediaOutput element="img" mimeType="image/jpeg" 
-                                    createContent="#{registroDocenteController.paint}" value="#{row}"
-                                    style="width:100px; height:100px;" cacheable="false">
-                                </a4j:mediaOutput>
-                            </h:panelGrid>
-                        </rich:panel>
-                    </rich:dataGrid>
-                        
-                    
 				</h:panelGrid>
 			</fieldset>
 
