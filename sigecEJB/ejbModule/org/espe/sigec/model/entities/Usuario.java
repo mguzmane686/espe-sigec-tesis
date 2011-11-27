@@ -45,6 +45,9 @@ public class Usuario implements Serializable {
     @Size(max = 50)
     @Column(name = "clave")
     private String clave;
+    @Size(max = 1)
+    @Column(name = "estado_usr")
+    private String estadoUsr;
     @ManyToMany(mappedBy = "usuarioCollection", fetch = FetchType.LAZY)
     private Collection<Perfil> perfilCollection;
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
@@ -121,5 +124,13 @@ public class Usuario implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.Usuario[ idUsuario=" + idUsuario + " ]";
     }
+
+	public String getEstadoUsr() {
+		return estadoUsr;
+	}
+
+	public void setEstadoUsr(String estadoUsr) {
+		this.estadoUsr = estadoUsr;
+	}
     
 }

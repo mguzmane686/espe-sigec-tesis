@@ -57,10 +57,27 @@ public class Profesor implements Serializable {
     @Size(max = 1)
     @Column(name = "expe_anio_area")
     private String expeAnioArea;
+    @Size(max = 1)
+    @Column(name = "estado_seleccion")
+    private String estadoSeleccion;
+    @Size(max = 1)
+    @Column(name = "estado_prof")
+    private String estadoProf;
+    @Column(name = "experiencia")
+    private Integer experiencia;
+    @Size(max = 1)
+    @Column(name = "tiempo_comp")
+    private String tiempoComp;
+    @Size(max = 1024)
+    @Column(name = "observacion")
+    private String observacion;
     
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
+    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Curso curso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
     private Collection<DesempenioProfesor> desempenioProfesorCollection;
     @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
@@ -164,17 +181,66 @@ public class Profesor implements Serializable {
 	@Transient
 	public double getPonderacion(){
 		double ponderacion =0;
-		if(getExpeAnioArea()!=null && getExpeAnioArea().equals("1")){
-			ponderacion += 33.33;
+		if(getExpeAnioArea()!=null){
+			ponderacion += (Integer.parseInt(getExpeAnioArea())*10);
 		}
-		if(getExpeAnioDocente() !=null && getExpeAnioDocente().equals("1")){
-			ponderacion += 33.33;
+		if(getExpeAnioDocente() !=null){
+			ponderacion += (Integer.parseInt(getExpeAnioDocente())*10);
 		}
-		if(getTituloNivelTres() !=null && getTituloNivelTres().equals("1")){
-			ponderacion += 33.33;
+		if(getTituloNivelTres() !=null){
+			ponderacion += (Integer.parseInt(getTituloNivelTres())*10);
 		}
 		
 		ponderacion = Math.round((ponderacion*100)/100);
 		return ponderacion;
 	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+	public String getEstadoSeleccion() {
+		return estadoSeleccion;
+	}
+
+	public void setEstadoSeleccion(String estadoSeleccion) {
+		this.estadoSeleccion = estadoSeleccion;
+	}
+
+	public String getEstadoProf() {
+		return estadoProf;
+	}
+
+	public void setEstadoProf(String estadoProf) {
+		this.estadoProf = estadoProf;
+	}
+
+	public Integer getExperiencia() {
+		return experiencia;
+	}
+
+	public void setExperiencia(Integer experiencia) {
+		this.experiencia = experiencia;
+	}
+
+	public String getTiempoComp() {
+		return tiempoComp;
+	}
+
+	public void setTiempoComp(String tiempoComp) {
+		this.tiempoComp = tiempoComp;
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+	
 }

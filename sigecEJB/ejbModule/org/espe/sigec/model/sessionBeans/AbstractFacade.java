@@ -6,8 +6,12 @@ package org.espe.sigec.model.sessionBeans;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
-//
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 
@@ -15,20 +19,27 @@ import org.hibernate.Session;
  *
  * @author roberto
  */
+
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
+    
+    @Resource 
+    private SessionContext context;
+
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     protected abstract EntityManager getEntityManager();
-
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    
     public void create(T entity) throws Exception{
         try {
         	getEntityManager().persist(entity);
 		} catch (Exception e) {
 //			getEntityManager().getTransaction().rollback();
+//			context.setRollbackOnly();
 			throw new Exception(e);
 		}
     	
@@ -70,5 +81,4 @@ public abstract class AbstractFacade<T> {
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
-    
 }

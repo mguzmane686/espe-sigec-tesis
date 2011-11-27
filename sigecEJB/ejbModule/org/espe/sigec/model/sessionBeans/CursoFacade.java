@@ -4,10 +4,16 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.espe.sigec.model.entities.Curso;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -25,5 +31,15 @@ public class CursoFacade extends AbstractFacade<Curso> implements CursoFacadeLoc
     public CursoFacade() {
         super(Curso.class);
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Curso> findCursoByEspecialidad(Integer idEspecialidad) {
+		
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Curso.class);
+		
+		criteria.add(Restrictions.eq("especialidad.idEspecialidad", idEspecialidad));
+		return criteria.list();
+	}
     
 }
