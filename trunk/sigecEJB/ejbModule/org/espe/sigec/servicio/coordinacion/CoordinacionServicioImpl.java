@@ -4,10 +4,12 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 
+import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.PeriodoAcademico;
+import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
@@ -18,6 +20,8 @@ import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
  *
  */
 public class CoordinacionServicioImpl implements CoordinacionServicio{
+	@EJB
+	private AulaFacadeLocal aulaFacadeLocal;
 	@EJB
 	private CursoFacadeLocal cursoFacadeLocal;
 	@EJB
@@ -45,5 +49,11 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 		cursoPeriodo.setPeriodoAcademico(periodoAcademico);
 		cursoPeriodoFacadeLocal.create(cursoPeriodo);	
 	}
+
+	@Override
+	public Collection<Aula> findAulas() {
+		return aulaFacadeLocal.findAll();
+	}
+	
 	
 }
