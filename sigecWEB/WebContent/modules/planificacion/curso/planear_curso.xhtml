@@ -54,6 +54,11 @@
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
         				</rich:select>
         				
+        				<h:outputLabel value="Aula"/>
+        				<rich:select defaultLabel="Seleccione" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.aula.idAula}">
+        					<f:selectItems value="#{planearCursoController.itemAulas}"></f:selectItems>
+        				</rich:select>
+        				
         				<h:outputLabel value="Inicio Inscripciones" />
         				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
         				
