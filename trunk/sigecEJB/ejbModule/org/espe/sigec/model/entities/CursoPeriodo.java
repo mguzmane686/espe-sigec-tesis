@@ -82,8 +82,9 @@ public class CursoPeriodo implements Serializable {
     @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
     @ManyToOne(fetch = FetchType.LAZY)
     private Curso curso;
-    @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
-    private Collection<Aula> aulaCollection;
+    @JoinColumn(name = "id_aula", referencedColumnName = "id_aula")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Aula aula;
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<MaterialDidactico> materialDidacticoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
@@ -191,15 +192,7 @@ public class CursoPeriodo implements Serializable {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-
-    public Collection<Aula> getAulaCollection() {
-        return aulaCollection;
-    }
-
-    public void setAulaCollection(Collection<Aula> aulaCollection) {
-        this.aulaCollection = aulaCollection;
-    }
-
+    
     public Collection<MaterialDidactico> getMaterialDidacticoCollection() {
         return materialDidacticoCollection;
     }
@@ -263,5 +256,14 @@ public class CursoPeriodo implements Serializable {
 
 	public void setHoraFinClase(String horaFinClase) {
 		this.horaFinClase = horaFinClase;
-	}    
+	}
+
+	public Aula getAula() {
+		return aula;
+	}
+
+	public void setAula(Aula aula) {
+		this.aula = aula;
+	}
+	
 }
