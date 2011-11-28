@@ -28,12 +28,12 @@ public class LoginController implements Serializable{
 	}
 	
 	public void btnSignIn(ActionEvent e) {
-		usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), getUsuario().getClave());
+		Usuario usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), getUsuario().getClave());
 		if(null != usuario){
 			
 			try {
-				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setLstModulos(loginServicio.getMenuByProfile(usuario));
-				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUiPanelMenu(FacesUtils.buildUserMenu(loginServicio.getMenuByProfile(usuario)));
+//				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setLstModulos(loginServicio.getMenuByProfile(usuario));
+//				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUiPanelMenu(FacesUtils.buildUserMenu(loginServicio.getMenuByProfile(usuario)));
 				FacesContext.getCurrentInstance().getExternalContext().redirect("modules/home.jsf?faces-redirect=true");
 			} catch (IOException e1) {
 				e1.printStackTrace();
