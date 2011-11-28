@@ -5,17 +5,22 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -31,10 +36,20 @@ public class Aula implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_aula")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aula_seq")
+    @SequenceGenerator(name="aula_seq", sequenceName="aula_seq", allocationSize = 1)
     private Integer idAula;
-    @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CursoPeriodo cursoPeriodo;
+    @Size(max = 50)
+    @Column(name = "cod_aula")
+    private String codAula;
+    @Size(max = 250)
+    @Column(name = "nombre_aula")
+    private String nombreAula;
+    @Size(max = 250)
+    @Column(name = "descripcion_aula")
+    private String descripcionAula;
+    @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
+    private Collection<CursoPeriodo> cursoPeriodoCollection;
 
     public Aula() {
     }
@@ -49,14 +64,6 @@ public class Aula implements Serializable {
 
     public void setIdAula(Integer idAula) {
         this.idAula = idAula;
-    }
-
-    public CursoPeriodo getCursoPeriodo() {
-        return cursoPeriodo;
-    }
-
-    public void setCursoPeriodo(CursoPeriodo cursoPeriodo) {
-        this.cursoPeriodo = cursoPeriodo;
     }
 
     @Override
@@ -83,5 +90,38 @@ public class Aula implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.Aula[ idAula=" + idAula + " ]";
     }
+
+	public String getCodAula() {
+		return codAula;
+	}
+
+	public void setCodAula(String codAula) {
+		this.codAula = codAula;
+	}
+
+	public String getNombreAula() {
+		return nombreAula;
+	}
+
+	public void setNombreAula(String nombreAula) {
+		this.nombreAula = nombreAula;
+	}
+
+	public String getDescripcionAula() {
+		return descripcionAula;
+	}
+
+	public void setDescripcionAula(String descripcionAula) {
+		this.descripcionAula = descripcionAula;
+	}
+
+	public Collection<CursoPeriodo> getCursoPeriodoCollection() {
+		return cursoPeriodoCollection;
+	}
+
+	public void setCursoPeriodoCollection(
+			Collection<CursoPeriodo> cursoPeriodoCollection) {
+		this.cursoPeriodoCollection = cursoPeriodoCollection;
+	}
     
 }
