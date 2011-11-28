@@ -12,6 +12,7 @@ import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
+import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Especialidad;
@@ -28,18 +29,10 @@ import org.espe.sigec.web.utils.SigecConstantes;
 @ManagedBean(name="planearCursoController")
 @ViewScoped
 public class AbrirCurso implements Serializable{
-//	@EJB
-//	private CursoFacadeLocal cursoFacadeLocal;
-//	@EJB
-//	private PeriodoAcademicoFacadeLocal academicoFacadeLocal;
-//	@EJB
-//	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
-//	@EJB
-//	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	
 	@Inject
 	private CoordinacionServicio coordinacionServicio;
-	
+	private Collection<SelectItem> itemAulas;
 	private Collection<SelectItem> itemCursos;
 	private Collection<SelectItem> itemEspecialidades;
 	
@@ -50,6 +43,7 @@ public class AbrirCurso implements Serializable{
 		setPeriodoAcademico(new PeriodoAcademico());
 		setCursoPeriodo(new CursoPeriodo());
 		getCursoPeriodo().setCurso(new Curso());
+		getCursoPeriodo().setAula(new Aula());
 		getCursoPeriodo().setTipoCurso(SigecConstantes.TIPO_CURSO_INDIVIDUAL);
 		loadParametrosGenerales();
 	}
@@ -59,7 +53,7 @@ public class AbrirCurso implements Serializable{
 		getCursoPeriodo().setMaximoEstudiantes(SigecConstantes.MAXIMO_ESTUDIANTES);
 	}
 	@PostConstruct
-	public void cargarEspecialidades(){
+	public void loadItems(){
 		setItemEspecialidades(new ArrayList<SelectItem>());
 		for(Especialidad especialidad: coordinacionServicio.findEspecialidades()){
 			getItemEspecialidades().add(new SelectItem(especialidad.getIdEspecialidad(), especialidad.getNombre()));
@@ -68,6 +62,11 @@ public class AbrirCurso implements Serializable{
 			Integer integer = (Integer) getItemEspecialidades().iterator().next().getValue();
 			loadCursos(integer);
 		}
+		setItemAulas(new ArrayList<SelectItem>());
+		for(Aula aula: coordinacionServicio.findAulas()){
+			getItemAulas().add(new SelectItem(aula.getIdAula(), aula.getCodAula() +" ; "+ aula.getNombreAula()));
+		}
+		
 	}
 	private void loadCursos(Integer especialidad){
 		setItemCursos(new ArrayList<SelectItem>());
@@ -83,9 +82,6 @@ public class AbrirCurso implements Serializable{
 	public void btnSaveAbrirCurso(ActionEvent e){
 		try {
 			coordinacionServicio.abrirCurso(getPeriodoAcademico(), getCursoPeriodo());
-//			academicoFacadeLocal.create(getPeriodoAcademico());
-//			getCursoPeriodo().setPeriodoAcademico(getPeriodoAcademico());
-//			cursoPeriodoFacadeLocal.create(getCursoPeriodo());
 			FacesUtils.addInfoMessage("El curso fue abierto con &eacutexito");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("No se pudo abrir el curso");
@@ -122,6 +118,14 @@ public class AbrirCurso implements Serializable{
 
 	public void setItemEspecialidades(Collection<SelectItem> itemEspecialidades) {
 		this.itemEspecialidades = itemEspecialidades;
+	}
+
+	public Collection<SelectItem> getItemAulas() {
+		return itemAulas;
+	}
+
+	public void setItemAulas(Collection<SelectItem> itemAulas) {
+		this.itemAulas = itemAulas;
 	}
 
 }
