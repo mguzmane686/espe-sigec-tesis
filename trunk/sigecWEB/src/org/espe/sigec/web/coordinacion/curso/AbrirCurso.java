@@ -40,14 +40,17 @@ public class AbrirCurso implements Serializable{
 	private CursoPeriodo cursoPeriodo;
 	
 	public AbrirCurso() {
+		initEntities();
+		loadParametrosGenerales();
+	}
+	
+	private void initEntities(){
 		setPeriodoAcademico(new PeriodoAcademico());
 		setCursoPeriodo(new CursoPeriodo());
 		getCursoPeriodo().setCurso(new Curso());
 		getCursoPeriodo().setAula(new Aula());
 		getCursoPeriodo().setTipoCurso(SigecConstantes.TIPO_CURSO_INDIVIDUAL);
-		loadParametrosGenerales();
 	}
-	
 	private void loadParametrosGenerales(){
 		getCursoPeriodo().setMinimoEstudiantes(SigecConstantes.MINIMO_ESTUDIANTES);
 		getCursoPeriodo().setMaximoEstudiantes(SigecConstantes.MAXIMO_ESTUDIANTES);
@@ -82,6 +85,7 @@ public class AbrirCurso implements Serializable{
 	public void btnSaveAbrirCurso(ActionEvent e){
 		try {
 			coordinacionServicio.abrirCurso(getPeriodoAcademico(), getCursoPeriodo());
+			initEntities();
 			FacesUtils.addInfoMessage("El curso fue abierto con &eacutexito");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("No se pudo abrir el curso");
