@@ -12,11 +12,20 @@
     	<h:outputStylesheet library="css" name="botones.css"/>
     	
         <h:form id="frmSeleDocen">
-        	<rich:panel header="#{msg['cursos_disponibles']}">
+        	<rich:panel header="#{msg['seleccion_docente']}">
+				<h:panelGroup layout="block" styleClass="roundCorner">
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+						<a4j:commandButton value="#{msg['guardar']}" actionListener="#{seleccionPorfesorController.btnSaveSeleccionProfesor}" image="/resources/images/save.png" render="pnlDocente"/>
+						<h:outputLabel value="#{msg['guardar']}" />
+					</h:panelGrid>
+				</h:panelGroup>
+			</rich:panel>
+			
+        	<rich:panel header="Seleccion">
         	
 	        	<fieldset>
 	        		<legend>
-	        			<h:outputLabel value="#{msg['cursos_disponibles']}" styleClass="titulo"/>
+	        			<h:outputLabel value="#{msg['seleccion_docente']}" styleClass="titulo"/>
 	        		</legend>
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
@@ -54,7 +63,7 @@
 		        					<h:outputText value="Seleccionar" />
 		        				</f:facet>
 		        				<center>
-			        				<h:selectOneRadio>
+			        				<h:selectOneRadio value="#{profesor.estadoSeleccion}">
 			        					<f:selectItem itemLabel="Si" itemValue="1"/>
 			        					<f:selectItem itemLabel="No" itemValue="0"/>
 			        				</h:selectOneRadio>
