@@ -34,13 +34,18 @@
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
-        			<h:inputText value="#{aulaController.aula.codAula}" size="72" required="true" requiredMessage="El campo es obligatorio"/>
+        			<h:selectOneMenu value="#{aulaController.aula.edificio.idEdificio}">
+        				<f:selectItems value="#{aulaController.itemsEdificio}"/>
+        			</h:selectOneMenu>
+        			
+        			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
+        			<h:inputText value="#{aulaController.aula.idAula}" size="72" required="true" requiredMessage="El campo #{msg['etiqueta_codigo']} es obligatorio"/>
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
         			<h:inputText value="#{aulaController.aula.nombreAula}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
         			
         			<h:outputLabel value="#{msg['descripcion']}:" />
-        			<h:inputTextarea value="#{aulaController.aula.descripcionAula}" style="width:40em" required="true" requiredMessage="El campo Descripcion es obligatorio"/>
+        			<h:inputTextarea value="#{aulaController.aula.descripcionAula}" style="width:40em"/>
         		</h:panelGrid>
         	</fieldset>	
        	</rich:panel>

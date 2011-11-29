@@ -32,19 +32,24 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['usuario']}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg['identificador']}"  style="padding-right:50px" />
+					<h:inputText value="#{administrativoController.persona.usuario.identificador}" />
+					
+					<h:outputLabel value="#{msg['clave']}"  style="padding-right:50px" />
+					<h:inputText value="#{administrativoController.persona.usuario.clave}" />
+				</h:panelGrid>
+			</fieldset>
 			
 			<fieldset>
 				<legend>
 					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="2">
-					
-					<h:outputLabel value="#{msg['identificador']}"  style="padding-right:50px" />
-					<h:inputText value="#{administrativoController.persona.usuario.identificador}" />
-					
-					<h:outputLabel value="#{msg['clave']}"  style="padding-right:50px" />
-					<h:inputText value="#{administrativoController.persona.usuario.clave}" />
-				
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
 					<h:inputText value="#{administrativoController.persona.cedula}" />
 

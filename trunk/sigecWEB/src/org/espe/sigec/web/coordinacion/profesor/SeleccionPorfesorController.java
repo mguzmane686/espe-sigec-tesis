@@ -7,18 +7,20 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author roberto
  *
  */
 @ManagedBean(name="seleccionPorfesorController")
-@SessionScoped
+@ViewScoped
 public class SeleccionPorfesorController {
 	@EJB
 	private ProfesorFacadeLocal profesorFacadeLocal;
@@ -43,7 +45,16 @@ public class SeleccionPorfesorController {
 		}
         stream.close();
     }
-	
+	public void btnSaveSeleccionProfesor(ActionEvent e){
+		for(Profesor profesorTMP: getLstProfesors()){
+			try {
+				profesorFacadeLocal.edit(profesorTMP);
+				FacesUtils.addInfoMessage("Los registros se actualizaron correctamente");
+			} catch (Exception e1) {
+				FacesUtils.addErrorMessage("Ocurrio un error al grabar los registros");
+			}
+		}
+	}
 	public void setLstProfesors(Collection<Profesor> lstProfesors) {
 		this.lstProfesors = lstProfesors;
 	}

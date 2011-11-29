@@ -31,6 +31,7 @@ public class AdministrativoController implements Serializable{
 		try {
 			admGeneralServicio.createAdministrativo(getPersona().getUsuario(), getPersona());
 			FacesUtils.addInfoMessage("Administrativo creado");
+			initEntities();
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Administrativo no creado");
 		}
