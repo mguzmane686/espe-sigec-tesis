@@ -39,42 +39,41 @@
 				</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
-					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 
 					<h:outputLabel value="#{msg['nombres']}"  />
 					<h:panelGrid columns="2">
-						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" />
+						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
 						<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
 					</h:panelGrid>
 
 
 					<h:outputLabel value="#{msg['apellidos']}"  />
 					<h:panelGrid columns="2">
-						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" />
+						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
 						<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
 					</h:panelGrid>
 
-					<h:outputLabel value="#{msg['fecha_nacimiento']}"
-						 />
+					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
 					<rich:calendar value="#{registroDocenteController.profesor.persona.fechaNacimiento}"></rich:calendar>
 
 					<h:outputLabel value="#{msg['nacionalidad']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" />
 
-					<h:outputLabel value="#{msg['direccion']}"  />
+					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
 					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" />
 
 					<h:outputLabel value="#{msg['e_mail']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" />
 
-					<h:outputLabel value="#{msg['celular']}"  />
+					<h:outputLabel value="#{msg['celular']}"  required="true"/>
 					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" />
 					
 					<h:outputLabel value="#{msg['etiqueta_observacion']}"  />
 					<h:inputText value="#{registroDocenteController.profesor.observacion}" />
 					
 					<h:outputLabel value="Tiempo completo" />
-					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioArea}">
+					<h:selectOneRadio value="#{registroDocenteController.profesor.tiempoComp}">
 						<f:selectItem itemLabel="Si" itemValue="1" />
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>	
