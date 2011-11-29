@@ -10,6 +10,7 @@ import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
 
 public class InscripcionServicioImpl implements InscripcionServicio{
+	@SuppressWarnings("unused")
 	@EJB
 	private EstudianteFacadeLocal estudianteFacadeLocal;
 	@EJB

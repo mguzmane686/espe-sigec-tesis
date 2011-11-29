@@ -14,6 +14,7 @@ public class LoginServicioImpl implements LoginServicio{
 
 	@EJB
 	private UsuarioFacadeLocal usuarioFacadeLocal;
+	@SuppressWarnings("unused")
 	@EJB
 	private ModuloFacadeLocal moduloFacadeLocal;
 	

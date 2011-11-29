@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author roberto
  */
+@SuppressWarnings("serial")
 @Embeddable
 public class AsistenciaEstudiantePK implements Serializable {
     @Basic(optional = false)

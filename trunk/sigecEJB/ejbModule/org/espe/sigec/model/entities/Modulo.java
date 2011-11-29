@@ -5,7 +5,6 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Basic;
