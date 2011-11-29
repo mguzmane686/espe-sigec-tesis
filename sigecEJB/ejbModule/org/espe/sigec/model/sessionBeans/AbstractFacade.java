@@ -6,11 +6,12 @@ package org.espe.sigec.model.sessionBeans;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -22,10 +23,6 @@ import org.hibernate.Session;
 
 public abstract class AbstractFacade<T> {
     private Class<T> entityClass;
-    
-    @Resource 
-    private SessionContext context;
-
 
     public AbstractFacade(Class<T> entityClass) {
         this.entityClass = entityClass;
@@ -65,8 +62,9 @@ public abstract class AbstractFacade<T> {
     	return crit.list();
     }
 
-    public List<T> findRange(int[] range) {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<T> findRange(int[] range) {
+        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         javax.persistence.Query q = getEntityManager().createQuery(cq);
         q.setMaxResults(range[1] - range[0]);
@@ -74,11 +72,12 @@ public abstract class AbstractFacade<T> {
         return q.getResultList();
     }
 
-    public int count() {
-        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
-        javax.persistence.criteria.Root<T> rt = cq.from(entityClass);
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public int count() {
+        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        Root<T> rt = cq.from(entityClass);
         cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        Query q = getEntityManager().createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
 }
