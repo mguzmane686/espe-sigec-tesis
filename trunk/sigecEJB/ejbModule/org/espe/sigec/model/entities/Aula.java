@@ -11,13 +11,12 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,9 +35,10 @@ public class Aula implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_aula")
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aula_seq")
-    @SequenceGenerator(name="aula_seq", sequenceName="aula_seq", allocationSize = 1)
-    private Integer idAula;
+//    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aula_seq")
+//    @SequenceGenerator(name="aula_seq", sequenceName="aula_seq", allocationSize = 1)
+    @Size(min = 1, max = 20)
+    private String idAula;
     @Size(max = 50)
     @Column(name = "cod_aula")
     private String codAula;
@@ -50,23 +50,28 @@ public class Aula implements Serializable {
     private String descripcionAula;
     @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
     private Collection<CursoPeriodo> cursoPeriodoCollection;
-
+    @JoinColumn(name = "id_edificio", referencedColumnName = "id_edificio")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Edificio edificio;
+    
     public Aula() {
     }
 
-    public Aula(Integer idAula) {
+    public Aula(String idAula) {
         this.idAula = idAula;
     }
 
-    public Integer getIdAula() {
-        return idAula;
-    }
+    
 
-    public void setIdAula(Integer idAula) {
-        this.idAula = idAula;
-    }
+    public String getIdAula() {
+		return idAula;
+	}
 
-    @Override
+	public void setIdAula(String idAula) {
+		this.idAula = idAula;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idAula != null ? idAula.hashCode() : 0);
@@ -122,6 +127,14 @@ public class Aula implements Serializable {
 	public void setCursoPeriodoCollection(
 			Collection<CursoPeriodo> cursoPeriodoCollection) {
 		this.cursoPeriodoCollection = cursoPeriodoCollection;
+	}
+
+	public Edificio getEdificio() {
+		return edificio;
+	}
+
+	public void setEdificio(Edificio edificio) {
+		this.edificio = edificio;
 	}
     
 }

@@ -36,6 +36,15 @@ public class HistoricoCursoEstado implements Serializable {
     @Size(max = 10)
     @Column(name = "estado")
     private String estado;
+    @Size(max = 1)
+    @Column(name = "etapa_lanzado")
+    private String etapaLanzado;
+    @Size(max = 1)
+    @Column(name = "etapa_ejecutado")
+    private String etapaEjecutado;
+    @Size(max = 1)
+    @Column(name = "etapa_finalizado")
+    private String etapaFinalizado;
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo")
     @ManyToOne(fetch = FetchType.LAZY)
     private CursoPeriodo cursoPeriodo;
@@ -61,6 +70,30 @@ public class HistoricoCursoEstado implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getEtapaLanzado() {
+        return etapaLanzado;
+    }
+
+    public void setEtapaLanzado(String etapaLanzado) {
+        this.etapaLanzado = etapaLanzado;
+    }
+
+    public String getEtapaEjecutado() {
+        return etapaEjecutado;
+    }
+
+    public void setEtapaEjecutado(String etapaEjecutado) {
+        this.etapaEjecutado = etapaEjecutado;
+    }
+
+    public String getEtapaFinalizado() {
+        return etapaFinalizado;
+    }
+
+    public void setEtapaFinalizado(String etapaFinalizado) {
+        this.etapaFinalizado = etapaFinalizado;
     }
 
     public CursoPeriodo getCursoPeriodo() {
@@ -93,7 +126,7 @@ public class HistoricoCursoEstado implements Serializable {
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entites.HistoricoCursoEstado[ idHistoricoEstado=" + idHistoricoEstado + " ]";
+        return "org.espe.sigec.model.entities.HistoricoCursoEstado[ idHistoricoEstado=" + idHistoricoEstado + " ]";
     }
     
 }

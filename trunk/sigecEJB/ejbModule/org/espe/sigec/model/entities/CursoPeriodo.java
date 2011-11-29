@@ -72,8 +72,7 @@ public class CursoPeriodo implements Serializable {
     private String horaInicioClase;
     @Column(name = "hora_fin_clase")
     private String horaFinClase;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
-    private Presupuesto presupuesto;
+    
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<HistoricoCursoEstado> historicoCursoEstadoCollection;
     @JoinColumn(name = "id_per_academico", referencedColumnName = "id_per_academico")
@@ -89,6 +88,8 @@ public class CursoPeriodo implements Serializable {
     private Collection<MaterialDidactico> materialDidacticoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<CursoEstudiante> cursoEstudianteCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
+    private PresupuestoCurso presupuestoCurso;
 
     public CursoPeriodo() {
     }
@@ -159,14 +160,6 @@ public class CursoPeriodo implements Serializable {
 
     public void setMaximoEstudiantes(Integer maximoEstudiantes) {
         this.maximoEstudiantes = maximoEstudiantes;
-    }
-
-    public Presupuesto getPresupuesto() {
-        return presupuesto;
-    }
-
-    public void setPresupuesto(Presupuesto presupuesto) {
-        this.presupuesto = presupuesto;
     }
 
     public Collection<HistoricoCursoEstado> getHistoricoCursoEstadoCollection() {
@@ -264,6 +257,14 @@ public class CursoPeriodo implements Serializable {
 
 	public void setAula(Aula aula) {
 		this.aula = aula;
+	}
+
+	public PresupuestoCurso getPresupuestoCurso() {
+		return presupuestoCurso;
+	}
+
+	public void setPresupuestoCurso(PresupuestoCurso presupuestoCurso) {
+		this.presupuestoCurso = presupuestoCurso;
 	}
 	
 }

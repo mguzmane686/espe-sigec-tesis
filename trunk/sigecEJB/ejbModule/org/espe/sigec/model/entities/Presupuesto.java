@@ -5,18 +5,19 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -29,53 +30,84 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "Presupuesto.findAll", query = "SELECT p FROM Presupuesto p")})
 public class Presupuesto implements Serializable {
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_curso_periodo")
-    private BigDecimal idCursoPeriodo;
-    @Column(name = "dinero_asignado")
-    private BigInteger dineroAsignado;
-    @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)
-    @OneToOne(optional = false, fetch = FetchType.LAZY)
-    private CursoPeriodo cursoPeriodo;
+    @Column(name = "id_presupuesto")
+    private Integer idPresupuesto;
+    @Column(name = "fecha_inicio")
+    @Temporal(TemporalType.DATE)
+    private Date fechaInicio;
+    @Column(name = "fecha_fin")
+    @Temporal(TemporalType.DATE)
+    private Date fechaFin;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "recurso_inicial")
+    private Double recursoInicial;
+    @Column(name = "recurso_actual")
+    private Double recursoActual;
+    @OneToMany(mappedBy = "presupuesto", fetch = FetchType.LAZY)
+    private Collection<PresupuestoCurso> presupuestoCursoCollection;
 
     public Presupuesto() {
     }
 
-    public Presupuesto(BigDecimal idCursoPeriodo) {
-        this.idCursoPeriodo = idCursoPeriodo;
+    public Presupuesto(Integer idPresupuesto) {
+        this.idPresupuesto = idPresupuesto;
     }
 
-    public BigDecimal getIdCursoPeriodo() {
-        return idCursoPeriodo;
+    public Integer getIdPresupuesto() {
+        return idPresupuesto;
     }
 
-    public void setIdCursoPeriodo(BigDecimal idCursoPeriodo) {
-        this.idCursoPeriodo = idCursoPeriodo;
+    public void setIdPresupuesto(Integer idPresupuesto) {
+        this.idPresupuesto = idPresupuesto;
     }
 
-    public BigInteger getDineroAsignado() {
-        return dineroAsignado;
+    public Date getFechaInicio() {
+        return fechaInicio;
     }
 
-    public void setDineroAsignado(BigInteger dineroAsignado) {
-        this.dineroAsignado = dineroAsignado;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public CursoPeriodo getCursoPeriodo() {
-        return cursoPeriodo;
+    public Date getFechaFin() {
+        return fechaFin;
     }
 
-    public void setCursoPeriodo(CursoPeriodo cursoPeriodo) {
-        this.cursoPeriodo = cursoPeriodo;
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Double getRecursoInicial() {
+        return recursoInicial;
+    }
+
+    public void setRecursoInicial(Double recursoInicial) {
+        this.recursoInicial = recursoInicial;
+    }
+
+    public Double getRecursoActual() {
+        return recursoActual;
+    }
+
+    public void setRecursoActual(Double recursoActual) {
+        this.recursoActual = recursoActual;
+    }
+
+    public Collection<PresupuestoCurso> getPresupuestoCursoCollection() {
+        return presupuestoCursoCollection;
+    }
+
+    public void setPresupuestoCursoCollection(Collection<PresupuestoCurso> presupuestoCursoCollection) {
+        this.presupuestoCursoCollection = presupuestoCursoCollection;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idCursoPeriodo != null ? idCursoPeriodo.hashCode() : 0);
+        hash += (idPresupuesto != null ? idPresupuesto.hashCode() : 0);
         return hash;
     }
 
@@ -86,7 +118,7 @@ public class Presupuesto implements Serializable {
             return false;
         }
         Presupuesto other = (Presupuesto) object;
-        if ((this.idCursoPeriodo == null && other.idCursoPeriodo != null) || (this.idCursoPeriodo != null && !this.idCursoPeriodo.equals(other.idCursoPeriodo))) {
+        if ((this.idPresupuesto == null && other.idPresupuesto != null) || (this.idPresupuesto != null && !this.idPresupuesto.equals(other.idPresupuesto))) {
             return false;
         }
         return true;
@@ -94,7 +126,7 @@ public class Presupuesto implements Serializable {
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entites.Presupuesto[ idCursoPeriodo=" + idCursoPeriodo + " ]";
+        return "org.espe.sigec.model.entities.Presupuesto[ idPresupuesto=" + idPresupuesto + " ]";
     }
     
 }

@@ -75,13 +75,11 @@ public class Profesor implements Serializable {
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
-    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Curso curso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
-    private Collection<DesempenioProfesor> desempenioProfesorCollection;
     @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
     private Collection<CursoEstudiante> cursoEstudianteCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
+    private Collection<CursoProfesor> cursoProfesorCollection;
+    
 
     public Profesor() {
     }
@@ -113,15 +111,7 @@ public class Profesor implements Serializable {
     public void setPersona(Persona persona) {
         this.persona = persona;
     }
-
-    public Collection<DesempenioProfesor> getDesempenioProfesorCollection() {
-        return desempenioProfesorCollection;
-    }
-
-    public void setDesempenioProfesorCollection(Collection<DesempenioProfesor> desempenioProfesorCollection) {
-        this.desempenioProfesorCollection = desempenioProfesorCollection;
-    }
-
+    
     public Collection<CursoEstudiante> getCursoEstudianteCollection() {
         return cursoEstudianteCollection;
     }
@@ -194,15 +184,7 @@ public class Profesor implements Serializable {
 		ponderacion = Math.round((ponderacion*100)/100);
 		return ponderacion;
 	}
-
-	public Curso getCurso() {
-		return curso;
-	}
-
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
-
+	
 	public String getEstadoSeleccion() {
 		return estadoSeleccion;
 	}
@@ -241,6 +223,15 @@ public class Profesor implements Serializable {
 
 	public void setObservacion(String observacion) {
 		this.observacion = observacion;
+	}
+
+	public Collection<CursoProfesor> getCursoProfesorCollection() {
+		return cursoProfesorCollection;
+	}
+
+	public void setCursoProfesorCollection(
+			Collection<CursoProfesor> cursoProfesorCollection) {
+		this.cursoProfesorCollection = cursoProfesorCollection;
 	}
 	
 }

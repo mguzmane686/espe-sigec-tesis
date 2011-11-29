@@ -33,6 +33,10 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Aula</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
+		<class>org.espe.sigec.model.entities.CursoProfesor</class>
+		<class>org.espe.sigec.model.entities.CursoProfesorPK</class>
+		<class>org.espe.sigec.model.entities.Edificio</class>
+		<class>org.espe.sigec.model.entities.PresupuestoCurso</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
