@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -32,8 +33,9 @@ public class Perfil implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "id_perfil")
-    private Integer idPerfil;
+    private String idPerfil;
     @JoinTable(name = "usuario_perfil", joinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")}, inverseJoinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")})
@@ -43,19 +45,19 @@ public class Perfil implements Serializable {
     public Perfil() {
     }
 
-    public Perfil(Integer idPerfil) {
+    public Perfil(String idPerfil) {
         this.idPerfil = idPerfil;
     }
+    
+    public String getIdPerfil() {
+		return idPerfil;
+	}
 
-    public Integer getIdPerfil() {
-        return idPerfil;
-    }
+	public void setIdPerfil(String idPerfil) {
+		this.idPerfil = idPerfil;
+	}
 
-    public void setIdPerfil(Integer idPerfil) {
-        this.idPerfil = idPerfil;
-    }
-
-    public Collection<Usuario> getUsuarioCollection() {
+	public Collection<Usuario> getUsuarioCollection() {
         return usuarioCollection;
     }
 

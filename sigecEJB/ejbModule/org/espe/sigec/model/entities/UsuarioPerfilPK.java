@@ -10,6 +10,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -24,13 +25,14 @@ public class UsuarioPerfilPK implements Serializable {
     private int idUsuario;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "id_perfil")
-    private int idPerfil;
+    private String idPerfil;
 
     public UsuarioPerfilPK() {
     }
 
-    public UsuarioPerfilPK(int idUsuario, int idPerfil) {
+    public UsuarioPerfilPK(int idUsuario, String idPerfil) {
         this.idUsuario = idUsuario;
         this.idPerfil = idPerfil;
     }
@@ -42,20 +44,20 @@ public class UsuarioPerfilPK implements Serializable {
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+    public String getIdPerfil() {
+		return idPerfil;
+	}
 
-    public int getIdPerfil() {
-        return idPerfil;
-    }
+	public void setIdPerfil(String idPerfil) {
+		this.idPerfil = idPerfil;
+	}
 
-    public void setIdPerfil(int idPerfil) {
-        this.idPerfil = idPerfil;
-    }
-
-    @Override
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (int) idUsuario;
-        hash += (int) idPerfil;
+        hash += (idPerfil != null ? idPerfil.hashCode() : 0);
         return hash;
     }
 

@@ -4,8 +4,11 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
+
 import javax.ejb.Local;
+
 import org.espe.sigec.model.entities.Aula;
 
 /**
@@ -29,4 +32,5 @@ public interface AulaFacadeLocal {
 
     int count();
     
+    Collection<Aula> findCursoByEdificio(String idEdificio);
 }

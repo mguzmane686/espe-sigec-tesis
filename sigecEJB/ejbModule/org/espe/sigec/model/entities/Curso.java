@@ -7,6 +7,7 @@ package org.espe.sigec.model.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -57,6 +58,8 @@ public class Curso implements Serializable {
     @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad")
     @ManyToOne(fetch = FetchType.LAZY)
     private Especialidad especialidad;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso", fetch = FetchType.LAZY)
+    private Collection<CursoProfesor> cursoProfesorCollection;
     
     @Transient
     private boolean showCursoPeriodoCollection;
@@ -155,6 +158,15 @@ public class Curso implements Serializable {
 
 	public void setEstadoCur(String estadoCur) {
 		this.estadoCur = estadoCur;
+	}
+
+	public Collection<CursoProfesor> getCursoProfesorCollection() {
+		return cursoProfesorCollection;
+	}
+
+	public void setCursoProfesorCollection(
+			Collection<CursoProfesor> cursoProfesorCollection) {
+		this.cursoProfesorCollection = cursoProfesorCollection;
 	}
     
 }

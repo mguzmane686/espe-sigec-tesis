@@ -11,6 +11,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -34,13 +35,16 @@ public class DesempenioProfesor implements Serializable {
     private Integer conocimientos;
     @Column(name = "desempenio")
     private Integer desempenio;
-    @JoinColumn(name = "id_profesor", referencedColumnName = "id_profesor", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Profesor profesor;
+    
     @JoinColumn(name = "id_per_academico", referencedColumnName = "id_per_academico", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private PeriodoAcademico periodoAcademico;
-
+    @JoinColumns({
+        @JoinColumn(name = "id_curso", referencedColumnName = "id_curso" , insertable = false, updatable = false),
+        @JoinColumn(name = "id_profesor", referencedColumnName = "id_profesor" , insertable = false, updatable = false)})
+    @ManyToOne(fetch = FetchType.LAZY)
+    private CursoProfesor cursoProfesor;
+    
     public DesempenioProfesor() {
     }
 
@@ -83,15 +87,7 @@ public class DesempenioProfesor implements Serializable {
     public void setDesempenio(Integer desempenio) {
         this.desempenio = desempenio;
     }
-
-    public Profesor getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
-    }
-
+    
     public PeriodoAcademico getPeriodoAcademico() {
         return periodoAcademico;
     }
@@ -124,5 +120,13 @@ public class DesempenioProfesor implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.DesempenioProfesor[ desempenioProfesorPK=" + desempenioProfesorPK + " ]";
     }
+
+	public CursoProfesor getCursoProfesor() {
+		return cursoProfesor;
+	}
+
+	public void setCursoProfesor(CursoProfesor cursoProfesor) {
+		this.cursoProfesor = cursoProfesor;
+	}
     
 }

@@ -51,7 +51,7 @@ public class UsuarioPerfil implements Serializable {
         this.usuarioPerfilPK = usuarioPerfilPK;
     }
 
-    public UsuarioPerfil(int idUsuario, int idPerfil) {
+    public UsuarioPerfil(int idUsuario, String idPerfil) {
         this.usuarioPerfilPK = new UsuarioPerfilPK(idUsuario, idPerfil);
     }
 
