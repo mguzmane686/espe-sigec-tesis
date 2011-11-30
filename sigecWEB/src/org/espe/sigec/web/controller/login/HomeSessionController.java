@@ -2,17 +2,12 @@ package org.espe.sigec.web.controller.login;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.Persona;
-import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
-import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.Mode;
