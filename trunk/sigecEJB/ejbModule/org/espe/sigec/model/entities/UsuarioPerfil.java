@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 /**
@@ -41,7 +42,9 @@ public class UsuarioPerfil implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Perfil perfil;
 
-    @OneToMany(mappedBy = "usuarioPerfil", fetch = FetchType.EAGER)
+    @Transient
+    private Persona persona;
+    @OneToMany(mappedBy = "usuarioPerfil", fetch = FetchType.LAZY)
     private Collection<Modulo> moduloCollection;
     
     public UsuarioPerfil() {
@@ -118,6 +121,14 @@ public class UsuarioPerfil implements Serializable {
 
 	public void setModuloCollection(Collection<Modulo> moduloCollection) {
 		this.moduloCollection = moduloCollection;
+	}
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
     
 }
