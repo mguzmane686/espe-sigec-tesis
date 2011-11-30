@@ -1,4 +1,4 @@
-package org.espe.sigec.web.inscripcion.controller;
+package org.espe.sigec.web.admGeneral.estudiante;
 
 import java.io.Serializable;
 
@@ -15,12 +15,12 @@ import org.richfaces.component.UIPanelMenu;
 @SuppressWarnings("serial")
 @ManagedBean(name="detalleInscripcionController")
 @SessionScoped
-public class DetalleInscripcionController extends CommonController implements Serializable{
+public class DetalleRegistroEstudianteController extends CommonController implements Serializable{
 
 	private Estudiante estudiante;
 	private boolean editMode;
 	
-	public DetalleInscripcionController() {
+	public DetalleRegistroEstudianteController() {
 		setUiPanelMenu((UIPanelMenu) FacesUtils.getFlashObject("menuSigec"));
 		setEstudiante((Estudiante) FacesUtils.getFlashObject("estudiante"));
 		if(getEstudiante()==null){
