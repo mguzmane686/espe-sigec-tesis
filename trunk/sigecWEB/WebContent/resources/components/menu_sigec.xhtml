@@ -42,7 +42,7 @@
             </rich:panelMenuItem>
                 
             <rich:panelMenuItem>
-            	<a4j:commandLink value="Registro nuevo docente" action="coor_registro_nuevo_docente.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="#{msg['registar_docente']}" action="coor_registro_nuevo_docente.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
@@ -54,7 +54,7 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup label="#{msg.etiqueta_adm_general}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
             	<a4j:commandLink value="Crear aula" action="adm_aulas.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
@@ -62,6 +62,13 @@
             <rich:panelMenuItem>
             	<a4j:commandLink value="Nuevo funcionario" action="adm_administrativo.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
+        </rich:panelMenuGroup>
+        
+        <rich:panelMenuGroup label="#{msg['etiqueta_inscripcion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false) or (homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='EST'?true:false)}">
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg['etiqueta_inscripcion']}" action="coor_inscripcion_estudiante.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+            
         </rich:panelMenuGroup>
    </rich:panelMenu>
 </composite:implementation>
