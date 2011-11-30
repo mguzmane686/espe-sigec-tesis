@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+
+	<h:outputStylesheet library="css" name="textos.css" />    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputStylesheet>
+   		.alinearLeft{
+   			text-align:left;
+   			font-weight: bold;
+   		}
+   		.alinearCenter{
+   			text-align:center;
+   			font-weight: bold;
+   		}
+   	</h:outputStylesheet>
+
+	<h:form>
+		<rich:panel header="#{msg['creacion_curso']}">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{registroDocenteController.btnSaveProfesor}" image="/resources/images/save.png" render="pnlDocente"/>
+					<h:outputLabel value="#{msg['guardar']}" />
+				</h:panelGrid>
+			</h:panelGroup>
+		</rich:panel>
+
+		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
+			
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+
+					<h:outputLabel value="#{msg['nombres']}"  />
+					<h:panelGrid columns="2">
+						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
+						<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
+					</h:panelGrid>
+
+
+					<h:outputLabel value="#{msg['apellidos']}"  />
+					<h:panelGrid columns="2">
+						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
+						<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
+					</h:panelGrid>
+
+					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
+					<rich:calendar value="#{registroDocenteController.profesor.persona.fechaNacimiento}"></rich:calendar>
+
+					<h:outputLabel value="#{msg['nacionalidad']}"  />
+					<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" />
+
+					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
+					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" />
+
+					<h:outputLabel value="#{msg['e_mail']}"  />
+					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" />
+
+					<h:outputLabel value="#{msg['celular']}"  required="true"/>
+					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" />
+					
+					<h:outputLabel value="#{msg['etiqueta_observacion']}"  />
+					<h:inputText value="#{registroDocenteController.profesor.observacion}" />
+					
+					<h:outputLabel value="Tiempo completo" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.tiempoComp}">
+						<f:selectItem itemLabel="Si" itemValue="1" />
+						<f:selectItem itemLabel="No" itemValue="0" />
+					</h:selectOneRadio>	
+				</h:panelGrid>
+				<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" listHeight="20" maxFilesQuantity="1"
+	                id="upload" acceptedTypes="jpg, gif, png, bmp" >
+	                <a4j:ajax event="uploadcomplete" execute="@none" render="info" />
+	            </rich:fileUpload>
+	            
+	            <rich:dataGrid columns="1" value="#{registroDocenteController.files}" id="info"
+                    var="file" rowKeyVar="row">
+                    <rich:panel bodyClass="rich-laguna-panel-no-header">
+                        <h:panelGrid columns="2">
+                            <a4j:mediaOutput element="img" mimeType="image/jpeg" 
+                                createContent="#{registroDocenteController.paint}" value="#{row}"
+                                style="width:100px; height:100px;" cacheable="false">
+                            </a4j:mediaOutput>
+                        </h:panelGrid>
+                    </rich:panel>
+                </rich:dataGrid>
+			</fieldset>
+
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['ponderacion']}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2" columnClasses="alinearLeft, alinearCenter, alinearCenter">
+					<h:outputLabel value="#{msg['titulo_nivel_tres']}"  style="padding-right:50px" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.tituloNivelTres}">
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+					</h:selectOneRadio>
+					
+					
+					<h:outputLabel value="#{msg['experiencia_docente']}"  style="padding-right:50px" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioDocente}">
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<f:selectItem itemLabel="4" itemValue="4" />
+						<f:selectItem itemLabel="5" itemValue="5" />
+					</h:selectOneRadio>
+					
+					<h:outputLabel value="#{msg['experiencia_area']}"  style="padding-right:50px" />
+					<h:selectOneRadio value="#{registroDocenteController.profesor.expeAnioArea}">
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+					</h:selectOneRadio>
+				</h:panelGrid>
+			</fieldset>
+
+		</rich:panel>
+	</h:form>
+</ui:composition>
