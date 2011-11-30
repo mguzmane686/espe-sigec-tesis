@@ -10,7 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Usuario;
-import org.espe.sigec.servicio.login.LoginServicio;
+import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
 @SuppressWarnings("serial")
@@ -18,7 +18,7 @@ import org.espe.sigec.web.utils.FacesUtils;
 @ViewScoped
 public class LoginController implements Serializable{
 	@Inject
-	private LoginServicio loginServicio;
+	private SeguridadServicio loginServicio;
 	private Usuario usuario;
 	
 	public LoginController() {
