@@ -101,7 +101,11 @@ public class FacesUtils {
     public static void resetManagedBean(String beanName) {
         getValueBinding(getJsfEl(beanName)).setValue(FacesContext.getCurrentInstance(), null);
     }
-
+    
+    public static void removeManagedBean(String beanName) {
+    	FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(beanName);
+    }
+     
     /**
      * Store the managed bean inside the session scope.
      *
