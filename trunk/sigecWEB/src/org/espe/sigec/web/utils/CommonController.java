@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import org.espe.sigec.model.entities.Modulo;
-import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.richfaces.component.UIPanelMenu;
 
