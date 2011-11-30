@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 
 /**
@@ -17,4 +18,5 @@ public interface AdmGeneralServicio {
 	void createAdministrativo(Usuario usuario, Persona persona) throws Exception;
 	Collection<Edificio> findEdificio();
 	Collection<Aula> findCursoByEdificio(String idEdificio);
+	void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
 }
