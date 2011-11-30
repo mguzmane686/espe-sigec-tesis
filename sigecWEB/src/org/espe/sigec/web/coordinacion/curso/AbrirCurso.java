@@ -41,7 +41,6 @@ public class AbrirCurso implements Serializable{
 	
 	public AbrirCurso() {
 		initEntities();
-		loadParametrosGenerales();
 	}
 	
 	private void initEntities(){
@@ -50,6 +49,7 @@ public class AbrirCurso implements Serializable{
 		getCursoPeriodo().setCurso(new Curso());
 		getCursoPeriodo().setAula(new Aula());
 		getCursoPeriodo().setTipoCurso(SigecConstantes.TIPO_CURSO_INDIVIDUAL);
+		loadParametrosGenerales();
 	}
 	private void loadParametrosGenerales(){
 		getCursoPeriodo().setMinimoEstudiantes(SigecConstantes.MINIMO_ESTUDIANTES);

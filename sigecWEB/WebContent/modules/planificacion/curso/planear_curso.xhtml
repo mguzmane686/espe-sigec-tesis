@@ -15,7 +15,8 @@
         	<rich:panel header="Abrir curso">
         		<h:panelGroup layout="block" styleClass="roundCorner">
         			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-        				<a4j:commandButton value="#{msg['guardar']}" actionListener="#{planearCursoController.btnSaveAbrirCurso}" image="/resources/images/save.png">
+        				<a4j:commandButton value="#{msg['guardar']}" actionListener="#{planearCursoController.btnSaveAbrirCurso}" 
+        					image="/resources/images/save.png" render="pnlLanCur">
         				</a4j:commandButton>
         				<h:outputLabel value="#{msg['guardar']}" />
         			</h:panelGrid>
