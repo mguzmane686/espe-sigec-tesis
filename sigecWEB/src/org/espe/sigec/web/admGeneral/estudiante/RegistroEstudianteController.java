@@ -1,4 +1,4 @@
-package org.espe.sigec.web.inscripcion.controller;
+package org.espe.sigec.web.admGeneral.estudiante;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,7 +22,7 @@ import org.richfaces.component.UIPanelMenu;
 @SuppressWarnings("serial")
 @ManagedBean(name="inscripcion")
 @ViewScoped
-public class InscripcionController extends CommonController{
+public class RegistroEstudianteController extends CommonController{
 	
 	@Inject
 	private InscripcionServicio inscripcionServicio;
@@ -30,7 +30,7 @@ public class InscripcionController extends CommonController{
 	private Estudiante estudiante;
 	
 	
-	public InscripcionController() {
+	public RegistroEstudianteController() {
 		setUiPanelMenu((UIPanelMenu) FacesUtils.getFlashObject("menuSigec"));
 		instanciarEntidades();
 	}
