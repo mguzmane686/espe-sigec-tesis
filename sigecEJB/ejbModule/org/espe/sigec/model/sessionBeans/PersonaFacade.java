@@ -8,6 +8,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Usuario;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -25,5 +29,12 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
     public PersonaFacade() {
         super(Persona.class);
     }
+
+	@Override
+	public Persona findPersonaByUser(Usuario usuario) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
+		criteria.add(Restrictions.eq("usuario.idUsuario", usuario.getIdUsuario()));
+		return (Persona) criteria.uniqueResult();
+	}
     
 }

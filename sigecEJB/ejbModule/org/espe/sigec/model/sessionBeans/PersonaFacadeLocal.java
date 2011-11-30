@@ -7,6 +7,7 @@ package org.espe.sigec.model.sessionBeans;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Usuario;
 
 /**
  *
@@ -29,4 +30,5 @@ public interface PersonaFacadeLocal {
 
     int count();
     
+    Persona findPersonaByUser(Usuario usuario);
 }
