@@ -2,11 +2,17 @@ package org.espe.sigec.web.controller.login;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
+import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Usuario;
+import org.espe.sigec.model.entities.UsuarioPerfil;
+import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.Mode;
@@ -22,16 +28,21 @@ import org.richfaces.component.UIToolbar;
 @ManagedBean(name="homeSessionController")
 @SessionScoped
 public class HomeSessionController extends CommonController{
-
+	
+	
+	public void setSessionUser(UsuarioPerfil usuarioPerfil){
+		setUsuarioPerfil(usuarioPerfil);
+	}
 	public HomeSessionController() {
 		if(getLstModulos()!=null){
 			FacesUtils.buildUserMenu(getLstModulos());
 			setAllowNavigate(Boolean.TRUE);
 		}
 	}
+	
 	public void btnLogOut(){
 		try {
-			FacesUtils.resetManagedBean("homeSessionController");
+			FacesUtils.removeManagedBean("homeSessionController");
 			FacesContext.getCurrentInstance().getExternalContext().redirect("../index.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -89,4 +100,5 @@ public class HomeSessionController extends CommonController{
       
         return menuBar;
     }
+    
 }

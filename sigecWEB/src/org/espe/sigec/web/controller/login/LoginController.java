@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.servicio.login.LoginServicio;
+import org.espe.sigec.web.utils.FacesUtils;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "loginController")
@@ -30,6 +31,7 @@ public class LoginController implements Serializable{
 		Usuario usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), getUsuario().getClave());
 		if(null != usuario){
 			
+			((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUsuarioPerfil(loginServicio.getUsuarioPerfil(usuario));
 			try {
 //				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setLstModulos(loginServicio.getMenuByProfile(usuario));
 //				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUiPanelMenu(FacesUtils.buildUserMenu(loginServicio.getMenuByProfile(usuario)));
