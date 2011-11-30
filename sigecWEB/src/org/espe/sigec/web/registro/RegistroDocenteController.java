@@ -13,9 +13,12 @@ import javax.faces.event.ActionEvent;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
+import org.espe.sigec.model.entities.UsuarioPerfil;
+import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
+import org.espe.sigec.model.sessionBeans.UsuarioPerfilFacadeLocal;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.SigecConstantes;
 import org.richfaces.event.FileUploadEvent;
@@ -35,6 +38,8 @@ public class RegistroDocenteController implements Serializable{
 	private UsuarioFacadeLocal usuarioFacadeLocal;
 	@EJB
 	private PersonaFacadeLocal personaFacadeLocal;
+	@EJB
+	private UsuarioPerfilFacadeLocal usuarioPerfilFacadeLocal;
 	
 	private Profesor profesor;
 	private Usuario usuario;
@@ -72,6 +77,13 @@ public class RegistroDocenteController implements Serializable{
 			getUsuario().setIdentificador(getProfesor().getPersona().getCedula());
 			getUsuario().setClave(getProfesor().getPersona().getCedula());
 			usuarioFacadeLocal.create(getUsuario());
+			UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK());
+			usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
+			usuarioPerfil.getUsuarioPerfilPK().setIdPerfil(SigecConstantes.PERFIL_PROFESOR);
+			usuarioPerfil.setEstado(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
+			
+			usuarioPerfilFacadeLocal.create(usuarioPerfil);
+			
 			profesor.getPersona().setUsuario(getUsuario());
 			personaFacadeLocal.create(profesor.getPersona());
 			profesorFacadeLocal.create(profesor);
