@@ -1,4 +1,4 @@
-package org.espe.sigec.servicio.login;
+package org.espe.sigec.servicio.seguridad;
 
 import java.util.Collection;
 
@@ -14,7 +14,7 @@ import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioPerfilFacadeLocal;
 
 
-public class LoginServicioImpl implements LoginServicio{
+public class SeguridadServicioImpl implements SeguridadServicio{
 
 	@EJB
 	private UsuarioFacadeLocal usuarioFacadeLocal;

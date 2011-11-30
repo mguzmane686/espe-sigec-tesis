@@ -1,4 +1,4 @@
-package org.espe.sigec.servicio.login;
+package org.espe.sigec.servicio.seguridad;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -14,6 +14,6 @@ import javax.inject.Qualifier;
 @Qualifier
 @Retention(RUNTIME)
 @Target({METHOD, FIELD, PARAMETER, TYPE})
-public @interface QLogin {
+public @interface QSeguridad {
 
 }
