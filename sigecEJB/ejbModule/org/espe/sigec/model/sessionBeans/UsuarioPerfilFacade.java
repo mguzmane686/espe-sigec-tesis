@@ -7,10 +7,6 @@ import javax.persistence.Query;
 
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
-import org.espe.sigec.model.entities.UsuarioPerfilPK;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 @Stateless
 public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implements UsuarioPerfilFacadeLocal{
 	 @PersistenceContext(unitName = "prjSigecEJBTestPU")
