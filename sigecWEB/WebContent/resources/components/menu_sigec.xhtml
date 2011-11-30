@@ -20,7 +20,7 @@
        groupCollapsedLeftIcon="triangleDown"
        topGroupExpandedRightIcon="chevronUp"
        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
-       <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}">
+       <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
             <rich:panelMenuItem>
             	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
             </rich:panelMenuItem>
@@ -31,7 +31,8 @@
             
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}">
+        
+        <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
             	<a4j:commandLink value="Abrir curso" action="lanzar_curso.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
@@ -53,7 +54,7 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup label="#{msg.etiqueta_adm_general}">
+        <rich:panelMenuGroup label="#{msg.etiqueta_adm_general}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
             	<a4j:commandLink value="Crear aula" action="adm_aulas.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
