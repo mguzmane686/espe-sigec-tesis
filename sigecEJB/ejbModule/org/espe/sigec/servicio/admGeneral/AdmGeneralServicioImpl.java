@@ -7,12 +7,14 @@ import javax.ejb.EJB;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
+import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioPerfilFacadeLocal;
 
@@ -30,6 +32,9 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	@EJB
 	private EdificioFacadeLocal edificioFacadeLocal;
 	
+	@EJB
+	private ProfesorFacadeLocal profesorFacadeLocal;
+	
 	@Override
 	public void createAula(Aula aula) throws Exception {
 		aulaFacadeLocal.create(aula);
@@ -43,8 +48,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		return aulaFacadeLocal.findCursoByEdificio(idEdificio);
 	}
 	@Override
-	public void createAdministrativo(Usuario usuario, Persona persona)
-			throws Exception {
+	public void createAdministrativo(Usuario usuario, Persona persona) throws Exception {
 		usuarioFacadeLocal.create(usuario);
 		personaFacadeLocal.create(persona);
 		
@@ -54,5 +58,22 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
 		
 		usuarioPerfilFacadeLocal.create(usuarioPerfil);
+	}
+	
+	public void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception{
+		usuario.setIdentificador(persona.getCedula());
+		usuario.setClave(persona.getCedula());
+		usuarioFacadeLocal.create(usuario);
+		
+		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK());
+		usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
+		usuarioPerfil.getUsuarioPerfilPK().setIdPerfil("PRO");
+		usuarioPerfil.setEstado("1");
+		
+		usuarioPerfilFacadeLocal.create(usuarioPerfil);
+		
+		profesor.getPersona().setUsuario(usuario);
+		personaFacadeLocal.create(persona);
+		profesorFacadeLocal.create(profesor);
 	}
 }
