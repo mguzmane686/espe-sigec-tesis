@@ -74,13 +74,6 @@
 		        			<rich:dataScroller for="tblDocentes" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 		        		
-		        		<rich:panel rendered="#{seleccionPorfesorController.profesor.persona.foto==null}">
-		        			No tiene registrado una foto
-		        		</rich:panel>
-		        		<a4j:mediaOutput element="img" mimeType="image/jpeg" id="pnlFoto" rendered="#{seleccionPorfesorController.profesor.persona.foto!=null}" 
-                            createContent="#{seleccionPorfesorController.paint}" value="#{row}"
-                            style="width:100px; height:100px;" cacheable="false">
-                        </a4j:mediaOutput>
 	        		</a4j:outputPanel>
 	        	</fieldset>	
         	</rich:panel>
