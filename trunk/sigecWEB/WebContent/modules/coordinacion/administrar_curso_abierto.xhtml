@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+    
+    
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+    	
+        <h:form id="frmCurso">
+        	
+        	<rich:panel header="#{msg['creacion_curso']}">
+        		<h:panelGroup layout="block" styleClass="roundCorner">
+        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" 
+        					actionListener="#{cursoController.btnSaveCurso}" image="/resources/images/save.png"/>
+        				<h:outputLabel value="#{msg['guardar']}" />
+        			</h:panelGrid>
+        		</h:panelGroup>
+        	</rich:panel>
+        	
+        	<rich:panel header="Planificar curso" id="pnlLanCur">
+	        	<fieldset>
+	        		<legend>
+	        			<h:outputLabel value="Fecha de curso" styleClass="titulo"/>
+	        		</legend>
+	        		<h:panelGrid columns="2">
+	        			<h:outputLabel value="Fecha inicio" />
+	        			<rich:calendar datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
+	        			
+	        			<h:outputLabel value="Fecha Finalizacion" />
+	        			<rich:calendar datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de fin es obligatoria"/>
+	        		</h:panelGrid>
+	        	</fieldset>
+        	
+	        	<fieldset>
+	        		<legend>
+	        			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
+	        		</legend>
+	        		
+        			<h:panelGrid columns="2">
+        				<h:outputLabel value="Curso"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.curso.nombreCurso}" />
+        				
+        				<h:outputLabel value="Aula"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo}" />
+        				
+        				<h:outputLabel value="Inicio Inscripciones" />
+        				<rich:calendar value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
+        				
+        				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
+        				<rich:inputNumberSpinner value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
+        				
+        				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
+        				<rich:inputNumberSpinner value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
+        				
+        				<h:outputLabel value="Hora inicio" />
+        				<h:inputText value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
+        				
+        				<h:outputLabel value="Hora fin" />
+        				<h:inputText value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
+        				
+        				<h:outputLabel value="#{msg['tipo_curso']}"/>
+        				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.tipoCurso}">
+        					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
+        					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
+        				</h:selectOneRadio>
+        				
+        				<h:outputLabel value="Lugar" />
+        				<h:inputText value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
+        			</h:panelGrid>
+        		</fieldset>	
+        	</rich:panel>
+        </h:form>
+</ui:composition>
