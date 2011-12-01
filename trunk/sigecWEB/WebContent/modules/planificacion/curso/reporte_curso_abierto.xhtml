@@ -30,7 +30,9 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<h:outputText value="#{curso.curso.nombreCurso}" />
+			        			<a4j:commandLink value="#{curso.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(curso)}">
+			        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{curso}"/>
+			        			</a4j:commandLink>
 		        			</rich:column>
 		        			
 		        			<rich:column>
