@@ -41,10 +41,17 @@
 	        		</legend>
 	        		<h:panelGrid columns="2">
 	        			<h:outputLabel value="Fecha inicio" />
-	        			<rich:calendar value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaInicio}" datePattern="#{msg['dd_MMM_yyyy']}" disabled="true"/>
+	        			<rich:calendar rendered="false" value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaInicio}" datePattern="#{msg['dd_MMM_yyyy']}" disabled="true"/>
 	        			
+	        			<h:outputText value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaInicio}">
+        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+        				</h:outputText>
+			        				
 	        			<h:outputLabel value="Fecha Finalizacion" />
-	        			<rich:calendar value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaFin}" datePattern="#{msg['dd_MMM_yyyy']}" disabled="true"/>
+	        			<rich:calendar rendered="false" value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaFin}" datePattern="#{msg['dd_MMM_yyyy']}" disabled="true"/>
+	        			<h:outputText value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaFin}">
+        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+        				</h:outputText>
 	        		</h:panelGrid>
 	        	</fieldset>
         	
@@ -53,7 +60,7 @@
 	        			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
 	        		</legend>
 	        		
-        			<h:panelGrid columns="2">
+        			<h:panelGrid columns="2" cellpadding="1" cellspacing="30">
         				<h:outputLabel value="Curso"/>
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.curso.nombreCurso}" />
         				
@@ -61,19 +68,26 @@
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.aula.idAula}" />
         				
         				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" disabled="true"/>
+        				<rich:calendar rendered="false" value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" disabled="true"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}">
+        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+        				</h:outputText>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
-        				<rich:inputNumberSpinner value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
+        				<rich:inputNumberSpinner rendered="false" value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
         				
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
-        				<rich:inputNumberSpinner value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
+        				<rich:inputNumberSpinner rendered="false" value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				
         				<h:outputLabel value="Hora inicio" />
-        				<h:inputText value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
+        				<h:inputText rendered="false" value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
         				
         				<h:outputLabel value="Hora fin" />
-        				<h:inputText value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
+        				<h:inputText rendered="false" value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
         				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
         				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.tipoCurso}">
@@ -82,7 +96,8 @@
         				</h:selectOneRadio>
         				
         				<h:outputLabel value="Lugar" />
-        				<h:inputText value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
+        				<h:inputText rendered="false" value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}"/>
         			</h:panelGrid>
         		</fieldset>	
         	</rich:panel>
