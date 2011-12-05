@@ -32,5 +32,15 @@ public interface CursoPeriodoFacadeLocal {
 
     int count();
     
+    /**
+     * Se usa para la administracion de cursos
+     * @return
+     */
     Collection<CursoPeriodo> findCursoAbierto();
+    
+    /**
+     * Carga la lista de cursos en los cuales se puede inscribir un estudiante
+     * @return
+     */
+    Collection<CursoPeriodo> cargarCursoLanzado();
 }

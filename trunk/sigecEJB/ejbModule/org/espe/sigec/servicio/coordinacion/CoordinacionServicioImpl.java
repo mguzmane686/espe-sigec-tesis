@@ -56,6 +56,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 		historicoCursoEstado.setCursoPeriodo(cursoPeriodo);
 		historicoCursoEstado.setEstado("1");
 		historicoCursoEstado.setEtapaLanzado("1");
+		historicoCursoEstado.setEtapaEjecutado("0");
+		historicoCursoEstado.setEtapaFinalizado("0");
 		historicoCursoEstadoFacadeLocal.create(historicoCursoEstado);
 	}
 
