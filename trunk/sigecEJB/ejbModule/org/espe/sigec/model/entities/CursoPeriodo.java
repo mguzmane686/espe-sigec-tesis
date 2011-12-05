@@ -27,6 +27,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -282,5 +283,21 @@ public class CursoPeriodo implements Serializable {
 	public void setPresupuestoCurso(PresupuestoCurso presupuestoCurso) {
 		this.presupuestoCurso = presupuestoCurso;
 	}
-	
+	@Transient
+	public String getEstadoProceso(){
+		String estadoProceso = "";
+		if(getHistoricoCursoEstadoCollection()!=null){
+			if(getHistoricoCursoEstadoCollection().getEtapaLanzado() !=null && getHistoricoCursoEstadoCollection().getEtapaLanzado().equals("1")){
+				estadoProceso = "ABIERTO";
+				if(getHistoricoCursoEstadoCollection().getEtapaEjecutado() !=null && getHistoricoCursoEstadoCollection().getEtapaEjecutado().equals("1")){
+					estadoProceso = "EJECUCION";
+					if(getHistoricoCursoEstadoCollection().getEtapaFinalizado() !=null && getHistoricoCursoEstadoCollection().getEtapaFinalizado().equals("1")){
+						estadoProceso = "FINALIZADO";
+					}
+				}	
+			}
+		}
+		
+		return estadoProceso;
+	}
 }
