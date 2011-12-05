@@ -39,11 +39,10 @@
 				</legend>
 				<h:panelGrid columns="3" id="pgBusqueda">
 					<h:outputLabel value="#{msg['cedula']}" />
-					<a4j:outputPanel ajaxRendered="true">
-						<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}"/>
-					</a4j:outputPanel>
 					
-					<a4j:commandLink immediate="true" actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno">
+					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}"/>
+					
+					<a4j:commandLink actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno">
 						<h:graphicImage library="images/button" name="search_button.png" height="20px"/>
 					</a4j:commandLink>
 				</h:panelGrid>
@@ -54,35 +53,30 @@
 						<f:selectItems value="#{inscripcionAlumnoCursoController.itemCursos}"></f:selectItems>
 					</rich:select>
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 
 					<h:outputLabel value="#{msg['nombres']}"  />
 					<h:panelGrid columns="2">
-						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
-						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoNombre}" />
+						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoNombre}" />
+						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerApellido} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoApellido}" /> 
 					</h:panelGrid>
-
-
-					<h:outputLabel value="#{msg['apellidos']}"  />
-					<h:panelGrid columns="2">
-						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
-						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoApellido}" />
-					</h:panelGrid>
-
+					
 					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
-					<rich:calendar value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.fechaNacimiento}"></rich:calendar>
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.fechaNacimiento}">
+						<f:convertDateTime pattern="dd/MMM/yyyy"/>
+					</h:outputText>
 
 					<h:outputLabel value="#{msg['nacionalidad']}"  />
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" />
 
 					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" />
 
 					<h:outputLabel value="#{msg['e_mail']}"  />
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" />
 
 					<h:outputLabel value="#{msg['celular']}"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" />
 						
 				</h:panelGrid>
 			</fieldset>

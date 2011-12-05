@@ -67,7 +67,8 @@
 					</h:panelGrid>
 
 					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
-					<rich:calendar value="#{administrativoController.persona.fechaNacimiento}"></rich:calendar>
+					<rich:calendar value="#{administrativoController.persona.fechaNacimiento}" datePattern="#{msg['dd_MMM_yyyy']}">
+					</rich:calendar>
 
 					<h:outputLabel value="#{msg['nacionalidad']}"  />
 					<h:inputText value="#{administrativoController.persona.nacionalidad}" />
