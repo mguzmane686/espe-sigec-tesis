@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -50,8 +52,10 @@ public class HistoricoCursoEstado implements Serializable {
     @Size(max = 1)
     @Column(name = "etapa_finalizado")
     private String etapaFinalizado;
+//    @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo")
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo")
-    @ManyToOne(fetch = FetchType.LAZY)
     private CursoPeriodo cursoPeriodo;
 
     public HistoricoCursoEstado() {

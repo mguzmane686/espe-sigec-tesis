@@ -22,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -73,8 +74,12 @@ public class CursoPeriodo implements Serializable {
     @Column(name = "hora_fin_clase")
     private String horaFinClase;
     
-    @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
-    private Collection<HistoricoCursoEstado> historicoCursoEstadoCollection;
+//    @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
+//    private Collection<HistoricoCursoEstado> historicoCursoEstadoCollection;
+//    
+    @OneToOne(mappedBy="cursoPeriodo", fetch= FetchType.LAZY)
+    private HistoricoCursoEstado historicoCursoEstadoCollection;
+    
     @JoinColumn(name = "id_per_academico", referencedColumnName = "id_per_academico")
     @ManyToOne(fetch = FetchType.LAZY)
     private PeriodoAcademico periodoAcademico;
@@ -162,19 +167,30 @@ public class CursoPeriodo implements Serializable {
         this.maximoEstudiantes = maximoEstudiantes;
     }
 
-    public Collection<HistoricoCursoEstado> getHistoricoCursoEstadoCollection() {
-        return historicoCursoEstadoCollection;
-    }
-
-    public void setHistoricoCursoEstadoCollection(Collection<HistoricoCursoEstado> historicoCursoEstadoCollection) {
-        this.historicoCursoEstadoCollection = historicoCursoEstadoCollection;
-    }
+//    public Collection<HistoricoCursoEstado> getHistoricoCursoEstadoCollection() {
+//        return historicoCursoEstadoCollection;
+//    }
+//
+//    public void setHistoricoCursoEstadoCollection(Collection<HistoricoCursoEstado> historicoCursoEstadoCollection) {
+//        this.historicoCursoEstadoCollection = historicoCursoEstadoCollection;
+//    }
+    
+    
 
     public PeriodoAcademico getPeriodoAcademico() {
         return periodoAcademico;
     }
 
-    public void setPeriodoAcademico(PeriodoAcademico periodoAcademico) {
+    public HistoricoCursoEstado getHistoricoCursoEstadoCollection() {
+		return historicoCursoEstadoCollection;
+	}
+
+	public void setHistoricoCursoEstadoCollection(
+			HistoricoCursoEstado historicoCursoEstadoCollection) {
+		this.historicoCursoEstadoCollection = historicoCursoEstadoCollection;
+	}
+
+	public void setPeriodoAcademico(PeriodoAcademico periodoAcademico) {
         this.periodoAcademico = periodoAcademico;
     }
 

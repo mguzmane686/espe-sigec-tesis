@@ -40,6 +40,7 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	crit.setFetchMode("curso", FetchMode.JOIN);
     	crit.setFetchMode("periodoAcademico", FetchMode.JOIN);
     	crit.setFetchMode("aula", FetchMode.JOIN);
+    	crit.setFetchMode("historicoCursoEstadoCollection", FetchMode.JOIN);
     	return crit.list();
 	}
     
