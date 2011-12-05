@@ -54,8 +54,8 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
     	crit.createAlias("historicoCursoEstadoCollection", "estados");
     	crit.setFetchMode("curso", FetchMode.JOIN);
-    	crit.setFetchMode("periodoAcademico", FetchMode.JOIN);
-    	crit.setFetchMode("historicoCursoEstadoCollection", FetchMode.JOIN);
+//    	crit.setFetchMode("periodoAcademico", FetchMode.JOIN);
+//    	crit.setFetchMode("historicoCursoEstadoCollection", FetchMode.JOIN);
     	crit.add(Restrictions.eq("estados.estado", "1"));
     	crit.add(Restrictions.eq("estados.etapaLanzado", "1")).
 //    	add(Restrictions.not(Restrictions.eq("estados.etapaEjecutado", "1"))). se mapea como and not estados1_.etapa_finalizado='1'
