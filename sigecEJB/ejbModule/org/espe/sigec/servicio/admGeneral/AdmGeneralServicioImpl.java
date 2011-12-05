@@ -49,6 +49,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 	@Override
 	public void createAdministrativo(Usuario usuario, Persona persona) throws Exception {
+		usuarioFacadeLocal.isIdentificadorvalida(usuario.getIdentificador());
 		usuarioFacadeLocal.create(usuario);
 		personaFacadeLocal.create(persona);
 		
@@ -61,6 +62,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 	
 	public void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception{
+		usuarioFacadeLocal.isIdentificadorvalida(persona.getCedula());
 		usuario.setIdentificador(persona.getCedula());
 		usuario.setClave(persona.getCedula());
 		usuarioFacadeLocal.create(usuario);

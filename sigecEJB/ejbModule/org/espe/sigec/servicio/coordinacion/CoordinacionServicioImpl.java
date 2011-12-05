@@ -8,11 +8,13 @@ import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Especialidad;
+import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
+import org.espe.sigec.model.sessionBeans.HistoricoCursoEstadoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 
 /**
@@ -30,7 +32,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
 	@EJB
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
-	
+	@EJB
+	private HistoricoCursoEstadoFacadeLocal historicoCursoEstadoFacadeLocal;
 	@Override
 	public Collection<Especialidad> findEspecialidades() {
 		
@@ -47,7 +50,13 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 			CursoPeriodo cursoPeriodo) throws Exception {
 		academicoFacadeLocal.create(periodoAcademico);
 		cursoPeriodo.setPeriodoAcademico(periodoAcademico);
-		cursoPeriodoFacadeLocal.create(cursoPeriodo);	
+		cursoPeriodoFacadeLocal.create(cursoPeriodo);
+		
+		HistoricoCursoEstado historicoCursoEstado = new HistoricoCursoEstado();
+		historicoCursoEstado.setCursoPeriodo(cursoPeriodo);
+		historicoCursoEstado.setEstado("1");
+		historicoCursoEstado.setEtapaLanzado("1");
+		historicoCursoEstadoFacadeLocal.create(historicoCursoEstado);
 	}
 
 	@Override
