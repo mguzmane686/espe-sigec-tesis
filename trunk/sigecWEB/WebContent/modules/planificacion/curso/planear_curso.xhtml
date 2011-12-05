@@ -61,7 +61,7 @@
         				</rich:select>
         				
         				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
+        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
