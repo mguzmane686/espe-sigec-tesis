@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
@@ -69,7 +70,9 @@ public class RegistroDocenteController implements Serializable{
 			
 			initEntities();
 			FacesUtils.addInfoMessage("El docente fue agregado correctamente");
-		} catch (Exception e1) {
+		}catch (UserValidateException e2){
+			FacesUtils.addInfoMessage(e2.getMessage());
+		}catch (Exception e1) {
 			FacesUtils.addErrorMessage("Ocurrio un error al agregar al docente");
 		}
 	}

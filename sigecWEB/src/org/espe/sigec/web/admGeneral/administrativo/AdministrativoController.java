@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
@@ -32,6 +33,8 @@ public class AdministrativoController implements Serializable{
 			admGeneralServicio.createAdministrativo(getPersona().getUsuario(), getPersona());
 			FacesUtils.addInfoMessage("Administrativo creado");
 			initEntities();
+		} catch (UserValidateException e2){
+			FacesUtils.addInfoMessage(e2.getMessage());
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Administrativo no creado");
 		}
