@@ -29,4 +29,5 @@ public interface EstudianteFacadeLocal {
 
     int count();
     
+    Estudiante buscarEstudinateByCedula(String cedula);
 }
