@@ -20,7 +20,6 @@ import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
  *
  */
 public class InscripcionServicioImpl implements InscripcionServicio{
-	@SuppressWarnings("unused")
 	@EJB
 	private EstudianteFacadeLocal estudianteFacadeLocal;
 	@EJB
@@ -52,5 +51,9 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 		return cursoPeriodoFacadeLocal.cargarCursoLanzado();
 	}
 	
+	@Override
+	public Estudiante buscarEstudinateByCedula(String cedula){
+		return estudianteFacadeLocal.buscarEstudinateByCedula(cedula);
+	}
 	
 }

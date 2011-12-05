@@ -16,4 +16,5 @@ public interface InscripcionServicio {
 	void registrarEstudiante(Usuario usuario, Persona persona, Estudiante estudiante) throws Exception;
 	void inscripcionEstudianteCurso(Estudiante estudiante, CursoPeriodo cursoPeriodo, CursoEstudiante cursoEstudiante) throws Exception;
 	Collection<CursoPeriodo> cargarCursoLanzado();
+	Estudiante buscarEstudinateByCedula(String cedula);
 }
