@@ -9,11 +9,14 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,6 +35,8 @@ public class HistoricoCursoEstado implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_historico_estado")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="hist_cur_seq")
+    @SequenceGenerator(name="hist_cur_seq", sequenceName="hist_cur_seq", allocationSize = 1)
     private Integer idHistoricoEstado;
     @Size(max = 10)
     @Column(name = "estado")
