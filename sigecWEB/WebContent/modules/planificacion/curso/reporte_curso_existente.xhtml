@@ -40,7 +40,7 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<h:outputText value="#{curso.nombreCurso}" />
+			        			<a4j:commandLink value="#{curso.nombreCurso}" action="#{reporteCursoController.btnShowCursoDetail(curso)}"></a4j:commandLink>
 		        			</rich:column>
 		        			
 		        			<rich:column>

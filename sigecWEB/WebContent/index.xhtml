@@ -42,7 +42,7 @@
 										<h:inputText value="#{loginController.usuario.identificador}" required="true" id="textfield" size="30"/>
 
 										<h:outputLabel value="Clave" />
-										<h:inputText value="#{loginController.usuario.clave}" required="true" id="textfield2" style="margin-top:5px;" size="30"/>
+										<h:inputSecret value="#{loginController.usuario.clave}" required="true" id="textfield2" style="margin-top:5px;" size="30"/>
 									</h:panelGrid> 
 									<a4j:commandButton actionListener="#{loginController.btnSignIn}" value="Sign In" id="button"/>
 								</td>
@@ -54,9 +54,9 @@
 
 				<h:panelGroup layout="block" id="layer04_holder">
 					<h:panelGroup layout="block" id="left"/>
-					<h:panelGroup layout="block" id="center">
-						<h:outputLabel value="Si no tiene una cuenta creela" />
-						<a4j:commandLink value="&nbsp; aqui" actionListener="${loginController.btnCreateAccount}" immediate="true"></a4j:commandLink> 
+					<h:panelGroup layout="block" id="center" rendered="true">
+						<h:outputLabel value="Si no tiene una cuenta creela" rendered="false"/>
+						<a4j:commandLink value="&nbsp; aqui" actionListener="#{loginController.btnCreateAccount}" immediate="true" rendered="false"></a4j:commandLink> 
 					</h:panelGroup>
 					<h:panelGroup layout="block" id="right"/>
 				</h:panelGroup>

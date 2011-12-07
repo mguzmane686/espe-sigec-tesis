@@ -1,5 +1,6 @@
 package org.espe.sigec.web.admGeneral.curso;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.curso.CursoServicio;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author Roberto
@@ -27,7 +29,7 @@ public class ReporteCursoController implements Serializable{
 	private Collection<Curso> lstCursos;
 
 	public ReporteCursoController() {
-		lstCursos = new ArrayList<Curso>();
+		setLstCursos(new ArrayList<Curso>());
 	}
 
 	
@@ -45,6 +47,16 @@ public class ReporteCursoController implements Serializable{
 			curso.setPensumAcademicoCollection(cursoServicio.findTemasCurso(curso.getIdCurso()));
 		}
 	}
+	
+	public void btnShowCursoDetail(Curso curso){
+		try {
+			FacesUtils.putFlashObject("cursoToEdit", curso);
+			FacesUtils.redirectPage("pla_edicion_curso.jsf");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	public Collection<Curso> getLstCursos() {
 		return lstCursos;
 	}
