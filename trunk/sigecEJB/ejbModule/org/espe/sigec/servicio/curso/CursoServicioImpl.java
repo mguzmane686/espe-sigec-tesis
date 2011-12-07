@@ -27,7 +27,7 @@ public class CursoServicioImpl implements CursoServicio{
 	private CursoPeriodoFacadeLocal periodoFacadeLocal;
 	
 	@Override
-	public Collection<Curso> findCursos() {
+	public Collection<Curso> findAllCursos() {
 		return cursoFacadeLocal.findAll();
 	}
 
@@ -40,5 +40,9 @@ public class CursoServicioImpl implements CursoServicio{
 	public Collection<CursoPeriodo> findCursoAbierto() {
 		return periodoFacadeLocal.findCursoAbierto();
 	}
-
+	
+	@Override
+	public Collection<Curso> findCursos(){
+		return cursoFacadeLocal.findCursoByEstado();
+	}
 }

@@ -31,4 +31,6 @@ public interface CursoFacadeLocal {
     int count();
     
     Collection<Curso> findCursoByEspecialidad(Integer idEspecialidad);
+    
+    Collection<Curso> findCursoByEstado();
 }
