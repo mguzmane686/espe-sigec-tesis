@@ -32,6 +32,7 @@
  */
 package org.espe.sigec.web.utils;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -262,5 +263,7 @@ public class FacesUtils {
 		}
 		return uiPanelMenu;
 	}
-    
+    public static void redirectPage(String page) throws IOException{
+    	getExternalContext().redirect(page);
+    }
 }

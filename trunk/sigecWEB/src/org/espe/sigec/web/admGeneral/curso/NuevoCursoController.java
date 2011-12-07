@@ -4,32 +4,31 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.PensumAcademico;
-import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
-import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
-import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
+import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.SigecConstantes;
 
+/**
+ * @author roberto
+ *
+ */
 @SuppressWarnings("serial")
 @ManagedBean(name="cursoController")
 @ViewScoped
 public class NuevoCursoController extends CommonController{
-	@EJB
-	private PensumAcademicoFacadeLocal pensumAcademicoFacadeLocal;
-	@EJB
-	private CursoFacadeLocal cursoFacadeLocal;
-	@EJB
-	private EspecialidadFacadeLocal especialidadFacadeLocal;
+	
+	@Inject
+	PlanificacionServicio planificacionServicio;
 	
 	private Collection<PensumAcademico> lstPensumAcademicos;
 	private Collection<SelectItem> itemEspecialidades;
@@ -50,23 +49,19 @@ public class NuevoCursoController extends CommonController{
 	}
 	@PostConstruct
 	public void loadEspecialidades(){
-		for(Especialidad especialidadTMP: especialidadFacadeLocal.findAll()){
+		for(Especialidad especialidadTMP: planificacionServicio.findEspecialidades()){
 			getItemEspecialidades().add(new SelectItem(especialidadTMP.getIdEspecialidad(), especialidadTMP.getNombre()));
 		}
 	}
+	
 	public void btnAddTemaPensum(ActionEvent e){
-		System.out.println("nuevo tema");
 		getLstPensumAcademicos().add(pensumAcademicoNuevo);
 		pensumAcademicoNuevo = new PensumAcademico();
 	}
 
 	public void btnSaveCurso(ActionEvent e){
 		try {
-			cursoFacadeLocal.create(getCurso());
-			for(PensumAcademico pensumAcademicoTMP: getLstPensumAcademicos()){
-				pensumAcademicoTMP.setCurso(getCurso());
-				pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
-			}
+			planificacionServicio.crearNuevoCurso(getCurso(), getLstPensumAcademicos());
 			initEntities();
 			FacesUtils.addInfoMessage("Curso creado satisfactoriamente");
 		} catch (Exception e1) {
