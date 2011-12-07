@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -49,7 +50,9 @@ public class PensumAcademico implements Serializable {
     @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
     @ManyToOne(fetch = FetchType.LAZY)
     private Curso curso;
-
+    @Transient
+    private boolean existInBase;
+    
     public PensumAcademico() {
     }
 
@@ -121,5 +124,13 @@ public class PensumAcademico implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.PensumAcademico[ idPensum=" + idPensum + " ]";
     }
+
+	public boolean isExistInBase() {
+		return existInBase;
+	}
+
+	public void setExistInBase(boolean existInBase) {
+		this.existInBase = existInBase;
+	}
     
 }

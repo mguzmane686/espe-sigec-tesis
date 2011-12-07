@@ -12,7 +12,10 @@ import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.Curso;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.annotations.OrderBy;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -39,6 +42,15 @@ public class CursoFacade extends AbstractFacade<Curso> implements CursoFacadeLoc
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Curso.class);
 		
 		criteria.add(Restrictions.eq("especialidad.idEspecialidad", idEspecialidad));
+		return criteria.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Curso> findCursoByEstado() {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Curso.class);
+		criteria.addOrder(Order.asc("nombreCurso"));
+		criteria.setFetchMode("especialidad", FetchMode.JOIN);
 		return criteria.list();
 	}
     

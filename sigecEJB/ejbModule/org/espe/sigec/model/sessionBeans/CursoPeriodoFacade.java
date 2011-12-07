@@ -14,6 +14,7 @@ import org.espe.sigec.model.entities.CursoPeriodo;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -41,7 +42,9 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 	public Collection<CursoPeriodo> findCursoAbierto() {
 		Criteria crit = null;
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
-    	crit.setFetchMode("curso", FetchMode.JOIN);
+    	crit.createAlias("curso", "cursoA");
+    	crit.setFetchMode("cursoA", FetchMode.JOIN);
+    	crit.addOrder(Order.asc("cursoA.nombreCurso"));
     	crit.setFetchMode("periodoAcademico", FetchMode.JOIN);
     	crit.setFetchMode("aula", FetchMode.JOIN);
     	crit.setFetchMode("historicoCursoEstadoCollection", FetchMode.JOIN);
