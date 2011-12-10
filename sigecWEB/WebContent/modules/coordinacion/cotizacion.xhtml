@@ -6,6 +6,12 @@
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	
+	<script>
+		function sumar(cantidad,precio, elemento){
+			$(elemento).attr('value',parseFloat(cantidad)+parseFloat(precio)); 
+		}				
+ 	</script>
     
     	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>    
     	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
@@ -55,45 +61,54 @@
         				<h:outputLabel value="Costo Total" styleClass="label-bold" />
         				<h:column></h:column>
         				<h:column></h:column>
-        				
+  
         				<h:outputLabel value="Instructores:" />
         				<h:inputText id="txtCInstructores" size="5" value="#{presupuestoController.n1}" 
         							 onblur="sumar($('#frmCotizacion\\:txtCInstructores').val(),$('#frmCotizacion\\:txtPInstructores').val(),$('#frmCotizacion\\:txtRInstructores'))"/>
         				<h:outputLabel value="Horas" />
-        				<h:inputText id="txtPInstructores" size="7" value="#{presupuestoController.n1}"/>
-        				<h:inputText id="txtRInstructores" size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtPInstructores" size="7" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCInstructores').val(),$('#frmCotizacion\\:txtPInstructores').val(),$('#frmCotizacion\\:txtRInstructores'))"/>
+        				<h:inputText id="txtRInstructores" size="7" value="0"/>
         				<h:outputLabel value="Precio X Participante:" />
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:outputText size="7" value="#{presupuestoController.n1}"/>
         				
         				<h:outputLabel value="Transporte:" />
-        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtCTransporte" size="5" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCTransporte').val(),$('#frmCotizacion\\:txtPTransporte').val(),$('#frmCotizacion\\:txtRTransporte'))"/>
         				<h:outputLabel value="Total" />
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtPTransporte" size="7" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCTransporte').val(),$('#frmCotizacion\\:txtPTransporte').val(),$('#frmCotizacion\\:txtRTransporte'))"/>
+        				<h:inputText id="txtRTransporte" size="7" value="0" />
         				<h:outputLabel value="Utilidad E.S.P.E. 30%:" />
         				<h:inputText size="7" value="#{presupuestoController.n1}"/>
         				
         				<h:outputLabel value="Arrendamiento de aulas:" />
-        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtCArrendamiento" size="5" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCArrendamiento').val(),$('#frmCotizacion\\:txtPArrendamiento').val(),$('#frmCotizacion\\:txtRArrendamiento'))"/>
         				<h:outputLabel value="Total" />
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtPArrendamiento" size="7" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCArrendamiento').val(),$('#frmCotizacion\\:txtPArrendamiento').val(),$('#frmCotizacion\\:txtRArrendamiento'))"/>
+        				<h:inputText id="txtRArrendamiento" size="7" value="0"/>
         				<h:outputLabel value="Precio X Participante:" />
         				<h:inputText size="7" value="#{presupuestoController.n1}"/>
         				
         				<h:outputLabel value="Alojamiento:" />
-        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtCAlojamiento" size="5" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCAlojamiento').val(),$('#frmCotizacion\\:txtPAlojamiento').val(),$('#frmCotizacion\\:txtRAlojamiento'))"/>
         				<h:outputLabel value="Total" />
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtPAlojamiento" size="7" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCAlojamiento').val(),$('#frmCotizacion\\:txtPAlojamiento').val(),$('#frmCotizacion\\:txtRAlojamiento'))"/>
+        				<h:inputText id="txtRAlojamiento" size="7" value="#{presupuestoController.n1}"/>
         				<h:outputLabel value="Precio Variable:" />
         				<h:inputText size="7" value="#{presupuestoController.n1}"/>
         				
         				<h:outputLabel value="Gastos administrativos:" />
-        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtCGAdministrativos" size="5" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCGAdministrativos').val(),$('#frmCotizacion\\:txtPGAdministrativos').val(),$('#frmCotizacion\\:txtRGAdministrativos'))"/>
         				<h:outputLabel value="Horas" />
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtPGAdministrativos" size="7" value="#{presupuestoController.n1}"
+        							 onblur="sumar($('#frmCotizacion\\:txtCGAdministrativos').val(),$('#frmCotizacion\\:txtPGAdministrativos').val(),$('#frmCotizacion\\:txtRGAdministrativos'))"/>
+        				<h:inputText id="txtRGAdministrativos" size="7" value="#{presupuestoController.n1}"/>
         				<h:outputLabel value="Ingresos Totales:" />
         				<h:inputText size="7" value="#{presupuestoController.n1}"/>
         				
@@ -259,34 +274,8 @@
         				
         			</h:panelGrid>
         		</fieldset>
-        			
-        		<fieldset>	
-	        		<h:panelGrid columns="2">
-	    				<h:outputLabel value="Cantidad 1"/>
-	    				<h:inputText styleClass="txtn1" value="#{presupuestoController.n1}"/>
-	    				<h:outputLabel value="Cantidad 2" />
-	    				<h:inputText styleClass="txtn2" value="#{presupuestoController.n2}" onblur="sumarCajas()"/>
-	    				<h:outputLabel value="Total"/>
-	    				<h:inputText styleClass="txtTotal" value="#{presupuestoController.total}"  />    			
-	        		</h:panelGrid>
-	        	</fieldset>
-	        		        	
-	        	<a4j:commandButton action="#{presupuestoController.sumar}" render="txtTotal">
-	        		
-	        	</a4j:commandButton>
 	        	
-	        	<script>
-					function sumarCajas(){
-						jQuery(document).ready(function(){
-							var er = parseInt($('.txtn1').val()) + parseInt($('.txtn2').val());
-							$('.txtTotal').attr('value',er);
-						});
-					}
-
-					function sumar(cantidad,precio, elemento){
-						$(elemento).attr('value',parseInt(cantidad)+parseInt(precio)); 
-					}				
-	        	</script>
+	        	
 	        	
     		</rich:panel>    	
         </h:form>
