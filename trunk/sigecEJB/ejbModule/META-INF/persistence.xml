@@ -12,6 +12,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.UsuarioPerfil</class>
 		<class>org.espe.sigec.model.entities.Usuario</class>
 		<class>org.espe.sigec.model.entities.Profesor</class>
+		<class>org.espe.sigec.model.entities.PresupuestoCurso</class>
 		<class>org.espe.sigec.model.entities.Presupuesto</class>
 		<class>org.espe.sigec.model.entities.Persona</class>
 		<class>org.espe.sigec.model.entities.PeriodoAcademico</class>
@@ -23,8 +24,11 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.HistoricoCursoEstado</class>
 		<class>org.espe.sigec.model.entities.Estudiante</class>
 		<class>org.espe.sigec.model.entities.Especialidad</class>
+		<class>org.espe.sigec.model.entities.Edificio</class>
 		<class>org.espe.sigec.model.entities.DesempenioProfesorPK</class>
 		<class>org.espe.sigec.model.entities.DesempenioProfesor</class>
+		<class>org.espe.sigec.model.entities.CursoProfesorPK</class>
+		<class>org.espe.sigec.model.entities.CursoProfesor</class>
 		<class>org.espe.sigec.model.entities.CursoPeriodo</class>
 		<class>org.espe.sigec.model.entities.CursoEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.CursoEstudiante</class>
@@ -33,10 +37,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Aula</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
-		<class>org.espe.sigec.model.entities.CursoProfesor</class>
-		<class>org.espe.sigec.model.entities.CursoProfesorPK</class>
-		<class>org.espe.sigec.model.entities.Edificio</class>
-		<class>org.espe.sigec.model.entities.PresupuestoCurso</class>
+		<class>org.espe.sigec.model.entities.CatalogoSigec</class>
+		<class>org.espe.sigec.model.entities.DetallePresupuestoCurso</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
