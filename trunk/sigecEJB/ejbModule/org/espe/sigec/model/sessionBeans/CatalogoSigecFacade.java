@@ -15,7 +15,7 @@ import org.espe.sigec.model.entities.CatalogoSigec;
  */
 @Stateless
 public class CatalogoSigecFacade extends AbstractFacade<CatalogoSigec> implements CatalogoSigecFacadeLocal {
-    @PersistenceContext(unitName = "baseRamosPU")
+    @PersistenceContext(unitName = "prjSigecEJBTestPU")
     private EntityManager em;
 
     protected EntityManager getEntityManager() {

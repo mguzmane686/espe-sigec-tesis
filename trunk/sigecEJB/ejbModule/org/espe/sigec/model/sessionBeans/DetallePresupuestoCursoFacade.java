@@ -15,7 +15,7 @@ import org.espe.sigec.model.entities.DetallePresupuestoCurso;
  */
 @Stateless
 public class DetallePresupuestoCursoFacade extends AbstractFacade<DetallePresupuestoCurso> implements DetallePresupuestoCursoFacadeLocal {
-    @PersistenceContext(unitName = "baseRamosPU")
+    @PersistenceContext(unitName = "prjSigecEJBTestPU")
     private EntityManager em;
 
     protected EntityManager getEntityManager() {
