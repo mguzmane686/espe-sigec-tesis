@@ -57,10 +57,11 @@
         				<h:column></h:column>
         				
         				<h:outputLabel value="Instructores:" />
-        				<h:inputText size="5" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtCInstructores" size="5" value="#{presupuestoController.n1}" 
+        							 onblur="sumar($('#frmCotizacion\\:txtCInstructores').val(),$('#frmCotizacion\\:txtPInstructores').val(),$('#frmCotizacion\\:txtRInstructores'))"/>
         				<h:outputLabel value="Horas" />
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
-        				<h:inputText size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtPInstructores" size="7" value="#{presupuestoController.n1}"/>
+        				<h:inputText id="txtRInstructores" size="7" value="#{presupuestoController.n1}"/>
         				<h:outputLabel value="Precio X Participante:" />
         				<h:inputText size="7" value="#{presupuestoController.n1}"/>
         				
@@ -259,7 +260,6 @@
         			</h:panelGrid>
         		</fieldset>
         			
-        			
         		<fieldset>	
 	        		<h:panelGrid columns="2">
 	    				<h:outputLabel value="Cantidad 1"/>
@@ -282,6 +282,10 @@
 							$('.txtTotal').attr('value',er);
 						});
 					}
+
+					function sumar(cantidad,precio, elemento){
+						$(elemento).attr('value',parseInt(cantidad)+parseInt(precio)); 
+					}				
 	        	</script>
 	        	
     		</rich:panel>    	
