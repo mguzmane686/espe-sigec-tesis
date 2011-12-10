@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.ejb.EJB;
 
 import org.espe.sigec.model.entities.CursoEstudiante;
+import org.espe.sigec.model.entities.CursoEstudiantePK;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.model.entities.Persona;
@@ -43,6 +44,9 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 			CursoEstudiante cursoEstudiante) throws Exception {
 		cursoEstudiante.setEstudiante(estudiante);
 		cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+		cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
+		cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+		cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
 		cursoEstudianteFacadeLocal.create(cursoEstudiante);
 	}
 
