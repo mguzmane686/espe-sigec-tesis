@@ -5,8 +5,9 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Collection;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -56,7 +57,7 @@ public class CursoEstudiante implements Serializable {
         this.cursoEstudiantePK = cursoEstudiantePK;
     }
 
-    public CursoEstudiante(BigInteger idCursoPeriodo, int idEstudiante) {
+    public CursoEstudiante(BigDecimal idCursoPeriodo, int idEstudiante) {
         this.cursoEstudiantePK = new CursoEstudiantePK(idCursoPeriodo, idEstudiante);
     }
 
