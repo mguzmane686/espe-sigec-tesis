@@ -1,24 +1,28 @@
 package org.espe.sigec.servicio.coordinacion;
 
+import java.util.Collection;
+
 import javax.ejb.EJB;
 
-import org.espe.sigec.model.entities.Profesor;
-import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
+import org.espe.sigec.model.entities.DetallePresupuestoCurso;
+import org.espe.sigec.model.entities.PresupuestoCurso;
+import org.espe.sigec.model.sessionBeans.DetallePresupuestoCursoFacadeLocal;
 
 public class PresupuestoServicioImpl implements PresupuestoServicio{
+
 	@EJB
-	ProfesorFacadeLocal facadeLocal;
+	private DetallePresupuestoCursoFacadeLocal detallePresupuestoCursoFacadeLocal;
+	
 	@Override
-	public void guardarPresupuesto() throws Exception{
-		Profesor profesor = new Profesor();
-		profesor.setTitulo("asdasd");
-		System.out.println("aki lo que tenga ke haver el metodo");
-		try {
-			facadeLocal.create(profesor);
-		} catch (Exception e) {
-			throw new Exception("Ha ocuttido algun erro y m se grabo");
+	public void guardarPresupuesto(PresupuestoCurso presupuestoCurso,
+			Collection<DetallePresupuestoCurso> lstDetallePresuCurso)
+			throws Exception {
+		for (DetallePresupuestoCurso detallePresuCurso:lstDetallePresuCurso){
+			detallePresuCurso.setPresupuestoCurso(presupuestoCurso);
+			detallePresupuestoCursoFacadeLocal.create(detallePresuCurso);
 		}
 		
 	}
+	
 
 }
