@@ -41,7 +41,8 @@ public class InscripcionAlumnoCursoController {
 	@PostConstruct 
 	public void cargarCursos(){
 		setItemCursos(new ArrayList<SelectItem>());
-		for(CursoPeriodo cursoPeriodoTMP: inscripcionServicio.cargarCursoLanzado()){
+		Collection<CursoPeriodo> lstCursoPeriodos = inscripcionServicio.cargarCursoLanzado();
+		for(CursoPeriodo cursoPeriodoTMP: lstCursoPeriodos){
 			getItemCursos().add(new SelectItem(cursoPeriodoTMP.getIdCursoPeriodo(), cursoPeriodoTMP.getCurso().getNombreCurso()));
 		}
 	}
@@ -53,7 +54,12 @@ public class InscripcionAlumnoCursoController {
 		getCursoEstudiante().setEstudiante(inscripcionServicio.buscarEstudinateByCedula(getCedulaUsr()));
 	}
 	public void btnInscripcionEstudinateCurso(ActionEvent e){
-		System.out.println("Guardado");
+		try {
+			inscripcionServicio.inscripcionEstudianteCurso(getCursoEstudiante().getEstudiante(), getCursoEstudiante().getCursoPeriodo(), getCursoEstudiante());
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	public void setCursoEstudiante(CursoEstudiante cursoEstudiante) {
 		this.cursoEstudiante = cursoEstudiante;
@@ -71,6 +77,5 @@ public class InscripcionAlumnoCursoController {
 	}
 	public void setCedulaUsr(String cedulaUsr) {
 		this.cedulaUsr = cedulaUsr;
-	}
-	
+	}	
 }
