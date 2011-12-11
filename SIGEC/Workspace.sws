@@ -4,7 +4,7 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{D0D72CB8-38C5-460F-BBD5-2D1FEB9AFC6B}" Name="SIGEC" Selected="Yes" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="SIGEC.prj"/>
+		<Model Expanded="Yes" ID="{D0D72CB8-38C5-460F-BBD5-2D1FEB9AFC6B}" Name="SIGEC" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="SIGEC.prj"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
