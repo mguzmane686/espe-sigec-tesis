@@ -1458,7 +1458,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:RelationshipSymbol Id="o57">
 <a:CreationDate>1322354848</a:CreationDate>
 <a:ModificationDate>1322534513</a:ModificationDate>
-<a:Rect>((-62400,14400), (-60800,24800))</a:Rect>
+<a:Rect>((-65312,14400), (-57888,24800))</a:Rect>
 <a:ListOfPoints>((-61600,24800),(-61600,14400))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>55</a:ArrowStyle>
@@ -1590,7 +1590,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:RelationshipSymbol Id="o74">
 <a:CreationDate>1322535706</a:CreationDate>
 <a:ModificationDate>1322535785</a:ModificationDate>
-<a:Rect>((-76800,-28000), (-52000,-16800))</a:Rect>
+<a:Rect>((-79050,-28000), (-52000,-16213))</a:Rect>
 <a:ListOfPoints>((-76800,-28000),(-76800,-16800),(-52000,-16800))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>55</a:ArrowStyle>
@@ -1612,7 +1612,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:RelationshipSymbol Id="o76">
 <a:CreationDate>1322542840</a:CreationDate>
 <a:ModificationDate>1322542840</a:ModificationDate>
-<a:Rect>((-12000,44000), (-800,51200))</a:Rect>
+<a:Rect>((-12000,44000), (1937,51787))</a:Rect>
 <a:ListOfPoints>((-800,44000),(-800,51200),(-12000,51200))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>55</a:ArrowStyle>
@@ -1634,7 +1634,7 @@ DESTINATION 0 Arial,8,N</a:FontList>
 <o:RelationshipSymbol Id="o79">
 <a:CreationDate>1322542845</a:CreationDate>
 <a:ModificationDate>1322542845</a:ModificationDate>
-<a:Rect>((5200,44000), (6800,55200))</a:Rect>
+<a:Rect>((3188,44000), (8812,55200))</a:Rect>
 <a:ListOfPoints>((6000,44000),(6000,55200))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>55</a:ArrowStyle>
