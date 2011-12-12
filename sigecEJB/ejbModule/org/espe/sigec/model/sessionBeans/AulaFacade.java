@@ -34,8 +34,7 @@ public class AulaFacade extends AbstractFacade<Aula> implements AulaFacadeLocal 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Aula> findCursoByEdificio(String idEdificio) {
-		Criteria crit = null;
-    	crit = ((Session)getEntityManager().getDelegate()).createCriteria(Aula.class);
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Aula.class);
     	crit.add(Restrictions.eq("edificio.idEdificio", idEdificio));
 		return crit.list();
 	}

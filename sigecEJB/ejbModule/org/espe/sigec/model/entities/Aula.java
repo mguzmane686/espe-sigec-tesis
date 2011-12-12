@@ -6,7 +6,6 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,14 +33,12 @@ public class Aula implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_aula")
-//    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="aula_seq")
-//    @SequenceGenerator(name="aula_seq", sequenceName="aula_seq", allocationSize = 1)
     @Size(min = 1, max = 20)
+    @Column(name = "id_aula")
     private String idAula;
-    @Size(max = 50)
-    @Column(name = "cod_aula")
-    private String codAula;
+//    @Size(max = 50)
+//    @Column(name = "cod_aula")
+//    private String codAula;
     @Size(max = 250)
     @Column(name = "nombre_aula")
     private String nombreAula;
@@ -53,7 +50,7 @@ public class Aula implements Serializable {
     @JoinColumn(name = "id_edificio", referencedColumnName = "id_edificio")
     @ManyToOne(fetch = FetchType.LAZY)
     private Edificio edificio;
-    
+
     public Aula() {
     }
 
@@ -61,17 +58,55 @@ public class Aula implements Serializable {
         this.idAula = idAula;
     }
 
-    
-
     public String getIdAula() {
-		return idAula;
-	}
+        return idAula;
+    }
 
-	public void setIdAula(String idAula) {
-		this.idAula = idAula;
-	}
+    public void setIdAula(String idAula) {
+        this.idAula = idAula;
+    }
 
-	@Override
+//    public String getCodAula() {
+//        return codAula;
+//    }
+//
+//    public void setCodAula(String codAula) {
+//        this.codAula = codAula;
+//    }
+
+    public String getNombreAula() {
+        return nombreAula;
+    }
+
+    public void setNombreAula(String nombreAula) {
+        this.nombreAula = nombreAula;
+    }
+
+    public String getDescripcionAula() {
+        return descripcionAula;
+    }
+
+    public void setDescripcionAula(String descripcionAula) {
+        this.descripcionAula = descripcionAula;
+    }
+
+    public Collection<CursoPeriodo> getCursoPeriodoCollection() {
+        return cursoPeriodoCollection;
+    }
+
+    public void setCursoPeriodoCollection(Collection<CursoPeriodo> cursoPeriodoCollection) {
+        this.cursoPeriodoCollection = cursoPeriodoCollection;
+    }
+
+    public Edificio getEdificio() {
+        return edificio;
+    }
+
+    public void setEdificio(Edificio edificio) {
+        this.edificio = edificio;
+    }
+
+    @Override
     public int hashCode() {
         int hash = 0;
         hash += (idAula != null ? idAula.hashCode() : 0);
@@ -93,48 +128,7 @@ public class Aula implements Serializable {
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entites.Aula[ idAula=" + idAula + " ]";
+        return "org.espe.sigec.model.entities.Aula[ idAula=" + idAula + " ]";
     }
-
-	public String getCodAula() {
-		return codAula;
-	}
-
-	public void setCodAula(String codAula) {
-		this.codAula = codAula;
-	}
-
-	public String getNombreAula() {
-		return nombreAula;
-	}
-
-	public void setNombreAula(String nombreAula) {
-		this.nombreAula = nombreAula;
-	}
-
-	public String getDescripcionAula() {
-		return descripcionAula;
-	}
-
-	public void setDescripcionAula(String descripcionAula) {
-		this.descripcionAula = descripcionAula;
-	}
-
-	public Collection<CursoPeriodo> getCursoPeriodoCollection() {
-		return cursoPeriodoCollection;
-	}
-
-	public void setCursoPeriodoCollection(
-			Collection<CursoPeriodo> cursoPeriodoCollection) {
-		this.cursoPeriodoCollection = cursoPeriodoCollection;
-	}
-
-	public Edificio getEdificio() {
-		return edificio;
-	}
-
-	public void setEdificio(Edificio edificio) {
-		this.edificio = edificio;
-	}
     
 }

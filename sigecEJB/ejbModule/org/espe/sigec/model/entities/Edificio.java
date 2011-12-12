@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -40,6 +42,9 @@ public class Edificio implements Serializable {
     @Size(max = 250)
     @Column(name = "descripcion")
     private String descripcion;
+    @JoinColumn(name = "id_lugar", referencedColumnName = "id_lugar")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private LugarCurso lugarCurso;
     @OneToMany(mappedBy = "edificio", fetch = FetchType.LAZY)
     private Collection<Aula> aulaCollection;
 
@@ -72,6 +77,14 @@ public class Edificio implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public LugarCurso getLugarCurso() {
+        return lugarCurso;
+    }
+
+    public void setLugarCurso(LugarCurso lugarCurso) {
+        this.lugarCurso = lugarCurso;
     }
 
     public Collection<Aula> getAulaCollection() {
