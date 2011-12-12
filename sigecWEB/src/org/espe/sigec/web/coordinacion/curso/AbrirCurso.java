@@ -15,7 +15,9 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
+import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -32,9 +34,14 @@ public class AbrirCurso implements Serializable{
 	
 	@Inject
 	private CoordinacionServicio coordinacionServicio;
+	private Collection<SelectItem> itemLugarCurso;
+	private Collection<SelectItem> itemEdificio;
 	private Collection<SelectItem> itemAulas;
-	private Collection<SelectItem> itemCursos;
+	
 	private Collection<SelectItem> itemEspecialidades;
+	private Collection<SelectItem> itemCursos;
+	
+	
 	
 	private PeriodoAcademico periodoAcademico;
 	private CursoPeriodo cursoPeriodo;
@@ -57,6 +64,7 @@ public class AbrirCurso implements Serializable{
 	}
 	@PostConstruct
 	public void loadItems(){
+		//carga de especialidades y cursos por especialidad
 		setItemEspecialidades(new ArrayList<SelectItem>());
 		for(Especialidad especialidad: coordinacionServicio.findEspecialidades()){
 			getItemEspecialidades().add(new SelectItem(especialidad.getIdEspecialidad(), especialidad.getNombre()));
@@ -65,9 +73,14 @@ public class AbrirCurso implements Serializable{
 			Integer integer = (Integer) getItemEspecialidades().iterator().next().getValue();
 			loadCursos(integer);
 		}
-		setItemAulas(new ArrayList<SelectItem>());
-		for(Aula aula: coordinacionServicio.findAulas()){
-			getItemAulas().add(new SelectItem(aula.getIdAula(), aula.getCodAula() +" ; "+ aula.getNombreAula()));
+		
+		//Carga de Lugares disponibles
+		setItemLugarCurso(new ArrayList<SelectItem>());
+		for(LugarCurso lugarCurso: coordinacionServicio.findLugarCurso()){
+			getItemLugarCurso().add(new SelectItem(lugarCurso.getIdLugar(), lugarCurso.getNombre()));
+		}
+		if(!getItemLugarCurso().isEmpty()){
+			
 		}
 		
 	}
@@ -78,10 +91,35 @@ public class AbrirCurso implements Serializable{
 			getItemCursos().add(new SelectItem(curso.getIdCurso(), curso.getNombreCurso()));
 		}
 	}
+	
+	public void somChangeLugarCurso(ValueChangeEvent e){
+		String idLugar = e.getNewValue().toString();
+		loadEdificio(idLugar);
+		loadAula(getItemEdificio().iterator().next().getValue().toString());
+	}
+	
+	private void loadEdificio(String idLugar){
+		setItemEdificio(new ArrayList<SelectItem>());
+		for(Edificio edificio: coordinacionServicio.findEdificioByLugarCurso(idLugar)){
+			getItemEdificio().add(new SelectItem(edificio.getIdEdificio(), edificio.getNombre()));
+		}
+	}
+	
+	public void somChangeEdificio(ValueChangeEvent e){
+		String idEdificio = e.getNewValue().toString();
+		loadAula(idEdificio);
+	}
+	private void loadAula(String idEdificio){
+		setItemAulas(new ArrayList<SelectItem>());
+		for(Aula aula: coordinacionServicio.findAulaByEdificio(idEdificio)){
+			getItemAulas().add(new SelectItem(aula.getIdAula(), aula.getNombreAula()));
+		}
+	}
 	public void somChangeEspecialidad(ValueChangeEvent e){
 		Integer integer = Integer.parseInt( e.getNewValue().toString());
 		loadCursos(integer);
 	}
+	
 	public void btnSaveAbrirCurso(ActionEvent e){
 		try {
 			coordinacionServicio.abrirCurso(getPeriodoAcademico(), getCursoPeriodo());
@@ -130,6 +168,22 @@ public class AbrirCurso implements Serializable{
 
 	public void setItemAulas(Collection<SelectItem> itemAulas) {
 		this.itemAulas = itemAulas;
+	}
+
+	public Collection<SelectItem> getItemLugarCurso() {
+		return itemLugarCurso;
+	}
+
+	public void setItemLugarCurso(Collection<SelectItem> itemLugarCurso) {
+		this.itemLugarCurso = itemLugarCurso;
+	}
+
+	public Collection<SelectItem> getItemEdificio() {
+		return itemEdificio;
+	}
+
+	public void setItemEdificio(Collection<SelectItem> itemEdificio) {
+		this.itemEdificio = itemEdificio;
 	}
 
 }

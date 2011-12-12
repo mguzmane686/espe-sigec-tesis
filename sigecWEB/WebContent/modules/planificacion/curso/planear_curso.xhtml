@@ -31,7 +31,8 @@
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Fecha inicio" />
-        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaInicio}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
+        			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaInicio}" showApplyButton="false"
+        				datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
         			
         			<h:outputLabel value="Fecha Finalizacion" />
         			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaFin}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de fin es obligatoria"/>
@@ -44,6 +45,24 @@
         		</legend>
         		
         			<h:panelGrid columns="2">
+        				<h:outputLabel value="Lugar" />
+        				<h:selectOneMenu required="true" requiredMessage="El campo Lugar es obligatorio" valueChangeListener="#{planearCursoController.somChangeLugarCurso}">
+        					<f:selectItems value="#{planearCursoController.itemLugarCurso}"/>
+        					<a4j:ajax execute="@this" event="click" render="itemEdificio, itemAula"/>
+        				</h:selectOneMenu>
+        				
+        				<h:outputLabel value="Edificio" />
+        				<h:selectOneMenu id="itemEdificio" required="true" requiredMessage="El campo Edificio es obligatorio" valueChangeListener="#{planearCursoController.somChangeEdificio}">
+        					<f:selectItems value="#{planearCursoController.itemEdificio}"/>
+        					<a4j:ajax execute="@this" event="click" render="itemAula"/>
+        				</h:selectOneMenu>
+        				
+        				<h:outputLabel value="Aula"/>
+        				<rich:select id="itemAula" defaultLabel="Seleccione" required="true" requiredMessage="El campo aula es obligatorio" value="#{planearCursoController.cursoPeriodo.aula.idAula}">
+        					<f:selectItems value="#{planearCursoController.itemAulas}"></f:selectItems>
+        				</rich:select>
+        				
+        				
         				<h:outputLabel value="#{msg['etiqueta_especialidad']}"/>
         				<h:selectOneMenu required="true" requiredMessage="El campo Especialidad es obligatorio" valueChangeListener="#{planearCursoController.somChangeEspecialidad}">
         					<f:selectItems value="#{planearCursoController.itemEspecialidades}"/>
@@ -51,13 +70,8 @@
         				</h:selectOneMenu>
         				
         				<h:outputLabel value="Curso"/>
-        				<rich:select id="somCurso" defaultLabel="Seleccione" required="true" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.curso.idCurso}" requiredMessage="El campo curso es obligatorio">
+        				<rich:select id="somCurso" defaultLabel="Seleccione" required="true" enableManualInput="false" value="#{planearCursoController.cursoPeriodo.curso.idCurso}" requiredMessage="El campo curso es obligatorio">
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
-        				</rich:select>
-        				
-        				<h:outputLabel value="Aula"/>
-        				<rich:select defaultLabel="Seleccione" enableManualInput="true" value="#{planearCursoController.cursoPeriodo.aula.idAula}">
-        					<f:selectItems value="#{planearCursoController.itemAulas}"></f:selectItems>
         				</rich:select>
         				
         				<h:outputLabel value="Inicio Inscripciones" />
@@ -80,9 +94,6 @@
         					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
         					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
-        				
-        				<h:outputLabel value="Lugar" />
-        				<h:inputText value="#{planearCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
         				
         			</h:panelGrid>
         		
