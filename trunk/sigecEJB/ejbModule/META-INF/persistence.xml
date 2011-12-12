@@ -25,6 +25,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Estudiante</class>
 		<class>org.espe.sigec.model.entities.Especialidad</class>
 		<class>org.espe.sigec.model.entities.Edificio</class>
+		<class>org.espe.sigec.model.entities.DetallePresupuestoCurso</class>
 		<class>org.espe.sigec.model.entities.DesempenioProfesorPK</class>
 		<class>org.espe.sigec.model.entities.DesempenioProfesor</class>
 		<class>org.espe.sigec.model.entities.CursoProfesorPK</class>
@@ -33,12 +34,12 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.CursoEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.CursoEstudiante</class>
 		<class>org.espe.sigec.model.entities.Curso</class>
+		<class>org.espe.sigec.model.entities.CatalogoSigec</class>
 		<class>org.espe.sigec.model.entities.CalificacionEstudiante</class>
 		<class>org.espe.sigec.model.entities.Aula</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
-		<class>org.espe.sigec.model.entities.CatalogoSigec</class>
-		<class>org.espe.sigec.model.entities.DetallePresupuestoCurso</class>
+		<class>org.espe.sigec.model.entities.LugarCurso</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>

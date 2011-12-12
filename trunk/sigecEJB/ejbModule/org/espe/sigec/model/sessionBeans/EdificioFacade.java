@@ -4,10 +4,16 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.espe.sigec.model.entities.Edificio;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -25,5 +31,13 @@ public class EdificioFacade extends AbstractFacade<Edificio> implements Edificio
     public EdificioFacade() {
         super(Edificio.class);
     }
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Edificio> findEdificioByLugarCurso(String idLugar) {
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Edificio.class);
+    	crit.add(Restrictions.eq("lugarCurso.idLugar", idLugar));
+		return crit.list();
+	}
     
 }

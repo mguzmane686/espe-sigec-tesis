@@ -4,6 +4,7 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.Edificio;
@@ -28,5 +29,7 @@ public interface EdificioFacadeLocal {
     List<Edificio> findRange(int[] range);
 
     int count();
+    
+    Collection<Edificio> findEdificioByLugarCurso(String idLugar);
     
 }
