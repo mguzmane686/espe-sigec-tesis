@@ -2,11 +2,10 @@ package org.espe.sigec.web.admGeneral.estudiante;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.SerializationUtils;
+import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
@@ -44,14 +43,21 @@ public class RegistroEstudianteController extends CommonController{
 	public void btnGuardarEstudiante(ActionEvent e){
 		try {
 			inscripcionServicio.registrarEstudiante(getEstudiante().getPersona().getUsuario(), getEstudiante().getPersona(), getEstudiante());
-			
-			FacesUtils.putFlashObject("estudiante", SerializationUtils.clone(getEstudiante()));
-			FacesContext.getCurrentInstance().getExternalContext().redirect("detalle_inscripcion.jsf");
+			FacesUtils.redirectPage("");
+//			FacesUtils.putFlashObject("estudiante", SerializationUtils.clone(getEstudiante()));
+//				FacesContext.getCurrentInstance().getExternalContext().redirect("detalle_inscripcion.jsf");
 			
 			instanciarEntidades();
-		} catch (Exception e1) {
+		} catch (UserValidateException e1) {
 			e1.printStackTrace();
+		} catch (Exception e1) {
+			if(e1.getMessage().contains("El identificador ya existe")){
+				FacesUtils.addErrorMessage("El identificador ya existe");
+			}
+			// TODO Auto-generated catch block
+			FacesUtils.addErrorMessage("No se pudo crear el usuario");
 		}
+			
 	}
 	public Estudiante getEstudiante() {
 		return estudiante;
