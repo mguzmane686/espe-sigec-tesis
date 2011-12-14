@@ -13,7 +13,10 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Estudiante;
+import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.servicio.inscripcion.InscripcionServicio;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author roberto
@@ -28,6 +31,7 @@ public class InscripcionAlumnoCursoController {
 	private InscripcionServicio inscripcionServicio;
 	
 	private Collection<SelectItem> itemCursos;
+	private boolean showFieldsNewStudent;
 	
 	public InscripcionAlumnoCursoController() {
 		initEntities();
@@ -52,15 +56,36 @@ public class InscripcionAlumnoCursoController {
 	
 	public void btnBuscarEstudiante(ActionEvent e){
 		getCursoEstudiante().setEstudiante(inscripcionServicio.buscarEstudinateByCedula(getCedulaUsr()));
+		if(getCursoEstudiante().getEstudiante()==null){
+			FacesUtils.addInfoMessage("El usuario no existe. Para crearlo hagalo con el boton Nuevo");
+		}else{
+			setShowFieldsNewStudent(Boolean.FALSE);
+		}
 	}
 	public void btnInscripcionEstudinateCurso(ActionEvent e){
 		try {
-			inscripcionServicio.inscripcionEstudianteCurso(getCursoEstudiante().getEstudiante(), getCursoEstudiante().getCursoPeriodo(), getCursoEstudiante());
+			inscripcionServicio.inscripcionEstudianteCurso(getCursoEstudiante().getEstudiante(), getCursoEstudiante().getCursoPeriodo(), getCursoEstudiante(), isShowFieldsNewStudent());
+			FacesUtils.addInfoMessage("Se ha inscrito a un curso");
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			FacesUtils.addErrorMessage("Ocurrio un error inesperado");
 		}
 	}
+	
+	public void btnNuevoEstudiante(ActionEvent e){
+//		try {
+//			FacesUtils.redirectPage("registro_usuario.jsf");
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+		
+		setCedulaUsr("");
+		getCursoEstudiante().setEstudiante(new Estudiante());
+		getCursoEstudiante().getEstudiante().setPersona(new Persona());
+		getCursoEstudiante().getEstudiante().getPersona().setUsuario(new Usuario());
+		setShowFieldsNewStudent(Boolean.TRUE);
+	}
+	
 	public void setCursoEstudiante(CursoEstudiante cursoEstudiante) {
 		this.cursoEstudiante = cursoEstudiante;
 	}
@@ -77,5 +102,12 @@ public class InscripcionAlumnoCursoController {
 	}
 	public void setCedulaUsr(String cedulaUsr) {
 		this.cedulaUsr = cedulaUsr;
-	}	
+	}
+	public boolean isShowFieldsNewStudent() {
+		return showFieldsNewStudent;
+	}
+	public void setShowFieldsNewStudent(boolean showFieldsNewStudent) {
+		this.showFieldsNewStudent = showFieldsNewStudent;
+	}
+	
 }

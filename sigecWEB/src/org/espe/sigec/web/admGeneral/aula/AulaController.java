@@ -8,11 +8,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
+import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -26,6 +28,7 @@ import org.espe.sigec.web.utils.FacesUtils;
 public class AulaController implements Serializable{
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
+	Collection<SelectItem> itemsLocalidades;
 	private Collection<SelectItem> itemsEdificio;
 	private Aula aula;
 	
@@ -41,8 +44,22 @@ public class AulaController implements Serializable{
 	}
 	
 	@PostConstruct
-	public void loadEdificio(){
-		for(Edificio edificioTMP: admGeneralServicio.findEdificio()){
+	public void loadLocalidad(){
+		setItemsLocalidades(new ArrayList<SelectItem>());
+		setItemsEdificio(new ArrayList<SelectItem>());
+		
+		for(LugarCurso lugarCursoTMP: admGeneralServicio.findLugar()){
+			getItemsLocalidades().add(new SelectItem(lugarCursoTMP.getIdLugar(), lugarCursoTMP.getNombre()));
+		}
+		
+		for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getItemsLocalidades().iterator().next().getValue().toString())){
+			getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+		}
+	}
+	
+	public void somChangeLocalidad(ValueChangeEvent e){
+		getItemsEdificio().clear();
+		for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(e.getNewValue().toString())){
 			getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
 		}
 	}
@@ -71,6 +88,14 @@ public class AulaController implements Serializable{
 
 	public void setItemsEdificio(Collection<SelectItem> itemsEdificio) {
 		this.itemsEdificio = itemsEdificio;
+	}
+
+	public Collection<SelectItem> getItemsLocalidades() {
+		return itemsLocalidades;
+	}
+
+	public void setItemsLocalidades(Collection<SelectItem> itemsLocalidades) {
+		this.itemsLocalidades = itemsLocalidades;
 	}
 	
 }
