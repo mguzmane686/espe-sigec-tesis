@@ -56,6 +56,14 @@
         
         <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
+            	<a4j:commandLink value="Nueva localidad" action="adm_localidad.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+        	
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="Nuevo edificio" action="adm_edificio.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+            
+        	<rich:panelMenuItem>
             	<a4j:commandLink value="Crear aula" action="adm_aulas.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
