@@ -6,6 +6,7 @@ import javax.ejb.EJB;
 
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
+import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
@@ -13,6 +14,7 @@ import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
+import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
@@ -34,6 +36,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	
 	@EJB
 	private ProfesorFacadeLocal profesorFacadeLocal;
+	@EJB
+	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
 	
 	@Override
 	public void createAula(Aula aula) throws Exception {
@@ -77,5 +81,22 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		profesor.getPersona().setUsuario(usuario);
 		personaFacadeLocal.create(persona);
 		profesorFacadeLocal.create(profesor);
+	}
+	@Override
+	public void createEdificio(Edificio edificio) throws Exception {
+		edificioFacadeLocal.create(edificio);
+	}
+	@Override
+	public void createLocalidad(LugarCurso lugarCurso) throws Exception {
+		lugarCursoFacadeLocal.create(lugarCurso);
+	}
+	@Override
+	public Collection<LugarCurso> findLugar() {
+		return lugarCursoFacadeLocal.findAll();
+	}
+	@Override
+	public Collection<Edificio> findEdificioByLugar(String idLugarCurso) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
