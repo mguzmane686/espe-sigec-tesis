@@ -24,59 +24,105 @@
 	<h:form>
 		<rich:panel header="#{msg['creacion_curso']}">
 			<h:panelGroup layout="block" styleClass="roundCorner">
-				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{inscripcionAlumnoCursoController.btnInscripcionEstudinateCurso}" image="/resources/images/save.png" render="pnlDocente"/>
-					<h:outputLabel value="#{msg['guardar']}" />
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+						<a4j:commandButton value="#{msg['guardar']}" actionListener="#{inscripcionAlumnoCursoController.btnInscripcionEstudinateCurso}" image="/resources/images/save.png" render="pnlDocente"/>
+						<h:outputLabel value="#{msg['guardar']}" />
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+						<a4j:commandButton value="Nuevo" actionListener="#{inscripcionAlumnoCursoController.btnNuevoEstudiante}" 
+							image="/resources/images/student.png" execute="@this" render="pgDatosAlumno"/>
+						<h:outputLabel value="Nuevo" />
+					</h:panelGrid>
 				</h:panelGrid>
 			</h:panelGroup>
 		</rich:panel>
 
 		<rich:panel header="#{msg['incripcion_curso']}" id="pnlEtsCur">
-			
 			<fieldset>
 				<legend>
-					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
+					<h:outputLabel value="Buscar Estudiante" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="3" id="pgBusqueda">
-					<h:outputLabel value="#{msg['cedula']}" />
-					
+					<h:outputLabel value="#{msg['cedula']}" />					
 					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}"/>
 					
 					<a4j:commandLink actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno">
 						<h:graphicImage library="images/button" name="search_button.png" height="20px"/>
 					</a4j:commandLink>
 				</h:panelGrid>
+			</fieldset>	
+			<h:panelGroup rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
+				<fieldset>
+	        		<legend>
+	        			<h:outputLabel value="Usuario" styleClass="titulo"/>
+	        		</legend>
+	        		<h:panelGrid columns="2">
+	        			<h:outputLabel value="Identificador" styleClass="label-bold espacioDetalle" />
+	        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" />
+	        			
+	        			<h:outputLabel value="Clave" styleClass="label-bold"/>
+	        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" />
+	        		</h:panelGrid>
+	        	</fieldset>
+        	</h:panelGroup>
+        	
+			<fieldset>
+				<legend>
+					<h:outputLabel value="Datos" styleClass="titulo" />
+				</legend>
 				
 				<h:panelGrid columns="2" id="pgDatosAlumno">
 					<h:outputLabel value="Curso" />
-					<rich:select value="#{inscripcionAlumnoCursoController.cursoEstudiante.cursoPeriodo.idCursoPeriodo}">
+					<rich:select value="#{inscripcionAlumnoCursoController.cursoEstudiante.cursoPeriodo.idCursoPeriodo}" required="true" requiredMessage="El campo Curso es obligatorio">
 						<f:selectItems value="#{inscripcionAlumnoCursoController.itemCursos}"></f:selectItems>
 					</rich:select>
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
-
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}" 
+						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
+						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+						
 					<h:outputLabel value="#{msg['nombres']}"  />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
 						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoNombre}" />
 						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerApellido} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoApellido}" /> 
 					</h:panelGrid>
+					<h:panelGrid columns="2" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
+						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
+						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoNombre}"/>
+					</h:panelGrid>
+					
+					
+					<h:outputLabel value="#{msg['apellidos']}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:panelGrid columns="2" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
+						<h:inputText value="#{administrativoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
+						<h:inputText value="#{administrativoController.persona.segundoApellido}" />
+					</h:panelGrid>
+					
 					
 					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.fechaNacimiento}">
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.fechaNacimiento}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
 						<f:convertDateTime pattern="dd/MMM/yyyy"/>
 					</h:outputText>
-
+					<rich:calendar rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"></rich:calendar>
+					
 					<h:outputLabel value="#{msg['nacionalidad']}"  />
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
 					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
 					<h:outputLabel value="#{msg['e_mail']}"  />
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
 					<h:outputLabel value="#{msg['celular']}"/>
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" />
+					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 						
 				</h:panelGrid>
 			</fieldset>
