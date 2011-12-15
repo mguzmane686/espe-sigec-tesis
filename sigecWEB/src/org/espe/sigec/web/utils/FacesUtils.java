@@ -51,11 +51,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Modulo;
 import org.espe.sigec.model.entities.Opcion;
 import org.richfaces.PanelMenuMode;
-import org.richfaces.component.UICommandLink;
 import org.richfaces.component.UIPanelMenu;
 import org.richfaces.component.UIPanelMenuGroup;
 import org.richfaces.component.UIPanelMenuItem;
@@ -63,6 +61,7 @@ import org.richfaces.component.UIPanelMenuItem;
 /**
  * JSF utilities.
  */
+@SuppressWarnings("deprecation")
 public class FacesUtils {
     /**
      * Get servlet context.
@@ -174,11 +173,13 @@ public class FacesUtils {
         return getApplication().createValueBinding(el);
     }
 
-    private static HttpServletRequest getServletRequest() {
+    @SuppressWarnings("unused")
+	private static HttpServletRequest getServletRequest() {
         return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
     }
 
-    private static Object getElValue(String el) {
+    @SuppressWarnings("unused")
+	private static Object getElValue(String el) {
         return getValueBinding(el).getValue(FacesContext.getCurrentInstance());
     }
 
@@ -243,6 +244,7 @@ public class FacesUtils {
 					uiCommandLink.setValue(opcion.getNombre());
 //					uiCommandLink.setExecute("@this");
 //					uiCommandLink.setRender("@all");
+					@SuppressWarnings("rawtypes")
 					Class[] params = {};
 //					MethodExpression actionExpression = FacesContext.getCurrentInstance().getApplication().getExpressionFactory()
 //				               .createMethodExpression(FacesContext.getCurrentInstance().getELContext(),
