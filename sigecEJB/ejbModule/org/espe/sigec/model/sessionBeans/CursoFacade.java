@@ -14,7 +14,6 @@ import org.espe.sigec.model.entities.Curso;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
-import org.hibernate.annotations.OrderBy;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
