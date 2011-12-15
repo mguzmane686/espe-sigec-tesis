@@ -7,5 +7,7 @@ import org.espe.sigec.model.entities.PresupuestoCurso;
 
 @QPresupuesto
 public interface PresupuestoServicio {
-	public void guardarPresupuesto(PresupuestoCurso presupuestoCurso,Collection<DetallePresupuestoCurso> lstDetallePresuCurso) throws Exception;
+	public void guardarPresupuesto(PresupuestoCurso presupuestoCurso,
+								   Collection<DetallePresupuestoCurso> lstDetPreCur) throws Exception;
+
 }

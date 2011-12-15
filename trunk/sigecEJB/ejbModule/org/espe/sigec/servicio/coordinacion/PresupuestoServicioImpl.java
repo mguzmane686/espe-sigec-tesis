@@ -11,18 +11,15 @@ import org.espe.sigec.model.sessionBeans.DetallePresupuestoCursoFacadeLocal;
 public class PresupuestoServicioImpl implements PresupuestoServicio{
 
 	@EJB
-	private DetallePresupuestoCursoFacadeLocal detallePresupuestoCursoFacadeLocal;
+	private DetallePresupuestoCursoFacadeLocal objDetPreCurFacLoc;
 	
 	@Override
 	public void guardarPresupuesto(PresupuestoCurso presupuestoCurso,
-			Collection<DetallePresupuestoCurso> lstDetallePresuCurso)
-			throws Exception {
-		for (DetallePresupuestoCurso detallePresuCurso:lstDetallePresuCurso){
-			detallePresuCurso.setPresupuestoCurso(presupuestoCurso);
-			detallePresupuestoCursoFacadeLocal.create(detallePresuCurso);
+								   Collection<DetallePresupuestoCurso> lstDetPreCur) throws Exception {
+		for (DetallePresupuestoCurso objDetPresCurso:lstDetPreCur){
+			objDetPresCurso.setPresupuestoCurso(presupuestoCurso);
+			objDetPreCurFacLoc.create(objDetPresCurso);
 		}
-		
 	}
 	
-
 }
