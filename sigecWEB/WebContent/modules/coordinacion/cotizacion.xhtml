@@ -42,41 +42,29 @@
         				<h:outputLabel value="Participantes:" />
         				<h:inputText value="" />
         			</h:panelGrid>
-        		
-        			<br />
-        			
-        			<rich:dataTable value="#{presupuestoController.lstDetPreCurso}" var="detallePres">
-    					<rich:column>
-    						<f:facet name="header">
-    							<h:outputLabel value="Descripcion" />
-    						</f:facet>
-    							<h:outputText value="#{detallePres.codElemento}" />
-    					</rich:column>
-    					<rich:column>
-    						<f:facet name="header">
-    							<h:outputLabel value="Cantidad" />
-    						</f:facet>
-    							<h:inputText value="#{detallePres.cantidad}" />
-    					</rich:column>
-    					<rich:column>
-    						<f:facet name="header">
-    							<h:outputLabel value="Unidad" />
-    						</f:facet>
-    							<h:outputText value="#{detallePres.unidad}" />
-    					</rich:column>
-    					<rich:column>
-    						<f:facet name="header">
-    							<h:outputLabel value="Precio" />
-    						</f:facet>
-    							<h:inputText value="#{detallePres.costoUnitario}" />
-    					</rich:column>
-    					<rich:column>
-    						<f:facet name="header">
-    							<h:outputLabel value="Total" />
-    						</f:facet>
-    							<h:outputText value="#{detallePres.costoTotal}" />
-    					</rich:column>
-    				</rich:dataTable>  	
+        		  	
+        		  	<rich:dataTable value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle">
+        		  		<rich:column rendered="false">
+        		  			<f:facet name="header">
+        		  				<h:outputLabel value="Codigo" />
+        		  			</f:facet>
+        		  			<h:outputText value="#{detalle.codElemento}" />
+        		  		</rich:column>
+        		  		
+        		  		<rich:column>
+        		  			<f:facet name="header">
+        		  				<h:outputLabel value="Descripcion" />
+        		  			</f:facet>
+        		  			<h:outputText value="#{detalle.descripcionCatalogo}" />
+        		  		</rich:column>
+        		  		
+        		  		<rich:column>
+        		  			<f:facet name="header">
+        		  				<h:outputLabel value="Cantidad" />
+        		  			</f:facet>
+        		  			<rich:inputNumberSpinner value="#{detalle.cantidad}"></rich:inputNumberSpinner>
+        		  		</rich:column>
+        		  	</rich:dataTable>
         		</fieldset>
     		</rich:panel>  
     		
