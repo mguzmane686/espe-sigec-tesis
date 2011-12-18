@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -51,6 +52,9 @@ public class DetallePresupuestoCurso implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private PresupuestoCurso presupuestoCurso;
 
+    @Transient
+    private String descripcionCatalogo;
+    
     public DetallePresupuestoCurso() {
     }
 
@@ -138,5 +142,13 @@ public class DetallePresupuestoCurso implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.DetallePresupuestoCurso[ codElemento=" + codElemento + " ]";
     }
+
+	public String getDescripcionCatalogo() {
+		return descripcionCatalogo;
+	}
+
+	public void setDescripcionCatalogo(String descripcionCatalogo) {
+		this.descripcionCatalogo = descripcionCatalogo;
+	}
     
 }
