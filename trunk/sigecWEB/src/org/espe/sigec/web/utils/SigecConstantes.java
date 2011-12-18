@@ -12,4 +12,5 @@ public interface SigecConstantes {
 	String PERFIL_ADMINISTRATIVO= "ADM";
 	String PERFIL_ESTUDIANTE = "EST";
 	String PERFIL_INVITADO = "INV";
+	String CATALOGO_COSTOS_GASTOS = "CYG";
 }
