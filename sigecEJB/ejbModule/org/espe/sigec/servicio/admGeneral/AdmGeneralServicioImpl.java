@@ -96,7 +96,6 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 	@Override
 	public Collection<Edificio> findEdificioByLugar(String idLugarCurso) {
-		// TODO Auto-generated method stub
-		return null;
+		return edificioFacadeLocal.findEdificioByLugarCurso(idLugarCurso);
 	}
 }
