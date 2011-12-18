@@ -5,6 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,12 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 /**
  *
- * @author roberto
+ * @author Diego
  */
 @Entity
 @Table(name = "catalogo_sigec")
@@ -27,15 +26,17 @@ public class CatalogoSigec implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "codigo")
     private String codigo;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "descripcion")
     private String descripcion;
+//    @OneToMany(mappedBy = "catalogoSigec", fetch = FetchType.LAZY)
+//    private Collection<CatalogoSigec> catalogoSigecCollection;
+//    @JoinColumn(name = "parent_codigo", referencedColumnName = "codigo")
+//    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "parent_codigo")
+    private String catalogoSigec;
 
     public CatalogoSigec() {
     }
@@ -65,6 +66,23 @@ public class CatalogoSigec implements Serializable {
         this.descripcion = descripcion;
     }
 
+//    public Collection<CatalogoSigec> getCatalogoSigecCollection() {
+//        return catalogoSigecCollection;
+//    }
+//
+//    public void setCatalogoSigecCollection(Collection<CatalogoSigec> catalogoSigecCollection) {
+//        this.catalogoSigecCollection = catalogoSigecCollection;
+//    }
+
+//    public CatalogoSigec getCatalogoSigec() {
+//        return catalogoSigec;
+//    }
+//
+//    public void setCatalogoSigec(CatalogoSigec catalogoSigec) {
+//        this.catalogoSigec = catalogoSigec;
+//    }
+
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -72,7 +90,15 @@ public class CatalogoSigec implements Serializable {
         return hash;
     }
 
-    @Override
+    public String getCatalogoSigec() {
+		return catalogoSigec;
+	}
+
+	public void setCatalogoSigec(String catalogoSigec) {
+		this.catalogoSigec = catalogoSigec;
+	}
+
+	@Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof CatalogoSigec)) {
