@@ -18,11 +18,17 @@
         	
         	<rich:panel header="Administrar curso">
         		<h:panelGroup layout="block" styleClass="roundCorner">
-	        		<h:panelGrid columns="2">
+	        		<h:panelGrid columns="3">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
 	        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" 
 	        					 image="/resources/images/save.png"/>
 	        				<h:outputLabel value="#{msg['guardar']}" />
+	        			</h:panelGrid>
+	        			
+	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+	        				<a4j:commandButton value="Presupuesto" 
+	        					image="/resources/images/budget.png"/>
+	        				<h:outputLabel value="Presupuesto" />
 	        			</h:panelGrid>
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
