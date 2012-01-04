@@ -1,5 +1,6 @@
 package org.espe.sigec.web.coordinacion.presupuesto;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,6 +12,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CatalogoSigec;
+import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.DetallePresupuestoCurso;
 import org.espe.sigec.servicio.coordinacion.PresupuestoServicio;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -22,17 +24,15 @@ import org.espe.sigec.web.utils.SigecConstantes;
 public class PresupuestoController implements Serializable {
 	@Inject 
 	private PresupuestoServicio presupuestoServicio; 
+	private CursoPeriodo cursoPeriodo;
 	
-//	private PresupuestoCurso objPreCurso;
 	private Collection<CatalogoSigec> lstCatalogoSigecs;
-	
 	private Collection<DetallePresupuestoCurso> lstDetallePresupuestoCursos;
 	
 	
 	public PresupuestoController() {
-		
+		setCursoPeriodo((CursoPeriodo) FacesUtils.getFlashObject("cursoPeriodo"));
 		setLstDetallePresupuestoCursos(new ArrayList<DetallePresupuestoCurso>());
-		
 	}
 	
 	@PostConstruct
@@ -49,24 +49,24 @@ public class PresupuestoController implements Serializable {
 		}
 		
 	}
-
+	
+	public void btnAtras(ActionEvent e){
+		try {
+			FacesUtils.redirectPage("coor_administrar_curso_abierto.jsf");
+			FacesUtils.putFlashObject("curso", getCursoPeriodo());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
+	
 	public void btnSavePresupuesto(ActionEvent e){
 		try {
-//			presupuestoServicio.guardarPresupuesto(getObjPreCurso(), getLstDetallePresupuestoCursos());
 			FacesUtils.addInfoMessage("Presupuesto guardado");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("Presupuesto no guardado");
 		}
 	}
-
-//	public PresupuestoCurso getObjPreCurso() {
-//		return objPreCurso;
-//	}
-//
-//	public void setObjPreCurso(PresupuestoCurso objPreCurso) {
-//		this.objPreCurso = objPreCurso;
-//	}
-
+	
 	public Collection<CatalogoSigec> getLstCatalogoSigecs() {
 		return lstCatalogoSigecs;
 	}
@@ -84,5 +84,11 @@ public class PresupuestoController implements Serializable {
 		this.lstDetallePresupuestoCursos = lstDetallePresupuestoCursos;
 	}
 
-		
+	public CursoPeriodo getCursoPeriodo() {
+		return cursoPeriodo;
+	}
+
+	public void setCursoPeriodo(CursoPeriodo cursoPeriodo) {
+		this.cursoPeriodo = cursoPeriodo;
+	}		
 }

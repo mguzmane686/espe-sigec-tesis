@@ -46,22 +46,21 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="Inicio del curso" />
 			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}">
-			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-			        				</h:outputText>
-			        			</center>
+			        			
+		        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
+		        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+		        				</h:outputText>
 		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="Fin del curso" />
 			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.periodoAcademico.fechaFin}">
-			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-			        				</h:outputText>
-			        			</center>
+			        			
+		        				<h:outputText value="#{curso.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
+		        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+		        				</h:outputText>
+			        			
 		        			</rich:column>
 		        			
 		        			
@@ -87,9 +86,7 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="Horario" />
 			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" />
-			        			</center>
+			        			<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" style="white-space:nowrap; text-align:center;"/>
 		        			</rich:column>
 		        			
 		        			<rich:column>

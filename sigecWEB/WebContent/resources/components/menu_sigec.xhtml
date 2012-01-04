@@ -48,10 +48,6 @@
             <rich:panelMenuItem>
             	<a4j:commandLink value="#{msg['seleccion_docente']}" action="coor_seleccion_docente.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
-            
-            <rich:panelMenuItem>
-            	<a4j:commandLink value="Presupuesto" action="presupuestos.jsf?faces-redirect=true"/>
-            </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
         <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
