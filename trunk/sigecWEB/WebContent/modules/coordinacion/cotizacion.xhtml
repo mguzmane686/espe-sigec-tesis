@@ -1,73 +1,139 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:a4j="http://richfaces.org/a4j" 
+	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
-	
+
 	<script>
 		function sumar(cantidad,precio, elemento){
 			$(elemento).attr('value',parseFloat(cantidad)+parseFloat(precio)); 
 		}				
  	</script>
-    
-    	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>    
-    	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
-    	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
-    	
-        <h:form id="frmCotizacion">
-        	<rich:panel header="Presupuestos" styleClass="titulo">
-        		<h:panelGroup layout="block" styleClass="roundCorner">
-        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-        				<a4j:commandButton value="Guardar" image="/resources/images/save.png"/>
-        				<h:outputLabel value="Guardar" />
-        			</h:panelGrid>
-        		</h:panelGroup>
-        	</rich:panel>
-        	
-        	<rich:panel header="Datos Presupuesto">
-        		<fieldset>
-        			<legend>
-        				<h:outputLabel value="Identificacion Curso" styleClass="titulo" />
-        			</legend>
-        			
-        			<h:panelGrid columns="2">
-        				<h:outputLabel value="Curso:" />
-        				<rich:select defaultLabel="Escribir para seleccionar" enableManualInput="true">
-        					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
-        				</rich:select>
-        				
-        				<h:outputLabel value="Participantes:" />
-        				<h:inputText value="" />
-        			</h:panelGrid>
-        		  	
-        		  	<rich:dataTable value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle">
-        		  		<rich:column rendered="false">
-        		  			<f:facet name="header">
-        		  				<h:outputLabel value="Codigo" />
-        		  			</f:facet>
-        		  			<h:outputText value="#{detalle.codElemento}" />
-        		  		</rich:column>
-        		  		
-        		  		<rich:column>
-        		  			<f:facet name="header">
-        		  				<h:outputLabel value="Descripcion" />
-        		  			</f:facet>
-        		  			<h:outputText value="#{detalle.descripcionCatalogo}" />
-        		  		</rich:column>
-        		  		
-        		  		<rich:column>
-        		  			<f:facet name="header">
-        		  				<h:outputLabel value="Cantidad" />
-        		  			</f:facet>
-        		  			<rich:inputNumberSpinner value="#{detalle.cantidad}"></rich:inputNumberSpinner>
-        		  		</rich:column>
-        		  	</rich:dataTable>
-        		</fieldset>
-    		</rich:panel>  
-    		
-        </h:form>
-    
+
+	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
+	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
+
+	<h:form id="frmCotizacion">
+		<rich:panel header="Presupuestos" styleClass="titulo">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+						<a4j:commandButton value="Guardar" image="/resources/images/save.png" />
+						<h:outputLabel value="Guardar" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+						<a4j:commandButton value="Atras" immediate="true" actionListener="#{presupuestoController.btnAtras}" image="/resources/images/go-back.png" />
+						<h:outputLabel value="Atras" />
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:panelGroup>
+		</rich:panel>
+
+		<rich:panel header="Datos del curso">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nombre del curso :" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.curso.nombreCurso}" />
+
+				<h:outputLabel value="Fecha inicio:" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.periodoAcademico.fechaInicio}">
+					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
+				</h:outputText>
+
+				<h:outputLabel value="Fecha fin:" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.periodoAcademico.fechaFin}">
+					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
+				</h:outputText>
+
+				<h:outputLabel value="Aula :" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.aula.idAula}" />
+
+				<h:outputLabel value="Inicio Inscripciones :" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.fechaInicioInscripcion}">
+					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
+				</h:outputText>
+
+				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.minimoEstudiantes}" />
+
+				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
+
+				<h:outputLabel value="Hora inicio" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.horaInicioClase}" />
+
+				<h:outputLabel value="Hora fin" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.horaFinClase}" />
+
+				<h:outputLabel value="#{msg['tipo_curso']}" />
+				<h:selectOneRadio value="#{presupuestoController.cursoPeriodo.tipoCurso}">
+					<f:selectItem itemLabel="Empresarial" itemValue="CORP" />
+					<f:selectItem itemLabel="Abierto" itemValue="IND" />
+				</h:selectOneRadio>
+
+				<h:outputLabel value="Lugar a dictarse" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.lugarCapacitacion}" />
+			</h:panelGrid>
+		</rich:panel>
+
+		<rich:panel header="Datos Presupuesto">
+			<fieldset>
+				<legend>
+					<h:outputLabel value="Costos y gastos" style="font-weight:bold;"/>
+				</legend>
+
+				<rich:dataTable value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle">
+					<rich:column rendered="false">
+						<f:facet name="header">
+							<h:outputLabel value="Codigo" />
+						</f:facet>
+						<h:outputText value="#{detalle.codElemento}" />
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Descripcion" />
+						</f:facet>
+						<h:outputText value="#{detalle.descripcionCatalogo}" />
+					</rich:column>
+
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Cantidad" />
+						</f:facet>
+						<rich:inputNumberSpinner value="#{detalle.cantidad}"/>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Unidad" />
+						</f:facet>
+						<h:selectOneRadio value="#{detalle.unidad}">
+							<f:selectItem itemLabel="Horas" itemValue="HOR"/>
+							<f:selectItem itemLabel="Total" itemValue="TOT"/>
+							<f:selectItem itemLabel="Unidades" itemValue="UNI"/>
+						</h:selectOneRadio>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Costo unitario USD." />
+						</f:facet>
+						<rich:inputNumberSpinner value="#{detalle.costoUnitario}"/>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Costo total USD." />
+						</f:facet>
+						<h:outputText value="#{detalle.costoTotal}"/>
+					</rich:column>
+				</rich:dataTable>
+			</fieldset>
+		</rich:panel>
+	</h:form>
 </ui:composition>
