@@ -98,4 +98,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public Collection<Edificio> findEdificioByLugar(String idLugarCurso) {
 		return edificioFacadeLocal.findEdificioByLugarCurso(idLugarCurso);
 	}
+	@Override
+	public void editEdificio(Edificio edificio) throws Exception {
+		edificioFacadeLocal.edit(edificio);
+	}
 }

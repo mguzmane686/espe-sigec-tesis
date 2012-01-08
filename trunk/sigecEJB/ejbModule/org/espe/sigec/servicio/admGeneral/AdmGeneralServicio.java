@@ -25,4 +25,5 @@ public interface AdmGeneralServicio {
 	void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
 	void createEdificio(Edificio edificio) throws Exception;
 	void createLocalidad(LugarCurso lugarCurso) throws Exception;
+	void editEdificio(Edificio edificio) throws Exception;
 }
