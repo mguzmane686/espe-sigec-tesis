@@ -61,6 +61,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 		cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
 		cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
 		cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
+		cursoEstudiante.setEstadoPago("DEBE");
 		cursoEstudianteFacadeLocal.create(cursoEstudiante);
 	
 	}
