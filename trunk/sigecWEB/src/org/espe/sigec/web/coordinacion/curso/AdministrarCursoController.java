@@ -28,7 +28,7 @@ public class AdministrarCursoController {
 	
 	public AdministrarCursoController() {
 		setCursoPeriodo((CursoPeriodo) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("curso"));
-		if(getCursoPeriodo().getHistoricoCursoEstadoCollection()==null){
+		if(getCursoPeriodo()!=null && getCursoPeriodo().getHistoricoCursoEstadoCollection()==null){
 			getCursoPeriodo().setHistoricoCursoEstadoCollection(new HistoricoCursoEstado());
 		}
 	}
