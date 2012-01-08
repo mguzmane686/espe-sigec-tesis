@@ -26,4 +26,5 @@ public interface AdmGeneralServicio {
 	void createEdificio(Edificio edificio) throws Exception;
 	void createLocalidad(LugarCurso lugarCurso) throws Exception;
 	void editEdificio(Edificio edificio) throws Exception;
+	Collection<Aula> findAula();
 }
