@@ -90,5 +90,10 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	public Collection<Aula> findAulaByEdificio(String idEdificio) {
 		return aulaFacadeLocal.findCursoByEdificio(idEdificio);
 	}
+
+	@Override
+	public void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception {		
+		cursoPeriodoFacadeLocal.edit(cursoPeriodo);
+	}
 	
 }
