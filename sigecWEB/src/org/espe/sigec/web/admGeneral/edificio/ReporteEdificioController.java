@@ -22,14 +22,14 @@ import org.espe.sigec.web.utils.FacesUtils;
 @SuppressWarnings("serial")
 @ManagedBean(name="reporteEdificioController")
 @ViewScoped
-public class ReporteEdificioControlle implements Serializable {
+public class ReporteEdificioController implements Serializable {
 
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
 	private Collection<Edificio> lstEdificios;
 	
-	public ReporteEdificioControlle(){
+	public ReporteEdificioController(){
 		setLstEdificios(new ArrayList<Edificio>());
 	}
 	
