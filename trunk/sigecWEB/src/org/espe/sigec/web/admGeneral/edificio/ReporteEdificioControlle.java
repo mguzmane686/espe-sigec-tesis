@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
