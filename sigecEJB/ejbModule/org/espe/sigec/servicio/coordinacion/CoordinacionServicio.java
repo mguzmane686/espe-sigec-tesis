@@ -23,4 +23,5 @@ public interface CoordinacionServicio {
 	Collection<LugarCurso> findLugarCurso();
 	Collection<Edificio> findEdificioByLugarCurso(String idLugar);
 	Collection<Aula> findAulaByEdificio(String idEdificio);
+	void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception;
 }
