@@ -28,11 +28,12 @@ public class PresupuestoController implements Serializable {
 	
 	private Collection<CatalogoSigec> lstCatalogoSigecs;
 	private Collection<DetallePresupuestoCurso> lstDetallePresupuestoCursos;
-	
+	private boolean updatePresupuesto;
 	
 	public PresupuestoController() {
 		setCursoPeriodo((CursoPeriodo) FacesUtils.getFlashObject("cursoPeriodo"));
 		setLstDetallePresupuestoCursos(new ArrayList<DetallePresupuestoCurso>());
+		
 	}
 	
 	@PostConstruct
