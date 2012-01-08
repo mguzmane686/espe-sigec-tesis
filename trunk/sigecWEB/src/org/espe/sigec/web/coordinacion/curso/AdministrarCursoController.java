@@ -6,8 +6,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.HistoricoCursoEstado;
+import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
 /**
@@ -17,11 +20,17 @@ import org.espe.sigec.web.utils.FacesUtils;
 @ManagedBean(name = "administrarCursoController")
 @ViewScoped
 public class AdministrarCursoController {
+	@Inject
+	private CoordinacionServicio coordinacionServicio;
+	
 	private CursoPeriodo cursoPeriodo;
 	private boolean editMode;
 	
 	public AdministrarCursoController() {
 		setCursoPeriodo((CursoPeriodo) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("curso"));
+		if(getCursoPeriodo().getHistoricoCursoEstadoCollection()==null){
+			getCursoPeriodo().setHistoricoCursoEstadoCollection(new HistoricoCursoEstado());
+		}
 	}
 
 	public void btnEdit(ActionEvent e){
@@ -34,6 +43,13 @@ public class AdministrarCursoController {
 	
 	public void btnSave(ActionEvent e){
 		setEditMode(Boolean.FALSE);
+		try {
+			coordinacionServicio.administrarCurso(getCursoPeriodo());
+			FacesUtils.addInfoMessage("Curso actualizado");
+		} catch (Exception e1) {
+			FacesUtils.addInfoMessage("Ha ocurrido un error al editar el curso");
+			e1.printStackTrace();
+		}
 	}
 	
 	public void btnPresupuestoCurso(ActionEvent e){
