@@ -20,19 +20,19 @@
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
 	        		<h:panelGrid columns="4">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarCursoController.editMode}">
-	        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" actionListener="#{administrarCursoController.btnSave}" 
+	        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso, pnlLanCur" actionListener="#{administrarCursoController.btnSave}" 
 	        					 image="/resources/images/save.png"/>
 	        				<h:outputLabel value="#{msg['guardar']}" />
 	        			</h:panelGrid>
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarCursoController.editMode}">
-	        				<a4j:commandButton value="#{msg['editar']}" render="pnlCurso" actionListener="#{administrarCursoController.btnEdit}" execute="@this" 
+	        				<a4j:commandButton value="#{msg['editar']}" render="pnlCurso, pnlLanCur" actionListener="#{administrarCursoController.btnEdit}" execute="@this" 
 	        					 image="/resources/images/edit.png"/>
 	        				<h:outputLabel value="#{msg['editar']}" />
 	        			</h:panelGrid>
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarCursoController.editMode}">
-	        				<a4j:commandButton value="#{msg['cancelar']}" render="pnlCurso" actionListener="#{administrarCursoController.btnCancelEdit}" execute="@this" 
+	        				<a4j:commandButton value="#{msg['cancelar']}" render="pnlCurso, pnlLanCur" actionListener="#{administrarCursoController.btnCancelEdit}" execute="@this" 
 	        					 image="/resources/images/cancel.png"/>
 	        				<h:outputLabel value="#{msg['cancelar']}" />
 	        			</h:panelGrid>
@@ -86,36 +86,55 @@
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.aula.idAula}" />
         				
         				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar rendered="false" value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" disabled="true"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}">
+        				<rich:calendar rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" disabled="true"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" rendered="#{!administrarCursoController.editMode}">
         					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
         				</h:outputText>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
-        				<rich:inputNumberSpinner rendered="false" value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
+        				<rich:inputNumberSpinner rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
-        				<rich:inputNumberSpinner rendered="false" value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
+        				<rich:inputNumberSpinner rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="Hora inicio" />
-        				<h:inputText rendered="false" value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
+        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaInicioClase}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="Hora fin" />
-        				<h:inputText rendered="false" value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
+        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaFinClase}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
-        				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.tipoCurso}">
+        				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.tipoCurso}" rendered="#{administrarCursoController.editMode}">
         					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
         					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
+        				<h:outputText value="#{(administrarCursoController.cursoPeriodo.tipoCurso =='CORP'?'Empresarial':'Abierto')}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="Lugar" />
-        				<h:inputText rendered="false" value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}"/>
+        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
+        				<h:outputText value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" rendered="#{!administrarCursoController.editMode}"/>
+        				
+        				<h:outputLabel value="Estado del curso" />
+						<h:outputText value="#{administrarCursoController.cursoPeriodo.estadoProceso}" rendered="#{!administrarCursoController.editMode}"/>
+						
+						<h:panelGrid columns="3">
+							<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaLanzado}" rendered="#{administrarCursoController.editMode}">
+	        					<f:selectItem itemLabel="Abierto" itemValue="1"/>
+	        				</h:selectOneRadio>
+	        				
+	        				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado}" rendered="#{administrarCursoController.editMode}">
+	        					<f:selectItem itemLabel="Ejecucion" itemValue="1"/>
+	        				</h:selectOneRadio>
+	        				
+	        				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaFinalizado}" rendered="#{administrarCursoController.editMode}">
+	        					<f:selectItem itemLabel="Finalizado" itemValue="1"/>
+	        				</h:selectOneRadio>
+						</h:panelGrid>
+				
         			</h:panelGrid>
         		</fieldset>	
         	</rich:panel>
