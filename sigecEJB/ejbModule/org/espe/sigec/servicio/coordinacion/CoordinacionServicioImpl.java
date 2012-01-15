@@ -93,6 +93,10 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 
 	@Override
 	public void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception {		
+		if(cursoPeriodo.getHistoricoCursoEstadoCollection().getCursoPeriodo()==null){
+			cursoPeriodo.getHistoricoCursoEstadoCollection().setCursoPeriodo(cursoPeriodo);
+			historicoCursoEstadoFacadeLocal.create(cursoPeriodo.getHistoricoCursoEstadoCollection());
+		}
 		cursoPeriodoFacadeLocal.edit(cursoPeriodo);
 	}
 	
