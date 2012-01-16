@@ -6,7 +6,10 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -37,6 +41,8 @@ public class PresupuestoCurso implements Serializable {
     private BigDecimal idCursoPeriodo;
     @Column(name = "dinero_asignado")
     private Double dineroAsignado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "presupuestoCurso", fetch = FetchType.LAZY)
+    private Collection<DetallePresupuestoCurso> detallePresupuestoCursoCollection;
     @JoinColumn(name = "id_presupuesto", referencedColumnName = "id_presupuesto")
     @ManyToOne(fetch = FetchType.LAZY)
     private Presupuesto presupuesto;
@@ -107,5 +113,14 @@ public class PresupuestoCurso implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.PresupuestoCurso[ idCursoPeriodo=" + idCursoPeriodo + " ]";
     }
+
+	public Collection<DetallePresupuestoCurso> getDetallePresupuestoCursoCollection() {
+		return detallePresupuestoCursoCollection;
+	}
+
+	public void setDetallePresupuestoCursoCollection(
+			Collection<DetallePresupuestoCurso> detallePresupuestoCursoCollection) {
+		this.detallePresupuestoCursoCollection = detallePresupuestoCursoCollection;
+	}
     
 }

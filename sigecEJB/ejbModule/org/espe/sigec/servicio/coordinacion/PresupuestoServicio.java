@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.coordinacion;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.espe.sigec.model.entities.CatalogoSigec;
@@ -12,4 +13,6 @@ public interface PresupuestoServicio {
 								   Collection<DetallePresupuestoCurso> lstDetPreCur) throws Exception;
 
 	public Collection<CatalogoSigec> findCatalogo(String parentId);
+	
+	public PresupuestoCurso findPresupuestoCurso(BigDecimal idCursoPeriodo);
 }

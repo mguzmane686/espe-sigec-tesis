@@ -6,18 +6,16 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -30,12 +28,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "DetallePresupuestoCurso.findAll", query = "SELECT d FROM DetallePresupuestoCurso d")})
 public class DetallePresupuestoCurso implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "cod_elemento")
-    private String codElemento;
+    @EmbeddedId
+    protected DetallePresupuestoCursoPK detallePresupuestoCursoPK;
     @Size(max = 100)
     @Column(name = "detalle")
     private String detalle;
@@ -48,8 +42,8 @@ public class DetallePresupuestoCurso implements Serializable {
     private BigInteger costoUnitario;
     @Column(name = "costo_total")
     private BigInteger costoTotal;
-    @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private PresupuestoCurso presupuestoCurso;
 
     @Transient
@@ -58,16 +52,20 @@ public class DetallePresupuestoCurso implements Serializable {
     public DetallePresupuestoCurso() {
     }
 
-    public DetallePresupuestoCurso(String codElemento) {
-        this.codElemento = codElemento;
+    public DetallePresupuestoCurso(DetallePresupuestoCursoPK detallePresupuestoCursoPK) {
+        this.detallePresupuestoCursoPK = detallePresupuestoCursoPK;
     }
 
-    public String getCodElemento() {
-        return codElemento;
+    public DetallePresupuestoCurso(BigInteger idCursoPeriodo, String codElemento) {
+        this.detallePresupuestoCursoPK = new DetallePresupuestoCursoPK(idCursoPeriodo, codElemento);
     }
 
-    public void setCodElemento(String codElemento) {
-        this.codElemento = codElemento;
+    public DetallePresupuestoCursoPK getDetallePresupuestoCursoPK() {
+        return detallePresupuestoCursoPK;
+    }
+
+    public void setDetallePresupuestoCursoPK(DetallePresupuestoCursoPK detallePresupuestoCursoPK) {
+        this.detallePresupuestoCursoPK = detallePresupuestoCursoPK;
     }
 
     public String getDetalle() {
@@ -121,7 +119,7 @@ public class DetallePresupuestoCurso implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codElemento != null ? codElemento.hashCode() : 0);
+        hash += (detallePresupuestoCursoPK != null ? detallePresupuestoCursoPK.hashCode() : 0);
         return hash;
     }
 
@@ -132,7 +130,7 @@ public class DetallePresupuestoCurso implements Serializable {
             return false;
         }
         DetallePresupuestoCurso other = (DetallePresupuestoCurso) object;
-        if ((this.codElemento == null && other.codElemento != null) || (this.codElemento != null && !this.codElemento.equals(other.codElemento))) {
+        if ((this.detallePresupuestoCursoPK == null && other.detallePresupuestoCursoPK != null) || (this.detallePresupuestoCursoPK != null && !this.detallePresupuestoCursoPK.equals(other.detallePresupuestoCursoPK))) {
             return false;
         }
         return true;
@@ -140,7 +138,7 @@ public class DetallePresupuestoCurso implements Serializable {
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entities.DetallePresupuestoCurso[ codElemento=" + codElemento + " ]";
+        return "org.espe.sigec.model.entities.DetallePresupuestoCurso[ detallePresupuestoCursoPK=" + detallePresupuestoCursoPK + " ]";
     }
 
 	public String getDescripcionCatalogo() {
