@@ -4,6 +4,9 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigDecimal;
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,5 +28,12 @@ public class DetallePresupuestoCursoFacade extends AbstractFacade<DetallePresupu
     public DetallePresupuestoCursoFacade() {
         super(DetallePresupuestoCurso.class);
     }
+
+	@Override
+	public Collection<DetallePresupuestoCurso> findDetallePresupuestoCurso(
+			BigDecimal idCursoPeriodo) {
+		
+		return null;
+	}
     
 }
