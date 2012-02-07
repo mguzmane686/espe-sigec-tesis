@@ -5,11 +5,13 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 	
     	<h:outputStylesheet library="css" name="textos.css"/>    
     	<h:outputStylesheet library="css" name="bordes.css"/>
     	<h:outputStylesheet library="css" name="botones.css"/>
+    	<h:outputStylesheet library="css" name="tables.css"/>
     	
         <h:form id="frmRepCurso">
         	<rich:panel header="#{msg['cursos_disponibles']}">
@@ -21,7 +23,8 @@
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoController.lstCursos}" var="curso" rows="5" rendered="#{!empty reporteCursoController.lstCursos}">
+		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoController.lstCursos}" var="curso" rows="10" 
+		        			rendered="#{!empty reporteCursoController.lstCursos}" rowClasses="even-row, odd-row">
 		        			<f:facet name="header">
 		        				<h:outputLabel value="Cursos" />
 		        			</f:facet>
@@ -36,12 +39,32 @@
 		        				</a4j:commandLink>
 		        			</rich:column>
 		        			
-		        			<rich:column>
+		        			<rich:column filterValue="#{reporteCursoController.nameFilter}"
+                				filterExpression="#{fn:containsIgnoreCase(curso.nombreCurso,reporteCursoController.nameFilter)}"
+                				sortBy="#{curso.nombreCurso}" sortOrder="#{reporteCursoController.namesOrder}">
 			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['nombre']}" />
+			        				<h:panelGrid columns="2">
+					        			
+				        				<h:panelGrid columns="2">
+		        							<h:outputLabel value="#{msg['nombre']}" />
+		        							
+		        							<h:inputText value="#{reporteCursoController.nameFilter}" onkeypress="if (event.keyCode == 13) return false;" styleClass="text-uppercase">
+					                            <a4j:ajax event="keyup" render="tblCursos@body" execute="@this" onbeforesubmit="if (event.keyCode != 13)  return false;"/>
+					                        </h:inputText>
+		        						</h:panelGrid>
+		        						
+		        						<h:panelGroup layout="block" style="float:right">
+		        							 <a4j:commandLink render="table" action="#{reporteCursoController.sortByNames}" >
+		        							 	<h:graphicImage library="images/button" name="sortArrow.png" height="12"/>
+		        							 </a4j:commandLink>
+		        						</h:panelGroup>
+	        						</h:panelGrid>	
 			        			</f:facet>
 			        			<a4j:commandLink value="#{curso.nombreCurso}" action="#{reporteCursoController.btnShowCursoDetail(curso)}"></a4j:commandLink>
 		        			</rich:column>
+		        			
+		        			
+		        			
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
