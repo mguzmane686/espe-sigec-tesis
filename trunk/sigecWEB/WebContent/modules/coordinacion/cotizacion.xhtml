@@ -82,8 +82,18 @@
 				<h:outputText value="#{presupuestoController.cursoPeriodo.estadoProceso}" />
 			</h:panelGrid>
 		</rich:panel>
-
+		
 		<rich:panel header="Datos Presupuesto">
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['presupuesto_asignacion']}" style="font-weight:bold;"/>
+				</legend>
+				<h:outputLabel value="Presupuesto asignado" />
+				<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado}" />
+			</fieldset>
+		</rich:panel>
+		
+		<rich:panel header="Detalle presupuesto">
 			<fieldset>
 				<legend>
 					<h:outputLabel value="Costos y gastos" style="font-weight:bold;"/>
