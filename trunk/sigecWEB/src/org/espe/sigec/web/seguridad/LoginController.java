@@ -10,6 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Usuario;
+import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -30,15 +31,23 @@ public class LoginController implements Serializable{
 	public void btnSignIn(ActionEvent e) {
 		Usuario usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), getUsuario().getClave());
 		if(null != usuario){
+			UsuarioPerfil usuarioPerfil = loginServicio.getUsuarioPerfil(usuario);
 			
-			((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUsuarioPerfil(loginServicio.getUsuarioPerfil(usuario));
-			try {
-//				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setLstModulos(loginServicio.getMenuByProfile(usuario));
-//				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUiPanelMenu(FacesUtils.buildUserMenu(loginServicio.getMenuByProfile(usuario)));
-				FacesContext.getCurrentInstance().getExternalContext().redirect("modules/home.jsf");
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			if(usuarioPerfil !=null){
+			
+				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUsuarioPerfil(usuarioPerfil);
+				try {
+	//				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setLstModulos(loginServicio.getMenuByProfile(usuario));
+	//				((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUiPanelMenu(FacesUtils.buildUserMenu(loginServicio.getMenuByProfile(usuario)));
+					FacesContext.getCurrentInstance().getExternalContext().redirect("modules/home.jsf");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}else{
+				FacesUtils.addErrorMessage("El usuario no tiene un perfil");
 			}
+		}else{
+			FacesUtils.addErrorMessage("Usuario o clave erroneas");
 		}
 		
 	}
