@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
  *
  */
 public class SigecResourceBundle {
-	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("ec.com.smx.corp.web.commons.jsf.resources.ApplicationResources");
+	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("org.espe.sigec.web.utils.sigec_msg");
 	
 	/**
 	 * Permite la obtención del valor de la clave del archivo de propiedades general
