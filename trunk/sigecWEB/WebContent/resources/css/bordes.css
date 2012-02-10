@@ -2,10 +2,10 @@
 .roundCorner{
 	/*roberto*/	
 	width:auto;
-	border.radius: 10px; 
+	border-radius: 10px; 
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
-	
+    
 	height:auto;
 	background:#E1E5DE;
 	
