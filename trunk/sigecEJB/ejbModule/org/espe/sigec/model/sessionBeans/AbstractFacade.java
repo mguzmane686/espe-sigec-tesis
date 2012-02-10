@@ -29,18 +29,14 @@ public abstract class AbstractFacade<T> {
     }
 
     protected abstract EntityManager getEntityManager();
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
+    @TransactionAttribute(TransactionAttributeType.MANDATORY)
     
     public void create(T entity) throws Exception{
         try {
         	getEntityManager().persist(entity);
 		} catch (Exception e) {
-//			getEntityManager().getTransaction().rollback();
-//			context.setRollbackOnly();
 			throw new Exception(e);
 		}
-    	
-//        getEntityManager().flush();
     }
 
     public void edit(T entity) throws Exception{
