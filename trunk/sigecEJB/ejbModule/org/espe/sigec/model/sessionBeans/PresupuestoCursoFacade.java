@@ -39,6 +39,5 @@ public class PresupuestoCursoFacade extends AbstractFacade<PresupuestoCurso> imp
 		criteria.add(Restrictions.eq("idCursoPeriodo", idCursoPeriodo));
 		criteria.setFetchMode("detallePresupuestoCursoCollection", FetchMode.JOIN);
 		return (PresupuestoCurso) criteria.uniqueResult();
-	}
-	
+	}	
 }
