@@ -14,41 +14,45 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.richfaces.component.SortOrder;
 
 /**
  * @author Roberto
- *
+ * 
  */
 @SuppressWarnings("serial")
-@ManagedBean(name="reporteCursoController")
+@ManagedBean(name = "reporteCursoController")
 @ViewScoped
-public class ReporteCursoController implements Serializable{
+public class ReporteCursoController implements Serializable {
 	@Inject
 	private CursoServicio cursoServicio;
-	
+
 	private Collection<Curso> lstCursos;
+
+	private String nameFilter;
+	private SortOrder namesOrder = SortOrder.unsorted;
 
 	public ReporteCursoController() {
 		setLstCursos(new ArrayList<Curso>());
 	}
 
-	
 	@PostConstruct
-	public void loadCursos(){
+	public void loadCursos() {
 		setLstCursos(cursoServicio.findCursos());
-		for(Curso curso: getLstCursos()){
+		for (Curso curso : getLstCursos()) {
 			curso.setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
 		}
 	}
-	
-	public void btnExpandContractCurso(Curso curso, boolean expanded){
+
+	public void btnExpandContractCurso(Curso curso, boolean expanded) {
 		curso.setShowCursoPeriodoCollection(expanded);
-		if(expanded){
-			curso.setPensumAcademicoCollection(cursoServicio.findTemasCurso(curso.getIdCurso()));
+		if (expanded) {
+			curso.setPensumAcademicoCollection(cursoServicio
+					.findTemasCurso(curso.getIdCurso()));
 		}
 	}
-	
-	public void btnShowCursoDetail(Curso curso){
+
+	public void btnShowCursoDetail(Curso curso) {
 		try {
 			FacesUtils.putFlashObject("cursoToEdit", curso);
 			FacesUtils.redirectPage("pla_edicion_curso.jsf");
@@ -56,7 +60,16 @@ public class ReporteCursoController implements Serializable{
 			e1.printStackTrace();
 		}
 	}
-	
+
+	public void sortByNames() {
+		
+		if (namesOrder.equals(SortOrder.ascending)) {
+			setNamesOrder(SortOrder.descending);
+		} else {
+			setNamesOrder(SortOrder.ascending);
+		}
+	}
+
 	public Collection<Curso> getLstCursos() {
 		return lstCursos;
 	}
@@ -64,6 +77,21 @@ public class ReporteCursoController implements Serializable{
 	public void setLstCursos(Collection<Curso> lstCursos) {
 		this.lstCursos = lstCursos;
 	}
-	
-	
+
+	public String getNameFilter() {
+		return nameFilter;
+	}
+
+	public void setNameFilter(String nameFilter) {
+		this.nameFilter = nameFilter;
+	}
+
+	public SortOrder getNamesOrder() {
+		return namesOrder;
+	}
+
+	public void setNamesOrder(SortOrder namesOrder) {
+		this.namesOrder = namesOrder;
+	}
+
 }
