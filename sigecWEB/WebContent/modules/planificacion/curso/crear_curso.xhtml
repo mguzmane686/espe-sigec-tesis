@@ -1,120 +1,128 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:a4j="http://richfaces.org/a4j" 
+	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
-    
-    
-    
-    	<h:outputStylesheet library="css" name="textos.css"/>    
-    	<h:outputStylesheet library="css" name="bordes.css"/>
-    	<h:outputStylesheet library="css" name="botones.css"/>
-    	
-    	
-        <h:form id="frmCurso">
-        	
-        	<rich:panel header="#{msg['creacion_curso']}">
-        		<h:panelGroup layout="block" styleClass="roundCorner">
-        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" 
-        					actionListener="#{cursoController.btnSaveCurso}" image="/resources/images/save.png"/>
-        				<h:outputLabel value="#{msg['guardar']}" />
-        			</h:panelGrid>
-        		</h:panelGroup>
-        	</rich:panel>
-        	
-        	<rich:panel header="#{msg['creacion_curso']}" id="pnlCurso">
-        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo"/>
-	        		</legend>
-	        		<h:panelGrid columns="2">
-	        			<h:outputLabel value="#{msg['etiqueta_especialidad']}:" />
-	        			<rich:select value="#{cursoController.curso.especialidad.idEspecialidad}" enableManualInput="false" defaultLabel="Seleccione una especialidad" 
-	        				required="true" requiredMessage="El campo Especialidad es obligatorio">
-	        				<f:selectItems value="#{cursoController.itemEspecialidades}"/>
-	        			</rich:select>
-	        			
-	        			<h:outputLabel value="#{msg['nombre']}:"/>
-	        			<h:inputText value="#{cursoController.curso.nombreCurso}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
-	        			<h:outputLabel value="#{msg['descripcion']}:" />
-	        			<h:inputTextarea value="#{cursoController.curso.descripcionCurso}" style="width:40em" required="true" requiredMessage="El campo Descripcion es obligatorio"/>
-	        		</h:panelGrid>
-	        	</fieldset>
-	        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['temas_curso']}" styleClass="titulo"/>
-	        		</legend>
-	        		
-	        		<a4j:outputPanel ajaxRendered="true">
-		        		<h:panelGroup layout="block">
-		   					<a4j:commandButton id="btnNuevoTema" value="Nuevo tema" onclick="#{rich:component('popupNuevoTema')}.show()" immediate="true"/>
-		   					<script>
-		   						$("#frmCurso\\:btnNuevoTema").live('click',function(){
-		   							$("#frmNuevoCurso\\:txtNomTem").attr('value','');
-		   							$("#frmNuevoCurso\\:txtDetTem").attr('value','');
-		   							$("#frmNuevoCurso\\:txtNomTem").focus();
-			   					});
-		   					</script>
-		   				</h:panelGroup>
-		        		<rich:panel rendered="#{empty cursoController.lstPensumAcademicos}">
-		        			#{msg.etiqueta_curso_no_tema}
-		        		</rich:panel>
-		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="temario" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Pensum" />
-		        			</f:facet>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Tema" />
-			        			</f:facet>
-			        			<h:inputText value="#{temario.tema}" />
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['descripcion']}" />
-			        			</f:facet>
-			        			<h:inputText value="#{temario.descripcion}" />
-		        			</rich:column>
-		        			
-		        		</rich:dataTable>
-		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
-	        		</a4j:outputPanel>
-	        	</fieldset>	
-        	</rich:panel>
-        	
-        </h:form>
-        
-        <rich:popupPanel id="popupNuevoTema" modal="true" resizeable="false" autosized="true" keepVisualState="true">
-		        <f:facet name="header">
-		            <h:outputText value="Nuevo tema" />
-		        </f:facet>
-		        <f:facet name="controls">
-		            <h:outputLink value="#" onclick="#{rich:component('popupNuevoTema')}.hide(); return false;">
-		                    X
-		                </h:outputLink>
-		        </f:facet>
-		        <h:form id="frmNuevoCurso">
-			        <h:panelGrid columns="2" id="pgDatosTema">
-			        	<h:outputLabel value="Tema" />
-			        	<h:inputText id="txtNomTem" value="#{cursoController.pensumAcademicoNuevo.tema}" tabindex="1"/>
-			        	
-			        	<h:outputLabel value="#{msg['descripcion']}" />
-			        	<h:inputText id="txtDetTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" tabindex="2"/>
-			        </h:panelGrid>
-			        
-			        <h:panelGroup layout="block" style="text-align:right; width:100%">
-			        	<a4j:commandButton value="#{msg['etiqueta_aniadir_Tema']}" actionListener="#{cursoController.btnAddTemaPensum}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoTema')}.hide()"/>
-			        </h:panelGroup>
-		        </h:form>
-		    </rich:popupPanel>
 
 
+
+	<h:outputStylesheet library="css" name="textos.css" />
+	<h:outputStylesheet library="css" name="bordes.css" />
+	<h:outputStylesheet library="css" name="botones.css" />
+
+	<h:form id="frmCurso">
+
+		<rich:panel header="#{msg['creacion_curso']}">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+					<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" actionListener="#{cursoController.btnSaveCurso}" 
+						image="/resources/images/save.png" />
+					<h:outputLabel value="#{msg['guardar']}" />
+				</h:panelGrid>
+			</h:panelGroup>
+		</rich:panel>
+
+		<rich:panel header="#{msg['creacion_curso']}" id="pnlCurso">
+
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg['etiqueta_especialidad']}:" />
+					<rich:select value="#{cursoController.curso.especialidad.idEspecialidad}" enableManualInput="false" 
+						defaultLabel="Seleccione una especialidad" required="true" requiredMessage="El campo Especialidad es obligatorio">
+						<f:selectItems value="#{cursoController.itemEspecialidades}" />
+					</rich:select>
+
+					<h:outputLabel value="#{msg['nombre']}:" />
+					<h:inputText value="#{cursoController.curso.nombreCurso}" size="72" required="true" 
+						requiredMessage="El campo Nombre es obligatorio" />
+					<h:outputLabel value="#{msg['descripcion']}:" />
+					<h:inputTextarea value="#{cursoController.curso.descripcionCurso}" style="width:40em" 
+						required="true" requiredMessage="El campo Descripcion es obligatorio" />
+				</h:panelGrid>
+			</fieldset>
+
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['temas_curso']}" styleClass="titulo" />
+				</legend>
+
+				<a4j:outputPanel ajaxRendered="true">
+					<h:panelGroup layout="block">
+						<a4j:commandButton id="btnNuevoTema" value="Nuevo tema" onclick="#{rich:component('popupNuevoTema')}.show()" immediate="true" />
+						<script>
+					$("#frmCurso\\:btnNuevoTema").live('click',function(){
+						$("#frmNuevoCurso\\:txtNomTem").attr('value','');
+						$("#frmNuevoCurso\\:txtDetTem").attr('value','');
+						$("#frmNuevoCurso\\:txtNomTem").focus();
+					});
+				</script>
+					</h:panelGroup>
+					<rich:panel rendered="#{empty cursoController.lstPensumAcademicos}">
+	   			#{msg.etiqueta_curso_no_tema}
+	   		</rich:panel>
+					<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="temario" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
+						<f:facet name="header">
+							<h:outputLabel value="Pensum" />
+						</f:facet>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="Tema" />
+							</f:facet>
+							<h:inputText value="#{temario.tema}" />
+						</rich:column>
+
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg['descripcion']}" />
+							</f:facet>
+							<h:inputText value="#{temario.descripcion}" />
+						</rich:column>
+
+					</rich:dataTable>
+					<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
+				</a4j:outputPanel>
+			</fieldset>
+		</rich:panel>
+
+	</h:form>
+
+	<rich:popupPanel id="popupNuevoTema" header="Nuevo tema" modal="true" resizeable="false" autosized="true" keepVisualState="true">
+
+		<f:facet name="controls">
+			<h:outputLink value="#" onclick="#{rich:component('popupNuevoTema')}.hide(); return false;">
+	                X
+	            </h:outputLink>
+		</f:facet>
+
+		<h:form id="frmNuevoCurso">
+			<h:panelGrid columns="2" id="pgDatosTema">
+				<h:outputLabel value="Tema :" />
+				<h:inputText id="txtNomTem" value="#{cursoController.pensumAcademicoNuevo.tema}" tabindex="1" 
+					required="true" requiredMessage="El campo Tema es obligatorio" />
+
+				<h:outputLabel value="#{msg['descripcion']} :" />
+				<h:inputText id="txtDetTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" tabindex="2" 
+					required="true" requiredMessage="El campo #{msg['descripcion']} es obligatorio" />
+			</h:panelGrid>
+
+			
+
+			<h:panelGrid columns="2" style="text-align:center; width:100%">
+				<a4j:commandButton value="#{msg['agregar']}" styleClass="btnAux addBtn" style="width:70px" 
+					actionListener="#{cursoController.btnAddTemaPensum}" render="pgDatosTema" 
+						execute="pgDatosTema" oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('popupNuevoTema')}.hide()" />
+
+				<a4j:commandButton value="#{msg['cancelar']}" styleClass="btnAux removeBtn" style="width:70px" immediate="true"
+					oncomplete="#{rich:component('popupNuevoTema')}.hide()" />
+			</h:panelGrid>
+
+		</h:form>
+	</rich:popupPanel>
 </ui:composition>

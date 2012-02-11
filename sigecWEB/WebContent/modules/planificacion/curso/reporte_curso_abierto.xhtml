@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 	
     	<h:outputStylesheet library="css" name="textos.css"/>    
@@ -20,85 +21,102 @@
 	        		</legend>
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
-	        		
-		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="5" rendered="#{!empty reporteCursoController.lstCursos}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Cursos" />
-		        			</f:facet>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['nombre']}" />
-			        			</f:facet>
-			        			<a4j:commandLink value="#{curso.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(curso)}">
-			        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{curso}"/>
-			        			</a4j:commandLink>
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['descripcion']}" />
-			        			</f:facet>
-			        			<h:outputText value="#{curso.curso.descripcionCurso}" />
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Inicio del curso" />
-			        			</f:facet>
-			        			
-		        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
-		        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-		        				</h:outputText>
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Fin del curso" />
-			        			</f:facet>
-			        			
-		        				<h:outputText value="#{curso.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
-		        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-		        				</h:outputText>
-			        			
-		        			</rich:column>
-		        			
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Inicio Inscripciones" />
-			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.fechaInicioInscripcion}">
-			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-			        				</h:outputText>
-			        			</center>
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Lugar" />
-			        			</f:facet>
-			        			<h:outputText value="#{curso.lugarCapacitacion}" />
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Horario" />
-			        			</f:facet>
-			        			<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" style="white-space:nowrap; text-align:center;"/>
-		        			</rich:column>
-		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="Estado" />
-			        			</f:facet>
-			        			<center>
-			        				<h:outputText value="#{curso.estadoProceso}" />
-			        			</center>
-		        			</rich:column>
-		        			
-		        		</rich:dataTable>
+	        			
+	        					<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="10" rendered="#{!empty reporteCursoController.lstCursos}">
+				        			<f:facet name="header">
+				        				<h:outputLabel value="Cursos" />
+				        			</f:facet>
+				        			
+				        			<rich:column sortBy="#{curso.curso.nombreCurso}" sortOrder="#{reporteCursoAbiertoController.namesOrder}" styleClass="colNombreDet">
+					        			<f:facet name="header">
+					        				<h:panelGrid columns="2">
+					        					<h:outputLabel value="#{msg['nombre']}" />
+					        					
+					        					<h:panelGroup layout="block" style="float:right">
+				        							 <a4j:commandLink render="tblCursos" action="#{reporteCursoAbiertoController.sortByNames}" >
+				        							 	<h:graphicImage library="images/button" name="sortArrow.png" height="12"/>
+				        							 </a4j:commandLink>
+				        						</h:panelGroup>
+					        				</h:panelGrid>
+					        			</f:facet>
+					        			<a4j:commandLink value="#{curso.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(curso)}">
+					        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{curso}"/>
+					        			</a4j:commandLink>
+				        			</rich:column>
+				        			
+				        			<rich:column>
+					        			<f:facet name="header">
+					        				<h:outputLabel value="#{msg['descripcion']}" />
+					        			</f:facet>
+					        			<h:outputText value="#{curso.curso.descripcionCurso}" />
+				        			</rich:column>
+				        			
+				        			<rich:column>
+					        			<f:facet name="header">
+					        				<h:outputLabel value="Inicio del curso" />
+					        			</f:facet>
+					        			
+				        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
+				        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+				        				</h:outputText>
+				        			</rich:column>
+				        			
+				        			<rich:column>
+					        			<f:facet name="header">
+					        				<h:outputLabel value="Fin del curso" />
+					        			</f:facet>
+					        			
+				        				<h:outputText value="#{curso.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
+				        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+				        				</h:outputText>
+					        			
+				        			</rich:column>
+				        			
+				        			
+				        			<rich:column>
+					        			<f:facet name="header">
+					        				<h:outputLabel value="Inicio Inscripciones" />
+					        			</f:facet>
+					        			<center>
+					        				<h:outputText value="#{curso.fechaInicioInscripcion}">
+					        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+					        				</h:outputText>
+					        			</center>
+				        			</rich:column>
+				        			
+				        			<rich:column>
+					        			<f:facet name="header">
+					        				<h:outputLabel value="Lugar" />
+					        			</f:facet>
+					        			<h:outputText value="#{curso.lugarCapacitacion}" />
+				        			</rich:column>
+				        			
+				        			<rich:column>
+					        			<f:facet name="header">
+					        				<h:outputLabel value="Horario" />
+					        			</f:facet>
+					        			<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" style="white-space:nowrap; text-align:center;"/>
+				        			</rich:column>
+				        			
+				        			<rich:column filterValue="#{reporteCursoAbiertoController.nameFilter}"
+		                				filterExpression="#{fn:containsIgnoreCase(curso.estadoProceso, reporteCursoAbiertoController.nameFilter)}">
+					        			<f:facet name="header">
+					        				<h:panelGrid columns="2">
+					        					<h:outputLabel value="Estado" />
+					        					
+					        					<h:selectOneMenu value="#{reporteCursoAbiertoController.nameFilter}">
+						                           <f:selectItems value="#{reporteCursoAbiertoController.itemsEstado}" />
+						                           <a4j:ajax render="tblCursos" execute="@this" event="change" />
+						                       </h:selectOneMenu>
+					        				</h:panelGrid>
+					        			</f:facet>
+					        			<center>
+					        				<h:outputText value="#{curso.estadoProceso}" />
+					        			</center>
+				        			</rich:column>
+				        			
+				        		</rich:dataTable>
+	        				
 		        		<center>
 		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
