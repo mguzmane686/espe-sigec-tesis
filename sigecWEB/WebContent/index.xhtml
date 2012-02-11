@@ -12,63 +12,65 @@
 		<ui:define name="title">Login</ui:define>
 
 		<ui:define name="body">
-
-			<h:outputStylesheet library="css" name="stylelog.css"></h:outputStylesheet>
-			<h:form prependId="false">
-				<h:inputHidden value="#{homeSessionController.allowNavigate}" />
-				<h:panelGroup layout="block" id="layer01_holder">
-					<div id="left"></div>
-					<div id="center"></div>
-					<div id="right"></div>
-				</h:panelGroup>
-
-				<h:panelGroup layout="block" id="layer02_holder">
-					<div id="left"></div>
-					<div id="center"></div>
-					<div id="right"></div>
-				</h:panelGroup>
-
-				<h:panelGroup layout="block" id="layer03_holder">
-					<div id="left"></div>
-					<div id="center">
-						
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td height="40">LOGIN</td>
-							</tr>
-							<tr>
-								<td><h:panelGrid columns="2">
-										<h:outputLabel value="Usuario" />
-										<h:inputText value="#{loginController.usuario.identificador}" required="true" id="textfield" size="30"/>
-
-										<h:outputLabel value="Clave" />
-										<h:inputSecret value="#{loginController.usuario.clave}" required="true" id="textfield2" style="margin-top:5px;" size="30"/>
-									</h:panelGrid> 
-									<a4j:commandButton actionListener="#{loginController.btnSignIn}" value="Sign In" id="button"/>
-								</td>
-							</tr>
-						</table>
-					</div>
-					<div id="right"></div>
-				</h:panelGroup>
-
-				<h:panelGroup layout="block" id="layer04_holder">
-					<h:panelGroup layout="block" id="left"/>
-					<h:panelGroup layout="block" id="center" rendered="true">
-						<h:outputLabel value="Si no tiene una cuenta creela" rendered="false"/>
-						<a4j:commandLink value="&nbsp; aqui" actionListener="#{loginController.btnCreateAccount}" immediate="true" rendered="false"></a4j:commandLink> 
-					</h:panelGroup>
-					<h:panelGroup layout="block" id="right"/>
-				</h:panelGroup>
-
-				<a4j:outputPanel ajaxRendered="true">
-					<rich:notify sticky="false" stayTime="1000" rendered="false"
-						detail="El usuario o clave no existen" showShadow="true">
-					</rich:notify>
-				</a4j:outputPanel>
-
-			</h:form>
+			<h:outputStylesheet library="css" name="stylelog.css"/>
 			
+			<rich:panel header="Ingresar al sistema" style="background-image:url('#{resource['images:loginpage_02.jpg']}'); background-color: #E5E5E5;">
+			
+				<h:form prependId="false">
+					<h:inputHidden value="#{homeSessionController.allowNavigate}" />
+					<h:panelGroup layout="block" id="layer01_holder">
+						<div id="left"></div>
+						<div id="center"></div>
+						<div id="right"></div>
+					</h:panelGroup>
+	
+					<h:panelGroup layout="block" id="layer02_holder">
+						<div id="left"></div>
+						<div id="center"></div>
+						<div id="right"></div>
+					</h:panelGroup>
+	
+					<h:panelGroup layout="block" id="layer03_holder">
+						<div id="left"></div>
+						<div id="center">
+							
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="20">LOGIN</td>
+								</tr>
+								<tr>
+									<td><h:panelGrid columns="2">
+											<h:outputLabel value="Usuario" />
+											<h:inputText value="#{loginController.usuario.identificador}" required="true" id="textfield" size="30" requiredMessage="Campo usuario requerido"/>
+	
+											<h:outputLabel value="Clave" />
+											<h:inputSecret value="#{loginController.usuario.clave}" required="true" id="textfield2" style="margin-top:5px;" size="30" requiredMessage="Campo clave requerido"/>
+										</h:panelGrid> 
+										
+										<h:panelGroup layout="block" style="background-image:url('#{resource['images:loginpage_02.jpg']}'); background-color: #E5E5E5;" >
+											<rich:messages ajaxRendered="true" title="No se pudo iniciar una sesion" style="font-weight:900;" />
+										</h:panelGroup>
+										
+										<a4j:commandButton actionListener="#{loginController.btnSignIn}" value="Sign In" id="button"/>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div id="right"></div>
+					</h:panelGroup>
+	
+					<h:panelGroup layout="block" id="layer04_holder">
+						<h:panelGroup layout="block" id="left"/>
+							<h:panelGroup layout="block" id="center" rendered="true">
+								<h:outputLabel value="Si no tiene una cuenta creela" rendered="false"/>
+								<a4j:commandLink value="&nbsp; aqui" actionListener="#{loginController.btnCreateAccount}" immediate="true" rendered="false"></a4j:commandLink> 
+							</h:panelGroup>
+							
+							
+						<h:panelGroup layout="block" id="right"/>
+					</h:panelGroup>
+				</h:form>	
+			</rich:panel>	
 		</ui:define>
 	</ui:composition>
 </body>
