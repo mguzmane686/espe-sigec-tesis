@@ -2,7 +2,9 @@ package org.espe.sigec.servicio.coordinacion;
 
 import java.util.Collection;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.transaction.UserTransaction;
 
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
@@ -43,7 +45,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
 	@EJB
 	private EdificioFacadeLocal edificioFacadeLocal;
-	
+	@Resource
+	private UserTransaction userTransaction;
 	@Override
 	public Collection<Especialidad> findEspecialidades() {
 		
@@ -58,17 +61,26 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	@Override
 	public void abrirCurso(PeriodoAcademico periodoAcademico,
 			CursoPeriodo cursoPeriodo) throws Exception {
-		academicoFacadeLocal.create(periodoAcademico);
-		cursoPeriodo.setPeriodoAcademico(periodoAcademico);
-		cursoPeriodoFacadeLocal.create(cursoPeriodo);
 		
-		HistoricoCursoEstado historicoCursoEstado = new HistoricoCursoEstado();
-		historicoCursoEstado.setCursoPeriodo(cursoPeriodo);
-		historicoCursoEstado.setEstado("1");
-		historicoCursoEstado.setEtapaLanzado("1");
-		historicoCursoEstado.setEtapaEjecutado("0");
-		historicoCursoEstado.setEtapaFinalizado("0");
-		historicoCursoEstadoFacadeLocal.create(historicoCursoEstado);
+		userTransaction.begin();
+		try {
+			academicoFacadeLocal.create(periodoAcademico);
+			cursoPeriodo.setPeriodoAcademico(periodoAcademico);
+			cursoPeriodoFacadeLocal.create(cursoPeriodo);
+			
+			HistoricoCursoEstado historicoCursoEstado = new HistoricoCursoEstado();
+			historicoCursoEstado.setCursoPeriodo(cursoPeriodo);
+			historicoCursoEstado.setEstado("1");
+			historicoCursoEstado.setEtapaLanzado("1");
+			historicoCursoEstado.setEtapaEjecutado("0");
+			historicoCursoEstado.setEtapaFinalizado("0");
+			historicoCursoEstadoFacadeLocal.create(historicoCursoEstado);
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+			throw new Exception(e.getCause());
+		}
+		
 	}
 
 	@Override
