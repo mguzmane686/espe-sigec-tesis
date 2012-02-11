@@ -10,6 +10,8 @@
 	<h:outputStylesheet library="css" name="textos.css" />    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
+   	
    	<h:outputStylesheet>
    		.alinearLeft{
    			text-align:left;
@@ -51,7 +53,8 @@
 				</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
-					<h:inputText value="#{administrativoController.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+					<h:inputText value="#{administrativoController.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
+						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 
 					<h:outputLabel value="#{msg['nombres']}"  />
 					<h:panelGrid columns="2">
@@ -80,7 +83,7 @@
 					<h:inputText value="#{administrativoController.persona.mail}" />
 
 					<h:outputLabel value="#{msg['celular']}"  />
-					<h:inputText value="#{administrativoController.persona.telefonoCelular}" />
+					<h:inputText value="#{administrativoController.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
 					
 				</h:panelGrid>
 				
