@@ -6,9 +6,12 @@ package org.espe.sigec.model.sessionBeans;
 
 import java.util.Collection;
 
+import javax.annotation.Resource;
+import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Modulo;
@@ -24,9 +27,13 @@ import org.hibernate.criterion.Restrictions;
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFacadeLocal {
-    @PersistenceContext(unitName = "prjSigecEJBTestPU")
+    @PersistenceContext(unitName = "prjSigecEJBTestPU", type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
+    
+    @Resource
+    private SessionContext sessionContext;
+    
     protected EntityManager getEntityManager() {
         return em;
     }
