@@ -11,6 +11,7 @@ import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SigecResourceBundle;
 @SuppressWarnings("serial")
 @ManagedBean(name="administrativoController")
 @ViewScoped
@@ -31,7 +32,7 @@ public class AdministrativoController implements Serializable{
 	public void btnSaveAdministrativo(){
 		try {
 			admGeneralServicio.createAdministrativo(getPersona().getUsuario(), getPersona());
-			FacesUtils.addInfoMessage("Administrativo creado");
+			FacesUtils.addInfoMessage(SigecResourceBundle.getString("funcionario_creacion_exito", new String[]{getPersona().getPrimerNombre()+" "+getPersona().getPrimerApellido()}));
 			initEntities();
 		} catch (UserValidateException e2){
 			FacesUtils.addInfoMessage(e2.getMessage());
@@ -47,6 +48,4 @@ public class AdministrativoController implements Serializable{
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	
-	
 }
