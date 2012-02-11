@@ -9,10 +9,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.servicio.curso.CursoServicio;
+import org.richfaces.component.SortOrder;
+import org.richfaces.model.Filter;
 @SuppressWarnings("serial")
 @ManagedBean(name="reporteCursoAbiertoController")
 @ViewScoped
@@ -23,6 +26,10 @@ public class ReporteCursoAbiertoController implements Serializable{
 	
 	private Collection<CursoPeriodo> lstCursoPeriodos;
 	
+	private SortOrder namesOrder = SortOrder.unsorted;
+	private String nameFilter;
+	
+	private Collection<SelectItem> itemsEstado;
 	public ReporteCursoAbiertoController() {
 		setLstCursoPeriodos(new ArrayList<CursoPeriodo>());
 	}
@@ -30,6 +37,11 @@ public class ReporteCursoAbiertoController implements Serializable{
 	@PostConstruct
 	public void loadCursoAbierto(){
 		setLstCursoPeriodos(cursoServicio.findCursoAbierto());
+		setItemsEstado(new ArrayList<SelectItem>());
+		getItemsEstado().add(new SelectItem(null, "TODOS"));
+		getItemsEstado().add(new SelectItem("ABIERTO", "ABIERTO"));
+		getItemsEstado().add(new SelectItem("EJECUCION", "EJECUCION"));
+		
 	}
 	
 	public void btnAdministrarCursoAbierto(CursoPeriodo cursoPeriodo){
@@ -41,11 +53,56 @@ public class ReporteCursoAbiertoController implements Serializable{
 		}
 	}
 	
+	
+	public void sortByNames() {	
+		if (namesOrder.equals(SortOrder.ascending)) {
+			setNamesOrder(SortOrder.descending);
+		} else {
+			setNamesOrder(SortOrder.ascending);
+		}
+	}
+
+	public Filter<?> getFilterVendor() {
+        return new Filter<String>() {
+            public boolean accept(String t) {
+                String vendor = getNameFilter();
+                if (vendor == null || vendor.length() == 0 || vendor.equals(t)) {
+                    return true;
+                }
+                return false;
+            }
+        };
+    }
+	
 	public Collection<CursoPeriodo> getLstCursoPeriodos() {
 		return lstCursoPeriodos;
 	}
 	public void setLstCursoPeriodos(Collection<CursoPeriodo> lstCursoPeriodos) {
 		this.lstCursoPeriodos = lstCursoPeriodos;
+	}
+
+	public SortOrder getNamesOrder() {
+		return namesOrder;
+	}
+
+	public void setNamesOrder(SortOrder namesOrder) {
+		this.namesOrder = namesOrder;
+	}
+
+	public String getNameFilter() {
+		return nameFilter;
+	}
+
+	public void setNameFilter(String nameFilter) {
+		this.nameFilter = nameFilter;
+	}
+
+	public Collection<SelectItem> getItemsEstado() {
+		return itemsEstado;
+	}
+
+	public void setItemsEstado(Collection<SelectItem> itemsEstado) {
+		this.itemsEstado = itemsEstado;
 	}
 	
 }
