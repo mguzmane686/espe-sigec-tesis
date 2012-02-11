@@ -4,12 +4,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich">
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
     
     	<h:outputStylesheet library="css" name="textos.css"/>    
     	<h:outputStylesheet library="css" name="bordes.css"/>
     	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+    	<h:outputStylesheet>
+    		.customSelect{
+				width: 200px;
+			}
+    	</h:outputStylesheet>
+    	
     	
         <h:form id="frmPlanearCurso">
         	<rich:panel header="Abrir curso">
@@ -46,15 +54,17 @@
         		
         			<h:panelGrid columns="2">
         				<h:outputLabel value="Lugar" />
-        				<h:selectOneMenu required="true" requiredMessage="El campo Lugar es obligatorio" valueChangeListener="#{planearCursoController.somChangeLugarCurso}">
+        				<h:selectOneMenu required="true" requiredMessage="El campo Lugar es obligatorio" styleClass="customSelect"
+        					valueChangeListener="#{planearCursoController.somChangeLugarCurso}">
         					<f:selectItems value="#{planearCursoController.itemLugarCurso}"/>
-        					<a4j:ajax execute="@this" event="click" render="itemEdificio, itemAula"/>
+        					<a4j:ajax execute="@this" event="valueChange" render="itemEdificio, itemAula"/>
         				</h:selectOneMenu>
         				
         				<h:outputLabel value="Edificio" />
-        				<h:selectOneMenu id="itemEdificio" required="true" requiredMessage="El campo Edificio es obligatorio" valueChangeListener="#{planearCursoController.somChangeEdificio}">
+        				<h:selectOneMenu id="itemEdificio" required="true" requiredMessage="El campo Edificio es obligatorio" styleClass="customSelect"
+        					valueChangeListener="#{planearCursoController.somChangeEdificio}">
         					<f:selectItems value="#{planearCursoController.itemEdificio}"/>
-        					<a4j:ajax execute="@this" event="click" render="itemAula"/>
+        					<a4j:ajax execute="@this" event="valueChange" render="itemAula"/>
         				</h:selectOneMenu>
         				
         				<h:outputLabel value="Aula"/>
@@ -64,9 +74,10 @@
         				
         				
         				<h:outputLabel value="#{msg['etiqueta_especialidad']}"/>
-        				<h:selectOneMenu required="true" requiredMessage="El campo Especialidad es obligatorio" valueChangeListener="#{planearCursoController.somChangeEspecialidad}">
+        				<h:selectOneMenu required="true" requiredMessage="El campo Especialidad es obligatorio" styleClass="customSelect" 
+        					valueChangeListener="#{planearCursoController.somChangeEspecialidad}">
         					<f:selectItems value="#{planearCursoController.itemEspecialidades}"/>
-        					<a4j:ajax execute="@this" event="click" render="somCurso"/>
+        					<a4j:ajax execute="@this" event="valueChange" render="somCurso"/>
         				</h:selectOneMenu>
         				
         				<h:outputLabel value="Curso"/>
@@ -75,7 +86,8 @@
         				</rich:select>
         				
         				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
+        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" inputSize="28" 
+        					datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
@@ -84,10 +96,11 @@
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				
         				<h:outputLabel value="Hora inicio" />
-        				<h:inputText value="#{planearCursoController.cursoPeriodo.horaInicioClase}"/>
+        				<sigecComp:timePicker id="tpHoraIni" value="#{planearCursoController.cursoPeriodo.horaInicioClase}"/>
         				
         				<h:outputLabel value="Hora fin" />
-        				<h:inputText value="#{planearCursoController.cursoPeriodo.horaFinClase}"/>
+        				<sigecComp:timePicker id="tpHoraFin" value="#{planearCursoController.cursoPeriodo.horaFinClase}"/>
+        				
         				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
         				<h:selectOneRadio value="#{planearCursoController.cursoPeriodo.tipoCurso}">
