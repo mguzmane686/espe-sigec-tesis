@@ -20,3 +20,36 @@ input[type='submit'].saveAjax {
 	
 	border-radius: 34px 14px 34px 14px;
 }
+
+.btnAux{
+	border-radius: 5px; 
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	
+	height:20px;
+	
+	background-color: SkyBlue;
+	background-color: none repeat scroll 0 0 #FFFFFF;
+	background-position:left;
+	
+	padding-left: 4px;
+	padding-right: 4px;
+	
+	text-indent: 20px;
+	text-align: right;
+	cursor:pointer;
+}
+
+
+input[type='submit'].removeBtn {
+	background-image: url('#{resource['images/icons:delete.gif']}');
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+input[type='submit'].addBtn {
+	background-image: url('#{resource['images/icons:add.gif']}');
+	background-repeat: no-repeat;
+	
+	background-position: left;
+}
