@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- Roberto Chasipanta.
+	Componente para la seleccion de horas y minutos
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<head>
+		<title>Not present in rendered output</title>
+	</head>
+	
+	<body>
+		<composite:interface>
+			<composite:attribute name="id" required="true"/>
+			<composite:attribute name="value" required="true"/>
+			<composite:attribute name="renderTimePick" default="true"/>
+			
+		</composite:interface>
+	
+		<composite:implementation>
+			<h:outputStylesheet library="css" name="ui.theme.css"/>
+			<h:outputStylesheet library="css" name="jquery.ptTimeSelect.css"/>
+			<h:inputText id="timePick" value="#{cc.attrs.value}" rendered="#{cc.attrs.renderTimePick}" styleClass="timePickerK"/>
+			<h:outputScript library="js" name="jquery.ptTimeSelect.js" target="head"/>
+			
+			<h:outputScript target="head">
+	         	jQuery(document).ready(function (){
+	                 $('.timePickerK').ptTimeSelect();
+	             });
+	         </h:outputScript>
+		</composite:implementation>
+	</body>
+</html>
