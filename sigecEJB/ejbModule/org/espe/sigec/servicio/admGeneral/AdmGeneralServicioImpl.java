@@ -2,8 +2,11 @@ package org.espe.sigec.servicio.admGeneral;
 
 import java.util.Collection;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.transaction.UserTransaction;
 
+import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.LugarCurso;
@@ -38,7 +41,9 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private ProfesorFacadeLocal profesorFacadeLocal;
 	@EJB
 	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
-	
+	@Resource
+    private UserTransaction userTransaction;
+		
 	@Override
 	public void createAula(Aula aula) throws Exception {
 		aulaFacadeLocal.create(aula);
@@ -52,7 +57,11 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		return aulaFacadeLocal.findCursoByEdificio(idEdificio);
 	}
 	@Override
-	public void createAdministrativo(Usuario usuario, Persona persona) throws Exception {
+	public void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException {
+		userTransaction.begin();
+		try {
+			
+		
 		usuarioFacadeLocal.isIdentificadorvalida(usuario.getIdentificador());
 		usuarioFacadeLocal.create(usuario);
 		personaFacadeLocal.create(persona);
@@ -63,6 +72,16 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
 		
 		usuarioPerfilFacadeLocal.create(usuarioPerfil);
+		userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+			if(e.getMessage().contains("El identificador ya existe")){
+				throw new UserValidateException(e.getMessage());
+			}else{
+				throw new Exception(e.getMessage());
+			}
+			
+		}
 	}
 	
 	public void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception{

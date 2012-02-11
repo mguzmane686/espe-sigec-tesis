@@ -2,6 +2,7 @@ package org.espe.sigec.servicio.admGeneral;
 
 import java.util.Collection;
 
+import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.LugarCurso;
@@ -16,7 +17,7 @@ import org.espe.sigec.model.entities.Usuario;
 @QAdmGeneral
 public interface AdmGeneralServicio {
 	void createAula(Aula aula) throws Exception;
-	void createAdministrativo(Usuario usuario, Persona persona) throws Exception;
+	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
 	Collection<LugarCurso> findLugar();
 	Collection<Edificio> findEdificioByLugar(String idLugarCurso);
 	
