@@ -9,6 +9,9 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,6 +22,12 @@ import javax.validation.constraints.Size;
 @SuppressWarnings("serial")
 @Embeddable
 public class DetallePresupuestoCursoPK implements Serializable {
+	@Basic(optional = false)
+    @NotNull
+    @Column(name = "id_detalle")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="det_pre_cur")
+    @SequenceGenerator(name="det_pre_cur", sequenceName="det_pre_cur")
+    private BigInteger idDetalle;
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_curso_periodo")
@@ -28,11 +37,12 @@ public class DetallePresupuestoCursoPK implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "cod_elemento")
     private String codElemento;
-
+    
     public DetallePresupuestoCursoPK() {
     }
 
-    public DetallePresupuestoCursoPK(BigInteger idCursoPeriodo, String codElemento) {
+    public DetallePresupuestoCursoPK(BigInteger idDetalle, BigInteger idCursoPeriodo, String codElemento) {
+        this.idDetalle = idDetalle;
         this.idCursoPeriodo = idCursoPeriodo;
         this.codElemento = codElemento;
     }
@@ -56,6 +66,7 @@ public class DetallePresupuestoCursoPK implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
+        hash += (idDetalle != null ? idDetalle.hashCode() : 0);
         hash += (idCursoPeriodo != null ? idCursoPeriodo.hashCode() : 0);
         hash += (codElemento != null ? codElemento.hashCode() : 0);
         return hash;
@@ -68,6 +79,9 @@ public class DetallePresupuestoCursoPK implements Serializable {
             return false;
         }
         DetallePresupuestoCursoPK other = (DetallePresupuestoCursoPK) object;
+        if ((this.idDetalle == null && other.idDetalle != null) || (this.idDetalle != null && !this.idDetalle.equals(other.idDetalle))) {
+            return false;
+        }
         if ((this.idCursoPeriodo == null && other.idCursoPeriodo != null) || (this.idCursoPeriodo != null && !this.idCursoPeriodo.equals(other.idCursoPeriodo))) {
             return false;
         }
@@ -79,7 +93,15 @@ public class DetallePresupuestoCursoPK implements Serializable {
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entities.DetallePresupuestoCursoPK[ idCursoPeriodo=" + idCursoPeriodo + ", codElemento=" + codElemento + " ]";
+        return "org.espe.sigec.model.entities.DetallePresupuestoCursoPK[ idDetalle=" + idDetalle + ", idCursoPeriodo=" + idCursoPeriodo + ", codElemento=" + codElemento + " ]";
     }
+
+	public BigInteger getIdDetalle() {
+		return idDetalle;
+	}
+
+	public void setIdDetalle(BigInteger idDetalle) {
+		this.idDetalle = idDetalle;
+	}
     
 }

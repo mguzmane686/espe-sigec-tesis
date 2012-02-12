@@ -2,7 +2,9 @@ package org.espe.sigec.servicio.planificacion;
 
 import java.util.Collection;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.transaction.UserTransaction;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
@@ -22,6 +24,8 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	private CursoFacadeLocal cursoFacadeLocal;
 	@EJB
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
+	@Resource
+	private UserTransaction userTransaction;
 	@Override
 	public void crearNuevoCurso(Curso curso, Collection<PensumAcademico> lstPensumAcademicos) throws Exception{
 		cursoFacadeLocal.create(curso);
@@ -37,16 +41,22 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	@Override
 	public void editarCurso(Curso curso,
 			Collection<PensumAcademico> lstPensumAcademicos) throws Exception {
-		cursoFacadeLocal.edit(curso);
-		
-		for(PensumAcademico pensumAcademicoTMP: lstPensumAcademicos){
-			if (pensumAcademicoTMP.isExistInBase()) {
-				pensumAcademicoFacadeLocal.edit(pensumAcademicoTMP);
-			}else{
-				pensumAcademicoTMP.setCurso(curso);
-				pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
+		userTransaction.begin();
+		try {
+			cursoFacadeLocal.edit(curso);
+			
+			for(PensumAcademico pensumAcademicoTMP: lstPensumAcademicos){
+				if (pensumAcademicoTMP.isExistInBase()) {
+					pensumAcademicoFacadeLocal.edit(pensumAcademicoTMP);
+				}else{
+					pensumAcademicoTMP.setCurso(curso);
+					pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
+				}
 			}
+		} catch (Exception e) {
+			userTransaction.rollback();
 		}
 		
+		userTransaction.commit();
 	}
 }
