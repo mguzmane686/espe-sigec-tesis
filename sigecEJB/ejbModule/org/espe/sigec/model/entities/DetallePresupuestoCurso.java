@@ -6,6 +6,7 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -42,10 +43,11 @@ public class DetallePresupuestoCurso implements Serializable {
     private BigInteger costoUnitario;
     @Column(name = "costo_total")
     private BigInteger costoTotal;
+    
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private PresupuestoCurso presupuestoCurso;
-
+    
     @Transient
     private String descripcionCatalogo;
     
@@ -55,11 +57,10 @@ public class DetallePresupuestoCurso implements Serializable {
     public DetallePresupuestoCurso(DetallePresupuestoCursoPK detallePresupuestoCursoPK) {
         this.detallePresupuestoCursoPK = detallePresupuestoCursoPK;
     }
-
-    public DetallePresupuestoCurso(BigInteger idCursoPeriodo, String codElemento) {
-        this.detallePresupuestoCursoPK = new DetallePresupuestoCursoPK(idCursoPeriodo, codElemento);
+    
+    public DetallePresupuestoCurso(BigInteger idDetalle, BigInteger idCursoPeriodo, String codElemento) {
+        this.detallePresupuestoCursoPK = new DetallePresupuestoCursoPK(idDetalle, idCursoPeriodo, codElemento);
     }
-
     public DetallePresupuestoCursoPK getDetallePresupuestoCursoPK() {
         return detallePresupuestoCursoPK;
     }
@@ -147,6 +148,5 @@ public class DetallePresupuestoCurso implements Serializable {
 
 	public void setDescripcionCatalogo(String descripcionCatalogo) {
 		this.descripcionCatalogo = descripcionCatalogo;
-	}
-    
+	}    
 }

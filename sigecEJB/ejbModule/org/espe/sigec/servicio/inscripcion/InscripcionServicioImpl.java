@@ -2,7 +2,9 @@ package org.espe.sigec.servicio.inscripcion;
 
 import java.util.Collection;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.transaction.UserTransaction;
 
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.CursoEstudiante;
@@ -38,32 +40,56 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 	
 	@EJB
 	private UsuarioPerfilFacadeLocal usuarioPerfilFacadeLocal;
+	
+	@Resource
+	private UserTransaction userTransaction;
 	@Override
 	public void registrarEstudiante(Usuario usuario, Persona persona, Estudiante estudiante) throws Exception, UserValidateException {
-		usuarioFacade.isIdentificadorvalida(usuario.getIdentificador());
-		usuarioFacade.create(usuario);
-		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK(usuario.getIdUsuario(), "EST"));
-		usuarioPerfilFacadeLocal.create(usuarioPerfil);
-		personaFacadeLocal.create(persona);
-		estudiante.setPersona(persona);
-		estudianteFacadeLocal.create(estudiante);	
+		userTransaction.begin();
+		try {
+			usuarioFacade.isIdentificadorvalida(usuario.getIdentificador());
+			usuarioFacade.create(usuario);
+			UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK(usuario.getIdUsuario(), "EST"));
+			usuarioPerfilFacadeLocal.create(usuarioPerfil);
+			personaFacadeLocal.create(persona);
+			estudiante.setPersona(persona);
+			estudianteFacadeLocal.create(estudiante);
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+			if(e.getMessage().contains("El identificador ya existe")){
+				throw new UserValidateException("UserValidateException");
+			}else{
+				throw new Exception(e);
+			}
+		}
 	}
 
 	@Override
 	public void inscripcionEstudianteCurso(Estudiante estudiante, CursoPeriodo cursoPeriodo,
 			CursoEstudiante cursoEstudiante, boolean isNewStudent) throws Exception {
-		
-		if(isNewStudent){
-			registrarEstudiante(estudiante.getPersona().getUsuario(), estudiante.getPersona(), estudiante);
+		try {
+			if(isNewStudent){
+				registrarEstudiante(estudiante.getPersona().getUsuario(), estudiante.getPersona(), estudiante);
+			}
+			userTransaction.begin();
+			cursoEstudiante.setEstudiante(estudiante);
+			cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+			cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
+			cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+			cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
+			cursoEstudiante.setEstadoPago("DEBE");
+			cursoEstudianteFacadeLocal.create(cursoEstudiante);
+			userTransaction.commit();
+			
+		} catch (Exception e) {
+			userTransaction.rollback();
+			if(e.getMessage().contains("El identificador ya existe")){
+				throw new UserValidateException("UserValidateException");
+			}else{
+				throw new Exception(e);
+			}
 		}
-		cursoEstudiante.setEstudiante(estudiante);
-		cursoEstudiante.setCursoPeriodo(cursoPeriodo);
-		cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
-		cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
-		cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
-		cursoEstudiante.setEstadoPago("DEBE");
-		cursoEstudianteFacadeLocal.create(cursoEstudiante);
-	
 	}
 
 	@Override
