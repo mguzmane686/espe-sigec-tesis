@@ -12,6 +12,15 @@
 		<ui:define name="title">Login</ui:define>
 
 		<ui:define name="body">
+		<script type="text/javascript">
+		//<![CDATA[
+		A4J.AJAX.onError = function(req, status, message) {
+			alert('sd');
+		        *window.location.reload();*
+		}
+		//]]>
+		</script>
+				
 			<h:outputStylesheet library="css" name="stylelog.css"/>
 			
 			<rich:panel header="Ingresar al sistema" style="background-image:url('#{resource['images:loginpage_02.jpg']}'); background-color: #E5E5E5;">
