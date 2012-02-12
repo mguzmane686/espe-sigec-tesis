@@ -84,7 +84,13 @@ public class PresupuestoController implements Serializable {
 	
 	public void btnSavePresupuesto(ActionEvent e){
 		try {
-			presupuestoServicio.guardarPresupuesto(getPresupuestoCurso(), lstDetallePresupuestoCursos);
+			if(isUpdatePresupuesto()){
+				presupuestoServicio.actualizarPresupuesto(getCursoPeriodo(), getPresupuestoCurso(), lstDetallePresupuestoCursos);
+			}else{
+				presupuestoServicio.guardarPresupuesto(getCursoPeriodo(), getPresupuestoCurso(), lstDetallePresupuestoCursos);
+				setUpdatePresupuesto(Boolean.TRUE);
+			}
+			
 			FacesUtils.addInfoMessage("Presupuesto guardado");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("Presupuesto no guardado");

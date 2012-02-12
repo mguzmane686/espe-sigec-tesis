@@ -7,12 +7,6 @@
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 
-	<script>
-		function sumar(cantidad,precio, elemento){
-			$(elemento).attr('value',parseFloat(cantidad)+parseFloat(precio)); 
-		}				
- 	</script>
-
 	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
 	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
@@ -22,7 +16,7 @@
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="2">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-						<a4j:commandButton value="Guardar" image="/resources/images/save.png" />
+						<a4j:commandButton value="Guardar" image="/resources/images/save.png" actionListener="#{presupuestoController.btnSavePresupuesto}"/>
 						<h:outputLabel value="Guardar" />
 					</h:panelGrid>
 
