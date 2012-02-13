@@ -33,4 +33,6 @@ public interface AulaFacadeLocal {
     int count();
     
     Collection<Aula> findCursoByEdificio(String idEdificio);
+    
+    Collection<Aula> findAulas();
 }
