@@ -31,11 +31,12 @@ public class AulaController implements Serializable{
 	Collection<SelectItem> itemsLocalidades;
 	private Collection<SelectItem> itemsEdificio;
 	private Aula aula;
-	
+	private boolean editMode;
 	
 	public AulaController() {
 		initEntities();
 		setItemsEdificio(new ArrayList<SelectItem>());
+		setAula((Aula) FacesUtils.getFlashObject("aulaToEdit"));
 	}
 	
 	private void initEntities(){
@@ -52,8 +53,14 @@ public class AulaController implements Serializable{
 			getItemsLocalidades().add(new SelectItem(lugarCursoTMP.getIdLugar(), lugarCursoTMP.getNombre()));
 		}
 		
-		for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getItemsLocalidades().iterator().next().getValue().toString())){
-			getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+		if(getAula().getEdificio()!=null && getAula().getEdificio().getLugarCurso()!=null){
+			for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getAula().getEdificio().getLugarCurso().getIdLugar())){
+				getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+			}
+		}else{
+			for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getItemsLocalidades().iterator().next().getValue().toString())){
+				getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+			}
 		}
 	}
 	
@@ -96,6 +103,14 @@ public class AulaController implements Serializable{
 
 	public void setItemsLocalidades(Collection<SelectItem> itemsLocalidades) {
 		this.itemsLocalidades = itemsLocalidades;
+	}
+
+	public boolean isEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
 	}
 	
 }
