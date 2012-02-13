@@ -123,6 +123,6 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 	@Override
 	public Collection<Aula> findAula() {
-		return aulaFacadeLocal.findAll();
+		return aulaFacadeLocal.findAulas();
 	}
 }

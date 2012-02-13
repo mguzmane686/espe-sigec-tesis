@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.espe.sigec.model.entities.Aula;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -36,6 +37,16 @@ public class AulaFacade extends AbstractFacade<Aula> implements AulaFacadeLocal 
 	public Collection<Aula> findCursoByEdificio(String idEdificio) {
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Aula.class);
     	crit.add(Restrictions.eq("edificio.idEdificio", idEdificio));
+		return crit.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Aula> findAulas() {
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Aula.class);
+		crit.setFetchMode("edificio", FetchMode.JOIN);
+		crit.setFetchMode("edificio.lugarCurso", FetchMode.JOIN);
+		
 		return crit.list();
 	}
     
