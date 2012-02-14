@@ -16,7 +16,8 @@
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="2">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-						<a4j:commandButton value="Guardar" image="/resources/images/save.png" actionListener="#{presupuestoController.btnSavePresupuesto}"/>
+						<a4j:commandButton value="Guardar" image="/resources/images/save.png" render="@form" 
+							actionListener="#{presupuestoController.btnSavePresupuesto}"/>
 						<h:outputLabel value="Guardar" />
 					</h:panelGrid>
 
@@ -29,7 +30,7 @@
 		</rich:panel>
 
 		<rich:panel header="Datos del curso">
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" columnClasses="espacioDetalle">
 				<h:outputLabel value="Nombre del curso :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.curso.nombreCurso}" />
 
@@ -51,28 +52,28 @@
 					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
 				</h:outputText>
 
-				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
+				<h:outputLabel value="#{msg['minimo_estudiantes']} :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.minimoEstudiantes}" />
 
-				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
+				<h:outputLabel value="#{msg['maximo_estudiantes']} :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
 
-				<h:outputLabel value="Hora inicio" />
+				<h:outputLabel value="Hora inicio :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.horaInicioClase}" />
 
-				<h:outputLabel value="Hora fin" />
+				<h:outputLabel value="Hora fin :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.horaFinClase}" />
 
-				<h:outputLabel value="#{msg['tipo_curso']}" />
+				<h:outputLabel value="#{msg['tipo_curso']} :" />
 				<h:selectOneRadio value="#{presupuestoController.cursoPeriodo.tipoCurso}">
 					<f:selectItem itemLabel="Empresarial" itemValue="CORP" />
 					<f:selectItem itemLabel="Abierto" itemValue="IND" />
 				</h:selectOneRadio>
 
-				<h:outputLabel value="Lugar a dictarse" />
+				<h:outputLabel value="Lugar a dictarse :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.lugarCapacitacion}" />
 				
-				<h:outputLabel value="Estado del curso" />
+				<h:outputLabel value="Estado del curso :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.estadoProceso}" />
 			</h:panelGrid>
 		</rich:panel>
@@ -82,8 +83,12 @@
 				<legend>
 					<h:outputLabel value="#{msg['presupuesto_asignacion']}" style="font-weight:bold;"/>
 				</legend>
-				<h:outputLabel value="Presupuesto asignado" />
-				<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado}" />
+				<h:outputLabel value="Presupuesto asignado : " />
+				<h:inputText value="#{presupuestoController.presupuestoCurso.dineroAsignado}" required="true" requiredMessage="El campo Presupueso asignado es obligatorio"
+					converterMessage="El campo Presupuesto asignado, solo acepta cantidades numericas">
+					
+				</h:inputText>
+				<h:outputText value="$"/>
 			</fieldset>
 		</rich:panel>
 		
@@ -93,19 +98,26 @@
 					<h:outputLabel value="Costos y gastos" style="font-weight:bold;"/>
 				</legend>
 
-				<rich:dataTable value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle">
+				<rich:dataTable value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle" iterationStatusVar="numRow" style="width:100%">
 					<rich:column rendered="false">
 						<f:facet name="header">
 							<h:outputLabel value="Codigo" />
 						</f:facet>
 						<h:outputText value="#{detalle.codElemento}" />
 					</rich:column>
-
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="N#" />
+						</f:facet>
+						<h:outputText value="#{numRow.index+1}" />
+					</rich:column>
+					
 					<rich:column>
 						<f:facet name="header">
 							<h:outputLabel value="Descripcion" />
 						</f:facet>
-						<h:outputText value="#{detalle.descripcionCatalogo}" />
+						<h:outputText value="#{detalle.detalle}" />
 					</rich:column>
 
 					<rich:column>
@@ -120,9 +132,10 @@
 							<h:outputLabel value="Unidad" />
 						</f:facet>
 						<h:selectOneRadio value="#{detalle.unidad}">
-							<f:selectItem itemLabel="Horas" itemValue="HOR"/>
-							<f:selectItem itemLabel="Total" itemValue="TOT"/>
-							<f:selectItem itemLabel="Unidades" itemValue="UNI"/>
+							<f:selectItem itemLabel="Horas" itemValue="HORA"/>
+							<f:selectItem itemLabel="Total" itemValue="TOTAL"/>
+							<f:selectItem itemLabel="Unidades" itemValue="UNIDAD"/>
+							<f:selectItem itemLabel="Participantes" itemValue="PARTICIPANTE"/>
 						</h:selectOneRadio>
 					</rich:column>
 					
@@ -133,12 +146,25 @@
 						<rich:inputNumberSpinner value="#{detalle.costoUnitario}"/>
 					</rich:column>
 					
-					<rich:column>
+					<rich:column style="text-align:right;">
 						<f:facet name="header">
 							<h:outputLabel value="Costo total USD." />
 						</f:facet>
-						<h:outputText value="#{detalle.costoTotal}"/>
+						<h:outputText value="#{detalle.costoTotalUSD} $"/>
 					</rich:column>
+					
+					<f:facet name="footer">
+			            <rich:columnGroup>
+			                <rich:column colspan="5" style="text-align:right">
+			                	<h:outputLabel value="Total" /> 
+			                </rich:column>
+			                
+			                <rich:column>
+			                    <h:outputText value="#{presupuestoController.totalLista} $"/>
+			                </rich:column>
+			            </rich:columnGroup>
+			        </f:facet>
+			        
 				</rich:dataTable>
 			</fieldset>
 		</rich:panel>
