@@ -2,6 +2,7 @@ package org.espe.sigec.web.coordinacion.presupuesto;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -46,7 +47,7 @@ public class PresupuestoController implements Serializable {
 		if(presupuestoCurso !=null){
 			setPresupuestoCurso(presupuestoCurso);
 			
-			if(getPresupuestoCurso().getDetallePresupuestoCursoCollection()==null){
+			if(getPresupuestoCurso().getDetallePresupuestoCursoCollection()==null || getPresupuestoCurso().getDetallePresupuestoCursoCollection().isEmpty()){
 				loadCatalogoPresupuesto();
 			}else{
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
@@ -70,12 +71,14 @@ public class PresupuestoController implements Serializable {
 			
 			detallePresupuestoCurso.getDetallePresupuestoCursoPK().setCodElemento(catalogoSigec.getCodigo());
 			detallePresupuestoCurso.setDescripcionCatalogo(catalogoSigec.getDescripcion());
+			detallePresupuestoCurso.setDetalle(catalogoSigec.getDescripcion());
+			detallePresupuestoCurso.setUnidad(catalogoSigec.getTipoUnidad());
 			getLstDetallePresupuestoCursos().add(detallePresupuestoCurso);
 		}
 	}
 	public void btnAtras(ActionEvent e){
 		try {
-			FacesUtils.redirectPage("coor_administrar_curso_abierto.jsf");
+			FacesUtils.redirectPage("coor_reporte_curso_abierto.jsf");
 			FacesUtils.putFlashObject("curso", getCursoPeriodo());
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -138,5 +141,16 @@ public class PresupuestoController implements Serializable {
 	public void setPresupuestoCurso(PresupuestoCurso presupuestoCurso) {
 		this.presupuestoCurso = presupuestoCurso;
 	}
-	
+	public BigDecimal getTotalLista(){
+		BigDecimal totalLista = new BigDecimal(0);
+		if(getPresupuestoCurso() != null){
+			if(getPresupuestoCurso().getDetallePresupuestoCursoCollection() != null){
+				for(DetallePresupuestoCurso detallePresupuestoCurso: getPresupuestoCurso().getDetallePresupuestoCursoCollection()){
+					detallePresupuestoCurso.getCostoTotalUSD();
+					totalLista = totalLista.add(detallePresupuestoCurso.getCostoTotalUSD());
+				}
+			}
+		}
+		return totalLista;
+	}
 }
