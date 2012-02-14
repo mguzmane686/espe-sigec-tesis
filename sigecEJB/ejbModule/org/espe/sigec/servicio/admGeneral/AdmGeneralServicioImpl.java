@@ -43,7 +43,12 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
 	@Resource
     private UserTransaction userTransaction;
-		
+	
+	@Override
+	public void editAula(Aula aula) throws Exception {
+		aulaFacadeLocal.edit(aula);
+	}
+	
 	@Override
 	public void createAula(Aula aula) throws Exception {
 		aulaFacadeLocal.create(aula);
