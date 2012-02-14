@@ -31,6 +31,7 @@ public class InscripcionAlumnoCursoController {
 	private InscripcionServicio inscripcionServicio;
 	
 	private Collection<SelectItem> itemCursos;
+	Collection<CursoPeriodo> lstCursoPeriodos;
 	private boolean showFieldsNewStudent;
 	
 	public InscripcionAlumnoCursoController() {
@@ -45,7 +46,7 @@ public class InscripcionAlumnoCursoController {
 	@PostConstruct 
 	public void cargarCursos(){
 		setItemCursos(new ArrayList<SelectItem>());
-		Collection<CursoPeriodo> lstCursoPeriodos = inscripcionServicio.cargarCursoLanzado();
+		lstCursoPeriodos = inscripcionServicio.cargarCursoLanzado();
 		for(CursoPeriodo cursoPeriodoTMP: lstCursoPeriodos){
 			getItemCursos().add(new SelectItem(cursoPeriodoTMP.getIdCursoPeriodo(), cursoPeriodoTMP.getCurso().getNombreCurso()));
 		}
@@ -64,6 +65,12 @@ public class InscripcionAlumnoCursoController {
 	}
 	public void btnInscripcionEstudinateCurso(ActionEvent e){
 		try {
+			for(CursoPeriodo cursoPeriodoTMP: lstCursoPeriodos){
+				if(cursoPeriodoTMP.getIdCursoPeriodo().compareTo(getCursoEstudiante().getCursoPeriodo().getIdCursoPeriodo()) == 0){
+					getCursoEstudiante().setCursoPeriodo(cursoPeriodoTMP);
+					break;
+				}
+			}
 			inscripcionServicio.inscripcionEstudianteCurso(getCursoEstudiante().getEstudiante(), getCursoEstudiante().getCursoPeriodo(), getCursoEstudiante(), isShowFieldsNewStudent());
 			FacesUtils.addInfoMessage("Se ha inscrito a un curso");
 		} catch (Exception e1) {
@@ -72,13 +79,6 @@ public class InscripcionAlumnoCursoController {
 	}
 	
 	public void btnNuevoEstudiante(ActionEvent e){
-//		try {
-//			FacesUtils.redirectPage("registro_usuario.jsf");
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-		
 		setCedulaUsr("");
 		getCursoEstudiante().setEstudiante(new Estudiante());
 		getCursoEstudiante().getEstudiante().setPersona(new Persona());
