@@ -10,6 +10,7 @@
 	<h:outputStylesheet library="css" name="textos.css" />    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
    	<h:outputStylesheet>
    		.alinearLeft{
    			text-align:left;
@@ -39,7 +40,8 @@
 				</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
-					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10" 
+						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 
 					<h:outputLabel value="#{msg['nombres']}"  />
 					<h:panelGrid columns="2">
@@ -61,16 +63,16 @@
 					<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" />
 
 					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
-					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" size="43"/>
 
 					<h:outputLabel value="#{msg['e_mail']}"  />
-					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" size="43"/>
 
 					<h:outputLabel value="#{msg['celular']}"  required="true"/>
-					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" />
+					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" onkeypress="return validateNumPP(event);" maxlength="20"/>
 					
 					<h:outputLabel value="#{msg['etiqueta_observacion']}"  />
-					<h:inputText value="#{registroDocenteController.profesor.observacion}" />
+					<h:inputText value="#{registroDocenteController.profesor.observacion}" size="43"/>
 					
 					<h:outputLabel value="Tiempo completo" />
 					<h:selectOneRadio value="#{registroDocenteController.profesor.tiempoComp}">

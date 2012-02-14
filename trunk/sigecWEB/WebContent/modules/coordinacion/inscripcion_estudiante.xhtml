@@ -10,6 +10,7 @@
 	<h:outputStylesheet library="css" name="textos.css" />    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
    	<h:outputStylesheet>
    		.alinearLeft{
    			text-align:left;
@@ -46,7 +47,7 @@
 				</legend>
 				<h:panelGrid columns="3" id="pgBusqueda">
 					<h:outputLabel value="#{msg['cedula']}" />					
-					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}" onkeypress="return validateNumPP(event);" maxlength="10"/>
 					
 					<a4j:commandLink actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno">
 						<h:graphicImage library="images/button" name="search_button.png" height="20px"/>
@@ -81,7 +82,9 @@
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}" 
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}"
+	        			onkeypress="return validateNumPP(event);" maxlength="10" 
+						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 						
 					<h:outputLabel value="#{msg['nombres']}"  />
@@ -114,15 +117,21 @@
 
 					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}"
+						size="43"
+						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
 					<h:outputLabel value="#{msg['e_mail']}"  />
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}"
+						size="43" 
+						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
 					<h:outputLabel value="#{msg['celular']}"/>
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}"
+						onkeypress="return validateNumPP(event);"  
+						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 						
 				</h:panelGrid>
 			</fieldset>

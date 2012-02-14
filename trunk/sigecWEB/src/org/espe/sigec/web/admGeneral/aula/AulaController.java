@@ -36,7 +36,14 @@ public class AulaController implements Serializable{
 	public AulaController() {
 		initEntities();
 		setItemsEdificio(new ArrayList<SelectItem>());
-		setAula((Aula) FacesUtils.getFlashObject("aulaToEdit"));
+		if((Aula) FacesUtils.getFlashObject("aulaToEdit") == null){
+			initEntities();
+			editMode = Boolean.FALSE;
+		}else{
+			setAula((Aula) FacesUtils.getFlashObject("aulaToEdit"));
+			editMode = Boolean.TRUE;
+		}
+		
 	}
 	
 	private void initEntities(){
@@ -73,9 +80,15 @@ public class AulaController implements Serializable{
 	
 	public void btnSaveAula(ActionEvent e){
 		try {
-			admGeneralServicio.createAula(getAula());
-			initEntities();
-			FacesUtils.addInfoMessage("El aula se cre&oacute correctamante");
+			if(editMode){
+				admGeneralServicio.editAula(getAula());
+				FacesUtils.addInfoMessage("El aula se actualizo correctamante");
+			}else{
+				admGeneralServicio.createAula(getAula());
+				FacesUtils.addInfoMessage("El aula se cre&oacute correctamante");
+				editMode = Boolean.TRUE;
+			}
+			
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("Ha ocurrido un error al gurdadr el aula");
 		}

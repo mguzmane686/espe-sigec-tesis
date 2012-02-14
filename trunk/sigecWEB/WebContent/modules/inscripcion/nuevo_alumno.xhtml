@@ -12,6 +12,8 @@
     
     <ui:define name="content"-->
     	<h:outputStylesheet library="css" name="textos.css"/>
+    	<h:outputScript library="js" name="validaciones.js" target="head"/>
+    	
         <h:form>
         	<rich:panel header="Registro de usuario">
         	
@@ -34,7 +36,9 @@
         		</legend>
 	        	<h:panelGrid columns="2">
 	        		<h:outputLabel value="Cedula" styleClass="label-bold" style="padding-right:50px"/>
-	        		<h:inputText value="#{inscripcion.estudiante.persona.cedula}" />
+	        		<h:inputText value="#{inscripcion.estudiante.persona.cedula}"
+	        			required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" 
+	        			onkeypress="return validateNumPP(event);" maxlength="10"/>
 	        		
 	        		<h:outputLabel value="Nombres" styleClass="label-bold"/>
 	        		<h:panelGrid columns="2">
