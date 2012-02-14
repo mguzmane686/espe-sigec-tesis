@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.coordinacion;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.espe.sigec.model.entities.Aula;
@@ -24,4 +25,5 @@ public interface CoordinacionServicio {
 	Collection<Edificio> findEdificioByLugarCurso(String idLugar);
 	Collection<Aula> findAulaByEdificio(String idEdificio);
 	void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception;
+	int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo);
 }

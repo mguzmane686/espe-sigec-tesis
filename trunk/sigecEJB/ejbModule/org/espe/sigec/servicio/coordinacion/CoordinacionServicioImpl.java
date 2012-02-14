@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.coordinacion;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -15,6 +16,7 @@ import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
+import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
@@ -40,6 +42,9 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	@EJB
 	private HistoricoCursoEstadoFacadeLocal historicoCursoEstadoFacadeLocal;
+	
+	@EJB
+	private CursoEstudianteFacadeLocal cursoEstudianteFacadeLocal;
 	
 	@EJB
 	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
@@ -110,6 +115,11 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 			historicoCursoEstadoFacadeLocal.create(cursoPeriodo.getHistoricoCursoEstadoCollection());
 		}
 		cursoPeriodoFacadeLocal.edit(cursoPeriodo);
+	}
+
+	@Override
+	public int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo) {
+		return cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(idCursoPeriodo);
 	}
 	
 }

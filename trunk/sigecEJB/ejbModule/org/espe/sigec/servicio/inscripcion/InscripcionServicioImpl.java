@@ -69,18 +69,38 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 	public void inscripcionEstudianteCurso(Estudiante estudiante, CursoPeriodo cursoPeriodo,
 			CursoEstudiante cursoEstudiante, boolean isNewStudent) throws Exception {
 		try {
-			if(isNewStudent){
-				registrarEstudiante(estudiante.getPersona().getUsuario(), estudiante.getPersona(), estudiante);
-			}
 			userTransaction.begin();
-			cursoEstudiante.setEstudiante(estudiante);
-			cursoEstudiante.setCursoPeriodo(cursoPeriodo);
-			cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
-			cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
-			cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
-			cursoEstudiante.setEstadoPago("DEBE");
-			cursoEstudianteFacadeLocal.create(cursoEstudiante);
-			userTransaction.commit();
+			
+			if(isNewStudent){
+				if(usuarioFacade.isIdentificadorvalida(estudiante.getPersona().getUsuario().getIdentificador())){
+					usuarioFacade.create(estudiante.getPersona().getUsuario());
+					UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK(estudiante.getPersona().getUsuario().getIdUsuario(), "EST"));
+					usuarioPerfilFacadeLocal.create(usuarioPerfil);
+					personaFacadeLocal.create(estudiante.getPersona());
+					estudiante.setPersona(estudiante.getPersona());
+					estudianteFacadeLocal.create(estudiante);
+				}else{
+					throw new Exception("El identificador ya existe");
+				}
+			}
+			
+				if(cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo()) < cursoPeriodo.getMaximoEstudiantes()){
+					cursoEstudiante.setEstudiante(estudiante);
+					cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+					cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
+					cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+					cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
+					cursoEstudiante.setEstadoPago("DEBE");
+					cursoEstudianteFacadeLocal.create(cursoEstudiante);
+					
+					if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())+1) == cursoPeriodo.getMaximoEstudiantes()){
+						System.out.println(cursoPeriodo);
+					}
+					
+					userTransaction.commit();
+				}else{
+					throw new Exception("Ya no quedan cupos para el curso");
+				}
 			
 		} catch (Exception e) {
 			userTransaction.rollback();
