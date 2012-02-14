@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -37,6 +38,13 @@ public class CatalogoSigec implements Serializable {
 //    @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "parent_codigo")
     private String catalogoSigec;
+    
+    @Column(name = "orden_lista")
+    private Integer ordenLista;
+    @Size(max = 20)
+    @Column(name = "tipo_unidad")
+    private String tipoUnidad;
+    
 
     public CatalogoSigec() {
     }
@@ -115,5 +123,21 @@ public class CatalogoSigec implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.CatalogoSigec[ codigo=" + codigo + " ]";
     }
+
+	public Integer getOrdenLista() {
+		return ordenLista;
+	}
+
+	public void setOrdenLista(Integer ordenLista) {
+		this.ordenLista = ordenLista;
+	}
+
+	public String getTipoUnidad() {
+		return tipoUnidad;
+	}
+
+	public void setTipoUnidad(String tipoUnidad) {
+		this.tipoUnidad = tipoUnidad;
+	}
     
 }

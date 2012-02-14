@@ -22,6 +22,8 @@ public interface PresupuestoFacadeLocal {
     void remove(Presupuesto presupuesto) throws Exception;
 
     Presupuesto find(Object id);
+    
+    Presupuesto findByCodAnio(String id);
 
     List<Presupuesto> findAll();
 
