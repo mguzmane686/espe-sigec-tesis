@@ -5,6 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -42,10 +43,14 @@ public class Presupuesto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "recurso_inicial")
-    private Double recursoInicial;
-    @Column(name = "recurso_actual")
-    private Double recursoActual;
+    @Column(name = "recurso_inicial_a")
+    private BigDecimal recursoInicial;
+    @Column(name = "recurso_actual_a")
+    private BigDecimal recursoActual;
+    
+    @Column(name = "codigo_anio")
+    private String codigoAnio;
+    
     @OneToMany(mappedBy = "presupuesto", fetch = FetchType.LAZY)
     private Collection<PresupuestoCurso> presupuestoCursoCollection;
 
@@ -80,23 +85,24 @@ public class Presupuesto implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public Double getRecursoInicial() {
-        return recursoInicial;
-    }
+    
+    public BigDecimal getRecursoInicial() {
+		return recursoInicial;
+	}
 
-    public void setRecursoInicial(Double recursoInicial) {
-        this.recursoInicial = recursoInicial;
-    }
+	public void setRecursoInicial(BigDecimal recursoInicial) {
+		this.recursoInicial = recursoInicial;
+	}
 
-    public Double getRecursoActual() {
-        return recursoActual;
-    }
+	public BigDecimal getRecursoActual() {
+		return recursoActual;
+	}
 
-    public void setRecursoActual(Double recursoActual) {
-        this.recursoActual = recursoActual;
-    }
+	public void setRecursoActual(BigDecimal recursoActual) {
+		this.recursoActual = recursoActual;
+	}
 
-    public Collection<PresupuestoCurso> getPresupuestoCursoCollection() {
+	public Collection<PresupuestoCurso> getPresupuestoCursoCollection() {
         return presupuestoCursoCollection;
     }
 
@@ -128,5 +134,13 @@ public class Presupuesto implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.Presupuesto[ idPresupuesto=" + idPresupuesto + " ]";
     }
+
+	public String getCodigoAnio() {
+		return codigoAnio;
+	}
+
+	public void setCodigoAnio(String codigoAnio) {
+		this.codigoAnio = codigoAnio;
+	}
     
 }

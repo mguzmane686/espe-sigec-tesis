@@ -5,6 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import javax.persistence.Column;
@@ -50,7 +51,8 @@ public class DetallePresupuestoCurso implements Serializable {
     
     @Transient
     private String descripcionCatalogo;
-    
+    @Transient
+    public BigDecimal CostoTotalUSD;
     public DetallePresupuestoCurso() {
     }
 
@@ -148,5 +150,30 @@ public class DetallePresupuestoCurso implements Serializable {
 
 	public void setDescripcionCatalogo(String descripcionCatalogo) {
 		this.descripcionCatalogo = descripcionCatalogo;
-	}    
+	}
+	
+	@Transient
+	public BigDecimal getCostoTotalUSD(){
+		BigDecimal a = null;
+		BigDecimal b = null;
+		if(costoUnitario != null ){
+			a = new BigDecimal(costoUnitario.doubleValue());
+		}else{
+			a = new BigDecimal(0);
+		}
+		
+		if(cantidad != null)		{
+			b = new BigDecimal(cantidad.doubleValue());
+		}else{
+			b = new BigDecimal(0);
+		}
+		
+		
+		return   a.multiply(b);
+	}
+
+	public void setCostoTotalUSD(BigDecimal costoTotalUSD) {
+		CostoTotalUSD = costoTotalUSD;
+	} 
+	
 }

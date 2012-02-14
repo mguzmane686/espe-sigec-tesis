@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import org.espe.sigec.model.entities.CatalogoSigec;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -35,6 +36,7 @@ public class CatalogoSigecFacade extends AbstractFacade<CatalogoSigec> implement
 	public Collection<CatalogoSigec> findCatalogo(String parentId) {
 		Criteria crit =((Session) getEntityManager().getDelegate()).createCriteria(CatalogoSigec.class);
 		crit.add(Restrictions.eq("catalogoSigec", parentId));
+		crit.addOrder(Order.asc("ordenLista"));
 //		crit.createAlias("catalogoSigec", "catalogoSigec_chil");
 //		crit.add(Restrictions.eq("catalogoSigec_chil", parentId));
 		@SuppressWarnings("unchecked")
