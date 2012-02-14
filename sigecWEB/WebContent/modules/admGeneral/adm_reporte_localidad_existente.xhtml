@@ -30,7 +30,8 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<a4j:commandLink value="#{localidad.nombre}" action="#{reporteLocalidadController.btnShowLocalidadDetail(localidad)}"></a4j:commandLink>
+			        			<a4j:commandLink value="#{localidad.nombre}" rendered="false" action="#{reporteLocalidadController.btnShowLocalidadDetail(localidad)}"></a4j:commandLink>
+			        			<h:outputText value="#{localidad.nombre}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>

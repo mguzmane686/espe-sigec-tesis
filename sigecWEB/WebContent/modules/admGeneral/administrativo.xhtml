@@ -74,13 +74,13 @@
 					</rich:calendar>
 
 					<h:outputLabel value="#{msg['nacionalidad']}"  />
-					<h:inputText value="#{administrativoController.persona.nacionalidad}" />
+					<h:inputText value="#{administrativoController.persona.nacionalidad}" size="43"/>
 
 					<h:outputLabel value="#{msg['direccion']}"  />
-					<h:inputText value="#{administrativoController.persona.direccion}" />
+					<h:inputText value="#{administrativoController.persona.direccion}" size="43"/>
 
 					<h:outputLabel value="#{msg['e_mail']}"  />
-					<h:inputText value="#{administrativoController.persona.mail}" />
+					<h:inputText value="#{administrativoController.persona.mail}" size="43"/>
 
 					<h:outputLabel value="#{msg['celular']}"  />
 					<h:inputText value="#{administrativoController.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
