@@ -16,17 +16,24 @@ import org.espe.sigec.model.entities.Usuario;
  */
 @QAdmGeneral
 public interface AdmGeneralServicio {
+	
+	//Lugar
+	Collection<LugarCurso> findLugar();
+	void createLugar(LugarCurso lugarCurso) throws Exception;
+	void editLugar(LugarCurso lugarCurso) throws Exception;
+	
+	
+	
+
 	void createAula(Aula aula) throws Exception;
 	void editAula(Aula aula) throws Exception;
 	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
-	Collection<LugarCurso> findLugar();
 	Collection<Edificio> findEdificioByLugar(String idLugarCurso);
-	
 	Collection<Edificio> findEdificio();
 	Collection<Aula> findCursoByEdificio(String idEdificio);
 	void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
+	//Edificio
 	void createEdificio(Edificio edificio) throws Exception;
-	void createLocalidad(LugarCurso lugarCurso) throws Exception;
 	void editEdificio(Edificio edificio) throws Exception;
 	Collection<Aula> findAula();
 }
