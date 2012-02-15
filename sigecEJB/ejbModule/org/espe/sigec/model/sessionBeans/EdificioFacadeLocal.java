@@ -31,5 +31,7 @@ public interface EdificioFacadeLocal {
     int count();
     
     Collection<Edificio> findEdificioByLugarCurso(String idLugar);
+
+	Collection<Edificio> findEdificiosReporte();
     
 }
