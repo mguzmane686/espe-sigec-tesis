@@ -43,9 +43,9 @@ public class Presupuesto implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "recurso_inicial_a")
+    @Column(name = "recurso_inicial")
     private BigDecimal recursoInicial;
-    @Column(name = "recurso_actual_a")
+    @Column(name = "recurso_actual")
     private BigDecimal recursoActual;
     
     @Column(name = "codigo_anio")
