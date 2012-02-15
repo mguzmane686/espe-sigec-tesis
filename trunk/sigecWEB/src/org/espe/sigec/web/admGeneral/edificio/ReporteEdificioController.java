@@ -49,7 +49,7 @@ public class ReporteEdificioController implements Serializable {
 	public void btnShowEdificioDetail(Edificio edificio){
 		FacesUtils.putFlashObject("edificioToEdit",edificio);
 		try {
-			FacesUtils.redirectPage("adm_edicion_edificio.jsf");
+			FacesUtils.redirectPage("adm_administrar_edificio.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

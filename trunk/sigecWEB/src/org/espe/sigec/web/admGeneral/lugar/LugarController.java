@@ -25,7 +25,7 @@ public class LugarController implements Serializable {
 		setLugarCurso(new LugarCurso());	
 	}
 	
-	public void btnGuardarLugar(ActionEvent e){
+	public void btnSaveLugar(ActionEvent e){
 		try {
 			admGeneralServicio.createLugar(getLugarCurso());
 			setLugarCurso(new LugarCurso());
