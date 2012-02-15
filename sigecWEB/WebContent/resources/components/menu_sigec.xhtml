@@ -78,6 +78,15 @@
             <rich:panelMenuItem>
             	<a4j:commandLink value="Nuevo funcionario" action="adm_administrativo.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="Crear Especialidad" action="adm_especialidad.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="Reporte Especialidades" action="adm_reporte_especialidad.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+            
         </rich:panelMenuGroup>
         
         <rich:panelMenuGroup label="#{msg['etiqueta_inscripcion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false) or (homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='EST'?true:false)}">
