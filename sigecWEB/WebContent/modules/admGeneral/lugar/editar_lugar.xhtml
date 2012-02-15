@@ -50,8 +50,7 @@
         		<h:panelGrid columns="2">
         		        		
         			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
-        			<h:inputText rendered="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.idLugar}" required="true" requiredMessage="El campo #{msg['etiqueta_codigo']} es obligatorio" disabled="true"/>
-        			<h:outputText value="#{administrarLugarController.lugarCurso.idLugar}" rendered="#{!administrarLugarController.editMode}" />
+        			<h:outputText value="#{administrarLugarController.lugarCurso.idLugar}" />
         			
         			<h:outputLabel value="#{msg['nombre']}:" />
         			<h:inputText rendered="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
