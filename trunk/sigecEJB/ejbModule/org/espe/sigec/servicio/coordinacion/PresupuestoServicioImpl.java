@@ -47,6 +47,9 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 					presupuestoCurso.setCursoPeriodo(cursoPeriodo);
 					presupuestoCurso.setPresupuesto(presupuesto);
 					presupuestoCurso.setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+					
+					presupuestoCurso.setDineroAsignado(calcularPresupuestoPorDetalles(lstDetPreCur).doubleValue());
+					
 					presupuestoCursoFacadeLocal.create(presupuestoCurso);
 					
 					long i=1;
@@ -83,7 +86,13 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 			}
 		}
 	}
-
+	private BigDecimal calcularPresupuestoPorDetalles(Collection<DetallePresupuestoCurso> lstDetPreCur){
+		BigDecimal editarPresupuesto = new BigDecimal(0);
+		for (DetallePresupuestoCurso objDetPresCurso:lstDetPreCur){
+			editarPresupuesto = editarPresupuesto.add(objDetPresCurso.getCostoTotalUSD());
+		}
+		return editarPresupuesto;
+	}
 	@Override
 	public Collection<CatalogoSigec> findCatalogo(String parentId) {
 		return catalogoSigecFacadeLocal.findCatalogo(parentId);
