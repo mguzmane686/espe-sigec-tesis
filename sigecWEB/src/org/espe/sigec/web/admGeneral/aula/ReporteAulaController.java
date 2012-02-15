@@ -15,7 +15,7 @@ import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
 /**
- * @author Diego
+ * @author diego
  *
  */
 
@@ -49,7 +49,7 @@ public class ReporteAulaController implements Serializable {
 	public void btnShowAulaDetail(Aula aula){
 		FacesUtils.putFlashObject("aulaToEdit",aula);
 		try {
-			FacesUtils.redirectPage("adm_edicion_aula.jsf");
+			FacesUtils.redirectPage("adm_administrar_aula.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

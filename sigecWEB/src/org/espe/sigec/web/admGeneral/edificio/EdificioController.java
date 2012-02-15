@@ -47,6 +47,7 @@ public class EdificioController implements Serializable{
 		try {
 			admGeneralServicio.createEdificio(getEdificio());
 			initEntities();
+			loadLugares();
 			FacesUtils.addInfoMessage("El edificio se cre&oacute exitosamente");
 		} catch (Exception e1) {
 			FacesUtils.addInfoMessage("No se pudo crear el edificio");
