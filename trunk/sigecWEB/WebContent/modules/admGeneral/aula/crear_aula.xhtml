@@ -7,16 +7,13 @@
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
-    
-    
    	<h:outputStylesheet library="css" name="textos.css"/>    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
    	
-   	
-       <h:form id="frmAula">
+   		<h:form id="frmAula">
        	
-       	<rich:panel header="#{msg['creacion_curso']}">
+       	<rich:panel header="#{msg['creacion_aula']}">
        		<h:panelGroup layout="block" styleClass="roundCorner">
        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
        				<a4j:commandButton value="#{msg['guardar']}" render="pnlAula" 
@@ -26,22 +23,22 @@
        		</h:panelGroup>
        	</rich:panel>
        	
-       	<rich:panel header="#{msg['creacion_curso']}" id="pnlAula">
+       	<rich:panel header="#{msg['creacion_aula']}" id="pnlAula">
        	
         	<fieldset>
         		<legend>
-        			<h:outputLabel value="Datos del aula" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg['datos_aula']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Lugar :" />
-        			<h:selectOneMenu valueChangeListener="#{aulaController.somChangeLocalidad}">
-        				<f:selectItems value="#{aulaController.itemsLocalidades}"/>
+        			<h:selectOneMenu valueChangeListener="#{aulaController.someChangeLugar}">
+        				<f:selectItems value="#{aulaController.itemsLugares}"/>
         				<a4j:ajax execute="@this" render="somEdificio" event="click"/>
         			</h:selectOneMenu>
         			
         			<h:outputLabel value="#{msg['etiqueta_edificio']}:" />
         			<h:selectOneMenu id="somEdificio" value="#{aulaController.aula.edificio.idEdificio}">
-        				<f:selectItems value="#{aulaController.itemsEdificio}"/>
+        				<f:selectItems value="#{aulaController.itemsEdificios}"/>
         			</h:selectOneMenu>
         			
         			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />

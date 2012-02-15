@@ -52,7 +52,7 @@
         
         <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
-            	<a4j:commandLink value="Nuevo Lugar" action="adm_lugar.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Crear Lugar" action="adm_lugar.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
@@ -60,19 +60,19 @@
             </rich:panelMenuItem>
         	
         	<rich:panelMenuItem>
-            	<a4j:commandLink value="Nuevo edificio" action="adm_edificio.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Crear Edificio" action="adm_edificio.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
-            	<a4j:commandLink value="Reporte edificios" action="adm_reporte_edificio.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Reporte Edificios" action="adm_reporte_edificio.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
         	<rich:panelMenuItem>
-            	<a4j:commandLink value="Crear aula" action="adm_aulas.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Crear Aula" action="adm_aula.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
-            	<a4j:commandLink value="Reporte aulas" action="reporte_aulas.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Reporte Aulas" action="adm_reporte_aula.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>

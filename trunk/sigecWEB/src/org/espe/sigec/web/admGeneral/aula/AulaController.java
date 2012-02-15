@@ -19,7 +19,7 @@ import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
 /**
- * @author roberto
+ * @author diego
  *
  */
 @SuppressWarnings("serial")
@@ -28,69 +28,38 @@ import org.espe.sigec.web.utils.FacesUtils;
 public class AulaController implements Serializable{
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
-	Collection<SelectItem> itemsLocalidades;
-	private Collection<SelectItem> itemsEdificio;
-	private Aula aula;
-	private boolean editMode;
 	
-	public AulaController() {
+	Collection<SelectItem> itemsLugares;
+	Collection<SelectItem> itemsEdificios;
+	
+	Aula aula;
+	
+	public AulaController(){
 		initEntities();
-		setItemsEdificio(new ArrayList<SelectItem>());
-		if((Aula) FacesUtils.getFlashObject("aulaToEdit") == null){
-			initEntities();
-			editMode = Boolean.FALSE;
-		}else{
-			setAula((Aula) FacesUtils.getFlashObject("aulaToEdit"));
-			editMode = Boolean.TRUE;
-		}
-		
 	}
 	
-	private void initEntities(){
+	public void initEntities(){
 		setAula(new Aula());
 		getAula().setEdificio(new Edificio());
 	}
 	
 	@PostConstruct
-	public void loadLocalidad(){
-		setItemsLocalidades(new ArrayList<SelectItem>());
-		setItemsEdificio(new ArrayList<SelectItem>());
-		
+	public void loadCombos(){
+		setItemsLugares(new ArrayList<SelectItem>());
+		setItemsEdificios(new ArrayList<SelectItem>());
+	
 		for(LugarCurso lugarCursoTMP: admGeneralServicio.findLugar()){
-			getItemsLocalidades().add(new SelectItem(lugarCursoTMP.getIdLugar(), lugarCursoTMP.getNombre()));
+			getItemsLugares().add(new SelectItem(lugarCursoTMP.getIdLugar(), lugarCursoTMP.getNombre()));
 		}
 		
 		if(getAula().getEdificio()!=null && getAula().getEdificio().getLugarCurso()!=null){
 			for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getAula().getEdificio().getLugarCurso().getIdLugar())){
-				getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+				getItemsEdificios().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
 			}
 		}else{
-			for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getItemsLocalidades().iterator().next().getValue().toString())){
-				getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+			for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(getItemsLugares().iterator().next().getValue().toString())){
+				getItemsEdificios().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
 			}
-		}
-	}
-	
-	public void somChangeLocalidad(ValueChangeEvent e){
-		getItemsEdificio().clear();
-		for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(e.getNewValue().toString())){
-			getItemsEdificio().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
-		}
-	}
-	
-	public void btnSaveAula(ActionEvent e){
-		try {
-			if(editMode){
-				admGeneralServicio.editAula(getAula());
-				FacesUtils.addInfoMessage("El aula se actualizo correctamante");
-			}else{
-				admGeneralServicio.createAula(getAula());
-				FacesUtils.addInfoMessage("El aula se cre&oacute correctamante");
-				editMode = Boolean.TRUE;
-			}
-			
-		} catch (Exception e1) {
-			FacesUtils.addErrorMessage("Ha ocurrido un error al gurdadr el aula");
 		}
 	}
 	
@@ -101,29 +70,39 @@ public class AulaController implements Serializable{
 	public void setAula(Aula aula) {
 		this.aula = aula;
 	}
-
-	public Collection<SelectItem> getItemsEdificio() {
-		return itemsEdificio;
+		
+	public Collection<SelectItem> getItemsLugares() {
+		return itemsLugares;
 	}
 
-	public void setItemsEdificio(Collection<SelectItem> itemsEdificio) {
-		this.itemsEdificio = itemsEdificio;
+	public void setItemsLugares(Collection<SelectItem> itemsLugares) {
+		this.itemsLugares = itemsLugares;
 	}
 
-	public Collection<SelectItem> getItemsLocalidades() {
-		return itemsLocalidades;
+	public Collection<SelectItem> getItemsEdificios() {
+		return itemsEdificios;
 	}
 
-	public void setItemsLocalidades(Collection<SelectItem> itemsLocalidades) {
-		this.itemsLocalidades = itemsLocalidades;
+	public void setItemsEdificios(Collection<SelectItem> itemsEdificios) {
+		this.itemsEdificios = itemsEdificios;
 	}
-
-	public boolean isEditMode() {
-		return editMode;
+	
+	public void someChangeLugar(ValueChangeEvent e){
+		getItemsEdificios().clear();
+		for(Edificio edificioTMP: admGeneralServicio.findEdificioByLugar(e.getNewValue().toString())){
+			getItemsEdificios().add(new SelectItem(edificioTMP.getIdEdificio(), edificioTMP.getNombre()));
+		}
 	}
-
-	public void setEditMode(boolean editMode) {
-		this.editMode = editMode;
+	
+	public void btnSaveAula(ActionEvent e){
+		try {
+			admGeneralServicio.createAula(getAula());
+			initEntities();
+			loadCombos();
+			FacesUtils.addInfoMessage("El aula se cre&oacute exitosamente");
+		} catch (Exception e1) {
+			FacesUtils.addErrorMessage("Ha ocurrido un error al gurdar el aula");
+		}
 	}
 	
 }
