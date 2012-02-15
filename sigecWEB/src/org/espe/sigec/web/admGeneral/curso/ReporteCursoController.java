@@ -1,18 +1,34 @@
 package org.espe.sigec.web.admGeneral.curso;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.curso.CursoServicio;
+import org.espe.sigec.web.reportes.ReporteGenerico;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.SortOrder;
 
@@ -43,7 +59,49 @@ public class ReporteCursoController implements Serializable {
 			curso.setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
 		}
 	}
+	
+	public void btnPDF(ActionEvent e){
+		ReporteGenerico reporteGenerico = new ReporteGenerico();
+		reporteGenerico .generarReporteSimple("curso_existentes", getLstCursos());
+	}
+	
+	public void paint(OutputStream out, Object data)  {
+		if (data instanceof String) {
+			java.io.InputStream file = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream((String) data);
+			int size;
+			try {
+				size = file.available();
+				byte[] pdf = new byte[size];
+				file.read(pdf);
+				file.close();
+				out.write(pdf);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
+	public void paint2(OutputStream out, Object obj) throws IOException{
+		java.io.InputStream file = 
+				FacesContext.getCurrentInstance().getExternalContext(). getResourceAsStream(this.getClass().getClassLoader().getResource("/home/roberto/Desktop/JSF2/test.pdf").getFile());
+	              
+	              if(file== null) {
+	            	  System.out.println("File Not Found in classpath");
+	              }
+	              int size = file.available();
+	              System.out.println("size of file:"+size);
+	              byte[] pdf = new byte[size];
 
+	              file.read(pdf);
+
+	              file.close();
+
+	              out.write(pdf);
+
+	    	
+	    }
+	 
 	public void btnExpandContractCurso(Curso curso, boolean expanded) {
 		curso.setShowCursoPeriodoCollection(expanded);
 		if (expanded) {

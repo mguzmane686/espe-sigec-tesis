@@ -10,6 +10,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.servlet.http.HttpServletRequest;
+
+import org.espe.sigec.model.entities.UsuarioPerfil;
+import org.espe.sigec.web.seguridad.HomeSessionController;
 
 @SuppressWarnings("serial")
 public class SigecLifeCycle implements PhaseListener{
@@ -30,6 +34,8 @@ public class SigecLifeCycle implements PhaseListener{
 	 */
 	public void beforePhase(PhaseEvent event) {
 		event.getFacesContext().getExternalContext().log("BEFORE " + event.getPhaseId());
+		validarLogin();
+		
 		if (event.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 			FacesContext facesContext = event.getFacesContext();
 			restoreMessages(facesContext);
@@ -38,13 +44,38 @@ public class SigecLifeCycle implements PhaseListener{
 
 
 	}
-
+	public void validarLogin(){
+		HomeSessionController homeSessionController = null;
+		
+		FacesContext ctx = FacesContext.getCurrentInstance();
+		HttpServletRequest servletRequest = (HttpServletRequest) ctx.getExternalContext().getRequest();
+		String fullURI = servletRequest.getRequestURI();
+		System.out.println(fullURI);
+		if(fullURI.contains("index")){
+			
+		}else{
+			try {
+				homeSessionController = (HomeSessionController) FacesUtils.getManagedBean("homeSessionController");
+				if(homeSessionController == null){
+					FacesUtils.redirectPage("../index.jsf");
+				}else{
+					UsuarioPerfil usuarioPerfil = homeSessionController.getUsuarioPerfil();
+					if(usuarioPerfil ==null){
+						FacesUtils.redirectPage("../index.jsf");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	/**
 	 * Handle a notification that the processing for a particular phase has just
 	 * been completed.
 	 */
 	public void afterPhase(PhaseEvent event) {
 		event.getFacesContext().getExternalContext().log("AFTER " + event.getPhaseId());
+		validarLogin();
 		if (event.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES
 				|| event.getPhaseId() == PhaseId.PROCESS_VALIDATIONS
 				|| event.getPhaseId() == PhaseId.INVOKE_APPLICATION) {

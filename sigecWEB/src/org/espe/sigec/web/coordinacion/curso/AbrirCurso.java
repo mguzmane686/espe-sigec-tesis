@@ -20,6 +20,7 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
+import org.espe.sigec.web.seguridad.HomeSessionController;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.SigecConstantes;
 
@@ -122,6 +123,8 @@ public class AbrirCurso implements Serializable{
 	
 	public void btnSaveAbrirCurso(ActionEvent e){
 		try {
+			
+			getCursoPeriodo().setPersona(((HomeSessionController) FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona());
 			coordinacionServicio.abrirCurso(getPeriodoAcademico(), getCursoPeriodo());
 			initEntities();
 			FacesUtils.addInfoMessage("El curso fue abierto con &eacutexito");
