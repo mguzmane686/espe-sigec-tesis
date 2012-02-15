@@ -45,4 +45,9 @@ public class CursoServicioImpl implements CursoServicio{
 	public Collection<Curso> findCursos(){
 		return cursoFacadeLocal.findCursoByEstado();
 	}
+
+	@Override
+	public Collection<CursoPeriodo> findCursoAbiertoByUser(Integer idPersona) {
+		return periodoFacadeLocal.findCursoAbiertoByUser(idPersona);
+	}
 }

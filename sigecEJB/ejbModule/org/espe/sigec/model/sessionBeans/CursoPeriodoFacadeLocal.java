@@ -38,6 +38,8 @@ public interface CursoPeriodoFacadeLocal {
      */
     Collection<CursoPeriodo> findCursoAbierto();
     
+    Collection<CursoPeriodo> findCursoAbiertoByUser(Integer idPersona);
+    
     /**
      * Carga la lista de cursos en los cuales se puede inscribir un estudiante
      * @return

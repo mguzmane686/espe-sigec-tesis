@@ -66,4 +66,22 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	add(Restrictions.ne("estados.etapaFinalizado", "1"));
     	return crit.list();
 	}
+
+	@Override
+	public Collection<CursoPeriodo> findCursoAbiertoByUser(Integer idPersona) {
+		Criteria crit = null;
+    	crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
+    	crit.createAlias("curso", "cursoA");
+    	crit.setFetchMode("cursoA", FetchMode.JOIN);
+    	
+    	crit.createAlias("persona", "personaA");
+    	crit.setFetchMode("personaA", FetchMode.JOIN);
+    	crit.add(Restrictions.eq("personaA.idPersona", idPersona));
+    	
+    	crit.addOrder(Order.asc("cursoA.nombreCurso"));
+    	crit.setFetchMode("periodoAcademico", FetchMode.JOIN);
+    	crit.setFetchMode("aula", FetchMode.JOIN);
+    	crit.setFetchMode("historicoCursoEstadoCollection", FetchMode.JOIN);
+    	return crit.list();
+	}
 }

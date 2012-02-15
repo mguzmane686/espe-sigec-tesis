@@ -16,4 +16,5 @@ public interface CursoServicio {
 	Collection<PensumAcademico> findTemasCurso(Integer idCurso);
 	Collection<Curso> findAllCursos();
 	Collection<CursoPeriodo> findCursoAbierto();
+	Collection<CursoPeriodo> findCursoAbiertoByUser(Integer idPersona);
 }
