@@ -6,17 +6,14 @@
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
-    
-    
-    
+        
    	<h:outputStylesheet library="css" name="textos.css"/>    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
-   	
-   	
-       <h:form id="frmAula">
+   	  	
+        <h:form id="frmEdificio">
        	
-       	<rich:panel header="#{msg['creacion_curso']}">
+       	<rich:panel header="#{msg['creacion_edificio']}">
        		<h:panelGroup layout="block" styleClass="roundCorner">
        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
        				<a4j:commandButton value="#{msg['guardar']}" render="pnlAula" 
@@ -26,16 +23,16 @@
        		</h:panelGroup>
        	</rich:panel>
        	
-       	<rich:panel header="#{msg['creacion_curso']}" id="pnlAula">
+       	<rich:panel header="#{msg['creacion_edificio']}" id="pnlEdificio">
        	
         	<fieldset>
         		<legend>
-        			<h:outputLabel value="Datos del edificio" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg['datos_edificio']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Lugar :" />
         			<h:selectOneMenu value="#{edificioController.edificio.lugarCurso.idLugar}">
-        				<f:selectItems value="#{edificioController.itemsLocalidades}"/>
+        				<f:selectItems value="#{edificioController.itemsLugares}"/>
         			</h:selectOneMenu>
         			
         			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />

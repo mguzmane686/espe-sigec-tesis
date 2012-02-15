@@ -24,25 +24,27 @@ public class EdificioController implements Serializable{
 	private AdmGeneralServicio admGeneralServicio;
 	
 	private Edificio edificio;
-	private Collection<SelectItem> itemsLocalidades; 
+	private Collection<SelectItem> itemsLugares; 
 	
 	public EdificioController() {
 		initEntities();
 	}
+	
 	private void initEntities(){
 		setEdificio(new Edificio());
 		getEdificio().setLugarCurso(new LugarCurso());
 	}
+	
 	@PostConstruct
-	public void loadLocalidades(){
-		setItemsLocalidades(new ArrayList<SelectItem>());
-		for(LugarCurso lugarCurso: admGeneralServicio.findLugar()){
-			getItemsLocalidades().add(new SelectItem(lugarCurso.getIdLugar(), lugarCurso.getNombre()));
+	public void loadLugares(){
+		setItemsLugares(new ArrayList<SelectItem>());
+		for (LugarCurso lugarCurso: admGeneralServicio.findLugar()){
+			getItemsLugares().add(new SelectItem(lugarCurso.getIdLugar(),lugarCurso.getNombre()));
 		}
 	}
+	
 	public void btnSaveEdificio(ActionEvent e){
 		try {
-//			getEdificio().setIdEdificio(getEdificio().getIdEdificio()+"_"+getEdificio().getLugarCurso().getIdLugar());
 			admGeneralServicio.createEdificio(getEdificio());
 			initEntities();
 			FacesUtils.addInfoMessage("El edificio se cre&oacute exitosamente");
@@ -50,6 +52,7 @@ public class EdificioController implements Serializable{
 			FacesUtils.addInfoMessage("No se pudo crear el edificio");
 		}
 	}
+	
 	public Edificio getEdificio() {
 		return edificio;
 	}
@@ -57,13 +60,13 @@ public class EdificioController implements Serializable{
 	public void setEdificio(Edificio edificio) {
 		this.edificio = edificio;
 	}
-
-	public Collection<SelectItem> getItemsLocalidades() {
-		return itemsLocalidades;
+	
+	public Collection<SelectItem> getItemsLugares() {
+		return itemsLugares;
 	}
-
-	public void setItemsLocalidades(Collection<SelectItem> itemsLocalidades) {
-		this.itemsLocalidades = itemsLocalidades;
+	
+	public void setItemsLugares(Collection<SelectItem> itemsLugares) {
+		this.itemsLugares = itemsLugares;
 	}
 	
 }
