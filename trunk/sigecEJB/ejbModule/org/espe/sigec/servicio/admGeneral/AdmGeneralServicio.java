@@ -22,18 +22,21 @@ public interface AdmGeneralServicio {
 	void createLugar(LugarCurso lugarCurso) throws Exception;
 	void editLugar(LugarCurso lugarCurso) throws Exception;
 	
-	
-	
-
-	void createAula(Aula aula) throws Exception;
-	void editAula(Aula aula) throws Exception;
-	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
-	Collection<Edificio> findEdificioByLugar(String idLugarCurso);
-	Collection<Edificio> findEdificio();
-	Collection<Aula> findCursoByEdificio(String idEdificio);
-	void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
 	//Edificio
+	Collection<Edificio> findEdificio();
+	Collection<Edificio> findEdificioByLugar(String idLugarCurso);
 	void createEdificio(Edificio edificio) throws Exception;
 	void editEdificio(Edificio edificio) throws Exception;
+	
+	//Aula
 	Collection<Aula> findAula();
+	Collection<Aula> findCursoByEdificio(String idEdificio);
+	void createAula(Aula aula) throws Exception;
+	void editAula(Aula aula) throws Exception;
+	
+	
+	
+	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
+	void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
+
 }
