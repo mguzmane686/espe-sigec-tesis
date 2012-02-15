@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">  
+    
+   	<h:outputStylesheet library="css" name="textos.css"/>    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	
+        <h:form id="frmLugar">
+        
+        <rich:panel header="Administrar lugar">
+        	<h:panelGroup layout="block" styleClass="roundCorner" id="pnlMenuLugar">
+	       		<h:panelGrid columns="4">
+	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarLugarController.editMode}">
+	       			<a4j:commandButton value="#{msg['guardar']}" render="pnlMenuLugar, pnlLugar" actionListener="#{administrarLugarController.btnSave}" 
+	       					 image="/resources/images/save.png"/>
+	       				<h:outputLabel value="#{msg['guardar']}" />
+	       			</h:panelGrid>
+	        			
+	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarLugarController.editMode}">
+	       				<a4j:commandButton value="#{msg['editar']}" render="pnlMenuLugar, pnlLugar" actionListener="#{administrarLugarController.btnEdit}" execute="@this" 
+	       					 image="/resources/images/edit.png"/>
+	       				<h:outputLabel value="#{msg['editar']}" />
+	       			</h:panelGrid>
+	       			
+	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarLugarController.editMode}">
+	       				<a4j:commandButton value="#{msg['cancelar']}" render="pnlMenuLugar, pnlLugar" actionListener="#{administrarLugarController.btnCancelEdit}" execute="@this" 
+	       					 image="/resources/images/cancel.png"/>
+	       				<h:outputLabel value="#{msg['cancelar']}" />
+	       			</h:panelGrid>
+	        			
+	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarLugarController.editMode}">
+	       				<a4j:commandButton value="Atras" render="pnlLugar" immediate="true" actionListener="#{administrarLugarController.btnReturnReporteLugares}" image="/resources/images/go-back.png"/>
+	       				<h:outputLabel value="#{msg['regresar']}" />
+	       			</h:panelGrid>
+	       		</h:panelGrid>
+        	</h:panelGroup>
+        </rich:panel>
+       	
+        <rich:panel header="#{msg['creacion_lugar']}" id="pnlLugar">
+       		<fieldset>
+        		<legend>
+        			<h:outputLabel value="Datos del lugar del curso" styleClass="titulo"/>
+        		</legend>
+        		<h:panelGrid columns="3">
+        		        		
+        			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
+        			<h:inputText render="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.idLugar}" required="true" requiredMessage="El campo #{msg['etiqueta_codigo']} es obligatorio" disabled="true"/>
+        			<h:outputText value="#{administrarLugarController.lugarCurso.idLugar}" render="#{!administrarLugarController.editMode}" />
+        			
+        			<h:outputLabel value="#{msg['nombre']}:" />
+        			<h:inputText render="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
+        			<h:outputText value="#{administrarLugarController.lugarCurso.nombre}" render="#{!administrarLugarController.editMode}" />
+        			
+        			<h:outputLabel value="#{msg['direccion']}:"/>
+        			<h:inputText render="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.direccion}" size="72" required="true" requiredMessage="El campo #{msg['direccion']} es obligatorio"/>
+        			<h:outputText value="#{administrarLugarController.lugarCurso.direccion}" render="#{!administrarLugarController.editMode}" />
+        		
+        		</h:panelGrid>
+        	</fieldset>	
+       	</rich:panel>
+       	
+       </h:form>
+</ui:composition>
