@@ -15,6 +15,9 @@
     	
         <h:form id="frmRepCurso">
         	<rich:panel header="#{msg['cursos_disponibles']}">
+        	<h:commandButton actionListener="#{reporteCursoController.btnPDF}" value="PDF" 
+        		immediate="true" image="/resources/images/button/ACP_PDF.png"/>
+        	  
         	
 	        	<fieldset>
 	        		<legend>

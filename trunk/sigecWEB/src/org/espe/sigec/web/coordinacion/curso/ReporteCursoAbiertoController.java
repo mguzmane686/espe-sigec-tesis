@@ -14,6 +14,8 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.servicio.curso.CursoServicio;
+import org.espe.sigec.web.seguridad.HomeSessionController;
+import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.SortOrder;
 import org.richfaces.model.Filter;
 @SuppressWarnings("serial")
@@ -37,6 +39,9 @@ public class ReporteCursoAbiertoController implements Serializable{
 	@PostConstruct
 	public void loadCursoAbierto(){
 		setLstCursoPeriodos(cursoServicio.findCursoAbierto());
+		
+		setLstCursoPeriodos(cursoServicio.findCursoAbiertoByUser(((HomeSessionController) FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getIdPersona()));
+		
 		setItemsEstado(new ArrayList<SelectItem>());
 		getItemsEstado().add(new SelectItem(null, "TODOS"));
 		getItemsEstado().add(new SelectItem("ABIERTO", "ABIERTO"));
