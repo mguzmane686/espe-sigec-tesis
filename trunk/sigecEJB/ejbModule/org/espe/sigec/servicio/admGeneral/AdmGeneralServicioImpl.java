@@ -26,17 +26,14 @@ import org.espe.sigec.model.sessionBeans.UsuarioPerfilFacadeLocal;
 public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	@EJB
 	private AulaFacadeLocal aulaFacadeLocal;
-	
 	@EJB 
 	private UsuarioFacadeLocal usuarioFacadeLocal;
 	@EJB 
 	private PersonaFacadeLocal personaFacadeLocal; 
-	
 	@EJB
 	private UsuarioPerfilFacadeLocal usuarioPerfilFacadeLocal;
 	@EJB
 	private EdificioFacadeLocal edificioFacadeLocal;
-	
 	@EJB
 	private ProfesorFacadeLocal profesorFacadeLocal;
 	@EJB
@@ -53,14 +50,17 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public void createAula(Aula aula) throws Exception {
 		aulaFacadeLocal.create(aula);
 	}
+	
 	@Override
 	public Collection<Edificio> findEdificio(){
 		return edificioFacadeLocal.findAll();
 	}
+	
 	@Override
 	public Collection<Aula> findCursoByEdificio(String idEdificio){
 		return aulaFacadeLocal.findCursoByEdificio(idEdificio);
 	}
+	
 	@Override
 	public void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException {
 		userTransaction.begin();
@@ -106,28 +106,39 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		personaFacadeLocal.create(persona);
 		profesorFacadeLocal.create(profesor);
 	}
+	
 	@Override
 	public void createEdificio(Edificio edificio) throws Exception {
 		edificioFacadeLocal.create(edificio);
 	}
-	@Override
-	public void createLocalidad(LugarCurso lugarCurso) throws Exception {
-		lugarCursoFacadeLocal.create(lugarCurso);
-	}
+	
 	@Override
 	public Collection<LugarCurso> findLugar() {
 		return lugarCursoFacadeLocal.findAll();
 	}
+	
 	@Override
 	public Collection<Edificio> findEdificioByLugar(String idLugarCurso) {
 		return edificioFacadeLocal.findEdificioByLugarCurso(idLugarCurso);
 	}
+	
 	@Override
 	public void editEdificio(Edificio edificio) throws Exception {
 		edificioFacadeLocal.edit(edificio);
 	}
+	
 	@Override
 	public Collection<Aula> findAula() {
 		return aulaFacadeLocal.findAulas();
+	}
+
+	@Override
+	public void createLugar(LugarCurso lugarCurso) throws Exception {
+		lugarCursoFacadeLocal.create(lugarCurso);
+	}
+
+	@Override
+	public void editLugar(LugarCurso lugarCurso) throws Exception {
+		lugarCursoFacadeLocal.edit(lugarCurso);
 	}
 }
