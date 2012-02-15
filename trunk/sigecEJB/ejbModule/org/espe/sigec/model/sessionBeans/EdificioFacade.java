@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.Edificio;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -38,6 +39,14 @@ public class EdificioFacade extends AbstractFacade<Edificio> implements Edificio
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Edificio.class);
     	crit.add(Restrictions.eq("lugarCurso.idLugar", idLugar));
 		return crit.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Edificio> findEdificiosReporte() {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Edificio.class);
+		criteria.setFetchMode("lugarCurso", FetchMode.JOIN);
+		return criteria.list();
 	}
     
 }

@@ -141,4 +141,9 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public void editLugar(LugarCurso lugarCurso) throws Exception {
 		lugarCursoFacadeLocal.edit(lugarCurso);
 	}
+
+	@Override
+	public Collection<Edificio> findEdificioReporte() {
+		return edificioFacadeLocal.findEdificiosReporte();
+	}
 }

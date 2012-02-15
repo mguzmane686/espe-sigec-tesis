@@ -24,6 +24,7 @@ public interface AdmGeneralServicio {
 	
 	//Edificio
 	Collection<Edificio> findEdificio();
+	Collection<Edificio> findEdificioReporte();
 	Collection<Edificio> findEdificioByLugar(String idLugarCurso);
 	void createEdificio(Edificio edificio) throws Exception;
 	void editEdificio(Edificio edificio) throws Exception;
