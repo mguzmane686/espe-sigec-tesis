@@ -24,8 +24,8 @@ public class LoginController implements Serializable{
 	
 	public LoginController() {
 		usuario = new Usuario();
-		usuario.setIdentificador("maniac787");
-		usuario.setClave("qwe123");
+		usuario.setIdentificador("");
+		usuario.setClave("");
 	}
 	
 	public void btnSignIn(ActionEvent e) {

@@ -54,20 +54,7 @@
 					</a4j:commandLink>
 				</h:panelGrid>
 			</fieldset>	
-			<h:panelGroup rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
-				<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="Usuario" styleClass="titulo"/>
-	        		</legend>
-	        		<h:panelGrid columns="2">
-	        			<h:outputLabel value="Identificador" styleClass="label-bold espacioDetalle" />
-	        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" />
-	        			
-	        			<h:outputLabel value="Clave" styleClass="label-bold"/>
-	        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" />
-	        		</h:panelGrid>
-	        	</fieldset>
-        	</h:panelGroup>
+			
         	
 			<fieldset>
 				<legend>
@@ -75,11 +62,18 @@
 				</legend>
 				
 				<h:panelGrid columns="2" id="pgDatosAlumno">
-					<h:outputLabel value="Curso" />
+        			<h:outputLabel value="Identificador :" styleClass="label-bold espacioDetalle" />
+        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" />
+        			
+        			<h:outputLabel value="Clave :" styleClass="label-bold"/>
+        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" />
+	        
+				
+					<h:outputLabel value="Curso :" />
 					<rich:select value="#{inscripcionAlumnoCursoController.cursoEstudiante.cursoPeriodo.idCursoPeriodo}" required="true" requiredMessage="El campo Curso es obligatorio">
 						<f:selectItems value="#{inscripcionAlumnoCursoController.itemCursos}"></f:selectItems>
 					</rich:select>
-					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
+					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}" 
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}"
@@ -87,7 +81,7 @@
 						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 						
-					<h:outputLabel value="#{msg['nombres']}"  />
+					<h:outputLabel value="#{msg['nombres']} :"  />
 					<h:panelGrid columns="2" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
 						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoNombre}" />
 						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerApellido} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoApellido}" /> 
@@ -98,36 +92,36 @@
 					</h:panelGrid>
 					
 					
-					<h:outputLabel value="#{msg['apellidos']}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+					<h:outputLabel value="#{msg['apellidos']} :" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 					<h:panelGrid columns="2" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
 						<h:inputText value="#{administrativoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
 						<h:inputText value="#{administrativoController.persona.segundoApellido}" />
 					</h:panelGrid>
 					
 					
-					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
+					<h:outputLabel value="#{msg['fecha_nacimiento']} :"/>
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.fechaNacimiento}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
 						<f:convertDateTime pattern="dd/MMM/yyyy"/>
 					</h:outputText>
 					<rich:calendar rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"></rich:calendar>
 					
-					<h:outputLabel value="#{msg['nacionalidad']}"  />
+					<h:outputLabel value="#{msg['nacionalidad']} :"  />
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.nacionalidad}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
-					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
+					<h:outputLabel value="#{msg['direccion']} :"  required="true"/>
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.direccion}"
 						size="43"
 						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
-					<h:outputLabel value="#{msg['e_mail']}"  />
+					<h:outputLabel value="#{msg['e_mail']} :"  />
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.mail}"
 						size="43" 
 						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 
-					<h:outputLabel value="#{msg['celular']}"/>
+					<h:outputLabel value="#{msg['celular']} :"/>
 					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.telefonoCelular}"
 						onkeypress="return validateNumPP(event);"  

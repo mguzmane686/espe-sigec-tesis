@@ -143,14 +143,14 @@ public class PresupuestoController implements Serializable {
 	}
 	public BigDecimal getTotalLista(){
 		BigDecimal totalLista = new BigDecimal(0);
-		if(getPresupuestoCurso() != null){
-			if(getPresupuestoCurso().getDetallePresupuestoCursoCollection() != null){
-				for(DetallePresupuestoCurso detallePresupuestoCurso: getPresupuestoCurso().getDetallePresupuestoCursoCollection()){
-					detallePresupuestoCurso.getCostoTotalUSD();
-					totalLista = totalLista.add(detallePresupuestoCurso.getCostoTotalUSD());
-				}
+		
+		if(getLstDetallePresupuestoCursos() != null){
+			for(DetallePresupuestoCurso detallePresupuestoCurso: getLstDetallePresupuestoCursos()){
+				detallePresupuestoCurso.getCostoTotalUSD();
+				totalLista = totalLista.add(detallePresupuestoCurso.getCostoTotalUSD());
 			}
 		}
+		
 		return totalLista;
 	}
 }

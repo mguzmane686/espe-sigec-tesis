@@ -84,11 +84,8 @@
 					<h:outputLabel value="#{msg['presupuesto_asignacion']}" style="font-weight:bold;"/>
 				</legend>
 				<h:outputLabel value="Presupuesto asignado : " />
-				<h:inputText value="#{presupuestoController.presupuestoCurso.dineroAsignado}" required="true" requiredMessage="El campo Presupueso asignado es obligatorio"
-					converterMessage="El campo Presupuesto asignado, solo acepta cantidades numericas">
-					
-				</h:inputText>
-				<h:outputText value="$"/>
+				<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado} $"/>
+				
 			</fieldset>
 		</rich:panel>
 		
@@ -155,7 +152,7 @@
 					
 					<f:facet name="footer">
 			            <rich:columnGroup>
-			                <rich:column colspan="5" style="text-align:right">
+			                <rich:column colspan="5" style="text-align:right" styleClass="rf-dt-shdr-c">
 			                	<h:outputLabel value="Total" /> 
 			                </rich:column>
 			                
