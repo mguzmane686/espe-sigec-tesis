@@ -20,6 +20,7 @@
        groupCollapsedLeftIcon="triangleDown"
        topGroupExpandedRightIcon="chevronUp"
        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
+       
        <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
             <rich:panelMenuItem>
             	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
@@ -30,8 +31,7 @@
             </rich:panelMenuItem>
             
         </rich:panelMenuGroup>
-        
-        
+                
         <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
             	<a4j:commandLink value="Abrir curso" action="coor_lanzar_curso.jsf?faces-redirect=true"/>
@@ -52,11 +52,11 @@
         
         <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	<rich:panelMenuItem>
-            	<a4j:commandLink value="Nueva localidad" action="adm_localidad.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Nuevo Lugar" action="adm_lugar.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
-            	<a4j:commandLink value="Reporte localidades" action="reporte_localidades.jsf?faces-redirect=true"/>
+            	<a4j:commandLink value="Reporte Lugares" action="adm_reporte_lugar.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
         	
         	<rich:panelMenuItem>
@@ -84,8 +84,8 @@
         	<rich:panelMenuItem>
             	<a4j:commandLink value="#{msg['etiqueta_inscripcion']}" action="coor_inscripcion_estudiante.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
-            
         </rich:panelMenuGroup>
+        
    </rich:panelMenu>
 </composite:implementation>
 </body>
