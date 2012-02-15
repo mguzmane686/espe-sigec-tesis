@@ -35,7 +35,7 @@ public class ReporteEdificioController implements Serializable {
 	
 	@PostConstruct
 	public void loadEdificios(){
-		setLstEdificios(admGeneralServicio.findEdificio());
+		setLstEdificios(admGeneralServicio.findEdificioReporte());
 	}
 
 	public Collection<Edificio> getLstEdificios() {

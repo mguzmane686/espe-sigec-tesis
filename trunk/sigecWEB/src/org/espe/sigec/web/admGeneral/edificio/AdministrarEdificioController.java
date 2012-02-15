@@ -1,19 +1,14 @@
 package org.espe.sigec.web.admGeneral.edificio;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
-import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Edificio;
-import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -29,21 +24,10 @@ public class AdministrarEdificioController {
 	private AdmGeneralServicio admGeneralServicio;
 	
 	private Edificio edificio;
-	private Collection<SelectItem> itemsLugares; 
-	
 	private boolean editMode;
 	
 	public AdministrarEdificioController(){
 		setEdificio((Edificio) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("edificioToEdit"));
-		//getEdificio().setLugarCurso(getEdificio().getLugarCurso());
-	}
-	
-	@PostConstruct
-	public void loadLugares(){
-		setItemsLugares(new ArrayList<SelectItem>());
-		for (LugarCurso lugarCurso: admGeneralServicio.findLugar()){
-			getItemsLugares().add(new SelectItem(lugarCurso.getIdLugar(),lugarCurso.getNombre()));
-		}
 	}
 	
 	public Edificio getEdificio() {
@@ -52,14 +36,6 @@ public class AdministrarEdificioController {
 	
 	public void setEdificio(Edificio edificio) {
 		this.edificio = edificio;
-	}
-	
-	public Collection<SelectItem> getItemsLugares() {
-		return itemsLugares;
-	}
-
-	public void setItemsLugares(Collection<SelectItem> itemsLugares) {
-		this.itemsLugares = itemsLugares;
 	}
 	
 	public boolean isEditMode() {

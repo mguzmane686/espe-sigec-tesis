@@ -50,13 +50,10 @@
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Lugar :" />
-        			<h:selectOneMenu value="#{administrarEdificioController.edificio.lugarCurso.idLugar}" disabled="true">
-        				<f:selectItems value="#{administrarEdificioController.itemsLugares}"/>
-        			</h:selectOneMenu>
+        			<h:outputText value="#{administrarEdificioController.edificio.lugarCurso.nombre}" />
         			
         			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
-        			<h:inputText rendered="#{administrarEdificioController.editMode}" value="#{administrarEdificioController.edificio.idEdificio}" size="72" required="true" requiredMessage="El campo #{msg['etiqueta_codigo']} es obligatorio" disabled="true"/>
-        			<h:outputText value="#{administrarEdificioController.edificio.idEdificio}" rendered="#{!administrarEdificioController.editMode}" />   			
+        			<h:outputText value="#{administrarEdificioController.edificio.idEdificio}" />   			
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
         			<h:inputText rendered="#{administrarEdificioController.editMode}" value="#{administrarEdificioController.edificio.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
