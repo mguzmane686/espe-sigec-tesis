@@ -28,9 +28,16 @@
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['lugar']}" />
+			        			</f:facet>
+			        			<a4j:commandLink value="#{edificio.lugarCurso.nombre}" action="#{reporteEdificioController.btnShowEdificioDetail(edificio)}"></a4j:commandLink>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<a4j:commandLink value="#{edificio.nombre}" action="#{reporteEdificioController.btnShowEdificioDetail(edificio)}"></a4j:commandLink>
+			        			<h:outputText value="#{edificio.nombre}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>

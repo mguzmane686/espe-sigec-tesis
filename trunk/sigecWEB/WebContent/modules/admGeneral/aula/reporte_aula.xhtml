@@ -28,9 +28,23 @@
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['lugar']}" />
+			        			</f:facet>
+			        			<a4j:commandLink value="#{aula.edificio.lugarCurso.nombre}" action="#{reporteAulaController.btnShowAulaDetail(aula)}"></a4j:commandLink>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['edificio']}" />
+			        			</f:facet>
+			        			<h:outputText value="#{aula.edificio.nombre}" />	
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<a4j:commandLink value="#{aula.nombreAula}" action="#{reporteAulaController.btnShowAulaDetail(aula)}"></a4j:commandLink>
+			        			<h:outputText value="#{aula.nombreAula}" />	
 		        			</rich:column>
 		        			
 		        			<rich:column>

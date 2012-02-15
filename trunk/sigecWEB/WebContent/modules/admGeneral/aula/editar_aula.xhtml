@@ -50,18 +50,13 @@
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Lugar :" />
-        			<h:selectOneMenu>
-        				<f:selectItems value="#{aulaController.itemsLugares}"/>
-        			</h:selectOneMenu>
+        			<h:outputText value="#{administrarAulaController.aula.edificio.lugarCurso.nombre}" />
         			
         			<h:outputLabel value="#{msg['etiqueta_edificio']}:" />
-        			<h:selectOneMenu value="#{aulaController.aula.edificio.idEdificio}">
-        				<f:selectItems value="#{aulaController.itemsEdificios}"/>
-        			</h:selectOneMenu>
+        			<h:outputText value="#{administrarAulaController.aula.edificio.nombre}" />
         			
         			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
-        			<h:inputText rendered="#{administrarAulaController.editMode}" value="#{administrarAulaController.aula.idAula}" size="72" required="true" requiredMessage="El campo #{msg['etiqueta_codigo']} es obligatorio" disabled="true"/>
-        			<h:outputText value="#{administrarAulaController.aula.idAula}" rendered="#{!administrarAulaController.editMode}"/>
+        			<h:outputText value="#{administrarAulaController.aula.idAula}" />
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
         			<h:inputText rendered="#{administrarAulaController.editMode}" value="#{administrarAulaController.aula.nombreAula}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
