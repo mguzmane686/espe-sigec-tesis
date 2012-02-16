@@ -18,6 +18,7 @@ import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EstudianteFacadeLocal;
+import org.espe.sigec.model.sessionBeans.HistoricoCursoEstadoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioPerfilFacadeLocal;
@@ -40,7 +41,8 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 	
 	@EJB
 	private UsuarioPerfilFacadeLocal usuarioPerfilFacadeLocal;
-	
+	@EJB
+	private HistoricoCursoEstadoFacadeLocal historicoCursoEstadoFacadeLocal;
 	@Resource
 	private UserTransaction userTransaction;
 	@Override
@@ -84,23 +86,25 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 				}
 			}
 			
-				if(cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo()) < cursoPeriodo.getMaximoEstudiantes()){
-					cursoEstudiante.setEstudiante(estudiante);
-					cursoEstudiante.setCursoPeriodo(cursoPeriodo);
-					cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
-					cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
-					cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
-					cursoEstudiante.setEstadoPago("DEBE");
-					cursoEstudianteFacadeLocal.create(cursoEstudiante);
+			if(cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo()) < cursoPeriodo.getMaximoEstudiantes()){
+				cursoEstudiante.setEstudiante(estudiante);
+				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+				cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
+				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
+				cursoEstudiante.setEstadoPago("DEBE");
+				cursoEstudianteFacadeLocal.create(cursoEstudiante);
+				
+				if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())) >= cursoPeriodo.getMinimoEstudiantes()){
+					cursoPeriodo.getHistoricoCursoEstadoCollection().setEtapaAsignacionProfesor("1");
+					historicoCursoEstadoFacadeLocal.edit(cursoPeriodo.getHistoricoCursoEstadoCollection());
 					
-					if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())+1) == cursoPeriodo.getMaximoEstudiantes()){
-						System.out.println(cursoPeriodo);
-					}
-					
-					userTransaction.commit();
-				}else{
-					throw new Exception("Ya no quedan cupos para el curso");
 				}
+				
+				userTransaction.commit();
+			}else{
+				throw new Exception("Ya no quedan cupos para el curso");
+			}
 			
 		} catch (Exception e) {
 			userTransaction.rollback();
