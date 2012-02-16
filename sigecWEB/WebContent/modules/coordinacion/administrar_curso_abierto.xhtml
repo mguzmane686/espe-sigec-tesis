@@ -116,7 +116,7 @@
         				<h:outputText value="#{(administrarCursoController.cursoPeriodo.tipoCurso =='CORP'?'Empresarial':'Abierto')}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="Lugar :" />
-        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" required="true" requiredMessage="El campo lugar es obligatorio"/>
+        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" />
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.lugarCapacitacion}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="Estado del curso :" />

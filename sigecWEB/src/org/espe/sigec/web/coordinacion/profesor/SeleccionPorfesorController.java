@@ -55,6 +55,16 @@ public class SeleccionPorfesorController {
 			}
 		}
 	}
+	
+	public void btnShowProfesorDetail(){
+		try {
+			FacesUtils.putFlashObject("profesor", getProfesor());
+			FacesUtils.redirectPage("coor_registro_nuevo_docente.jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void setLstProfesors(Collection<Profesor> lstProfesors) {
 		this.lstProfesors = lstProfesors;
 	}

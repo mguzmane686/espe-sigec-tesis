@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
@@ -26,7 +26,7 @@ import org.richfaces.model.UploadedFile;
  */
 @SuppressWarnings("serial")
 @ManagedBean(name="registroDocenteController")
-@SessionScoped
+@ViewScoped
 public class RegistroDocenteController implements Serializable{
 	
 	@Inject
@@ -35,8 +35,15 @@ public class RegistroDocenteController implements Serializable{
 	private Profesor profesor;
 	private Usuario usuario;
 	private ArrayList<Persona> files;
+	private boolean editMode;
 	public RegistroDocenteController() {
-		initEntities();
+		setProfesor((Profesor) FacesUtils.getFlashObject("profesor"));
+		setEditMode(Boolean.TRUE);
+		if(getProfesor() ==null){
+			initEntities();
+			setEditMode(Boolean.FALSE);
+		}
+		
 	}
 
 	
@@ -55,25 +62,36 @@ public class RegistroDocenteController implements Serializable{
 	public void uploadImage(FileUploadEvent event) throws Exception {
         UploadedFile item = event.getUploadedFile();
         getProfesor().getPersona().setFoto(item.getData());
-        files.add(getProfesor().getPersona());
+//        files.add(getProfesor().getPersona());
+        FacesUtils.refresh();
     }
 	
-	public void paint(OutputStream stream, Object object) throws IOException {
-        stream.write(getFiles().get((Integer) object).getFoto());
-        stream.close();
+	public  synchronized void  paint(OutputStream stream, Object object) throws IOException {
+        try {
+        	stream.write(getProfesor().getPersona().getFoto());
+            stream.close();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
     }
 	
 	public void btnSaveProfesor(ActionEvent e){
 		try {
+			if(isEditMode()){
+				admGeneralServicio.editProfesor(getUsuario(), getProfesor().getPersona(), getProfesor());
+				FacesUtils.addInfoMessage("El docente fue actualizado correctamente");
+			}else{
+				admGeneralServicio.createProfesor(getUsuario(), getProfesor().getPersona(), getProfesor());
+				setEditMode(Boolean.TRUE);
+				initEntities();
+				FacesUtils.addInfoMessage("El docente fue agregado correctamente");
+			}
 			
-			admGeneralServicio.createProfesor(getUsuario(), getProfesor().getPersona(), getProfesor());
-			
-			initEntities();
-			FacesUtils.addInfoMessage("El docente fue agregado correctamente");
 		}catch (UserValidateException e2){
 			FacesUtils.addInfoMessage(e2.getMessage());
 		}catch (Exception e1) {
-			FacesUtils.addErrorMessage("Ocurrio un error al agregar al docente");
+			FacesUtils.addErrorMessage("Ocurrio un error al grabar el docente");
 		}
 	}
 	
@@ -100,4 +118,15 @@ public class RegistroDocenteController implements Serializable{
 	public void setFiles(ArrayList<Persona> files) {
 		this.files = files;
 	}
+
+
+	public boolean isEditMode() {
+		return editMode;
+	}
+
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
+	}
+	
 }
