@@ -56,12 +56,17 @@ public class InscripcionAlumnoCursoController {
 	}
 	
 	public void btnBuscarEstudiante(ActionEvent e){
+		setShowFieldsNewStudent(Boolean.FALSE);
 		getCursoEstudiante().setEstudiante(inscripcionServicio.buscarEstudinateByCedula(getCedulaUsr()));
 		if(getCursoEstudiante().getEstudiante()==null){
 			FacesUtils.addInfoMessage("El usuario no existe. Para crearlo hagalo con el boton Nuevo");
 		}else{
 			setShowFieldsNewStudent(Boolean.FALSE);
 		}
+	}
+	
+	public void btnFindEstudiante(ActionEvent e){
+		setShowFieldsNewStudent(Boolean.FALSE);
 	}
 	public void btnInscripcionEstudinateCurso(ActionEvent e){
 		try {
