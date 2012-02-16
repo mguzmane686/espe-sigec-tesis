@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
+import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
@@ -35,6 +36,10 @@ public interface AdmGeneralServicio {
 	void createAula(Aula aula) throws Exception;
 	void editAula(Aula aula) throws Exception;
 	
+	//Especialidad
+	Collection<Especialidad> findEspecialidad();
+	void createEspecialidad(Especialidad especialidad) throws Exception;
+	void editEspecialidad(Especialidad especialidad) throws Exception;
 	
 	
 	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
