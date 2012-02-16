@@ -25,36 +25,46 @@
 	<h:form>
 		<rich:panel header="#{msg['creacion_curso']}">
 			<h:panelGroup layout="block" styleClass="roundCorner">
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3" id="pgBtnInscrip">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-						<a4j:commandButton value="#{msg['guardar']}" actionListener="#{inscripcionAlumnoCursoController.btnInscripcionEstudinateCurso}" image="/resources/images/save.png" render="pnlDocente"/>
+						<a4j:commandButton value="#{msg['guardar']}"  
+							actionListener="#{inscripcionAlumnoCursoController.btnInscripcionEstudinateCurso}" 
+							image="/resources/images/save.png" render="pnlDocente, pgBtnInscrip"/>
 						<h:outputLabel value="#{msg['guardar']}" />
 					</h:panelGrid>
 					
-					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-						<a4j:commandButton value="Nuevo" actionListener="#{inscripcionAlumnoCursoController.btnNuevoEstudiante}" 
-							image="/resources/images/student.png" execute="@this" render="pgDatosAlumno"/>
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
+						<a4j:commandButton value="Nuevo" actionListener="#{inscripcionAlumnoCursoController.btnNuevoEstudiante}"  
+							image="/resources/images/student.png" execute="@this" render="pgDatosAlumno, pgBtnInscrip, pnlEtsCur" immediate="true"/>
 						<h:outputLabel value="Nuevo" />
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}" >
+						<a4j:commandButton value="Buscar" actionListener="#{inscripcionAlumnoCursoController.btnFindEstudiante}"
+							image="/resources/images/button/search-user.png" execute="@this" render="pgDatosAlumno, pgBtnInscrip, pnlEtsCur" immediate="true"/>
+						<h:outputLabel value="Buscar" />
 					</h:panelGrid>
 				</h:panelGrid>
 			</h:panelGroup>
 		</rich:panel>
 
 		<rich:panel header="#{msg['incripcion_curso']}" id="pnlEtsCur">
+			<h:panelGroup rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
 			<fieldset>
 				<legend>
 					<h:outputLabel value="Buscar Estudiante" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="3" id="pgBusqueda">
-					<h:outputLabel value="#{msg['cedula']}" />					
-					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}" onkeypress="return validateNumPP(event);" maxlength="10"/>
+					<h:outputLabel value="#{msg['cedula']} :" />					
+					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"
+						onkeypress="return validateNumPP(event);" maxlength="10"/>
 					
 					<a4j:commandLink actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno">
 						<h:graphicImage library="images/button" name="search_button.png" height="20px"/>
 					</a4j:commandLink>
 				</h:panelGrid>
 			</fieldset>	
-			
+			</h:panelGroup>
         	
 			<fieldset>
 				<legend>
@@ -62,11 +72,11 @@
 				</legend>
 				
 				<h:panelGrid columns="2" id="pgDatosAlumno">
-        			<h:outputLabel value="Identificador :" styleClass="label-bold espacioDetalle" />
-        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" />
+        			<h:outputLabel value="Identificador :" styleClass="label-bold espacioDetalle" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
         			
-        			<h:outputLabel value="Clave :" styleClass="label-bold"/>
-        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" />
+        			<h:outputLabel value="Clave :" styleClass="label-bold" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 	        
 				
 					<h:outputLabel value="Curso :" />
