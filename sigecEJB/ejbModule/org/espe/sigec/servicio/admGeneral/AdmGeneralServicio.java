@@ -8,6 +8,7 @@ import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
+import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 
@@ -40,6 +41,11 @@ public interface AdmGeneralServicio {
 	Collection<Especialidad> findEspecialidad();
 	void createEspecialidad(Especialidad especialidad) throws Exception;
 	void editEspecialidad(Especialidad especialidad) throws Exception;
+	
+	//Presupuesto
+	Collection<Presupuesto> findPresupuesto();
+	void createPresupuesto(Presupuesto presupuesto) throws Exception;
+	void editPresupuesto(Presupuesto presupuesto) throws Exception;
 	
 	
 	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
