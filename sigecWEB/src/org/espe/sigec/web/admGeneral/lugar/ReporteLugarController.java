@@ -14,7 +14,6 @@ import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
-
 @SuppressWarnings("serial")
 @ManagedBean(name="reporteLugarController")
 @ViewScoped
