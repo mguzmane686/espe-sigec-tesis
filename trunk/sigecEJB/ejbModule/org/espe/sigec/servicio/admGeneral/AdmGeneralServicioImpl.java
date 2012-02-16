@@ -9,6 +9,7 @@ import javax.transaction.UserTransaction;
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
+import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
@@ -17,6 +18,7 @@ import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
+import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
@@ -40,6 +42,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
 	@Resource
     private UserTransaction userTransaction;
+	@EJB
+	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	
 	@Override
 	public void editAula(Aula aula) throws Exception {
@@ -162,4 +166,20 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public Collection<Edificio> findEdificioReporte() {
 		return edificioFacadeLocal.findEdificiosReporte();
 	}
+
+	@Override
+	public Collection<Especialidad> findEspecialidad() {
+		return especialidadFacadeLocal.findAll();
+	}
+
+	@Override
+	public void createEspecialidad(Especialidad especialidad) throws Exception {
+		especialidadFacadeLocal.create(especialidad);
+	}
+
+	@Override
+	public void editEspecialidad(Especialidad especialidad) throws Exception {
+		especialidadFacadeLocal.edit(especialidad);
+	}
+	
 }
