@@ -1,6 +1,7 @@
 package org.espe.sigec.web.coordinacion.curso;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
+import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -27,6 +29,8 @@ public class AdministrarCursoController {
 	private CursoPeriodo cursoPeriodo;
 	private boolean editMode;
 	private int numeroAlumnosInscritos;
+	private Collection<Profesor> itemsProfesor;
+	private Profesor profesorSelected;
 	
 	public AdministrarCursoController() {
 		setCursoPeriodo((CursoPeriodo) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("curso"));
@@ -41,12 +45,12 @@ public class AdministrarCursoController {
 			setNumeroAlumnosInscritos(coordinacionServicio.numeroEstudiantesInscritos(getCursoPeriodo().getIdCursoPeriodo()));
 		} catch (Exception e) {
 			System.out.println("Error al cargar el numero de estudiantes inscritos");
-		}
-		
+		}		
 	}
 
 	public void btnEdit(ActionEvent e){
 		setEditMode(Boolean.TRUE);
+		setItemsProfesor(coordinacionServicio.findProfesoresSeleccionados());
 	}
 	
 	public void btnCancelEdit(ActionEvent e){
@@ -104,6 +108,22 @@ public class AdministrarCursoController {
 
 	public void setNumeroAlumnosInscritos(int numeroAlumnosInscritos) {
 		this.numeroAlumnosInscritos = numeroAlumnosInscritos;
+	}
+
+	public Collection<Profesor> getItemsProfesor() {
+		return itemsProfesor;
+	}
+
+	public void setItemsProfesor(Collection<Profesor> itemsProfesor) {
+		this.itemsProfesor = itemsProfesor;
+	}
+
+	public Profesor getProfesorSelected() {
+		return profesorSelected;
+	}
+
+	public void setProfesorSelected(Profesor profesorSelected) {
+		this.profesorSelected = profesorSelected;
 	}
 	
 }

@@ -50,6 +50,31 @@
         	</rich:panel>
         	
         	<rich:panel header="Administrar curso" id="pnlLanCur">
+        		<h:panelGroup rendered="#{(administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaAsignacionProfesor == '1') and 
+        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0')}">
+        			<fieldset style="border-color:red">
+		        		<legend>
+		        			<h:outputLabel value="Alerta!!!" styleClass="titulo" style="color:#1394EB;"/>
+		        			
+		        		</legend>
+		        		
+		        		<h:panelGroup style="width:100%; background-color:#CEDE64;" layout="block">
+			        		<h:outputLabel value="El curso ya ha cumplido con el minimo de estudiantes" styleClass="titulo" style="color:#3D413F"/>
+			        		<h:outputLabel value="y se debe asignar un profesor al curso" styleClass="titulo" style="color:#3D413F"/>
+		        		</h:panelGroup>
+		        		
+		        		<h:panelGroup rendered="#{administrarCursoController.editMode}">
+		        			<h:panelGrid columns="2">
+			        			<h:outputLabel value="Profesor :" />
+			        			<h:selectOneMenu value="#{administrarCursoController.profesorSelected}">
+			        				<f:selectItems value="#{administrarCursoController.itemsProfesor}" var="prof"
+			        					itemLabel="#{prof.persona.primerNombre}" itemValue="#{prof}"/>
+			        					
+			        			</h:selectOneMenu>
+		        			</h:panelGrid>
+		        		</h:panelGroup>
+	        		</fieldset>
+        		</h:panelGroup>
 	        	<fieldset>
 	        		<legend>
 	        			<h:outputLabel value="Fecha de curso :" styleClass="titulo"/>
