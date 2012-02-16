@@ -15,6 +15,7 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.PeriodoAcademico;
+import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
@@ -24,6 +25,7 @@ import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.HistoricoCursoEstadoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 
 /**
  * @author roberto
@@ -42,14 +44,15 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	@EJB
 	private HistoricoCursoEstadoFacadeLocal historicoCursoEstadoFacadeLocal;
-	
 	@EJB
 	private CursoEstudianteFacadeLocal cursoEstudianteFacadeLocal;
-	
 	@EJB
 	private LugarCursoFacadeLocal lugarCursoFacadeLocal;
 	@EJB
 	private EdificioFacadeLocal edificioFacadeLocal;
+	@EJB
+	private ProfesorFacadeLocal profesorFacadeLocal;
+	
 	@Resource
 	private UserTransaction userTransaction;
 	@Override
@@ -121,6 +124,11 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	@Override
 	public int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo) {
 		return cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(idCursoPeriodo);
+	}
+
+	@Override
+	public Collection<Profesor> findProfesoresSeleccionados() {
+		return profesorFacadeLocal.findProfesoresSeleccionados();
 	}
 	
 }

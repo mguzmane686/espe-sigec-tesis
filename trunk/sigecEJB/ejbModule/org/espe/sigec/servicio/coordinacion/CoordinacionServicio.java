@@ -10,6 +10,7 @@ import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.PeriodoAcademico;
+import org.espe.sigec.model.entities.Profesor;
 
 /**
  * @author roberto
@@ -26,4 +27,5 @@ public interface CoordinacionServicio {
 	Collection<Aula> findAulaByEdificio(String idEdificio);
 	void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception;
 	int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo);
+	Collection<Profesor> findProfesoresSeleccionados();
 }

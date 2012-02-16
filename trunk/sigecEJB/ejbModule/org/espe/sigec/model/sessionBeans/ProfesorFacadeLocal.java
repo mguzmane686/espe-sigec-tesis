@@ -31,5 +31,7 @@ public interface ProfesorFacadeLocal {
     int count();
     
     Collection<Profesor> findProfesores();
+    Collection<Profesor> findProfesoresSeleccionadosPorEspecialidad();
+    Collection<Profesor> findProfesoresSeleccionados();
     
 }
