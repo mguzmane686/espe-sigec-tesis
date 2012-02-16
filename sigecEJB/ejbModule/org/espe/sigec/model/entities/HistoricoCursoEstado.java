@@ -46,6 +46,9 @@ public class HistoricoCursoEstado implements Serializable {
     @Column(name = "etapa_lanzado")
     private String etapaLanzado;
     @Size(max = 1)
+    @Column(name = "etapa_asignacion_profesor")
+    private String etapaAsignacionProfesor;
+    @Size(max = 1)
     @Column(name = "etapa_ejecutado")
     private String etapaEjecutado;
     @Size(max = 1)
@@ -136,5 +139,13 @@ public class HistoricoCursoEstado implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.HistoricoCursoEstado[ idHistoricoEstado=" + idHistoricoEstado + " ]";
     }
+
+	public String getEtapaAsignacionProfesor() {
+		return etapaAsignacionProfesor;
+	}
+
+	public void setEtapaAsignacionProfesor(String etapaAsignacionProfesor) {
+		this.etapaAsignacionProfesor = etapaAsignacionProfesor;
+	}
     
 }
