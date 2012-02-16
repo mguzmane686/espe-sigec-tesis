@@ -90,23 +90,39 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 	
 	public void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception{
-		usuarioFacadeLocal.isIdentificadorvalida(persona.getCedula());
-		usuario.setIdentificador(persona.getCedula());
-		usuario.setClave(persona.getCedula());
-		usuarioFacadeLocal.create(usuario);
-		
-		UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK());
-		usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
-		usuarioPerfil.getUsuarioPerfilPK().setIdPerfil("PRO");
-		usuarioPerfil.setEstado("1");
-		
-		usuarioPerfilFacadeLocal.create(usuarioPerfil);
-		
-		profesor.getPersona().setUsuario(usuario);
-		personaFacadeLocal.create(persona);
-		profesorFacadeLocal.create(profesor);
+		userTransaction.begin();
+		try {
+			usuarioFacadeLocal.isIdentificadorvalida(persona.getCedula());
+			usuario.setIdentificador(persona.getCedula());
+			usuario.setClave(persona.getCedula());
+			usuarioFacadeLocal.create(usuario);
+			
+			UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK());
+			usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
+			usuarioPerfil.getUsuarioPerfilPK().setIdPerfil("PRO");
+			usuarioPerfil.setEstado("1");
+			
+			usuarioPerfilFacadeLocal.create(usuarioPerfil);
+			
+			profesor.getPersona().setUsuario(usuario);
+			personaFacadeLocal.create(persona);
+			profesorFacadeLocal.create(profesor);
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+		}
 	}
 	
+	public void editProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception{
+		userTransaction.begin();
+		try {
+			personaFacadeLocal.edit(persona);
+			profesorFacadeLocal.edit(profesor);
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+		}
+	}
 	@Override
 	public void createEdificio(Edificio edificio) throws Exception {
 		edificioFacadeLocal.create(edificio);
