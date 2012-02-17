@@ -12,8 +12,10 @@
         <h:outputStylesheet library="css" name="default.css"> </h:outputStylesheet>
         <h:outputStylesheet library="css" name="stylelog.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="botones.css"></h:outputStylesheet>
         <h:outputScript library="js" name="jquery-1.7.js"></h:outputScript>
         <h:outputScript library="js" name="jquery.validate.js"></h:outputScript>
+        
         <title>Sigec</title>
         <h:outputScript>
         	jQuery(document).ready(function(){
@@ -38,7 +40,8 @@
         			<h:outputText value="#{homeSessionController.usuarioPerfil.persona.primerNombre} #{homeSessionController.usuarioPerfil.persona.primerApellido}"  style="float:right; color: blue;"/>
         		</h:panelGrid>
         		
-            	<a4j:commandButton value="#{msg['cerrar_sesion']}" action="#{homeSessionController.btnLogOut}" execute="@this" style="float:right;" immediate="true" limitRender="true"/>
+            	<a4j:commandButton value="#{msg['cerrar_sesion']}" action="#{homeSessionController.btnLogOut}" styleClass="btnAux logoutBtn"
+            		execute="@this" style="float:right;" immediate="true" limitRender="true" />
         	</h:panelGrid>
             
         </h:panelGroup>>
