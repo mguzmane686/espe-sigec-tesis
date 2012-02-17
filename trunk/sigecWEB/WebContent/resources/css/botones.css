@@ -53,3 +53,9 @@ input[type='submit'].addBtn {
 	
 	background-position: left;
 }
+
+input[type='submit'].logoutBtn {
+	background-image: url('#{resource['images/icons:application-exit.png']}');
+	background-repeat: no-repeat;	
+	background-position: left;
+}
