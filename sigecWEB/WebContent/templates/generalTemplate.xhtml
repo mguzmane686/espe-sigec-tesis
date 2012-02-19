@@ -17,24 +17,30 @@
         <h:outputScript library="js" name="jquery.validate.js"></h:outputScript>
         
         <title>Sigec</title>
-        <h:outputScript>
-        	jQuery(document).ready(function(){
-        		$(".left_content").css({'height':$(window).height()-105});
-        		$(".left_content").css({'overflow-y':'auto'});
-        	});
-        </h:outputScript>
+        <a4j:outputPanel ajaxRendered="true">
+	        <script>
+	        	jQuery(document).ready(function(){
+		        	
+	        		$('.left_content').css({'height':($(window).height()-105)});
+	        		$('#left').css({'height':($(window).height()-105)});
+	        		$('.left_content').css({'overflow-y':'scroll'});
+	        		
+	        	});
+	        </script>
+        </a4j:outputPanel>
         <h:outputStylesheet>
 	        a>img {
 	        	border: none;
 	        }
 	    </h:outputStylesheet>
+	    
     </h:head>
 
-    <h:body>
+    <h:body style="background-image: url('#{resource['images:Bottom_texture.jpg']}');">
 
         <h:panelGroup layout="block" id="top" style="text-align:center; width:100%" styleClass="roundSigec">
         	<h:panelGrid columns="3" style="text-align:center" width="100%">
-        		<h:outputLabel value="#{msg['sigec']}" style="font-size:24px; color:#183637;"/>
+        		<h:outputLabel value="#{msg['sigec']}" style="font-size:24px; color:#183637;" rendered="false"/>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Bienvenido :" style="color: blue;"/>
         			<h:outputText value="#{homeSessionController.usuarioPerfil.persona.primerNombre} #{homeSessionController.usuarioPerfil.persona.primerApellido}"  style="float:right; color: blue;"/>
@@ -44,23 +50,26 @@
             		execute="@this" style="float:right;" immediate="true" limitRender="true" />
         	</h:panelGrid>
             
-        </h:panelGroup>>
+        </h:panelGroup>
         
-        <div>
+        <h:panelGroup layout="block">
             <h:panelGroup layout="block" id="left">
             	
                 <ui:insert name="left">
                 	menu sigec
                 </ui:insert>
             </h:panelGroup>
-            <div id="content" class="left_content" style=" overflow-y:auto;">
+            <h:panelGroup id="content" class="left_content" style=" overflow-y:auto;" layout="block">
             	<rich:notifyMessages ajaxRendered="true"></rich:notifyMessages>
                 <ui:insert name="content">Content</ui:insert>
-            </div>
-        </div>
-        <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
-        </div>
+            </h:panelGroup>
+        </h:panelGroup>
+        
+        <h:panelGroup id="bottom" layout="block">
+            <ui:insert name="bottom">
+            	<h:outputLabel value="#{msg.bottom_UEC}" style="color:red; text-align:center;"/> 
+            </ui:insert>
+        </h:panelGroup>
 
 	<a4j:status onstart="#{rich:component('statusPanel')}.show();" onstop="#{rich:component('statusPanel')}.hide();" />
     
