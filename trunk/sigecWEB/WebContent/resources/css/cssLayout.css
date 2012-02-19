@@ -1,7 +1,10 @@
 
 #top {
     position: relative;
-    background-color: #D5E2E9;
+    background-color: #EE7908;
+    background-image: url('#{resource['images:UEC.png']}');
+	background-repeat: no-repeat;
+	background-position:center;
     color: white;
     /*padding: 5px;*/
     margin: 0px 0px 0px 0px;
@@ -10,13 +13,18 @@
 #bottom {
     position: relative;
     background-color: #c2dfef;
+    text-align: center;
     /*padding: 5px;*/
     margin: 0px 0px 0px 0px;
 }
 
 #left {
     float: left;
-    /*background-color: #FFFFFF;*/
+    background-color: #FFFFFF;
+    background-image: url('#{resource['images:Bottom_texture_left.jpg']}');
+	background-repeat:repeat;
+	
+    
     /*padding: 1px;*/
     width: 270px;
 }
@@ -35,7 +43,7 @@
 }
 
 .left_content {
-    background-color: #dddddd;
+    background-color: white;
     /*padding: 5px;*/
     margin-left: 270px;
 }
