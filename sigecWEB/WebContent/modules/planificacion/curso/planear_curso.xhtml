@@ -14,7 +14,7 @@
     	
     	<h:outputStylesheet>
     		.customSelect{
-				width: 200px;
+				width: 300px;
 			}
     	</h:outputStylesheet>
     	
@@ -68,7 +68,7 @@
         				</h:selectOneMenu>
         				
         				<h:outputLabel value="Aula"/>
-        				<rich:select id="itemAula" defaultLabel="Seleccione" required="true" requiredMessage="El campo aula es obligatorio" value="#{planearCursoController.cursoPeriodo.aula.idAula}">
+        				<rich:select id="itemAula" defaultLabel="Seleccione" required="true" requiredMessage="El campo aula es obligatorio">
         					<f:selectItems value="#{planearCursoController.itemAulas}"></f:selectItems>
         				</rich:select>
         				
@@ -85,9 +85,7 @@
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
         				</rich:select>
         				
-        				<h:outputLabel value="Inicio Inscripciones" />
-        				<rich:calendar value="#{planearCursoController.cursoPeriodo.fechaInicioInscripcion}" inputSize="28" 
-        					datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="El campo inicio inscripciones es obligatorio"/>
+        				
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
@@ -95,11 +93,9 @@
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				
-        				<h:outputLabel value="Hora inicio" />
-        				<sigecComp:timePicker id="tpHoraIni" value="#{planearCursoController.cursoPeriodo.horaInicioClase}"/>
         				
-        				<h:outputLabel value="Hora fin" />
-        				<sigecComp:timePicker id="tpHoraFin" value="#{planearCursoController.cursoPeriodo.horaFinClase}"/>
+        				
+        				
         				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
         				<h:selectOneRadio value="#{planearCursoController.cursoPeriodo.tipoCurso}">

@@ -38,8 +38,7 @@ public class ReporteCursoAbiertoController implements Serializable{
 	
 	@PostConstruct
 	public void loadCursoAbierto(){
-		setLstCursoPeriodos(cursoServicio.findCursoAbierto());
-		
+//		setLstCursoPeriodos(cursoServicio.findCursoAbierto());
 		setLstCursoPeriodos(cursoServicio.findCursoAbiertoByUser(((HomeSessionController) FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getIdPersona()));
 		
 		setItemsEstado(new ArrayList<SelectItem>());

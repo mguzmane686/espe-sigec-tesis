@@ -36,12 +36,15 @@ public class RegistroDocenteController implements Serializable{
 	private Usuario usuario;
 	private ArrayList<Persona> files;
 	private boolean editMode;
+	private boolean renderEditionButtons;
 	public RegistroDocenteController() {
 		setProfesor((Profesor) FacesUtils.getFlashObject("profesor"));
 		setEditMode(Boolean.TRUE);
+		setRenderEditionButtons(Boolean.FALSE);
 		if(getProfesor() ==null){
 			initEntities();
 			setEditMode(Boolean.FALSE);
+			setRenderEditionButtons(Boolean.TRUE);
 		}
 		
 	}
@@ -81,6 +84,7 @@ public class RegistroDocenteController implements Serializable{
 			if(isEditMode()){
 				admGeneralServicio.editProfesor(getUsuario(), getProfesor().getPersona(), getProfesor());
 				FacesUtils.addInfoMessage("El docente fue actualizado correctamente");
+				setRenderEditionButtons(Boolean.FALSE);
 			}else{
 				admGeneralServicio.createProfesor(getUsuario(), getProfesor().getPersona(), getProfesor());
 				setEditMode(Boolean.TRUE);
@@ -92,6 +96,22 @@ public class RegistroDocenteController implements Serializable{
 			FacesUtils.addInfoMessage(e2.getMessage());
 		}catch (Exception e1) {
 			FacesUtils.addErrorMessage("Ocurrio un error al grabar el docente");
+		}
+	}
+	
+	public void btnCancelSaveProfesor(ActionEvent e){
+		setRenderEditionButtons(Boolean.FALSE);
+	}
+	
+	public void btnEditProfesor(ActionEvent e){
+		setRenderEditionButtons(Boolean.TRUE);
+	}
+
+	public void btnAtrasListaProfesor(ActionEvent e){
+		try {
+			FacesUtils.redirectPage("coor_seleccion_docente.jsf");
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
 	}
 	
@@ -127,6 +147,16 @@ public class RegistroDocenteController implements Serializable{
 
 	public void setEditMode(boolean editMode) {
 		this.editMode = editMode;
+	}
+
+
+	public boolean isRenderEditionButtons() {
+		return renderEditionButtons;
+	}
+
+
+	public void setRenderEditionButtons(boolean renderEditionButtons) {
+		this.renderEditionButtons = renderEditionButtons;
 	}
 	
 }

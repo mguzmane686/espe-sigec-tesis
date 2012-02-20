@@ -34,6 +34,12 @@
 		        			<f:facet name="header">
 		        				<h:outputLabel value="Docentes" />
 		        			</f:facet>
+		        			<rich:column style="text-align:center;">
+		        				<f:facet name="header">
+		        					<h:outputLabel value="#{msg.cedula}" />
+		        				</f:facet> 
+		        				<h:outputText value="#{profesor.persona.cedula}" />
+		        			</rich:column>
 		        			<rich:column>
 		        				<f:facet name="header">
 		        					<h:outputText value="#{msg['nombres']}" />
