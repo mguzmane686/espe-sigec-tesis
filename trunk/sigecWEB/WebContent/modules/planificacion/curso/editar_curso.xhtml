@@ -16,7 +16,7 @@
     	
         <h:form id="frmCurso">
         	
-        	<rich:panel header="#{msg['creacion_curso']}">
+        	<rich:panel header="#{msg.etiqueta_actualizacion_curso}">
         		<h:panelGroup layout="block" styleClass="roundCorner">
 	        		<h:panelGrid columns="2">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
@@ -34,7 +34,7 @@
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="#{msg['creacion_curso']}" id="pnlCurso">
+        	<rich:panel header="#{msg['etiqueta_actualizacion_curso']}" id="pnlCurso">
         	
 	        	<fieldset>
 	        		<legend>
@@ -48,7 +48,7 @@
 	        			<h:inputText value="#{edicionCursoController.curso.nombreCurso}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
 	        			
 	        			<h:outputLabel value="#{msg['descripcion']}:" />
-	        			<h:inputTextarea value="#{edicionCursoController.curso.descripcionCurso}" style="width:40em" required="true" requiredMessage="El campo Descripcion es obligatorio"/>
+	        			<h:inputTextarea value="#{edicionCursoController.curso.generalidadesCurso}" style="width:40em" required="true" requiredMessage="El campo Descripcion es obligatorio"/>
 	        		</h:panelGrid>
 	        	</fieldset>
 	        	
@@ -68,10 +68,10 @@
 			   					});
 		   					</script>
 		   				</h:panelGroup>
-		        		<rich:panel rendered="#{empty edicionCursoController.curso.pensumAcademicoCollection}">
+		        		<rich:panel rendered="#{empty edicionCursoController.curso.moduloCursoCollection}">
 		        			#{msg.etiqueta_curso_no_tema}
 		        		</rich:panel>
-		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.pensumAcademicoCollection}" var="temario" rows="5" rendered="#{!empty edicionCursoController.curso.pensumAcademicoCollection}">
+		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.moduloCursoCollection}" var="modulo" rows="5" rendered="#{!empty edicionCursoController.curso.moduloCursoCollection}">
 		        			<f:facet name="header">
 		        				<h:outputLabel value="Pensum" />
 		        			</f:facet>
@@ -80,14 +80,14 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="Tema" />
 			        			</f:facet>
-			        			<h:inputText value="#{temario.tema}" />
+			        			<h:inputText value="#{modulo.nombre}" style="width:100%"/>
 		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['descripcion']}" />
 			        			</f:facet>
-			        			<h:inputText value="#{temario.descripcion}" />
+			        			<h:inputText value="#{modulo.generalidades}" style="width:100%"/>
 		        			</rich:column>
 		        			
 		        		</rich:dataTable>

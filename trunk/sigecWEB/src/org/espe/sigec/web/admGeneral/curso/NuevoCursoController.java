@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
+import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
 import org.espe.sigec.web.utils.CommonController;
@@ -31,6 +32,9 @@ public class NuevoCursoController extends CommonController{
 	PlanificacionServicio planificacionServicio;
 	
 	private Collection<PensumAcademico> lstPensumAcademicos;
+	private Collection<ModuloCurso> lstModuloCursos;
+	private ModuloCurso moduloCurso;
+	
 	private Collection<SelectItem> itemEspecialidades;
 	
 	private PensumAcademico pensumAcademicoNuevo;
@@ -46,12 +50,20 @@ public class NuevoCursoController extends CommonController{
 		getCurso().setEspecialidad(new Especialidad());
 		setPensumAcademicoNuevo(new PensumAcademico());
 		setLstPensumAcademicos(new ArrayList<PensumAcademico>());
+		setLstModuloCursos(new ArrayList<ModuloCurso>());
+		setModuloCurso(new ModuloCurso());
 	}
+	
 	@PostConstruct
 	public void loadEspecialidades(){
 		for(Especialidad especialidadTMP: planificacionServicio.findEspecialidades()){
 			getItemEspecialidades().add(new SelectItem(especialidadTMP.getIdEspecialidad(), especialidadTMP.getNombre()));
 		}
+	}
+	
+	public void btnAddModuloCurso(ActionEvent e){
+		getLstModuloCursos().add(getModuloCurso());
+		setModuloCurso(new ModuloCurso());
 	}
 	
 	public void btnAddTemaPensum(ActionEvent e){
@@ -61,7 +73,7 @@ public class NuevoCursoController extends CommonController{
 
 	public void btnSaveCurso(ActionEvent e){
 		try {
-			planificacionServicio.crearNuevoCurso(getCurso(), getLstPensumAcademicos());
+			planificacionServicio.crearNuevoCursoModulo(getCurso(), getLstModuloCursos());
 			initEntities();
 			FacesUtils.addInfoMessage("Curso creado satisfactoriamente");
 		} catch (Exception e1) {
@@ -100,6 +112,18 @@ public class NuevoCursoController extends CommonController{
 
 	public void setItemEspecialidades(Collection<SelectItem> itemEspecialidades) {
 		this.itemEspecialidades = itemEspecialidades;
+	}
+	public Collection<ModuloCurso> getLstModuloCursos() {
+		return lstModuloCursos;
+	}
+	public void setLstModuloCursos(Collection<ModuloCurso> lstModuloCursos) {
+		this.lstModuloCursos = lstModuloCursos;
+	}
+	public ModuloCurso getModuloCurso() {
+		return moduloCurso;
+	}
+	public void setModuloCurso(ModuloCurso moduloCurso) {
+		this.moduloCurso = moduloCurso;
 	}
 	
 }

@@ -39,7 +39,7 @@ public class InscripcionAlumnoCursoController {
 	}
 	private void initEntities(){
 		setCursoEstudiante(new CursoEstudiante());
-		getCursoEstudiante().setCursoPeriodo(new CursoPeriodo());
+//		getCursoEstudiante().setCursoPeriodo(new CursoPeriodo());
 		getCursoEstudiante().setEstudiante(new Estudiante());
 	}
 	
@@ -70,13 +70,13 @@ public class InscripcionAlumnoCursoController {
 	}
 	public void btnInscripcionEstudinateCurso(ActionEvent e){
 		try {
-			for(CursoPeriodo cursoPeriodoTMP: lstCursoPeriodos){
-				if(cursoPeriodoTMP.getIdCursoPeriodo().compareTo(getCursoEstudiante().getCursoPeriodo().getIdCursoPeriodo()) == 0){
-					getCursoEstudiante().setCursoPeriodo(cursoPeriodoTMP);
-					break;
-				}
-			}
-			inscripcionServicio.inscripcionEstudianteCurso(getCursoEstudiante().getEstudiante(), getCursoEstudiante().getCursoPeriodo(), getCursoEstudiante(), isShowFieldsNewStudent());
+//			for(CursoPeriodo cursoPeriodoTMP: lstCursoPeriodos){
+//				if(cursoPeriodoTMP.getIdCursoPeriodo().compareTo(getCursoEstudiante().getCursoPeriodo().getIdCursoPeriodo()) == 0){
+//					getCursoEstudiante().setCursoPeriodo(cursoPeriodoTMP);
+//					break;
+//				}
+//			}
+//			inscripcionServicio.inscripcionEstudianteCurso(getCursoEstudiante().getEstudiante(), getCursoEstudiante().getCursoPeriodo(), getCursoEstudiante(), isShowFieldsNewStudent());
 			FacesUtils.addInfoMessage("Se ha inscrito a un curso");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("Ocurrio un error inesperado");

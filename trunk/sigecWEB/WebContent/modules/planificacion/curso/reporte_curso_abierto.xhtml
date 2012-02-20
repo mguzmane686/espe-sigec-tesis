@@ -48,7 +48,7 @@
 					        			<f:facet name="header">
 					        				<h:outputLabel value="#{msg['descripcion']}" />
 					        			</f:facet>
-					        			<h:outputText value="#{curso.curso.descripcionCurso}" />
+					        			<h:outputText value="#{curso.curso.generalidadesCurso}" />
 				        			</rich:column>
 				        			
 				        			<rich:column>
@@ -72,18 +72,6 @@
 					        			
 				        			</rich:column>
 				        			
-				        			
-				        			<rich:column>
-					        			<f:facet name="header">
-					        				<h:outputLabel value="Inicio Inscripciones" />
-					        			</f:facet>
-					        			<center>
-					        				<h:outputText value="#{curso.fechaInicioInscripcion}">
-					        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-					        				</h:outputText>
-					        			</center>
-				        			</rich:column>
-				        			
 				        			<rich:column>
 					        			<f:facet name="header">
 					        				<h:outputLabel value="Lugar" />
@@ -91,17 +79,11 @@
 					        			<h:outputText value="#{curso.lugarCapacitacion}" />
 				        			</rich:column>
 				        			
-				        			<rich:column>
-					        			<f:facet name="header">
-					        				<h:outputLabel value="Horario" />
-					        			</f:facet>
-					        			<h:outputText value="#{curso.horaInicioClase} - #{curso.horaFinClase}" style="white-space:nowrap; text-align:center;"/>
-				        			</rich:column>
 				        			
 				        			<rich:column filterValue="#{reporteCursoAbiertoController.nameFilter}"
 		                				filterExpression="#{fn:containsIgnoreCase(curso.estadoProceso, reporteCursoAbiertoController.nameFilter)}">
 					        			<f:facet name="header">
-					        				<h:panelGrid columns="2">
+					        				<h:panelGrid columns="2" style="width:100%;">
 					        					<h:outputLabel value="Estado" />
 					        					
 					        					<h:selectOneMenu value="#{reporteCursoAbiertoController.nameFilter}">

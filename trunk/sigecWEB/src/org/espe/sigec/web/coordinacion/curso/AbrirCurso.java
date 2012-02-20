@@ -55,7 +55,7 @@ public class AbrirCurso implements Serializable{
 		setPeriodoAcademico(new PeriodoAcademico());
 		setCursoPeriodo(new CursoPeriodo());
 		getCursoPeriodo().setCurso(new Curso());
-		getCursoPeriodo().setAula(new Aula());
+//		getCursoPeriodo().setAula(new Aula());
 		getCursoPeriodo().setTipoCurso(SigecConstantes.TIPO_CURSO_INDIVIDUAL);
 		loadParametrosGenerales();
 	}
@@ -81,7 +81,10 @@ public class AbrirCurso implements Serializable{
 			getItemLugarCurso().add(new SelectItem(lugarCurso.getIdLugar(), lugarCurso.getNombre()));
 		}
 		if(!getItemLugarCurso().isEmpty()){
-			
+			loadEdificio(String.valueOf( getItemLugarCurso().iterator().next().getValue()));
+		}
+		if (!getItemEdificio().isEmpty()) {
+			loadAula(String.valueOf(getItemEdificio().iterator().next().getValue()));
 		}
 		
 	}

@@ -10,6 +10,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Curso;
+import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
@@ -22,7 +23,6 @@ import org.espe.sigec.web.utils.FacesUtils;
 @ManagedBean(name ="edicionCursoController")
 @ViewScoped
 public class EdicionCursoController {
-//	private Collection<PensumAcademico> lstPensumAcademicos;
 	private PensumAcademico pensumAcademicoNuevo;
 	private Curso curso;
 	@Inject
@@ -37,27 +37,27 @@ public class EdicionCursoController {
 	
 	@PostConstruct
 	public void addLostFields(){
-		getCurso().setPensumAcademicoCollection(cursoServicio.findTemasCurso(curso.getIdCurso()));
+		getCurso().setModuloCursoCollection(cursoServicio.findModulosCurso(curso.getIdCurso()));
 		
-		if(getCurso().getPensumAcademicoCollection() == null){
-			getCurso().setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
+		if(getCurso().getModuloCursoCollection() == null){
+			getCurso().setModuloCursoCollection(new ArrayList<ModuloCurso>());
 		}else{
-			for(PensumAcademico pensumAcademicoTMP: getCurso().getPensumAcademicoCollection()){
-				pensumAcademicoTMP.setExistInBase(Boolean.TRUE);
+			for(ModuloCurso moduloCursoTMP: getCurso().getModuloCursoCollection()){
+				moduloCursoTMP.setExistInBase(Boolean.TRUE);
 			}
 		}
 	}
 	
 	public void btnSaveEditCurso(ActionEvent e){
 		try {
-			planificacionServicio.editarCurso(getCurso(), getCurso().getPensumAcademicoCollection());
+			planificacionServicio.editarCursoModulo(getCurso(), getCurso().getModuloCursoCollection());
 			FacesUtils.addInfoMessage("El curso se edito con &eacutexito");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("El curso no pudo editarse");
 		}
 	}
 	public void btnAddTemaPensum(ActionEvent e){
-		getCurso().getPensumAcademicoCollection().add(pensumAcademicoNuevo);
+//		getCurso().getPensumAcademicoCollection().add(pensumAcademicoNuevo);
 		setPensumAcademicoNuevo(new PensumAcademico());
 	}
 	

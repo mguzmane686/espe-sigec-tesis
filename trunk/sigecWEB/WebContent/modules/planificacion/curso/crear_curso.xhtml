@@ -42,73 +42,73 @@
 					<h:inputText value="#{cursoController.curso.nombreCurso}" size="72" required="true" 
 						requiredMessage="El campo Nombre es obligatorio" />
 					<h:outputLabel value="#{msg.etiqueta_generalidades} :" />
-					<h:inputTextarea value="#{cursoController.curso.descripcionCurso}" style="width:40em" 
+					<h:inputTextarea value="#{cursoController.curso.generalidadesCurso}" cols="70"  
 						required="true" requiredMessage="El campo Descripcion es obligatorio" />
 					<h:outputLabel value="#{msg.etiqueta_nivel_curso} :" />
-					<h:selectOneRadio>
-						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Basico}"  itemValue="N_C_B"/>
-						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Intermedio}"  itemValue="N_C_I"/>
-						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Avanzado}"  itemValue="N_C_A"/>
+					<h:selectOneRadio value="#{cursoController.curso.nivelCurso}">
+						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Basico}"  itemValue="B"/>
+						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Intermedio}"  itemValue="I"/>
+						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Avanzado}"  itemValue="A"/>
 					</h:selectOneRadio>
 					
 					<h:outputLabel value="#{msg.etiqueta_objetivoGeneral} :" />
-					<h:inputTextarea cols="70"/>
+					<h:inputTextarea cols="70" value="#{cursoController.curso.objetivoGeneral}"/>
 					
 					<h:outputLabel value="#{msg.etiqueta_objetivosEspecificos} :" />
-					<h:inputTextarea cols="70" rows="6"/>
+					<h:inputTextarea cols="70" rows="6" value="#{cursoController.curso.objetivosEspecificos}"/>
 					
 					<h:outputLabel value="#{msg.etiqueta_perfil_participante} :" />
-					<h:inputTextarea cols="70" rows="6"/>
+					<h:inputTextarea cols="70" rows="6" value="#{cursoController.curso.perfilParticipante}"/>
 					
 					<h:outputLabel value="#{msg.etiqueta_perfil_docente} :" />
-					<h:inputTextarea cols="70" rows="6"/>
+					<h:inputTextarea cols="70" rows="6" value="#{cursoController.curso.perfilDocente}"/>
 					
 				</h:panelGrid>
 			</fieldset>
 
 			<fieldset>
 				<legend>
-					<h:outputLabel value="#{msg['temas_curso']}" styleClass="titulo" />
+					<h:outputLabel value="#{msg.etiqueta_modulos_curso}" styleClass="titulo" />
 				</legend>
 
 				<a4j:outputPanel ajaxRendered="true">
 					<h:panelGroup layout="block">
-						<a4j:commandButton id="btnNuevoTema" value="Nuevo tema" onclick="#{rich:component('popupNuevoTema')}.show()" immediate="true" />
+						<a4j:commandButton id="btnNuevoModulo" value="Nuevo #{msg.etiqueta_modulo}" onclick="#{rich:component('popupNuevoModulo')}.show()" immediate="true" />
 						<script>
-					$("#frmCurso\\:btnNuevoTema").live('click',function(){
-						$("#frmNuevoCurso\\:txtNomTem").attr('value','');
-						$("#frmNuevoCurso\\:txtDetTem").attr('value','');
-						$("#frmNuevoCurso\\:txtNomTem").focus();
-					});
-				</script>
+							$("#frmCurso\\:btnNuevoModulo").live('click',function(){
+								$("#frmNuevoCurso\\:txtNomTem").attr('value','');
+								$("#frmNuevoCurso\\:txtDetTem").attr('value','');
+								$("#frmNuevoCurso\\:txtNomTem").focus();
+							});
+						</script>
 					</h:panelGroup>
 					<rich:panel rendered="#{empty cursoController.lstPensumAcademicos}">
-	   			#{msg.etiqueta_curso_no_tema}
-	   		</rich:panel>
-					<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="temario" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
+			   			#{msg.etiqueta_curso_sin_modulos}
+			   		</rich:panel>
+					<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstModuloCursos}" var="modulo" rows="5" rendered="#{!empty cursoController.lstModuloCursos}">
 						<f:facet name="header">
-							<h:outputLabel value="#{msg.etiqueta_contenidos}" />
+							<h:outputLabel value="#{msg.etiqueta_modulos}" />
 						</f:facet>
 
 						<rich:column>
 							<f:facet name="header">
-								<h:outputLabel value="#{msg.etiqueta_tema}" />
+								<h:outputLabel value="#{msg.nombre}" />
 							</f:facet>
-							<h:inputText value="#{temario.tema}" />
+							<h:inputText value="#{modulo.nombre}" style="width:100%"/>
 						</rich:column>
 
 						<rich:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg['descripcion']}" />
 							</f:facet>
-							<h:inputText value="#{temario.descripcion}" />
+							<h:inputText value="#{modulo.generalidades}" style="width:100%"/>
 						</rich:column>
 						
 						<rich:column>
 							<f:facet name="header">
-								<h:outputLabel value="#{msg.etiqueta_tiempo}" />
+								<h:outputLabel value="Nivel orden" />
 							</f:facet>
-							<h:inputText value="#{temario.descripcion}" />
+							<h:inputText value="#{modulo.nivel}" />
 						</rich:column>
 						
 					</rich:dataTable>
@@ -119,38 +119,37 @@
 
 	</h:form>
 
-	<rich:popupPanel id="popupNuevoTema" header="Nuevo tema" modal="true" resizeable="false" autosized="true" keepVisualState="true">
-
+	<rich:popupPanel id="popupNuevoModulo" header="#{msg.etiqueta_agregar_modulos_curso}" modal="true" resizeable="false" autosized="true" keepVisualState="true">
 		<f:facet name="controls">
-			<h:outputLink value="#" onclick="#{rich:component('popupNuevoTema')}.hide(); return false;">
+			<h:outputLink value="#" onclick="#{rich:component('popupNuevoModulo')}.hide(); return false;">
 	                X
 	            </h:outputLink>
 		</f:facet>
 
 		<h:form id="frmNuevoCurso">
 			<h:panelGrid columns="2" id="pgDatosTema">
-				<h:outputLabel value="Tema :" />
-				<h:inputText id="txtNomTem" value="#{cursoController.pensumAcademicoNuevo.tema}" tabindex="1" 
-					required="true" requiredMessage="El campo Tema es obligatorio" />
+				<h:outputLabel value="#{msg.etiqueta_nombre_modulo} :" />
+				<h:inputText id="txtNomTem" value="#{cursoController.moduloCurso.nombre}" tabindex="1" 
+					required="true" requiredMessage="El campo #{msg.etiqueta_nombre_modulo} es obligatorio" />
 
 				<h:outputLabel value="#{msg['descripcion']} :" />
-				<h:inputText id="txtDetTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" tabindex="2" 
+				<h:inputText id="txtDetTem" value="#{cursoController.moduloCurso.generalidades}" tabindex="2" 
 					required="true" requiredMessage="El campo #{msg['descripcion']} es obligatorio" />
 					
-				<h:outputLabel value="#{msg.etiqueta_tiempo} :" />
-				<h:inputText id="txtTiempoTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" tabindex="3" 
-					required="true" requiredMessage="El campo  es obligatorio" />
+				<h:outputLabel value="Orden :" />
+				<h:inputText id="txtTiempoTem" value="#{cursoController.moduloCurso.nivel}" tabindex="3" 
+					required="true" requiredMessage="El campo Orden es obligatorio" />
 			</h:panelGrid>
 
 			
 
 			<h:panelGrid columns="2" style="text-align:center; width:100%">
 				<a4j:commandButton value="#{msg['agregar']}" styleClass="btnAux addBtn" style="width:70px" 
-					actionListener="#{cursoController.btnAddTemaPensum}" render="pgDatosTema" 
-						execute="pgDatosTema" oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('popupNuevoTema')}.hide()" />
+					actionListener="#{cursoController.btnAddModuloCurso}" render="pgDatosTema" 
+						execute="pgDatosTema" oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('popupNuevoModulo')}.hide()" />
 
 				<a4j:commandButton value="#{msg['cancelar']}" styleClass="btnAux removeBtn" style="width:70px" immediate="true"
-					oncomplete="#{rich:component('popupNuevoTema')}.hide()" />
+					oncomplete="#{rich:component('popupNuevoModulo')}.hide()" />
 			</h:panelGrid>
 
 		</h:form>
