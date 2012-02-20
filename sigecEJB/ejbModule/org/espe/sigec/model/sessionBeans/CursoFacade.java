@@ -48,8 +48,9 @@ public class CursoFacade extends AbstractFacade<Curso> implements CursoFacadeLoc
 	@Override
 	public Collection<Curso> findCursoByEstado() {
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Curso.class);
-		criteria.addOrder(Order.asc("nombreCurso"));
-		criteria.setFetchMode("especialidad", FetchMode.JOIN);
+		criteria.createAlias("especialidad", "especialidadA");
+		criteria.addOrder(Order.asc("especialidadA.nombre")).addOrder(Order.asc("nombreCurso"));
+		criteria.setFetchMode("especialidadA", FetchMode.JOIN);
 		return criteria.list();
 	}
     

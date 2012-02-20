@@ -11,10 +11,7 @@ public class UserValidateException extends RuntimeException{
 		super();
 	}
 
-	public UserValidateException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
+	
 
 	public UserValidateException(String message, Throwable cause) {
 		super(message, cause);

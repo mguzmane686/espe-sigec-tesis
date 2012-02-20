@@ -47,9 +47,9 @@ public class PensumAcademico implements Serializable {
     @Size(max = 500)
     @Column(name = "descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
+    @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Curso curso;
+    private ModuloCurso moduloCurso;
     @Transient
     private boolean existInBase;
     
@@ -92,14 +92,6 @@ public class PensumAcademico implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Curso getCurso() {
-        return curso;
-    }
-
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,6 +123,14 @@ public class PensumAcademico implements Serializable {
 
 	public void setExistInBase(boolean existInBase) {
 		this.existInBase = existInBase;
+	}
+
+	public ModuloCurso getModuloCurso() {
+		return moduloCurso;
+	}
+
+	public void setModuloCurso(ModuloCurso moduloCurso) {
+		this.moduloCurso = moduloCurso;
 	}
     
 }

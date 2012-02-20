@@ -88,9 +88,9 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 			
 			if(cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo()) < cursoPeriodo.getMaximoEstudiantes()){
 				cursoEstudiante.setEstudiante(estudiante);
-				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+//				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
 				cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
-				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+//				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
 				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
 				cursoEstudiante.setEstadoPago("DEBE");
 				cursoEstudianteFacadeLocal.create(cursoEstudiante);

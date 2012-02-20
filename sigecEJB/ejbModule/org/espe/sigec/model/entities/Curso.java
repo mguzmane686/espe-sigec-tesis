@@ -46,20 +46,37 @@ public class Curso implements Serializable {
     @Column(name = "nombre_curso")
     private String nombreCurso;
     @Size(max = 500)
-    @Column(name = "descripcion_curso")
-    private String descripcionCurso;
+    @Column(name = "generalidades_curso")
+    private String generalidadesCurso;
     @Size(max = 1)
     @Column(name = "estado_cur")
     private String estadoCur;
+    
+    @Size(max = 1)
+    @Column(name = "nivel_curso")
+    private String nivelCurso;
+    @Size(max = 250)
+    @Column(name = "objetivo_general")
+    private String objetivoGeneral;
+    @Size(max = 1024)
+    @Column(name = "objetivos_especificos")
+    private String objetivosEspecificos;
+    @Size(max = 1024)
+    @Column(name = "perfil_participante")
+    private String perfilParticipante;
+    @Size(max = 1024)
+    @Column(name = "perfil_docente")
+    private String perfilDocente;
+    
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
-    private Collection<PensumAcademico> pensumAcademicoCollection;
+    private Collection<ModuloCurso> moduloCursoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso", fetch = FetchType.LAZY)
+    private Collection<CursoProfesor> cursoProfesorCollection;
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     private Collection<CursoPeriodo> cursoPeriodoCollection;
     @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad")
     @ManyToOne(fetch = FetchType.LAZY)
     private Especialidad especialidad;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso", fetch = FetchType.LAZY)
-    private Collection<CursoProfesor> cursoProfesorCollection;
     
     @Transient
     private boolean showCursoPeriodoCollection;
@@ -87,21 +104,13 @@ public class Curso implements Serializable {
         this.nombreCurso = nombreCurso;
     }
 
-    public String getDescripcionCurso() {
-        return descripcionCurso;
-    }
+    public String getGeneralidadesCurso() {
+		return generalidadesCurso;
+	}
 
-    public void setDescripcionCurso(String descripcionCurso) {
-        this.descripcionCurso = descripcionCurso;
-    }
-
-    public Collection<PensumAcademico> getPensumAcademicoCollection() {
-        return pensumAcademicoCollection;
-    }
-
-    public void setPensumAcademicoCollection(Collection<PensumAcademico> pensumAcademicoCollection) {
-        this.pensumAcademicoCollection = pensumAcademicoCollection;
-    }
+	public void setGeneralidadesCurso(String generalidadesCurso) {
+		this.generalidadesCurso = generalidadesCurso;
+	}
 
     public Collection<CursoPeriodo> getCursoPeriodoCollection() {
         return cursoPeriodoCollection;
@@ -168,5 +177,54 @@ public class Curso implements Serializable {
 			Collection<CursoProfesor> cursoProfesorCollection) {
 		this.cursoProfesorCollection = cursoProfesorCollection;
 	}
-    
+
+	public String getNivelCurso() {
+		return nivelCurso;
+	}
+
+	public void setNivelCurso(String nivelCurso) {
+		this.nivelCurso = nivelCurso;
+	}
+
+	public String getObjetivoGeneral() {
+		return objetivoGeneral;
+	}
+
+	public void setObjetivoGeneral(String objetivoGeneral) {
+		this.objetivoGeneral = objetivoGeneral;
+	}
+
+	public String getObjetivosEspecificos() {
+		return objetivosEspecificos;
+	}
+
+	public void setObjetivosEspecificos(String objetivosEspecificos) {
+		this.objetivosEspecificos = objetivosEspecificos;
+	}
+
+	public Collection<ModuloCurso> getModuloCursoCollection() {
+		return moduloCursoCollection;
+	}
+
+	public void setModuloCursoCollection(
+			Collection<ModuloCurso> moduloCursoCollection) {
+		this.moduloCursoCollection = moduloCursoCollection;
+	}
+
+	public String getPerfilParticipante() {
+		return perfilParticipante;
+	}
+
+	public void setPerfilParticipante(String perfilParticipante) {
+		this.perfilParticipante = perfilParticipante;
+	}
+
+	public String getPerfilDocente() {
+		return perfilDocente;
+	}
+
+	public void setPerfilDocente(String perfilDocente) {
+		this.perfilDocente = perfilDocente;
+	}
+	
 }

@@ -5,7 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.persistence.CascadeType;
@@ -14,6 +14,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -36,15 +37,14 @@ public class CursoEstudiante implements Serializable {
     @Size(max = 10)
     @Column(name = "estado_pago")
     private String estadoPago;
-    @JoinColumn(name = "id_profesor", referencedColumnName = "id_profesor")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Profesor profesor;
+    @JoinColumns({
+        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
+        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ModuloCursoPeriodo moduloCursoPeriodo;
     @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estudiante estudiante;
-    @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private CursoPeriodo cursoPeriodo;
     @OneToMany(mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
     private Collection<CalificacionEstudiante> calificacionEstudianteCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
@@ -57,8 +57,9 @@ public class CursoEstudiante implements Serializable {
         this.cursoEstudiantePK = cursoEstudiantePK;
     }
 
-    public CursoEstudiante(BigDecimal idCursoPeriodo, int idEstudiante) {
-        this.cursoEstudiantePK = new CursoEstudiantePK(idCursoPeriodo, idEstudiante);
+    
+    public CursoEstudiante(int idEstudiante, BigInteger idCursoPeriodo, int idModuloCurso) {
+        this.cursoEstudiantePK = new CursoEstudiantePK(idEstudiante, idCursoPeriodo, idModuloCurso);
     }
 
     public CursoEstudiantePK getCursoEstudiantePK() {
@@ -77,28 +78,12 @@ public class CursoEstudiante implements Serializable {
         this.estadoPago = estadoPago;
     }
 
-    public Profesor getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
-    }
-
     public Estudiante getEstudiante() {
         return estudiante;
     }
 
     public void setEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
-    }
-
-    public CursoPeriodo getCursoPeriodo() {
-        return cursoPeriodo;
-    }
-
-    public void setCursoPeriodo(CursoPeriodo cursoPeriodo) {
-        this.cursoPeriodo = cursoPeriodo;
     }
 
     public Collection<CalificacionEstudiante> getCalificacionEstudianteCollection() {
@@ -141,5 +126,13 @@ public class CursoEstudiante implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.CursoEstudiante[ cursoEstudiantePK=" + cursoEstudiantePK + " ]";
     }
+
+	public ModuloCursoPeriodo getModuloCursoPeriodo() {
+		return moduloCursoPeriodo;
+	}
+
+	public void setModuloCursoPeriodo(ModuloCursoPeriodo moduloCursoPeriodo) {
+		this.moduloCursoPeriodo = moduloCursoPeriodo;
+	}
     
 }

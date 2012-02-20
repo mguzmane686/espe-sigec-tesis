@@ -14,6 +14,7 @@ import org.espe.sigec.model.entities.Profesor;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -38,7 +39,9 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
 	public Collection<Profesor> findProfesores() {
 		Criteria crit = null;
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(Profesor.class);
-    	crit.setFetchMode("persona", FetchMode.JOIN);
+    	crit.createAlias("persona", "personaA");
+    	crit.addOrder(Order.asc("personaA.primerApellido"));
+    	crit.setFetchMode("personaA", FetchMode.JOIN);
 		return crit.list();
 	}
 

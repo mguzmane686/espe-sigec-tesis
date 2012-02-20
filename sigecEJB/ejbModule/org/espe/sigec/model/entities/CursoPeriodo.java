@@ -7,7 +7,6 @@ package org.espe.sigec.model.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -25,8 +24,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -49,19 +46,7 @@ public class CursoPeriodo implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="curper_seq")
     @SequenceGenerator(name="curper_seq", sequenceName="curper_seq", allocationSize = 1)
     private BigDecimal idCursoPeriodo;
-    @Column(name = "fecha_inicio_inscripcion")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicioInscripcion;
-    @Column(name = "fecha_fin_inscripcion")
-    @Temporal(TemporalType.DATE)
-    private Date fechaFinInscripcion;
-    @Column(name = "fecha_inicio_pago")
-    @Temporal(TemporalType.DATE)
-    private Date fechaInicioPago;
-    @Column(name = "fecha_fin_pago")
-    @Temporal(TemporalType.DATE)
-    private Date fechaFinPago;
-    @Size(max = 10)
+    
     @Column(name = "tipo_curso")
     private String tipoCurso;
     @Column(name = "minimo_estudiantes")
@@ -70,10 +55,20 @@ public class CursoPeriodo implements Serializable {
     private Integer maximoEstudiantes;
     @Column(name = "lugar_capacitacion")
     private String lugarCapacitacion;
-    @Column(name = "hora_inicio_clase")
-    private String horaInicioClase;
-    @Column(name = "hora_fin_clase")
-    private String horaFinClase;
+    @Size(max = 20)
+    @Column(name = "modalidad")
+    private String modalidad;
+    
+    
+    /**/
+    
+    @JoinColumn(name = "id_programa", referencedColumnName = "id_programa")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Programa programa;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
+    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private PresupuestoCurso presupuestoCurso;
     
@@ -90,13 +85,9 @@ public class CursoPeriodo implements Serializable {
     @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
     @ManyToOne(fetch = FetchType.LAZY)
     private Curso curso;
-    @JoinColumn(name = "id_aula", referencedColumnName = "id_aula")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Aula aula;
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<MaterialDidactico> materialDidacticoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
-    private Collection<CursoEstudiante> cursoEstudianteCollection;
+    
     
 
     public CursoPeriodo() {
@@ -112,38 +103,6 @@ public class CursoPeriodo implements Serializable {
 
     public void setIdCursoPeriodo(BigDecimal idCursoPeriodo) {
         this.idCursoPeriodo = idCursoPeriodo;
-    }
-
-    public Date getFechaInicioInscripcion() {
-        return fechaInicioInscripcion;
-    }
-
-    public void setFechaInicioInscripcion(Date fechaInicioInscripcion) {
-        this.fechaInicioInscripcion = fechaInicioInscripcion;
-    }
-
-    public Date getFechaFinInscripcion() {
-        return fechaFinInscripcion;
-    }
-
-    public void setFechaFinInscripcion(Date fechaFinInscripcion) {
-        this.fechaFinInscripcion = fechaFinInscripcion;
-    }
-
-    public Date getFechaInicioPago() {
-        return fechaInicioPago;
-    }
-
-    public void setFechaInicioPago(Date fechaInicioPago) {
-        this.fechaInicioPago = fechaInicioPago;
-    }
-
-    public Date getFechaFinPago() {
-        return fechaFinPago;
-    }
-
-    public void setFechaFinPago(Date fechaFinPago) {
-        this.fechaFinPago = fechaFinPago;
     }
 
     public String getTipoCurso() {
@@ -169,17 +128,7 @@ public class CursoPeriodo implements Serializable {
     public void setMaximoEstudiantes(Integer maximoEstudiantes) {
         this.maximoEstudiantes = maximoEstudiantes;
     }
-
-//    public Collection<HistoricoCursoEstado> getHistoricoCursoEstadoCollection() {
-//        return historicoCursoEstadoCollection;
-//    }
-//
-//    public void setHistoricoCursoEstadoCollection(Collection<HistoricoCursoEstado> historicoCursoEstadoCollection) {
-//        this.historicoCursoEstadoCollection = historicoCursoEstadoCollection;
-//    }
     
-    
-
     public PeriodoAcademico getPeriodoAcademico() {
         return periodoAcademico;
     }
@@ -211,14 +160,6 @@ public class CursoPeriodo implements Serializable {
 
     public void setMaterialDidacticoCollection(Collection<MaterialDidactico> materialDidacticoCollection) {
         this.materialDidacticoCollection = materialDidacticoCollection;
-    }
-
-    public Collection<CursoEstudiante> getCursoEstudianteCollection() {
-        return cursoEstudianteCollection;
-    }
-
-    public void setCursoEstudianteCollection(Collection<CursoEstudiante> cursoEstudianteCollection) {
-        this.cursoEstudianteCollection = cursoEstudianteCollection;
     }
 
     @Override
@@ -254,29 +195,7 @@ public class CursoPeriodo implements Serializable {
 		this.lugarCapacitacion = lugarCapacitacion;
 	}
 
-	public String getHoraInicioClase() {
-		return horaInicioClase;
-	}
 
-	public void setHoraInicioClase(String horaInicioClase) {
-		this.horaInicioClase = horaInicioClase;
-	}
-
-	public String getHoraFinClase() {
-		return horaFinClase;
-	}
-
-	public void setHoraFinClase(String horaFinClase) {
-		this.horaFinClase = horaFinClase;
-	}
-
-	public Aula getAula() {
-		return aula;
-	}
-
-	public void setAula(Aula aula) {
-		this.aula = aula;
-	}
 
 	public PresupuestoCurso getPresupuestoCurso() {
 		return presupuestoCurso;
@@ -309,6 +228,31 @@ public class CursoPeriodo implements Serializable {
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	public String getModalidad() {
+		return modalidad;
+	}
+
+	public void setModalidad(String modalidad) {
+		this.modalidad = modalidad;
+	}
+
+	public Programa getPrograma() {
+		return programa;
+	}
+
+	public void setPrograma(Programa programa) {
+		this.programa = programa;
+	}
+
+	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
+		return moduloCursoPeriodoCollection;
+	}
+
+	public void setModuloCursoPeriodoCollection(
+			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
+		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
 	}
 	
 	
