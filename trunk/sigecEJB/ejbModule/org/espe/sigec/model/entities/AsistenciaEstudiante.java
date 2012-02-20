@@ -40,8 +40,9 @@ public class AsistenciaEstudiante implements Serializable {
     @Column(name = "estado_asistencia")
     private String estadoAsistencia;
     @JoinColumns({
+        @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante" , insertable = false, updatable = false),
         @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante", insertable = false, updatable = false)})
+        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso" , insertable = false, updatable = false)})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CursoEstudiante cursoEstudiante;
 

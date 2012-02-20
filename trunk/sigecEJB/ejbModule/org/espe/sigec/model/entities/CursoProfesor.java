@@ -34,8 +34,6 @@ public class CursoProfesor implements Serializable {
     @Size(max = 1)
     @Column(name = "estado")
     private String estado;
-    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
-    private Collection<DesempenioProfesor> desempenioProfesorCollection;
     @JoinColumn(name = "id_profesor", referencedColumnName = "id_profesor", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Profesor profesor;
@@ -43,6 +41,11 @@ public class CursoProfesor implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Curso curso;
 
+    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
+    private Collection<DesempenioProfesor> desempenioProfesorCollection;
+    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
+    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
+    
     public CursoProfesor() {
     }
 
@@ -118,5 +121,14 @@ public class CursoProfesor implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.CursoProfesor[ cursoProfesorPK=" + cursoProfesorPK + " ]";
     }
+
+	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
+		return moduloCursoPeriodoCollection;
+	}
+
+	public void setModuloCursoPeriodoCollection(
+			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
+		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
+	}
     
 }

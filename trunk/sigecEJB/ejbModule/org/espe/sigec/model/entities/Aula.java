@@ -36,20 +36,19 @@ public class Aula implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "id_aula")
     private String idAula;
-//    @Size(max = 50)
-//    @Column(name = "cod_aula")
-//    private String codAula;
     @Size(max = 250)
     @Column(name = "nombre_aula")
     private String nombreAula;
     @Size(max = 250)
     @Column(name = "descripcion_aula")
     private String descripcionAula;
-    @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
-    private Collection<CursoPeriodo> cursoPeriodoCollection;
+    @Column(name = "capacidad")
+    private Integer capacidad;
     @JoinColumn(name = "id_edificio", referencedColumnName = "id_edificio")
     @ManyToOne(fetch = FetchType.LAZY)
     private Edificio edificio;
+    @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
+    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
 
     public Aula() {
     }
@@ -65,15 +64,7 @@ public class Aula implements Serializable {
     public void setIdAula(String idAula) {
         this.idAula = idAula;
     }
-
-//    public String getCodAula() {
-//        return codAula;
-//    }
-//
-//    public void setCodAula(String codAula) {
-//        this.codAula = codAula;
-//    }
-
+    
     public String getNombreAula() {
         return nombreAula;
     }
@@ -89,15 +80,7 @@ public class Aula implements Serializable {
     public void setDescripcionAula(String descripcionAula) {
         this.descripcionAula = descripcionAula;
     }
-
-    public Collection<CursoPeriodo> getCursoPeriodoCollection() {
-        return cursoPeriodoCollection;
-    }
-
-    public void setCursoPeriodoCollection(Collection<CursoPeriodo> cursoPeriodoCollection) {
-        this.cursoPeriodoCollection = cursoPeriodoCollection;
-    }
-
+    
     public Edificio getEdificio() {
         return edificio;
     }
@@ -130,5 +113,22 @@ public class Aula implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.Aula[ idAula=" + idAula + " ]";
     }
+
+	public Integer getCapacidad() {
+		return capacidad;
+	}
+
+	public void setCapacidad(Integer capacidad) {
+		this.capacidad = capacidad;
+	}
+
+	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
+		return moduloCursoPeriodoCollection;
+	}
+
+	public void setModuloCursoPeriodoCollection(
+			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
+		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
+	}
     
 }

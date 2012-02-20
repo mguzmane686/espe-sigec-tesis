@@ -75,10 +75,10 @@ public class Profesor implements Serializable {
     @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
-    @OneToMany(mappedBy = "profesor", fetch = FetchType.LAZY)
-    private Collection<CursoEstudiante> cursoEstudianteCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
     private Collection<CursoProfesor> cursoProfesorCollection;
+    
     
 
     public Profesor() {
@@ -112,14 +112,6 @@ public class Profesor implements Serializable {
         this.persona = persona;
     }
     
-    public Collection<CursoEstudiante> getCursoEstudianteCollection() {
-        return cursoEstudianteCollection;
-    }
-
-    public void setCursoEstudianteCollection(Collection<CursoEstudiante> cursoEstudianteCollection) {
-        this.cursoEstudianteCollection = cursoEstudianteCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -171,17 +163,22 @@ public class Profesor implements Serializable {
 	@Transient
 	public double getPonderacion(){
 		double ponderacion =0;
-		if(getExpeAnioArea()!=null){
-			ponderacion += (Integer.parseInt(getExpeAnioArea())*10);
-		}
-		if(getExpeAnioDocente() !=null){
-			ponderacion += (Integer.parseInt(getExpeAnioDocente())*10);
-		}
-		if(getTituloNivelTres() !=null){
-			ponderacion += (Integer.parseInt(getTituloNivelTres())*10);
+		try {
+			if(getExpeAnioArea()!=null){
+				ponderacion += (Integer.parseInt(getExpeAnioArea())*10);
+			}
+			if(getExpeAnioDocente() !=null){
+				ponderacion += (Integer.parseInt(getExpeAnioDocente())*10);
+			}
+			if(getTituloNivelTres() !=null){
+				ponderacion += (Integer.parseInt(getTituloNivelTres())*10);
+			}
+			
+			ponderacion = Math.round((ponderacion*100)/100);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		ponderacion = Math.round((ponderacion*100)/100);
 		return ponderacion;
 	}
 	

@@ -37,8 +37,9 @@ public class CalificacionEstudiante implements Serializable {
     @Column(name = "nota")
     private BigInteger nota;
     @JoinColumns({
+        @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante"),
         @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo"),
-        @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante")})
+        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso")})
     @ManyToOne(fetch = FetchType.LAZY)
     private CursoEstudiante cursoEstudiante;
 
