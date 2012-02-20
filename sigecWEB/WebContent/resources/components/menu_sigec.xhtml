@@ -103,6 +103,12 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
+        <rich:panelMenuGroup label="#{msg['etiqueta_reportes']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="Reporte Lugares" action="rep_lugares.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+        </rich:panelMenuGroup>
+        
    </rich:panelMenu>
 </composite:implementation>
 </body>
