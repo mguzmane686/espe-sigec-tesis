@@ -11,41 +11,48 @@
     	<h:outputStylesheet library="css" name="bordes.css"/>
     	<h:outputStylesheet library="css" name="botones.css"/>
     	
-        <h:form id="frmRepLugar">
-        	<rich:panel header="#{msg['lugares_registrados']}">
-        		
-        		<h:commandButton actionListener="#{reporteLugarController.btnPDF}" value="PDF" 
+        <h:form id="frmRepEdificio">
+        	<rich:panel header="#{msg['edificios_registrados']}">
+        	
+        		<h:commandButton actionListener="#{reporteEdificioController.btnPDF}" value="PDF" 
         		immediate="true" image="/resources/images/button/pdf.png"/>
         	
 	        	<fieldset>
 	        		<legend>
-	        			<h:outputLabel value="#{msg['lugares_registrados']}" styleClass="titulo"/>
+	        			<h:outputLabel value="#{msg['edificios_registrados']}" styleClass="titulo"/>
 	        		</legend>
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblLugares" style="width:100%" value="#{reporteLugarController.lstLugares}" var="lugar" rows="10" rendered="#{!empty reporteLugarController.lstLugares}">
+		        		<rich:dataTable id="tblEdificios" style="width:100%" value="#{reporteEdificioController.lstEdificios}" var="edificio" rows="10" rendered="#{!empty reporteEdificioController.lstEdificios}">
 		        			<f:facet name="header">
-		        				<h:outputLabel value="Lugares" />
+		        				<h:outputLabel value="Edificios" />
 		        			</f:facet>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['lugar']}" />
+			        			</f:facet>
+			        			<h:outputText value="#{edificio.lugarCurso.nombre}" />
+		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<h:outputText value="#{lugar.nombre}" />
-			   		        </rich:column>
+			        			<h:outputText value="#{edificio.nombre}" />
+		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['descripcion']}" />
 			        			</f:facet>
-			        			<h:outputText value="#{lugar.direccion}" />
+			        			<h:outputText value="#{edificio.descripcion}" />
 		        			</rich:column>
 			        	</rich:dataTable>
 		        		
 		        		<center>
-		        			<rich:dataScroller for="tblLugares" renderIfSinglePage="false" fastControls="hide"/>
+		        			<rich:dataScroller for="tblEdificios" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 	        		</a4j:outputPanel>
 	        	</fieldset>	
