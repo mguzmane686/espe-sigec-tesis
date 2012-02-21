@@ -36,12 +36,18 @@ public class Perfil implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "id_perfil")
     private String idPerfil;
+    
+    @Column(name = "nombre", length = 250)
+    private String nombre;
+    @Column(name = "descripcion", length = 250)
+    private String descripcion;
+    
     @JoinTable(name = "usuario_perfil", joinColumns = {
         @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")}, inverseJoinColumns = {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")})
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Usuario> usuarioCollection;
-
+    
     public Perfil() {
     }
 
@@ -89,5 +95,21 @@ public class Perfil implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entites.Perfil[ idPerfil=" + idPerfil + " ]";
     }
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
     
 }
