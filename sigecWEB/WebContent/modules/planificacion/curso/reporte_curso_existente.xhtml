@@ -32,6 +32,16 @@
 		        				<h:outputLabel value="Cursos" />
 		        			</f:facet>
 		        			
+		        			<rich:column>
+		        				<a4j:commandLink rendered="#{!curso.showCursoPeriodoCollection}" action="#{reporteCursoController.btnExpandContractCurso(curso, true)}" render="tblCursos">
+		        					<h:graphicImage library="images/button" name="expand.png"/>
+		        				</a4j:commandLink>
+		        				
+		        				<a4j:commandLink rendered="#{curso.showCursoPeriodoCollection}" action="#{reporteCursoController.btnExpandContractCurso(curso, false)}" render="tblCursos">
+		        					<h:graphicImage library="images/button" name="contract.png"/>
+		        				</a4j:commandLink>
+		        			</rich:column>
+		        			
 		        			<rich:column style="text-align:center;" filterValue="#{reporteCursoController.nameEspecialidadFilter}"
 		                				filterExpression="#{fn:containsIgnoreCase(curso.especialidad.nombre, reporteCursoController.nameEspecialidadFilter)}">
 			        			<f:facet name="header">
@@ -45,16 +55,6 @@
 			        				
 			        			</f:facet>
 			        			<h:outputText value="#{curso.especialidad.nombre}" />
-		        			</rich:column>
-		        			
-		        			<rich:column>
-		        				<a4j:commandLink rendered="#{!curso.showCursoPeriodoCollection}" action="#{reporteCursoController.btnExpandContractCurso(curso, true)}" render="tblCursos">
-		        					<h:graphicImage library="images/button" name="expand.png"/>
-		        				</a4j:commandLink>
-		        				
-		        				<a4j:commandLink rendered="#{curso.showCursoPeriodoCollection}" action="#{reporteCursoController.btnExpandContractCurso(curso, false)}" render="tblCursos">
-		        					<h:graphicImage library="images/button" name="contract.png"/>
-		        				</a4j:commandLink>
 		        			</rich:column>
 		        			
 		        			<rich:column filterValue="#{reporteCursoController.nameFilter}"
