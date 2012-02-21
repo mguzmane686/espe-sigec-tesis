@@ -51,6 +51,7 @@
 				<legend>
 					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
 				</legend>
+				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
@@ -84,11 +85,20 @@
 
 					<h:outputLabel value="#{msg['celular']} :" />
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
-					
 				</h:panelGrid>
-				
 			</fieldset>
 			
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg.etiqueta_perfil}" styleClass="titulo" />
+				</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Tipo de perfil" />
+					<h:selectOneRadio value="#{creacionUsuarioController.usuarioPerfil.usuarioPerfilPK.idPerfil}" required="true" requiredMessage="El campo Perfil es obligatorio">
+						<f:selectItems value="#{creacionUsuarioController.lstPerfils}" var="perfil" itemLabel="#{perfil.nombre}" itemValue="#{perfil.idPerfil}"></f:selectItems>
+					</h:selectOneRadio>
+				</h:panelGrid>
+			</fieldset>
 		</rich:panel>
 	</h:form>
 </ui:composition>
