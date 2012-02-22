@@ -24,7 +24,7 @@ public class ReporteLugarController implements Serializable{
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
-	Collection<LugarCurso> lstLugares;
+	private Collection<LugarCurso> lstLugares;
 
 	public ReporteLugarController(){
 		setLstLugares(new ArrayList<LugarCurso>());

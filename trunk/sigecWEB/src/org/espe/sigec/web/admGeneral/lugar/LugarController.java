@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
-
+import org.espe.sigec.web.utils.GeneralFunctions;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="lugarController")
@@ -24,16 +24,6 @@ public class LugarController implements Serializable {
 	public LugarController(){
 		setLugarCurso(new LugarCurso());	
 	}
-	
-	public void btnSaveLugar(ActionEvent e){
-		try {
-			admGeneralServicio.createLugar(getLugarCurso());
-			setLugarCurso(new LugarCurso());
-			FacesUtils.addInfoMessage("El lugar se cre&oacute exitosamente");
-		} catch (Exception e1) {
-			FacesUtils.addInfoMessage("No se pudo guardar el lugar");
-		}
-	}
 
 	public LugarCurso getLugarCurso() {
 		return lugarCurso;
@@ -41,6 +31,35 @@ public class LugarController implements Serializable {
 	
 	public void setLugarCurso(LugarCurso lugarCurso) {
 		this.lugarCurso = lugarCurso;
+	}
+	
+	public void btnSaveLugar(ActionEvent e){
+		try {
+			generarCodigoLugar();
+			admGeneralServicio.createLugar(getLugarCurso());
+			setLugarCurso(new LugarCurso());
+			FacesUtils.addInfoMessage("El lugar se cre&oacute exitosamente");
+		} catch (Exception e1) {
+			FacesUtils.addInfoMessage("No se pudo guardar el lugar");
+		}
+	}
+	
+	private void generarCodigoLugar(){
+		int nextRegistro;
+		int cantidadNumeros;
+		
+		String prefijo;
+		String sufijo;
+		
+		GeneralFunctions generalFunctions = new GeneralFunctions();
+		
+		nextRegistro = admGeneralServicio.findLugar().size() + 1;
+		cantidadNumeros = Integer.toString(nextRegistro).length();
+		
+		prefijo = "LUG";		
+		sufijo = generalFunctions.completarCeros(nextRegistro, cantidadNumeros);
+		
+		lugarCurso.setIdLugar(prefijo + sufijo);
 	}
 
 }
