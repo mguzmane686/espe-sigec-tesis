@@ -28,9 +28,16 @@
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
+			        			</f:facet>
+			        			<a4j:commandLink value="#{especialidad.idEspecialidadPrefijo}" action="#{reporteEspecialidadController.btnShowEspecialidadDetail(especialidad)}"></a4j:commandLink>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
-			        			<a4j:commandLink value="#{especialidad.nombre}" action="#{reporteEspecialidadController.btnShowEspecialidadDetail(especialidad)}"></a4j:commandLink>
+			        			<h:outputText value="#{especialidad.nombre}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>
