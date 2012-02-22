@@ -24,7 +24,9 @@ import org.espe.sigec.web.utils.FacesUtils;
 @ViewScoped
 public class EdicionCursoController {
 	private PensumAcademico pensumAcademicoNuevo;
+	private ModuloCurso moduloCurso;
 	private Curso curso;
+	private boolean renderEditButtons;
 	@Inject
 	private PlanificacionServicio planificacionServicio;
 	@Inject
@@ -48,17 +50,29 @@ public class EdicionCursoController {
 		}
 	}
 	
+	public void btnEditCurso(ActionEvent e){
+		setRenderEditButtons(Boolean.TRUE);
+	}
+	
+	public void btnCancelEditCurso(ActionEvent e){
+		setRenderEditButtons(Boolean.FALSE);
+	}
 	public void btnSaveEditCurso(ActionEvent e){
 		try {
 			planificacionServicio.editarCursoModulo(getCurso(), getCurso().getModuloCursoCollection());
 			FacesUtils.addInfoMessage("El curso se edito con &eacutexito");
+			setRenderEditButtons(Boolean.FALSE);
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("El curso no pudo editarse");
 		}
 	}
 	public void btnAddTemaPensum(ActionEvent e){
-//		getCurso().getPensumAcademicoCollection().add(pensumAcademicoNuevo);
 		setPensumAcademicoNuevo(new PensumAcademico());
+	}
+	
+	public void btnAddModuloCurso(ActionEvent e){
+		getCurso().getModuloCursoCollection().add(getModuloCurso());
+		setModuloCurso(new ModuloCurso());
 	}
 	
 	public void btnAtras(ActionEvent e){
@@ -70,16 +84,10 @@ public class EdicionCursoController {
 	}
 	
 	public void initEntities(){
-//		setLstPensumAcademicos(new ArrayList<PensumAcademico>());
 		setPensumAcademicoNuevo(new PensumAcademico());
+		setModuloCurso(new ModuloCurso());
 	}
-//	public Collection<PensumAcademico> getLstPensumAcademicos() {
-//		return lstPensumAcademicos;
-//	}
-//	public void setLstPensumAcademicos(
-//			Collection<PensumAcademico> lstPensumAcademicos) {
-//		this.lstPensumAcademicos = lstPensumAcademicos;
-//	}
+	
 	public PensumAcademico getPensumAcademicoNuevo() {
 		return pensumAcademicoNuevo;
 	}
@@ -91,6 +99,22 @@ public class EdicionCursoController {
 	}
 	public void setCurso(Curso curso) {
 		this.curso = curso;
+	}
+
+	public ModuloCurso getModuloCurso() {
+		return moduloCurso;
+	}
+
+	public void setModuloCurso(ModuloCurso moduloCurso) {
+		this.moduloCurso = moduloCurso;
+	}
+
+	public boolean isRenderEditButtons() {
+		return renderEditButtons;
+	}
+
+	public void setRenderEditButtons(boolean renderEditButtons) {
+		this.renderEditButtons = renderEditButtons;
 	}
 	
 	
