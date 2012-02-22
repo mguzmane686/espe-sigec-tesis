@@ -66,6 +66,10 @@
         			<h:inputTextarea rendered="#{administrarAulaController.editMode}" value="#{administrarAulaController.aula.descripcionAula}" style="width:40em"/>
         			<h:outputText value="#{administrarAulaController.aula.descripcionAula}" rendered="#{!administrarAulaController.editMode}"/>
         		
+        			<h:outputLabel value="Capacidad:" />
+        			<rich:inputNumberSpinner rendered="#{administrarAulaController.editMode}" value="#{administrarAulaController.aula.capacidad}" size="30"/>
+        			<h:outputText value="#{administrarAulaController.aula.capacidad}" rendered="#{!administrarAulaController.editMode}"/>
+        			
         		</h:panelGrid>
         	</fieldset>	
        	</rich:panel>
