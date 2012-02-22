@@ -35,9 +35,6 @@
         				<f:selectItems value="#{edificioController.itemsLugares}"/>
         			</h:selectOneMenu>
         			
-        			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
-        			<h:inputText value="#{edificioController.edificio.idEdificio}" size="72" required="true" requiredMessage="El campo #{msg['etiqueta_codigo']} es obligatorio"/>
-        			
         			<h:outputLabel value="#{msg['nombre']}:"/>
         			<h:inputText value="#{edificioController.edificio.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
         			
