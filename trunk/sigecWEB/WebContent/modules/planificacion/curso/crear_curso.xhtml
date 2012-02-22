@@ -78,6 +78,7 @@
 							$("#frmCurso\\:btnNuevoModulo").live('click',function(){
 								$("#frmNuevoCurso\\:txtNomTem").attr('value','');
 								$("#frmNuevoCurso\\:txtDetTem").attr('value','');
+								$("#frmNuevoCurso\\:txtNivMod").attr('value','');
 								$("#frmNuevoCurso\\:txtNomTem").focus();
 							});
 						</script>
@@ -137,7 +138,7 @@
 					required="true" requiredMessage="El campo #{msg['descripcion']} es obligatorio" />
 					
 				<h:outputLabel value="Orden :" />
-				<h:inputText id="txtTiempoTem" value="#{cursoController.moduloCurso.nivel}" tabindex="3" 
+				<h:inputText id="txtNivMod" value="#{cursoController.moduloCurso.nivel}" tabindex="3" 
 					required="true" requiredMessage="El campo Orden es obligatorio" />
 			</h:panelGrid>
 
