@@ -30,7 +30,14 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['lugar']}" />
 			        			</f:facet>
-			        			<a4j:commandLink value="#{aula.edificio.lugarCurso.nombre}" action="#{reporteAulaController.btnShowAulaDetail(aula)}"></a4j:commandLink>
+			        			<a4j:commandLink value="#{aula.idAula}" action="#{reporteAulaController.btnShowAulaDetail(aula)}"></a4j:commandLink>
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['lugar']}" />
+			        			</f:facet>
+			        			<h:outputText value="#{aula.edificio.lugarCurso.nombre}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>
