@@ -44,6 +44,9 @@ public class Especialidad implements Serializable {
     @Size(max = 250)
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name="id_especialidad_prefijo")
+    private String idEspecialidadPrefijo;
+    @Size(max = 10)
     @OneToMany(mappedBy = "especialidad", fetch = FetchType.LAZY)
     private Collection<Curso> cursoCollection;
 
@@ -77,6 +80,14 @@ public class Especialidad implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    public String getIdEspecialidadPrefijo() {
+		return idEspecialidadPrefijo;
+	}
+
+	public void setIdEspecialidadPrefijo(String idEspecialidadPrefijo) {
+		this.idEspecialidadPrefijo = idEspecialidadPrefijo;
+	}
 
     public Collection<Curso> getCursoCollection() {
         return cursoCollection;
@@ -110,5 +121,5 @@ public class Especialidad implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.Especialidad[ idEspecialidad=" + idEspecialidad + " ]";
     }
-    
+
 }
