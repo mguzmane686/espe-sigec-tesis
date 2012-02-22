@@ -17,6 +17,7 @@ import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.GeneralFunctions;
 
 /**
  * @author diego
@@ -96,6 +97,7 @@ public class AulaController implements Serializable{
 	
 	public void btnSaveAula(ActionEvent e){
 		try {
+			generarCodigoAula();
 			admGeneralServicio.createAula(getAula());
 			initEntities();
 			loadCombos();
@@ -103,6 +105,24 @@ public class AulaController implements Serializable{
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("Ha ocurrido un error al gurdar el aula");
 		}
+	}
+	
+	private void generarCodigoAula(){
+		int nextRegistro;
+		int cantidadNumeros;
+		
+		String prefijo;
+		String sufijo;
+		
+		GeneralFunctions generalFunctions = new GeneralFunctions();
+		
+		nextRegistro = admGeneralServicio.findAula().size() + 1;
+		cantidadNumeros = Integer.toString(nextRegistro).length();
+		
+		prefijo = "AUL";		
+		sufijo = generalFunctions.completarCeros(nextRegistro, cantidadNumeros);
+		
+		aula.setIdAula(prefijo + sufijo);
 	}
 	
 }
