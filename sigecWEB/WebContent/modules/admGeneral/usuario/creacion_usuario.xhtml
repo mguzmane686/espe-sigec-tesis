@@ -21,6 +21,17 @@
    			text-align:center;
    			font-weight: bold;
    		}
+   		.rmsg-tef .rf-msg-err{		   
+		   background-image: url('#{resource['images:circle-alert.png']}');
+		   visibility: visible;
+		   height: 14px;
+		   width: 14px;
+		}
+        
+        .rmsg-tef .rf-msg-det {
+            visibility: hidden;
+        }
+        
    	</h:outputStylesheet>
 
 	<h:form>
@@ -43,7 +54,16 @@
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio"/>
 					
 					<h:outputLabel value="#{msg['clave']} :"  style="padding-right:50px" />
-					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio"/>
+					<h:panelGrid columns="2">
+						<h:inputText id="txtClave" value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio"/>
+						<rich:message for="txtClave" ajaxRendered="true" styleClass="rmsg-tef" >
+							<rich:tooltip id="tt1" styleClass="tooltip" layout="block">
+				                <span style="white-space: nowrap"> 
+				                	<strong>el campo clave el obligatorio</strong>
+				                </span>
+				            </rich:tooltip>
+						</rich:message>
+					</h:panelGrid>
 				</h:panelGrid>
 			</fieldset>
 			
@@ -54,14 +74,24 @@
 				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
+					
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
 
 					<h:outputLabel value="#{msg['nombres']} :" />
-					<h:panelGrid columns="2">
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
+					<h:panelGrid columns="3">
+						<h:inputText id="ssdsd" value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
+						<rich:message for="ssdsd" ajaxRendered="true" styleClass="rmsg-tef" >
+							<rich:tooltip styleClass="tooltip" zindex="20">
+				                <span style="white-space: nowrap"> 
+				                	<strong>el campo clave el obligatorio</strong>
+				                </span>
+				            </rich:tooltip>
+						</rich:message>
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoNombre}"/>
-					</h:panelGrid>
+					</h:panelGrid>	
+						
+					
 
 
 					<h:outputLabel value="#{msg['apellidos']} :" />
