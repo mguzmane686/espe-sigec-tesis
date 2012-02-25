@@ -108,14 +108,7 @@
         				<h:outputLabel value="Curso :"/>
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.curso.nombreCurso}" />
         				
-        				<h:outputLabel value="Aula :"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.aula.idAula}" />
         				
-        				<h:outputLabel value="Inicio Inscripciones :" />
-        				<rich:calendar rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" disabled="true"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.fechaInicioInscripcion}" rendered="#{!administrarCursoController.editMode}">
-        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-        				</h:outputText>
         				
         				<h:outputLabel value="#{msg['minimo_estudiantes']} :" />
         				<rich:inputNumberSpinner rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.minimoEstudiantes}"/>
@@ -125,13 +118,6 @@
         				<rich:inputNumberSpinner rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.maximoEstudiantes}" rendered="#{!administrarCursoController.editMode}"/>
         				
-        				<h:outputLabel value="Hora inicio :" />
-        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.horaInicioClase}"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaInicioClase}" rendered="#{!administrarCursoController.editMode}"/>
-        				
-        				<h:outputLabel value="Hora fin" />
-        				<h:inputText rendered="#{administrarCursoController.editMode}" value="#{administrarCursoController.cursoPeriodo.horaFinClase}"/>
-        				<h:outputText value="#{administrarCursoController.cursoPeriodo.horaFinClase}" rendered="#{!administrarCursoController.editMode}"/>
         				
         				<h:outputLabel value="#{msg['tipo_curso']} :"/>
         				<h:selectOneRadio value="#{administrarCursoController.cursoPeriodo.tipoCurso}" rendered="#{administrarCursoController.editMode}">
