@@ -200,5 +200,11 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public void editPresupuesto(Presupuesto presupuesto) throws Exception {
 		presupuestoFacadeLocal.edit(presupuesto);
 	}
+
+	@Override
+	public Collection<Persona> loadPerson() {
+		
+		return personaFacadeLocal.findAll();
+	}
 	
 }

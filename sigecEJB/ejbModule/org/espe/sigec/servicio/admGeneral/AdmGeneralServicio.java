@@ -51,5 +51,7 @@ public interface AdmGeneralServicio {
 	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;
 	void createProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
 	void editProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
+	
+	Collection<Persona> loadPerson();
 
 }
