@@ -21,7 +21,35 @@
 					<f:facet name="header">
 						<h:outputLabel value="Nombre" />
 					</f:facet>
-					<h:outputText value="#{person.primerNombre}" />
+					<h:outputText value="#{person.primerNombre.concat(' ').concat(person.primerApellido)}" />
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Direccion" />
+					</f:facet>
+					<h:outputText value="#{person.direccion}" />
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Mail" />
+					</f:facet>
+					<h:outputText value="#{person.mail}" />
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Telf. Convencional" />
+					</f:facet>
+					<h:outputText value="#{person.telefonoConvencional}" style="float:right;"/>
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Telf. Celular" />
+					</f:facet>
+					<h:outputText value="#{person.telefonoCelular}" style="float:right;"/>
 				</rich:column>
 			</rich:dataTable>
 			<center>
