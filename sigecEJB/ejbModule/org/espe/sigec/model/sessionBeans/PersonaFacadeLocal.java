@@ -33,5 +33,7 @@ public interface PersonaFacadeLocal {
     
     Persona findPersonaByUser(Usuario usuario);
     
+    Collection<Persona> cargarUsuarios();
+    
     Collection<Persona> cargarContactos();
 }

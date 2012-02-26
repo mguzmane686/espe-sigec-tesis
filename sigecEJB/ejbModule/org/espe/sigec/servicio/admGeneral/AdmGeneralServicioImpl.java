@@ -203,13 +203,22 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 
 	@Override
 	public Collection<Persona> loadPerson() {
-		
 		return personaFacadeLocal.findAll();
 	}
 
 	@Override
 	public Collection<Persona> cargarContactos() {
 		return personaFacadeLocal.cargarContactos();
+	}
+
+	@Override
+	public void crearContacto(Persona persona) throws Exception {
+		personaFacadeLocal.create(persona);
+	}
+
+	@Override
+	public Collection<Persona> cargarUsuarios() {
+		return personaFacadeLocal.cargarUsuarios();
 	}
 	
 }
