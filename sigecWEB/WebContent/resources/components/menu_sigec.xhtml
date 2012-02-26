@@ -32,15 +32,24 @@
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
-            	<a4j:commandLink value="Nuevo usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
+            	<a4j:commandLink value="Nuevo Usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
             
             <rich:panelMenuItem>
-            	<a4j:commandLink value="Listado usuarios" action="adm_listado_usuario.jsf?faces-redirect=true" execute="@this"/>
+            	<a4j:commandLink value="#{msg.etiqueta_lista_usuarios}" action="adm_listado_usuario.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
        </rich:panelMenuGroup>
        
-       
+       <rich:panelMenuGroup label="#{msg.etiqueta_contactos}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg.etiqueta_lista_contactos}" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg.etiqueta_aniadir_contacto}" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+       </rich:panelMenuGroup>
+        
        <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
             <rich:panelMenuGroup label="Curso">
 	            <rich:panelMenuItem>
