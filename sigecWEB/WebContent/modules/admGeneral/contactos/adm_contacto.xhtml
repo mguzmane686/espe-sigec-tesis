@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+
+	<h:outputStylesheet library="css" name="textos.css" />    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
+   	
+   	<h:outputStylesheet>
+   		.alinearLeft{
+   			text-align:left;
+   			font-weight: bold;
+   		}
+   		.alinearCenter{
+   			text-align:center;
+   			font-weight: bold;
+   		}
+   		.rmsg-tef .rf-msg-err{		   
+		   background-image: url('#{resource['images:circle-alert.png']}');
+		   visibility: visible;
+		   height: 14px;
+		   width: 14px;
+		}
+        
+        .rmsg-tef .rf-msg-det {
+            visibility: hidden;
+        }
+        
+   	</h:outputStylesheet>
+
+	<h:form>
+		<rich:panel header="#{msg['etiqueta_contactos']}">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{admContactoController.btnSaveContact}" image="/resources/images/save.png" render="pnlDocente"/>
+					<h:outputLabel value="#{msg['guardar']}" />
+				</h:panelGrid>
+			</h:panelGroup>
+		</rich:panel>
+
+		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
+						
+			<fieldset>
+				<legend>
+					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
+				</legend>
+				
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
+					<h:inputText value="#{admContactoController.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"/>
+					
+					<h:outputLabel value="#{msg['nombres']} :" />
+					<h:panelGrid columns="2">
+						<h:inputText value="#{admContactoController.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
+						<h:inputText value="#{admContactoController.persona.segundoNombre}"/>
+					</h:panelGrid>	
+					
+					<h:outputLabel value="#{msg['apellidos']} :" />
+					<h:panelGrid columns="2">
+						<h:inputText value="#{admContactoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
+						<h:inputText value="#{admContactoController.persona.segundoApellido}" />
+					</h:panelGrid>
+
+					<h:outputLabel value="#{msg['fecha_nacimiento']} :" />
+					<rich:calendar value="#{admContactoController.persona.fechaNacimiento}" datePattern="#{msg['dd_MMM_yyyy']}">
+					</rich:calendar>
+
+					<h:outputLabel value="#{msg['nacionalidad']} :" />
+					<h:inputText value="#{admContactoController.persona.nacionalidad}" size="43"/>
+
+					<h:outputLabel value="#{msg['direccion']} :" />
+					<h:inputText value="#{admContactoController.persona.direccion}" size="43"/>
+
+					<h:outputLabel value="#{msg['e_mail']} :" />
+					<h:inputText value="#{admContactoController.persona.mail}" size="43"/>
+
+					<h:outputLabel value="#{msg['celular']} :" />
+					<h:inputText value="#{admContactoController.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
+					<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+					<h:inputText value="#{admContactoController.persona.telefonoConvencional}" maxlength="15" onkeypress="return validateNumPP(event);"/>
+				</h:panelGrid>
+			</fieldset>
+		</rich:panel>
+	</h:form>
+</ui:composition>

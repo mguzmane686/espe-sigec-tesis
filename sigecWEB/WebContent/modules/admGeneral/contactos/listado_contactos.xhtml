@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+
+	<h:outputStylesheet library="css" name="textos.css" />    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
+   	
+   	<h:outputStylesheet>
+   		.alinearLeft{
+   			text-align:left;
+   			font-weight: bold;
+   		}
+   		.alinearCenter{
+   			text-align:center;
+   			font-weight: bold;
+   		}
+   	</h:outputStylesheet>
+
+	<h:form>
+		<rich:panel header="#{msg['etiqueta_lista_contactos']}">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				
+			</h:panelGroup>
+			
+			<fieldset>
+				<legend>
+					<h:outputLabel value="" />
+				</legend>
+				<rich:dataTable value="#{listadoContactosController.lstPersonas}" var="contacto">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Nombre" />
+						</f:facet>
+						<h:outputText value="#{contacto.primerNombre}" />
+					</rich:column>
+				</rich:dataTable>
+			</fieldset>
+		</rich:panel>
+		
+		
+		
+	</h:form>
+</ui:composition>
