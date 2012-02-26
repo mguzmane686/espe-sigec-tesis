@@ -14,6 +14,7 @@ import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -53,4 +54,19 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 		return lst;
 	}
     
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Persona> cargarUsuarios() {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
+		
+		criteria.add(Restrictions.or(
+				Restrictions.isNull("esContacto"), Restrictions.ne("esContacto", "1")
+				));
+		
+		
+		criteria.addOrder(Order.asc("primerApellido"));
+		Collection<Persona> lst =  criteria.list();
+		
+		return lst;
+	}
 }
