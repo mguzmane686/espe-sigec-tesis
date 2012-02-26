@@ -4,13 +4,17 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -35,6 +39,18 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
 		criteria.add(Restrictions.eq("usuario.idUsuario", usuario.getIdUsuario()));
 		return (Persona) criteria.uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Persona> cargarContactos() {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
+		criteria.add(Restrictions.isNotNull("esContacto"));
+		criteria.add(Restrictions.eq("esContacto", "1"));
+		criteria.addOrder(Order.asc("primerApellido"));
+		Collection<Persona> lst =  criteria.list();
+		
+		return lst;
 	}
     
 }
