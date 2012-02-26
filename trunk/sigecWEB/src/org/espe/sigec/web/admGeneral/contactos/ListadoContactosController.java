@@ -1,4 +1,4 @@
-package org.espe.sigec.web.admGeneral.usuario;
+package org.espe.sigec.web.admGeneral.contactos;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -16,19 +16,21 @@ import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
  *
  */
 @SuppressWarnings("serial")
-@ManagedBean(name = "listadoUsuarioController")
+@ManagedBean(name="listadoContactosController")
 @ViewScoped
-public class ListadoUsuarioController implements Serializable{
-	private Collection<Persona> lstPersonas;
-	
+public class ListadoContactosController implements Serializable{
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
+	Collection<Persona> lstPersonas;
 	@PostConstruct
-	public void inicializarControlador(){
-		setLstPersonas(admGeneralServicio.cargarUsuarios());
+	public void cargarContactos(){
+		setLstPersonas(admGeneralServicio.cargarContactos());
+		System.out.println("personas");
 	}
-	public ListadoUsuarioController() {
+	
+	public ListadoContactosController() {
+		
 	}
 
 	public Collection<Persona> getLstPersonas() {
