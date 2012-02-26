@@ -53,5 +53,7 @@ public interface AdmGeneralServicio {
 	void editProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception;
 	
 	Collection<Persona> loadPerson();
+	
+	Collection<Persona> cargarContactos();
 
 }
