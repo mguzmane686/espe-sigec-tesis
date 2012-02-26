@@ -206,5 +206,10 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		
 		return personaFacadeLocal.findAll();
 	}
+
+	@Override
+	public Collection<Persona> cargarContactos() {
+		return personaFacadeLocal.cargarContactos();
+	}
 	
 }
