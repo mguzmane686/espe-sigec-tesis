@@ -22,7 +22,9 @@ public class ListadoContactosController implements Serializable{
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
-	Collection<Persona> lstPersonas;
+	private Collection<Persona> lstPersonas;
+	private String primerApellidoFilter;
+	private String primerNombreFilter;
 	@PostConstruct
 	public void cargarContactos(){
 		setLstPersonas(admGeneralServicio.cargarContactos());
@@ -39,6 +41,22 @@ public class ListadoContactosController implements Serializable{
 
 	public void setLstPersonas(Collection<Persona> lstPersonas) {
 		this.lstPersonas = lstPersonas;
+	}
+
+	public String getPrimerApellidoFilter() {
+		return primerApellidoFilter;
+	}
+
+	public void setPrimerApellidoFilter(String primerApellidoFilter) {
+		this.primerApellidoFilter = primerApellidoFilter;
+	}
+
+	public String getPrimerNombreFilter() {
+		return primerNombreFilter;
+	}
+
+	public void setPrimerNombreFilter(String primerNombreFilter) {
+		this.primerNombreFilter = primerNombreFilter;
 	}
 	
 	
