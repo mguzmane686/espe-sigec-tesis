@@ -74,6 +74,9 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	crit.createAlias("curso", "cursoA");
     	crit.setFetchMode("cursoA", FetchMode.JOIN);
     	
+    	crit.createAlias("cursoA.especialidad", "especialidadA");
+    	crit.setFetchMode("especialidadA", FetchMode.JOIN);
+    	
     	crit.createAlias("persona", "personaA");
     	crit.setFetchMode("personaA", FetchMode.JOIN);
     	crit.add(Restrictions.eq("personaA.idPersona", idPersona));
