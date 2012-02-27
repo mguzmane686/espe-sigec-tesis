@@ -79,6 +79,10 @@ public class Persona implements Serializable {
     private String telefonoConvencional;
     @Column(name = "foto")
     private byte[] foto;
+    @Column(name = "referencia")
+    private String referencia;
+    @Column(name = "profesion")
+    private String profesion;
     @Column(name = "es_contacto")
     private String esContacto;
     @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
@@ -257,5 +261,19 @@ public class Persona implements Serializable {
 		this.esContacto = esContacto;
 	}
 
-    
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
+	}
+
+	public String getProfesion() {
+		return profesion;
+	}
+
+	public void setProfesion(String profesion) {
+		this.profesion = profesion;
+	}    
 }
