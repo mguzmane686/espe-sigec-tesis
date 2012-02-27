@@ -31,9 +31,12 @@
 
 		<rich:panel header="Datos del curso">
 			<h:panelGrid columns="2" columnClasses="espacioDetalle">
+				<h:outputLabel value="#{msg.etiqueta_especialidad}" />
+				<h:outputText value="#{presupuestoController.cursoPeriodo.curso.especialidad.nombre}" />
+				
 				<h:outputLabel value="Nombre del curso :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.curso.nombreCurso}" />
-
+				
 				<h:outputLabel value="Fecha inicio:" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.periodoAcademico.fechaInicio}">
 					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
@@ -44,26 +47,12 @@
 					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
 				</h:outputText>
 
-				<h:outputLabel value="Aula :" />
-				<h:outputText value="#{presupuestoController.cursoPeriodo.aula.idAula}" />
-
-				<h:outputLabel value="Inicio Inscripciones :" />
-				<h:outputText value="#{presupuestoController.cursoPeriodo.fechaInicioInscripcion}">
-					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}" />
-				</h:outputText>
-
 				<h:outputLabel value="#{msg['minimo_estudiantes']} :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.minimoEstudiantes}" />
 
 				<h:outputLabel value="#{msg['maximo_estudiantes']} :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
-
-				<h:outputLabel value="Hora inicio :" />
-				<h:outputText value="#{presupuestoController.cursoPeriodo.horaInicioClase}" />
-
-				<h:outputLabel value="Hora fin :" />
-				<h:outputText value="#{presupuestoController.cursoPeriodo.horaFinClase}" />
-
+				
 				<h:outputLabel value="#{msg['tipo_curso']} :" />
 				<h:selectOneRadio value="#{presupuestoController.cursoPeriodo.tipoCurso}">
 					<f:selectItem itemLabel="Empresarial" itemValue="CORP" />
