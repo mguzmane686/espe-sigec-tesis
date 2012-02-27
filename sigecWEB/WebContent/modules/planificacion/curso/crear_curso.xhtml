@@ -33,17 +33,17 @@
 				</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg.etiqueta_departamento}:" />
-					<rich:select value="#{cursoController.curso.especialidad.idEspecialidad}" enableManualInput="false" 
+					<rich:select value="#{cursoController.curso.especialidad.idEspecialidad}" enableManualInput="false" styleClass="campoRequerido" 
 						defaultLabel="Seleccione una especialidad" required="true" requiredMessage="El campo Especialidad es obligatorio">
 						<f:selectItems value="#{cursoController.itemEspecialidades}" />
 					</rich:select>
 
 					<h:outputLabel value="#{msg['nombre']}:" />
 					<h:inputText value="#{cursoController.curso.nombreCurso}" size="72" required="true" 
-						requiredMessage="El campo Nombre es obligatorio" />
+						requiredMessage="El campo Nombre es obligatorio" styleClass="campoRequerido"/>
 					<h:outputLabel value="#{msg.etiqueta_generalidades} :" />
 					<h:inputTextarea value="#{cursoController.curso.generalidadesCurso}" cols="70"  
-						required="true" requiredMessage="El campo Descripcion es obligatorio" />
+						required="true" requiredMessage="El campo Descripcion es obligatorio" styleClass="campoRequerido"/>
 					<h:outputLabel value="#{msg.etiqueta_nivel_curso} :" />
 					<h:selectOneRadio value="#{cursoController.curso.nivelCurso}">
 						<f:selectItem itemLabel="#{msg.etiqueta_nivelCurso_Basico}"  itemValue="B"/>
