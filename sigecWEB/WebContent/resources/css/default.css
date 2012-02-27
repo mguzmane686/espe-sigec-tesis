@@ -27,3 +27,11 @@ a:link:hover, a:visited:hover  {
   font-weight : bold;
   text-decoration : underline;
 }
+
+.campoRequerido {
+	background-image: url('#{resource['images:required.png']}') !important;
+	background-repeat: repeat;
+	background-color: #CEECF5 !important;
+	background-position: right !important;
+	position: relative;
+}
