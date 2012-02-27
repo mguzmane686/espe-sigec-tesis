@@ -23,6 +23,7 @@ public class ListadoContactosController implements Serializable{
 	private AdmGeneralServicio admGeneralServicio;
 	
 	private Collection<Persona> lstPersonas;
+	private Persona personaSelected;
 	private String primerApellidoFilter;
 	private String primerNombreFilter;
 	@PostConstruct
@@ -57,6 +58,14 @@ public class ListadoContactosController implements Serializable{
 
 	public void setPrimerNombreFilter(String primerNombreFilter) {
 		this.primerNombreFilter = primerNombreFilter;
+	}
+
+	public Persona getPersonaSelected() {
+		return personaSelected;
+	}
+
+	public void setPersonaSelected(Persona personaSelected) {
+		this.personaSelected = personaSelected;
 	}
 	
 	

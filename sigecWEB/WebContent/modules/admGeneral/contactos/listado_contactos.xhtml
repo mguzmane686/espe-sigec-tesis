@@ -50,7 +50,10 @@
 		                            <a4j:ajax event="keyup" render="tblContactos@body, scrContactos" execute="@this scrContactos" onbeforesubmit="if (event.keyCode != 13)  return false;" limitRender="true"/>
 		                        </h:inputText>
 							</f:facet>
-							<h:outputText value="#{contacto.primerApellido.concat(' ').concat(contacto.segundoApellido)}" />
+							<a4j:commandLink value="#{contacto.primerApellido.concat(' ').concat(contacto.segundoApellido)}" 
+								execute="@this" oncomplete="#{rich:component('detailContact')}.show()" render="detailContact">
+								<f:setPropertyActionListener target="#{listadoContactosController.personaSelected}" value="#{contacto}"></f:setPropertyActionListener>
+								</a4j:commandLink>
 						</rich:column>
 						
 						<rich:column>
@@ -83,7 +86,7 @@
 						
 						<rich:column>
 							<f:facet name="header">
-								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+								<h:outputLabel value="#{msg.etiqueta_referencia}" />
 							</f:facet>
 							<h:outputText value="#{contacto.referencia}" />
 						</rich:column>
@@ -93,7 +96,38 @@
 			</fieldset>
 		</rich:panel>
 		
-		
+		<rich:popupPanel header="Contacto" id="detailContact" domElementAttachment="parent" autosized="true" onmaskclick="#{rich:component('detailContact')}.hide()">
+			<f:facet name="controls">
+				<h:outputLink value="#" onclick="#{rich:component('detailContact')}.hide(); return false;">X
+				</h:outputLink>
+			</f:facet>
+						
+			<h:panelGrid columns="2" id="editGrid" styleClass="espacioDetalle">
+				<h:outputLabel value="#{msg.etiqueta_profesion} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.profesion}" />
+     			
+				<h:outputLabel value="#{msg.nombre} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.primerNombre.concat(' ').concat(listadoContactosController.personaSelected.segundoNombre)}" />
+     			
+     			<h:outputLabel value="#{msg.apellidos} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.primerApellido.concat(' ').concat(listadoContactosController.personaSelected.segundoApellido)}" />
+     			
+     			<h:outputLabel value="#{msg.direccion} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.direccion}" />
+     			
+     			<h:outputLabel value="#{msg.e_mail} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.mail}" />
+     			
+     			<h:outputLabel value="#{msg.etiqueta_telefono_convencional} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.telefonoConvencional}" />
+     			
+     			<h:outputLabel value="#{msg.celular} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.telefonoCelular}" />
+     			
+     			<h:outputLabel value="#{msg.etiqueta_referencia} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.referencia}" />
+			</h:panelGrid>
+		</rich:popupPanel>
 		
 	</h:form>
 </ui:composition>
