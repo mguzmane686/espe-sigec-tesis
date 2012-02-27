@@ -17,6 +17,31 @@
         <h:outputScript library="js" name="jquery.validate.js"></h:outputScript>
         
         <title>Sigec</title>
+        <script>
+	        function bloquearTeclas(e){
+	        	var tecla;
+	        	if (window.event) {
+	        		//IE
+	        		tecla = window.event.keyCode;
+	        		if(tecla == 122){
+	        			event.keyCode=0;
+	        			event.returnValue=false;
+	        		}
+	        	}else{
+	        		//firefox
+	        		tecla = e.which;
+	        		if(tecla == 122)
+	        			return true;
+	        	}
+	        }
+        </script>
+        <script type="text/javascript">
+			if(history.forward(1)){
+				history.replace(history.forward(1));
+			}
+			document.oncontextmenu = new Function("return false");
+		</script>
+		
         <a4j:outputPanel ajaxRendered="true">
 	        <script>
 	        	jQuery(document).ready(function(){
@@ -36,7 +61,7 @@
 	    
     </h:head>
 
-    <h:body style="background-image: url('#{resource['images:Bottom_texture.jpg']}');">
+    <h:body style="background-image: url('#{resource['images:Bottom_texture.jpg']}');" onkeydown="if(bloquearTeclas(event)) return false;">
 
         <h:panelGroup layout="block" id="top" style="text-align:center; width:100%" styleClass="roundSigec">
         	<h:panelGrid columns="3" style="text-align:center" width="100%">
