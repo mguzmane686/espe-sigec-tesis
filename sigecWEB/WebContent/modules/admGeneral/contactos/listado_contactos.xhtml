@@ -3,6 +3,7 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
@@ -25,22 +26,70 @@
 
 	<h:form>
 		<rich:panel header="#{msg['etiqueta_lista_contactos']}">
-			<h:panelGroup layout="block" styleClass="roundCorner">
-				
-			</h:panelGroup>
 			
 			<fieldset>
 				<legend>
 					<h:outputLabel value="" />
 				</legend>
-				<rich:dataTable value="#{listadoContactosController.lstPersonas}" var="contacto">
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="Nombre" />
-						</f:facet>
-						<h:outputText value="#{contacto.primerNombre}" />
-					</rich:column>
-				</rich:dataTable>
+				<h:panelGroup layout="block" style="width:100%;">
+					
+					<rich:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" var="contacto" rows="15" iterationStatusVar="numRow" style="width:100%;">
+						
+						<rich:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputLabel value="Numero" />
+							</f:facet>
+							<h:outputText value="#{numRow.index+1}" />
+						</rich:column>
+						
+						<rich:column filterValue="#{listadoContactosController.primerApellidoFilter}"
+			                filterExpression="#{fn:containsIgnoreCase(contacto.primerApellido, listadoContactosController.primerApellidoFilter)}">
+							<f:facet name="header">
+								<h:outputLabel value="Apellido" />
+								<h:inputText value="#{listadoContactosController.primerApellidoFilter}" onkeypress="if (event.keyCode == 13) return false;" styleClass="text-uppercase">
+		                            <a4j:ajax event="keyup" render="tblContactos@body, scrContactos" execute="@this scrContactos" onbeforesubmit="if (event.keyCode != 13)  return false;" limitRender="true"/>
+		                        </h:inputText>
+							</f:facet>
+							<h:outputText value="#{contacto.primerApellido.concat(' ').concat(contacto.segundoApellido)}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="Nombre" />
+							</f:facet>
+							<h:outputText value="#{contacto.primerNombre.concat(' ').concat(contacto.segundoNombre)}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+							</f:facet>
+							<h:outputText value="#{contacto.telefonoConvencional}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.celular}" />
+							</f:facet>
+							<h:outputText value="#{contacto.telefonoCelular}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+							</f:facet>
+							<h:outputText value="#{contacto.mail}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+							</f:facet>
+							<h:outputText value="#{contacto.referencia}" />
+						</rich:column>
+					</rich:dataTable>
+					<rich:dataScroller id="scrContactos" for="tblContactos" fastControls="hide" renderIfSinglePage="false" maxPages="10" style="width:100%; text-align:center;"/>
+				</h:panelGroup>
 			</fieldset>
 		</rich:panel>
 		

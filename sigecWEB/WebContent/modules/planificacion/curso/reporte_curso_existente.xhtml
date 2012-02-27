@@ -66,7 +66,7 @@
 				        				<h:panelGrid columns="2" style="width:100%;">
 		        							<h:outputLabel value="#{msg['nombre']}" />
 		        							
-		        							<h:inputText value="#{reporteCursoController.nameFilter}" onkeypress="if (event.keyCode == 13) return true;" styleClass="text-uppercase" style="width:100%;">
+		        							<h:inputText value="#{reporteCursoController.nameFilter}" onkeypress="if (event.keyCode == 13) return false;" styleClass="text-uppercase" style="width:100%;">
 					                            <a4j:ajax event="keyup" render="tblCursos@body" execute="@this" onbeforesubmit="if (event.keyCode != 13)  return false;" limitRender="true"/>
 					                        </h:inputText>
 		        						</h:panelGrid>
