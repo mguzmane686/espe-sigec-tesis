@@ -11,6 +11,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.UsuarioPerfilPK</class>
 		<class>org.espe.sigec.model.entities.UsuarioPerfil</class>
 		<class>org.espe.sigec.model.entities.Usuario</class>
+		<class>org.espe.sigec.model.entities.Programa</class>
 		<class>org.espe.sigec.model.entities.Profesor</class>
 		<class>org.espe.sigec.model.entities.PresupuestoCurso</class>
 		<class>org.espe.sigec.model.entities.Presupuesto</class>
@@ -19,9 +20,14 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Perfil</class>
 		<class>org.espe.sigec.model.entities.PensumAcademico</class>
 		<class>org.espe.sigec.model.entities.Opcion</class>
+		<class>org.espe.sigec.model.entities.ModuloCursoPeriodoPK</class>
+		<class>org.espe.sigec.model.entities.ModuloCursoPeriodo</class>
+		<class>org.espe.sigec.model.entities.ModuloCurso</class>
 		<class>org.espe.sigec.model.entities.Modulo</class>
 		<class>org.espe.sigec.model.entities.MaterialDidactico</class>
 		<class>org.espe.sigec.model.entities.LugarCurso</class>
+		<class>org.espe.sigec.model.entities.HorarioModuloPK</class>
+		<class>org.espe.sigec.model.entities.HorarioModulo</class>
 		<class>org.espe.sigec.model.entities.HistoricoCursoEstado</class>
 		<class>org.espe.sigec.model.entities.Estudiante</class>
 		<class>org.espe.sigec.model.entities.Especialidad</class>
@@ -41,12 +47,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Aula</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
-		<class>org.espe.sigec.model.entities.ModuloCurso</class>
-		<class>org.espe.sigec.model.entities.ModuloCursoPeriodo</class>
-		<class>org.espe.sigec.model.entities.ModuloCursoPeriodoPK</class>
-		<class>org.espe.sigec.model.entities.HorarioModulo</class>
-		<class>org.espe.sigec.model.entities.HorarioModuloPK</class>
-		<class>org.espe.sigec.model.entities.Programa</class>
+		<class>org.espe.sigec.model.entities.ProgramaCurso</class>
+		<class>org.espe.sigec.model.entities.ProgramaCursoPK</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
