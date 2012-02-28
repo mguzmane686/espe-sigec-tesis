@@ -58,14 +58,7 @@ public class CursoPeriodo implements Serializable {
     @Size(max = 20)
     @Column(name = "modalidad")
     private String modalidad;
-    
-    
-    /**/
-    
-    @JoinColumn(name = "id_programa", referencedColumnName = "id_programa")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Programa programa;
-    
+      
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
     
@@ -88,7 +81,8 @@ public class CursoPeriodo implements Serializable {
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<MaterialDidactico> materialDidacticoCollection;
     
-    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
+    private Collection<ProgramaCurso> programaCursoCollection;
 
     public CursoPeriodo() {
     }
@@ -237,15 +231,7 @@ public class CursoPeriodo implements Serializable {
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
 	}
-
-	public Programa getPrograma() {
-		return programa;
-	}
-
-	public void setPrograma(Programa programa) {
-		this.programa = programa;
-	}
-
+	
 	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
 		return moduloCursoPeriodoCollection;
 	}
@@ -253,6 +239,15 @@ public class CursoPeriodo implements Serializable {
 	public void setModuloCursoPeriodoCollection(
 			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
 		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
+	}
+
+	public Collection<ProgramaCurso> getProgramaCursoCollection() {
+		return programaCursoCollection;
+	}
+
+	public void setProgramaCursoCollection(
+			Collection<ProgramaCurso> programaCursoCollection) {
+		this.programaCursoCollection = programaCursoCollection;
 	}
 	
 	
