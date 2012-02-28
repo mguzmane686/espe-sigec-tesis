@@ -80,7 +80,7 @@
 	        
 				
 					<h:outputLabel value="Curso :" />
-					<rich:select value="#{inscripcionAlumnoCursoController.cursoEstudiante.cursoPeriodo.idCursoPeriodo}" required="true" requiredMessage="El campo Curso es obligatorio">
+					<rich:select  required="true" requiredMessage="El campo Curso es obligatorio">
 						<f:selectItems value="#{inscripcionAlumnoCursoController.itemCursos}"></f:selectItems>
 					</rich:select>
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
