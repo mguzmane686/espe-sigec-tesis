@@ -1,15 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:f="http://java.sun.com/jsf/core" 
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<title>Business Solutions</title>
 
-	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="css" name="style.css" />
 	<!--[if lte IE 7]>
 		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8" />	
 	<![endif]-->
@@ -20,16 +16,15 @@
 		<a href="index.html" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 		<h:panelGroup layout="block" id="navigation">
 			<ul>
-				<li class="first selected">
-					<a href="pages/index.jsf">Home</a>
-					<p:calendar/>
-				</li>
-				<li><a href="pages/about.html">About us</a></li>
-				<li><a href="services.html">Services</a></li>
-				<li><a href="solutions.html">Solutions</a></li>
-				<li><a href="support.html">Support</a></li>
-				<li><a href="blog.html">Blog</a></li>
-				<li><a href="contact.html">Contact</a></li>
+				<h:form>
+					<li class="first selected"><h:commandLink value="Home" action="index.jsf" /></li>
+					<li><h:commandLink action="about.html" value="About"/></li>
+					<li><h:commandLink action="services.html" value="Services"/></li>
+					<li><h:commandLink action="solutions.html" value="Solutions"/></li>
+					<li><h:commandLink action="support.html" value="Support"/></li>
+					<li><h:commandLink action="blog.html" value="Blog"/></li>
+					<li><h:commandLink action="contact.html" value="Contact"/></li>
+				</h:form>
 			</ul>
 		</h:panelGroup>
 		<div id="search">
@@ -42,8 +37,8 @@
 	<div id="adbox">
 		<div class="body">
 			<div class="images">
-				<h:graphicImage library="images" name="discussing2.jpg" alt="Img" styleClass="preview"/>
-				<h:graphicImage library="images" name="shake-hands.jpg" width="230px" height="144"/>
+				<h:graphicImage library="images" name="discussing2.jpg" alt="Img" styleClass="preview" />
+				<h:graphicImage library="images" name="shake-hands.jpg" width="230px" height="144" />
 				<h:graphicImage library="images" name="professionals.jpg" alt="Img" height="135" width="230px" styleClass="last" />
 			</div>
 			<div class="details">
@@ -55,19 +50,16 @@
 		</div>
 		<div class="footer">
 			<ul>
-				<li class="selected"><a href="index.html">
-					<h:graphicImage library="images" name="meeting2.jpg" alt="Img" />
-					</a>
+				<li class="selected"><a href="index.html"> <h:graphicImage library="images" name="meeting2.jpg" alt="Img" />
+				</a>
 					<p>
 						<a href="index.html">Morbi quiseros sedquam interdum placerat</a><br /> Fusce placerat tellusdiam rutrum porttitor
 					</p></li>
-				<li><a href="index.html">
-					<h:graphicImage library="images" name="flags2.jpg" alt="Img" /></a>
+				<li><a href="index.html"> <h:graphicImage library="images" name="flags2.jpg" alt="Img" /></a>
 					<p>
 						<a href="index.html">Ut posuere nibh in tortor</a><br /> Phasellusposuere semper loremsodales orci fringilla eget.
 					</p></li>
-				<li><a href="index.html">
-					<h:graphicImage library="images" name="boys.jpg" alt="Img" /></a>
+				<li><a href="index.html"> <h:graphicImage library="images" name="boys.jpg" alt="Img" /></a>
 					<p>
 						<a href="index.html">In sagittis lacus mollis nunc</a><br /> malesuada et facilisisipsum scelerisque
 					</p></li>
