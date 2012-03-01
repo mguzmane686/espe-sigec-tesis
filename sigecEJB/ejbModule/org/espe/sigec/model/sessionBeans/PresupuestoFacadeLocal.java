@@ -4,6 +4,7 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.Presupuesto;
@@ -30,5 +31,7 @@ public interface PresupuestoFacadeLocal {
     List<Presupuesto> findRange(int[] range);
 
     int count();
+
+	Collection<Presupuesto> findPresupuesto(String codigoAnio);
     
 }

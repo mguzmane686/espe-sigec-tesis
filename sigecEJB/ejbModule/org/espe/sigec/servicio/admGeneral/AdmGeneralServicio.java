@@ -46,6 +46,7 @@ public interface AdmGeneralServicio {
 	Collection<Presupuesto> findPresupuesto();
 	void createPresupuesto(Presupuesto presupuesto) throws Exception;
 	void editPresupuesto(Presupuesto presupuesto) throws Exception;
+	Collection<Presupuesto> findPresupuesto(String codigoAnio);
 	
 	
 	void createAdministrativo(Usuario usuario, Persona persona) throws Exception, UserValidateException;

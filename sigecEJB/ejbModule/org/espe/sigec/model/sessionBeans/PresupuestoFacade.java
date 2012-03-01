@@ -4,6 +4,8 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +38,14 @@ public class PresupuestoFacade extends AbstractFacade<Presupuesto> implements Pr
     	crit.add(Restrictions.eq("codigoAnio", codAnio));
     	Presupuesto  presupuesto = (Presupuesto) crit.uniqueResult();
 		return presupuesto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Presupuesto> findPresupuesto(String codigoAnio) {
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Presupuesto.class);
+    	crit.add(Restrictions.eq("codigoAnio", codigoAnio));
+		return crit.list();
 	}
     
 }

@@ -56,6 +56,9 @@ public class Presupuesto implements Serializable {
     @Column(name = "codigo_anio")
     private String codigoAnio;
     
+    @Column(name = "id_prefijo_presupuesto")
+    private String idPrefijoPresupuesto;
+    
     @OneToMany(mappedBy = "presupuesto", fetch = FetchType.LAZY)
     private Collection<PresupuestoCurso> presupuestoCursoCollection;
 
@@ -146,6 +149,14 @@ public class Presupuesto implements Serializable {
 
 	public void setCodigoAnio(String codigoAnio) {
 		this.codigoAnio = codigoAnio;
+	}
+
+	public String getIdPrefijoPresupuesto() {
+		return idPrefijoPresupuesto;
+	}
+
+	public void setIdPrefijoPresupuesto(String idPrefijoPresupuesto) {
+		this.idPrefijoPresupuesto = idPrefijoPresupuesto;
 	}
     
 }
