@@ -26,7 +26,7 @@ img {
 
 /** Navigation **/
 #navigation {
-	background: url(../images/bg-menu-left-curve.gif) no-repeat left bottom;
+	background: url('#{resource['images:bg-menu-left-curve.gif']}') no-repeat left bottom;
 	height: 47px;
 	padding: 13px 0 0 4px;
 	position: absolute;
@@ -34,7 +34,7 @@ img {
 	left: 0;
 }
 #navigation ul {
-	background: url(../images/bg-menu.gif) repeat-x;
+	background: url('#{resource['images:bg-menu.gif']}') repeat-x;
 	display: inline-block;
 	height: 40px;
 	width: 688px;
@@ -69,7 +69,7 @@ img {
 
 /** Searchbar **/
 #search {
-	background: url(../images/bg-search.gif) no-repeat right bottom;
+	background: url('#{resource['images:bg-search.gif']}') no-repeat right bottom;
 	height: 47px;
 	width: 268px;
 	padding: 13px 0 0;
@@ -97,7 +97,7 @@ img {
 	padding: 0;
 }
 #search .button {
-	background: url(../images/spotlight.gif) no-repeat right center;
+	background: url('#{resource['images:spotlight.gif']}') no-repeat right center;
 	border: 0;
 	cursor: pointer;
 	height: 38px;
@@ -205,7 +205,7 @@ img {
 	color: #5c6164;
 }
 #adbox div.footer span.bottom-shadow {
-	background: url(../images/bottom-shadow.gif) no-repeat left top;
+	background: url('#{resource['images:bottom-shadow.gif']}') no-repeat left top;
 	display: block;
 	height: 20px;
 	width: 960px;
@@ -215,7 +215,7 @@ img {
 
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
-	background: url(../images/bg-content.gif) repeat;
+	background: url('#{resource['images:bg-content.gif']}') repeat;
 	padding: 40px 0 20px;
 }
 #contents div.body {
@@ -315,7 +315,7 @@ img {
 	margin-bottom: 10px;
 }
 #sidebar ul li span a {
-	background: url(../images/bg-comment.gif) no-repeat 7px 3px;
+	background: url('#{resource['images:bg-comment.gif']}') no-repeat 7px 3px;
 	color: #fffffb;
 	display: inline-block;
 	height: 20px;
@@ -562,7 +562,7 @@ img {
 	margin: 4px 0 16px;
 }
 #newsletter .txtfield {
-	background: url(../images/input.gif) no-repeat;
+	background: url('#{resource['images:input.gif']}') no-repeat;
 	color: #9c9c9c;
 	height: 25px;
 	line-height: 25px;
@@ -572,7 +572,7 @@ img {
 	padding: 0 10px;
 }
 #newsletter .button {
-	background: url(../images/button-check.gif) no-repeat;
+	background: url('#{resource['images:button-check.gif']}') no-repeat;
 	cursor: pointer;
 	height: 25px;
 	width: 25px;
