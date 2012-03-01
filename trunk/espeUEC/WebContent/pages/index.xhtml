@@ -19,10 +19,8 @@
 				<h:form>
 					<li class="first selected"><h:commandLink value="Home" action="index.jsf" /></li>
 					<li><h:commandLink action="about.html" value="About"/></li>
-					<li><h:commandLink action="services.xhtml" value="Services"/></li>
-					<li><h:commandLink action="solutions.html" value="Solutions"/></li>
-					<li><h:commandLink action="support.html" value="Support"/></li>
-					<li><h:commandLink action="blog.html" value="Blog"/></li>
+					<li><h:commandLink action="services.jsf" value="Services"/></li>
+					<li><h:commandLink action="solutions.jsf" value="Solutions"/></li>
 					<li><h:commandLink action="contact.html" value="Contact"/></li>
 				</h:form>
 			</ul>
@@ -43,25 +41,34 @@
 			</div>
 			<div class="details">
 				<p>
-					<span> This website template has been designed by <a href="http://www.freewebsitetemplates.com/">Free Website Templates</a> for you, for free.
-					</span> You can remove any link to our website from this website template, you're free to use this website template without linking back to us.
+					<span> 
+						<h:outputLabel value="#{homeController.mensajeLeftHeader}" />
+					</span>
+					<h:outputLabel value="#{homeController.mensajeLeft}" /> 
 				</p>
 			</div>
 		</div>
 		<div class="footer">
 			<ul>
-				<li class="selected"><a href="index.html"> <h:graphicImage library="images" name="meeting2.jpg" alt="Img" />
-				</a>
+				<li class="selected">
+					<a href="index.html"> 
+						<h:graphicImage library="images" name="meeting2.jpg" alt="Img" />
+					</a>
 					<p>
-						<a href="index.html">Morbi quiseros sedquam interdum placerat</a><br /> Fusce placerat tellusdiam rutrum porttitor
-					</p></li>
-				<li><a href="index.html"> <h:graphicImage library="images" name="flags2.jpg" alt="Img" /></a>
+						<a href="index.html"> <h:outputLabel value="#{homeController.leftTopFooter}" /> </a><br /> <h:outputLabel value="#{homeController.leftFooter}"/>
+					</p>
+				</li>
+				<li>
+					<a href="index.html">
+						<h:graphicImage library="images" name="flags2.jpg" alt="Img" />
+					</a>
 					<p>
-						<a href="index.html">Ut posuere nibh in tortor</a><br /> Phasellusposuere semper loremsodales orci fringilla eget.
-					</p></li>
+						<a href="index.html"> <h:outputLabel value="#{homeController.centerTopFooter}"/> </a><br /> <h:outputLabel value="#{homeController.centerFooter}"/>
+					</p>
+				</li>
 				<li><a href="index.html"> <h:graphicImage library="images" name="boys.jpg" alt="Img" /></a>
 					<p>
-						<a href="index.html">In sagittis lacus mollis nunc</a><br /> malesuada et facilisisipsum scelerisque
+						<a href="index.html"> <h:outputLabel value="#{homeController.rightTopFooter}"/> </a><br /> <h:outputLabel value="#{homeController.rightFooter}"/>
 					</p></li>
 			</ul>
 			<span class="bottom-shadow"></span>
