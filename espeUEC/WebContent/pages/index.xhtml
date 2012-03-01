@@ -1,11 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 	<title>Business Solutions</title>
 
-	<h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="style.css"/>
 	<!--[if lte IE 7]>
 		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8" />	
 	<![endif]-->
@@ -16,8 +20,11 @@
 		<a href="index.html" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 		<h:panelGroup layout="block" id="navigation">
 			<ul>
-				<li class="first selected"><a href="index.html">Home</a></li>
-				<li><a href="about.html">About us</a></li>
+				<li class="first selected">
+					<a href="pages/index.jsf">Home</a>
+					<p:calendar/>
+				</li>
+				<li><a href="pages/about.html">About us</a></li>
 				<li><a href="services.html">Services</a></li>
 				<li><a href="solutions.html">Solutions</a></li>
 				<li><a href="support.html">Support</a></li>
