@@ -14,6 +14,9 @@
         <h:form id="frmRepPresupuesto">
         	<rich:panel header="#{msg['presupuestos_registradas']}">
         	
+        		<h:commandButton actionListener="#{reportePresupuestoController.btnPDF}" value="PDF" 
+        		immediate="true" image="/resources/images/button/pdf.png"/>
+        	
 	        	<fieldset>
 	        		<legend>
 	        			<h:outputLabel value="#{msg['presupuestos_registradas']}" styleClass="titulo"/>
@@ -30,7 +33,7 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
 			        			</f:facet>
-			        			<a4j:commandLink value="#{presupuesto.idPrefijoPresupuesto}" action="#{reportePresupuestoController.btnShowPresupuestoDetail(presupuesto)}"></a4j:commandLink>
+			        			<h:outputText value="#{presupuesto.idPrefijoPresupuesto}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>
