@@ -49,20 +49,25 @@
         		</legend>
         		<h:panelGrid columns="2">
         		
-        			<h:outputLabel value="Fecha inicio" />
-        			<rich:calendar rendered="#{administrarPresupuestoController.editMode}" value="#{administrarPresupuestoController.presupuesto.fechaInicio}"
-        				datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
-        			<h:outputText value="#{administrarPresupuestoController.presupuesto.fechaInicio}" rendered="#{!administrarPresupuestoController.editMode}" />
+        			<h:outputText value="#{msg['etiqueta_codigo']}" />
+        			<h:outputText value="#{administrarPresupuestoController.presupuesto.idPrefijoPresupuesto}" />
+        			
+        			<h:outputLabel value="Fecha Inicio" />
+        			<h:outputText value="#{administrarPresupuestoController.presupuesto.fechaInicio}" />
         				
         			<h:outputLabel value="Fecha Finalizacion" />
-        			<rich:calendar rendered="#{administrarPresupuestoController.editMode}" value="#{administrarPresupuestoController.presupuesto.fechaFin}" 
-        				datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de fin es obligatoria"/>
-        			<h:outputText value="#{administrarPresupuestoController.presupuesto.fechaFin}" rendered="#{!administrarPresupuestoController.editMode}" />
-        		
-        			<h:outputLabel value="Cantidad" />
+        			<h:outputText value="#{administrarPresupuestoController.presupuesto.fechaFin}" />
+        			
+        			<h:outputLabel value="#{msg['etiqueta_anio']}" />
+        			<h:outputText value="#{administrarPresupuestoController.presupuesto.codigoAnio}" />
+        						
+        			<h:outputLabel value="Cantidad Inicial" />
         			<h:inputText rendered="#{administrarPresupuestoController.editMode}" value="#{administrarPresupuestoController.presupuesto.recursoInicial}" required="true" requiredMessage="El campo Cantidad es obligatorio"/>
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoInicial}" rendered="#{!administrarPresupuestoController.editMode}" />			
-                		
+                	
+                	<h:outputLabel value="Cantidad Actual" />
+        			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoActual}"/>			
+                	
         		</h:panelGrid>
         	</fieldset>	
        	</rich:panel>

@@ -29,14 +29,9 @@
         			<h:outputLabel value="#{msg['datos_presupuesto']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="Fecha inicio" />
-        			<rich:calendar value="#{presupuestoAdmController.presupuesto.fechaInicio}" showApplyButton="false"
-        				datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
-        				
-        			<h:outputLabel value="Fecha Finalizacion" />
-        			<rich:calendar value="#{presupuestoAdmController.presupuesto.fechaFin}" 
-        				datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de fin es obligatoria"/>
-        		
+        			<h:outputLabel value="#{msg['etiqueta_anio']}" />
+        			<rich:inputNumberSpinner value="#{presupuestoAdmController.presupuesto.codigoAnio}" minValue="2000" maxValue="2100"/>
+        		    
         			<h:outputLabel value="Cantidad" />
         			<h:inputText value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" requiredMessage="El campo Cantidad es obligatorio"/>
         		</h:panelGrid>
