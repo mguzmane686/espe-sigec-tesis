@@ -24,8 +24,11 @@ public class PresupuestoController implements Serializable{
 	
 	private Presupuesto presupuesto;
 
+	@SuppressWarnings("deprecation")
 	public PresupuestoController(){
 		setPresupuesto(new Presupuesto());
+		java.util.Date fecha = new Date();
+		presupuesto.setCodigoAnio(String.valueOf(fecha.getYear()+1900));
 	}
 	
 	public Presupuesto getPresupuesto() {
@@ -39,49 +42,37 @@ public class PresupuestoController implements Serializable{
 	@SuppressWarnings("deprecation")
 	public void btnSavePresupuesto(ActionEvent e){
 		try {
-			Integer anioInicio = new Integer(0);
-			Integer anioFin = new Integer(0);
-			
-			anioInicio = presupuesto.getFechaInicio().getYear();
-			anioFin = presupuesto.getFechaFin().getYear();
-			
-			if (anioInicio != anioFin){
-				FacesUtils.addInfoMessage("El rango de fecha debe ser para el mismo periodo");
-			}
-		else{		
-			
+					
 			Collection<Presupuesto> lstTemp;
-			lstTemp = admGeneralServicio.findPresupuesto(String.valueOf(anioInicio + 1900));
+			lstTemp = admGeneralServicio.findPresupuesto(presupuesto.getCodigoAnio());
 			
 				if (lstTemp.size() > 0){
 					FacesUtils.addInfoMessage("Ya existe un presupuesto asignado a ese periodo");
 				}
 				else{
-					presupuesto.setRecursoActual(presupuesto.getRecursoInicial());
-					presupuesto.setCodigoAnio(String.valueOf(anioInicio + 1900));
 					
 					Date fechaInicio = new Date();
-					Date fechaFin = new Date();
+					Date fechaFin = new Date(); 
 					
 					fechaInicio.setDate(1);
 					fechaInicio.setMonth(0);
-					fechaInicio.setYear(anioInicio);
-					
-					presupuesto.setFechaInicio(fechaInicio);
+					fechaInicio.setYear(Integer.valueOf(presupuesto.getCodigoAnio()) - 1900);
 					
 					fechaFin.setDate(31);
 					fechaFin.setMonth(11);
-					fechaFin.setYear(anioFin);
-					
-					presupuesto.setFechaFin(fechaFin);
+					fechaFin.setYear(Integer.valueOf(presupuesto.getCodigoAnio()) - 1900);
 			
+					presupuesto.setRecursoActual(presupuesto.getRecursoInicial());
+					presupuesto.setFechaInicio(fechaInicio);
+					presupuesto.setFechaFin(fechaFin);
+					
 					admGeneralServicio.createPresupuesto(getPresupuesto());
 					generarCodigoPresupuesto(presupuesto.getIdPresupuesto());
 					admGeneralServicio.editPresupuesto(getPresupuesto());
 					setPresupuesto(new Presupuesto());
 					FacesUtils.addInfoMessage("El presupuesto se cre&oacute exitosamente");
 				}
-			}			
+						
 		} catch (Exception e1) {
 			FacesUtils.addInfoMessage("No se pudo guardar el presupuesto");
 		}
