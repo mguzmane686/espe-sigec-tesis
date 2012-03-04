@@ -12,7 +12,7 @@ public class PortalServicioImpl implements PortalServicio{
 	private ProgramaCursoFacadeLocal programaCursoFacadeLocal;
 	@Override
 	public Collection<ProgramaCurso> buscarPrograma() {
-		return programaCursoFacadeLocal.findAll();
+		return programaCursoFacadeLocal.cargarProgramaPortal();
 	}
 
 }

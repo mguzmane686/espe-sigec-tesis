@@ -25,4 +25,6 @@ public interface ProgramaCursoFacadeLocal {
     List<ProgramaCurso> findRange(int[] range);
 
     int count();
+    
+    List<ProgramaCurso> cargarProgramaPortal();
 }
