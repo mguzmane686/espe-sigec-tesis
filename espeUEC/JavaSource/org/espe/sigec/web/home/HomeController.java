@@ -22,8 +22,11 @@ public class HomeController implements Serializable{
 	private String rightFooter;
 	
 	public HomeController() {
-		setMensajeLeft("Cursos de la uec");
-		setMensajeLeftHeader("algun mensaje");
+		setMensajeLeft("planifica, organiza, ejecuta y controla " +
+				"eventos de educación continua y capacitación con profesionales altamente calificados, " +
+				"orientados a satisfacer requerimientos internos, de empresas públicas, privadas y del público en general, " +
+				"fortaleciendo así la vinculación de nuestra institución con la sociedad");
+		setMensajeLeftHeader("El Centro de Educación Continua de la Universidad de las Fuerzas Armadas – ESPE");
 		
 		setLeftTopFooter("cabecera");
 		setLeftFooter("detalle");
