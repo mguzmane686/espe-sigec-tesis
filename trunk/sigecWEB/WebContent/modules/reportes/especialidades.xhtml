@@ -16,18 +16,10 @@
         	
         		<h:commandButton actionListener="#{reporteEspecialidadController.btnPDF}" value="PDF" 
         		immediate="true" image="/resources/images/button/pdf.png"/>
-        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['especialidades_registradas']}" styleClass="titulo"/>
-	        		</legend>
-	        		
+        	    		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblEspecialidades" style="width:100%" value="#{reporteEspecialidadController.lstEspecialidad}" var="especialidad" rows="10" rendered="#{!empty reporteEspecialidadController.lstEspecialidad}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Especialidades" />
-		        			</f:facet>
+		        		<rich:dataTable id="tblEspecialidades" style="width:100%" value="#{reporteEspecialidadController.lstEspecialidad}" var="especialidad" rows="15" rendered="#{!empty reporteEspecialidadController.lstEspecialidad}">
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
@@ -54,8 +46,7 @@
 		        		<center>
 		        			<rich:dataScroller for="tblEspecialidades" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
-	        		</a4j:outputPanel>
-	        	</fieldset>	
+	        		</a4j:outputPanel>	
         	</rich:panel>
         	
         </h:form>
