@@ -27,7 +27,7 @@ public class ProgramasController implements Serializable{
 
 	@PostConstruct
 	public void cargarPrograma(){
-		portalServicio.buscarPrograma();
+		setLstProgramaCursos(portalServicio.buscarPrograma());
 	}
 	
 	public Collection<ProgramaCurso> getLstProgramaCursos() {
