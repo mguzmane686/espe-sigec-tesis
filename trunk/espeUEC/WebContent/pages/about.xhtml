@@ -1,17 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Business Solutions</title>
-	<h:outputStylesheet library="css" name="style.css"/>	
-	<!--[if lte IE 7]>
-		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8" />	
-	<![endif]-->
-</h:head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
-<body>
+<ui:composition template="/templates/generalTemplate.xhtml">
+	<ui:define name="pageTitle">Inicio</ui:define>
+	
+	<ui:define name="pageHeader">
 	<div id="header">
-		<a href="index.xhtml" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
+		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 		<div id="navigation">
 			<ul>
 				<li class="first"><a href="index.jsf">Home</a></li>
@@ -29,6 +28,9 @@
 			</form>
 		</div>
 	</div> <!-- /#header -->
+	</ui:define>
+	
+	<ui:define name="body">
 	<div id="contents">
 		<div class="background">
 			<h3>We Have Free Templates for Everyone</h3>
@@ -57,7 +59,10 @@
 			</p>
 		</div>
 	</div> <!-- /#contents -->
-	<ui:include src="/pages/footerPage.xhtml" />
-	<!-- /#footer -->
-</body>
+	</ui:define>
+	<ui:define name="footerPage">
+		<ui:include src="/pages/footerPage.xhtml" />
+		<!-- /#footer -->
+	</ui:define>
+	</ui:composition>
 </html>
