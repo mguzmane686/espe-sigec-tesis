@@ -1,68 +1,79 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/templates/generalTemplate.xhtml">
 	<ui:define name="pageTitle">Inicio</ui:define>
-	
+
 	<ui:define name="pageHeader">
-	<div id="header">
-		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-		<div id="navigation">
-			<ul>
-				<li class="first"><a href="index.jsf">Home</a></li>
-				<li class="selected"><a href="about.jsf">About us</a></li>
-				<li><a href="services.jsf">Services</a></li>
-				<li><a href="solutions.jsf">Solutions</a></li>
-				<li><a href="support.jsf">Support</a></li>
-				<li><a href="contact.jsf">Contact</a></li>
-			</ul>
+		<div id="header">
+			<a href="index.jsf" id="logo"> <h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
+			<div id="navigation">
+				<ul>
+					<li class="first"><a href="index.jsf">Home</a></li>
+					<li class="selected"><a href="about.jsf">About us</a></li>
+					<li><a href="services.jsf">Services</a></li>
+					<li><a href="solutions.jsf">Solutions</a></li>
+					<li><a href="support.jsf">Support</a></li>
+					<li><a href="contact.jsf">Contact</a></li>
+				</ul>
+			</div>
+			<div id="search">
+				<form action="" method="">
+					<input type="text" value="Search" class="txtfield" onblur="javascript:if(this.value==''){this.value=this.defaultValue;}" onfocus="javascript:if(this.value==this.defaultValue){this.value='';}" /> <input type="submit" value="" class="button" />
+				</form>
+			</div>
 		</div>
-		<div id="search">
-			<form action="" method="">
-				<input type="text" value="Search" class="txtfield" onblur="javascript:if(this.value==''){this.value=this.defaultValue;}" onfocus="javascript:if(this.value==this.defaultValue){this.value='';}" />
-				<input type="submit" value="" class="button" />
-			</form>
-		</div>
-	</div> <!-- /#header -->
+		<!-- /#header -->
 	</ui:define>
-	
+
 	<ui:define name="body">
-	<div id="contents">
-		<div class="background">
-			<h3>We Have Free Templates for Everyone</h3>
-			<p>
-				Our website templates are created with inspiration, checked for quality and originality and meticulously sliced and coded. What&acute;s more, they&acute;re
-				absolutely free! You can do a lot with them. You can modify them. You can use them to design websites for clients, so long as you agree with
-				the <a href="http://www.freewebsitetemplates.com/about/termsofuse/">Terms of Use</a>. You can even remove all our links if you want to.
-			</p>
+		<div id="contents">
+			<div class="background">
+				<h3>Cursos UEC / Información General</h3>
+				<p>
+					La Unidad de Educación Continua coordina la planificación y ejecución de cursos especiales orientados a actualizar los conocimientos de los profesionales y satisfacer requerimientos de capacitación de organizaciones públicas o privadas, que demanden tales servicios, para lo cual ejecuta procesos de elaboración de propuestas de capacitación y de soporte administrativo en la realización de los cursos.
 
-			<h3>We Have More Templates for You</h3>
-			<p>
-				Looking for more templates? Just browse through all our <a href="http://www.freewebsitetemplates.com/">Free Website	Templates</a> and find what you&acute;re looking for. But if you don&acute;t find any
-				website template you can use, you can try our <a href="http://www.freewebsitetemplates.com/freewebdesign/">Free Web Design</a> service and tell us all about it. Maybe you&acute;re looking for something different,
-				something special. And we love the challenge of doing something	different and something special.
-			</p>
+					La UEC es una unidad dependiente de Vicerrectorado Académico y como tal está inserta en las políticas de este estamento.  Su gestión está enfocada al cumplimiento de objetivos institucionales, dentro del marco del Plan Estratégico de la ESPE.  Para la presente propuesta es necesario considerar que a partir del mes de Abril de 2012, la Unidad de Educación Continua se convertirá en - “Centro”- con el objetivo de garantizar su autonomía, flexibilizar y agilitar la operatividad de la misma. Considerando la nueva red organizacional que regirá  a la Universidad de la Fuerzas Armadas – ESPE, el Centro de Educación Continua se constituirá en apoyo a la gestión de Vinculación con la Colectividad del Vicerrectorado de Investigaciones.
+				</p>
 
-			<h3>Be Part of Our Community</h3>
-			<p>If you&acute;re experiencing issues and concerns about this website template, join the discussion <a href="http://www.freewebsitetemplates.com/forum/">on our forum</a> and meet other people in the community who share the same interests with you.</p>
+				<h3>VISIÓN:</h3>
+				<p>
+					"Ser el referente número uno de gestión administrativa y académica  de diversos eventos de educación continua y capacitación de la ESPE, respondiendo asertivamente a  una sociedad demandante y cambiante a nivel nacional logrando un nivel de reconocimiento dentro de los diez mejores centros de capacitación en la sierra norte del país”.
+				</p>
 
-			<p>
-				<b>Template details</b>
-				Version 5<br/><br/>
-				Website Template details, discussion and updates for this <a href="http://www.freewebsitetemplates.com/forum/f18/business-solutions-website-template-18773">Business Solutions Template</a>.<br/><br/>
-				Website Template design by <a href="http://www.freewebsitetemplates.com/">Free Website Templates</a>.<br/><br/>
-				Please feel free to remove some or all the text and links of this page and replace it with your own About content.<br/><br/>
-			</p>
+				<h3>MISIÓN:</h3>
+				<p>
+					“El Centro de Educación Continua de la Universidad de las Fuerzas Armadas – ESPE planifica, organiza, ejecuta y controla eventos de educación continua y capacitación  con profesionales altamente calificados, orientados a satisfacer requerimientos internos, de empresas públicas, privadas y del público en general, fortaleciendo así la vinculación de nuestra institución con la sociedad”.
+				</p>
+				
+				<h3>OBJETIVOS</h3>
+				<p>
+					a) Objetivos de UEC (a nivel táctico)
+				</p>
+				
+				<h4>General</h4>
+				<p>
+					Ser reconocidos dentro de los diez mejores centros de capacitación de la Sierra Norte del País, a través de programas de educación continua de excelencia, fundamentados en las operaciones internas altamente efectivas, que permitan contribuir al sistema de vinculación con la sociedad de la ESPE y la obtención de mayores ingresos provenientes de la autogestión.
+				</p>
+				
+				<h4>Tácticos</h4>
+				<p>
+					• Organizar las responsabilidades de Educación continua para lograr productividad y competitividad en las operaciones de servicio a través un sistema de servucción.
+<br/>
+<br/>
+• Establecer, diseñar y ejecutar planes, proyectos y programas de formación continua y capacitación técnico-profesional, que permitan responder asertivamente a las demandas de la sociedad, por medio de ofertas innovadoras, técnicas y de excelencia académica y de servicio.
+<br/>
+<br/>
+• Diseñar y ejecutar acciones integrales de difusión y comercialización, a través de procesos de comunicación éticos y efectivos para posicionar la oferta académica de Educación continua de la ESPE dentro de los diez centros de preferencia del mercado y mejorar los niveles de ingresos provenientes de estos servicios.
+				</p>
+				
+			</div>
 		</div>
-	</div> <!-- /#contents -->
+		<!-- /#contents -->
 	</ui:define>
 	<ui:define name="footerPage">
 		<ui:include src="/pages/footerPage.xhtml" />
 		<!-- /#footer -->
 	</ui:define>
-	</ui:composition>
+</ui:composition>
 </html>
