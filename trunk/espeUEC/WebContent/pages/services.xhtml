@@ -44,13 +44,21 @@
 					
 				</ul>
 				<p>
-					<p:dataTable value="#{programasController.lstProgramaCursos}" var="programa">
+					<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso">
 						<p:column>
 							<f:facet name="header">
 								<h:outputLabel value="Noombre" />
 							</f:facet>
-							<h:outputText value="#{programa.modalidad}" />
+							<h:outputText value="#{programaCurso.programa.nombre}" />
 						</p:column>
+						
+						<p:column>
+							<f:facet name="header">
+								<h:outputLabel value="Modalidad" />
+							</f:facet>
+							<h:outputText value="#{programaCurso.modalidad}" />
+						</p:column>
+						
 					</p:dataTable>
 				</p>
 			</div>
