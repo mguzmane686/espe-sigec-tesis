@@ -13,19 +13,11 @@
     	
         <h:form id="frmRepLugar">
         	<rich:panel header="#{msg['lugares_registrados']}">
-        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['lugares_registrados']}" styleClass="titulo"/>
-	        		</legend>
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblLugares" style="width:100%" value="#{reporteLugarController.lstLugares}" var="lugar" rows="10" rendered="#{!empty reporteLugarController.lstLugares}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Lugares" />
-		        			</f:facet>
-		        			
+		        		<rich:dataTable id="tblLugares" style="width:100%" value="#{reporteLugarController.lstLugares}" var="lugar" rows="15" rendered="#{!empty reporteLugarController.lstLugares}">
+		       		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
@@ -52,7 +44,6 @@
 		        			<rich:dataScroller for="tblLugares" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 	        		</a4j:outputPanel>
-	        	</fieldset>	
         	</rich:panel>
         	
         </h:form>
