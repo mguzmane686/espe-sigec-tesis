@@ -7,7 +7,7 @@
       xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <head>
-<title>Not present in rendered output</title>
+<title>Menu SIGEC</title>
 </head>
 <body>
 <composite:interface>
@@ -20,72 +20,30 @@
        groupCollapsedLeftIcon="triangleDown"
        topGroupExpandedRightIcon="chevronUp"
        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
-       <rich:panelMenuGroup label="Usuarios" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
-       		<rich:panelMenuItem>
-            	<a4j:commandLink value="Nuevo administrador" action="adm_administrativo.jsf?faces-redirect=true" execute="@this">
-            		<rich:tooltip id="tt1" styleClass="tooltip" layout="block">
-		                <span style="white-space: nowrap"> 
-		                	El perfil <strong>administrador</strong> tiene acceso a todas opciones del sistema
-		                </span>
-		            </rich:tooltip>
-            	</a4j:commandLink>
-            </rich:panelMenuItem>
-            
-            <rich:panelMenuItem>
-            	<a4j:commandLink value="Nuevo Usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
-            </rich:panelMenuItem>
-            
-            <rich:panelMenuItem>
-            	<a4j:commandLink value="#{msg.etiqueta_lista_usuarios}" action="adm_listado_usuario.jsf?faces-redirect=true" execute="@this"/>
-            </rich:panelMenuItem>
-       </rich:panelMenuGroup>
        
-       <rich:panelMenuGroup label="#{msg.etiqueta_contactos}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
-            <rich:panelMenuItem>
-            	<a4j:commandLink value="#{msg.etiqueta_lista_contactos}" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
-            </rich:panelMenuItem>
-            
-            <rich:panelMenuItem>
-            	<a4j:commandLink value="#{msg.etiqueta_aniadir_contacto}" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
-            </rich:panelMenuItem>
-       </rich:panelMenuGroup>
-        
-       <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
-            <rich:panelMenuGroup label="Curso">
-	            <rich:panelMenuItem>
-	            	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
-	            </rich:panelMenuItem>
-	            
-	            <rich:panelMenuItem>
-	            	<a4j:commandLink value="#{msg['cursos_existentes']}" action="reporte_cursos.jsf?faces-redirect=true"></a4j:commandLink>
-	            </rich:panelMenuItem>
-            </rich:panelMenuGroup>
-        </rich:panelMenuGroup>
-                
-        <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+       <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	
-        	<rich:panelMenuGroup label="Curso">
-	        	<rich:panelMenuItem>
-	            	<a4j:commandLink value="Abrir curso" action="coor_lanzar_curso.jsf?faces-redirect=true" execute="@this"/>
-	            </rich:panelMenuItem>
-	        
-	        	<rich:panelMenuItem>
-	            	<a4j:commandLink value="Cursos abiertos" action="coor_reporte_curso_abierto.jsf?faces-redirect=true" execute="@this"/>
-	            </rich:panelMenuItem>
-            </rich:panelMenuGroup>
+        	<rich:panelMenuGroup label="Usuarios" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        		
+        		<rich:panelMenuItem>
+	            	<a4j:commandLink value="Crear Administrador" action="adm_administrativo.jsf?faces-redirect=true" execute="@this">
+	            		<rich:tooltip id="tt1" styleClass="tooltip" layout="block">
+			                <span style="white-space: nowrap"> 
+			                	El perfil <strong>administrador</strong> tiene acceso a todas opciones del Sistema
+			                </span>
+			            </rich:tooltip>
+	            	</a4j:commandLink>
+            	</rich:panelMenuItem>
             
-            <rich:panelMenuGroup label="Docente">
 	            <rich:panelMenuItem>
-	            	<a4j:commandLink value="#{msg['registar_docente']}" action="coor_registro_nuevo_docente.jsf?faces-redirect=true" execute="@this"/>
+	            	<a4j:commandLink value="Crear Usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
-	            
+            
 	            <rich:panelMenuItem>
-	            	<a4j:commandLink value="#{msg['seleccion_docente']}" action="coor_seleccion_docente.jsf?faces-redirect=true" execute="@this"/>
-	            </rich:panelMenuItem>
-            </rich:panelMenuGroup>
-        </rich:panelMenuGroup>
+	            	<a4j:commandLink value="#{msg.etiqueta_lista_usuarios}" action="adm_listado_usuario.jsf?faces-redirect=true" execute="@this"/>
+	            </rich:panelMenuItem>   
         
-        <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	</rich:panelMenuGroup>
         	
         	<rich:panelMenuGroup label="Lugares" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         		
@@ -145,9 +103,58 @@
             		<a4j:commandLink value="Administrar Presupuesto" action="adm_reporte_presupuesto.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
-        	</rich:panelMenuGroup>     	  	      
+        	</rich:panelMenuGroup>     	  	
+        	
+        	   
         	    
         </rich:panelMenuGroup>
+       
+       <rich:panelMenuGroup label="#{msg.etiqueta_contactos}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg.etiqueta_lista_contactos}" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+            
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg.etiqueta_aniadir_contacto}" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
+            </rich:panelMenuItem>
+       </rich:panelMenuGroup>
+        
+       <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+            <rich:panelMenuGroup label="Curso">
+	            <rich:panelMenuItem>
+	            	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
+	            </rich:panelMenuItem>
+	            
+	            <rich:panelMenuItem>
+	            	<a4j:commandLink value="#{msg['cursos_existentes']}" action="reporte_cursos.jsf?faces-redirect=true"></a4j:commandLink>
+	            </rich:panelMenuItem>
+            </rich:panelMenuGroup>
+        </rich:panelMenuGroup>
+                
+        <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	
+        	<rich:panelMenuGroup label="Curso">
+	        	<rich:panelMenuItem>
+	            	<a4j:commandLink value="Abrir curso" action="coor_lanzar_curso.jsf?faces-redirect=true" execute="@this"/>
+	            </rich:panelMenuItem>
+	        
+	        	<rich:panelMenuItem>
+	            	<a4j:commandLink value="Cursos abiertos" action="coor_reporte_curso_abierto.jsf?faces-redirect=true" execute="@this"/>
+	            </rich:panelMenuItem>
+            </rich:panelMenuGroup>
+            
+            <rich:panelMenuGroup label="Docente">
+	            <rich:panelMenuItem>
+	            	<a4j:commandLink value="#{msg['registar_docente']}" action="coor_registro_nuevo_docente.jsf?faces-redirect=true" execute="@this"/>
+	            </rich:panelMenuItem>
+	            
+	            <rich:panelMenuItem>
+	            	<a4j:commandLink value="#{msg['seleccion_docente']}" action="coor_seleccion_docente.jsf?faces-redirect=true" execute="@this"/>
+	            </rich:panelMenuItem>
+            </rich:panelMenuGroup>
+        </rich:panelMenuGroup>
+        
+        
         
         <rich:panelMenuGroup label="#{msg['etiqueta_inscripcion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false) or (homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='EST'?true:false)}">
         	<rich:panelMenuItem>
@@ -170,6 +177,12 @@
             </rich:panelMenuItem>
             <rich:panelMenuItem>
             	<a4j:commandLink value="Reporte Presupuestos" action="rep_presupuestos.jsf?faces-redirect=true" execute="@this"/>
+            </rich:panelMenuItem>
+        </rich:panelMenuGroup>
+        
+        <rich:panelMenuGroup label="Ayuda" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="Crear Lugar" action="ayu_crear_lugar.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
