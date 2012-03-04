@@ -33,8 +33,11 @@ public class ProgramaCursoFacade extends AbstractFacade<ProgramaCurso>  implemen
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(ProgramaCurso.class);
 		criteria.createAlias("programa", "programaA");
 		criteria.createAlias("cursoPeriodo", "cursoPeriodoA");
-		criteria.setFetchMode("cursoPeriodo", FetchMode.JOIN);
+		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
 		
+		criteria.setFetchMode("cursoPeriodo", FetchMode.JOIN);
+		criteria.setFetchMode("programaA", FetchMode.JOIN);
+		criteria.setFetchMode("cursoA", FetchMode.JOIN);
 		return criteria.list();
 	}
 }
