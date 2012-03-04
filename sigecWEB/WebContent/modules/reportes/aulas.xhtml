@@ -16,18 +16,10 @@
         	
         		<h:commandButton actionListener="#{reporteAulaController.btnPDF}" value="PDF" 
         		immediate="true" image="/resources/images/button/pdf.png"/>
-        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['aulas_registradas']}" styleClass="titulo"/>
-	        		</legend>
-	        		
+        	     		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblAulas" style="width:100%" value="#{reporteAulaController.lstAulas}" var="aula" rows="10" rendered="#{!empty reporteAulaController.lstAulas}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Aulas" />
-		        			</f:facet>
+		        		<rich:dataTable id="tblAulas" style="width:100%" value="#{reporteAulaController.lstAulas}" var="aula" rows="15" rendered="#{!empty reporteAulaController.lstAulas}">
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
@@ -69,7 +61,6 @@
 		        			<rich:dataScroller for="tblAulas" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 	        		</a4j:outputPanel>
-	        	</fieldset>	
         	</rich:panel>
         	
         </h:form>

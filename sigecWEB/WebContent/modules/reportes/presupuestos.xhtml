@@ -17,18 +17,10 @@
         		<h:commandButton actionListener="#{reportePresupuestoController.btnPDF}" value="PDF" 
         		immediate="true" image="/resources/images/button/pdf.png"/>
         	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['presupuestos_registradas']}" styleClass="titulo"/>
-	        		</legend>
-	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblPresupuestos" style="width:100%" value="#{reportePresupuestoController.lstPresupuestos}" var="presupuesto" rows="10" rendered="#{!empty reportePresupuestoController.lstPresupuestos}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Presupuestos" />
-		        			</f:facet>
-		        			
+		        		<rich:dataTable id="tblPresupuestos" style="width:100%" value="#{reportePresupuestoController.lstPresupuestos}" var="presupuesto" rows="15" rendered="#{!empty reportePresupuestoController.lstPresupuestos}">
+		      	        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
@@ -69,7 +61,6 @@
 		        			<rich:dataScroller for="tblPresupuestos" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 	        		</a4j:outputPanel>
-	        	</fieldset>	
         	</rich:panel>
         	
         </h:form>
