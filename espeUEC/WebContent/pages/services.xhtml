@@ -2,16 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Business Solutions</title>
-	<h:outputStylesheet library="css" name="style.css"/>
-	<!--[if lte IE 7]>
-		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8" />	
-	<![endif]-->
-</h:head>
+	
+	<ui:composition template="/templates/generalTemplate.xhtml">
+	
+	<ui:define name="pageTitle">Inicio</ui:define>
 
-<body>
+	<ui:define name="pageHeader">
 	<div id="header">
 		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 		<div id="navigation">
@@ -27,6 +23,9 @@
 			
 		</div>
 	</div> <!-- /#header -->
+	</ui:define>
+	
+	<ui:define name="body">
 	<div id="contents">
 		<div class="background">
 			<div id="services">
@@ -44,27 +43,45 @@
 					
 				</ul>
 				<p>
-					<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso">
-						<p:column>
-							<f:facet name="header">
-								<h:outputLabel value="Noombre" />
-							</f:facet>
-							<h:outputText value="#{programaCurso.programa.nombre}" />
-						</p:column>
-						
-						<p:column>
-							<f:facet name="header">
-								<h:outputLabel value="Modalidad" />
-							</f:facet>
-							<h:outputText value="#{programaCurso.modalidad}" />
-						</p:column>
-						
-					</p:dataTable>
+					<p:panel>
+						<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso">
+							<p:column>
+								<f:facet name="header">
+									<h:outputLabel value="Noombre" />
+								</f:facet>
+								<p:commandLink value="#{programaCurso.programa.nombre}" update=":frmUEC:dialogPro" process="@this" oncomplete="prograDialog.show()">
+									
+									<f:setPropertyActionListener target="#{programasController.programaCursoSelected}" value="#{programaCurso}"></f:setPropertyActionListener>
+								</p:commandLink>
+							</p:column>
+							
+							<p:column>
+								<f:facet name="header">
+									<h:outputLabel value="Modalidad" />
+								</f:facet>
+								<h:outputText value="#{programaCurso.modalidad}" />
+							</p:column>
+						</p:dataTable>
+					
+						<p:dialog id="dialogPro" header="Car Detail" widgetVar="prograDialog" maximizable="true" minimizable="true"
+							showEffect="explode" hideEffect="explode">  
+					        <h:panelGrid id="display" columns="2" cellpadding="4">  
+					  
+					            <f:facet name="header">  
+					                <p:graphicImage value="/images/cars.jpg"/>  
+					            </f:facet>  
+					  
+					            <h:outputText value="Model:" />
+					            <h:outputText value="#{programasController.programaCursoSelected.programa.nombre}" />  
+					            <h:outputText value="Color:" />    
+					            <h:outputText value="#{programasController.programaCursoSelected.programa.nombre}" />
+					        </h:panelGrid>  
+					    </p:dialog>  
+					</p:panel>
 				</p>
 			</div>
 		</div>
 	</div> <!-- /#contents -->
-	<ui:include src="/pages/footerPage.xhtml" />
-	<!-- /#footer -->
-</body>
+	</ui:define>
+	</ui:composition>
 </html>

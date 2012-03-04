@@ -18,16 +18,22 @@ import org.espe.sigec.servicio.portal.PortalServicio;
 public class ProgramasController implements Serializable{
 	@Inject 
 	private PortalServicio portalServicio;
+	private ProgramaCurso programaCursoSelected;
 	
 	private Collection<ProgramaCurso> lstProgramaCursos;
 	
 	public ProgramasController() {
 		setLstProgramaCursos(new ArrayList<ProgramaCurso>());
+		programaCursoSelected = new ProgramaCurso();
 	}
 
 	@PostConstruct
 	public void cargarPrograma(){
 		setLstProgramaCursos(portalServicio.buscarPrograma());
+	}
+	
+	public void btnShowProgramaDetalle(){
+		System.out.println("Uno");
 	}
 	
 	public Collection<ProgramaCurso> getLstProgramaCursos() {
@@ -36,6 +42,14 @@ public class ProgramasController implements Serializable{
 
 	public void setLstProgramaCursos(Collection<ProgramaCurso> lstProgramaCursos) {
 		this.lstProgramaCursos = lstProgramaCursos;
+	}
+
+	public ProgramaCurso getProgramaCursoSelected() {
+		return programaCursoSelected;
+	}
+
+	public void setProgramaCursoSelected(ProgramaCurso programaCursoSelected) {
+		this.programaCursoSelected = programaCursoSelected;
 	}
 	
 }
