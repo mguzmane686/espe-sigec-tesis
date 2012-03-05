@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
+import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
@@ -60,6 +61,9 @@ public interface AdmGeneralServicio {
 	
 	//Profesor
 	Collection<Profesor> cargarProfesores();
+	
+	//Cursos Existentes
+	Collection<Curso> cargarCursos();
 
 	
 }
