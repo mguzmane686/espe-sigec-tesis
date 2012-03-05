@@ -6,6 +6,7 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
+import org.espe.sigec.model.entities.Programa;
 
 /**
  * @author roberto
@@ -18,4 +19,5 @@ public interface PlanificacionServicio {
 	public Collection<Especialidad> findEspecialidades();
 	void editarCurso(Curso curso, Collection<PensumAcademico> lstPensumAcademicos) throws Exception;
 	void editarCursoModulo(Curso curso, Collection<ModuloCurso> lstModuloCursos) throws Exception;
+	void crearPrograma(Programa programa) throws Exception;
 }
