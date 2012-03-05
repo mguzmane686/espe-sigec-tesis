@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+
+	<h:outputStylesheet library="css" name="textos.css" />    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+
+	<h:form>
+		<rich:panel header="Cursos registrados}">
+		
+			<h:commandButton actionListener="#{reporteCursosController.btnPDF}" value="PDF" 
+        		immediate="true" image="/resources/images/button/pdf.png"/>
+			
+				<h:panelGroup layout="block" style="width:100%;">
+					
+					<rich:dataTable id="tblCursos" value="#{reporteCursosController.lstCursos}" var="curso" rows="15" iterationStatusVar="numRow" style="width:100%;">
+																
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.etiqueta_codigo}" />
+							</f:facet>
+							<h:outputText value="#{curso.idCurso}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.etiqueta_especialidad}" />
+							</f:facet>
+							<h:outputText value="#{curso.especialidad.nombre}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.nombre}" />
+							</f:facet>
+							<h:outputText value="#{curso.nombreCurso}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.etiqueta_generalidades}" />
+							</f:facet>
+							<h:outputText value="#{curso.generalidadesCurso}" />
+						</rich:column>
+						
+					</rich:dataTable>
+					<center>
+						<rich:dataScroller for="tblCursos" fastControls="hide" renderIfSinglePage="false"/>
+					</center>
+				</h:panelGroup>
+		</rich:panel>
+		
+	</h:form>
+</ui:composition>
