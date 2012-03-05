@@ -225,5 +225,10 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public Collection<Presupuesto> findPresupuesto(String codigoAnio) {
 		return presupuestoFacadeLocal.findPresupuesto(codigoAnio);
 	}
+
+	@Override
+	public Collection<Profesor> cargarProfesores() {
+		return profesorFacadeLocal.cargarProfesores();
+	}
 	
 }

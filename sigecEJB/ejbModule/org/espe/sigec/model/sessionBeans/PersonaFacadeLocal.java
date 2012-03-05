@@ -36,4 +36,5 @@ public interface PersonaFacadeLocal {
     Collection<Persona> cargarUsuarios();
     
     Collection<Persona> cargarContactos();
+    
 }

@@ -34,4 +34,6 @@ public interface ProfesorFacadeLocal {
     Collection<Profesor> findProfesoresSeleccionadosPorEspecialidad();
     Collection<Profesor> findProfesoresSeleccionados();
     
+    Collection<Profesor> cargarProfesores();
+    
 }

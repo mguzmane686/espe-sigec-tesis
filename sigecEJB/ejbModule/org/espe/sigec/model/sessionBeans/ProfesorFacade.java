@@ -60,5 +60,14 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
     	
 		return crit.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Profesor> cargarProfesores() {
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Profesor.class);
+		crit.setFetchMode("persona", FetchMode.JOIN);
+    	    	
+		return crit.list();
+	}
     
 }
