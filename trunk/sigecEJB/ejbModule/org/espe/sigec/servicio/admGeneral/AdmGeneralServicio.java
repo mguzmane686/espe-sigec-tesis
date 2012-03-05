@@ -57,5 +57,8 @@ public interface AdmGeneralServicio {
 	Collection<Persona> cargarUsuarios();
 	Collection<Persona> cargarContactos();
 	void crearContacto(Persona persona) throws Exception;
+	
+	//Profesor
+	Collection<Profesor> cargarProfesores();
 
 }
