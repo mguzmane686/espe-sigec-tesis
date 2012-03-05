@@ -8,6 +8,7 @@ import javax.transaction.UserTransaction;
 
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
+import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
@@ -18,6 +19,7 @@ import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
+import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
@@ -48,6 +50,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	@EJB
 	private PresupuestoFacadeLocal presupuestoFacadeLocal;
+	@EJB
+	private CursoFacadeLocal cursoFacadeLocal;
 	
 	
 	@Override
@@ -232,5 +236,9 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		return profesorFacadeLocal.cargarProfesores();
 	}
 
+	@Override
+	public Collection<Curso> cargarCursos() {
+		return cursoFacadeLocal.cargarCursos();
+	}
 	
 }

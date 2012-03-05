@@ -33,4 +33,6 @@ public interface CursoFacadeLocal {
     Collection<Curso> findCursoByEspecialidad(Integer idEspecialidad);
     
     Collection<Curso> findCursoByEstado();
+    
+    Collection<Curso> cargarCursos();
 }

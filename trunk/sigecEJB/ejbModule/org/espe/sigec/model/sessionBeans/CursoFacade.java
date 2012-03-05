@@ -53,5 +53,13 @@ public class CursoFacade extends AbstractFacade<Curso> implements CursoFacadeLoc
 		criteria.setFetchMode("especialidadA", FetchMode.JOIN);
 		return criteria.list();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Curso> cargarCursos() {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Curso.class);
+		criteria.setFetchMode("especialidad",FetchMode.JOIN);
+		return criteria.list();
+	}
     
 }
