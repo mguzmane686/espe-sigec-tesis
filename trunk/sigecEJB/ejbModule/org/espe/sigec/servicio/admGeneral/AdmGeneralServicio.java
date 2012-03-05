@@ -10,6 +10,7 @@ import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.Profesor;
+import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.Usuario;
 
 /**
@@ -61,4 +62,5 @@ public interface AdmGeneralServicio {
 	//Profesor
 	Collection<Profesor> cargarProfesores();
 
+	void crearPrograma(Programa programa) throws Exception;
 }

@@ -13,10 +13,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,6 +40,8 @@ public class Programa implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_programa")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="programa_seq")
+    @SequenceGenerator(name="programa_seq", sequenceName="programa_seq", allocationSize = 1)
     private Integer idPrograma;
     @Size(max = 250)
     @Column(name = "nombre")
