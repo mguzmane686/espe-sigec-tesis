@@ -6,10 +6,12 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
+import org.espe.sigec.web.reportes.ReporteGenerico;
 
 /**
  * @author roberto
@@ -68,5 +70,9 @@ public class ListadoContactosController implements Serializable{
 		this.personaSelected = personaSelected;
 	}
 	
+	public void btnPDF(ActionEvent e){
+		ReporteGenerico reporteGenerico = new ReporteGenerico();
+		reporteGenerico.generarReporteSimple("contactos",getLstPersonas());
+	}
 	
 }
