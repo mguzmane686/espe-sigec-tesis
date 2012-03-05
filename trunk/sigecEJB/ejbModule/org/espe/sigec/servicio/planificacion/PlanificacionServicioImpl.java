@@ -119,4 +119,9 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	public void crearPrograma(Programa programa) throws Exception {
 		programaFacadeLocal.create(programa);
 	}
+
+	@Override
+	public Collection<Programa> buscarPrograma() {
+		return programaFacadeLocal.findAll();
+	}
 }
