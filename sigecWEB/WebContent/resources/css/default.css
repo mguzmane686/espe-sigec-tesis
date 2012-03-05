@@ -29,7 +29,7 @@ a:link:hover, a:visited:hover  {
 }
 
 .campoRequerido {
-	background-image: url('#{resource['images:required.png']}') !important;
+	background-image: url('') !important;
 	background-repeat: no-repeat !important;
 	background-color: #CEECF5 !important;
 	background-position: right !important;
