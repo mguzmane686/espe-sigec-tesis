@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author Roberto
  */
+@SuppressWarnings("serial")
 @Embeddable
 public class ModuloCursoPeriodoPK implements Serializable {
     @Basic(optional = false)
