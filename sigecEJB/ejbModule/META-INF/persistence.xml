@@ -11,6 +11,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.UsuarioPerfilPK</class>
 		<class>org.espe.sigec.model.entities.UsuarioPerfil</class>
 		<class>org.espe.sigec.model.entities.Usuario</class>
+		<class>org.espe.sigec.model.entities.ProgramaCursoPK</class>
+		<class>org.espe.sigec.model.entities.ProgramaCurso</class>
 		<class>org.espe.sigec.model.entities.Programa</class>
 		<class>org.espe.sigec.model.entities.Profesor</class>
 		<class>org.espe.sigec.model.entities.PresupuestoCurso</class>
@@ -47,8 +49,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Aula</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiantePK</class>
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
-		<class>org.espe.sigec.model.entities.ProgramaCurso</class>
-		<class>org.espe.sigec.model.entities.ProgramaCursoPK</class>
+		<class>org.espe.sigec.model.entities.ContentPage</class>
+		<class>org.espe.sigec.model.entities.TemplatePage</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
