@@ -67,6 +67,7 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	return crit.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<CursoPeriodo> findCursoAbiertoByUser(Integer idPersona) {
 		Criteria crit = null;

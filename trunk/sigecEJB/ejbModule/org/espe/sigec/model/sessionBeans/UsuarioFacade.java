@@ -31,7 +31,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     private EntityManager em;
 
     
-    @Resource
+    @SuppressWarnings("unused")
+	@Resource
     private SessionContext sessionContext;
     
     protected EntityManager getEntityManager() {
