@@ -10,10 +10,12 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
+import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ModuloCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.ProgramaFacadeLocal;
 
 /**
  * @author roberto
@@ -28,6 +30,8 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	private ModuloCursoFacadeLocal moduloCursoFacadeLocal;
 	@EJB
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
+	@EJB
+	private ProgramaFacadeLocal programaFacadeLocal;
 	@Resource
 	private UserTransaction userTransaction;
 	@Override
@@ -109,5 +113,10 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 		}
 		
 		userTransaction.commit();
+	}
+	
+	@Override
+	public void crearPrograma(Programa programa) throws Exception {
+		programaFacadeLocal.create(programa);
 	}
 }
