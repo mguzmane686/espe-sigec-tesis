@@ -1,7 +1,6 @@
 package org.espe.sigec.web.admGeneral.curso;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,8 +8,6 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
@@ -19,7 +16,6 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.servicio.curso.CursoServicio;
-import org.espe.sigec.web.reportes.ReporteGenerico;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.SortOrder;
 
@@ -60,49 +56,7 @@ public class ReporteCursoController implements Serializable {
 			curso.setModuloCursoCollection(new ArrayList<ModuloCurso>());
 		}
 	}
-	
-	public void btnPDF(ActionEvent e){
-		ReporteGenerico reporteGenerico = new ReporteGenerico();
-		reporteGenerico .generarReporteSimple("curso_existentes", getLstCursos());
-	}
-	
-	public void paint(OutputStream out, Object data)  {
-		if (data instanceof String) {
-			java.io.InputStream file = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream((String) data);
-			int size;
-			try {
-				size = file.available();
-				byte[] pdf = new byte[size];
-				file.read(pdf);
-				file.close();
-				out.write(pdf);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-		}
-	}
-	
-	public void paint2(OutputStream out, Object obj) throws IOException{
-		java.io.InputStream file = 
-				FacesContext.getCurrentInstance().getExternalContext(). getResourceAsStream(this.getClass().getClassLoader().getResource("/home/roberto/Desktop/JSF2/test.pdf").getFile());
-	              
-	              if(file== null) {
-	            	  System.out.println("File Not Found in classpath");
-	              }
-	              int size = file.available();
-	              System.out.println("size of file:"+size);
-	              byte[] pdf = new byte[size];
-
-	              file.read(pdf);
-
-	              file.close();
-
-	              out.write(pdf);
-
-	    	
-	    }
-	 
+		 
 	public void btnExpandContractCurso(Curso curso, boolean expanded) {
 		curso.setShowCursoPeriodoCollection(expanded);
 		if (expanded) {
