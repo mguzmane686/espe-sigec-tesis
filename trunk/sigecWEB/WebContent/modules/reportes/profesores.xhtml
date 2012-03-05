@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	
+		<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+	
+	<h:form id="frmReporteProfesores">
+		<rich:panel header="Profesores registrados">
+			
+			<h:commandButton actionListener="#{reporteProfesoresController.btnPDF}" value="PDF" 
+        		immediate="true" image="/resources/images/button/pdf.png"/>
+			
+			<rich:dataTable id="tblPerson" value="#{reporteProfesoresController.lstProfesores}" var="profesor" rows="15" iterationStatusVar="numRow" style="width:100%;">
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Numero" />
+					</f:facet>
+					<h:outputText value="#{numRow.index +1}" />
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Nombre" />
+					</f:facet>
+					<h:outputText value="#{profesor.persona.primerNombre.concat(' ').concat(profesor.persona.primerApellido)}" />
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Mail" />
+					</f:facet>
+					<h:outputText value="#{profesor.persona.mail}" />
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Telf. Convencional" />
+					</f:facet>
+					<h:outputText value="#{profesor.persona.telefonoConvencional}" style="float:right;"/>
+				</rich:column>
+				
+				<rich:column>
+					<f:facet name="header">
+						<h:outputLabel value="Telf. Celular" />
+					</f:facet>
+					<h:outputText value="#{profesor.persona.telefonoCelular}" style="float:right;"/>
+				</rich:column>
+			
+			</rich:dataTable>
+			<center>
+				<rich:dataScroller for="tblPerson" renderIfSinglePage="false" style="width:100%;" fastControls="hide" lastPageMode="full" maxPages="5"/>
+			</center>
+	</rich:panel>
+	</h:form>	
+</ui:composition>
