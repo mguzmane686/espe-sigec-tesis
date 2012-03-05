@@ -20,4 +20,5 @@ public interface PlanificacionServicio {
 	void editarCurso(Curso curso, Collection<PensumAcademico> lstPensumAcademicos) throws Exception;
 	void editarCursoModulo(Curso curso, Collection<ModuloCurso> lstModuloCursos) throws Exception;
 	void crearPrograma(Programa programa) throws Exception;
+	Collection<Programa> buscarPrograma();
 }
