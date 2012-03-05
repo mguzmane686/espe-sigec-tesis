@@ -9,22 +9,24 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Programa;
-import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
+import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="listaProgramaController")
 @ViewScoped
 public class ListaProgramaController implements Serializable{
 	@Inject
-	private AdmGeneralServicio admGeneralServicio;
+	private PlanificacionServicio planificacionServicio;
+	private Programa programaSelected;
+	
 	private Collection<Programa> lstProgramas;
 	
 	public ListaProgramaController() {
-//		admGeneralServicio
+		
 	}
 	@PostConstruct
 	public void cargarProgramas(){
-		
+		setLstProgramas(planificacionServicio.buscarPrograma());
 	}
 	public Collection<Programa> getLstProgramas() {
 		return lstProgramas;
@@ -33,6 +35,10 @@ public class ListaProgramaController implements Serializable{
 	public void setLstProgramas(Collection<Programa> lstProgramas) {
 		this.lstProgramas = lstProgramas;
 	}
-	
-	
+	public Programa getProgramaSelected() {
+		return programaSelected;
+	}
+	public void setProgramaSelected(Programa programaSelected) {
+		this.programaSelected = programaSelected;
+	}
 }
