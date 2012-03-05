@@ -18,7 +18,7 @@
 		<rich:panel header="#{msg['creacion_curso']}">
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-					<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" actionListener="#{cursoController.btnSaveCurso}" 
+					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{administrarProgramaController.btnSavePrograma}" 
 						image="/resources/images/save.png" />
 					<h:outputLabel value="#{msg['guardar']}" />
 				</h:panelGrid>
@@ -30,7 +30,16 @@
 				<legend>
 					<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo" />
 				</legend>
-				
+				<h:panelGrid columns="2">
+					<h:outputLabel value="#{msg.nombre} :" />
+					<h:inputText value="#{administrarProgramaController.programa.nombre}" styleClass="campoRequerido" required="true" requiredMessage="El campo nombre es obligatorio"/>
+					
+					<h:outputLabel value="#{msg.descripcion} :" />
+					<h:inputText value="#{administrarProgramaController.programa.descripcion}" />
+					
+					<h:outputLabel value="Fecha inicio" />
+					<rich:calendar value="#{administrarProgramaController.programa.inicio}" />
+				</h:panelGrid>
 			</fieldset>
 		</rich:panel>
 
