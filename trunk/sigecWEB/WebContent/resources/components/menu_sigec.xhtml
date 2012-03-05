@@ -110,6 +110,16 @@
        </rich:panelMenuGroup>
        
        <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+            <rich:panelMenuGroup label="#{msg.etiqueta_programa}">
+	            <rich:panelMenuItem>
+	            	<a4j:commandLink value="#{msg.etiqueta_crear_programa}" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
+	            </rich:panelMenuItem>
+	            
+	            <rich:panelMenuItem>
+	            	<a4j:commandLink value="#{msg.etiqueta_programas_existentes}" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
+	            </rich:panelMenuItem>
+            </rich:panelMenuGroup>
+            
             <rich:panelMenuGroup label="Curso">
 	            <rich:panelMenuItem>
 	            	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
