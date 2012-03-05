@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">  
+    
+   	<h:outputStylesheet library="css" name="textos.css"/>    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	
+   	  	<h:form id="frmCrearLugar">
+   	  	
+   	  		<rich:panel>
+   	  		
+   	  		<div id="media">
+            	<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="600" height="380" id="csSWF">
+	                <param name="movie" value="#{msg['url_server']}/ayuda/crear_lugar.swf" />
+	                <param name="quality" value="best" />
+	                <param name="bgcolor" value="#1a1a1a" />
+	                <param name="allowfullscreen" value="true" />
+	                <param name="scale" value="showall" />
+	                <param name="allowscriptaccess" value="always" />
+	                <!--[if !IE]>-->
+		                <object type="application/x-shockwave-flash" data="#{msg['url_server']}/ayuda/crear_lugar.swf" width="600" height="380">
+		                    <param name="quality" value="best" />
+		                    <param name="bgcolor" value="#1a1a1a" />
+		                    <param name="allowfullscreen" value="true" />
+		                    <param name="scale" value="showall" />
+		                    <param name="allowscriptaccess" value="always" />
+		                <!--<![endif]-->
+	                    <div id="noUpdate">
+	                        <p>El video necesita la version mas reciente de Adobe Flash Player. Si esta usando un explorador con javascript desactivado por favor activelo. De lo contrario, por favor actualize desde:  <a href="http://www.adobe.com/go/getflashplayer">Bajar Aqui</a>.</p>
+	                    </div>
+                	<!--[if !IE]>-->
+                		</object>
+                	<!--<![endif]-->
+            	</object>
+        	</div>
+   	  		  		
+   	  		</rich:panel>
+     
+    	</h:form> 	
+        
+</ui:composition>
