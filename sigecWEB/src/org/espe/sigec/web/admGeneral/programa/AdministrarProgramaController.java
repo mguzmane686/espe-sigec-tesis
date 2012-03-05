@@ -7,23 +7,29 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Programa;
-import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
+import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="administrarProgramaController")
 @ViewScoped
 public class AdministrarProgramaController implements Serializable{
 	@Inject
-	private AdmGeneralServicio admGeneralServicio;
+	private PlanificacionServicio planificacionServicio;
 	private Programa programa;
-
+	private boolean editMode;
+	
 	public AdministrarProgramaController() {
 		setPrograma(new Programa());
 	}
 	
 	public void btnSavePrograma(){
 		try {
-			admGeneralServicio.crearPrograma(getPrograma());
+			if(isEditMode()){
+				
+			}else{
+				planificacionServicio.crearPrograma(getPrograma());
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,6 +41,14 @@ public class AdministrarProgramaController implements Serializable{
 
 	public void setPrograma(Programa programa) {
 		this.programa = programa;
+	}
+
+	public boolean isEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
 	}	
 	
 }
