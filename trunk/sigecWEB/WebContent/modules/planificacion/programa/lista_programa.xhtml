@@ -6,9 +6,7 @@
 	xmlns:a4j="http://richfaces.org/a4j" 
 	xmlns:rich="http://richfaces.org/rich" 
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
-
-
-
+	
 	<h:outputStylesheet library="css" name="textos.css" />
 	<h:outputStylesheet library="css" name="bordes.css" />
 	<h:outputStylesheet library="css" name="botones.css" />
@@ -31,8 +29,36 @@
 					<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo" />
 				</legend>
 				
+				<rich:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.nombre}" />
+						</f:facet>
+						<a4j:commandLink value="#{programa.nombre}" oncomplete="#{rich:component('popupPrograma')}.show()" execute="@this" render="popupPrograma">
+							<f:setPropertyActionListener target="#{listaProgramaController.programaSelected}" value="#{programa}"></f:setPropertyActionListener>
+						</a4j:commandLink>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.descripcion} :" />
+						</f:facet>
+						<h:outputLabel value="#{programa.descripcion }" />
+					</rich:column>
+				</rich:dataTable>
 			</fieldset>
 		</rich:panel>
-
+		
+		<rich:popupPanel id="popupPrograma" modal="true" autosized="true" resizeable="false" domElementAttachment="parent" header="Detalle programa">
+	        <f:facet name="controls">
+	            <h:outputLink value="#" onclick="#{rich:component('popupPrograma')}.hide(); return false;">
+	                X
+	            </h:outputLink>
+	        </f:facet>
+	        <h:panelGrid columns="2">
+	        	<h:outputLabel value="#{msg.nombre }" />
+	        	<h:outputText value="#{listaProgramaController.programaSelected.nombre }" />
+	        </h:panelGrid>	
+		</rich:popupPanel>
 	</h:form>
 </ui:composition>
