@@ -62,5 +62,5 @@ public interface AdmGeneralServicio {
 	//Profesor
 	Collection<Profesor> cargarProfesores();
 
-	void crearPrograma(Programa programa) throws Exception;
+	
 }

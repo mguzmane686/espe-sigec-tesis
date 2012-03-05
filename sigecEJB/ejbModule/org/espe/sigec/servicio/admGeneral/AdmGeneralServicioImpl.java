@@ -50,8 +50,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	@EJB
 	private PresupuestoFacadeLocal presupuestoFacadeLocal;
-	@EJB
-	private ProgramaFacadeLocal programaFacadeLocal;
+	
 	
 	@Override
 	public void editAula(Aula aula) throws Exception {
@@ -235,8 +234,5 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		return profesorFacadeLocal.cargarProfesores();
 	}
 
-	@Override
-	public void crearPrograma(Programa programa) throws Exception {
-		programaFacadeLocal.create(programa);
-	}
+	
 }
