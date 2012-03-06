@@ -188,6 +188,9 @@
             <rich:panelMenuItem>
             	<a4j:commandLink value="Reporte Cursos Existentes" action="rep_cursos_existentes.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
             </rich:panelMenuItem>
+            <rich:panelMenuItem>
+            	<a4j:commandLink value="Reporte Cursos" action="rep_cursos.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
+            </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
         <rich:panelMenuGroup label="Ayuda" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
