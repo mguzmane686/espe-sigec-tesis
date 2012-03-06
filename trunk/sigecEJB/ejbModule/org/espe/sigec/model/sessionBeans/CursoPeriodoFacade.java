@@ -103,11 +103,17 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 		criteria.add(Restrictions.between("periodo.fechaFin", fechaInicio, fechaFin));
 		if (estado.equals("A")) {
 			criteria.add(Restrictions.eq("estado.etapaLanzado","1"));
+			criteria.add(Restrictions.eq("estado.etapaEjecutado","0"));
+			criteria.add(Restrictions.eq("estado.etapaFinalizado","0"));
 		}
 		if (estado.equals("E")) {
+			criteria.add(Restrictions.eq("estado.etapaLanzado","1"));
 			criteria.add(Restrictions.eq("estado.etapaEjecutado","1"));
+			criteria.add(Restrictions.eq("estado.etapaFinalizado","0"));
 		}
 		if (estado.equals("F")) {
+			criteria.add(Restrictions.eq("estado.etapaLanzado","1"));
+			criteria.add(Restrictions.eq("estado.etapaEjecutado","1"));
 			criteria.add(Restrictions.eq("estado.etapaFinalizado","1"));
 		}
 		return criteria.list();
