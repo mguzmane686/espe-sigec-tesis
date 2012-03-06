@@ -39,9 +39,6 @@
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
 		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reportCursosController.lstCursos}" var="cursos" rows="15" rendered="#{!empty reportCursosController.lstCursos}">
-		        			<f:facet name="header">
-		        				<h:outputLabel value="Cursos" />
-		        			</f:facet>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
@@ -74,7 +71,9 @@
 			        			<f:facet name="header">
 			        				<h:outputLabel value="Estado" />
 			        			</f:facet>
-			        			<h:outputText value="#{cursos.estadoProceso}" />
+			        			<center>
+			        				<h:outputText value="#{cursos.estadoProceso}" />
+			        			</center>
 		        			</rich:column>
 			        	</rich:dataTable>
 		        		
