@@ -5,6 +5,7 @@
 package org.espe.sigec.model.sessionBeans;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -45,4 +46,6 @@ public interface CursoPeriodoFacadeLocal {
      * @return
      */
     Collection<CursoPeriodo> cargarCursoLanzado();
+    
+    Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin, String estado);
 }

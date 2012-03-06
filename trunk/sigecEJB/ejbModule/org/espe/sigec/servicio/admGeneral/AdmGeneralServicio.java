@@ -1,10 +1,12 @@
 package org.espe.sigec.servicio.admGeneral;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
+import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
@@ -64,6 +66,9 @@ public interface AdmGeneralServicio {
 	
 	//Cursos Existentes
 	Collection<Curso> cargarCursos();
+	
+	//Cursos con parametros
+	Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin,String estado);
 
 	
 }

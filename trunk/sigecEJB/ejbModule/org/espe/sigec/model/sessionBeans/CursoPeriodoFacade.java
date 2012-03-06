@@ -5,6 +5,7 @@
 package org.espe.sigec.model.sessionBeans;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -88,4 +89,28 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	crit.setFetchMode("historicoCursoEstadoCollection", FetchMode.JOIN);
     	return crit.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin, String estado){
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
+		criteria.setFetchMode("curso",FetchMode.JOIN);
+		criteria.createAlias("periodoAcademico","periodo");
+		criteria.setFetchMode("periodo",FetchMode.JOIN);
+		criteria.createAlias("historicoCursoEstadoCollection","estado");
+		criteria.setFetchMode("estado",FetchMode.JOIN);
+		criteria.add(Restrictions.between("periodo.fechaInicio", fechaInicio, fechaFin));
+		criteria.add(Restrictions.between("periodo.fechaFin", fechaInicio, fechaFin));
+		if (estado.equals("A")) {
+			criteria.add(Restrictions.eq("estado.etapaLanzado","1"));
+		}
+		if (estado.equals("E")) {
+			criteria.add(Restrictions.eq("estado.etapaEjecutado","1"));
+		}
+		if (estado.equals("F")) {
+			criteria.add(Restrictions.eq("estado.etapaFinalizado","1"));
+		}
+		return criteria.list();
+	}
+	
 }
