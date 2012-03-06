@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+        <h:form id="frmRepCursos">
+        	<rich:panel>
+        	
+        		<h:commandButton actionListener="#{reportCursosController.btnPDF}" value="PDF" 
+        		immediate="true" image="/resources/images/button/pdf.png"/>
+        		
+        		<rich:panel id="pnlCabecera">
+        				<h:outputLabel value="Fecha Inicio:" />
+        				<rich:calendar datePattern="#{msg['dd_MMM_yyyy']}" value="#{reportCursosController.fechaInicio}"></rich:calendar>	
+        			
+        				<h:outputLabel value="Fecha Fin:" />
+        				<rich:calendar datePattern="#{msg['dd_MMM_yyyy']}" value="#{reportCursosController.fechaFin}"></rich:calendar>	
+        			
+        				<h:outputLabel value="Estado:" />
+        				<h:selectOneMenu value="#{reportCursosController.estado}">
+							<f:selectItems value="#{reportCursosController.itemsEstado}" />
+						</h:selectOneMenu>
+        				
+        				<a4j:commandButton value="Ver Informe" render="pnlCabecera" 
+       					actionListener="#{reportCursosController.btnCargar}"/>
+       					        		
+        		</rich:panel>    		
+        		
+        			
+       	
+	        		<a4j:outputPanel ajaxRendered="true">
+	        		
+		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reportCursosController.lstCursos}" var="cursos" rows="15" rendered="#{!empty reportCursosController.lstCursos}">
+		        			<f:facet name="header">
+		        				<h:outputLabel value="Cursos" />
+		        			</f:facet>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
+			        			</f:facet>
+			        			<h:outputText value="#{cursos.curso.idCurso}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg.nombre}" />
+			        			</f:facet>
+			        			<h:outputText value="#{cursos.curso.nombreCurso}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Inicio curso" />
+			        			</f:facet>
+			        			<h:outputText value="#{cursos.periodoAcademico.fechaInicio}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Fin Curso" />
+			        			</f:facet>
+			        			<h:outputText value="#{cursos.periodoAcademico.fechaFin}" />
+		        			</rich:column>
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Estado" />
+			        			</f:facet>
+			        			<h:outputText value="#{cursos.estadoProceso}" />
+		        			</rich:column>
+			        	</rich:dataTable>
+		        		
+		        		<center>
+		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
+		        		</center>
+	        		</a4j:outputPanel>
+        	</rich:panel>
+        	
+        </h:form>
+        
+</ui:composition>
