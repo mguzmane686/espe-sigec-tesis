@@ -43,6 +43,8 @@ public class ProgramaCurso implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CursoPeriodo cursoPeriodo;
 
+    @Transient
+    private boolean selected;
     public ProgramaCurso() {
     }
 
@@ -126,5 +128,13 @@ public class ProgramaCurso implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.ProgramaCurso[ programaCursoPK=" + programaCursoPK + " ]";
     }
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
     
 }
