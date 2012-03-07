@@ -20,7 +20,7 @@
         		<rich:panel id="pnlCabecera">
         				<h:outputLabel value="Fecha Inicio:" />
         				<rich:calendar datePattern="#{msg['dd_MMM_yyyy']}" value="#{reportCursosController.fechaInicio}"></rich:calendar>	
-        			
+        				
         				<h:outputLabel value="Fecha Fin:" />
         				<rich:calendar datePattern="#{msg['dd_MMM_yyyy']}" value="#{reportCursosController.fechaFin}"></rich:calendar>	
         			
@@ -30,12 +30,9 @@
 						</h:selectOneMenu>
         				
         				<a4j:commandButton value="Ver Informe" render="pnlCabecera" 
-       					actionListener="#{reportCursosController.btnCargar}"/>
-       					        		
+       					actionListener="#{reportCursosController.btnCargar}"/>		
         		</rich:panel>    		
-        		
-        			
-       	
+        		       	
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
 		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reportCursosController.lstCursos}" var="cursos" rows="15" rendered="#{!empty reportCursosController.lstCursos}">
@@ -52,6 +49,13 @@
 			        				<h:outputLabel value="#{msg.nombre}" />
 			        			</f:facet>
 			        			<h:outputText value="#{cursos.curso.nombreCurso}" />
+		        			</rich:column>
+		        			
+		        			<rich:column>
+			        			<f:facet name="header">
+			        				<h:outputLabel value="#{msg.etiqueta_especialidad}" />
+			        			</f:facet>
+			        			<h:outputText value="#{cursos.curso.especialidad.nombre}" />
 		        			</rich:column>
 		        			
 		        			<rich:column>
