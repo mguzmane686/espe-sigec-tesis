@@ -99,6 +99,8 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 		criteria.setFetchMode("periodo",FetchMode.JOIN);
 		criteria.createAlias("historicoCursoEstadoCollection","estado");
 		criteria.setFetchMode("estado",FetchMode.JOIN);
+		criteria.createAlias("curso.especialidad", "especialidad");
+		criteria.setFetchMode("especialidad",FetchMode.JOIN);
 		criteria.add(Restrictions.between("periodo.fechaInicio", fechaInicio, fechaFin));
 		criteria.add(Restrictions.between("periodo.fechaFin", fechaInicio, fechaFin));
 		if (estado.equals("A")) {
