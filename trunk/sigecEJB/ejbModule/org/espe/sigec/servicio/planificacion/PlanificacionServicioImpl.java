@@ -1,7 +1,6 @@
 package org.espe.sigec.servicio.planificacion;
 
 import java.util.Collection;
-import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -126,8 +125,19 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	}
 	
 	@Override
-	public void crearPrograma(Programa programa) throws Exception {
-		programaFacadeLocal.create(programa);
+	public void crearPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCurso) throws Exception {
+		userTransaction.begin();
+		try {
+			programaFacadeLocal.create(programa);
+			for(ProgramaCurso programaCurso: lstProgramaCurso){
+				programaCursoFacadeLocal.create(programaCurso);
+			}
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+			throw new Exception(e);
+		}
+		
 	}
 
 	@Override
