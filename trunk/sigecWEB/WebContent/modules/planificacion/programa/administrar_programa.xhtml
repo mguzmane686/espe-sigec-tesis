@@ -29,6 +29,7 @@
 					<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo" />
 				</legend>
 				<h:panelGrid columns="2">
+				
 					<h:outputLabel value="#{msg.nombre} :" />
 					<h:inputText value="#{administrarProgramaController.programa.nombre}" size="80" 
 						styleClass="campoRequerido" required="true" requiredMessage="El campo nombre es obligatorio"/>
@@ -40,14 +41,20 @@
 					<rich:calendar value="#{administrarProgramaController.programa.inicio}" />
 				</h:panelGrid>
 				
-				<rich:dataTable value="#{administrarProgramaController.lstProgramaCursos}" var="cursoPrograma">
+				<rich:dataTable value="#{administrarProgramaController.lstProgramaCursos}" var="cursoPrograma" rendered="#{!empty administrarProgramaController.lstProgramaCursos}">
 					<rich:column>
-						<f:facet name="haeder">
+						<f:facet name="header">
 							<h:outputLabel value="Seleccione" />
 						</f:facet>
 						<h:selectBooleanCheckbox value="#{cursoPrograma.selected}" >
-							
 						</h:selectBooleanCheckbox>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Nombre" />
+						</f:facet>
+						<h:outputText value="#{cursoPrograma.cursoPeriodo.curso.nombreCurso}" />
 					</rich:column>
 				</rich:dataTable>
 			</fieldset>
