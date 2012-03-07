@@ -131,7 +131,8 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	crit.add(Restrictions.eq("estados.etapaLanzado", "1")).
     	add(Restrictions.ne("estados.etapaEjecutado", "1")).
     	add(Restrictions.ne("estados.etapaFinalizado", "1"));
-		return crit.list();
+    	Collection<CursoPeriodo> lst = crit.list();
+		return lst;
 	}
 	
 }
