@@ -48,4 +48,6 @@ public interface CursoPeriodoFacadeLocal {
     Collection<CursoPeriodo> cargarCursoLanzado();
     
     Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin, String estado);
+    
+    Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma(Date fechaInicio);
 }
