@@ -139,7 +139,23 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 		}
 		
 	}
-
+	
+	@Override
+	public void editarPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCurso) throws Exception {
+		userTransaction.begin();
+		try {
+			programaFacadeLocal.edit(programa);
+			for(ProgramaCurso programaCurso: lstProgramaCurso){
+				programaCursoFacadeLocal.create(programaCurso);
+			}
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+			throw new Exception(e);
+		}
+		
+	}
+	
 	@Override
 	public Collection<Programa> buscarPrograma() {
 		return programaFacadeLocal.findAll();
