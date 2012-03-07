@@ -1,5 +1,6 @@
 package org.espe.sigec.web.admGeneral.programa;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -10,6 +11,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
+import org.espe.sigec.web.utils.FacesUtils;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="listaProgramaController")
@@ -28,6 +30,15 @@ public class ListaProgramaController implements Serializable{
 	public void cargarProgramas(){
 		setLstProgramas(planificacionServicio.buscarPrograma());
 	}
+	
+	public void btnProgramaDetail(){
+		try {
+			FacesUtils.putFlashObject("programa", getProgramaSelected());
+			FacesUtils.redirectPage("pla_admistrar_programa.jsf");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public Collection<Programa> getLstProgramas() {
 		return lstProgramas;
 	}
@@ -41,4 +52,6 @@ public class ListaProgramaController implements Serializable{
 	public void setProgramaSelected(Programa programaSelected) {
 		this.programaSelected = programaSelected;
 	}
+	
+	
 }
