@@ -30,14 +30,26 @@
 				</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg.nombre} :" />
-					<h:inputText value="#{administrarProgramaController.programa.nombre}" styleClass="campoRequerido" required="true" requiredMessage="El campo nombre es obligatorio"/>
+					<h:inputText value="#{administrarProgramaController.programa.nombre}" size="80" 
+						styleClass="campoRequerido" required="true" requiredMessage="El campo nombre es obligatorio"/>
 					
 					<h:outputLabel value="#{msg.descripcion} :" />
-					<h:inputText value="#{administrarProgramaController.programa.descripcion}" />
+					<h:inputText value="#{administrarProgramaController.programa.descripcion}" size="80"/>
 					
 					<h:outputLabel value="Fecha inicio" />
 					<rich:calendar value="#{administrarProgramaController.programa.inicio}" />
 				</h:panelGrid>
+				
+				<rich:dataTable value="#{administrarProgramaController.lstProgramaCursos}" var="cursoPrograma">
+					<rich:column>
+						<f:facet name="haeder">
+							<h:outputLabel value="Seleccione" />
+						</f:facet>
+						<h:selectBooleanCheckbox value="#{cursoPrograma.selected}" >
+							
+						</h:selectBooleanCheckbox>
+					</rich:column>
+				</rich:dataTable>
 			</fieldset>
 		</rich:panel>
 

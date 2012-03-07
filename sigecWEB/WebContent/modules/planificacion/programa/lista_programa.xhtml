@@ -34,8 +34,9 @@
 						<f:facet name="header">
 							<h:outputLabel value="#{msg.nombre}" />
 						</f:facet>
-						<a4j:commandLink value="#{programa.nombre}" oncomplete="#{rich:component('popupPrograma')}.show()" execute="@this" render="popupPrograma">
-							<f:setPropertyActionListener target="#{listaProgramaController.programaSelected}" value="#{programa}"></f:setPropertyActionListener>
+						<a4j:commandLink value="#{programa.nombre}" action="#{listaProgramaController.btnProgramaDetail}" execute="@this">
+							<f:setPropertyActionListener target="#{listaProgramaController.programaSelected}" value="#{programa}" />
+							<f:setPropertyActionListener target="#{administrarProgramaController.programa}" value="#{programa}" />
 						</a4j:commandLink>
 					</rich:column>
 					
