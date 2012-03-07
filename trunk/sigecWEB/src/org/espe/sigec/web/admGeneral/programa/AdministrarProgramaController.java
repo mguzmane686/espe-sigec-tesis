@@ -55,7 +55,6 @@ public class AdministrarProgramaController implements Serializable{
 			for(CursoPeriodo cursoPeriodoTMP: lst){
 				programaCursoTMP = new ProgramaCurso();
 				programaCursoTMP.setProgramaCursoPK(new ProgramaCursoPK());
-				
 				programaCursoTMP.getProgramaCursoPK().setIdCursoPeriodo(cursoPeriodoTMP.getIdCursoPeriodo().toBigInteger());
 				programaCursoTMP.getProgramaCursoPK().setIdPrograma(getPrograma().getIdPrograma());
 				
@@ -71,7 +70,7 @@ public class AdministrarProgramaController implements Serializable{
 	public void btnSavePrograma(){
 		try {
 			if(isEditMode()){
-				
+				planificacionServicio.editarPrograma(getPrograma(), getLstProgramaCursos());
 			}else{
 				planificacionServicio.crearPrograma(getPrograma(), getLstProgramaCursos());
 			}
