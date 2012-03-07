@@ -16,6 +16,7 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -119,6 +120,19 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 			criteria.add(Restrictions.eq("estado.etapaFinalizado","1"));
 		}
 		return criteria.list();
+	}
+
+	@Override
+	public Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma(
+			Date fechaInicio) {
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
+		crit.createAlias("historicoCursoEstadoCollection", "estados");
+    	crit.setFetchMode("curso", FetchMode.JOIN);
+    	crit.add(Restrictions.eq("estados.estado", "1"));
+    	crit.add(Restrictions.eq("estados.etapaLanzado", "1")).
+    	add(Restrictions.ne("estados.etapaEjecutado", "1")).
+    	add(Restrictions.ne("estados.etapaFinalizado", "1"));
+		return crit.list();
 	}
 	
 }
