@@ -1,20 +1,25 @@
 package org.espe.sigec.servicio.planificacion;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
 import org.espe.sigec.model.entities.Curso;
+import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
+import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ModuloCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.ProgramaCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaFacadeLocal;
 
 /**
@@ -32,8 +37,13 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	@EJB
 	private ProgramaFacadeLocal programaFacadeLocal;
+	@EJB
+	private ProgramaCursoFacadeLocal programaCursoFacadeLocal;
+	@EJB
+	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
 	@Resource
 	private UserTransaction userTransaction;
+	
 	@Override
 	public void crearNuevoCurso(Curso curso, Collection<PensumAcademico> lstPensumAcademicos) throws Exception{
 		userTransaction.begin();
@@ -123,5 +133,15 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	@Override
 	public Collection<Programa> buscarPrograma() {
 		return programaFacadeLocal.findAll();
+	}
+
+	@Override
+	public Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Programa programa) {
+		return programaCursoFacadeLocal.buscarCursosAsignadosPrograma(programa);
+	}
+
+	@Override
+	public Collection<CursoPeriodo> cargarCursoPerdiodoPorAsignar(Date fechaInicio) {
+		return cursoPeriodoFacadeLocal.cargarCursosPeriodoPorasignarPrograma(fechaInicio);
 	}
 }
