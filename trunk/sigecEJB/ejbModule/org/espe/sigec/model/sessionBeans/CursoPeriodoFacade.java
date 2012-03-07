@@ -123,8 +123,7 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 	}
 
 	@Override
-	public Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma(
-			Date fechaInicio) {
+	public Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma() {
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
 		crit.createAlias("historicoCursoEstadoCollection", "estados");
     	crit.setFetchMode("curso", FetchMode.JOIN);

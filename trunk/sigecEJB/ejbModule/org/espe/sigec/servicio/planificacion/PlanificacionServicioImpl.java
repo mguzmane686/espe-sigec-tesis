@@ -141,7 +141,7 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	}
 
 	@Override
-	public Collection<CursoPeriodo> cargarCursoPerdiodoPorAsignar(Date fechaInicio) {
-		return cursoPeriodoFacadeLocal.cargarCursosPeriodoPorasignarPrograma(fechaInicio);
+	public Collection<CursoPeriodo> cargarCursoPerdiodoPorAsignar() {
+		return cursoPeriodoFacadeLocal.cargarCursosPeriodoPorasignarPrograma();
 	}
 }
