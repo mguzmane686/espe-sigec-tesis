@@ -45,6 +45,9 @@
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Contacto" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
             	</rich:panelMenuItem>
+            	<rich:panelMenuItem>
+            		<a4j:commandLink value="Lista de contactos" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
+            	</rich:panelMenuItem>
         	</rich:panelMenuGroup>	
         	
         	<rich:panelMenuGroup label="Lugares" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
