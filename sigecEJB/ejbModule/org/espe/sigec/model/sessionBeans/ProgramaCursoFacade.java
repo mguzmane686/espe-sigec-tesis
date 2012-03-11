@@ -44,6 +44,7 @@ public class ProgramaCursoFacade extends AbstractFacade<ProgramaCurso>  implemen
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Programa programa) {
 		
