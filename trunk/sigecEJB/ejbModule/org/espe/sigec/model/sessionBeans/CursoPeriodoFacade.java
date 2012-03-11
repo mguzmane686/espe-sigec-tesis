@@ -16,7 +16,6 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -122,6 +121,7 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 		return criteria.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma() {
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
