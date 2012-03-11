@@ -23,8 +23,8 @@
    			font-weight: bold;
    		}
    	</h:outputStylesheet>
-
-	<h:form>
+   	
+	<h:form id="frmContactos">
 		<rich:panel header="#{msg['etiqueta_lista_contactos']}">
 			
 			<fieldset>
@@ -46,7 +46,7 @@
 			                filterExpression="#{fn:containsIgnoreCase(contacto.primerApellido, listadoContactosController.primerApellidoFilter)}">
 							<f:facet name="header">
 								<h:outputLabel value="Apellido" />
-								<h:inputText value="#{listadoContactosController.primerApellidoFilter}" onkeypress="if (event.keyCode == 13) return false;" styleClass="text-uppercase">
+								<h:inputText value="#{listadoContactosController.primerApellidoFilter}" onkeypress="if (event.keyCode == 13) return true;" styleClass="text-uppercase">
 		                            <a4j:ajax event="keyup" render="tblContactos@body, scrContactos" execute="@this scrContactos" onbeforesubmit="if (event.keyCode != 13)  return false;" limitRender="true"/>
 		                        </h:inputText>
 							</f:facet>
@@ -91,7 +91,10 @@
 							<h:outputText value="#{contacto.referencia}" />
 						</rich:column>
 					</rich:dataTable>
-					<rich:dataScroller id="scrContactos" for="tblContactos" fastControls="hide" renderIfSinglePage="false" maxPages="10" style="width:100%; text-align:center;"/>
+					
+					<rich:dataScroller id="scrContactos" for="tblContactos" fastControls="hide" renderIfSinglePage="false" 
+						maxPages="10" style="width:100%; text-align:center;" >
+					</rich:dataScroller>
 				</h:panelGroup>
 			</fieldset>
 		</rich:panel>
