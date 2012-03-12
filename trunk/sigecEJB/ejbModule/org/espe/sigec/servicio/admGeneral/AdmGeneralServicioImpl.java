@@ -16,6 +16,7 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
+import org.espe.sigec.model.entities.PresupuestoCurso;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
@@ -27,6 +28,7 @@ import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
+import org.espe.sigec.model.sessionBeans.PresupuestoCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PresupuestoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
@@ -57,6 +59,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private CursoFacadeLocal cursoFacadeLocal;
 	@EJB
 	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
+	@EJB
+	private PresupuestoCursoFacadeLocal presupuestoCursoFacadeLocal;
 	
 	
 	@Override
@@ -250,5 +254,14 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin, String estado) {
 		return cursoPeriodoFacadeLocal .cargarCursosParametros(fechaInicio, fechaFin, estado);
 	}
-	
+
+	@Override
+	public Collection<PresupuestoCurso> cargarCursoPresupuesto(String anio) {
+		return presupuestoCursoFacadeLocal.cargarCursoPresupuesto(anio);
+	}
+
+	public Presupuesto findByCodAnio(String anio) {
+		return presupuestoFacadeLocal.findByCodAnio(anio);
+	}
+
 }
