@@ -105,13 +105,6 @@
 						</f:facet>
 						<h:outputText value="#{detalle.detalle}" />
 					</rich:column>
-
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="Cantidad" />
-						</f:facet>
-						<rich:inputNumberSpinner value="#{detalle.cantidad}"/>
-					</rich:column>
 					
 					<rich:column>
 						<f:facet name="header">
@@ -127,9 +120,16 @@
 					
 					<rich:column>
 						<f:facet name="header">
+							<h:outputLabel value="Cantidad" />
+						</f:facet>
+						<h:inputText value="#{detalle.cantidad}" style="text-align:right"/>
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
 							<h:outputLabel value="Costo unitario USD." />
 						</f:facet>
-						<rich:inputNumberSpinner value="#{detalle.costoUnitario}"/>
+						<h:inputText value="#{detalle.costoUnitario}" style="text-align:right"/>
 					</rich:column>
 					
 					<rich:column style="text-align:right;">
@@ -145,8 +145,10 @@
 			                	<h:outputLabel value="Total" /> 
 			                </rich:column>
 			                
-			                <rich:column>
-			                    <h:outputText value="#{presupuestoController.totalLista} $"/>
+			                <rich:column style="text-align:right">
+			                    <h:outputText id="txtTotal" value="#{presupuestoController.totalLista} $">
+			                    	<f:convertNumber for="txtTotal" pattern="0000000000.00"/>
+			                    </h:outputText>
 			                </rich:column>
 			            </rich:columnGroup>
 			        </f:facet>
