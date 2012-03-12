@@ -7,6 +7,7 @@ package org.espe.sigec.model.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -36,14 +37,14 @@ public class DetallePresupuestoCurso implements Serializable {
     @Column(name = "detalle")
     private String detalle;
     @Column(name = "cantidad")
-    private Integer cantidad;
+    private Double cantidad;
     @Size(max = 25)
     @Column(name = "unidad")
     private String unidad;
     @Column(name = "costo_unitario")
-    private BigInteger costoUnitario;
+    private BigDecimal costoUnitario;
     @Column(name = "costo_total")
-    private BigInteger costoTotal;
+    private BigDecimal costoTotal;
     
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -79,14 +80,6 @@ public class DetallePresupuestoCurso implements Serializable {
         this.detalle = detalle;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
     public String getUnidad() {
         return unidad;
     }
@@ -95,23 +88,33 @@ public class DetallePresupuestoCurso implements Serializable {
         this.unidad = unidad;
     }
 
-    public BigInteger getCostoUnitario() {
-        return costoUnitario;
-    }
+    
 
-    public void setCostoUnitario(BigInteger costoUnitario) {
-        this.costoUnitario = costoUnitario;
-    }
+    public Double getCantidad() {
+		return cantidad;
+	}
 
-    public BigInteger getCostoTotal() {
-        return costoTotal;
-    }
+	public void setCantidad(Double cantidad) {
+		this.cantidad = cantidad;
+	}
 
-    public void setCostoTotal(BigInteger costoTotal) {
-        this.costoTotal = costoTotal;
-    }
+	public BigDecimal getCostoUnitario() {
+		return costoUnitario;
+	}
 
-    public PresupuestoCurso getPresupuestoCurso() {
+	public void setCostoUnitario(BigDecimal costoUnitario) {
+		this.costoUnitario = costoUnitario;
+	}
+
+	public BigDecimal getCostoTotal() {
+		return costoTotal;
+	}
+
+	public void setCostoTotal(BigDecimal costoTotal) {
+		this.costoTotal = costoTotal;
+	}
+
+	public PresupuestoCurso getPresupuestoCurso() {
         return presupuestoCurso;
     }
 
@@ -167,9 +170,10 @@ public class DetallePresupuestoCurso implements Serializable {
 		}else{
 			b = new BigDecimal(0);
 		}
+		BigDecimal total = a.multiply(b);
+		total = total.setScale(2, RoundingMode.HALF_UP);
 		
-		
-		return   a.multiply(b);
+		return  total;
 	}
 
 	public void setCostoTotalUSD(BigDecimal costoTotalUSD) {
