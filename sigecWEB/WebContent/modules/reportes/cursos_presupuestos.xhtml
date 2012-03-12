@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+	
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+        <h:form id="frmRepCursos">
+        	<rich:panel>
+        	       					 
+        	<table>
+	        	<tr>
+	        		<td>
+	        		<h:commandButton actionListener="#{reporteCursoPresupuestoController.btnPDF}" value="PDF" 
+        					 		 immediate="true" image="/resources/images/button/pdf.png"/>
+        			</td>
+        			<td width="50"></td>
+	        		<td>
+	        			<h:outputLabel value="#{msg.etiqueta_anio}:" />
+	        		</td>
+	        		<td>
+	        			<rich:inputNumberSpinner value="#{reporteCursoPresupuestoController.anio}" minValue="2000" maxValue="2100"/>
+	        		</td>
+	        		<td>
+	        			<a4j:commandButton value="Ver Informe" actionListener="#{reporteCursoPresupuestoController.btnCargarInforme}"/>	
+	        		</td>
+	        		<td>
+	        			<a4j:outputPanel ajaxRendered="true">
+				        	<table>
+				        		<tr>
+				        			<td>
+				        				<h:outputLabel value="Recurso Inicial:" />
+				        			</td>
+				        			<td>
+				        				<h:outputText value="#{reporteCursoPresupuestoController.presupuesto.recursoInicial}" />	
+					        		</td>
+				        		</tr>
+				        		<tr>
+				        			<td>
+				        				<h:outputLabel value="Recurso Actual:" />	
+					        		</td>
+					        		<td>
+					        			<h:outputText value="#{reporteCursoPresupuestoController.presupuesto.recursoActual}" />	
+					        		</td>
+				        		</tr>
+				        	</table>
+				        </a4j:outputPanel>
+	        		</td>
+	        	</tr>
+	        </table>
+	                		       	
+	        <a4j:outputPanel ajaxRendered="true">
+	               		
+		    	<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoPresupuestoController.lstCursos}" var="cursos" rows="15" rendered="#{!empty reporteCursoPresupuestoController.lstCursos}">
+		        
+		        	<rich:column>
+			        	<f:facet name="header">
+			        	<h:outputLabel value="#{msg.etiqueta_codigo}" />
+			        </f:facet>
+			        	<h:outputText value="#{cursos.idCursoPeriodo}" />
+		        	</rich:column>
+		        	
+		        	<rich:column>
+			        	<f:facet name="header">
+			        	<h:outputLabel value="Especialidad" />
+			        </f:facet>
+			        	<h:outputText value="#{cursos.cursoPeriodo.curso.especialidad.nombre}" />
+		        	</rich:column>
+		        	
+		        	<rich:column>
+			        	<f:facet name="header">
+			        	<h:outputLabel value="Nombre" />
+			        </f:facet>
+			        	<h:outputText value="#{cursos.cursoPeriodo.curso.nombreCurso}" />
+		        	</rich:column>
+		        	
+		        	<rich:column>
+			        	<f:facet name="header">
+			        	<h:outputLabel value="Dinero Asignado" />
+			        </f:facet>
+			        	<h:outputText value="#{cursos.dineroAsignado}" />
+		        	</rich:column>
+		        			
+		       	</rich:dataTable>
+		        		
+		        <center>
+		        	<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
+		        </center>
+	       	</a4j:outputPanel>
+        	
+        	</rich:panel>
+        	
+        </h:form>
+        
+</ui:composition>
