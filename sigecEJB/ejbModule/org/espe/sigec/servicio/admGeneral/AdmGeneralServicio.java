@@ -12,6 +12,7 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.LugarCurso;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
+import org.espe.sigec.model.entities.PresupuestoCurso;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 
@@ -70,5 +71,8 @@ public interface AdmGeneralServicio {
 	//Cursos con parametros
 	Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin,String estado);
 
+	//Curso Presupuesto
+	Collection<PresupuestoCurso> cargarCursoPresupuesto(String anio);
+	Presupuesto findByCodAnio(String anio);
 	
 }
