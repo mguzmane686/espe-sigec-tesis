@@ -11,7 +11,6 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoCurso;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.reportes.ReporteGenerico;
@@ -27,10 +26,8 @@ public class ReporteCursoPresupuestoController implements Serializable{
 	AdmGeneralServicio admGeneralServicio;
 	
 	Collection<PresupuestoCurso> lstCursos;
-	Presupuesto presupuesto;
 	
 	public ReporteCursoPresupuestoController(){	
-		setPresupuesto(new Presupuesto());
 		setLstCursos(new ArrayList<PresupuestoCurso>());
 		setAnio(new Integer(0));
 	}
@@ -44,8 +41,6 @@ public class ReporteCursoPresupuestoController implements Serializable{
 	}
 	
 	public void btnCargarInforme(ActionEvent e){
-		
-		setPresupuesto(admGeneralServicio.findByCodAnio(String.valueOf(getAnio())));
 		
 		Collection<PresupuestoCurso> lstAux;
 		
@@ -71,14 +66,6 @@ public class ReporteCursoPresupuestoController implements Serializable{
 
 	public void setAnio(Integer anio) {
 		this.anio = anio;
-	}
-	
-	public Presupuesto getPresupuesto() {
-		return presupuesto;
-	}
-
-	public void setPresupuesto(Presupuesto presupuesto) {
-		this.presupuesto = presupuesto;
 	}
 
 	@SuppressWarnings("deprecation")
