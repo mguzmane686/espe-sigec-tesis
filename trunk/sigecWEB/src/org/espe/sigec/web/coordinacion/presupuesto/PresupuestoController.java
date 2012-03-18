@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -12,6 +14,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.beanutils.BeanComparator;
 import org.espe.sigec.model.entities.CatalogoSigec;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.DetallePresupuestoCurso;
@@ -35,6 +38,11 @@ public class PresupuestoController implements Serializable {
 	
 	private PresupuestoCurso presupuestoCurso;
 	
+	private InformePresupuesto informePresupuesto;
+	
+	
+	private boolean editMode;
+	
 	public PresupuestoController() {
 		setCursoPeriodo((CursoPeriodo) FacesUtils.getFlashObject("cursoPeriodo"));
 		setLstDetallePresupuestoCursos(new ArrayList<DetallePresupuestoCurso>());
@@ -45,18 +53,35 @@ public class PresupuestoController implements Serializable {
 		PresupuestoCurso presupuestoCurso = presupuestoServicio.findPresupuestoCurso(getCursoPeriodo().getIdCursoPeriodo());
 		
 		if(presupuestoCurso !=null){
+			setEditMode(Boolean.TRUE);
+			
 			setPresupuestoCurso(presupuestoCurso);
 			
 			if(getPresupuestoCurso().getDetallePresupuestoCursoCollection()==null || getPresupuestoCurso().getDetallePresupuestoCursoCollection().isEmpty()){
 				loadCatalogoPresupuesto();
 			}else{
+				
+				
+				try {
+					if(presupuestoCurso.getDetallePresupuestoCursoCollection() !=null){
+//						BeanComparator reverseOrderBeanComparator = new BeanComparator("detallePresupuestoCursoPK.idDetalle", new ReverseComparator(new ComparableComparator()));
+						BeanComparator reverseOrderBeanComparator = new BeanComparator("detallePresupuestoCursoPK.idDetalle");
+						Collections.sort((List<DetallePresupuestoCurso>) presupuestoCurso.getDetallePresupuestoCursoCollection(), reverseOrderBeanComparator);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
 				updatePresupuesto = Boolean.TRUE;
 			}
 		}else{
 			setPresupuestoCurso(new PresupuestoCurso());
 			loadCatalogoPresupuesto();
+			setEditMode(Boolean.FALSE);
 		}
+		
+		setInformePresupuesto(new InformePresupuesto(getTotalLista()));
 	}
 	
 	private void loadCatalogoPresupuesto(){
@@ -153,4 +178,21 @@ public class PresupuestoController implements Serializable {
 		
 		return totalLista;
 	}
+
+	public InformePresupuesto getInformePresupuesto() {
+		return informePresupuesto;
+	}
+
+	public void setInformePresupuesto(InformePresupuesto informePresupuesto) {
+		this.informePresupuesto = informePresupuesto;
+	}
+
+	public boolean isEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
+	}
+	
 }

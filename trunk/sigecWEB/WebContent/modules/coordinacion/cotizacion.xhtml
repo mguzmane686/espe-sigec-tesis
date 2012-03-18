@@ -96,7 +96,9 @@
 						<f:facet name="header">
 							<h:outputLabel value="N#" />
 						</f:facet>
-						<h:outputText value="#{numRow.index+1}" />
+						<h:panelGroup layout="block" style="text-align:center;">
+							<h:outputText value="#{numRow.index+1}" />
+						</h:panelGroup>
 					</rich:column>
 					
 					<rich:column>
@@ -110,26 +112,32 @@
 						<f:facet name="header">
 							<h:outputLabel value="Unidad" />
 						</f:facet>
-						<h:selectOneRadio value="#{detalle.unidad}">
-							<f:selectItem itemLabel="Horas" itemValue="HORA"/>
-							<f:selectItem itemLabel="Total" itemValue="TOTAL"/>
-							<f:selectItem itemLabel="Unidades" itemValue="UNIDAD"/>
-							<f:selectItem itemLabel="Participantes" itemValue="PARTICIPANTE"/>
-						</h:selectOneRadio>
+						<h:panelGroup layout="block" style="text-align:center;">
+							<h:selectOneRadio value="#{detalle.unidad}" style="width:100%">
+								<f:selectItem itemLabel="Horas" itemValue="HORA"/>
+								<f:selectItem itemLabel="Total" itemValue="TOTAL"/>
+								<f:selectItem itemLabel="Unidades" itemValue="UNIDAD"/>
+								<f:selectItem itemLabel="Participantes" itemValue="PARTICIPANTE"/>
+							</h:selectOneRadio>
+						</h:panelGroup>
 					</rich:column>
 					
 					<rich:column>
 						<f:facet name="header">
 							<h:outputLabel value="Cantidad" />
 						</f:facet>
-						<h:inputText value="#{detalle.cantidad}" style="text-align:right"/>
+						<h:panelGroup layout="block" style="text-align:center;">
+							<h:inputText value="#{detalle.cantidad}" style="text-align:right"/>
+						</h:panelGroup>
 					</rich:column>
 					
 					<rich:column>
 						<f:facet name="header">
 							<h:outputLabel value="Costo unitario USD." />
 						</f:facet>
-						<h:inputText value="#{detalle.costoUnitario}" style="text-align:right"/>
+						<h:panelGroup layout="block" style="text-align:center;">
+							<h:inputText value="#{detalle.costoUnitario}" style="text-align:right"/>
+						</h:panelGroup>
 					</rich:column>
 					
 					<rich:column style="text-align:right;">
@@ -139,6 +147,7 @@
 						<h:outputText value="#{detalle.costoTotalUSD} $"/>
 					</rich:column>
 					
+					
 					<f:facet name="footer">
 			            <rich:columnGroup>
 			                <rich:column colspan="5" style="text-align:right" styleClass="rf-dt-shdr-c">
@@ -146,14 +155,29 @@
 			                </rich:column>
 			                
 			                <rich:column style="text-align:right">
-			                    <h:outputText id="txtTotal" value="#{presupuestoController.totalLista} $">
-			                    	<f:convertNumber for="txtTotal" pattern="0000000000.00"/>
-			                    </h:outputText>
+			                    <h:outputText id="txtTotal" value="#{presupuestoController.totalLista}" converter="org.espe.sigec.numberConverter"/>
 			                </rich:column>
 			            </rich:columnGroup>
 			        </f:facet>
-			        
 				</rich:dataTable>
+			</fieldset>
+			
+			<fieldset>
+				<legend>
+					<h:outputLabel value="Detalle" style="font-weight:bold;"/>
+				</legend>
+				<h:panelGroup>
+					<h:panelGrid columns="2" style="width:100%">
+						<h:outputLabel value="Suministros y materiales oficina" />
+						<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.suministrosMatOfi}" converter="org.espe.sigec.numberConverter"/>
+						
+						<h:outputLabel value="Costo total" />
+						<h:outputText value="#{((presupuestoController.totalLista * .05) + presupuestoController.totalLista)}" converter="org.espe.sigec.numberConverter"/>
+						
+						<h:outputLabel value="PRECIO POR PARTICIPANTE" />
+						<h:outputText value="#{((presupuestoController.totalLista * .05) + presupuestoController.totalLista)}" converter="org.espe.sigec.numberConverter"/>
+					</h:panelGrid>
+				</h:panelGroup>
 			</fieldset>
 		</rich:panel>
 	</h:form>
