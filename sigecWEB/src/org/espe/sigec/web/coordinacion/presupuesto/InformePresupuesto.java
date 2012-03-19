@@ -12,6 +12,7 @@ public class InformePresupuesto {
 	private ResumenCostosCurso resumenCostosCurso;
 	private BigDecimal totalListaDetalle;
 	private int numeroParticipantes;
+	
 	public InformePresupuesto() {
 		setPuntoEquilibrio(new PuntoEquilibrio());
 		setResumenCostosCurso(new ResumenCostosCurso());
@@ -28,7 +29,6 @@ public class InformePresupuesto {
 	private void calculoInforme(){
 		if(getTotalListaDetalle() !=null){
 			calculoResumenCostosCurso(getTotalListaDetalle());
-			calculoPuntoEquilibrio();
 		}
 	}
 	
@@ -45,21 +45,31 @@ public class InformePresupuesto {
 		getResumenCostosCurso().setPrecioParicipanteFinal(getResumenCostosCurso().getPrecioParicipante().add(getResumenCostosCurso().getUtilidadEspe()));
 		
 		getResumenCostosCurso().setIngresoTotal(getResumenCostosCurso().getPrecioParicipanteFinal().multiply(new BigDecimal(getNumeroParticipantes())));
-//		getResumenCostosCurso().setValorHoraClase(valorHoraClase)
+		
 		getResumenCostosCurso().setUtilidad(getResumenCostosCurso().getIngresoTotal().subtract(getResumenCostosCurso().getCostoTotal()));
 		try {
 			getResumenCostosCurso().setMargenUtilidad(getResumenCostosCurso().getUtilidad().divide(getResumenCostosCurso().getCostoTotal(), BigDecimal.ROUND_UNNECESSARY, BigDecimal.ROUND_FLOOR));
 			getResumenCostosCurso().setMargenUtilidad(getResumenCostosCurso().getMargenUtilidad().multiply(new BigDecimal(100)));
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
 	
-	private void calculoPuntoEquilibrio(){
+	public void calculoPuntoEquilibrio(BigDecimal manuales, BigDecimal refrigerios){
+		setCostosFijos(manuales, refrigerios);
+	}
+	
+	private void setCostosFijos(BigDecimal manuales, BigDecimal refrigerios){
+		BigDecimal suma = manuales.add(refrigerios).add(getResumenCostosCurso().getSuministrosMatOfi());
+		
+		getPuntoEquilibrio().setCostoFijo(getResumenCostosCurso().getCostoTotal().subtract(suma));
+		getPuntoEquilibrio().setCostoVariable(suma);
+		getPuntoEquilibrio().setCostoVariableUnitario(suma.divide(new BigDecimal(getNumeroParticipantes()), BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_UP));
+		getPuntoEquilibrio().setPrecio(getResumenCostosCurso().getPrecioParicipante());
+		getPuntoEquilibrio().setParticipante(new BigDecimal(getNumeroParticipantes()));
 		
 	}
-
 	public PuntoEquilibrio getPuntoEquilibrio() {
 		return puntoEquilibrio;
 	}
