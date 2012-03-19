@@ -81,7 +81,7 @@ public class PresupuestoController implements Serializable {
 			setEditMode(Boolean.FALSE);
 		}
 		
-		setInformePresupuesto(new InformePresupuesto(getTotalLista()));
+		setInformePresupuesto(new InformePresupuesto(getTotalLista(), 26));
 	}
 	
 	private void loadCatalogoPresupuesto(){
@@ -110,6 +110,14 @@ public class PresupuestoController implements Serializable {
 		}
 	}
 	
+	public void btnEditPresupuesto(){
+		setEditMode(Boolean.FALSE);
+	}
+	
+	public void btnCancelEditPresupuesto(){
+		setEditMode(Boolean.TRUE);
+	}
+
 	public void btnSavePresupuesto(ActionEvent e){
 		try {
 			if(isUpdatePresupuesto()){
