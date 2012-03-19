@@ -13,6 +13,7 @@ public class ResumenCostosCurso implements Serializable{
 	private BigDecimal suministrosMatOfi;
 	private BigDecimal costoTotal;
 	private BigDecimal precioParicipante;
+	private BigDecimal precioParicipanteFinal;
 	private BigDecimal utilidadEspe;
 	private BigDecimal precioVariable;
 	private BigDecimal ingresoTotal;
@@ -121,4 +122,13 @@ public class ResumenCostosCurso implements Serializable{
 	public void setMargenUtilidadReferencial(BigDecimal margenUtilidadReferencial) {
 		this.margenUtilidadReferencial = margenUtilidadReferencial;
 	}
+
+	public BigDecimal getPrecioParicipanteFinal() {
+		return precioParicipanteFinal;
+	}
+
+	public void setPrecioParicipanteFinal(BigDecimal precioParicipanteFinal) {
+		this.precioParicipanteFinal = precioParicipanteFinal;
+	}
+	
 }

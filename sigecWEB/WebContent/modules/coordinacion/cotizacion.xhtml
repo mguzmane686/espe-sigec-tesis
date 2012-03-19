@@ -10,18 +10,43 @@
 	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>
 	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
 	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
-
+	
+	<h:outputStylesheet>
+		.alinearDerecha{
+			text-align:right;
+		}
+		.subirTabla{
+			vertical-align:top;
+		}
+		.espacioCustom{
+			width:160px;
+			font-weight:bold;
+		}
+	</h:outputStylesheet>
+	
 	<h:form id="frmCotizacion">
 		<rich:panel header="Presupuestos" styleClass="titulo">
 			<h:panelGroup layout="block" styleClass="roundCorner">
-				<h:panelGrid columns="2">
-					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-						<a4j:commandButton value="Guardar" image="/resources/images/save.png" render="@form" 
+				<h:panelGrid columns="2" id="pgBotones">
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!presupuestoController.editMode}" >
+						<a4j:commandButton value="Guardar" image="/resources/images/save.png" 
 							actionListener="#{presupuestoController.btnSavePresupuesto}"/>
 						<h:outputLabel value="Guardar" />
 					</h:panelGrid>
-
-					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+					
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{presupuestoController.editMode}" >
+						<a4j:commandButton value="#{msg['editar']}" action="#{presupuestoController.btnEditPresupuesto}" execute="@this" render="frmCotizacion"
+	       					 image="/resources/images/edit.png"/>
+	       				<h:outputLabel value="#{msg['editar']}" />
+       				</h:panelGrid>
+	       			
+	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!presupuestoController.editMode}">
+	       				<a4j:commandButton value="#{msg['cancelar']}" render="frmCotizacion" actionListener="#{presupuestoController.btnCancelEditPresupuesto}" execute="@this" 
+	       					 image="/resources/images/cancel.png"/>
+	       				<h:outputLabel value="#{msg['cancelar']}" />
+	       			</h:panelGrid>
+	       			
+					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{presupuestoController.editMode}">
 						<a4j:commandButton value="Atras" immediate="true" actionListener="#{presupuestoController.btnAtras}" image="/resources/images/go-back.png" />
 						<h:outputLabel value="Atras" />
 					</h:panelGrid>
@@ -29,9 +54,9 @@
 			</h:panelGroup>
 		</rich:panel>
 
-		<rich:panel header="#{msg.datos_curso}">
-			<h:panelGrid columns="2" columnClasses="espacioDetalle">
-				<h:outputLabel value="#{msg.etiqueta_especialidad}" />
+		<rich:panel header="#{msg.datos_curso}" >
+			<h:panelGrid columns="2" columnClasses="espacioCustom," frame="box" style="width:100%;" >
+				<h:outputLabel value="#{msg.etiqueta_especialidad} :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.curso.especialidad.nombre}" />
 				
 				<h:outputLabel value="Nombre del curso :" />
@@ -54,11 +79,12 @@
 				<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
 				
 				<h:outputLabel value="#{msg['tipo_curso']} :" />
-				<h:selectOneRadio value="#{presupuestoController.cursoPeriodo.tipoCurso}">
+				<h:selectOneRadio value="#{presupuestoController.cursoPeriodo.tipoCurso}" rendered="#{!presupuestoController.editMode}">
 					<f:selectItem itemLabel="Empresarial" itemValue="CORP" />
-					<f:selectItem itemLabel="Abierto" itemValue="IND" />
+					<f:selectItem itemLabel="Individual" itemValue="IND" />
 				</h:selectOneRadio>
-
+				<h:outputText value="#{(presupuestoController.cursoPeriodo.tipoCurso == 'CORP' ?'Empresarial':'Individual')}" rendered="#{presupuestoController.editMode}"/>
+				
 				<h:outputLabel value="Lugar a dictarse :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.lugarCapacitacion}" />
 				
@@ -103,7 +129,7 @@
 					
 					<rich:column>
 						<f:facet name="header">
-							<h:outputLabel value="Descripcion" />
+							<h:outputLabel value="#{msg.descripcion}" />
 						</f:facet>
 						<h:outputText value="#{detalle.detalle}" />
 					</rich:column>
@@ -113,12 +139,14 @@
 							<h:outputLabel value="Unidad" />
 						</f:facet>
 						<h:panelGroup layout="block" style="text-align:center;">
-							<h:selectOneRadio value="#{detalle.unidad}" style="width:100%">
+							<h:selectOneRadio value="#{detalle.unidad}" style="width:100%" rendered="#{!presupuestoController.editMode}">
 								<f:selectItem itemLabel="Horas" itemValue="HORA"/>
 								<f:selectItem itemLabel="Total" itemValue="TOTAL"/>
 								<f:selectItem itemLabel="Unidades" itemValue="UNIDAD"/>
 								<f:selectItem itemLabel="Participantes" itemValue="PARTICIPANTE"/>
 							</h:selectOneRadio>
+							
+							<h:outputText value="#{detalle.unidad}" rendered="#{presupuestoController.editMode}"/>
 						</h:panelGroup>
 					</rich:column>
 					
@@ -127,7 +155,8 @@
 							<h:outputLabel value="Cantidad" />
 						</f:facet>
 						<h:panelGroup layout="block" style="text-align:center;">
-							<h:inputText value="#{detalle.cantidad}" style="text-align:right"/>
+							<h:inputText value="#{detalle.cantidad}" rendered="#{!presupuestoController.editMode}" style="text-align:right" />
+							<h:outputText value="#{detalle.cantidad}" rendered="#{presupuestoController.editMode}"/>
 						</h:panelGroup>
 					</rich:column>
 					
@@ -136,7 +165,8 @@
 							<h:outputLabel value="Costo unitario USD." />
 						</f:facet>
 						<h:panelGroup layout="block" style="text-align:center;">
-							<h:inputText value="#{detalle.costoUnitario}" style="text-align:right"/>
+							<h:inputText value="#{detalle.costoUnitario}" rendered="#{!presupuestoController.editMode}" style="text-align:right"/>
+							<h:outputText value="#{detalle.costoUnitario}" rendered="#{presupuestoController.editMode}" style="text-align:right" converter="org.espe.sigec.numberConverter"/>
 						</h:panelGroup>
 					</rich:column>
 					
@@ -167,15 +197,41 @@
 					<h:outputLabel value="Detalle" style="font-weight:bold;"/>
 				</legend>
 				<h:panelGroup>
-					<h:panelGrid columns="2" style="width:100%">
-						<h:outputLabel value="Suministros y materiales oficina" />
-						<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.suministrosMatOfi}" converter="org.espe.sigec.numberConverter"/>
+					<h:panelGrid columns="2" style="width:100%" bgcolor="#DFECFC"  frame="hsides" columnClasses="subirTabla, subirTabla">
+				
+						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC"  frame="box" columnClasses=", alinearDerecha">
+							<h:outputLabel value="Suministros y materiales oficina" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.suministrosMatOfi}" 
+								converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="Costo total" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.costoTotal}" 
+								converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="PRECIO POR PARTICIPANTE" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.precioParicipante}" 
+								converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="UTILIDAD ESPE" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.utilidadEspe}" 
+								converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="PRECIO POR PARTICIPANTE + UTILIDAD" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.precioParicipanteFinal}" 
+								converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="UTILIDAD" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.utilidad}" converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="MARGEN DE UTILIDAD" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.margenUtilidad}" converter="org.espe.sigec.percentageConverter"/>
+							
+						</h:panelGrid>
 						
-						<h:outputLabel value="Costo total" />
-						<h:outputText value="#{((presupuestoController.totalLista * .05) + presupuestoController.totalLista)}" converter="org.espe.sigec.numberConverter"/>
-						
-						<h:outputLabel value="PRECIO POR PARTICIPANTE" />
-						<h:outputText value="#{((presupuestoController.totalLista * .05) + presupuestoController.totalLista)}" converter="org.espe.sigec.numberConverter"/>
+						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC"  frame="box" columnClasses=", alinearDerecha">
+							<h:outputLabel value="Suministros y materiales oficina" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.suministrosMatOfi}" converter="org.espe.sigec.numberConverter"/>
+						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGroup>
 			</fieldset>
