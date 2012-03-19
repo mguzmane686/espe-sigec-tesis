@@ -69,6 +69,19 @@ public class InformePresupuesto {
 		getPuntoEquilibrio().setPrecio(getResumenCostosCurso().getPrecioParicipante());
 		getPuntoEquilibrio().setParticipante(new BigDecimal(getNumeroParticipantes()));
 		
+		calucularPEUno();
+		
+		getPuntoEquilibrio().setVerifIngresos(getPuntoEquilibrio().getPrecio().multiply(getPuntoEquilibrio().getPuntoEquilibrioUno()));
+		getPuntoEquilibrio().setVerifCostoVariable(getPuntoEquilibrio().getCostoVariableUnitario().multiply(getPuntoEquilibrio().getPuntoEquilibrioUno()));
+		getPuntoEquilibrio().setVerifCostoFijo(getPuntoEquilibrio().getCostoFijo());
+		getPuntoEquilibrio().setVerifUtilidad(getPuntoEquilibrio().getVerifIngresos().subtract(getPuntoEquilibrio().getVerifCostoVariable()).subtract(getPuntoEquilibrio().getVerifCostoFijo()));
+		
+	}
+	
+	private void calucularPEUno(){
+		BigDecimal costo_participantes = getPuntoEquilibrio().getCostoVariable().divide(getPuntoEquilibrio().getParticipante(),BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_UP);
+		BigDecimal divisionPE = getPuntoEquilibrio().getPrecio().subtract(costo_participantes);
+		getPuntoEquilibrio().setPuntoEquilibrioUno(getPuntoEquilibrio().getCostoFijo().divide(divisionPE,BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_UP));
 	}
 	public PuntoEquilibrio getPuntoEquilibrio() {
 		return puntoEquilibrio;

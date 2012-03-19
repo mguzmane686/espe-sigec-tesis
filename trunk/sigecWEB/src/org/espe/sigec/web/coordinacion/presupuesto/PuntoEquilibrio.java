@@ -24,6 +24,9 @@ public class PuntoEquilibrio implements Serializable{
 	private BigDecimal verifCostoFijo;
 	private BigDecimal verifUtilidad;
 	
+	private BigDecimal puntoEquilibrioUno;
+	private BigDecimal puntoEquilibrioDos;
+	
 	public BigDecimal getCostoFijo() {
 		return costoFijo;
 	}
@@ -77,5 +80,19 @@ public class PuntoEquilibrio implements Serializable{
 	}
 	public void setVerifUtilidad(BigDecimal verifUtilidad) {
 		this.verifUtilidad = verifUtilidad;
-	}	
+	}
+	public BigDecimal getPuntoEquilibrioUno() {
+		return puntoEquilibrioUno;
+	}
+	public void setPuntoEquilibrioUno(BigDecimal puntoEquilibrioUno) {
+		this.puntoEquilibrioUno = puntoEquilibrioUno;
+	}
+	public BigDecimal getPuntoEquilibrioDos() {
+		return puntoEquilibrioDos;
+	}
+	public void setPuntoEquilibrioDos(BigDecimal puntoEquilibrioDos) {
+		this.puntoEquilibrioDos = puntoEquilibrioDos;
+	}
+	
+	
 }
