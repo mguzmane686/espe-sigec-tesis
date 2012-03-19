@@ -197,9 +197,9 @@
 					<h:outputLabel value="Detalle" style="font-weight:bold;"/>
 				</legend>
 				<h:panelGroup>
-					<h:panelGrid columns="2" style="width:100%" bgcolor="#DFECFC"  frame="hsides" columnClasses="subirTabla, subirTabla">
+					<h:panelGrid columns="1" style="width:100%" bgcolor="#DFECFC"  frame="lhs" columnClasses="subirTabla">
 				
-						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC"  frame="box" columnClasses=", alinearDerecha">
+						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC"  frame="box" columnClasses="label-bold, alinearDerecha">
 							<h:outputLabel value="Suministros y materiales oficina" />
 							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.suministrosMatOfi}" 
 								converter="org.espe.sigec.numberConverter"/>
@@ -228,21 +228,41 @@
 							
 						</h:panelGrid>
 						
-						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC"  frame="box" columnClasses=", alinearDerecha">
-							<h:outputLabel value="COSTOS FIJOS" />
-							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoFijo}" converter="org.espe.sigec.numberConverter"/>
-							
-							<h:outputLabel value="COSTOS VARIABLES" />
-							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoVariable}" converter="org.espe.sigec.numberConverter"/>
-							
-							<h:outputLabel value="COSTO VARI. UNITARIO" />
-							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoVariableUnitario}" converter="org.espe.sigec.numberConverter"/>
-							
-							<h:outputLabel value="PRECIO" />
-							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.precio}" converter="org.espe.sigec.numberConverter"/>
-							
-							<h:outputLabel value="PARTICIPANTES" />
-							<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
+						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC" frame="box" columnClasses="subirTabla, subirTabla">
+							<h:panelGrid columns="2" style="width:100%;" frame="box" columnClasses="label-bold, alinearDerecha">
+								<h:outputLabel value="COSTOS FIJOS" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoFijo}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="COSTOS VARIABLES" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoVariable}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="COSTO VARI. UNITARIO" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoVariableUnitario}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="PRECIO" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.precio}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="PARTICIPANTES" />
+								<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
+								
+								<h:outputLabel value="P. E" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.puntoEquilibrioUno}" />
+								
+							</h:panelGrid>
+						
+							<h:panelGrid columns="2" style="width:100%;" frame="box" columnClasses="label-bold, alinearDerecha">
+								<h:outputLabel value="INGRESOS" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.verifIngresos}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="COSTOS VARIABLES" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.verifCostoVariable}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="COSTOS FIJOS" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.verifCostoFijo}" converter="org.espe.sigec.numberConverter"/>
+								
+								<h:outputLabel value="UTILIDAD" />
+								<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.verifUtilidad}" converter="org.espe.sigec.numberConverter"/>
+							</h:panelGrid>
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGroup>
