@@ -229,8 +229,20 @@
 						</h:panelGrid>
 						
 						<h:panelGrid columns="2" style="width:100%;" bgcolor="#DFECFC"  frame="box" columnClasses=", alinearDerecha">
-							<h:outputLabel value="Suministros y materiales oficina" />
-							<h:outputText value="#{presupuestoController.informePresupuesto.resumenCostosCurso.suministrosMatOfi}" converter="org.espe.sigec.numberConverter"/>
+							<h:outputLabel value="COSTOS FIJOS" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoFijo}" converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="COSTOS VARIABLES" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoVariable}" converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="COSTO VARI. UNITARIO" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.costoVariableUnitario}" converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="PRECIO" />
+							<h:outputText value="#{presupuestoController.informePresupuesto.puntoEquilibrio.precio}" converter="org.espe.sigec.numberConverter"/>
+							
+							<h:outputLabel value="PARTICIPANTES" />
+							<h:outputText value="#{presupuestoController.cursoPeriodo.maximoEstudiantes}" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGroup>

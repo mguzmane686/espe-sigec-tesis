@@ -73,15 +73,17 @@ public class PresupuestoController implements Serializable {
 				}
 				
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
-				updatePresupuesto = Boolean.TRUE;
+				setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes()));
+				getInformePresupuesto().calculoPuntoEquilibrio(new BigDecimal(125), BigDecimal.ZERO);
+				
+				setUpdatePresupuesto(Boolean.TRUE);
 			}
 		}else{
 			setPresupuestoCurso(new PresupuestoCurso());
 			loadCatalogoPresupuesto();
 			setEditMode(Boolean.FALSE);
+			setInformePresupuesto(new InformePresupuesto(BigDecimal.ZERO,0));
 		}
-		
-		setInformePresupuesto(new InformePresupuesto(getTotalLista(), 26));
 	}
 	
 	private void loadCatalogoPresupuesto(){
