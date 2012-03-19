@@ -27,7 +27,7 @@ public class InformePresupuesto {
 	}
 	
 	private void calculoInforme(){
-		if(getTotalListaDetalle() !=null){
+		if(getTotalListaDetalle() !=null && !getTotalListaDetalle().equals(BigDecimal.ZERO)){
 			calculoResumenCostosCurso(getTotalListaDetalle());
 		}
 	}
