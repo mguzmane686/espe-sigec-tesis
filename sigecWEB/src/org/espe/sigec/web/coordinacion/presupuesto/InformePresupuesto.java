@@ -12,18 +12,34 @@ public class InformePresupuesto {
 	private ResumenCostosCurso resumenCostosCurso;
 	private BigDecimal totalListaDetalle;
 	private int numeroParticipantes;
-	
+	private BigDecimal porcenUtilidadEspe;
+	private BigDecimal porcenMatOfi;
 	public InformePresupuesto() {
 		setPuntoEquilibrio(new PuntoEquilibrio());
 		setResumenCostosCurso(new ResumenCostosCurso());
 	}
 	
-	public InformePresupuesto(BigDecimal totalListaDetalle, int numeroParticipantes) {
+	public InformePresupuesto(BigDecimal totalListaDetalle, int numeroParticipantes, Integer porceUtiEspe, Integer porceMatOfi) {
+		porcenUtilidadEspe = convertirPorcentage(porceUtiEspe);
+		porcenMatOfi = convertirPorcentage(porceMatOfi);
+		
 		setPuntoEquilibrio(new PuntoEquilibrio());
 		setResumenCostosCurso(new ResumenCostosCurso());
 		setTotalListaDetalle(totalListaDetalle);
 		setNumeroParticipantes(numeroParticipantes);
 		calculoInforme();
+		
+	}
+	
+	private BigDecimal convertirPorcentage(Integer cantidad){
+		BigDecimal valor = new BigDecimal(cantidad);
+		try {
+			valor = valor.multiply(new BigDecimal(.01));
+		} catch (Exception e) {
+			new BigDecimal(0);
+		}
+		
+		return valor;
 	}
 	
 	private void calculoInforme(){
@@ -33,7 +49,7 @@ public class InformePresupuesto {
 	}
 	
 	private void calculoResumenCostosCurso(BigDecimal totalLista){
-		getResumenCostosCurso().setSuministrosMatOfi(totalLista.multiply(new BigDecimal(.05)));
+		getResumenCostosCurso().setSuministrosMatOfi(totalLista.multiply(porcenMatOfi));
 		getResumenCostosCurso().setCostoTotal(getResumenCostosCurso().getSuministrosMatOfi().add(totalLista));
 		try {
 			getResumenCostosCurso().setPrecioParicipante(getResumenCostosCurso().getCostoTotal().divide(new BigDecimal(getNumeroParticipantes()), BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_UP));
@@ -41,7 +57,7 @@ public class InformePresupuesto {
 			e.printStackTrace();
 		}
 		
-		getResumenCostosCurso().setUtilidadEspe(getResumenCostosCurso().getPrecioParicipante().multiply(new BigDecimal(0.3)));
+		getResumenCostosCurso().setUtilidadEspe(getResumenCostosCurso().getPrecioParicipante().multiply(porcenUtilidadEspe));
 		getResumenCostosCurso().setPrecioParicipanteFinal(getResumenCostosCurso().getPrecioParicipante().add(getResumenCostosCurso().getUtilidadEspe()));
 		
 		getResumenCostosCurso().setIngresoTotal(getResumenCostosCurso().getPrecioParicipanteFinal().multiply(new BigDecimal(getNumeroParticipantes())));
