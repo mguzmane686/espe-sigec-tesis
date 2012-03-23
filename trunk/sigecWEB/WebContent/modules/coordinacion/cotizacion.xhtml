@@ -98,8 +98,18 @@
 				<legend>
 					<h:outputLabel value="#{msg['presupuesto_asignacion']}" style="font-weight:bold;"/>
 				</legend>
-				<h:outputLabel value="Presupuesto asignado : " />
-				<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado} $"/>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Presupuesto asignado : " />
+					<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado} $"/>
+					
+					<h:outputLabel value="Porcentege suministros y materiales :" />
+					<h:inputText value="#{presupuestoController.presupuestoCurso.porcentageMatOfi} %" rendered="#{!presupuestoController.editMode}" />
+					<h:outputText value="#{presupuestoController.presupuestoCurso.porcentageMatOfi} %" rendered="#{presupuestoController.editMode}" />
+					
+					<h:outputLabel value="Porcentege utilidad Espe:" />
+					<h:inputText value="#{presupuestoController.presupuestoCurso.porcentageUtiEspe} %" rendered="#{!presupuestoController.editMode}" />
+					<h:outputText value="#{presupuestoController.presupuestoCurso.porcentageUtiEspe} %" rendered="#{presupuestoController.editMode}" />
+				</h:panelGrid>
 				
 			</fieldset>
 		</rich:panel>

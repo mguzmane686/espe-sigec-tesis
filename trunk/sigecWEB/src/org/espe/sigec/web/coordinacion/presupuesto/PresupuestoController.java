@@ -73,7 +73,7 @@ public class PresupuestoController implements Serializable {
 				}
 				
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
-				setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes()));
+				setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes(), getPresupuestoCurso().getPorcentageUtiEspe() , getPresupuestoCurso().getPorcentageMatOfi()));
 				getInformePresupuesto().calculoPuntoEquilibrio(new BigDecimal(125), BigDecimal.ZERO);
 				
 				setUpdatePresupuesto(Boolean.TRUE);
@@ -82,7 +82,7 @@ public class PresupuestoController implements Serializable {
 			setPresupuestoCurso(new PresupuestoCurso());
 			loadCatalogoPresupuesto();
 			setEditMode(Boolean.FALSE);
-			setInformePresupuesto(new InformePresupuesto(BigDecimal.ZERO,0));
+			setInformePresupuesto(new InformePresupuesto(BigDecimal.ZERO,0,0,0));
 		}
 	}
 	
