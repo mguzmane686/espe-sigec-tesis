@@ -41,6 +41,10 @@ public class PresupuestoCurso implements Serializable {
     private BigDecimal idCursoPeriodo;
     @Column(name = "dinero_asignado")
     private Double dineroAsignado;
+    @Column(name = "porcentage_mat_ofi")
+    private Integer porcentageMatOfi;
+    @Column(name = "porcentage_uti_espe")
+    private Integer porcentageUtiEspe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "presupuestoCurso", fetch = FetchType.LAZY)
     private Collection<DetallePresupuestoCurso> detallePresupuestoCursoCollection;
     @JoinColumn(name = "id_presupuesto", referencedColumnName = "id_presupuesto")
@@ -122,5 +126,21 @@ public class PresupuestoCurso implements Serializable {
 			Collection<DetallePresupuestoCurso> detallePresupuestoCursoCollection) {
 		this.detallePresupuestoCursoCollection = detallePresupuestoCursoCollection;
 	}
-    
+
+	public Integer getPorcentageMatOfi() {
+		return porcentageMatOfi;
+	}
+
+	public void setPorcentageMatOfi(Integer porcentageMatOfi) {
+		this.porcentageMatOfi = porcentageMatOfi;
+	}
+
+	public Integer getPorcentageUtiEspe() {
+		return porcentageUtiEspe;
+	}
+
+	public void setPorcentageUtiEspe(Integer porcentageUtiEspe) {
+		this.porcentageUtiEspe = porcentageUtiEspe;
+	}
+	
 }
