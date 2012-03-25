@@ -48,6 +48,7 @@ public class PresupuestoController implements Serializable {
 		setLstDetallePresupuestoCursos(new ArrayList<DetallePresupuestoCurso>());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@PostConstruct
 	public void cargarCatalogo(){
 		PresupuestoCurso presupuestoCurso = presupuestoServicio.findPresupuestoCurso(getCursoPeriodo().getIdCursoPeriodo());
@@ -74,7 +75,7 @@ public class PresupuestoController implements Serializable {
 				
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
 				setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes(), getPresupuestoCurso().getPorcentageUtiEspe() , getPresupuestoCurso().getPorcentageMatOfi()));
-				getInformePresupuesto().calculoPuntoEquilibrio(new BigDecimal(125), BigDecimal.ZERO);
+				getInformePresupuesto().calculoPuntoEquilibrio(PresupuestoUtil.getPresupuestoUtil().getValorManuales(getLstDetallePresupuestoCursos()), PresupuestoUtil.getPresupuestoUtil().getValorRefrigerios(getLstDetallePresupuestoCursos()));
 				
 				setUpdatePresupuesto(Boolean.TRUE);
 			}
@@ -128,7 +129,9 @@ public class PresupuestoController implements Serializable {
 				presupuestoServicio.guardarPresupuesto(getCursoPeriodo(), getPresupuestoCurso(), lstDetallePresupuestoCursos);
 				setUpdatePresupuesto(Boolean.TRUE);
 			}
-			
+			setEditMode(Boolean.TRUE);
+			setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes(), getPresupuestoCurso().getPorcentageUtiEspe() , getPresupuestoCurso().getPorcentageMatOfi()));
+			getInformePresupuesto().calculoPuntoEquilibrio(PresupuestoUtil.getPresupuestoUtil().getValorManuales(getLstDetallePresupuestoCursos()), PresupuestoUtil.getPresupuestoUtil().getValorRefrigerios(getLstDetallePresupuestoCursos()));
 			FacesUtils.addInfoMessage("Presupuesto guardado");
 		} catch (Exception e1) {
 			FacesUtils.addErrorMessage("Presupuesto no guardado");

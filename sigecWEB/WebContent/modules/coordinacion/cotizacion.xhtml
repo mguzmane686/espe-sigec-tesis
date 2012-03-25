@@ -29,8 +29,8 @@
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="2" id="pgBotones">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!presupuestoController.editMode}" >
-						<a4j:commandButton value="Guardar" image="/resources/images/save.png" execute="@this tblDetalles" 
-							actionListener="#{presupuestoController.btnSavePresupuesto}"/>
+						<a4j:commandButton value="Guardar" image="/resources/images/save.png" execute="@this txtPorUtiEspe txtPorMatOfi tblDetalles" 
+							actionListener="#{presupuestoController.btnSavePresupuesto}" render="@form"/>
 						<h:outputLabel value="Guardar" />
 					</h:panelGrid>
 					
@@ -98,16 +98,16 @@
 				<legend>
 					<h:outputLabel value="#{msg['presupuesto_asignacion']}" style="font-weight:bold;"/>
 				</legend>
-				<h:panelGrid columns="2" id="pgPE">
+				<h:panelGrid columns="2">
 					<h:outputLabel value="Presupuesto asignado : " />
 					<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado} $"/>
 					
 					<h:outputLabel value="Porcentege suministros y materiales :" />
-					<h:inputText value="#{presupuestoController.presupuestoCurso.porcentageMatOfi}" rendered="#{!presupuestoController.editMode}" />
+					<h:inputText id="txtPorMatOfi" value="#{presupuestoController.presupuestoCurso.porcentageMatOfi}" rendered="#{!presupuestoController.editMode}" />
 					<h:outputText value="#{presupuestoController.presupuestoCurso.porcentageMatOfi}" rendered="#{presupuestoController.editMode}" />
 					
 					<h:outputLabel value="Porcentege utilidad Espe:" />
-					<h:inputText value="#{presupuestoController.presupuestoCurso.porcentageUtiEspe} " rendered="#{!presupuestoController.editMode}" />
+					<h:inputText id="txtPorUtiEspe" value="#{presupuestoController.presupuestoCurso.porcentageUtiEspe}" rendered="#{!presupuestoController.editMode}" />
 					<h:outputText value="#{presupuestoController.presupuestoCurso.porcentageUtiEspe} " rendered="#{presupuestoController.editMode}" />
 				</h:panelGrid>
 				
