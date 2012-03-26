@@ -76,7 +76,7 @@
 				
 				<rich:dataTable value="#{administrarProgramaController.lstProgramaCursos}" var="cursoPrograma" style="width:100%"  
 					rendered="#{!empty administrarProgramaController.lstProgramaCursos}">
-					<rich:column style="text-align:center">
+					<rich:column style="text-align:center" rendered="#{administrarProgramaController.editMode}">
 						<f:facet name="header">
 							<h:outputLabel value="Seleccione" />
 						</f:facet>
