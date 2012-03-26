@@ -13,20 +13,12 @@
 
 	<h:form id="frmPrograma">
 
-		<rich:panel header="#{msg['creacion_curso']}">
-			<h:panelGroup layout="block" styleClass="roundCorner">
-				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-					<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso" actionListener="#{cursoController.btnSaveCurso}" 
-						image="/resources/images/save.png" />
-					<h:outputLabel value="#{msg['guardar']}" />
-				</h:panelGrid>
-			</h:panelGroup>
-		</rich:panel>
+		
 
-		<rich:panel header="#{msg['creacion_curso']}" id="pnlCurso">
+		<rich:panel header="Programas" id="pnlCurso">
 			<fieldset>
 				<legend>
-					<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo" />
+					<h:outputLabel value="#{msg.etiqueta_lista_programas}" styleClass="titulo" />
 				</legend>
 				
 				<rich:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;">
