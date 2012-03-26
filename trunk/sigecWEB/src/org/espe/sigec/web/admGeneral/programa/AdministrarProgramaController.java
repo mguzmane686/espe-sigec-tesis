@@ -35,10 +35,12 @@ public class AdministrarProgramaController implements Serializable{
 		setPrograma((Programa) FacesUtils.getFlashObject("programa"));
 		if(getPrograma() ==null){
 			setPrograma(new Programa());
+			setEditMode(Boolean.TRUE);
 		}else{
 			setLstProgramaCursos(new ArrayList<ProgramaCurso>());
+			setEditMode(Boolean.FALSE);
 		}
-		setEditMode(Boolean.FALSE);
+		
 		
 	}
 	@PostConstruct
