@@ -74,8 +74,9 @@
 					No se encontraron cursos asignados al programa
 				</h:panelGroup>
 				
-				<rich:dataTable value="#{administrarProgramaController.lstProgramaCursos}" var="cursoPrograma" rendered="#{!empty administrarProgramaController.lstProgramaCursos}">
-					<rich:column>
+				<rich:dataTable value="#{administrarProgramaController.lstProgramaCursos}" var="cursoPrograma" style="width:100%"  
+					rendered="#{!empty administrarProgramaController.lstProgramaCursos}">
+					<rich:column style="text-align:center">
 						<f:facet name="header">
 							<h:outputLabel value="Seleccione" />
 						</f:facet>
@@ -89,6 +90,14 @@
 						</f:facet>
 						<h:outputText value="#{cursoPrograma.cursoPeriodo.curso.nombreCurso}" />
 					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Objetivo general" />
+						</f:facet>
+						<h:outputText value="#{cursoPrograma.cursoPeriodo.curso.objetivoGeneral}" />
+					</rich:column>
+					
 				</rich:dataTable>
 			</fieldset>
 		</rich:panel>
