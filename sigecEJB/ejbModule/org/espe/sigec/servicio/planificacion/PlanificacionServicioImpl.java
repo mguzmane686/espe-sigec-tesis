@@ -128,6 +128,7 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	public void crearPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCurso) throws Exception {
 		userTransaction.begin();
 		try {
+			programa.setEstado("1");
 			programaFacadeLocal.create(programa);
 			for(ProgramaCurso programaCurso: lstProgramaCurso){
 				programaCursoFacadeLocal.create(programaCurso);
