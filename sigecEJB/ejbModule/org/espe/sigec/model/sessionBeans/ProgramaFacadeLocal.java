@@ -20,4 +20,6 @@ public interface ProgramaFacadeLocal {
     List<Programa> findRange(int[] range);
 
     int count();
+    
+	List<Programa> cargarProgramaActivoPortal();
 }
