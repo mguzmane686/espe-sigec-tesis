@@ -9,47 +9,52 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.ProgramaCurso;
+import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.servicio.portal.PortalServicio;
 
+/**
+ * @author Roberto
+ *
+ */
 @SuppressWarnings("serial")
 @ManagedBean(name="programasController")
 @ViewScoped
 public class ProgramasController implements Serializable{
 	@Inject 
 	private PortalServicio portalServicio;
-	private ProgramaCurso programaCursoSelected;
+	private Programa programaCursoSelected;
 	
-	private Collection<ProgramaCurso> lstProgramaCursos;
+	private Collection<Programa> lstProgramaCursos;
 	
 	public ProgramasController() {
-		setLstProgramaCursos(new ArrayList<ProgramaCurso>());
-		programaCursoSelected = new ProgramaCurso();
+		setLstProgramaCursos(new ArrayList<Programa>());
+		programaCursoSelected = new Programa();
 	}
 
 	@PostConstruct
 	public void cargarPrograma(){
-		setLstProgramaCursos(portalServicio.buscarPrograma());
+		setLstProgramaCursos(portalServicio.buscarProgramaActivo());
 	}
 	
 	public void btnShowProgramaDetalle(){
 		System.out.println("Uno");
 	}
 	
-	public Collection<ProgramaCurso> getLstProgramaCursos() {
+	public Collection<Programa> getLstProgramaCursos() {
 		return lstProgramaCursos;
 	}
 
-	public void setLstProgramaCursos(Collection<ProgramaCurso> lstProgramaCursos) {
+	public void setLstProgramaCursos(Collection<Programa> lstProgramaCursos) {
 		this.lstProgramaCursos = lstProgramaCursos;
 	}
 
-	public ProgramaCurso getProgramaCursoSelected() {
+	public Programa getProgramaCursoSelected() {
 		return programaCursoSelected;
 	}
 
-	public void setProgramaCursoSelected(ProgramaCurso programaCursoSelected) {
+	public void setProgramaCursoSelected(Programa programaCursoSelected) {
 		this.programaCursoSelected = programaCursoSelected;
 	}
+	
 	
 }
