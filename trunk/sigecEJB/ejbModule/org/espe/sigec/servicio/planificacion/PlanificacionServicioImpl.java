@@ -147,6 +147,7 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 		try {
 			programaFacadeLocal.edit(programa);
 			for(ProgramaCurso programaCurso: lstProgramaCurso){
+				programaCurso.setEstado("1");
 				programaCursoFacadeLocal.create(programaCurso);
 			}
 			userTransaction.commit();

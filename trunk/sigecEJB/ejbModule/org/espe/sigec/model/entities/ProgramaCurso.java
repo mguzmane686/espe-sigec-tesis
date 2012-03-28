@@ -36,6 +36,9 @@ public class ProgramaCurso implements Serializable {
     @Size(max = 10)
     @Column(name = "modalidad")
     private String modalidad;
+    @Column(name = "estado")
+    private String estado;
+    
     @JoinColumn(name = "id_programa", referencedColumnName = "id_programa", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Programa programa;
@@ -135,6 +138,14 @@ public class ProgramaCurso implements Serializable {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
     
 }

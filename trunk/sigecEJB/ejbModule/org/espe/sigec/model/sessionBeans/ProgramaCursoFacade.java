@@ -35,6 +35,7 @@ public class ProgramaCursoFacade extends AbstractFacade<ProgramaCurso>  implemen
 	public List<ProgramaCurso> cargarProgramaPortal() {
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(ProgramaCurso.class);
 		criteria.createAlias("programa", "programaA");
+		criteria.add(Restrictions.eq("estado", "1"));
 		criteria.createAlias("cursoPeriodo", "cursoPeriodoA");
 		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
 		
