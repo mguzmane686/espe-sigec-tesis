@@ -44,23 +44,40 @@
 				</ul>
 				<p>
 					<p:panel>
-						<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso">
+						<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
 							<p:column>
 								<f:facet name="header">
-									<h:outputLabel value="Noombre" />
+									<h:outputLabel value="Nombre" />
 								</f:facet>
-								<p:commandLink value="#{programaCurso.programa.nombre}" update=":frmUEC:dialogPro" process="@this" oncomplete="prograDialog.show()">
-									
-									<f:setPropertyActionListener target="#{programasController.programaCursoSelected}" value="#{programaCurso}"></f:setPropertyActionListener>
-								</p:commandLink>
-							</p:column>
+								
+							</p:column>'
 							
-							<p:column>
-								<f:facet name="header">
-									<h:outputLabel value="Modalidad" />
-								</f:facet>
-								<h:outputText value="#{programaCurso.modalidad}" />
-							</p:column>
+							
+							
+							 <p:columnGroup type="header">  
+					            <p:row>  
+					                <p:column colspan="2" headerText="Nombre" sortBy="#{programaCurso.nombre}"/>
+					            </p:row>  
+					        </p:columnGroup>
+					        
+					        
+					        <p:subTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">  
+					            <f:facet name="header">  
+					            	<p:commandLink value="#{programaCurso.nombre}" update=":frmUEC:dialogPro"  immediate="true" process="@this, tblPrograma" oncomplete="prograDialog.show()">
+										<f:setPropertyActionListener target="#{programasController.programaCursoSelected}" value="#{programaCurso}" />
+									</p:commandLink>   
+					            </f:facet>  
+					  
+					            <p:column>  
+					                <h:outputText value="#{curso.cursoPeriodo.curso.nombreCurso}" />
+					            </p:column>  
+					            
+					            <p:column>  
+					                <h:outputText value="#{curso.cursoPeriodo.estadoProceso}" />
+					            </p:column>
+					              
+					        </p:subTable>  
+							
 						</p:dataTable>
 					
 						<p:dialog id="dialogPro" header="#{msg.etiqueta_detalle_programa}" widgetVar="prograDialog" maximizable="true" minimizable="true"
@@ -68,13 +85,10 @@
 					        <h:panelGrid id="display" columns="2" cellpadding="4">  
 					  
 					            <f:facet name="header">  
-					                <p:graphicImage value="/images/cars.jpg"/>  
 					            </f:facet>  
 					  
 					            <h:outputText value="Model:" />
-					            <h:outputText value="#{programasController.programaCursoSelected.programa.nombre}" />  
-					            <h:outputText value="Color:" />    
-					            <h:outputText value="#{programasController.programaCursoSelected.programa.nombre}" />
+					            <h:outputText value="#{programasController.programaCursoSelected.estado}" />  
 					        </h:panelGrid>  
 					    </p:dialog>  
 					</p:panel>
