@@ -63,8 +63,8 @@
 					        
 					        <p:subTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">  
 					            <f:facet name="header">  
-					            	<p:commandLink value="#{programaCurso.nombre}" update=":frmUEC:dialogPro"  immediate="true" process="@this, tblPrograma" oncomplete="prograDialog.show()">
-										<f:setPropertyActionListener target="#{programasController.programaCursoSelected}" value="#{programaCurso}" />
+					            	<p:commandLink value="#{programaCurso.nombre}" update=":frmUEC:dialogPro" process="@this" oncomplete="prograDialog.show()" ajax="true" type="submit" global="true">
+										<f:setPropertyActionListener  target="#{programasController.programaCursoSelected}" value="#{programaCurso}"/>
 									</p:commandLink>   
 					            </f:facet>  
 					  
