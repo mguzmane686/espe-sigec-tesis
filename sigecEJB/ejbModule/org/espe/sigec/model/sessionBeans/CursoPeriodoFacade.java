@@ -123,7 +123,7 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma() {
+	public Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma(Integer[] listaIdCursosAsignados) {
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(CursoPeriodo.class);
 		crit.createAlias("historicoCursoEstadoCollection", "estados");
     	crit.setFetchMode("curso", FetchMode.JOIN);
@@ -131,6 +131,11 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	crit.add(Restrictions.eq("estados.etapaLanzado", "1")).
     	add(Restrictions.ne("estados.etapaEjecutado", "1")).
     	add(Restrictions.ne("estados.etapaFinalizado", "1"));
+    	
+    	if(listaIdCursosAsignados != null){
+    		crit.add(Restrictions.not(Restrictions.in("curso.idCurso", listaIdCursosAsignados)));
+    	}
+    	
     	Collection<CursoPeriodo> lst = crit.list();
 		return lst;
 	}
