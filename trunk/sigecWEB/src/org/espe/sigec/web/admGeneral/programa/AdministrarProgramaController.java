@@ -58,9 +58,20 @@ public class AdministrarProgramaController implements Serializable{
 	}
 	
 	private void cargarCursosAsignar(){
-		Collection<ProgramaCurso> lstTMP = new ArrayList<ProgramaCurso>();
 		ProgramaCurso programaCursoTMP = null;
-		Collection<CursoPeriodo> lst =  planificacionServicio.cargarCursoPerdiodoPorAsignar();
+		Integer []idCursos = null;
+		if(getLstProgramaCursos()!=null && !getLstProgramaCursos().isEmpty()){
+			idCursos = new Integer[getLstProgramaCursos().size()];
+			int indice =0;
+			for(ProgramaCurso programaCursoLoop: getLstProgramaCursos()){
+				idCursos[indice] = programaCursoLoop.getCursoPeriodo().getCurso().getIdCurso();
+				indice++;
+			}
+		}
+		
+		
+		
+		Collection<CursoPeriodo> lst =  planificacionServicio.cargarCursoPerdiodoPorAsignar(idCursos);
 		for(CursoPeriodo cursoPeriodoTMP: lst){
 			programaCursoTMP = new ProgramaCurso();
 			programaCursoTMP.setProgramaCursoPK(new ProgramaCursoPK());
@@ -69,8 +80,6 @@ public class AdministrarProgramaController implements Serializable{
 			
 			programaCursoTMP.setCursoPeriodo(cursoPeriodoTMP);
 			programaCursoTMP.setPrograma(getPrograma());
-			
-			lstTMP.add(programaCursoTMP);
 			
 			getLstProgramaCursos().add(programaCursoTMP);
 		}
