@@ -49,5 +49,5 @@ public interface CursoPeriodoFacadeLocal {
     
     Collection<CursoPeriodo> cargarCursosParametros(Date fechaInicio,Date fechaFin, String estado);
     
-    Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma();
+    Collection<CursoPeriodo> cargarCursosPeriodoPorasignarPrograma(Integer[] listaIdCursosAsignados);
 }
