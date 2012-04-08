@@ -30,5 +30,5 @@ public interface PensumAcademicoFacadeLocal {
 
     int count();
 
-    Collection<PensumAcademico> findTemasCurso(Integer idCurso);
+    Collection<PensumAcademico> findTemasModulo(Integer idModulo);
 }

@@ -35,8 +35,8 @@ public class CursoServicioImpl implements CursoServicio{
 	}
 
 	@Override
-	public Collection<PensumAcademico> findTemasCurso(Integer idCurso) {
-		return pensumAcademicoFacadeLocal.findTemasCurso(idCurso);
+	public Collection<PensumAcademico> findTemasModulo(Integer idModulo) {
+		return pensumAcademicoFacadeLocal.findTemasModulo(idModulo);
 	}
 
 	@Override

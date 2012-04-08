@@ -46,6 +46,10 @@ public class ModuloCurso implements Serializable {
     private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
     @Transient 
     private boolean existInBase;
+    
+    @Transient
+    private boolean showPensum;
+    
     public ModuloCurso() {
     }
 
@@ -145,6 +149,14 @@ public class ModuloCurso implements Serializable {
 
 	public void setExistInBase(boolean existInBase) {
 		this.existInBase = existInBase;
+	}
+
+	public boolean isShowPensum() {
+		return showPensum;
+	}
+
+	public void setShowPensum(boolean showPensum) {
+		this.showPensum = showPensum;
 	}
     
 }

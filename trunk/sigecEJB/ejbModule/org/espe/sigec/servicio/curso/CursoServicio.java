@@ -14,7 +14,7 @@ import org.espe.sigec.model.entities.PensumAcademico;
 @QCurso
 public interface CursoServicio {
 	Collection<Curso> findCursos();
-	Collection<PensumAcademico> findTemasCurso(Integer idCurso);
+	Collection<PensumAcademico> findTemasModulo(Integer idModulo);
 	Collection<ModuloCurso> findModulosCurso(Integer idCurso);
 	Collection<Curso> findAllCursos();
 	Collection<CursoPeriodo> findCursoAbierto();

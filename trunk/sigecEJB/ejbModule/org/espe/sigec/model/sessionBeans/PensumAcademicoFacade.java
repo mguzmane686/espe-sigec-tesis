@@ -34,10 +34,10 @@ public class PensumAcademicoFacade extends AbstractFacade<PensumAcademico> imple
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<PensumAcademico> findTemasCurso(Integer idCurso) {
+	public Collection<PensumAcademico> findTemasModulo(Integer idModulo) {
 		Criteria crit = null;
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(PensumAcademico.class);
-    	crit.add(Restrictions.eq("curso.idCurso", idCurso));
+    	crit.add(Restrictions.eq("moduloCurso.idModuloCurso", idModulo));
     	return crit.list();
 	}
     
