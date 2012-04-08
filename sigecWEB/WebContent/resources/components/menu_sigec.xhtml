@@ -98,22 +98,7 @@
             	
         	</rich:panelMenuGroup>   
         	
-        	<rich:panelMenuGroup label="Presupuesto" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
-
-        		<rich:panelMenuItem>
-            		<a4j:commandLink value="Crear Presupuesto" action="adm_presupuesto.jsf?faces-redirect=true" execute="@this"/>
-            	</rich:panelMenuItem>
-            
-            	<rich:panelMenuItem>
-            		<a4j:commandLink value="Administrar Presupuesto" action="adm_reporte_presupuesto.jsf?faces-redirect=true" execute="@this"/>
-            	</rich:panelMenuItem>
-            	
-        	</rich:panelMenuGroup>     	  
-         
-       </rich:panelMenuGroup>
-       
-       <rich:panelMenuGroup label="#{msg['etiqueta_planificacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
-            <rich:panelMenuGroup label="#{msg.etiqueta_programa}">
+        	<rich:panelMenuGroup label="#{msg.etiqueta_programa}">
 	            <rich:panelMenuItem>
 	            	<a4j:commandLink value="#{msg.etiqueta_crear_programa}" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
 	            </rich:panelMenuItem>
@@ -132,8 +117,21 @@
 	            	<a4j:commandLink value="#{msg['cursos_existentes']}" action="reporte_cursos.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
-        </rich:panelMenuGroup>
-                
+            
+        	<rich:panelMenuGroup label="Presupuesto" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+
+        		<rich:panelMenuItem>
+            		<a4j:commandLink value="Crear Presupuesto" action="adm_presupuesto.jsf?faces-redirect=true" execute="@this"/>
+            	</rich:panelMenuItem>
+            
+            	<rich:panelMenuItem>
+            		<a4j:commandLink value="Administrar Presupuesto" action="adm_reporte_presupuesto.jsf?faces-redirect=true" execute="@this"/>
+            	</rich:panelMenuItem>
+            	
+        	</rich:panelMenuGroup>     	  
+         
+       </rich:panelMenuGroup>
+       
         <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
         	
         	<rich:panelMenuGroup label="Curso">
