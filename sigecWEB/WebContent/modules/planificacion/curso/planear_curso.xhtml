@@ -85,23 +85,24 @@
         					<f:selectItems value="#{planearCursoController.itemCursos}"></f:selectItems>
         				</rich:select>
         				
-        				
-        				
         				<h:outputLabel value="#{msg['minimo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.minimoEstudiantes}"/>
         				
         				<h:outputLabel value="#{msg['maximo_estudiantes']}" />
         				<rich:inputNumberSpinner value="#{planearCursoController.cursoPeriodo.maximoEstudiantes}"/>
         				
-        				
-        				
-        				
-        				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
         				<h:selectOneRadio value="#{planearCursoController.cursoPeriodo.tipoCurso}">
         					<f:selectItem itemLabel="Empresarial" itemValue="CORP"/>
         					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
+        				
+        				<h:outputLabel value="#{msg['tipo_curso']}"/>
+        				<h:selectOneMenu value="#{planearCursoController.cursoPeriodo.modalidad}">
+        					<f:selectItem itemLabel="Presencial" itemValue="PRESENCIAL"/>
+        					<f:selectItem itemLabel="Distancia" itemValue="DISTANCIA"/>
+        					<f:selectItem itemLabel="Virtual" itemValue="VIRTUAL"/>
+        				</h:selectOneMenu>
         				
         			</h:panelGrid>
         		

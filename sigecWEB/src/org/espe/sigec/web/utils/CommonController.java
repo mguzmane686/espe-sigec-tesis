@@ -13,6 +13,7 @@ public class CommonController implements Serializable{
 	protected UIPanelMenu uiPanelMenu;
 	protected Collection<Modulo> lstModulos;
 	private UsuarioPerfil usuarioPerfil;
+	private String activeItem;
 	
 	public UIPanelMenu getUiPanelMenu() {
 		return uiPanelMenu;
@@ -44,6 +45,14 @@ public class CommonController implements Serializable{
 
 	public void setUsuarioPerfil(UsuarioPerfil usuarioPerfil) {
 		this.usuarioPerfil = usuarioPerfil;
+	}
+
+	public String getActiveItem() {
+		return activeItem;
+	}
+
+	public void setActiveItem(String activeItem) {
+		this.activeItem = activeItem;
 	}
 	
 }
