@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlOutputText;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.web.utils.CommonController;
@@ -13,7 +14,9 @@ import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.Mode;
 import org.richfaces.component.UIDropDownMenu;
 import org.richfaces.component.UIMenuItem;
+import org.richfaces.component.UIPanelMenuGroup;
 import org.richfaces.component.UIToolbar;
+import org.richfaces.event.ItemChangeEvent;
 
 /**
  * @author roberto
@@ -28,6 +31,7 @@ public class HomeSessionController extends CommonController{
 	public void setSessionUser(UsuarioPerfil usuarioPerfil){
 		setUsuarioPerfil(usuarioPerfil);
 	}
+	
 	public HomeSessionController() {
 		if(getLstModulos()!=null){
 			FacesUtils.buildUserMenu(getLstModulos());
@@ -52,6 +56,17 @@ public class HomeSessionController extends CommonController{
 		}	  
 	}
 	
+	public void cambioItemMenu(ItemChangeEvent itemChangeEvent){
+		System.out.println(itemChangeEvent);
+		
+	}
+	
+	public void pmiSeleccionPanel(ActionEvent e){
+		UIPanelMenuGroup uiPanelMenuGroup = (UIPanelMenuGroup) e.getSource();
+		String itemActivo = String.valueOf(uiPanelMenuGroup.getAttributes().get("idMenuPanelGroup"));
+		System.out.println("Se mantendra activo el item ..........." +itemActivo);
+		setActiveItem(itemActivo);
+	}
 	private UIToolbar menuBar;
 	  
     public void setMenuBar(UIToolbar menuBar) {
