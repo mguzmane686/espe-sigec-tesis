@@ -46,6 +46,7 @@ public class EdicionCursoController {
 		}else{
 			for(ModuloCurso moduloCursoTMP: getCurso().getModuloCursoCollection()){
 				moduloCursoTMP.setExistInBase(Boolean.TRUE);
+				moduloCursoTMP.setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
 			}
 		}
 	}
@@ -66,6 +67,14 @@ public class EdicionCursoController {
 			FacesUtils.addErrorMessage("El curso no pudo editarse");
 		}
 	}
+	
+	public void btnExpandContractModulo(ModuloCurso modulo, boolean expanded) {
+		modulo.setShowPensum(expanded);
+		if (expanded) {
+			modulo.setPensumAcademicoCollection(cursoServicio.findTemasModulo(modulo.getIdModuloCurso()));
+		}
+	}
+	
 	public void btnAddTemaPensum(ActionEvent e){
 		setPensumAcademicoNuevo(new PensumAcademico());
 	}

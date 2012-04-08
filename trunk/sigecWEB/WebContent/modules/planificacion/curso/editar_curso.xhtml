@@ -118,6 +118,15 @@
 		        			<f:facet name="header">
 		        				<h:outputLabel value="#{msg.etiqueta_modulos}" />
 		        			</f:facet>
+		        			<rich:column>
+		        				<a4j:commandLink rendered="#{!modulo.showPensum}" action="#{edicionCursoController.btnExpandContractModulo(modulo, true)}" render="tblCursos">
+		        					<h:graphicImage library="images/button" name="expand.png"/>
+		        				</a4j:commandLink>
+		        				
+		        				<a4j:commandLink rendered="#{modulo.showPensum}" action="#{edicionCursoController.btnExpandContractModulo(modulo, false)}" render="tblCursos">
+		        					<h:graphicImage library="images/button" name="contract.png"/>
+		        				</a4j:commandLink>
+		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
@@ -135,6 +144,28 @@
 			        			<h:outputText value="#{modulo.generalidades}" style="width:100%" rendered="#{!edicionCursoController.renderEditButtons}"/>
 		        			</rich:column>
 		        			
+		        			<rich:column breakRowBefore="true" colspan="4" rendered="#{modulo.showPensum}">
+	        					<center>
+	        					<rich:dataTable value="#{modulo.pensumAcademicoCollection}" var="pensumCurso" style="width:90%;">
+	        						<f:facet name="header">
+				        				<h:outputLabel value="#{msg.etiqueta_tema}" />
+				        			</f:facet>
+	        						<rich:column>
+	        							<f:facet name="header">
+	        								<h:outputLabel value="Nombre" />
+	        							</f:facet>
+	        							<h:outputText value="#{pensumCurso.tema}" />
+	        						</rich:column>
+	        						
+	        						<rich:column>
+	        							<f:facet name="header">
+	        								<h:outputLabel value="#{msg['descripcion']}" />
+	        							</f:facet>
+	        							<h:outputText value="#{pensumCurso.descripcion}" />
+	        						</rich:column>
+	        					</rich:dataTable>
+	        					</center>
+	        				</rich:column>
 		        		</rich:dataTable>
 		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
 	        		</a4j:outputPanel>

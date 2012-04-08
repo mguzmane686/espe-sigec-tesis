@@ -64,6 +64,13 @@ public class ReporteCursoController implements Serializable {
 		}
 	}
 
+	public void btnExpandContractModulo(ModuloCurso modulo, boolean expanded) {
+		modulo.setShowPensum(expanded);
+		if (expanded) {
+			modulo.setPensumAcademicoCollection(cursoServicio.findTemasModulo(modulo.getIdModuloCurso()));
+		}
+	}
+	
 	public void btnShowCursoDetail(Curso curso) {
 		try {
 			FacesUtils.putFlashObject("cursoToEdit", curso);
