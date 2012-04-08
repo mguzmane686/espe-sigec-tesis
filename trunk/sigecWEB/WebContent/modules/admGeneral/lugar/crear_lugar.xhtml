@@ -29,11 +29,11 @@
         			<h:outputLabel value="#{msg['datos_lugar']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="#{msg['nombre']}:" />
-        			<h:inputText value="#{lugarController.lugarCurso.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
+        			<h:outputLabel value="#{msg['nombre']}:" style="display:block; width:70px;"/>
+        			<h:inputText value="#{lugarController.lugarCurso.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio" styleClass="campoRequerido"/>
         			
         			<h:outputLabel value="#{msg['direccion']}:"/>
-        			<h:inputText value="#{lugarController.lugarCurso.direccion}" size="72" required="true" requiredMessage="El campo #{msg['direccion']} es obligatorio"/>
+        			<h:inputText value="#{lugarController.lugarCurso.direccion}" size="72" required="true" requiredMessage="El campo #{msg['direccion']} es obligatorio" styleClass="campoRequerido"/>
         		</h:panelGrid>
         	</fieldset>	
        	</rich:panel>
