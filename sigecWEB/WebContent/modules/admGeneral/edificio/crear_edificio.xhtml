@@ -36,7 +36,7 @@
         			</h:selectOneMenu>
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
-        			<h:inputText value="#{edificioController.edificio.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
+        			<h:inputText value="#{edificioController.edificio.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio" styleClass="campoRequerido"/>
         			
         			<h:outputLabel value="#{msg['descripcion']}:" />
         			<h:inputTextarea value="#{edificioController.edificio.descripcion}" style="width:40em"/>
