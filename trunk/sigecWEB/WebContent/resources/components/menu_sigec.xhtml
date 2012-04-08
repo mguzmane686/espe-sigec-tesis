@@ -15,18 +15,23 @@
 </composite:interface>
 <composite:implementation>
 	<!-- rich:panelMenu binding="#{cc.attrs.controller}" /-->
-	<rich:panelMenu itemMode="client" groupMode="client" rendered="true"
+	<rich:panelMenu id="pmSigecMenu" itemMode="ajax" immediate="true" groupMode="ajax" rendered="true"  activeItem="#{homeSessionController.activeItem}"
        groupExpandedLeftIcon="triangleUp" 
        groupCollapsedLeftIcon="triangleDown"
        topGroupExpandedRightIcon="chevronUp"
+       itemChangeListener="#{homeSessionController.cambioItemMenu}"
        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
        
-       <rich:panelMenuGroup label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+       <rich:panelMenuGroup id="pmgAdmGeneral" label="#{msg['etiqueta_adm_general']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}" 
+       		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+       		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneral"/>
         	
-        	<rich:panelMenuGroup label="Usuarios" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralUsuario" label="Usuarios" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralUsuario"/>
         		
-        		<rich:panelMenuItem>
-	            	<a4j:commandLink value="Crear Administrador" action="adm_administrativo.jsf?faces-redirect=true" execute="@this">
+        		<rich:panelMenuItem execute="@this">
+	            	<a4j:commandLink value="Crear Administrador" action="adm_administrativo.jsf?faces-redirect=true">
 	            		<rich:tooltip id="tt1" styleClass="tooltip" layout="block">
 			                <span style="white-space: nowrap"> 
 			                	El perfil <strong>administrador</strong> tiene acceso a todas opciones del Sistema
@@ -38,10 +43,12 @@
 	            <rich:panelMenuItem>
 	            	<a4j:commandLink value="Crear Usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem> 
-        
         	</rich:panelMenuGroup>
         	
-        	<rich:panelMenuGroup label="Contactos" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralContactos" label="Contactos" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralContactos"/>
+        		
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Contacto" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
             	</rich:panelMenuItem>
@@ -50,7 +57,9 @@
             	</rich:panelMenuItem>
         	</rich:panelMenuGroup>	
         	
-        	<rich:panelMenuGroup label="Lugares" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralLugares" label="Lugares" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralLugares"/>
         		
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Lugar" action="adm_lugar.jsf?faces-redirect=true" execute="@this"/>
@@ -62,7 +71,9 @@
             	
         	</rich:panelMenuGroup>
         	
-        	<rich:panelMenuGroup label="Edificios" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralEdificio" label="Edificios" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}" 
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralEdificio"/>
         		
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Edificio" action="adm_edificio.jsf?faces-redirect=true" execute="@this"/>
@@ -74,7 +85,9 @@
             	
         	</rich:panelMenuGroup>  
         	
-        	<rich:panelMenuGroup label="Aulas" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralAulas" label="Aulas" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}" 
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralAulas"/>
         		
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Aula" action="adm_aula.jsf?faces-redirect=true" execute="@this"/>
@@ -86,7 +99,9 @@
             	
         	</rich:panelMenuGroup>    
         	
-        	<rich:panelMenuGroup label="Especialidades" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralEspecialidades" label="Especialidades" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}" 
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralEspecialidades"/>
         		
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Especialidad" action="adm_especialidad.jsf?faces-redirect=true" execute="@this"/>
@@ -98,7 +113,10 @@
             	
         	</rich:panelMenuGroup>   
         	
-        	<rich:panelMenuGroup label="#{msg.etiqueta_programa}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralProgramas" label="#{msg.etiqueta_programa}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralProgramas"/>
+        		
 	            <rich:panelMenuItem>
 	            	<a4j:commandLink value="#{msg.etiqueta_crear_programa}" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
 	            </rich:panelMenuItem>
@@ -108,7 +126,9 @@
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
             
-            <rich:panelMenuGroup label="Curso">
+            <rich:panelMenuGroup id="pmgAdmGeneralCursos" label="Curso"
+            	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralCursos"/>
 	            <rich:panelMenuItem>
 	            	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
@@ -118,7 +138,9 @@
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
             
-        	<rich:panelMenuGroup label="Presupuesto" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        	<rich:panelMenuGroup id="pmgAdmGeneralPresupuesto" label="Presupuesto" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralPresupuesto"/>
 
         		<rich:panelMenuItem>
             		<a4j:commandLink value="Crear Presupuesto" action="adm_presupuesto.jsf?faces-redirect=true" execute="@this"/>
@@ -132,9 +154,12 @@
          
        </rich:panelMenuGroup>
        
-        <rich:panelMenuGroup label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        <rich:panelMenuGroup id="pmgCoordinacion" label="#{msg['etiqueta_coordinacion']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}"
+        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
+        	<f:attribute name="idMenuPanelGroup" value="pmgCoordinacion"/>
         	
-        	<rich:panelMenuGroup label="Curso">
+        	<rich:panelMenuGroup label="Curso" id="pmgCoordinacionCurso" execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
+        		<f:attribute name="idMenuPanelGroup" value="pmgCoordinacionCurso"/>
 	        	<rich:panelMenuItem>
 	            	<a4j:commandLink value="Abrir curso" action="coor_lanzar_curso.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
@@ -144,7 +169,8 @@
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
             
-            <rich:panelMenuGroup label="Docente">
+            <rich:panelMenuGroup label="Docente" id="pmgCoordinacionDocente" execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
+            	<f:attribute name="idMenuPanelGroup" value="pmgCoordinacionDocente"/>
 	            <rich:panelMenuItem>
 	            	<a4j:commandLink value="#{msg['registar_docente']}" action="coor_registro_nuevo_docente.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
@@ -161,7 +187,9 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup label="#{msg['etiqueta_reportes']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}">
+        <rich:panelMenuGroup id="pmgReportes" label="#{msg['etiqueta_reportes']}" rendered="#{(homeSessionController.usuarioPerfil.usuarioPerfilPK.idPerfil =='ADM'?true:false)}"
+        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgReportes"/>
         	<rich:panelMenuItem>
             	<a4j:commandLink value="Reporte Lugares" action="rep_lugares.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
