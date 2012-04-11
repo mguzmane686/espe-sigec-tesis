@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.exception.UserValidateException;
+import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
@@ -37,6 +41,7 @@ public class RegistroDocenteController implements Serializable{
 	private ArrayList<Persona> files;
 	private boolean editMode;
 	private boolean renderEditionButtons;
+	private Collection<SelectItem> especialidades;
 	public RegistroDocenteController() {
 		setProfesor((Profesor) FacesUtils.getFlashObject("profesor"));
 		setEditMode(Boolean.TRUE);
@@ -46,7 +51,6 @@ public class RegistroDocenteController implements Serializable{
 			setEditMode(Boolean.FALSE);
 			setRenderEditionButtons(Boolean.TRUE);
 		}
-		
 	}
 
 	
@@ -58,10 +62,19 @@ public class RegistroDocenteController implements Serializable{
 		getProfesor().setTiempoComp(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
 		getProfesor().setEstadoSeleccion(SigecConstantes.ESTADO_INACTIVO_BOOLEANO);
 		getProfesor().setPersona(new Persona());
+		getProfesor().setEspecialidad(new Especialidad());
 		setFiles(new ArrayList<Persona>());
 		setUsuario(new Usuario());
 	}
-	
+	@PostConstruct
+	public void cargarEspecialidades(){
+		Collection<Especialidad> lstEspecialidades = admGeneralServicio.findEspecialidad();
+		setEspecialidades(new ArrayList<SelectItem>());
+		
+		for(Especialidad especialidad: lstEspecialidades){
+			getEspecialidades().add(new SelectItem(especialidad.getIdEspecialidad(), especialidad.getNombre()));
+		}
+	}
 	public void uploadImage(FileUploadEvent event) throws Exception {
         UploadedFile item = event.getUploadedFile();
         getProfesor().getPersona().setFoto(item.getData());
@@ -157,6 +170,16 @@ public class RegistroDocenteController implements Serializable{
 
 	public void setRenderEditionButtons(boolean renderEditionButtons) {
 		this.renderEditionButtons = renderEditionButtons;
+	}
+
+
+	public Collection<SelectItem> getEspecialidades() {
+		return especialidades;
+	}
+
+
+	public void setEspecialidades(Collection<SelectItem> especialidades) {
+		this.especialidades = especialidades;
 	}
 	
 }
