@@ -86,12 +86,14 @@ public class AdministrarProgramaController implements Serializable{
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void btnEditPrograma(){
 		setLstProgramaCursosClone((Collection<ProgramaCurso>) SerializationUtils.clone((Serializable) getLstProgramaCursos()));
 		cargarCursosAsignar();
 		setEditMode(Boolean.TRUE);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void btnCancelEditPrograma(){
 		setLstProgramaCursos((Collection<ProgramaCurso>) SerializationUtils.clone((Serializable) getLstProgramaCursosClone()));
 		setEditMode(Boolean.FALSE);
