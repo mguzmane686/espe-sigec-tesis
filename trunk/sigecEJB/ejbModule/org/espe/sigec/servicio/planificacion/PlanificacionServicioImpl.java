@@ -13,6 +13,7 @@ import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
+import org.espe.sigec.model.entities.ProgramaCursoPK;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
@@ -142,13 +143,29 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	}
 	
 	@Override
-	public void editarPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCurso) throws Exception {
+	public void editarPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCursoActivar, Collection<ProgramaCurso> lstProgramaCursoRemover) throws Exception {
 		userTransaction.begin();
 		try {
 			programaFacadeLocal.edit(programa);
-			for(ProgramaCurso programaCurso: lstProgramaCurso){
-				programaCurso.setEstado("1");
-				programaCursoFacadeLocal.create(programaCurso);
+			ProgramaCurso programaCursoTMP=null;
+			for(ProgramaCurso programaCurso: lstProgramaCursoActivar){
+				ProgramaCursoPK programaCursoPK = programaCurso.getProgramaCursoPK();
+				programaCursoTMP = programaCursoFacadeLocal.find(programaCursoPK);
+				
+				if(programaCursoTMP==null){
+					programaCurso.setEstado("1");
+					programaCursoFacadeLocal.create(programaCurso);
+				}else{
+					programaCursoTMP.setEstado("1");
+					programaCursoFacadeLocal.edit(programaCursoTMP);
+				}
+			}
+			
+			for(ProgramaCurso programaCurso: lstProgramaCursoRemover){
+				ProgramaCursoPK programaCursoPK = programaCurso.getProgramaCursoPK();
+				programaCursoTMP = programaCursoFacadeLocal.find(programaCursoPK);
+				programaCursoTMP.setEstado("0");
+				programaCursoFacadeLocal.edit(programaCursoTMP);
 			}
 			userTransaction.commit();
 		} catch (Exception e) {

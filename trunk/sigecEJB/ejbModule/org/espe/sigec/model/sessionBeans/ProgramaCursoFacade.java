@@ -53,7 +53,7 @@ public class ProgramaCursoFacade extends AbstractFacade<ProgramaCurso>  implemen
 		criteria.add(Restrictions.eq("programaCursoPK.idPrograma", programa.getIdPrograma()));
 		criteria.createAlias("programa", "programaA");
 		criteria.add(Restrictions.eq("programaA.estado", "1"));
-		
+		criteria.add(Restrictions.eq("estado", "1"));
 		criteria.createAlias("cursoPeriodo", "cursoPeriodoA");
 		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
 		
