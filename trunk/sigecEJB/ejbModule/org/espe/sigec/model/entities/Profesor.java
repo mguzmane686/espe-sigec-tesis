@@ -79,7 +79,9 @@ public class Profesor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
     private Collection<CursoProfesor> cursoProfesorCollection;
     
-    
+    @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Especialidad especialidad;
 
     public Profesor() {
     }
@@ -229,6 +231,14 @@ public class Profesor implements Serializable {
 	public void setCursoProfesorCollection(
 			Collection<CursoProfesor> cursoProfesorCollection) {
 		this.cursoProfesorCollection = cursoProfesorCollection;
+	}
+
+	public Especialidad getEspecialidad() {
+		return especialidad;
+	}
+
+	public void setEspecialidad(Especialidad especialidad) {
+		this.especialidad = especialidad;
 	}
 	
 }

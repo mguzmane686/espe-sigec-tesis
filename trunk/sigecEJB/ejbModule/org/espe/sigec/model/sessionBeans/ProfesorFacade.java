@@ -42,6 +42,7 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
     	crit.createAlias("persona", "personaA");
     	crit.addOrder(Order.asc("personaA.primerApellido"));
     	crit.setFetchMode("personaA", FetchMode.JOIN);
+    	crit.setFetchMode("especialidad", FetchMode.JOIN);
 		return crit.list();
 	}
 
