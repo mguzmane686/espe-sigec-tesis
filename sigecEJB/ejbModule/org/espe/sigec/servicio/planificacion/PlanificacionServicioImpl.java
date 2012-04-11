@@ -132,6 +132,8 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 			programa.setEstado("1");
 			programaFacadeLocal.create(programa);
 			for(ProgramaCurso programaCurso: lstProgramaCurso){
+				programaCurso.getProgramaCursoPK().setIdPrograma(programa.getIdPrograma());
+				programaCurso.setEstado("1");
 				programaCursoFacadeLocal.create(programaCurso);
 			}
 			userTransaction.commit();
