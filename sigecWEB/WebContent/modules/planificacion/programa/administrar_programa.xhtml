@@ -30,7 +30,7 @@
 		        	
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarProgramaController.editMode}">
 						<a4j:commandButton value="#{msg['guardar']}" actionListener="#{administrarProgramaController.btnSavePrograma}" 
-							image="/resources/images/save.png" />
+							image="/resources/images/save.png" render="pnlPrograma, pgBotones"/>
 						<h:outputLabel value="#{msg['guardar']}" />
 					</h:panelGrid>
 					
