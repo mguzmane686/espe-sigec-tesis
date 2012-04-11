@@ -117,6 +117,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 			usuarioFacadeLocal.isIdentificadorvalida(persona.getCedula());
 			usuario.setIdentificador(persona.getCedula());
 			usuario.setClave(persona.getCedula());
+			usuario.setEstadoUsr("1");
 			usuarioFacadeLocal.create(usuario);
 			
 			UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK());
