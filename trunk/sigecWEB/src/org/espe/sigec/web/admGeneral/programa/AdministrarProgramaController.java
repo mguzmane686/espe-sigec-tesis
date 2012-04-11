@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -107,12 +108,37 @@ public class AdministrarProgramaController implements Serializable{
 	public void btnSavePrograma(){
 		try {
 			if(isEditMode()){
-				planificacionServicio.editarPrograma(getPrograma(), getLstProgramaCursos());
+				Collection<ProgramaCurso> lstInactivar = new ArrayList<ProgramaCurso>();
+				for(int i=0; i<lstProgramaCursosClone.size();i++){
+					if(!((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
+						lstInactivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
+					}
+					i++;
+				}
+				Collection<ProgramaCurso> lstActivar = new ArrayList<ProgramaCurso>();
+				for(int i=lstProgramaCursosClone.size(); i<lstProgramaCursos.size();i++){
+					if(((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
+						lstActivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
+					}
+					i++;
+				}
+				
+				planificacionServicio.editarPrograma(getPrograma(), lstActivar, lstInactivar);
+				Collection<ProgramaCurso> lst = new ArrayList<ProgramaCurso>();
+				for(ProgramaCurso obj: lstProgramaCursos){
+					if(obj.isSelected()){
+						lst.add(obj);
+					}
+				}
+				setLstProgramaCursos(lst);
+				setEditMode(Boolean.FALSE);
+				FacesUtils.addInfoMessage("Programa actualizado");
 			}else{
 				planificacionServicio.crearPrograma(getPrograma(), getLstProgramaCursos());
 			}
 			
 		} catch (Exception e) {
+			FacesUtils.addInfoMessage("Ocurrio un error al actualizar el programa");
 			e.printStackTrace();
 		}
 	}
