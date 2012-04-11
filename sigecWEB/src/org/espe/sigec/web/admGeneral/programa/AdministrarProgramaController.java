@@ -31,15 +31,18 @@ public class AdministrarProgramaController implements Serializable{
 	private Collection<ProgramaCurso> lstProgramaCursos;
 	private Collection<ProgramaCurso> lstProgramaCursosClone;
 	private boolean editMode;
+	private boolean newProgram;
 	
 	public AdministrarProgramaController() {
 		setPrograma((Programa) FacesUtils.getFlashObject("programa"));
 		if(getPrograma() ==null){
 			setPrograma(new Programa());
 			setEditMode(Boolean.TRUE);
+			setNewProgram(Boolean.TRUE);
 		}else{
 			setLstProgramaCursos(new ArrayList<ProgramaCurso>());
 			setEditMode(Boolean.FALSE);
+			setNewProgram(Boolean.FALSE);
 		}
 		
 		
@@ -55,6 +58,8 @@ public class AdministrarProgramaController implements Serializable{
 			}else{
 				setLstProgramaCursos(new ArrayList<ProgramaCurso>());
 			}
+		}else{
+			cargarCursosAsignar();
 		}
 	}
 	
@@ -70,18 +75,22 @@ public class AdministrarProgramaController implements Serializable{
 			}
 		}
 		
-		
-		
 		Collection<CursoPeriodo> lst =  planificacionServicio.cargarCursoPerdiodoPorAsignar(idCursos);
 		for(CursoPeriodo cursoPeriodoTMP: lst){
 			programaCursoTMP = new ProgramaCurso();
 			programaCursoTMP.setProgramaCursoPK(new ProgramaCursoPK());
 			programaCursoTMP.getProgramaCursoPK().setIdCursoPeriodo(cursoPeriodoTMP.getIdCursoPeriodo().toBigInteger());
-			programaCursoTMP.getProgramaCursoPK().setIdPrograma(getPrograma().getIdPrograma());
+			try {
+				programaCursoTMP.getProgramaCursoPK().setIdPrograma(getPrograma().getIdPrograma());
+			} catch (Exception e) {
+				System.out.println("Registro nuevo");
+			}
 			
 			programaCursoTMP.setCursoPeriodo(cursoPeriodoTMP);
 			programaCursoTMP.setPrograma(getPrograma());
-			
+			if(getLstProgramaCursos()==null){
+				setLstProgramaCursos(new ArrayList<ProgramaCurso>());
+			}
 			getLstProgramaCursos().add(programaCursoTMP);
 		}
 	}
@@ -109,7 +118,7 @@ public class AdministrarProgramaController implements Serializable{
 	
 	public void btnSavePrograma(){
 		try {
-			if(isEditMode()){
+			if(!isNewProgram()){
 				Collection<ProgramaCurso> lstInactivar = new ArrayList<ProgramaCurso>();
 				for(int i=0; i<lstProgramaCursosClone.size();i++){
 					if(!((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
@@ -134,13 +143,23 @@ public class AdministrarProgramaController implements Serializable{
 				}
 				setLstProgramaCursos(lst);
 				setEditMode(Boolean.FALSE);
+				setNewProgram(Boolean.FALSE);
 				FacesUtils.addInfoMessage("Programa actualizado");
 			}else{
-				planificacionServicio.crearPrograma(getPrograma(), getLstProgramaCursos());
+				Collection<ProgramaCurso> lst = new ArrayList<ProgramaCurso>();
+				for(ProgramaCurso obj: lstProgramaCursos){
+					if(obj.isSelected()){
+						lst.add(obj);
+					}
+				}
+				planificacionServicio.crearPrograma(getPrograma(), lst);
+				setNewProgram(Boolean.FALSE);
+				setEditMode(Boolean.FALSE);
+				FacesUtils.addInfoMessage("Programa creado");
 			}
 			
 		} catch (Exception e) {
-			FacesUtils.addInfoMessage("Ocurrio un error al actualizar el programa");
+			FacesUtils.addErrorMessage("Ocurrio un error al actualizar el programa");
 			e.printStackTrace();
 		}
 	}
@@ -174,6 +193,12 @@ public class AdministrarProgramaController implements Serializable{
 	public void setLstProgramaCursosClone(
 			Collection<ProgramaCurso> lstProgramaCursosClone) {
 		this.lstProgramaCursosClone = lstProgramaCursosClone;
+	}
+	public boolean isNewProgram() {
+		return newProgram;
+	}
+	public void setNewProgram(boolean newProgram) {
+		this.newProgram = newProgram;
 	}	
 	
 }
