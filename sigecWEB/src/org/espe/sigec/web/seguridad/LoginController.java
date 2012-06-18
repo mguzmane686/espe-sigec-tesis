@@ -62,9 +62,9 @@ public class LoginController implements Serializable{
 			} 
 		}
 		else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Login or password incorrect."));			
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario o clave incorrecto."));			
 			try {
-				FacesUtils.redirectPage("login.xml");
+				FacesUtils.redirectPage("index.jsf");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

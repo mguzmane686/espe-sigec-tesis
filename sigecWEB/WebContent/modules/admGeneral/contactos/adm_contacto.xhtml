@@ -32,6 +32,8 @@
             visibility: hidden;
         }
    	</h:outputStylesheet>
+   	
+   	<h:outputStylesheet library="css" name="tables.css" />
 
 	<h:form>
 		<rich:panel header="#{msg['etiqueta_contactos']}">
@@ -55,13 +57,13 @@
 					<h:inputText value="#{admContactoController.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"/>
 					
 					<h:outputLabel value="#{msg['nombres']} :" />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
 						<h:inputText value="#{admContactoController.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{admContactoController.persona.segundoNombre}"/>
 					</h:panelGrid>	
 					
 					<h:outputLabel value="#{msg['apellidos']} :" />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
 						<h:inputText value="#{admContactoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{admContactoController.persona.segundoApellido}" />
 					</h:panelGrid>
