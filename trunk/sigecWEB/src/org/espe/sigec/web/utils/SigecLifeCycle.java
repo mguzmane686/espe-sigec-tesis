@@ -34,7 +34,7 @@ public class SigecLifeCycle implements PhaseListener{
 	 */
 	public void beforePhase(PhaseEvent event) {
 		event.getFacesContext().getExternalContext().log("BEFORE " + event.getPhaseId());
-		validarLogin();
+//		validarLogin();
 		
 		if (event.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 			FacesContext facesContext = event.getFacesContext();
@@ -75,7 +75,7 @@ public class SigecLifeCycle implements PhaseListener{
 	 */
 	public void afterPhase(PhaseEvent event) {
 		event.getFacesContext().getExternalContext().log("AFTER " + event.getPhaseId());
-		validarLogin();
+//		validarLogin();
 		if (event.getPhaseId() == PhaseId.APPLY_REQUEST_VALUES
 				|| event.getPhaseId() == PhaseId.PROCESS_VALIDATIONS
 				|| event.getPhaseId() == PhaseId.INVOKE_APPLICATION) {
