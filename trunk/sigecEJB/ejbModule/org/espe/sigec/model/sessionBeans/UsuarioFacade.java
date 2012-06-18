@@ -9,6 +9,7 @@ import java.util.Collection;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
@@ -17,6 +18,7 @@ import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Modulo;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
+import org.espe.sigec.utils.InterceptorSigec;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -44,6 +46,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     }
 
 	@Override
+	@Interceptors({ InterceptorSigec.class })
 	public Usuario validateLogin(String identificador, String clave) {
 		Usuario usuario = null;
 		
