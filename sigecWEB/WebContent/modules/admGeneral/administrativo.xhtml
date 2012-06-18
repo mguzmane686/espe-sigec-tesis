@@ -35,23 +35,24 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['usuario']}" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="Nuevo usuario administrador"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['identificador']} :"  style="padding-right:50px" />
+					<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
 					<h:inputText value="#{administrativoController.persona.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio" styleClass="campoRequerido"/>
 					
-					<h:outputLabel value="#{msg['clave']} :"  style="padding-right:50px" />
+					<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
 					<h:inputText value="#{administrativoController.persona.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
 				</h:panelGrid>
-			</fieldset>
 			
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
-				</legend>
+			</rich:collapsiblePanel>
+			
+			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
+					
+				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']} :" style="width:150px; display:block;"  />
 					<h:inputText value="#{administrativoController.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
@@ -90,7 +91,7 @@
 				
 	            
 	            
-			</fieldset>
+			</rich:collapsiblePanel>
 			
 		</rich:panel>
 	</h:form>
