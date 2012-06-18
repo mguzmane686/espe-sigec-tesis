@@ -71,7 +71,7 @@
         			<h:outputText value="#{homeSessionController.usuarioPerfil.persona.primerNombre} #{homeSessionController.usuarioPerfil.persona.primerApellido}"  style="float:right; color: blue;"/>
         		</h:panelGrid>
         		
-            	<a4j:commandButton value="#{msg['cerrar_sesion']}" action="#{homeSessionController.btnLogOut}" styleClass="btnAux logoutBtn"
+            	<a4j:commandButton value="#{msg['cerrar_sesion']}" action="#{loginController.btnLogOut}" styleClass="btnAux logoutBtn"
             		execute="@this" style="float:right;" immediate="true" limitRender="true" />
         	</h:panelGrid>
             

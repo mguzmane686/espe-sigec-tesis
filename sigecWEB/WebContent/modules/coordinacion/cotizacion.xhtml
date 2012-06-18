@@ -11,6 +11,13 @@
 	<h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
 	<h:outputScript library="js" name="jquery.min.js"></h:outputScript>
 	
+	
+	<h:outputScript library="js" name="jquery.effects.core.js" />
+	<h:outputScript library="js" name="jquery.effects.blind.js" />
+    <h:outputStylesheet library="css" name="componentsCss.css" />
+    <h:outputScript  library="js" name="componentsJs.js" />
+        
+	
 	<h:outputStylesheet>
 		.alinearDerecha{
 			text-align:right;
@@ -94,10 +101,8 @@
 		</rich:panel>
 		
 		<rich:panel header="Datos Presupuesto" id="datosPresu">
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['presupuesto_asignacion']}" style="font-weight:bold;"/>
-				</legend>
+			<sigecComp:extendedFieldset titlePanel="#{msg['presupuesto_asignacion']}">
+			
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Presupuesto asignado : " />
 					<h:outputText value="#{presupuestoController.presupuestoCurso.dineroAsignado} $"/>
@@ -111,14 +116,13 @@
 					<h:outputText value="#{presupuestoController.presupuestoCurso.porcentageUtiEspe} " rendered="#{presupuestoController.editMode}" />
 				</h:panelGrid>
 				
-			</fieldset>
+			
+			</sigecComp:extendedFieldset>
 		</rich:panel>
 		
 		<rich:panel header="Detalle presupuesto">
-			<fieldset>
-				<legend>
-					<h:outputLabel value="Costos y gastos" style="font-weight:bold;"/>
-				</legend>
+			<sigecComp:extendedFieldset titlePanel="Costos y gastos">
+					
 
 				<rich:dataTable id="tblDetalles" value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle" iterationStatusVar="numRow" style="width:100%">
 					<rich:column rendered="false">
@@ -200,7 +204,7 @@
 			            </rich:columnGroup>
 			        </f:facet>
 				</rich:dataTable>
-			</fieldset>
+			</sigecComp:extendedFieldset>
 			
 			<fieldset>
 				<legend>

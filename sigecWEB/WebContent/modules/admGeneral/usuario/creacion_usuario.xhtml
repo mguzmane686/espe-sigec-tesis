@@ -12,6 +12,13 @@
    	<h:outputStylesheet library="css" name="botones.css"/>
    	<h:outputScript library="js" name="validaciones.js" target="head"/>
    	
+   	
+   	
+   	<h:outputScript library="js" name="jquery.effects.core.js" />
+	<h:outputScript library="js" name="jquery.effects.blind.js" />
+    <h:outputStylesheet library="css" name="componentsCss.css" />
+    <h:outputScript  library="js" name="componentsJs.js" />
+    
    	<h:outputStylesheet>
    		.alinearLeft{
    			text-align:left;
@@ -31,7 +38,14 @@
         .rmsg-tef .rf-msg-det {
             visibility: hidden;
         }
-        
+        .removeSpacesTable{
+        	border-collapse: collapse;
+        	border-spacing: 0;
+        	
+        }
+        .colRemoveSpace{
+        	padding-left: 0px;
+        }
    	</h:outputStylesheet>
 
 	<h:form>
@@ -45,6 +59,7 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
+			<sigecComp:extendedFieldset titlePanel="Costos y gastos">
 			<fieldset>
 				<legend>
 					<h:outputLabel value="#{msg['usuario']}" styleClass="titulo" />
@@ -59,20 +74,20 @@
 					</h:panelGroup>
 				</h:panelGrid>
 			</fieldset>
-			
+			</sigecComp:extendedFieldset>
 			<fieldset>
 				<legend>
 					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
 				</legend>
 				
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
 					<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
 					
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido"/>
 
 					<h:outputLabel value="#{msg['nombres']} :" />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido" />
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoNombre}"/>
 					</h:panelGrid>	
@@ -81,7 +96,7 @@
 
 
 					<h:outputLabel value="#{msg['apellidos']} :" />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoApellido}" />
 					</h:panelGrid>
