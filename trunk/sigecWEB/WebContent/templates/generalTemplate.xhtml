@@ -15,7 +15,38 @@
         <h:outputStylesheet library="css" name="botones.css"></h:outputStylesheet>
         <h:outputScript library="js" name="jquery-1.7.js"></h:outputScript>
         <h:outputScript library="js" name="jquery.validate.js"></h:outputScript>
-        
+        <h:outputStylesheet>
+        	.mainDivCollap{
+		    border-top-width:0px !important;
+		    border-right-width:0px !important;
+		    border-bottom-width: 0px !important;
+		    border-left-width: 0px !important;
+		    background:none repeat scroll 0 0 transparent !important;
+		}
+		
+		.headerDivCollap{
+		    border-top-width:0px !important;
+		    border-right-width:0px !important;
+		    border-bottom-width: 0px !important;
+		    border-left-width: 0px !important;
+		    
+		    background-color:white !important;
+		    background-image:none !important;
+		    background:none repeat scroll 0 0 transparent !important;
+		}
+		
+		.rf-cp-lbl-exp{
+			border-top-width:2px !important;
+			background-image:url("#{resource['images/icons:linexrepeat.png']}");
+			background-repeat:repeat-x;
+		}
+		
+		.rf-cp-lbl-colps{
+			border-top-width:2px !important;
+			background-image:url("#{resource['images/icons:linexrepeat.png']}");
+			background-repeat:repeat-x;
+		}
+        </h:outputStylesheet>
         <title>Sigec</title>
         <script>
 	        function bloquearTeclas(e){
