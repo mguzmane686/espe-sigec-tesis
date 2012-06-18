@@ -5,6 +5,7 @@
 	<projects>
 		<project>sigecEJB</project>
 		<project>sigecWEB</project>
+		<project>espeUEC</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
