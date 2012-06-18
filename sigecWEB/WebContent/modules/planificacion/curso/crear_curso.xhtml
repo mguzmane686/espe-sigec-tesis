@@ -26,11 +26,9 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg['creacion_curso']}" id="pnlCurso">
-
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="#{msg['datos_curso']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg.etiqueta_departamento}:" />
 					<rich:select value="#{cursoController.curso.especialidad.idEspecialidad}" enableManualInput="false" styleClass="campoRequerido" 
@@ -64,13 +62,11 @@
 					<h:inputTextarea cols="70" rows="6" value="#{cursoController.curso.perfilDocente}"/>
 					
 				</h:panelGrid>
-			</fieldset>
+			</rich:collapsiblePanel>
 
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg.etiqueta_modulos_curso}" styleClass="titulo" />
-				</legend>
-
+			<rich:collapsiblePanel header="#{msg.etiqueta_modulos_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<a4j:outputPanel ajaxRendered="true">
 					<h:panelGroup layout="block">
 						<a4j:commandButton id="btnNuevoModulo" value="Nuevo #{msg.etiqueta_modulo}" onclick="#{rich:component('popupNuevoModulo')}.show()" immediate="true" />
@@ -115,7 +111,7 @@
 					</rich:dataTable>
 					<rich:dataScroller for="tblTemario" renderIfSinglePage="false" />
 				</a4j:outputPanel>
-			</fieldset>
+			</rich:collapsiblePanel>
 		</rich:panel>
 
 	</h:form>

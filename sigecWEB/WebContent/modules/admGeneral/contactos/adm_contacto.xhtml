@@ -47,10 +47,8 @@
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
 						
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
@@ -90,7 +88,7 @@
 					<h:outputLabel value="#{msg.etiqueta_referencia}" />
 					<h:inputText value="#{admContactoController.persona.referencia}" size="43" styleClass="campoRequerido"/>
 				</h:panelGrid>
-			</fieldset>
+			</rich:collapsiblePanel>
 		</rich:panel>
 	</h:form>
 </ui:composition>

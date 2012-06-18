@@ -48,10 +48,9 @@
         	
         	<rich:panel header="#{msg['etiqueta_actualizacion_curso']}" id="pnlCurso">
         	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['datos_curso']}" styleClass="titulo"/>
-	        		</legend>
+        		<rich:collapsiblePanel header="#{msg['datos_curso']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        	
 	        		<h:panelGrid columns="2">
 	        			<h:outputLabel value="#{msg['etiqueta_especialidad']}:" />
 	        			<h:outputText value="#{edicionCursoController.curso.especialidad.nombre}" />
@@ -91,13 +90,11 @@
 						<h:inputTextarea cols="70" rows="6" value="#{edicionCursoController.curso.perfilDocente}" rendered="#{edicionCursoController.renderEditButtons}"/>
 						<h:outputText value="#{edicionCursoController.curso.perfilDocente}" rendered="#{!edicionCursoController.renderEditButtons}" />
 	        		</h:panelGrid>
-	        	</fieldset>
+	        	</rich:collapsiblePanel>
 	        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg.etiqueta_modulos_curso}" styleClass="titulo" />
-	        		</legend>
-	        		
+	        	<rich:collapsiblePanel header="#{msg.etiqueta_modulos_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        	
 	        		<a4j:outputPanel ajaxRendered="true">
 		        		<h:panelGroup layout="block">
 		   					<a4j:commandButton id="btnNuevoTema" rendered="#{edicionCursoController.renderEditButtons}" 
@@ -169,7 +166,7 @@
 		        		</rich:dataTable>
 		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
 	        		</a4j:outputPanel>
-	        	</fieldset>	
+	        	</rich:collapsiblePanel>
         	</rich:panel>
         	
         </h:form>

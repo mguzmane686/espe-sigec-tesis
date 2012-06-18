@@ -52,27 +52,23 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
-			<sigecComp:extendedFieldset titlePanel="Costos y gastos">
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['usuario']}" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="#{msg['usuario']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				
 				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['identificador']} :"  style="padding-right:50px" />
+					<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio" styleClass="campoRequerido"/>
 					
-					<h:outputLabel value="#{msg['clave']} :"  style="padding-right:50px" />
+					<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
 					<h:panelGroup>
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
 					</h:panelGroup>
 				</h:panelGrid>
-			</fieldset>
-			</sigecComp:extendedFieldset>
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
-				</legend>
-				
+			</rich:collapsiblePanel>
+			
+			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
 					<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
 					
@@ -110,7 +106,7 @@
 					<h:outputLabel value="#{msg['celular']} :" />
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
 				</h:panelGrid>
-			</fieldset>
+			</rich:collapsiblePanel>
 			
 			<fieldset>
 				<legend>
