@@ -22,6 +22,7 @@
    			font-weight: bold;
    		}
    	</h:outputStylesheet>
+   	<h:outputStylesheet library="css" name="tables.css" />
 
 	<h:form>
 		<rich:panel header="#{msg['etiqueta_nuevo_usuario']}">
@@ -57,14 +58,14 @@
 						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido"/>
 
 					<h:outputLabel value="#{msg['nombres']} :" />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
 						<h:inputText value="#{administrativoController.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{administrativoController.persona.segundoNombre}"/>
 					</h:panelGrid>
 
 
 					<h:outputLabel value="#{msg['apellidos']} :" />
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
 						<h:inputText value="#{administrativoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{administrativoController.persona.segundoApellido}" />
 					</h:panelGrid>

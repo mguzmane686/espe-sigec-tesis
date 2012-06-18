@@ -12,3 +12,12 @@
 	background-color: #FFEBDA !important;
 	cursor: pointer;
 }
+
+.removeSpacesTable{
+    border-collapse: collapse;
+   	border-spacing: 0;
+       	
+}
+.colRemoveSpace{
+	padding-left: 0px;
+}
