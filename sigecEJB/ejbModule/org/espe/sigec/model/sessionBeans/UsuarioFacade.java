@@ -20,6 +20,7 @@ import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.utils.InterceptorSigec;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -61,10 +62,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
 	public Collection<Modulo> getMenuByProfile(Usuario usuario) {
 		Criteria crit = null;
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(UsuarioPerfil.class);
-    	crit.add(Restrictions.eq("idUsuario", usuario.getIdUsuario()));
+    	crit.add(Restrictions.eq("usuarioPerfilPK.idUsuario", usuario.getIdUsuario()));
+    	crit.setFetchMode("perfil", FetchMode.JOIN);
     	UsuarioPerfil usuarioPerfil = (UsuarioPerfil) crit.uniqueResult();
     	
-    	return usuarioPerfil.getModuloCollection();
+    	return usuarioPerfil.getPerfil().getModuloCollection();
 	}
 
 	@Override
