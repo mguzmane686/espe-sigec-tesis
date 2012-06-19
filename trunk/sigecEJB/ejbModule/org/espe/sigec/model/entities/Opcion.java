@@ -39,6 +39,10 @@ public class Opcion implements Serializable {
     @Size(max = 250)
     @Column(name = "descripcion")
     private String descripcion;
+    
+    @Column(name = "target")
+    private String targetUrl;
+    
 //    @Size(max = 250)
 //    @Column(name = "URL")
 //    private String url;
@@ -117,5 +121,13 @@ public class Opcion implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.Opcion[ idOpcion=" + idOpcion + " ]";
     }
+
+	public String getTargetUrl() {
+		return targetUrl;
+	}
+
+	public void setTargetUrl(String targetUrl) {
+		this.targetUrl = targetUrl;
+	}
     
 }

@@ -48,6 +48,10 @@ public class Modulo implements Serializable {
     @OneToMany(mappedBy = "modulo", fetch = FetchType.EAGER)
     private Set<Opcion> opcionCollection;
     
+    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil", insertable = false, updatable=false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Perfil idPerfil;
+    
     public Modulo() {
     }
 
@@ -120,5 +124,13 @@ public class Modulo implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.Modulo[ idModulo=" + idModulo + " ]";
     }
+
+	public Perfil getIdPerfil() {
+		return idPerfil;
+	}
+
+	public void setIdPerfil(Perfil idPerfil) {
+		this.idPerfil = idPerfil;
+	}
     
 }

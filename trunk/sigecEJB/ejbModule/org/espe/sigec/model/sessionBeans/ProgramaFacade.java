@@ -44,9 +44,11 @@ public class ProgramaFacade extends AbstractFacade<Programa>  implements Program
 			criteria = ((Session)getEntityManager().getDelegate()).createCriteria(ProgramaCurso.class, "programaCursoA");
 			
 			criteria.add(Restrictions.eq("programaCursoA.programaCursoPK.idPrograma", programaTMP.getIdPrograma()));
+			criteria.add(Restrictions.eq("programaCursoA.estado", "1"));
 			criteria.createAlias("cursoPeriodo.curso", "cursoA");
 			criteria.setFetchMode("cursoPeriodo", FetchMode.JOIN);
 			criteria.setFetchMode("cursoA", FetchMode.JOIN);
+			
 			Collection<ProgramaCurso> lstProgramaCurso = criteria.list();
 			if(lstProgramaCurso==null){
 				lstProgramaCurso = new ArrayList<ProgramaCurso>();

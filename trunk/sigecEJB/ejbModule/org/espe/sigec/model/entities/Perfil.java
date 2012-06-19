@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -47,6 +48,9 @@ public class Perfil implements Serializable {
         @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")})
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Usuario> usuarioCollection;
+    
+    @OneToMany(mappedBy = "idPerfil", fetch = FetchType.EAGER)
+    private Collection<Modulo> moduloCollection;
     
     public Perfil() {
     }
@@ -110,6 +114,14 @@ public class Perfil implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Collection<Modulo> getModuloCollection() {
+		return moduloCollection;
+	}
+
+	public void setModuloCollection(Collection<Modulo> moduloCollection) {
+		this.moduloCollection = moduloCollection;
 	}
     
 }
