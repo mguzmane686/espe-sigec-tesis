@@ -33,25 +33,22 @@
         	
         	<rich:panel header="Planificar curso" id="pnlLanCur">
         	
-        	<fieldset>
-        		<legend>
-        			<h:outputLabel value="Fecha de curso" styleClass="titulo"/>
-        		</legend>
+        	<rich:collapsiblePanel header="Fecha de curso"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="Fecha inicio" />
+        			<h:outputLabel value="Fecha inicio" style="float:left; width:150px;"/>
         			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaInicio}" showApplyButton="false"
         				datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de inicio es obligatoria"/>
         			
-        			<h:outputLabel value="Fecha Finalizacion" />
+        			<h:outputLabel value="#{msg.fecha_finalizacion}" style="float:left; width:150px;"/>
         			<rich:calendar value="#{planearCursoController.periodoAcademico.fechaFin}" datePattern="#{msg['dd_MMM_yyyy']}" required="true" requiredMessage="la fecha de fin es obligatoria"/>
         		</h:panelGrid>
-        	</fieldset>
+        	</rich:collapsiblePanel>
         	
-        	<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
-        		</legend>
-        		
+        	<rich:collapsiblePanel header="#{msg['datos_especificos']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+        	
         			<h:panelGrid columns="2">
         				<h:outputLabel value="Lugar" />
         				<h:selectOneMenu required="true" requiredMessage="El campo Lugar es obligatorio" styleClass="customSelect"
@@ -106,7 +103,7 @@
         				
         			</h:panelGrid>
         		
-        		</fieldset>	
+        		</rich:collapsiblePanel>	
         	</rich:panel>
         	
         </h:form>

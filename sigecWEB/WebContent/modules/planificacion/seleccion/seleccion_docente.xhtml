@@ -22,12 +22,9 @@
 			</rich:panel>
 			
         	<rich:panel header="Seleccion">
-        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['seleccion_docente']}" styleClass="titulo"/>
-	        		</legend>
-	        		
+        		<rich:collapsiblePanel header="#{msg['seleccion_docente']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        	
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
 		        		<rich:dataTable id="tblDocentes" style="width:100%" value="#{seleccionPorfesorController.lstProfesors}" var="profesor" rows="5" rendered="#{!empty seleccionPorfesorController.lstProfesors}">
@@ -82,7 +79,7 @@
 		        		</center>
 		        		
 	        		</a4j:outputPanel>
-	        	</fieldset>	
+	        	</rich:collapsiblePanel>
         	</rich:panel>
         	
         </h:form>

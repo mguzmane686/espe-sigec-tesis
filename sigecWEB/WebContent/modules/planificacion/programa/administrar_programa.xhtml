@@ -44,10 +44,10 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg.etiqueta_detalle_programa}" id="pnlPrograma">
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg.etiqueta_datos_programa}" styleClass="titulo" />
-				</legend>
+			
+			<rich:collapsiblePanel header="#{msg.etiqueta_datos_programa}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				
 				<h:panelGrid columns="2">
 				
 					<h:outputLabel value="#{msg.nombre} :" />
@@ -63,13 +63,12 @@
 					<h:outputText value="#{administrarProgramaController.programa.inicio}" rendered="#{!administrarProgramaController.editMode}"/>
 					<rich:calendar value="#{administrarProgramaController.programa.inicio}" rendered="#{administrarProgramaController.editMode}"/>
 				</h:panelGrid>
-			</fieldset>
+			</rich:collapsiblePanel>
 			
 			
-			<fieldset>
-				<legend>
-					<h:outputLabel value="Cursos asignados al programa" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="Cursos asignados al programa"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<h:panelGroup rendered="#{empty administrarProgramaController.lstProgramaCursos}">
 					No se encontraron cursos asignados al programa
 				</h:panelGroup>
@@ -99,7 +98,7 @@
 					</rich:column>
 					
 				</rich:dataTable>
-			</fieldset>
+			</rich:collapsiblePanel>
 		</rich:panel>
 
 	</h:form>

@@ -52,11 +52,9 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
+			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 			
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['datos_personales']}" styleClass="titulo" />
-				</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
 					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10" styleClass="campoRequerido" 
@@ -132,12 +130,11 @@
 	                    </rich:panel>
 	                </a4j:outputPanel>
                 </h:panelGroup>
-			</fieldset>
+			</rich:collapsiblePanel>
 
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg['ponderacion']}" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="#{msg['ponderacion']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<h:panelGrid columns="2" columnClasses="alinearLeft, alinearCenter, alinearCenter">
 					<h:outputLabel value="#{msg['titulo_nivel_tres']}"  style="padding-right:50px" />
 					<h:selectOneRadio value="#{registroDocenteController.profesor.tituloNivelTres}" disabled="#{!registroDocenteController.renderEditionButtons}">
@@ -162,7 +159,7 @@
 						<f:selectItem itemLabel="2" itemValue="2" />
 					</h:selectOneRadio>
 				</h:panelGrid>
-			</fieldset>
+			</rich:collapsiblePanel>
 
 		</rich:panel>
 	</h:form>

@@ -24,16 +24,15 @@
        	</rich:panel>
        	
        	<rich:panel header="#{msg['creacion_aula']}" id="pnlAula">
-       	
-        	<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_aula']}" styleClass="titulo"/>
-        		</legend>
+       		
+       		<rich:collapsiblePanel header="#{msg['datos_aula']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+        	
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Lugar :" />
         			<h:selectOneMenu valueChangeListener="#{aulaController.someChangeLugar}">
         				<f:selectItems value="#{aulaController.itemsLugares}"/>
-        				<a4j:ajax execute="@this" render="somEdificio" event="click"/>
+        				<a4j:ajax execute="@this" render="somEdificio" event="valueChange"/>
         			</h:selectOneMenu>
         			
         			<h:outputLabel value="#{msg['etiqueta_edificio']}:" />
@@ -50,7 +49,7 @@
         			<h:outputLabel value="Capacidad:" />
         			<rich:inputNumberSpinner value="#{aulaController.aula.capacidad}" size="30" />
         		</h:panelGrid>
-        	</fieldset>	
+        	</rich:collapsiblePanel>	
        	</rich:panel>
        	
        </h:form>

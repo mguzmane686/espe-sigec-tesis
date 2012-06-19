@@ -16,10 +16,8 @@
 		
 
 		<rich:panel header="Programas" id="pnlCurso">
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg.etiqueta_lista_programas}" styleClass="titulo" />
-				</legend>
+			<rich:collapsiblePanel header="#{msg.etiqueta_lista_programas}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
 				<rich:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;">
 					<rich:column>
@@ -39,7 +37,7 @@
 						<h:outputLabel value="#{programa.descripcion }" />
 					</rich:column>
 				</rich:dataTable>
-			</fieldset>
+			</rich:collapsiblePanel>
 		</rich:panel>
 		
 		<rich:popupPanel id="popupPrograma" modal="true" autosized="true" resizeable="false" domElementAttachment="parent" header="Detalle programa">

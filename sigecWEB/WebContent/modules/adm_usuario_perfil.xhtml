@@ -7,15 +7,14 @@
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
-    <ui:define name="top">
-    </ui:define>
+    
     <ui:define name="left">
-    	<h:form>
+    	<h:form >
     		<sigecComp:menu_sigec controller="#{homeSessionController.uiPanelMenu}"></sigecComp:menu_sigec>
-    	</h:form>
+    	</h:form>	
     </ui:define>
     
     <ui:define name="content">
-    	<h:panelGroup layout="block" style="height:600px;"></h:panelGroup>
+    	<ui:include src="/modules/admGeneral/administrativo.xhtml"/>
     </ui:define>
 </ui:composition>
