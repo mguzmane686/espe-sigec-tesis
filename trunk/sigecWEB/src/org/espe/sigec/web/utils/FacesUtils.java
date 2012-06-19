@@ -54,6 +54,7 @@ import javax.servlet.http.HttpSession;
 import org.espe.sigec.model.entities.Modulo;
 import org.espe.sigec.model.entities.Opcion;
 import org.richfaces.PanelMenuMode;
+import org.richfaces.component.UICommandLink;
 import org.richfaces.component.UIPanelMenu;
 import org.richfaces.component.UIPanelMenuGroup;
 import org.richfaces.component.UIPanelMenuItem;
@@ -235,14 +236,16 @@ public class FacesUtils {
 			if(modulo.getOpcionCollection() != null && !modulo.getOpcionCollection().isEmpty()){
 				UIPanelMenuItem panelMenuItem = null;
 //				UICommandLink uiCommandLink = null;
-				HtmlCommandLink uiCommandLink ;
+				UICommandLink uiCommandLink ;
 				for(Opcion opcion: modulo.getOpcionCollection()){
 					panelMenuItem = new UIPanelMenuItem();
 //					uiCommandLink = new UICommandLink();
-					uiCommandLink = new HtmlCommandLink();
+					uiCommandLink = new UICommandLink();
 					panelMenuItem.setName(opcion.getNombre());
 					uiCommandLink.setValue(opcion.getNombre());
-//					uiCommandLink.setExecute("@this");
+					uiCommandLink.setTarget(opcion.getTargetUrl());
+					
+					uiCommandLink.setExecute("@this");
 //					uiCommandLink.setRender("@all");
 					@SuppressWarnings("rawtypes")
 					Class[] params = {};
@@ -251,10 +254,10 @@ public class FacesUtils {
 //				            		   "#{homeSessionController.menuAction('"+opcion.getDescripcion()+"')}", String.class, params);
 					MethodExpression actionExpression = FacesContext.getCurrentInstance().getApplication().getExpressionFactory()
 				               .createMethodExpression(FacesContext.getCurrentInstance().getELContext(),
-				            		   opcion.getDescripcion()+"?faces-redirect=true", String.class, params);
+				            		   opcion.getTargetUrl()+"?faces-redirect=true", String.class, params);
 					
 					uiCommandLink.setActionExpression(actionExpression);
-					uiCommandLink.setImmediate(true);
+					uiCommandLink.setHreflang(opcion.getTargetUrl());
 					panelMenuItem.getChildren().add(uiCommandLink);
 					uiPanelMenuGroup.getChildren().add(panelMenuItem);
 				}
