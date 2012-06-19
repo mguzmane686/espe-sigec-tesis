@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.servicio.portal.PortalServicio;
 
@@ -23,6 +24,7 @@ public class ProgramasController implements Serializable{
 	@Inject 
 	private PortalServicio portalServicio;
 	private Programa programaCursoSelected;
+	private CursoPeriodo cursoPeriodoSeleccionado; 
 	
 	private Collection<Programa> lstProgramaCursos;
 	
@@ -30,12 +32,15 @@ public class ProgramasController implements Serializable{
 		setLstProgramaCursos(new ArrayList<Programa>());
 		programaCursoSelected = new Programa();
 	}
-
+	
 	@PostConstruct
 	public void cargarPrograma(){
 		setLstProgramaCursos(portalServicio.buscarProgramaActivo());
 	}
 	
+	public void btnAceptar(){
+		System.out.println("asdasd");
+	}
 	public void btnShowProgramaDetalle(){
 		System.out.println("Uno");
 	}
@@ -54,6 +59,14 @@ public class ProgramasController implements Serializable{
 
 	public void setProgramaCursoSelected(Programa programaCursoSelected) {
 		this.programaCursoSelected = programaCursoSelected;
+	}
+
+	public CursoPeriodo getCursoPeriodoSeleccionado() {
+		return cursoPeriodoSeleccionado;
+	}
+
+	public void setCursoPeriodoSeleccionado(CursoPeriodo cursoPeriodoSeleccionado) {
+		this.cursoPeriodoSeleccionado = cursoPeriodoSeleccionado;
 	}
 	
 	

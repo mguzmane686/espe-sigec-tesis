@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<h:outputStylesheet library="css" name="style.css" />
@@ -11,9 +13,16 @@
 	</title>
 </h:head>
 
-<body>
+<h:body>
 	<ui:insert name="pageHeader">Page Header</ui:insert>
-	<h:form id="frmUEC">
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+              
+	<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false"   
+	        draggable="false" closable="false">  
+		<h:graphicImage library="images" name="ajax-loader.gif"/>  
+	</p:dialog>  
+
+	<h:form id="frmUEC"  prependId="false">
 		<ui:insert name="body">Page Body</ui:insert>
 	</h:form>
 	<ui:insert name="footerPage">
@@ -22,6 +31,6 @@
 		<ui:include src="/pages/footerPage.xhtml" />
 	</ui:insert>
 	</ui:insert>
-</body>
+</h:body>
 
 </html>

@@ -43,55 +43,46 @@
 					
 				</ul>
 				<p>
-					<p:panel>
-						<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
-							<p:column>
-								<f:facet name="header">
-									<h:outputLabel value="Nombre" />
-								</f:facet>
-								
-							</p:column>'
-							
-							
-							
-							 <p:columnGroup type="header">  
-					            <p:row>  
-					                <p:column colspan="2" headerText="Nombre" sortBy="#{programaCurso.nombre}"/>
-					            </p:row>  
-					        </p:columnGroup>
-					        
-					        
-					        <p:subTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">  
-					            <f:facet name="header">  
-					            	<p:commandLink value="#{programaCurso.nombre}" update=":frmUEC:dialogPro" process="@this" oncomplete="prograDialog.show()" ajax="true" type="submit" global="true">
-										<f:setPropertyActionListener  target="#{programasController.programaCursoSelected}" value="#{programaCurso}"/>
-									</p:commandLink>   
-					            </f:facet>  
-					  
-					            <p:column>  
-					                <h:outputText value="#{curso.cursoPeriodo.curso.nombreCurso}" />
-					            </p:column>  
-					            
-					            <p:column>  
-					                <h:outputText value="#{curso.cursoPeriodo.estadoProceso}" />
-					            </p:column>
-					              
-					        </p:subTable>  
-							
-						</p:dataTable>
+				<p:dialog id="dialogPro" header="#{msg.etiqueta_detalle_programa}" widgetVar="prograDialog" maximizable="true" minimizable="true"
+					showEffect="explode" hideEffect="explode" modal="true" dynamic="true"> 
+				        
+			        <p:outputPanel id="documentPanel" autoUpdate="true">
+				        <h:panelGrid id="display" columns="2" cellpadding="4">  
+				            <h:outputText value="Nombre del curso:" />
+				            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.nombreCurso}" />
+				            
+				            <h:outputText value="Nombre del curso:" />
+				            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.generalidadesCurso}" />
+				            
+				            <h:outputText value="Nombre del curso:" />
+				            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" />
+				            
+				            <h:outputText value="Nombre del curso:" />
+				            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.tipoCurso}" />
+				        </h:panelGrid>
+			        </p:outputPanel>  
+			    </p:dialog>
+				
+				<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
 					
-						<p:dialog id="dialogPro" header="#{msg.etiqueta_detalle_programa}" widgetVar="prograDialog" maximizable="true" minimizable="true"
-							showEffect="explode" hideEffect="explode">  
-					        <h:panelGrid id="display" columns="2" cellpadding="4">  
-					  
-					            <f:facet name="header">  
-					            </f:facet>  
-					  
-					            <h:outputText value="Model:" />
-					            <h:outputText value="#{programasController.programaCursoSelected.estado}" />  
-					        </h:panelGrid>  
-					    </p:dialog>  
-					</p:panel>
+					 
+	                <p:column  headerText="Programas" >
+	                	
+						<p:dataTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">
+							<p:column headerText="#{programaCurso.nombre}">  
+				                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
+									<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
+								</p:commandLink>
+				            </p:column>  
+			            
+				            <p:column >  
+				                <h:outputText value="#{curso.cursoPeriodo.estadoProceso}" />
+				            </p:column>
+						</p:dataTable>
+					</p:column>
+							
+				</p:dataTable>
+					
 				</p>
 			</div>
 		</div>
