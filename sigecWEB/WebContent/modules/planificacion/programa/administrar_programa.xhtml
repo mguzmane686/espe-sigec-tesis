@@ -62,6 +62,13 @@
 					<h:outputLabel value="Fecha inicio" />
 					<h:outputText value="#{administrarProgramaController.programa.inicio}" rendered="#{!administrarProgramaController.editMode}"/>
 					<rich:calendar value="#{administrarProgramaController.programa.inicio}" rendered="#{administrarProgramaController.editMode}"/>
+					
+					<h:outputLabel value="Estado" />
+					<h:outputText value="#{administrarProgramaController.programa.estado=='1'?'Activo':'Inactivo'}" rendered="#{!administrarProgramaController.editMode}"/>
+					<h:selectOneRadio value="#{administrarProgramaController.programa.estado}" rendered="#{administrarProgramaController.editMode}">
+						<f:selectItem itemLabel="Activo" itemValue="1"/>
+						<f:selectItem itemLabel="Inactivo" itemValue="0"/>
+					</h:selectOneRadio>
 				</h:panelGrid>
 			</rich:collapsiblePanel>
 			
