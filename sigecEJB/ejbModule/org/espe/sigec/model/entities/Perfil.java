@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -51,6 +52,9 @@ public class Perfil implements Serializable {
     
     @OneToMany(mappedBy = "idPerfil", fetch = FetchType.EAGER)
     private Collection<Modulo> moduloCollection;
+    
+    @Transient
+    private boolean selected;
     
     public Perfil() {
     }
@@ -122,6 +126,14 @@ public class Perfil implements Serializable {
 
 	public void setModuloCollection(Collection<Modulo> moduloCollection) {
 		this.moduloCollection = moduloCollection;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
     
 }

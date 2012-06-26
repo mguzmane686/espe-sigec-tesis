@@ -47,6 +47,9 @@ public class UsuarioPerfil implements Serializable {
     @OneToMany(mappedBy = "usuarioPerfil", fetch = FetchType.LAZY)
     private Collection<Modulo> moduloCollection;
     
+    @Transient
+    private Collection<Perfil> lstPerfils;
+    
     public UsuarioPerfil() {
     }
 
@@ -129,6 +132,14 @@ public class UsuarioPerfil implements Serializable {
 
 	public void setPersona(Persona persona) {
 		this.persona = persona;
+	}
+
+	public Collection<Perfil> getLstPerfils() {
+		return lstPerfils;
+	}
+
+	public void setLstPerfils(Collection<Perfil> lstPerfils) {
+		this.lstPerfils = lstPerfils;
 	}
     
 }

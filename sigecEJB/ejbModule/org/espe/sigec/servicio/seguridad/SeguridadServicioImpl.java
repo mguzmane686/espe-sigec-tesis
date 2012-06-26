@@ -68,11 +68,21 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 		try {
 			if(usuarioFacadeLocal.isIdentificadorvalida(usuarioPerfil.getUsuario().getIdentificador())){
 				usuarioPerfil.getUsuario().setEstadoUsr("1");
+				//se crea el usuario
 				usuarioFacadeLocal.create(usuarioPerfil.getUsuario());
 				usuarioPerfil.getPersona().setUsuario(usuarioPerfil.getUsuario());
+				//se crea la persona
 				personaFacadeLocal.create(usuarioPerfil.getPersona());
 				usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuarioPerfil.getUsuario().getIdUsuario());
-				usuarioPerfilFacadeLocal.create(usuarioPerfil);
+				for (Perfil perfil : usuarioPerfil.getLstPerfils()) {
+					UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil();
+					usuarioPerfilTMP.setEstado("1");
+					usuarioPerfilTMP.setPerfil(perfil);
+					
+					usuarioPerfilTMP.setUsuarioPerfilPK(new UsuarioPerfilPK(usuarioPerfil.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
+					usuarioPerfilFacadeLocal.create(usuarioPerfilTMP);
+				}
+				
 				
 				if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals("EST")){
 					Estudiante estudiante = new Estudiante();
