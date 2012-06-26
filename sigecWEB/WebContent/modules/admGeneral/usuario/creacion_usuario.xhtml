@@ -108,17 +108,38 @@
 				</h:panelGrid>
 			</rich:collapsiblePanel>
 			
-			<fieldset>
-				<legend>
-					<h:outputLabel value="#{msg.etiqueta_perfil}" styleClass="titulo" />
-				</legend>
-				<h:panelGrid columns="2">
-					<h:outputLabel value="Tipo de perfil" />
-					<h:selectOneRadio value="#{creacionUsuarioController.usuarioPerfil.usuarioPerfilPK.idPerfil}" required="true" requiredMessage="El campo Perfil es obligatorio">
-						<f:selectItems value="#{creacionUsuarioController.lstPerfils}" var="perfil" itemLabel="#{perfil.nombre}" itemValue="#{perfil.idPerfil}"></f:selectItems>
-					</h:selectOneRadio>
-				</h:panelGrid>
-			</fieldset>
+			<rich:collapsiblePanel header="#{msg.etiqueta_perfil}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
+					
+				
+				
+				<rich:dataTable value="#{creacionUsuarioController.lstPerfils}" var="perfil" style="width:100%;">
+					<f:facet name="header">
+						<h:outputLabel value="Seleccione un perfil" />
+					</f:facet>
+					<rich:column style="text-align:center;">
+						<f:facet name="header">
+							<h:outputLabel value="Seleccionar" />
+						</f:facet>
+						<h:selectBooleanCheckbox value="#{perfil.selected}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="Nombre del perfil" />
+						</f:facet>
+						<h:outputText value="#{perfil.nombre}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.descripcion}" />
+						</f:facet>
+						<h:outputText value="#{perfil.descripcion}" />
+					</rich:column>
+				</rich:dataTable>
+			</rich:collapsiblePanel>
 		</rich:panel>
 	</h:form>
 </ui:composition>
