@@ -1,6 +1,7 @@
 package org.espe.sigec.web.admGeneral.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.espe.sigec.model.entities.Perfil;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
@@ -30,6 +32,9 @@ public class CreacionUsuarioController implements Serializable{
 	private UsuarioPerfil usuarioPerfil;
 	private Collection<Perfil> lstPerfils;
 	
+	private String filtroBusqueda;
+	private String txtFiltroBusqueda;
+	
 	public CreacionUsuarioController() {
 		initEntities();
 	}
@@ -48,12 +53,27 @@ public class CreacionUsuarioController implements Serializable{
 	
 	public void btnCrearUsuario(){
 		try {
+			getUsuarioPerfil().setLstPerfils(new ArrayList<Perfil>());
+			for(Perfil perfil: getLstPerfils()){
+				if(perfil.isSelected()){
+					getUsuarioPerfil().getLstPerfils().add(perfil);
+				}
+			}
+			
+			if(CollectionUtils.isEmpty(getUsuarioPerfil().getLstPerfils())){
+				FacesUtils.addErrorMessage("Seleccione al menos un perfil");
+				throw new Exception("Seleccione al menos un perfil");
+			}
 			seguridadServicio.crearUsuario(getUsuarioPerfil());
 			FacesUtils.addInfoMessage("Usuario creado");
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurrio un error al guardar el usuario");
-			e.printStackTrace();
 		}
+	}
+	
+	public void btnFindUsr(){
+		System.out.println(getTxtFiltroBusqueda());
+		System.out.println(getFiltroBusqueda());
 	}
 	
 	public UsuarioPerfil getUsuarioPerfil() {
@@ -71,5 +91,21 @@ public class CreacionUsuarioController implements Serializable{
 	public void setLstPerfils(Collection<Perfil> lstPerfils) {
 		this.lstPerfils = lstPerfils;
 	}
+
+	public String getFiltroBusqueda() {
+		return filtroBusqueda;
+	}
+
+	public void setFiltroBusqueda(String filtroBusqueda) {
+		this.filtroBusqueda = filtroBusqueda;
+	}
+
+	public String getTxtFiltroBusqueda() {
+		return txtFiltroBusqueda;
+	}
+
+	public void setTxtFiltroBusqueda(String txtFiltroBusqueda) {
+		this.txtFiltroBusqueda = txtFiltroBusqueda;
+	}	
 	
 }
