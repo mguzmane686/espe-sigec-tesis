@@ -75,10 +75,8 @@
 		        		</h:panelGroup>
 	        		</fieldset>
         		</h:panelGroup>
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="Fecha de curso :" styleClass="titulo"/>
-	        		</legend>
+	        	<rich:collapsiblePanel header="Fecha de curso"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
 	        		<h:panelGrid columns="2"  columnClasses="espacioDetalle">
 	        			<h:outputLabel value="Usuarios inscritos :" style="font-weight:bold;"/>
@@ -97,13 +95,11 @@
         					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
         				</h:outputText>
 	        		</h:panelGrid>
-	        	</fieldset>
+	        	</rich:collapsiblePanel>
         	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['datos_especificos']}" styleClass="titulo"/>
-	        		</legend>
-	        		
+        		<rich:collapsiblePanel header="#{msg['datos_especificos']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        	
         			<h:panelGrid columns="2" columnClasses="espacioDetalle">
         				<h:outputLabel value="Curso :"/>
         				<h:outputText value="#{administrarCursoController.cursoPeriodo.curso.nombreCurso}" />
@@ -148,7 +144,7 @@
 						</h:panelGrid>
 				
         			</h:panelGrid>
-        		</fieldset>	
+        		</rich:collapsiblePanel>	
         	</rich:panel>
         </h:form>
 </ui:composition>

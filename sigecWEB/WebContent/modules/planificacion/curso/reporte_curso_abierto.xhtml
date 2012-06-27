@@ -86,10 +86,10 @@
 					        				<h:panelGrid columns="2" style="width:100%;">
 					        					<h:outputLabel value="Estado" />
 					        					
-					        					<h:selectOneMenu value="#{reporteCursoAbiertoController.nameFilter}">
+					        					<rich:select value="#{reporteCursoAbiertoController.nameFilter}" defaultLabel="Seleccione" >
 						                           <f:selectItems value="#{reporteCursoAbiertoController.itemsEstado}" />
-						                           <a4j:ajax render="tblCursos" execute="@this" event="change" />
-						                       </h:selectOneMenu>
+						                           <a4j:ajax render="tblCursos" execute="@this" event="selectitem" />
+						                       </rich:select>
 					        				</h:panelGrid>
 					        			</f:facet>
 					        			<center>

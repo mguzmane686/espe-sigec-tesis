@@ -30,15 +30,15 @@
         	
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Lugar :" />
-        			<h:selectOneMenu valueChangeListener="#{aulaController.someChangeLugar}">
+        			<rich:select valueChangeListener="#{aulaController.someChangeLugar}" defaultLabel="Seleccione">
         				<f:selectItems value="#{aulaController.itemsLugares}"/>
-        				<a4j:ajax execute="@this" render="somEdificio" event="valueChange"/>
-        			</h:selectOneMenu>
+        				<a4j:ajax execute="@this" render="somEdificio" event="selectitem"/>
+        			</rich:select>
         			
         			<h:outputLabel value="#{msg['etiqueta_edificio']}:" />
-        			<h:selectOneMenu id="somEdificio" value="#{aulaController.aula.edificio.idEdificio}">
+        			<rich:select id="somEdificio" value="#{aulaController.aula.edificio.idEdificio}" defaultLabel="Seleccione">
         				<f:selectItems value="#{aulaController.itemsEdificios}"/>
-        			</h:selectOneMenu>
+        			</rich:select>
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
         			<h:inputText value="#{aulaController.aula.nombreAula}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio" styleClass="campoRequerido"/>
