@@ -101,7 +101,9 @@
 		</rich:panel>
 		
 		<rich:panel header="Datos Presupuesto" id="datosPresu">
-			<sigecComp:extendedFieldset titlePanel="#{msg['presupuesto_asignacion']}">
+			
+			<rich:collapsiblePanel header="#{msg['presupuesto_asignacion']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 			
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Presupuesto asignado : " />
@@ -117,12 +119,13 @@
 				</h:panelGrid>
 				
 			
-			</sigecComp:extendedFieldset>
+			</rich:collapsiblePanel>
 		</rich:panel>
 		
 		<rich:panel header="Detalle presupuesto">
-			<sigecComp:extendedFieldset titlePanel="Costos y gastos">
-					
+			
+			<rich:collapsiblePanel header="Costos y gastos"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">	
 
 				<rich:dataTable id="tblDetalles" value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle" iterationStatusVar="numRow" style="width:100%">
 					<rich:column rendered="false">
@@ -204,12 +207,11 @@
 			            </rich:columnGroup>
 			        </f:facet>
 				</rich:dataTable>
-			</sigecComp:extendedFieldset>
+			</rich:collapsiblePanel>
 			
-			<fieldset>
-				<legend>
-					<h:outputLabel value="Detalle" style="font-weight:bold;"/>
-				</legend>
+			<rich:collapsiblePanel header="Detalle"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+			
 				<h:panelGroup>
 					<h:panelGrid columns="1" style="width:100%" bgcolor="#DFECFC"  frame="lhs" columnClasses="subirTabla">
 				
@@ -280,7 +282,7 @@
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGroup>
-			</fieldset>
+			</rich:collapsiblePanel>
 		</rich:panel>
 	</h:form>
 </ui:composition>

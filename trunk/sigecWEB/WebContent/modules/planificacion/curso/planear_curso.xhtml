@@ -51,18 +51,18 @@
         	
         			<h:panelGrid columns="2">
         				<h:outputLabel value="Lugar" />
-        				<h:selectOneMenu required="true" requiredMessage="El campo Lugar es obligatorio" styleClass="customSelect"
+        				<rich:select required="true" requiredMessage="El campo Lugar es obligatorio" styleClass="customSelect" defaultLabel="Seleccione"
         					valueChangeListener="#{planearCursoController.somChangeLugarCurso}">
         					<f:selectItems value="#{planearCursoController.itemLugarCurso}"/>
-        					<a4j:ajax execute="@this" event="valueChange" render="itemEdificio, itemAula"/>
-        				</h:selectOneMenu>
+        					<a4j:ajax execute="@this" event="selectitem" render="itemEdificio, itemAula"/>
+        				</rich:select>
         				
         				<h:outputLabel value="Edificio" />
-        				<h:selectOneMenu id="itemEdificio" required="true" requiredMessage="El campo Edificio es obligatorio" styleClass="customSelect"
+        				<rich:select id="itemEdificio" required="true" requiredMessage="El campo Edificio es obligatorio" styleClass="customSelect" defaultLabel="Seleccione"
         					valueChangeListener="#{planearCursoController.somChangeEdificio}">
         					<f:selectItems value="#{planearCursoController.itemEdificio}"/>
-        					<a4j:ajax execute="@this" event="valueChange" render="itemAula"/>
-        				</h:selectOneMenu>
+        					<a4j:ajax execute="@this" event="selectitem" render="itemAula"/>
+        				</rich:select>
         				
         				<h:outputLabel value="Aula"/>
         				<rich:select id="itemAula" defaultLabel="Seleccione" required="true" requiredMessage="El campo aula es obligatorio">
@@ -71,11 +71,11 @@
         				
         				
         				<h:outputLabel value="#{msg['etiqueta_especialidad']}"/>
-        				<h:selectOneMenu required="true" requiredMessage="El campo Especialidad es obligatorio" styleClass="customSelect" 
+        				<rich:select required="true" requiredMessage="El campo Especialidad es obligatorio" styleClass="customSelect" defaultLabel="Seleccione"
         					valueChangeListener="#{planearCursoController.somChangeEspecialidad}">
         					<f:selectItems value="#{planearCursoController.itemEspecialidades}"/>
-        					<a4j:ajax execute="@this" event="valueChange" render="somCurso"/>
-        				</h:selectOneMenu>
+        					<a4j:ajax execute="@this" event="selectitem" render="somCurso"/>
+        				</rich:select>
         				
         				<h:outputLabel value="Curso"/>
         				<rich:select id="somCurso" defaultLabel="Seleccione" required="true" enableManualInput="false" value="#{planearCursoController.cursoPeriodo.curso.idCurso}" requiredMessage="El campo curso es obligatorio">
@@ -95,11 +95,11 @@
         				</h:selectOneRadio>
         				
         				<h:outputLabel value="#{msg['tipo_curso']}"/>
-        				<h:selectOneMenu value="#{planearCursoController.cursoPeriodo.modalidad}">
+        				<rich:select value="#{planearCursoController.cursoPeriodo.modalidad}" defaultLabel="Seleccione">
         					<f:selectItem itemLabel="Presencial" itemValue="PRESENCIAL"/>
         					<f:selectItem itemLabel="Distancia" itemValue="DISTANCIA"/>
         					<f:selectItem itemLabel="Virtual" itemValue="VIRTUAL"/>
-        				</h:selectOneMenu>
+        				</rich:select>
         				
         			</h:panelGrid>
         		
