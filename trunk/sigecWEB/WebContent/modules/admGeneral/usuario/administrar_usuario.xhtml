@@ -52,6 +52,18 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
+			<h:panelGrid columns="2" style="width:100%;" columnClasses="clas1">
+				<h:panelGroup layout="block" styleClass="rf-p-hdr pgLeft" style="height:20px; width:auto;" >
+					<a4j:commandLink id="pgLeft" execute="@none" style="float:right;">
+						<h:graphicImage library="images/icons" name="navigate-left.png" />
+					</a4j:commandLink>
+					<rich:jQuery selector="#pgLeft" event="click" query="jQuery('.clas1').css({width:'18px'});" />
+					<rich:jQuery selector="#pgLeft" event="click" query="jQuery(this).css({visibility:'hidden'});" />
+				</h:panelGroup>
+				
+				<h:panelGroup layout="block" styleClass="rf-p-hdr">
+				</h:panelGroup>
+			</h:panelGrid>
 			<rich:collapsiblePanel header="Criterios de busqueda"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
@@ -63,8 +75,8 @@
 						<f:selectItem itemLabel="Primer apellido :" itemValue="ape"/>
 					</h:selectOneRadio>
 					<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda"/>
-					<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}" oncomplete="#{rich:component('popup')}.show()" 
-						execute="somFiltroBusqueda txtFiltroBusqueda"></a4j:commandLink>
+					<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}"  
+						execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas"></a4j:commandLink>
 				</h:panelGrid>
 				
 				
@@ -72,13 +84,30 @@
 			
 			<rich:collapsiblePanel header="Criterios de busqueda"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-				<rich:dataTable>
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="Uno" />
-						</f:facet>
-					</rich:column>
-				</rich:dataTable>
+				<h:panelGroup id="tblPersonas">
+					<rich:dataTable value="#{creacionUsuarioController.lstPersonas}" var="lstPersona" style="width:100%" 
+						rendered="#{!empty creacionUsuarioController.lstPersonas}">
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.cedula}" />
+							</f:facet>
+							<a4j:commandLink value="#{lstPersona.cedula}" oncomplete="#{rich:component('popup')}.show()" execute="@this" render="popup">
+								<f:setPropertyActionListener target="#{creacionUsuarioController.personaSeleccionadaBucarPerfil}" value="#{lstPersona}"></f:setPropertyActionListener>
+							</a4j:commandLink>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.nombres}" />
+							</f:facet>
+							<h:outputText value="#{lstPersona.primerNombre.concat(' ').concat(lstPersona.primerApellido)} " />
+						</rich:column>
+					</rich:dataTable>
+				
+					<rich:panel rendered="#{empty creacionUsuarioController.lstPersonas}">
+						No se encontraron resultados
+					</rich:panel>
+				</h:panelGroup>
 			</rich:collapsiblePanel>
 		</rich:panel>
 		
@@ -93,58 +122,57 @@
 	        <h:panelGroup>
 	        	<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-					<h:panelGrid columns="2">
-						<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
-						<h:outputText value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio" styleClass="campoRequerido"/>
-						
-						<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
-						<h:panelGroup>
-							<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
-						</h:panelGroup>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
-						<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
-						
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
-							required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido"/>
-	
-						<h:outputLabel value="#{msg['nombres']} :" />
-						<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-							<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido" />
-							<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoNombre}"/>
-						</h:panelGrid>	
+					<h:panelGroup id="pnlDatosPersona">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
+							<h:outputText value="#{creacionUsuarioController.personaSeleccionada.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio" styleClass="campoRequerido"/>
 							
-						
-	
-	
-						<h:outputLabel value="#{msg['apellidos']} :" />
-						<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-							<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
-							<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoApellido}" />
+							<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
+							<h:panelGroup>
+								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
+							</h:panelGroup>
 						</h:panelGrid>
-	
-						<h:outputLabel value="#{msg['fecha_nacimiento']} :" />
-						<rich:calendar value="#{creacionUsuarioController.usuarioPerfil.persona.fechaNacimiento}" datePattern="#{msg['dd_MMM_yyyy']}">
-						</rich:calendar>
-	
-						<h:outputLabel value="#{msg['nacionalidad']} :" />
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.nacionalidad}" size="43"/>
-	
-						<h:outputLabel value="#{msg['direccion']} :" />
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.direccion}" size="43"/>
-	
-						<h:outputLabel value="#{msg['e_mail']} :" />
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.mail}" size="43"/>
-	
-						<h:outputLabel value="#{msg['celular']} :" />
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
-					</h:panelGrid>
+						
+						<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
+							<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
+							
+							<h:inputText value="#{creacionUsuarioController.personaSeleccionada.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
+								required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido"/>
+		
+							<h:outputLabel value="#{msg['nombres']} :" />
+							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
+								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido" />
+								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoNombre}"/>
+							</h:panelGrid>	
+							
+							<h:outputLabel value="#{msg['apellidos']} :" />
+							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
+								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
+								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoApellido}" />
+							</h:panelGrid>
+		
+							<h:outputLabel value="#{msg['fecha_nacimiento']} :" />
+							<rich:calendar value="#{creacionUsuarioController.personaSeleccionada.fechaNacimiento}" datePattern="#{msg['dd_MMM_yyyy']}">
+							</rich:calendar>
+		
+							<h:outputLabel value="#{msg['nacionalidad']} :" />
+							<h:inputText value="#{creacionUsuarioController.personaSeleccionada.nacionalidad}" size="43"/>
+		
+							<h:outputLabel value="#{msg['direccion']} :" />
+							<h:inputText value="#{creacionUsuarioController.personaSeleccionada.direccion}" size="43"/>
+		
+							<h:outputLabel value="#{msg['e_mail']} :" />
+							<h:inputText value="#{creacionUsuarioController.personaSeleccionada.mail}" size="43"/>
+		
+							<h:outputLabel value="#{msg['celular']} :" />
+							<h:inputText value="#{creacionUsuarioController.personaSeleccionada.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
+						</h:panelGrid>
+					</h:panelGroup>
 				</rich:collapsiblePanel>
 				
 				<rich:collapsiblePanel header="#{msg.etiqueta_perfil}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-					<rich:dataTable value="#{creacionUsuarioController.lstPerfils}" var="perfil" style="width:100%;">
+					<rich:dataTable value="#{creacionUsuarioController.lstPerfilesUsuario}" var="perfil" style="width:100%;">
 						<f:facet name="header">
 							<h:outputLabel value="Seleccione un perfil" />
 						</f:facet>
@@ -159,21 +187,21 @@
 							<f:facet name="header">
 								<h:outputLabel value="Nombre del perfil" />
 							</f:facet>
-							<h:outputText value="#{perfil.nombre}" />
+							<h:outputText value="#{perfil.perfil.nombre}" />
 						</rich:column>
 						
 						<rich:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.descripcion}" />
 							</f:facet>
-							<h:outputText value="#{perfil.descripcion}" />
+							<h:outputText value="#{perfil.perfil.descripcion}" />
 						</rich:column>
 					</rich:dataTable>
 				</rich:collapsiblePanel>
 	        </h:panelGroup>
-	        <h:panelGroup layout="block" style="width:100%; text-align:center;">
-	        	<h:panelGrid columns="2">
-	        		<a4j:commandLink value="Aceptar" oncomplete="#{rich:component('popup')}.hide();" execute="@this"></a4j:commandLink>
+	        <h:panelGroup layout="block" style="width:100%; margin:auto; ">
+	        	<h:panelGrid columns="2" style="margin:auto;">
+	        		<a4j:commandLink value="Aceptar" oncomplete="#{rich:component('popup')}.hide();" execute="pnlDatosPersona" render="tblPersonas"></a4j:commandLink>
 	        		<a4j:commandLink value="Cancelar" oncomplete="#{rich:component('popup')}.hide();" execute="@this"></a4j:commandLink>
 	        	</h:panelGrid>
 	        </h:panelGroup>
