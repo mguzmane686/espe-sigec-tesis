@@ -265,4 +265,9 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		return presupuestoFacadeLocal.findByCodAnio(anio);
 	}
 
+	@Override
+	public Collection<Persona> findPersonByCriteria(String creiterio, String valor) {
+		return personaFacadeLocal.findPersonByCriteria(creiterio, valor);
+	}
+
 }
