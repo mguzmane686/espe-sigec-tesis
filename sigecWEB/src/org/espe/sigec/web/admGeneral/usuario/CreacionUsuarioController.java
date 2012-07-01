@@ -15,6 +15,7 @@ import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.model.entities.UsuarioPerfilPK;
+import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -28,13 +29,18 @@ import org.espe.sigec.web.utils.FacesUtils;
 public class CreacionUsuarioController implements Serializable{
 	@Inject
 	private SeguridadServicio seguridadServicio;
+	@Inject
+	private AdmGeneralServicio admGeneralServicio;
 	
 	private UsuarioPerfil usuarioPerfil;
 	private Collection<Perfil> lstPerfils;
+	private Collection<UsuarioPerfil> lstPerfilesUsuario;
 	
 	private String filtroBusqueda;
 	private String txtFiltroBusqueda;
 	
+	private Collection<Persona> lstPersonas;
+	private Persona personaSeleccionada;
 	public CreacionUsuarioController() {
 		initEntities();
 	}
@@ -44,6 +50,7 @@ public class CreacionUsuarioController implements Serializable{
 		getUsuarioPerfil().setUsuarioPerfilPK(new UsuarioPerfilPK());
 		getUsuarioPerfil().setPersona(new Persona());
 		getUsuarioPerfil().setUsuario(new Usuario());
+		setPersonaSeleccionada(new Persona());
 		
 	}
 	@PostConstruct
@@ -72,8 +79,7 @@ public class CreacionUsuarioController implements Serializable{
 	}
 	
 	public void btnFindUsr(){
-		System.out.println(getTxtFiltroBusqueda());
-		System.out.println(getFiltroBusqueda());
+		setLstPersonas(admGeneralServicio.findPersonByCriteria(getFiltroBusqueda(), getTxtFiltroBusqueda()));
 	}
 	
 	public UsuarioPerfil getUsuarioPerfil() {
@@ -106,6 +112,52 @@ public class CreacionUsuarioController implements Serializable{
 
 	public void setTxtFiltroBusqueda(String txtFiltroBusqueda) {
 		this.txtFiltroBusqueda = txtFiltroBusqueda;
-	}	
+	}
+
+	public Collection<Persona> getLstPersonas() {
+		return lstPersonas;
+	}
+
+	public void setLstPersonas(Collection<Persona> lstPersonas) {
+		this.lstPersonas = lstPersonas;
+	}
+
+	public Persona getPersonaSeleccionada() {
+		return personaSeleccionada;
+	}
+	
+	public void setPersonaSeleccionada(Persona personaSeleccionada) {
+		this.personaSeleccionada = personaSeleccionada;
+	}
+	
+	public void setPersonaSeleccionadaBucarPerfil(Persona personaSeleccionada) {
+		setLstPerfilesUsuario(new ArrayList<UsuarioPerfil>());
+		try {
+			Collection<UsuarioPerfil> lstUsrPerfil = seguridadServicio.findPerfilesUsuario(personaSeleccionada.getUsuario().getIdUsuario());
+			for(Perfil perfil: getLstPerfils()){
+				UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil( );
+				usuarioPerfilTMP.setUsuarioPerfilPK(new UsuarioPerfilPK(personaSeleccionada.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
+				usuarioPerfilTMP.setPerfil(perfil);
+				for(UsuarioPerfil usuarioPerfil: lstUsrPerfil){
+					if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals(perfil.getIdPerfil())){
+						usuarioPerfilTMP.setSelected(Boolean.TRUE);
+					}
+				}
+				getLstPerfilesUsuario().add(usuarioPerfilTMP);
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.personaSeleccionada = personaSeleccionada;
+	}
+
+	public Collection<UsuarioPerfil> getLstPerfilesUsuario() {
+		return lstPerfilesUsuario;
+	}
+
+	public void setLstPerfilesUsuario(Collection<UsuarioPerfil> lstPerfilesUsuario) {
+		this.lstPerfilesUsuario = lstPerfilesUsuario;
+	}
 	
 }
