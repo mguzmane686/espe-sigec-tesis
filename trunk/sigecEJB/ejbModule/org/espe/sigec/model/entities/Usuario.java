@@ -48,8 +48,12 @@ public class Usuario implements Serializable {
     @Size(max = 1)
     @Column(name = "estado_usr")
     private String estadoUsr;
-    @ManyToMany(mappedBy = "usuarioCollection", fetch = FetchType.LAZY)
-    private Collection<Perfil> perfilCollection;
+//    @ManyToMany(mappedBy = "usuarioCollection", fetch = FetchType.LAZY)
+//    private Collection<Perfil> perfilCollection;
+//    
+    @OneToMany( mappedBy = "usuario", fetch = FetchType.LAZY)
+    private Collection<UsuarioPerfil> usuarioPerfilCollection;
+    
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private Collection<Persona> personaCollection;
 
@@ -84,19 +88,29 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
-    public Collection<Perfil> getPerfilCollection() {
-        return perfilCollection;
-    }
-
-    public void setPerfilCollection(Collection<Perfil> perfilCollection) {
-        this.perfilCollection = perfilCollection;
-    }
+//    public Collection<Perfil> getPerfilCollection() {
+//        return perfilCollection;
+//    }
+//
+//    public void setPerfilCollection(Collection<Perfil> perfilCollection) {
+//        this.perfilCollection = perfilCollection;
+//    }
+    
 
     public Collection<Persona> getPersonaCollection() {
         return personaCollection;
     }
 
-    public void setPersonaCollection(Collection<Persona> personaCollection) {
+    public Collection<UsuarioPerfil> getUsuarioPerfilCollection() {
+		return usuarioPerfilCollection;
+	}
+
+	public void setUsuarioPerfilCollection(
+			Collection<UsuarioPerfil> usuarioPerfilCollection) {
+		this.usuarioPerfilCollection = usuarioPerfilCollection;
+	}
+
+	public void setPersonaCollection(Collection<Persona> personaCollection) {
         this.personaCollection = personaCollection;
     }
 

@@ -4,12 +4,15 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
@@ -60,14 +63,35 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
 		criteria.setFetchMode("usuario", FetchMode.JOIN);
 		
-		criteria.add(Restrictions.or(
-				Restrictions.isNull("esContacto"), Restrictions.ne("esContacto", "1")
-				));
+		criteria.add(Restrictions.or( Restrictions.isNull("esContacto"), Restrictions.ne("esContacto", "1") ));
 		
 		criteria.addOrder(Order.asc("primerApellido"));
 		Collection<Persona> lst =  criteria.list();
 		
 		return lst;
+	}
+
+	@Override
+	public Collection<Persona> findPersonByCriteria(String criterio, String valor) {
+		System.out.println(criterio.concat(valor));
+		
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
+		criteria.createAlias("usuario", "usrPer");
+		criteria.setFetchMode("usrPer", FetchMode.JOIN);
+		if(criterio.equals("usr")){
+			criteria.add(Restrictions.like("usrPer.identificador", valor));
+		}else if(criterio.equals("ced")){
+			criteria.add(Restrictions.like("cedula", valor));
+		}else if(criterio.equals("ape")){
+			criteria.add(Restrictions.like("primerApellido", valor));
+		}
+		
+		
+		Collection<Persona> lstPersonas = criteria.list();
+		if(lstPersonas ==null){
+			lstPersonas = new ArrayList<Persona>();
+		}
+		return lstPersonas;
 	}
 	
 }

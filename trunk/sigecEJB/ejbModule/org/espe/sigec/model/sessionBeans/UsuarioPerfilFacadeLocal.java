@@ -1,10 +1,10 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
 
-import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 @Local
 public interface UsuarioPerfilFacadeLocal {
@@ -21,5 +21,5 @@ public interface UsuarioPerfilFacadeLocal {
 	List<UsuarioPerfil> findRange(int[] range);
 	
 	int count();
-	UsuarioPerfil findUsuarioPerfilByUserId(Usuario usuario);
+	Collection<UsuarioPerfil> findUsuarioPerfilByUserId(Integer usuarioId);
 }

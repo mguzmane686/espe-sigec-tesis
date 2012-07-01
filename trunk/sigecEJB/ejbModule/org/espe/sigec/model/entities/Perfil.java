@@ -44,13 +44,16 @@ public class Perfil implements Serializable {
     @Column(name = "descripcion", length = 250)
     private String descripcion;
     
-    @JoinTable(name = "usuario_perfil", joinColumns = {
-        @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")}, inverseJoinColumns = {
-        @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private Collection<Usuario> usuarioCollection;
+//    @JoinTable(name = "usuario_perfil", joinColumns = {
+//        @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")}, inverseJoinColumns = {
+//        @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")})
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    private Collection<Usuario> usuarioCollection;
     
-    @OneToMany(mappedBy = "idPerfil", fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "perfil", fetch = FetchType.LAZY)
+    private Collection<UsuarioPerfil> usuarioPerfilCollection;
+    
+    @OneToMany(mappedBy = "idPerfil", fetch = FetchType.LAZY)
     private Collection<Modulo> moduloCollection;
     
     @Transient
@@ -71,14 +74,15 @@ public class Perfil implements Serializable {
 		this.idPerfil = idPerfil;
 	}
 
-	public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
-    }
+//	public Collection<Usuario> getUsuarioCollection() {
+//        return usuarioCollection;
+//    }
+//
+//    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+//        this.usuarioCollection = usuarioCollection;
+//    }
 
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
-    }
-
+	
     @Override
     public int hashCode() {
         int hash = 0;
@@ -86,7 +90,16 @@ public class Perfil implements Serializable {
         return hash;
     }
 
-    @Override
+    public Collection<UsuarioPerfil> getUsuarioPerfilCollection() {
+		return usuarioPerfilCollection;
+	}
+
+	public void setUsuarioPerfilCollection(
+			Collection<UsuarioPerfil> usuarioPerfilCollection) {
+		this.usuarioPerfilCollection = usuarioPerfilCollection;
+	}
+
+	@Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Perfil)) {

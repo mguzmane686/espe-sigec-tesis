@@ -4,6 +4,7 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.Perfil;
@@ -26,7 +27,9 @@ public interface PerfilFacadeLocal {
     List<Perfil> findAll();
 
     List<Perfil> findRange(int[] range);
-
+    
+    Collection<Perfil> findPerfiles();
+    
     int count();
     
 }

@@ -75,4 +75,7 @@ public interface AdmGeneralServicio {
 	Collection<PresupuestoCurso> cargarCursoPresupuesto(String anio);
 	Presupuesto findByCodAnio(String anio);
 	
+	Collection<Persona> findPersonByCriteria(String creiterio, String valor);
+	
+	
 }

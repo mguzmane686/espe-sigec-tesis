@@ -57,7 +57,7 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 	public UsuarioPerfil getUsuarioPerfil(Usuario usuario) {
 		UsuarioPerfil id = new UsuarioPerfil(new UsuarioPerfilPK());
 		id.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
-		UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.findUsuarioPerfilByUserId(usuario);
+		UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.findUsuarioPerfilByUserId(usuario.getIdUsuario()).iterator().next();
 		usuarioPerfil.setPersona(personaFacadeLocal.findPersonaByUser(usuario));
 		return usuarioPerfil;
 	}
@@ -81,18 +81,20 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 					
 					usuarioPerfilTMP.setUsuarioPerfilPK(new UsuarioPerfilPK(usuarioPerfil.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
 					usuarioPerfilFacadeLocal.create(usuarioPerfilTMP);
+					
+					if(perfil.getIdPerfil().equals("EST")){
+						Estudiante estudiante = new Estudiante();
+						estudiante.setPersona(usuarioPerfil.getPersona());
+						estudianteFacadeLocal.create(estudiante);
+					}else if(perfil.getIdPerfil().equals("PRO")){
+						Profesor profesor = new Profesor();
+						profesor.setPersona(usuarioPerfil.getPersona());
+						profesorFacadeLocal.create(profesor);
+					}
 				}
 				
 				
-				if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals("EST")){
-					Estudiante estudiante = new Estudiante();
-					estudiante.setPersona(usuarioPerfil.getPersona());
-					estudianteFacadeLocal.create(estudiante);
-				}else if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals("PRO")){
-					Profesor profesor = new Profesor();
-					profesor.setPersona(usuarioPerfil.getPersona());
-					profesorFacadeLocal.create(profesor);
-				}
+				
 			}
 			userTransaction.commit();
 		} catch (Exception e) {
@@ -103,7 +105,13 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 
 	@Override
 	public Collection<Perfil> findPerfiles() {
-		return perfilFacadeLocal.findAll();
+		return perfilFacadeLocal.findPerfiles();
+	}
+
+	@Override
+	public Collection<UsuarioPerfil> findPerfilesUsuario(Integer idUsuario) throws Exception {
+		return usuarioPerfilFacadeLocal.findUsuarioPerfilByUserId(idUsuario);
+		
 	}
 	
 	

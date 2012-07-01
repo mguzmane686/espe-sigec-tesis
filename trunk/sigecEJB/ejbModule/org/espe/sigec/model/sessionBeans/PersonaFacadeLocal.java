@@ -37,4 +37,6 @@ public interface PersonaFacadeLocal {
     
     Collection<Persona> cargarContactos();
     
+    Collection<Persona> findPersonByCriteria(String creiterio, String valor); 
+    
 }

@@ -12,5 +12,6 @@ public interface SeguridadServicio {
 	Collection<Modulo> getMenuByProfile(Usuario usuario);
 	UsuarioPerfil getUsuarioPerfil(Usuario usuario);
 	void crearUsuario(UsuarioPerfil usuarioPerfil) throws Exception;
+	Collection<UsuarioPerfil> findPerfilesUsuario(Integer idUsuario) throws Exception;
 	Collection<Perfil> findPerfiles();
 }

@@ -1,11 +1,12 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 @Stateless
 public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implements UsuarioPerfilFacadeLocal{
@@ -21,11 +22,11 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
 	    }
 
 		@Override
-		public UsuarioPerfil findUsuarioPerfilByUserId(Usuario usuario) {
+		public Collection<UsuarioPerfil> findUsuarioPerfilByUserId(Integer usuarioId) {
 			Query query = getEntityManager().createQuery("select a from UsuarioPerfil a " +
 					"where a.usuarioPerfilPK.idUsuario =:idUsuario");
-			query.setParameter("idUsuario", usuario.getIdUsuario());
-			UsuarioPerfil usuarioPerfil = (UsuarioPerfil) query.getSingleResult();
+			query.setParameter("idUsuario", usuarioId);
+			Collection<UsuarioPerfil> usuarioPerfil =  query.getResultList();
 			return usuarioPerfil;
 		}
 }

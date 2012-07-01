@@ -50,6 +50,8 @@ public class UsuarioPerfil implements Serializable {
     @Transient
     private Collection<Perfil> lstPerfils;
     
+    @Transient
+    private boolean selected;
     public UsuarioPerfil() {
     }
 
@@ -140,6 +142,14 @@ public class UsuarioPerfil implements Serializable {
 
 	public void setLstPerfils(Collection<Perfil> lstPerfils) {
 		this.lstPerfils = lstPerfils;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
     
 }
