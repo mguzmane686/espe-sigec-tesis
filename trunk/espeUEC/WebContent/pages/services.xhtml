@@ -12,11 +12,11 @@
 		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 		<div id="navigation">
 			<ul>
-				<li class="first"><a href="index.jsf">Home</a></li>
-				<li><a href="about.jsf">About us</a></li>
-				<li class="selected"><a href="services.jsf">Services</a></li>
-				<li><a href="solutions.jsf">Solutions</a></li>
-				<li><a href="contact.jsf">Contact</a></li>
+				<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
+				<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
+				<li class="selected"><a href="services.jsf">#{msg.etiqueta_programas}</a></li>
+				<li><a href="solutions.jsf">#{msg.etiqueta_encuesta}</a></li>
+				<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
 			</ul>
 		</div>
 		<div id="search">
@@ -24,13 +24,22 @@
 		</div>
 	</div> <!-- /#header -->
 	</ui:define>
+
 	<h:outputStylesheet>
 		.centrarCelda{
 			text-align:center !important;
 		}
 	</h:outputStylesheet>
 	<ui:define name="body">
+	
+	<h:outputStylesheet library="css" name="imageLinks.css" />
 	<div id="contents">
+		<style>
+        	.btnAceptar{
+				background: url('#{resource['images/icons:button_cancel.png']}') !important;
+				background-repeat: no-repeat !important;
+			}
+        </style>
 		<div class="background">
 			<div id="services">
 			
@@ -48,44 +57,33 @@
 				</ul>
 				<p>
 				<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso??" widgetVar="prograDialog" maximizable="false" minimizable="false"
-					showEffect="explode" hideEffect="explode" modal="true" dynamic="true"> 
+					showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true"> 
 				        
 			        <p:outputPanel id="documentPanel" autoUpdate="true">
 				        <p:panel>
 					        <h:panelGrid id="display" columns="2" cellpadding="4">  
-					            <h:outputText value="Nombre del curso:" />
+					            <h:outputText value="Nombre del curso: " />
 					            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.nombreCurso}" />
 					            
-					            <h:outputText value="Generalidades del curso" />
+					            <h:outputText value="Generalidades del curso: " />
 					            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.generalidadesCurso}" />
 					            
-					            <h:outputText value="Perfil del participante" />
+					            <h:outputText value="Perfil del participante: " />
 					            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" />
-					            
 					        </h:panelGrid>
 				        
 				        </p:panel>
 				        
 				        
 				        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
-				        	<h:panelGrid columns="2">
-				        		<h:outputLabel value="Aceptar" />
-					        	<p:commandLink >
-					        		<h:graphicImage library="images/icons" name="button_accept.png"/>
-					        	</p:commandLink>
-				        	</h:panelGrid>
-				        	
-				        	<h:panelGrid columns="2">
-				        		<h:outputLabel value="Cancelar" />
-					        	<p:commandLink onclick="prograDialog.hide();">
-					        		<h:graphicImage library="images/icons" name="button_cancel.png"/>
-					        	</p:commandLink>
-				        	</h:panelGrid>
+					        <p:commandLink  value="Aceptar" styleClass="aceptar" style="width:100px" onclick="prograDialog.hide();"/>
+					        <p:commandLink onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
+					        
 				        </h:panelGrid>
 				        
 			        </p:outputPanel>  
 			    </p:dialog>
-				
+			    
 				<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
 					
 					 
@@ -96,9 +94,7 @@
 				                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
 									<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
 								</p:commandLink>
-				            </p:column>  
-			            
-				            
+				            </p:column>
 						</p:dataTable>
 					</p:column>
 							

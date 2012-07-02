@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<!-- 
+		Replace path to template, title, header and body
+		with actual data.
+	 -->
+	<ui:composition template="/templates/common.xhtml">
+			<ui:define name="pageTitle">Title</ui:define>
+			<ui:define name="pageHeader">Header</ui:define>
+			<ui:define name="body">
+				<form jsfc="h:form" id="Form">
+					<p:dock>
+<p:menuitem value="Home" icon="/images/dock/home.png" url="#" />
+<p:menuitem value="Music" icon="/images/dock/music.png" url="#" />
+<p:menuitem value="Video" icon="/images/dock/video.png" url="#"/>
+<p:menuitem value="Email" icon="/images/dock/email.png" url="#"/>
+<p:menuitem value="Link" icon="/images/dock/link.png" url="#"/>
+<p:menuitem value="RSS" icon="/images/dock/rss.png" url="#"/>
+<p:menuitem value="History" icon="/images/dock/history.png" url="#"/>
+</p:dock>
+				</form>
+			</ui:define>
+	</ui:composition>
+
+</html>

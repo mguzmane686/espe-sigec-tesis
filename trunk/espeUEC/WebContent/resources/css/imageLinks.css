@@ -1,0 +1,25 @@
+a.aceptar {
+	display: block;
+	background: url('#{resource['images/icons:button_accept.png']}');
+	background-repeat: no-repeat;
+	margin: 0px auto;
+	padding: 0 0 0 0;
+	text-align: center;
+	font-weight: bold;
+	background-position: right 4px !important;
+	background-color: #DBE8FA !important;
+	vertical-align: middle;
+}
+
+a.cancelar{
+	display: block;
+	background: url('#{resource['images/icons:button_cancel.png']}');
+	background-repeat: no-repeat;`
+	margin: 0px auto;
+	padding: 0 0 0 0;
+	text-align: center;
+	font-weight: bold;
+	background-position: right 4px !important;
+	background-color: #DBE8FA !important;
+	vertical-align: middle;
+}
