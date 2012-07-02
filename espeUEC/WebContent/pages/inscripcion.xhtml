@@ -1,30 +1,94 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:uec="http://java.sun.com/jsf/composite/components">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>#{msg.etiqueta_inscripcion}</title>
+	<h:outputStylesheet library="css" name="style.css"/>	
+	<!--[if lte IE 7]>
+		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8" />	
+	<![endif]-->
+</h:head>
 
-	<!-- 
-		Replace path to template, title, header and body
-		with actual data.
-	 -->
-	<ui:composition template="/templates/common.xhtml">
-			<ui:define name="pageTitle">Title</ui:define>
-			<ui:define name="pageHeader">Header</ui:define>
-			<ui:define name="body">
-				<form jsfc="h:form" id="Form">
-					<p:dock>
-<p:menuitem value="Home" icon="/images/dock/home.png" url="#" />
-<p:menuitem value="Music" icon="/images/dock/music.png" url="#" />
-<p:menuitem value="Video" icon="/images/dock/video.png" url="#"/>
-<p:menuitem value="Email" icon="/images/dock/email.png" url="#"/>
-<p:menuitem value="Link" icon="/images/dock/link.png" url="#"/>
-<p:menuitem value="RSS" icon="/images/dock/rss.png" url="#"/>
-<p:menuitem value="History" icon="/images/dock/history.png" url="#"/>
-</p:dock>
-				</form>
-			</ui:define>
-	</ui:composition>
-
+<body>
+	<div id="header">
+		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
+		<div id="navigation">
+			<ul>
+				<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
+				<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
+				<li><a href="services.jsf">#{msg.etiqueta_programas}</a></li>
+				<li class="selected"><a href="solutions.jsf">#{msg.etiqueta_encuesta}</a></li>
+				<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
+			</ul>
+		</div>
+		<div id="search">
+			
+		</div>
+	</div> <!-- /#header -->
+	<div id="contents">
+		<h:outputStylesheet>
+			.label-bold{
+				font-weight: bold;
+			}
+			.tamanioLabel{
+				display:block; 
+				width:250px;
+			}
+			
+		</h:outputStylesheet>
+		<div class="background">
+			<div id="solutions">
+				<h:form id="frmEncuesta">
+					<p:panel header="Curso :">
+						<h:panelGrid>
+							
+						</h:panelGrid>
+						<h:panelGrid columns="2" >
+							<h:outputText value="Identificador" styleClass="tamanioLabel"/>
+							<p:inputText />
+							
+							<h:outputText value="Clave" styleClass="tamanioLabel"/>
+							<p:password />
+							
+							<h:outputText value="Curso" style="display:block; width:250px;"/>
+							<p:inputText />
+							
+							<h:outputText value="#{msg.etiqueta_cedula} :" />
+							<p:inputText />
+							
+							<h:outputText value="Nombre :" />
+							<p:inputText />
+							
+							<h:outputText value="Apellido :" />
+							<p:inputText />
+							
+							<h:outputText value="Fecha nacimiento :" />
+							<p:inputText />
+							
+							<h:outputText value="Nacionalidad :" />
+							<p:inputText />
+							
+							<h:outputText value="#{msg.etiqueta_direccion} :" />
+							<p:inputText />
+							
+							<h:outputText value="E-mail" />
+							<p:inputText />
+							
+							<h:outputText value="#{msg.etiqueta_telefono}" />
+							<p:inputText />
+						</h:panelGrid>
+						<h:panelGroup style="text-align:center;" layout="block">
+							<p:commandLink value="Guardar"></p:commandLink>
+						</h:panelGroup>
+					</p:panel>
+				</h:form>
+			</div>
+		</div>
+	</div> <!-- /#contents -->
+	<ui:include src="/pages/footerPage.xhtml" />
+	<!-- /#footer -->
+</body>
 </html>
