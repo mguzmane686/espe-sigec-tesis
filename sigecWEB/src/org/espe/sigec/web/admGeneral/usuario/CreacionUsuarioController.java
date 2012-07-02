@@ -51,6 +51,7 @@ public class CreacionUsuarioController implements Serializable{
 		getUsuarioPerfil().setPersona(new Persona());
 		getUsuarioPerfil().setUsuario(new Usuario());
 		setPersonaSeleccionada(new Persona());
+		setFiltroBusqueda("usr");
 		
 	}
 	@PostConstruct
