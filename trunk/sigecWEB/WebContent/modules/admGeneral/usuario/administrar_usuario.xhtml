@@ -42,42 +42,28 @@
    	<h:outputStylesheet library="css" name="tables.css" />
 
 	<h:form>
-		<rich:panel header="#{msg['etiqueta_nuevo_usuario']}">
-			<h:panelGroup layout="block" styleClass="roundCorner">
-				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
-					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{creacionUsuarioController.btnCrearUsuario}" image="/resources/images/save.png" render="pnlDocente"/>
-					<h:outputLabel value="#{msg['guardar']}" />
-				</h:panelGrid>
-			</h:panelGroup>
-		</rich:panel>
+		
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
-			<h:panelGrid columns="2" style="width:100%;" columnClasses="clas1">
-				<h:panelGroup layout="block" styleClass="rf-p-hdr pgLeft" style="height:20px; width:auto;" >
-					<a4j:commandLink id="pgLeft" execute="@none" style="float:right;">
-						<h:graphicImage library="images/icons" name="navigate-left.png" />
-					</a4j:commandLink>
-					<rich:jQuery selector="#pgLeft" event="click" query="jQuery('.clas1').css({width:'18px'});" />
-					<rich:jQuery selector="#pgLeft" event="click" query="jQuery(this).css({visibility:'hidden'});" />
-				</h:panelGroup>
-				
-				<h:panelGroup layout="block" styleClass="rf-p-hdr">
-				</h:panelGroup>
-			</h:panelGrid>
+			
 			<rich:collapsiblePanel header="Criterios de busqueda"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
-				<h:panelGrid columns="4">
-					<h:outputLabel value="Buscar por" />
-					<h:selectOneRadio value="#{creacionUsuarioController.filtroBusqueda}" id="somFiltroBusqueda">
-						<f:selectItem itemLabel="Usuario :" itemValue="usr"/>
-						<f:selectItem itemLabel="Cedula :" itemValue="ced"/>
-						<f:selectItem itemLabel="Primer apellido :" itemValue="ape"/>
-					</h:selectOneRadio>
-					<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda"/>
-					<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}"  
-						execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas"></a4j:commandLink>
-				</h:panelGrid>
+				<h:panelGroup>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Buscar por :" styleClass="label-bold"/>
+						<h:selectOneRadio value="#{creacionUsuarioController.filtroBusqueda}" id="somFiltroBusqueda">
+							<f:selectItem itemLabel="Usuario :" itemValue="usr"/>
+							<f:selectItem itemLabel="#{msg.}" itemValue="ced"/>
+							<f:selectItem itemLabel="Primer apellido :" itemValue="ape"/>
+						</h:selectOneRadio>
+					</h:panelGrid>
+					<h:panelGrid columns="2">
+						<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda"/>
+						<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}"  
+							execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas"></a4j:commandLink>
+					</h:panelGrid>
+				</h:panelGroup>
 				
 				
 			</rich:collapsiblePanel>
