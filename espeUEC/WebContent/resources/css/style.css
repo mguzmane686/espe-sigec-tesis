@@ -427,10 +427,10 @@ img {
 #services span, #solutions span, #support span {
 	color: #0e2934;
 	display: block;
-	font-size: 17px;
+	
 	font-weight: bold;
 	line-height: 20px;
-	margin: 0 0 20px;
+	
 	text-align: justify;
 }
 #services span a, #solutions span a, #support span a {
