@@ -61,7 +61,7 @@ img {
 	font-weight: bold;
 	padding: 0 10px;
 	text-decoration: none;
-	text-shadow: 1px 1px 0 #eaeaea;
+	
 }
 #navigation a:hover {
 	color: #0a2d43;
@@ -216,7 +216,7 @@ img {
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	background: url('#{resource['images:bg-content.gif']}') repeat;
-	padding: 40px 0 20px;
+	padding: 20px 0 20px;
 }
 #contents div.body {
 	color: #fdfffa;

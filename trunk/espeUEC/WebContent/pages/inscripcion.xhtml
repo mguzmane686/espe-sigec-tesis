@@ -7,9 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>#{msg.etiqueta_inscripcion}</title>
 	<h:outputStylesheet library="css" name="style.css"/>	
-	<!--[if lte IE 7]>
-		<link rel="stylesheet" href="css/ie.css" type="text/css" charset="utf-8" />	
-	<![endif]-->
+	
 </h:head>
 
 <body>
@@ -42,7 +40,7 @@
 		<div class="background">
 			<div id="solutions">
 				<h:form id="frmEncuesta">
-					<p:panel header="Curso :">
+					<p:panel header="Curso : #{inscripcionController.cursoPeriodo.curso.nombreCurso}">
 						<h:panelGrid>
 							
 						</h:panelGrid>
@@ -50,11 +48,8 @@
 							<h:outputText value="Identificador" styleClass="tamanioLabel"/>
 							<p:inputText />
 							
-							<h:outputText value="Clave" styleClass="tamanioLabel"/>
+							<h:outputText value="Clave" styleClass="tamanioLabel" style="display:block; width:200px;"/>
 							<p:password />
-							
-							<h:outputText value="Curso" style="display:block; width:250px;"/>
-							<p:inputText />
 							
 							<h:outputText value="#{msg.etiqueta_cedula} :" />
 							<p:inputText />
@@ -81,7 +76,7 @@
 							<p:inputText />
 						</h:panelGrid>
 						<h:panelGroup style="text-align:center;" layout="block">
-							<p:commandLink value="Guardar"></p:commandLink>
+							<p:commandLink value="Guardar" action="#{inscripcionController.btnGuardarInscripcion}" process="@this"></p:commandLink>
 						</h:panelGroup>
 					</p:panel>
 				</h:form>
