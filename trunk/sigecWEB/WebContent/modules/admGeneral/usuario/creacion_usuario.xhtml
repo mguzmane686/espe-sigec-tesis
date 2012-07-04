@@ -73,7 +73,7 @@
 					<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
 					
 					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
-						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido"/>
+						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido" validator="cedulaValidator"/>
 
 					<h:outputLabel value="#{msg['nombres']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
