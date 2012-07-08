@@ -13,14 +13,18 @@ public class CedulaValidator implements Validator{
 
 	@Override
 	public void validate(FacesContext arg0, UIComponent arg1, Object arg2) throws ValidatorException {
+		String mensaje;
 		try {
 			if(!CedulaValidacion.getInstancia().validarCedula(String.valueOf(arg2))){
-				throw new Exception("no pasa la validacion de la cedula");
+				mensaje = "La cédula "+ arg2+ " no es válida";
+				FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensaje, mensaje);
+				throw new ValidatorException(facesMessage);
 			}
-			System.out.println("Pasa la validacion");
+			
 		} catch (Exception e) {
-			String mensaje = "La cédula "+ arg2+ " no es válida";
-			throw new ValidatorException(new FacesMessage(mensaje));
+			mensaje = "La cédula "+ arg2+ " no es válida";
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, mensaje, mensaje);
+			throw new ValidatorException(facesMessage);
 		} 
 	}
 
