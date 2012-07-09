@@ -39,7 +39,7 @@ public class ProgramasController implements Serializable{
 	}
 	
 	public void btnAceptar(){
-		System.out.println("asdasd");
+		System.out.println(getCursoPeriodoSeleccionado().getModuloCursoPeriodoCollection());
 	}
 	public void btnShowProgramaDetalle(){
 		System.out.println("Uno");

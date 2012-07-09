@@ -1,29 +1,63 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Business Solutions</title>
-	<h:outputStylesheet library="css" name="style.css"/>
 	
+	<style>
+		
+		.cabecera {
+			width: 960px;
+			margin: 0 auto;
+			padding: 40px 0;
+			position: relative;
+		}
+		.logoCabecera {
+			display: block;
+			padding: 0 0 35px 20px;
+		}
+		.bodyStyle{
+			background-color: #0c2635; 
+			margin: 0;
+		}
+		.contenido {
+			background: url('#{resource['images:bg-content.gif']}') repeat;
+			width: 960px;
+			margin: 0 auto;
+			padding: 40px 0;
+			position: relative;
+		}
+		img {
+			border: 0;
+		}
+		body {
+			background-color: #0c2635; 
+			margin: 0;
+		}
+	</style>
 </h:head>
 
 <body>
-	<div id="header">
-		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-		<div id="navigation">
-			<ul>
-				<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
-				<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
-				<li><a href="services.jsf">#{msg.etiqueta_programas}</a></li>
-				<li><a href="solutions.jsf">#{msg.etiqueta_encuesta}</a></li>
-				<li class="selected"><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
-			</ul>
-		</div>
-		<div id="search">
-			
-		</div>
-	</div> <!-- /#header -->
-	<div id="contents">
+	<h:form id="frmUno">
+	
+	<h:panelGrid columns="1" style="width:100%;">
+		<h:panelGroup styleClass="bodyStyle" layout="block">
+			<h:panelGroup class="cabecera" layout="block">
+				<a class="logoCabecera" href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
+				<p:breadCrumb>  
+				    <p:menuitem value="#{msg.etiqueta_Inicio}" url="index.jsf" />  
+				    <p:menuitem value="#{msg.etiqueta_nosotros}" url="about.jsf" />  
+				    <p:menuitem value="#{msg.etiqueta_programas}" url="services.jsf" />  
+				    <p:menuitem value="#{msg.etiqueta_encuesta}" url="solutions.jsf" />  
+				    <p:menuitem value="#{msg.etiqueta_contacto}" url="contact.jsf" />  
+				</p:breadCrumb> 
+			</h:panelGroup>
+		</h:panelGroup>
+		
+		<p:panel>
+			<div class="contenido ">
 		<div class="background">
 			<div id="contacts">
 				<p>
@@ -42,8 +76,12 @@
 				</ul>
 			</div>
 		</div>
-	</div> <!-- /#contents -->
+	</div>
+		</p:panel>
+	</h:panelGrid>
+	
 	<ui:include src="/pages/footerPage.xhtml" />
 	<!-- /#footer -->
+	</h:form>
 </body>
 </html>

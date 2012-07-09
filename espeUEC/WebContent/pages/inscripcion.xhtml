@@ -38,45 +38,83 @@
 			
 		</h:outputStylesheet>
 		<div class="background">
-			<div id="solutions">
-				<h:form id="frmEncuesta">
-					<p:panel header="Curso : #{inscripcionController.cursoPeriodo.curso.nombreCurso}">
-						<h:panelGrid>
-							
+			<div >
+			<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+              
+			<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false"   
+			        draggable="false" closable="false">  
+				<h:graphicImage library="images" name="ajax-loader.gif"/>  
+			</p:dialog>  
+				<h:form id="frmInscripcion">
+					<h:panelGrid columns="2">
+						<p:commandButton value="Nuevo" action="#{inscripcionController.btnNewEstudent}" process="@this" update="pnlDatosEstCur"/>
+						<p:commandButton value="Buscar" action="#{inscripcionController.btnFindStudent}" process="@this" update="pnlDatosEstCur"/>
+					</h:panelGrid>
+				  
+					<p:panel header="Curso : #{inscripcionController.cursoPeriodo.curso.nombreCurso}" id="pnlDatosEstCur">
+					<p:messages id="msgs" autoUpdate="true"/>
+						<h:panelGrid columns="3" rendered="#{inscripcionController.findMode}" id="pnlFindFilter">
+							<h:outputLabel value="#{msg.etiqueta_cedula}" style="margin-right: 56px;"/>
+							<p:inputText id="txtCedulaFilter" value="#{inscripcionController.cedulaUsr}" validator="cedulaValidator" required="true" requiredMessage="El documento es obligatorio"></p:inputText>
+							<p:commandButton action="#{inscripcionController.btnBuscarPorCedula}" process="@this txtCedulaFilter" update="pnlDatosEst"></p:commandButton> 
 						</h:panelGrid>
-						<h:panelGrid columns="2" >
-							<h:outputText value="Identificador" styleClass="tamanioLabel"/>
-							<p:inputText />
+						<h:panelGrid columns="2" id="pnlDatosEst">
+							<h:outputText value="Identificador" styleClass="tamanioLabel" rendered="#{!inscripcionController.findMode}"/>
+							<p:inputText value="#{inscripcionController.persona.usuario.identificador}" rendered="#{!inscripcionController.findMode}"/>
 							
-							<h:outputText value="Clave" styleClass="tamanioLabel" style="display:block; width:200px;"/>
-							<p:password />
 							
-							<h:outputText value="#{msg.etiqueta_cedula} :" />
-							<p:inputText />
+							<h:outputText value="Clave" styleClass="tamanioLabel" style="display:block; width:200px;" rendered="#{!inscripcionController.findMode}"/>
+							<p:password value="#{inscripcionController.persona.usuario.clave}" rendered="#{!inscripcionController.findMode}"/>
 							
-							<h:outputText value="Nombre :" />
-							<p:inputText />
+							<h:outputText value="#{msg.etiqueta_cedula} :"/>
+							<p:inputText value="#{inscripcionController.persona.cedula}" required="true" rendered="#{!inscripcionController.findMode}"
+								validator="cedulaValidator" validatorMessage="Documento invalido" requiredMessage="El campo documento es obligatorio"/>
 							
-							<h:outputText value="Apellido :" />
-							<p:inputText />
+							<h:outputText value="#{inscripcionController.persona.cedula}" rendered="#{inscripcionController.findMode}"/>
+							
+							<h:outputText value="Nombre :"/>
+							<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+								<p:inputText value="#{inscripcionController.persona.primerNombre}" rendered="#{!inscripcionController.findMode}"/>
+								<p:inputText value="#{inscripcionController.persona.segundoNombre}" rendered="#{!inscripcionController.findMode}"/>
+								
+								<h:outputText value="#{inscripcionController.persona.primerNombre}" rendered="#{inscripcionController.findMode}"/>
+								<h:outputText value="#{inscripcionController.persona.segundoNombre}" rendered="#{inscripcionController.findMode}"/>
+							</h:panelGrid>
+							
+							
+							<h:outputText value="Apellido :"/>
+							<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+								<p:inputText value="#{inscripcionController.persona.primerApellido}" rendered="#{!inscripcionController.findMode}"/>
+								<p:inputText value="#{inscripcionController.persona.segundoApellido}" rendered="#{!inscripcionController.findMode}"/>
+								
+								<h:outputText value="#{inscripcionController.persona.primerApellido}" rendered="#{inscripcionController.findMode}"/>
+								<h:outputText value="#{inscripcionController.persona.segundoApellido}" rendered="#{inscripcionController.findMode}"/>
+							</h:panelGrid>
 							
 							<h:outputText value="Fecha nacimiento :" />
-							<p:inputText />
-							
+							<p:calendar value="#{inscripcionController.persona.fechaNacimiento}" rendered="#{!inscripcionController.findMode}" 
+								pattern="yyyy-MM-dd" navigator="true" />
+							<h:outputText value="#{inscripcionController.persona.fechaNacimiento}" rendered="#{inscripcionController.findMode}"/>
+														
 							<h:outputText value="Nacionalidad :" />
-							<p:inputText />
+							<p:inputText value="#{inscripcionController.persona.nacionalidad}" rendered="#{!inscripcionController.findMode}"/>
+							<h:outputText value="#{inscripcionController.persona.nacionalidad}" rendered="#{inscripcionController.findMode}"/>
 							
 							<h:outputText value="#{msg.etiqueta_direccion} :" />
-							<p:inputText />
+							<p:inputText value="#{inscripcionController.persona.direccion}" rendered="#{!inscripcionController.findMode}"/>
+							<h:outputText value="#{inscripcionController.persona.direccion}" rendered="#{inscripcionController.findMode}"/>
 							
 							<h:outputText value="E-mail" />
-							<p:inputText />
+							<p:inputText value="#{inscripcionController.persona.mail}" rendered="#{!inscripcionController.findMode}"/>
+							<h:outputText value="#{inscripcionController.persona.mail}" rendered="#{inscripcionController.findMode}"/>
 							
 							<h:outputText value="#{msg.etiqueta_telefono}" />
-							<p:inputText />
+							<p:inputText value="#{inscripcionController.persona.telefonoCelular}" rendered="#{!inscripcionController.findMode}"/>
+							<h:outputText value="#{inscripcionController.persona.telefonoCelular}" rendered="#{inscripcionController.findMode}"/>
+							
 						</h:panelGrid>
 						<h:panelGroup style="text-align:center;" layout="block">
-							<p:commandLink value="Guardar" action="#{inscripcionController.btnGuardarInscripcion}" process="@this"></p:commandLink>
+							<p:commandLink value="Guardar" action="#{inscripcionController.btnGuardarInscripcion}" process="@this pnlDatosEst" update="pnlDatosEstCur"></p:commandLink>
 						</h:panelGroup>
 					</p:panel>
 				</h:form>
