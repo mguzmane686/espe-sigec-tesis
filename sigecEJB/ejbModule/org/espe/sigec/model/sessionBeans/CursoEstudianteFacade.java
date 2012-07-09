@@ -5,6 +5,7 @@
 package org.espe.sigec.model.sessionBeans;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.Stateless;
@@ -36,7 +37,7 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 	@Override
 	public int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo) {
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class);
-		criteria.add(Restrictions.eq("cursoEstudiantePK.idCursoPeriodo", idCursoPeriodo));
+		criteria.add(Restrictions.eq("cursoEstudiantePK.idCursoPeriodo", new BigInteger(idCursoPeriodo.toString())));
 		
 		@SuppressWarnings("unchecked")
 		Collection<Usuario> lstUsuarios = criteria.list();

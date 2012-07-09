@@ -16,6 +16,7 @@ import org.espe.sigec.model.entities.Usuario;
 public interface InscripcionServicio {
 	void registrarEstudiante(Usuario usuario, Persona persona, Estudiante estudiante) throws Exception, UserValidateException;
 	void inscripcionEstudianteCurso(Estudiante estudiante, CursoPeriodo cursoPeriodo, CursoEstudiante cursoEstudiante, boolean isNewStudent) throws Exception;
+	void inscripcionEstudianteCurso(Persona persona, CursoPeriodo cursoPeriodo) throws Exception;
 	Collection<CursoPeriodo> cargarCursoLanzado();
 	Estudiante buscarEstudinateByCedula(String cedula);
 }

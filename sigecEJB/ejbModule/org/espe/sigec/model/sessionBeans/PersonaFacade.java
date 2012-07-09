@@ -11,8 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
@@ -81,7 +79,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 		if(criterio.equals("usr")){
 			criteria.add(Restrictions.like("usrPer.identificador", valor));
 		}else if(criterio.equals("ced")){
-			criteria.add(Restrictions.like("cedula", valor));
+			criteria.add(Restrictions.eq("cedula", valor));
 		}else if(criterio.equals("ape")){
 			criteria.add(Restrictions.like("primerApellido", valor));
 		}
