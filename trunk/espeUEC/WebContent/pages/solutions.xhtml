@@ -62,7 +62,9 @@
 								
 								<h:outputText value="#{msg.etiqueta_nombre_curso} :" styleClass="label-bold" style="display:block; width:150px;"/>
 								<p:inplace label="#{msg.etiqueta_points.concat(msg.etiqueta_points).concat(msg.etiqueta_points).concat(msg.etiqueta_points)}">
-									<p:inputText value="" size="88"/>
+									<p:selectOneMenu>
+										<f:selectItems value="#{encuestaController.lstCursosAbiertos}" var="itemCurso" itemLabel="#{itemCurso.curso.nombreCurso}" itemValue="#{itemCurso.idCursoPeriodo}"></f:selectItems>
+									</p:selectOneMenu>
 								</p:inplace>
 								
 								<h:outputText value="#{msg.etiqueta_lugar} :" styleClass="label-bold" style="display:block; width:150px;"/>
