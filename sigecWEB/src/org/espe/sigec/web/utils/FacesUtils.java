@@ -43,7 +43,6 @@ import javax.faces.application.ApplicationFactory;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.ViewHandler;
 import javax.faces.component.UIViewRoot;
-import javax.faces.component.html.HtmlCommandLink;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.el.ValueBinding;
