@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.inscripcion;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -124,6 +125,72 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 	@Override
 	public Estudiante buscarEstudinateByCedula(String cedula){
 		return estudianteFacadeLocal.buscarEstudinateByCedula(cedula);
+	}
+
+	@Override
+	public void inscripcionEstudianteCurso(Persona persona, CursoPeriodo cursoPeriodo) throws Exception {
+		try {
+			userTransaction.begin();
+			
+			Estudiante estudiante = null;
+			
+			if(persona.getIdPersona()==null){
+				if(usuarioFacade.isIdentificadorvalida(persona.getUsuario().getIdentificador())){
+					usuarioFacade.create(persona.getUsuario());
+					UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
+					usuarioPerfilFacadeLocal.create(usuarioPerfil);
+					personaFacadeLocal.create(persona);
+					
+					estudiante = new Estudiante();
+					estudiante.setPersona(persona);
+					
+					estudianteFacadeLocal.create(estudiante);
+				}else{
+					throw new Exception("El identificador ya existe");
+				}
+			}else{
+				UsuarioPerfilPK usuarioPerfilPK = new UsuarioPerfilPK(persona.getIdPersona(), "EST");
+				UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.find(usuarioPerfilPK);
+				if(usuarioPerfil==null){
+					UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
+					usuarioPerfilFacadeLocal.create(usuarioPerfilTMP);
+					
+					estudiante = new Estudiante();
+					estudiante.setPersona(persona);
+					
+					estudianteFacadeLocal.create(estudiante);
+				}
+			}
+			
+			if(cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo()) < cursoPeriodo.getMaximoEstudiantes()){
+				CursoEstudiante cursoEstudiante = new CursoEstudiante();
+				cursoEstudiante.setEstudiante(estudiante);
+//				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+				cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
+				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(new BigInteger(cursoPeriodo.getIdCursoPeriodo().toString()));
+				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
+				cursoEstudiante.setEstadoPago("DEBE");
+				cursoEstudianteFacadeLocal.create(cursoEstudiante);
+				
+				if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())) >= cursoPeriodo.getMinimoEstudiantes()){
+					cursoPeriodo.getHistoricoCursoEstadoCollection().setEtapaAsignacionProfesor("1");
+					historicoCursoEstadoFacadeLocal.edit(cursoPeriodo.getHistoricoCursoEstadoCollection());
+				}
+				
+				userTransaction.commit();
+			}else{
+				throw new Exception("Ya no quedan cupos para el curso");
+			}
+			
+		} catch (Exception e) {
+			userTransaction.rollback();
+			if(e.getMessage().contains("El identificador ya existe")){
+				throw new UserValidateException("UserValidateException");
+			}else{
+				throw new Exception(e);
+			}
+		}
+		
 	}
 	
 }
