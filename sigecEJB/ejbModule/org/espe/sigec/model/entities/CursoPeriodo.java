@@ -33,7 +33,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "curso_periodo")
+@Table(name = "sgct_acd_cur_per")
 @NamedQueries({
     @NamedQuery(name = "CursoPeriodo.findAll", query = "SELECT c FROM CursoPeriodo c")})
 public class CursoPeriodo implements Serializable {
@@ -49,33 +49,34 @@ public class CursoPeriodo implements Serializable {
     
     @Column(name = "tipo_curso")
     private String tipoCurso;
-    @Column(name = "minimo_estudiantes")
+    @Column(name = "cper_min_est")
     private Integer minimoEstudiantes;
-    @Column(name = "maximo_estudiantes")
+    @Column(name = "cper_max_est")
     private Integer maximoEstudiantes;
-    @Column(name = "lugar_capacitacion")
+    @Column(name = "cper_lugar_cap")
     private String lugarCapacitacion;
     @Size(max = 20)
-    @Column(name = "modalidad")
+    @Column(name = "cper_modalidad")
     private String modalidad;
       
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
-    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
+    
+    @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
+    private Collection<PensumAcademicoPeriodoCurso> lstPensumAcademicoPerCursoCollection;
     
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private PresupuestoCurso presupuestoCurso;
     
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @JoinColumn(name = "per_id_persona", referencedColumnName = "per_id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
     
     @OneToOne(mappedBy="cursoPeriodo", fetch= FetchType.LAZY)
     private HistoricoCursoEstado historicoCursoEstadoCollection;
     
-    @JoinColumn(name = "id_per_academico", referencedColumnName = "id_per_academico")
+    @JoinColumn(name = "paca_id", referencedColumnName = "paca_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private PeriodoAcademico periodoAcademico;
-    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
+    @JoinColumn(name = "cur_id_curso", referencedColumnName = "cur_id_curso")
     @ManyToOne(fetch = FetchType.LAZY)
     private Curso curso;
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
@@ -84,6 +85,8 @@ public class CursoPeriodo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<ProgramaCurso> programaCursoCollection;
 
+    @Transient
+    private ProgramaCurso programaCurso;
     public CursoPeriodo() {
     }
 
@@ -232,22 +235,42 @@ public class CursoPeriodo implements Serializable {
 		this.modalidad = modalidad;
 	}
 	
-	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
-		return moduloCursoPeriodoCollection;
-	}
+//	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
+//		return moduloCursoPeriodoCollection;
+//	}
+//
+//	public void setModuloCursoPeriodoCollection(
+//			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
+//		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
+//	}
 
-	public void setModuloCursoPeriodoCollection(
-			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
-		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
-	}
-
+	
 	public Collection<ProgramaCurso> getProgramaCursoCollection() {
 		return programaCursoCollection;
+	}
+
+
+
+	public Collection<PensumAcademicoPeriodoCurso> getLstPensumAcademicoPerCursoCollection() {
+		return lstPensumAcademicoPerCursoCollection;
+	}
+
+	public void setLstPensumAcademicoPerCursoCollection(
+			Collection<PensumAcademicoPeriodoCurso> lstPensumAcademicoPerCursoCollection) {
+		this.lstPensumAcademicoPerCursoCollection = lstPensumAcademicoPerCursoCollection;
 	}
 
 	public void setProgramaCursoCollection(
 			Collection<ProgramaCurso> programaCursoCollection) {
 		this.programaCursoCollection = programaCursoCollection;
+	}
+
+	public ProgramaCurso getProgramaCurso() {
+		return programaCurso;
+	}
+
+	public void setProgramaCurso(ProgramaCurso programaCurso) {
+		this.programaCurso = programaCurso;
 	}
 	
 	

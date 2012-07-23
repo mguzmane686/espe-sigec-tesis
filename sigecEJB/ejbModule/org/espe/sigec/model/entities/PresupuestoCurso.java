@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  * @author roberto
  */
 @Entity
-@Table(name = "presupuesto_curso")
+@Table(name = "sgct_fnc_presupuesto_curso")
 @NamedQueries({
     @NamedQuery(name = "PresupuestoCurso.findAll", query = "SELECT p FROM PresupuestoCurso p")})
 public class PresupuestoCurso implements Serializable {
@@ -47,7 +47,7 @@ public class PresupuestoCurso implements Serializable {
     private Integer porcentageUtiEspe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "presupuestoCurso", fetch = FetchType.LAZY)
     private Collection<DetallePresupuestoCurso> detallePresupuestoCursoCollection;
-    @JoinColumn(name = "id_presupuesto", referencedColumnName = "id_presupuesto")
+    @JoinColumn(name = "pre_id", referencedColumnName = "pre_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Presupuesto presupuesto;
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)

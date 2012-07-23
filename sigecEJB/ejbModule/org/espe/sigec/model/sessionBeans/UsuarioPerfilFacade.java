@@ -24,8 +24,9 @@ public class UsuarioPerfilFacade extends AbstractFacade<UsuarioPerfil> implement
 		@Override
 		public Collection<UsuarioPerfil> findUsuarioPerfilByUserId(Integer usuarioId) {
 			Query query = getEntityManager().createQuery("select a from UsuarioPerfil a " +
-					"where a.usuarioPerfilPK.idUsuario =:idUsuario");
+					"where a.usuarioPerfilPK.idUsuario =:idUsuario and a.estado =:estado");
 			query.setParameter("idUsuario", usuarioId);
+			query.setParameter("estado", "1");
 			Collection<UsuarioPerfil> usuarioPerfil =  query.getResultList();
 			return usuarioPerfil;
 		}

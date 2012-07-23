@@ -21,24 +21,24 @@ import javax.validation.constraints.NotNull;
 public class CursoEstudiantePK implements Serializable {
 	@Basic(optional = false)
     @NotNull
-    @Column(name = "id_estudiante")
+    @Column(name = "est_id_estudiante")
     private int idEstudiante;
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_curso_periodo")
     private BigInteger idCursoPeriodo;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "id_modulo_curso")
-    private int idModuloCurso;
+//    @Basic(optional = false)
+//    @NotNull
+//    @Column(name = "id_modulo_curso")
+//    private int idModuloCurso;
     
     public CursoEstudiantePK() {
     }
 
-    public CursoEstudiantePK(int idEstudiante, BigInteger idCursoPeriodo, int idModuloCurso) {
+    public CursoEstudiantePK(int idEstudiante, BigInteger idCursoPeriodo) {
         this.idEstudiante = idEstudiante;
         this.idCursoPeriodo = idCursoPeriodo;
-        this.idModuloCurso = idModuloCurso;
+//        this.idModuloCurso = idModuloCurso;
     }
     
     public int getIdEstudiante() {
@@ -54,7 +54,7 @@ public class CursoEstudiantePK implements Serializable {
         int hash = 0;
         hash += (int) idEstudiante;
         hash += (idCursoPeriodo != null ? idCursoPeriodo.hashCode() : 0);
-        hash += (int) idModuloCurso;
+//        hash += (int) idModuloCurso;
         return hash;
     }
 
@@ -71,24 +71,24 @@ public class CursoEstudiantePK implements Serializable {
         if ((this.idCursoPeriodo == null && other.idCursoPeriodo != null) || (this.idCursoPeriodo != null && !this.idCursoPeriodo.equals(other.idCursoPeriodo))) {
             return false;
         }
-        if (this.idModuloCurso != other.idModuloCurso) {
-            return false;
-        }
+//        if (this.idModuloCurso != other.idModuloCurso) {
+//            return false;
+//        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entities.CursoEstudiantePK[ idEstudiante=" + idEstudiante + ", idCursoPeriodo=" + idCursoPeriodo + ", idModuloCurso=" + idModuloCurso + " ]";
+        return "org.espe.sigec.model.entities.CursoEstudiantePK[ idEstudiante=" + idEstudiante + ", idCursoPeriodo=" + idCursoPeriodo + " ]";
     }
 
-	public int getIdModuloCurso() {
-		return idModuloCurso;
-	}
-
-	public void setIdModuloCurso(int idModuloCurso) {
-		this.idModuloCurso = idModuloCurso;
-	}
+//	public int getIdModuloCurso() {
+//		return idModuloCurso;
+//	}
+//
+//	public void setIdModuloCurso(int idModuloCurso) {
+//		this.idModuloCurso = idModuloCurso;
+//	}
 
 	public void setIdCursoPeriodo(BigInteger idCursoPeriodo) {
 		this.idCursoPeriodo = idCursoPeriodo;

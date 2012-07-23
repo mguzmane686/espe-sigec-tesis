@@ -6,13 +6,13 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
  * @author roberto
  */
 @Entity
-@Table(name = "calificacion_estudiante")
+@Table(name = "sgct_acd_cal_est")
 @NamedQueries({
     @NamedQuery(name = "CalificacionEstudiante.findAll", query = "SELECT c FROM CalificacionEstudiante c")})
 public class CalificacionEstudiante implements Serializable {
@@ -36,10 +36,7 @@ public class CalificacionEstudiante implements Serializable {
     private Integer idCalificacion;
     @Column(name = "nota")
     private BigInteger nota;
-    @JoinColumns({
-        @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante"),
-        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo"),
-        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso")})
+    @JoinColumn(name = "est_id_estudiante", referencedColumnName = "est_id_estudiante")
     @ManyToOne(fetch = FetchType.LAZY)
     private CursoEstudiante cursoEstudiante;
 

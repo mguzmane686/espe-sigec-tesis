@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "detalle_presupuesto_curso")
+@Table(name = "sgct_fnc_det_pres_cur")
 @NamedQueries({
     @NamedQuery(name = "DetallePresupuestoCurso.findAll", query = "SELECT d FROM DetallePresupuestoCurso d")})
 public class DetallePresupuestoCurso implements Serializable {
@@ -34,16 +34,16 @@ public class DetallePresupuestoCurso implements Serializable {
     @EmbeddedId
     protected DetallePresupuestoCursoPK detallePresupuestoCursoPK;
     @Size(max = 100)
-    @Column(name = "detalle")
+    @Column(name = "det_detalle")
     private String detalle;
-    @Column(name = "cantidad")
+    @Column(name = "det_cantidad")
     private Double cantidad;
     @Size(max = 25)
-    @Column(name = "unidad")
+    @Column(name = "det_unidad")
     private String unidad;
-    @Column(name = "costo_unitario")
+    @Column(name = "det_costo_unitario")
     private BigDecimal costoUnitario;
-    @Column(name = "costo_total")
+    @Column(name = "det_costo_total")
     private BigDecimal costoTotal;
     
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)

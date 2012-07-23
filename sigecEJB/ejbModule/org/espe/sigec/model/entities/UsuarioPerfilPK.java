@@ -21,12 +21,12 @@ import javax.validation.constraints.Size;
 public class UsuarioPerfilPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_usuario")
+    @Column(name = "usr_id_usuario")
     private int idUsuario;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "id_perfil")
+    @Column(name = "prf_id_perfil")
     private String idPerfil;
 
     public UsuarioPerfilPK() {

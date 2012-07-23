@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "curso_estudiante")
+@Table(name = "sgct_acd_cur_est")
 @NamedQueries({
     @NamedQuery(name = "CursoEstudiante.findAll", query = "SELECT c FROM CursoEstudiante c")})
 public class CursoEstudiante implements Serializable {
@@ -37,12 +37,16 @@ public class CursoEstudiante implements Serializable {
     @Size(max = 10)
     @Column(name = "estado_pago")
     private String estadoPago;
-    @JoinColumns({
-        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso", insertable = false, updatable = false)})
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private ModuloCursoPeriodo moduloCursoPeriodo;
-    @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante", insertable = false, updatable = false)
+    
+    @Column(name = "prg_id")
+    private Integer idPrograma; 
+    
+//    @JoinColumns({
+//        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
+//        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso", insertable = false, updatable = false)})
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+//    private ModuloCursoPeriodo moduloCursoPeriodo;
+    @JoinColumn(name = "est_id_estudiante", referencedColumnName = "est_id_estudiante", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Estudiante estudiante;
     @OneToMany(mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
@@ -50,6 +54,12 @@ public class CursoEstudiante implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
     private Collection<AsistenciaEstudiante> asistenciaEstudianteCollection;
 
+    @JoinColumns({
+        @JoinColumn(name = "prg_id", referencedColumnName = "prg_id", insertable = false, updatable = false),
+        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ProgramaCurso programaCurso;
+    
     public CursoEstudiante() {
     }
 
@@ -58,8 +68,8 @@ public class CursoEstudiante implements Serializable {
     }
 
     
-    public CursoEstudiante(int idEstudiante, BigInteger idCursoPeriodo, int idModuloCurso) {
-        this.cursoEstudiantePK = new CursoEstudiantePK(idEstudiante, idCursoPeriodo, idModuloCurso);
+    public CursoEstudiante(int idEstudiante, BigInteger idCursoPeriodo) {
+        this.cursoEstudiantePK = new CursoEstudiantePK(idEstudiante, idCursoPeriodo);
     }
 
     public CursoEstudiantePK getCursoEstudiantePK() {
@@ -127,12 +137,30 @@ public class CursoEstudiante implements Serializable {
         return "org.espe.sigec.model.entites.CursoEstudiante[ cursoEstudiantePK=" + cursoEstudiantePK + " ]";
     }
 
-	public ModuloCursoPeriodo getModuloCursoPeriodo() {
-		return moduloCursoPeriodo;
+	public ProgramaCurso getProgramaCurso() {
+		return programaCurso;
 	}
 
-	public void setModuloCursoPeriodo(ModuloCursoPeriodo moduloCursoPeriodo) {
-		this.moduloCursoPeriodo = moduloCursoPeriodo;
+	public void setProgramaCurso(ProgramaCurso programaCurso) {
+		this.programaCurso = programaCurso;
 	}
+
+	public Integer getIdPrograma() {
+		return idPrograma;
+	}
+
+	public void setIdPrograma(Integer idPrograma) {
+		this.idPrograma = idPrograma;
+	}
+
+	
+
+//	public ModuloCursoPeriodo getModuloCursoPeriodo() {
+//		return moduloCursoPeriodo;
+//	}
+//
+//	public void setModuloCursoPeriodo(ModuloCursoPeriodo moduloCursoPeriodo) {
+//		this.moduloCursoPeriodo = moduloCursoPeriodo;
+//	}
     
 }

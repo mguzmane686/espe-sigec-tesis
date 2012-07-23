@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
  * @author roberto
  */
 @Entity
-@Table(name = "presupuesto")
+@Table(name = "sgct_fnc_presupuesto")
 @NamedQueries({
     @NamedQuery(name = "Presupuesto.findAll", query = "SELECT p FROM Presupuesto p")})
 public class Presupuesto implements Serializable {
@@ -37,26 +37,26 @@ public class Presupuesto implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_presupuesto")
+    @Column(name = "pre_id")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="presupuesto_seq")
     @SequenceGenerator(name="presupuesto_seq", sequenceName="presupuesto_seq", allocationSize = 1)
     private Integer idPresupuesto;
-    @Column(name = "fecha_inicio")
+    @Column(name = "pre_fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
-    @Column(name = "fecha_fin")
+    @Column(name = "pre_fecha_fin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "recurso_inicial")
+    @Column(name = "pre_recurso_inicial")
     private BigDecimal recursoInicial;
-    @Column(name = "recurso_actual")
+    @Column(name = "pre_recurso_actual")
     private BigDecimal recursoActual;
     
-    @Column(name = "codigo_anio")
+    @Column(name = "pre_codigo_anio")
     private String codigoAnio;
     
-    @Column(name = "id_prefijo_presupuesto")
+    @Column(name = "pre_id_prefijo_presupuesto")
     private String idPrefijoPresupuesto;
     
     @OneToMany(mappedBy = "presupuesto", fetch = FetchType.LAZY)

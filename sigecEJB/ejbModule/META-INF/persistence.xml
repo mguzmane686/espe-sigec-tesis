@@ -22,22 +22,16 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Perfil</class>
 		<class>org.espe.sigec.model.entities.PensumAcademico</class>
 		<class>org.espe.sigec.model.entities.Opcion</class>
-		<class>org.espe.sigec.model.entities.ModuloCursoPeriodoPK</class>
-		<class>org.espe.sigec.model.entities.ModuloCursoPeriodo</class>
-		<class>org.espe.sigec.model.entities.ModuloCurso</class>
 		<class>org.espe.sigec.model.entities.Modulo</class>
 		<class>org.espe.sigec.model.entities.MaterialDidactico</class>
-		<class>org.espe.sigec.model.entities.LugarCurso</class>
-		<class>org.espe.sigec.model.entities.HorarioModuloPK</class>
-		<class>org.espe.sigec.model.entities.HorarioModulo</class>
+		<class>org.espe.sigec.model.entities.Establecimiento</class>
+		<class>org.espe.sigec.model.entities.HorarioCursoPeriodo</class>
 		<class>org.espe.sigec.model.entities.HistoricoCursoEstado</class>
 		<class>org.espe.sigec.model.entities.Estudiante</class>
 		<class>org.espe.sigec.model.entities.Especialidad</class>
 		<class>org.espe.sigec.model.entities.Edificio</class>
 		<class>org.espe.sigec.model.entities.DetallePresupuestoCursoPK</class>
 		<class>org.espe.sigec.model.entities.DetallePresupuestoCurso</class>
-		<class>org.espe.sigec.model.entities.DesempenioProfesorPK</class>
-		<class>org.espe.sigec.model.entities.DesempenioProfesor</class>
 		<class>org.espe.sigec.model.entities.CursoProfesorPK</class>
 		<class>org.espe.sigec.model.entities.CursoProfesor</class>
 		<class>org.espe.sigec.model.entities.CursoPeriodo</class>
@@ -51,6 +45,11 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.AsistenciaEstudiante</class>
 		<class>org.espe.sigec.model.entities.ContentPage</class>
 		<class>org.espe.sigec.model.entities.TemplatePage</class>
+		<class>org.espe.sigec.model.entities.RangoAcademico</class>
+		<class>org.espe.sigec.model.entities.PensumAcademicoPeriodoCurso</class>
+		<class>org.espe.sigec.model.entities.PensumAcademicoPeriodoCursoPK</class>
+		<class>org.espe.sigec.model.entities.RangoAcademicoProfesor</class>
+		<class>org.espe.sigec.model.entities.RangoAcademicoProfesorPK</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>

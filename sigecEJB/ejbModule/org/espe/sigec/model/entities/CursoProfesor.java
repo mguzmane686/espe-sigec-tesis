@@ -6,7 +6,7 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.Collection;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -24,7 +23,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "curso_profesor")
+@Table(name = "sgct_acd_curso_profesor")
 @NamedQueries({
     @NamedQuery(name = "CursoProfesor.findAll", query = "SELECT c FROM CursoProfesor c")})
 public class CursoProfesor implements Serializable {
@@ -34,17 +33,17 @@ public class CursoProfesor implements Serializable {
     @Size(max = 1)
     @Column(name = "estado")
     private String estado;
-    @JoinColumn(name = "id_profesor", referencedColumnName = "id_profesor", insertable = false, updatable = false)
+    @JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Profesor profesor;
-    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso", insertable = false, updatable = false)
+    @JoinColumn(name = "cur_id_curso", referencedColumnName = "cur_id_curso", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Curso curso;
 
-    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
-    private Collection<DesempenioProfesor> desempenioProfesorCollection;
-    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
-    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
+//    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
+//    private Collection<DesempenioProfesor> desempenioProfesorCollection;
+//    @OneToMany(mappedBy = "cursoProfesor", fetch = FetchType.LAZY)
+//    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
     
     public CursoProfesor() {
     }
@@ -73,13 +72,13 @@ public class CursoProfesor implements Serializable {
         this.estado = estado;
     }
 
-    public Collection<DesempenioProfesor> getDesempenioProfesorCollection() {
-        return desempenioProfesorCollection;
-    }
-
-    public void setDesempenioProfesorCollection(Collection<DesempenioProfesor> desempenioProfesorCollection) {
-        this.desempenioProfesorCollection = desempenioProfesorCollection;
-    }
+//    public Collection<DesempenioProfesor> getDesempenioProfesorCollection() {
+//        return desempenioProfesorCollection;
+//    }
+//
+//    public void setDesempenioProfesorCollection(Collection<DesempenioProfesor> desempenioProfesorCollection) {
+//        this.desempenioProfesorCollection = desempenioProfesorCollection;
+//    }
 
     public Profesor getProfesor() {
         return profesor;
@@ -122,13 +121,13 @@ public class CursoProfesor implements Serializable {
         return "org.espe.sigec.model.entities.CursoProfesor[ cursoProfesorPK=" + cursoProfesorPK + " ]";
     }
 
-	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
-		return moduloCursoPeriodoCollection;
-	}
-
-	public void setModuloCursoPeriodoCollection(
-			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
-		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
-	}
+//	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
+//		return moduloCursoPeriodoCollection;
+//	}
+//
+//	public void setModuloCursoPeriodoCollection(
+//			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
+//		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
+//	}
     
 }

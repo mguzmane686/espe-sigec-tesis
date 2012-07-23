@@ -13,7 +13,7 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoCurso;
@@ -152,7 +152,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 	
 	@Override
-	public Collection<LugarCurso> findLugar() {
+	public Collection<Establecimiento> findLugar() {
 		return lugarCursoFacadeLocal.findAll();
 	}
 	
@@ -172,12 +172,12 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	}
 
 	@Override
-	public void createLugar(LugarCurso lugarCurso) throws Exception {
+	public void createLugar(Establecimiento lugarCurso) throws Exception {
 		lugarCursoFacadeLocal.create(lugarCurso);
 	}
 
 	@Override
-	public void editLugar(LugarCurso lugarCurso) throws Exception {
+	public void editLugar(Establecimiento lugarCurso) throws Exception {
 		lugarCursoFacadeLocal.edit(lugarCurso);
 	}
 

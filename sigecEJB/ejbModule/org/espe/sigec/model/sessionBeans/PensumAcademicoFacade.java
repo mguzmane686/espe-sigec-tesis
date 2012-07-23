@@ -37,7 +37,7 @@ public class PensumAcademicoFacade extends AbstractFacade<PensumAcademico> imple
 	public Collection<PensumAcademico> findTemasModulo(Integer idModulo) {
 		Criteria crit = null;
     	crit = ((Session)getEntityManager().getDelegate()).createCriteria(PensumAcademico.class);
-    	crit.add(Restrictions.eq("moduloCurso.idModuloCurso", idModulo));
+    	crit.add(Restrictions.eq("curso.idCurso", idModulo));
     	return crit.list();
 	}
     

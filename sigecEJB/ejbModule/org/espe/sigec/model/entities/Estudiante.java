@@ -28,7 +28,7 @@ import javax.validation.constraints.NotNull;
  * @author roberto
  */
 @Entity
-@Table(name = "estudiante")
+@Table(name = "sgct_rh_estudiante")
 @NamedQueries({
     @NamedQuery(name = "Estudiante.findAll", query = "SELECT e FROM Estudiante e")})
 public class Estudiante implements Serializable {
@@ -36,11 +36,11 @@ public class Estudiante implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_estudiante")
+    @Column(name = "est_id_estudiante")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="estudiante_seq")
     @SequenceGenerator(name="estudiante_seq", sequenceName="estudiante_seq", allocationSize = 1)
     private Integer idEstudiante;
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @JoinColumn(name = "est_per_id_persona", referencedColumnName = "per_id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estudiante", fetch = FetchType.LAZY)

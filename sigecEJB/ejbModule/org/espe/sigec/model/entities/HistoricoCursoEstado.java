@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "historico_curso_estado")
+@Table(name = "sgct_his_cur_est")
 @NamedQueries({
     @NamedQuery(name = "HistoricoCursoEstado.findAll", query = "SELECT h FROM HistoricoCursoEstado h")})
 public class HistoricoCursoEstado implements Serializable {

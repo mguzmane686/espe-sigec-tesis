@@ -8,7 +8,7 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.entities.Profesor;
 
@@ -22,7 +22,7 @@ public interface CoordinacionServicio {
 	Collection<Curso> findCursoByEspecialidad(Integer idEspecialidad);
 	void abrirCurso(PeriodoAcademico periodoAcademico, CursoPeriodo cursoPeriodo) throws Exception;
 	Collection<Aula> findAulas(); 
-	Collection<LugarCurso> findLugarCurso();
+	Collection<Establecimiento> findLugarCurso();
 	Collection<Edificio> findEdificioByLugarCurso(String idLugar);
 	Collection<Aula> findAulaByEdificio(String idEdificio);
 	void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception;

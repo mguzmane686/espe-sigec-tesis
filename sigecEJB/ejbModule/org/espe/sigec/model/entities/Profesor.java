@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "profesor")
+@Table(name = "sgct_rh_profesor")
 @NamedQueries({
     @NamedQuery(name = "Profesor.findAll", query = "SELECT p FROM Profesor p")})
 public class Profesor implements Serializable {
@@ -40,12 +40,12 @@ public class Profesor implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_profesor")
+    @Column(name = "prf_id_profesor")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="prof_seq")
     @SequenceGenerator(name="prof_seq", sequenceName="prof_seq", allocationSize = 1)
     private BigDecimal idProfesor;
     @Size(max = 250)
-    @Column(name = "titulo")
+    @Column(name = "prf_titulo")
     private String titulo;
     
     @Size(max = 1)
@@ -72,17 +72,19 @@ public class Profesor implements Serializable {
     @Column(name = "observacion")
     private String observacion;
     
-    @JoinColumn(name = "id_persona", referencedColumnName = "id_persona")
+    @JoinColumn(name = "per_id_persona", referencedColumnName = "per_id_persona")
     @ManyToOne(fetch = FetchType.LAZY)
     private Persona persona;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
     private Collection<CursoProfesor> cursoProfesorCollection;
     
-    @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Especialidad especialidad;
-
+//    @JoinColumn(name = "esp_id_especialidad", referencedColumnName = "esp_id_especialidad")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Especialidad especialidad;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
+//    Collection<RangoAcademicoProfesor> lstRangoAcademicoProfesor;
+    
     public Profesor() {
     }
 
@@ -233,12 +235,21 @@ public class Profesor implements Serializable {
 		this.cursoProfesorCollection = cursoProfesorCollection;
 	}
 
-	public Especialidad getEspecialidad() {
-		return especialidad;
-	}
+//	public Collection<RangoAcademicoProfesor> getLstRangoAcademicoProfesor() {
+//		return lstRangoAcademicoProfesor;
+//	}
+//
+//	public void setLstRangoAcademicoProfesor(
+//			Collection<RangoAcademicoProfesor> lstRangoAcademicoProfesor) {
+//		this.lstRangoAcademicoProfesor = lstRangoAcademicoProfesor;
+//	}
 
-	public void setEspecialidad(Especialidad especialidad) {
-		this.especialidad = especialidad;
-	}
+//	public Especialidad getEspecialidad() {
+//		return especialidad;
+//	}
+//
+//	public void setEspecialidad(Especialidad especialidad) {
+//		this.especialidad = especialidad;
+//	}
 	
 }

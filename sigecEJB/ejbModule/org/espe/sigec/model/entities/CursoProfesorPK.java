@@ -20,11 +20,11 @@ import javax.validation.constraints.NotNull;
 public class CursoProfesorPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_curso")
+    @Column(name = "cur_id_curso")
     private int idCurso;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_profesor")
+    @Column(name = "prf_id_profesor")
     private BigInteger idProfesor;
 
     public CursoProfesorPK() {

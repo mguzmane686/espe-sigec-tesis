@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * @author roberto
  */
 @Entity
-@Table(name = "material_didactico")
+@Table(name = "sgct_ifr_mat_did")
 @NamedQueries({
     @NamedQuery(name = "MaterialDidactico.findAll", query = "SELECT m FROM MaterialDidactico m")})
 public class MaterialDidactico implements Serializable {
@@ -30,9 +30,9 @@ public class MaterialDidactico implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_material")
+    @Column(name = "mtdt_id_material")
     private Integer idMaterial;
-    @Column(name = "cantidad")
+    @Column(name = "mtdt_cantidad")
     private Integer cantidad;
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo")
     @ManyToOne(fetch = FetchType.LAZY)

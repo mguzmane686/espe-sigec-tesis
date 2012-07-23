@@ -13,7 +13,7 @@ import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
@@ -98,7 +98,7 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	}
 
 	@Override
-	public Collection<LugarCurso> findLugarCurso() {
+	public Collection<Establecimiento> findLugarCurso() {
 		return lugarCursoFacadeLocal.findAll();
 	}
 

@@ -25,7 +25,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "edificio")
+@Table(name = "sgct_ifr_edificio")
 @NamedQueries({
     @NamedQuery(name = "Edificio.findAll", query = "SELECT e FROM Edificio e")})
 public class Edificio implements Serializable {
@@ -34,17 +34,17 @@ public class Edificio implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "id_edificio")
+    @Column(name = "edf_id_edificio")
     private String idEdificio;
     @Size(max = 250)
-    @Column(name = "nombre")
+    @Column(name = "edf_nombre")
     private String nombre;
     @Size(max = 250)
-    @Column(name = "descripcion")
+    @Column(name = "edf_descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_lugar", referencedColumnName = "id_lugar")
+    @JoinColumn(name = "etb_id", referencedColumnName = "etb_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private LugarCurso lugarCurso;
+    private Establecimiento lugarCurso;
     @OneToMany(mappedBy = "edificio", fetch = FetchType.LAZY)
     private Collection<Aula> aulaCollection;
 
@@ -79,11 +79,11 @@ public class Edificio implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public LugarCurso getLugarCurso() {
+    public Establecimiento getLugarCurso() {
         return lugarCurso;
     }
 
-    public void setLugarCurso(LugarCurso lugarCurso) {
+    public void setLugarCurso(Establecimiento lugarCurso) {
         this.lugarCurso = lugarCurso;
     }
 
