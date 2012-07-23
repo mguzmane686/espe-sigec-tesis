@@ -59,7 +59,7 @@
 						</h:selectOneRadio>
 					</h:panelGrid>
 					<h:panelGrid columns="2">
-						<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda"/>
+						<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda" />
 						<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}"  
 							execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas"></a4j:commandLink>
 					</h:panelGrid>
@@ -102,7 +102,7 @@
         
 	        <f:facet name="controls">
 	            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;">
-	                X
+	                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
 	            </h:outputLink>
 	        </f:facet>
 	        <h:panelGroup>
@@ -158,7 +158,7 @@
 				
 				<rich:collapsiblePanel header="#{msg.etiqueta_perfil}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-					<rich:dataTable value="#{creacionUsuarioController.lstPerfilesUsuario}" var="perfil" style="width:100%;">
+					<rich:dataTable value="#{creacionUsuarioController.lstPerfilesUsuario}" var="perfil" style="width:100%;" id="tblPerfilesEdit">
 						<f:facet name="header">
 							<h:outputLabel value="Seleccione un perfil" />
 						</f:facet>
@@ -187,7 +187,7 @@
 	        </h:panelGroup>
 	        <h:panelGroup layout="block" style="width:100%; margin:auto; ">
 	        	<h:panelGrid columns="2" style="margin:auto;">
-	        		<a4j:commandLink value="Aceptar" oncomplete="#{rich:component('popup')}.hide();" execute="pnlDatosPersona" render="tblPersonas"></a4j:commandLink>
+	        		<a4j:commandLink value="Aceptar" oncomplete="#{rich:component('popup')}.hide();" execute="pnlDatosPersona, tblPerfilesEdit" render="tblPersonas" action="#{creacionUsuarioController.btnActualizarUsuario}"></a4j:commandLink>
 	        		<a4j:commandLink value="Cancelar" oncomplete="#{rich:component('popup')}.hide();" execute="@this"></a4j:commandLink>
 	        	</h:panelGrid>
 	        </h:panelGroup>

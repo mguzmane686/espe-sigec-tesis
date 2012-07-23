@@ -10,7 +10,6 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Curso;
-import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
@@ -24,7 +23,7 @@ import org.espe.sigec.web.utils.FacesUtils;
 @ViewScoped
 public class EdicionCursoController {
 	private PensumAcademico pensumAcademicoNuevo;
-	private ModuloCurso moduloCurso;
+//	private ContenidoCurso moduloCurso;
 	private Curso curso;
 	private boolean renderEditButtons;
 	@Inject
@@ -39,14 +38,13 @@ public class EdicionCursoController {
 	
 	@PostConstruct
 	public void addLostFields(){
-		getCurso().setModuloCursoCollection(cursoServicio.findModulosCurso(curso.getIdCurso()));
-		
-		if(getCurso().getModuloCursoCollection() == null){
-			getCurso().setModuloCursoCollection(new ArrayList<ModuloCurso>());
+		getCurso().setPensumAcademicoCollection(cursoServicio.findTemasModulo(curso.getIdCurso()));
+//		
+		if(getCurso().getPensumAcademicoCollection() == null){
+			getCurso().setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
 		}else{
-			for(ModuloCurso moduloCursoTMP: getCurso().getModuloCursoCollection()){
-				moduloCursoTMP.setExistInBase(Boolean.TRUE);
-				moduloCursoTMP.setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
+			for(PensumAcademico pensumAcademicoTMP: getCurso().getPensumAcademicoCollection()){
+				pensumAcademicoTMP.setExistInBase(Boolean.TRUE);
 			}
 		}
 	}
@@ -60,7 +58,7 @@ public class EdicionCursoController {
 	}
 	public void btnSaveEditCurso(ActionEvent e){
 		try {
-			planificacionServicio.editarCursoModulo(getCurso(), getCurso().getModuloCursoCollection());
+			planificacionServicio.editarCurso(getCurso(), getCurso().getPensumAcademicoCollection());
 			FacesUtils.addInfoMessage("El curso se edito con &eacutexito");
 			setRenderEditButtons(Boolean.FALSE);
 		} catch (Exception e1) {
@@ -68,20 +66,20 @@ public class EdicionCursoController {
 		}
 	}
 	
-	public void btnExpandContractModulo(ModuloCurso modulo, boolean expanded) {
-		modulo.setShowPensum(expanded);
-		if (expanded) {
-			modulo.setPensumAcademicoCollection(cursoServicio.findTemasModulo(modulo.getIdModuloCurso()));
-		}
-	}
+//	public void btnExpandContractModulo(ContenidoCurso modulo, boolean expanded) {
+//		modulo.setShowPensum(expanded);
+//		if (expanded) {
+//			modulo.setPensumAcademicoCollection(cursoServicio.findTemasModulo(modulo.getIdModuloCurso()));
+//		}
+//	}
 	
 	public void btnAddTemaPensum(ActionEvent e){
 		setPensumAcademicoNuevo(new PensumAcademico());
 	}
 	
 	public void btnAddModuloCurso(ActionEvent e){
-		getCurso().getModuloCursoCollection().add(getModuloCurso());
-		setModuloCurso(new ModuloCurso());
+		getCurso().getPensumAcademicoCollection().add(getPensumAcademicoNuevo());
+		setPensumAcademicoNuevo(new PensumAcademico());
 	}
 	
 	public void btnAtras(ActionEvent e){
@@ -94,7 +92,7 @@ public class EdicionCursoController {
 	
 	public void initEntities(){
 		setPensumAcademicoNuevo(new PensumAcademico());
-		setModuloCurso(new ModuloCurso());
+//		setModuloCurso(new ContenidoCurso());
 	}
 	
 	public PensumAcademico getPensumAcademicoNuevo() {
@@ -110,13 +108,13 @@ public class EdicionCursoController {
 		this.curso = curso;
 	}
 
-	public ModuloCurso getModuloCurso() {
-		return moduloCurso;
-	}
+//	public ContenidoCurso getModuloCurso() {
+//		return moduloCurso;
+//	}
 
-	public void setModuloCurso(ModuloCurso moduloCurso) {
-		this.moduloCurso = moduloCurso;
-	}
+//	public void setModuloCurso(ContenidoCurso moduloCurso) {
+//		this.moduloCurso = moduloCurso;
+//	}
 
 	public boolean isRenderEditButtons() {
 		return renderEditButtons;

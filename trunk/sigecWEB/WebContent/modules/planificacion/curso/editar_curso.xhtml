@@ -108,61 +108,32 @@
 			   					});
 		   					</script>
 		   				</h:panelGroup>
-		        		<rich:panel rendered="#{empty edicionCursoController.curso.moduloCursoCollection}">
+		        		<rich:panel rendered="#{empty edicionCursoController.curso.pensumAcademicoCollection}">
 		        			#{msg.etiqueta_curso_sin_modulos}
 		        		</rich:panel>
-		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.moduloCursoCollection}" var="modulo" rows="5" rendered="#{!empty edicionCursoController.curso.moduloCursoCollection}">
+		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.pensumAcademicoCollection}" var="modulo" rows="5" >
 		        			<f:facet name="header">
 		        				<h:outputLabel value="#{msg.etiqueta_modulos}" />
 		        			</f:facet>
-		        			<rich:column>
-		        				<a4j:commandLink rendered="#{!modulo.showPensum}" action="#{edicionCursoController.btnExpandContractModulo(modulo, true)}" render="tblCursos">
-		        					<h:graphicImage library="images/button" name="expand.png"/>
-		        				</a4j:commandLink>
-		        				
-		        				<a4j:commandLink rendered="#{modulo.showPensum}" action="#{edicionCursoController.btnExpandContractModulo(modulo, false)}" render="tblCursos">
-		        					<h:graphicImage library="images/button" name="contract.png"/>
-		        				</a4j:commandLink>
-		        			</rich:column>
+		        			
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg.etiqueta_modulo}" />
 			        			</f:facet>
-			        			<h:inputText value="#{modulo.nombre}" style="width:100%" rendered="#{edicionCursoController.renderEditButtons}"/>
-			        			<h:outputText value="#{modulo.nombre}" style="width:100%" rendered="#{!edicionCursoController.renderEditButtons}"/>
+			        			<h:inputText value="#{modulo.tema}" style="width:100%" rendered="#{edicionCursoController.renderEditButtons}"/>
+			        			<h:outputText value="#{modulo.tema}" style="width:100%" rendered="#{!edicionCursoController.renderEditButtons}"/>
 		        			</rich:column>
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['descripcion']}" />
 			        			</f:facet>
-			        			<h:inputText value="#{modulo.generalidades}" style="width:100%" rendered="#{edicionCursoController.renderEditButtons}"/>
-			        			<h:outputText value="#{modulo.generalidades}" style="width:100%" rendered="#{!edicionCursoController.renderEditButtons}"/>
+			        			<h:inputText value="#{modulo.descripcion}" style="width:100%" rendered="#{edicionCursoController.renderEditButtons}"/>
+			        			<h:outputText value="#{modulo.descripcion}" style="width:100%" rendered="#{!edicionCursoController.renderEditButtons}"/>
 		        			</rich:column>
 		        			
-		        			<rich:column breakRowBefore="true" colspan="4" rendered="#{modulo.showPensum}">
-	        					<center>
-	        					<rich:dataTable value="#{modulo.pensumAcademicoCollection}" var="pensumCurso" style="width:90%;">
-	        						<f:facet name="header">
-				        				<h:outputLabel value="#{msg.etiqueta_tema}" />
-				        			</f:facet>
-	        						<rich:column>
-	        							<f:facet name="header">
-	        								<h:outputLabel value="Nombre" />
-	        							</f:facet>
-	        							<h:outputText value="#{pensumCurso.tema}" />
-	        						</rich:column>
-	        						
-	        						<rich:column>
-	        							<f:facet name="header">
-	        								<h:outputLabel value="#{msg['descripcion']}" />
-	        							</f:facet>
-	        							<h:outputText value="#{pensumCurso.descripcion}" />
-	        						</rich:column>
-	        					</rich:dataTable>
-	        					</center>
-	        				</rich:column>
+		        			
 		        		</rich:dataTable>
 		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
 	        		</a4j:outputPanel>
@@ -181,14 +152,11 @@
 	        <h:form id="frmNuevoCurso">
 		        <h:panelGrid columns="2" id="pgDatosTema">
 		        	<h:outputLabel value="Tema" />
-		        	<h:inputText id="txtNomTem" value="#{edicionCursoController.moduloCurso.nombre}" tabindex="1"/>
+		        	<h:inputText id="txtNomTem" value="#{edicionCursoController.pensumAcademicoNuevo.tema}" tabindex="1"/>
 		        	
 		        	<h:outputLabel value="#{msg['descripcion']}" />
-		        	<h:inputText id="txtDetTem" value="#{edicionCursoController.moduloCurso.generalidades}" tabindex="2"/>
+		        	<h:inputText id="txtDetTem" value="#{edicionCursoController.pensumAcademicoNuevo.descripcion}" tabindex="2"/>
 		        	
-		        	<h:outputLabel value="Orden :" />
-					<h:inputText id="txtNivMod" value="#{cursoController.moduloCurso.nivel}" tabindex="3" 
-						required="true" requiredMessage="El campo Orden es obligatorio" />
 		        </h:panelGrid>
 		        
 		        <h:panelGroup layout="block" style="text-align:right; width:100%">

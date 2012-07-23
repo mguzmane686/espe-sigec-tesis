@@ -17,7 +17,7 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.seguridad.HomeSessionController;
@@ -77,7 +77,7 @@ public class AbrirCurso implements Serializable{
 		
 		//Carga de Lugares disponibles
 		setItemLugarCurso(new ArrayList<SelectItem>());
-		for(LugarCurso lugarCurso: coordinacionServicio.findLugarCurso()){
+		for(Establecimiento lugarCurso: coordinacionServicio.findLugarCurso()){
 			getItemLugarCurso().add(new SelectItem(lugarCurso.getIdLugar(), lugarCurso.getNombre()));
 		}
 		if(!getItemLugarCurso().isEmpty()){

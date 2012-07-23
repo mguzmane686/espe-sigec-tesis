@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:a4j="http://richfaces.org/a4j" 
+	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+
+
+
+	<h:outputStylesheet library="css" name="textos.css" />
+	<h:outputStylesheet library="css" name="bordes.css" />
+	<h:outputStylesheet library="css" name="botones.css" />
+
+	<h:form id="frmCurso">
+
+		<rich:panel header="Contrato automatico">
+			<h:panelGroup layout="block" styleClass="roundCorner">
+				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
+					<h:commandButton value="#{msg['Generar']}" render="pnlCurso"  image="/resources/images/save.png"
+						action="#{generacionMemosController.btnGenerarMemo}" />
+						
+					<h:outputLabel value="#{msg['guardar']}" />
+				</h:panelGrid>
+				
+			</h:panelGroup>
+		</rich:panel>
+
+		<rich:panel rendered="false">
+			<rich:collapsiblePanel header="#{msg['datos_curso']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				
+				<rich:tabPanel switchType="client">
+					<rich:tab id="tab1" header="Plan">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Plan :" />
+							<rich:select defaultLabel="Seleccione">
+								<f:selectItem itemLabel="FUERZA TERRESTRE" itemValue="FTE"/>
+								<f:selectItem itemLabel="AUTOGESTION" itemValue="ATG"/>
+							</rich:select>
+							
+							
+							
+							<h:outputLabel value="Vicerrector :" />
+							<h:panelGrid columns="2" cellspacing="0" cellpadding="0">
+								<h:inputText value="" />
+								<a4j:commandButton value="Buscar/ lanzar popup"></a4j:commandButton>
+							</h:panelGrid>
+							
+							<h:outputLabel value="Plan :" />
+							<h:inputTextarea value=""/>
+						</h:panelGrid>
+					</rich:tab>
+					<rich:tab header="Curso">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Curso :" />
+							<h:panelGrid columns="2" cellspacing="0" cellpadding="0">
+								<h:inputText value="" />
+								<a4j:commandButton value="Buscar/ lanzar popup"></a4j:commandButton>
+							</h:panelGrid>
+							
+							<h:outputLabel value="Fecha de curso" />
+							<rich:calendar></rich:calendar>
+							
+							<h:outputLabel value="Numero de horas" />
+							<h:inputText value="" />
+							
+							<h:outputLabel value="Valor :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Valor a pagar :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="lugar a dictarse:" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Coordinador :" />
+							<h:panelGrid columns="2" cellspacing="0" cellpadding="0">
+								<h:inputText value="" />
+								<a4j:commandButton value="Buscar/ lanzar popup"></a4j:commandButton>
+							</h:panelGrid>
+							
+							<h:outputLabel value="Horario de clases :" />
+							<h:inputText value=""/>
+						</h:panelGrid>
+					</rich:tab>
+					
+					<rich:tab header="Fechas">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Fecha certificacion:" />
+							<rich:calendar></rich:calendar>
+							
+							<h:outputLabel value="Fecha de contrato:" />
+							<rich:calendar></rich:calendar>
+							
+							<h:outputLabel value="Fecha de invitacion:" />
+							<rich:calendar></rich:calendar>
+							
+							<h:outputLabel value="Fecha de aceptacion:" />
+							<rich:calendar></rich:calendar>
+						</h:panelGrid>
+					</rich:tab>
+					
+					<rich:tab header="Memo">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Detalle memo :" title="Detalle memo legalizacion contrato"/>
+							<h:inputText value=""/>
+						</h:panelGrid>
+					</rich:tab>
+					
+					<rich:tab header="Recurso">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Numero de ejemplares :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Numero memo imprenta:" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Fecha memo imprenta:" />
+							<rich:calendar></rich:calendar>
+							
+							<h:outputLabel value="Num. partida presupuestria imprenta:" />
+							<h:inputText value=""/>
+							
+							
+							<h:outputLabel value="Valor partida presupuestria imprenta:" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Valor imprenta:" />
+							<h:inputText value=""/>
+							
+							
+							
+							<h:outputLabel value="Terna :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Actividades :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="fecha carta de pago :" />
+							<h:inputText value=""/>
+							
+							
+						</h:panelGrid>
+					</rich:tab>
+					
+					<rich:tab header="Instructor">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Proveedor :" />
+							<h:panelGrid columns="2" cellspacing="0" cellpadding="0">
+								<h:inputText value="" />
+								<a4j:commandButton value="Buscar/ lanzar popup"></a4j:commandButton>
+							</h:panelGrid>
+							
+							<h:outputLabel value="Tipo relacion loboral :" />
+							<rich:select>
+								<f:selectItem itemLabel="Docente interno" itemValue="DCTI"/>
+								<f:selectItem itemLabel="Docente externo" itemValue="DCTE"/>
+							</rich:select>
+							
+							<h:outputLabel value="Valor hora clase :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Banco :" />
+							<h:inputText value=""/>
+							
+							<h:outputLabel value="Numero cuenta :" />
+							<h:inputText value=""/>
+						</h:panelGrid>
+					</rich:tab>
+				</rich:tabPanel>
+			</rich:collapsiblePanel>
+		</rich:panel>
+
+	</h:form>
+</ui:composition>

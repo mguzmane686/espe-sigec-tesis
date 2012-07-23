@@ -59,7 +59,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		try {
 			conn = ds.getConnection();
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select identificador,clave from usuario where identificador = '"+username+"'");
+			ResultSet rs = st.executeQuery("select usr_identificador,usr_clave from sgct_sg_usuario where usr_identificador = '"+username+"'");
 			
 			while(rs.next()){
 //				getLstItemsUsuario().add(new SelectItem(rs.getString(1), rs.getString(2)));

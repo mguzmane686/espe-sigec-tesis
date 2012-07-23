@@ -26,6 +26,13 @@ import com.lowagie.text.pdf.PdfWriter;
  *
  */
 public class ReporteGenerico {
+	private static final ReporteGenerico REPORTE_GENERICO = new ReporteGenerico();
+	
+	
+	public static ReporteGenerico getResource() {
+		return REPORTE_GENERICO;
+	}
+
 	private JasperPrint jasperPrint;
 	private JRBeanCollectionDataSource beanCollectionDataSource;
 	

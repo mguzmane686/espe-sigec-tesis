@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Perfil;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
@@ -35,6 +36,7 @@ public class CreacionUsuarioController implements Serializable{
 	private UsuarioPerfil usuarioPerfil;
 	private Collection<Perfil> lstPerfils;
 	private Collection<UsuarioPerfil> lstPerfilesUsuario;
+	private Collection<UsuarioPerfil> lstPerfilesUsuarioClone;
 	
 	private String filtroBusqueda;
 	private String txtFiltroBusqueda;
@@ -59,6 +61,9 @@ public class CreacionUsuarioController implements Serializable{
 		setLstPerfils(seguridadServicio.findPerfiles());
 	}
 	
+	/**
+	 * Metodo que se jecuta desde la creacion del usuario
+	 */
 	public void btnCrearUsuario(){
 		try {
 			getUsuarioPerfil().setLstPerfils(new ArrayList<Perfil>());
@@ -74,6 +79,32 @@ public class CreacionUsuarioController implements Serializable{
 			}
 			seguridadServicio.crearUsuario(getUsuarioPerfil());
 			FacesUtils.addInfoMessage("Usuario creado");
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage("Ocurrio un error al guardar el usuario");
+		}
+	}
+	
+	/**
+	 * Metodo para actualizar el usuario y su perfil
+	 */
+	public void btnActualizarUsuario(){
+		try {
+			Collection<Perfil> lstPerfilTMP = new ArrayList<Perfil>();
+			for(UsuarioPerfil usuarioPerfil: getLstPerfilesUsuario()){
+				if(usuarioPerfil.isSelected()){
+					if(!usuarioPerfil.getPerfil().isSelected()){
+						usuarioPerfil.getPerfil().setSelected(Boolean.TRUE);
+						lstPerfilTMP.add(usuarioPerfil.getPerfil());
+					}
+				}else{
+					if(usuarioPerfil.getPerfil().isSelected()){
+						usuarioPerfil.getPerfil().setSelected(Boolean.FALSE);
+						lstPerfilTMP.add(usuarioPerfil.getPerfil());
+					}
+				}
+			}
+			seguridadServicio.actualizarUsuarioPerfil(getPersonaSeleccionada(), lstPerfilTMP);
+			FacesUtils.addInfoMessage("Usuario actualizado");
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurrio un error al guardar el usuario");
 		}
@@ -131,6 +162,7 @@ public class CreacionUsuarioController implements Serializable{
 		this.personaSeleccionada = personaSeleccionada;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setPersonaSeleccionadaBucarPerfil(Persona personaSeleccionada) {
 		setLstPerfilesUsuario(new ArrayList<UsuarioPerfil>());
 		try {
@@ -142,11 +174,14 @@ public class CreacionUsuarioController implements Serializable{
 				for(UsuarioPerfil usuarioPerfil: lstUsrPerfil){
 					if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals(perfil.getIdPerfil())){
 						usuarioPerfilTMP.setSelected(Boolean.TRUE);
+						usuarioPerfilTMP.getPerfil().setExistInBase(Boolean.TRUE);
+						usuarioPerfilTMP.getPerfil().setSelected(Boolean.TRUE);
 					}
 				}
 				getLstPerfilesUsuario().add(usuarioPerfilTMP);
 				
 			}
+			lstPerfilesUsuarioClone =  (Collection<UsuarioPerfil>) SerializationUtils.clone((Serializable)getLstPerfilesUsuario()); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

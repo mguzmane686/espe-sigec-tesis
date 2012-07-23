@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -23,18 +23,18 @@ public class AdministrarLugarController {
 	@Inject
 	AdmGeneralServicio admGeneralServicio;
 	
-	LugarCurso lugarCurso;
+	Establecimiento lugarCurso;
 	private boolean editMode;
 	
 	public AdministrarLugarController(){
-		setLugarCurso((LugarCurso) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("lugarToEdit"));
+		setLugarCurso((Establecimiento) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("lugarToEdit"));
 	}
 		
-	public LugarCurso getLugarCurso() {
+	public Establecimiento getLugarCurso() {
 		return lugarCurso;
 	}
 	
-	public void setLugarCurso(LugarCurso lugarCurso) {
+	public void setLugarCurso(Establecimiento lugarCurso) {
 		this.lugarCurso = lugarCurso;
 	}
 	

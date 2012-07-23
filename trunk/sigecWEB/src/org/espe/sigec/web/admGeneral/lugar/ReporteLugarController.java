@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.reportes.ReporteGenerico;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -24,10 +24,10 @@ public class ReporteLugarController implements Serializable{
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
-	private Collection<LugarCurso> lstLugares;
+	private Collection<Establecimiento> lstLugares;
 
 	public ReporteLugarController(){
-		setLstLugares(new ArrayList<LugarCurso>());
+		setLstLugares(new ArrayList<Establecimiento>());
 	}
 	
 	@PostConstruct
@@ -35,15 +35,15 @@ public class ReporteLugarController implements Serializable{
 		setLstLugares(admGeneralServicio.findLugar());
 	}
 		
-	public Collection<LugarCurso> getLstLugares() {
+	public Collection<Establecimiento> getLstLugares() {
 		return lstLugares;
 	}
 
-	public void setLstLugares(Collection<LugarCurso> lstLugares) {
+	public void setLstLugares(Collection<Establecimiento> lstLugares) {
 		this.lstLugares = lstLugares;
 	}
 	
-	public void btnShowLugarDetail(LugarCurso lugar){
+	public void btnShowLugarDetail(Establecimiento lugar){
 		FacesUtils.putFlashObject("lugarToEdit",lugar);
 		try {
 			FacesUtils.redirectPage("adm_administrar_lugar.jsf");

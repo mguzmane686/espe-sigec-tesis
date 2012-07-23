@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Edificio;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.GeneralFunctions;
@@ -49,7 +49,7 @@ public class AulaController implements Serializable{
 		setItemsLugares(new ArrayList<SelectItem>());
 		setItemsEdificios(new ArrayList<SelectItem>());
 	
-		for(LugarCurso lugarCursoTMP: admGeneralServicio.findLugar()){
+		for(Establecimiento lugarCursoTMP: admGeneralServicio.findLugar()){
 			getItemsLugares().add(new SelectItem(lugarCursoTMP.getIdLugar(), lugarCursoTMP.getNombre()));
 		}
 		

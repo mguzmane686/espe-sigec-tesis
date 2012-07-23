@@ -82,7 +82,8 @@
 					<rich:panel rendered="#{empty cursoController.lstPensumAcademicos}">
 			   			#{msg.etiqueta_curso_sin_modulos}
 			   		</rich:panel>
-					<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstModuloCursos}" var="modulo" rows="5" rendered="#{!empty cursoController.lstModuloCursos}">
+					
+					<rich:dataTable id="tblTemario" style="width:100%" value="#{cursoController.lstPensumAcademicos}" var="pensum" rows="5" rendered="#{!empty cursoController.lstPensumAcademicos}">
 						<f:facet name="header">
 							<h:outputLabel value="#{msg.etiqueta_modulos}" />
 						</f:facet>
@@ -91,21 +92,14 @@
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.nombre}" />
 							</f:facet>
-							<h:inputText value="#{modulo.nombre}" style="width:100%"/>
+							<h:inputText value="#{pensum.tema}" style="width:100%"/>
 						</rich:column>
 
 						<rich:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg['descripcion']}" />
 							</f:facet>
-							<h:inputText value="#{modulo.generalidades}" style="width:100%"/>
-						</rich:column>
-						
-						<rich:column>
-							<f:facet name="header">
-								<h:outputLabel value="Nivel orden" />
-							</f:facet>
-							<h:inputText value="#{modulo.nivel}" />
+							<h:inputText value="#{pensum.descripcion}" style="width:100%"/>
 						</rich:column>
 						
 					</rich:dataTable>
@@ -126,23 +120,19 @@
 		<h:form id="frmNuevoCurso">
 			<h:panelGrid columns="2" id="pgDatosTema">
 				<h:outputLabel value="#{msg.etiqueta_nombre_modulo} :" />
-				<h:inputText id="txtNomTem" value="#{cursoController.moduloCurso.nombre}" tabindex="1" 
+				<h:inputText id="txtNomTem" value="#{cursoController.pensumAcademicoNuevo.tema}" tabindex="1" 
 					required="true" requiredMessage="El campo #{msg.etiqueta_nombre_modulo} es obligatorio" />
 
 				<h:outputLabel value="#{msg['descripcion']} :" />
-				<h:inputText id="txtDetTem" value="#{cursoController.moduloCurso.generalidades}" tabindex="2" 
+				<h:inputText id="txtDetTem" value="#{cursoController.pensumAcademicoNuevo.descripcion}" tabindex="2" 
 					required="true" requiredMessage="El campo #{msg['descripcion']} es obligatorio" />
-					
-				<h:outputLabel value="Orden :" />
-				<h:inputText id="txtNivMod" value="#{cursoController.moduloCurso.nivel}" tabindex="3" 
-					required="true" requiredMessage="El campo Orden es obligatorio" />
 			</h:panelGrid>
 
 			
 
 			<h:panelGrid columns="2" style="text-align:center; width:100%">
 				<a4j:commandButton value="#{msg['agregar']}" styleClass="btnAux addBtn" style="width:70px" 
-					actionListener="#{cursoController.btnAddModuloCurso}" render="pgDatosTema" 
+					actionListener="#{cursoController.btnAddTemaPensum}" render="pgDatosTema" 
 						execute="pgDatosTema" oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('popupNuevoModulo')}.hide()" />
 
 				<a4j:commandButton value="#{msg['cancelar']}" styleClass="btnAux removeBtn" style="width:70px" immediate="true"

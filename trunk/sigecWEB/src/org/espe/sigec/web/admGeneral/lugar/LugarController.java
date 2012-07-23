@@ -7,7 +7,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.GeneralFunctions;
@@ -19,17 +19,17 @@ public class LugarController implements Serializable {
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
-	private LugarCurso lugarCurso;
+	private Establecimiento lugarCurso;
 
 	public LugarController(){
-		setLugarCurso(new LugarCurso());	
+		setLugarCurso(new Establecimiento());	
 	}
 
-	public LugarCurso getLugarCurso() {
+	public Establecimiento getLugarCurso() {
 		return lugarCurso;
 	}
 	
-	public void setLugarCurso(LugarCurso lugarCurso) {
+	public void setLugarCurso(Establecimiento lugarCurso) {
 		this.lugarCurso = lugarCurso;
 	}
 	
@@ -37,7 +37,7 @@ public class LugarController implements Serializable {
 		try {
 			generarCodigoLugar();
 			admGeneralServicio.createLugar(getLugarCurso());
-			setLugarCurso(new LugarCurso());
+			setLugarCurso(new Establecimiento());
 			FacesUtils.addInfoMessage("El lugar se cre&oacute exitosamente");
 		} catch (Exception e1) {
 			FacesUtils.addInfoMessage("No se pudo guardar el lugar");
