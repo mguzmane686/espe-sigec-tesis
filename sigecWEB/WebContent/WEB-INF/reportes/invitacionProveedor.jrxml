@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invitacionProveedor" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="019c746d-f48a-44aa-a40c-c11b160b5125">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="132"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#00BFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFEFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="cf8fa448-f42c-456d-834d-d0f777688ce3"/>
+	<field name="fechaInivitacion" class="java.util.Date"/>
+	<field name="numeroInivitacion" class="java.lang.String"/>
+	<field name="nombreProveedor" class="java.lang.String"/>
+	<field name="nombreElaborador" class="java.lang.String"/>
+	<field name="nombreDirectora" class="java.lang.String"/>
+	<field name="cuerpoMemo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="152" splitType="Stretch">
+			<frame>
+				<reportElement uuid="2958d92f-0e8c-418c-8f07-99c506bf729f" x="0" y="0" width="555" height="130"/>
+				<staticText>
+					<reportElement uuid="2386d8f1-556d-4b28-b114-25203e18babd" x="16" y="14" width="58" height="20"/>
+					<textElement/>
+					<text><![CDATA[Sangolquí]]></text>
+				</staticText>
+				<image>
+					<reportElement uuid="5c1400b5-48a4-4115-a7f1-7f64cce79bee" x="482" y="8" width="59" height="44"/>
+					<imageExpression><![CDATA["C:\\projects\\workspaceSTS64_28\\sigecWEB\\WebContent\\resources\\images\\logo_espe.png"]]></imageExpression>
+				</image>
+				<textField>
+					<reportElement uuid="eb81ba42-6943-46c3-93b0-74b79b753c8d" x="87" y="14" width="121" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{fechaInivitacion}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="304833ce-e202-4cd7-9080-2c0737fbccea" x="16" y="94" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Presente.-]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="dd24ecb8-23ce-4c4f-ae79-310e11d62aed" x="16" y="34" width="58" height="20"/>
+					<textElement/>
+					<text><![CDATA[Oficio No. ]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="33810f6f-8104-4a2b-8037-c161550d7163" x="48" y="74" width="405" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{nombreProveedor}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="886ba374-da69-425c-828b-d18f82a8932e" x="16" y="54" width="58" height="20"/>
+					<textElement/>
+					<text><![CDATA[Señor (a)]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="8499bc7b-d49c-464c-a048-cd446bb9d495" x="87" y="34" width="121" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{numeroInivitacion}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="295" splitType="Stretch">
+			<frame>
+				<reportElement uuid="fb0626ee-0e7e-4f5f-9386-62ac41a3a8ff" x="0" y="0" width="555" height="272"/>
+				<staticText>
+					<reportElement uuid="50cf1fcb-6cae-4556-84e2-cb3b5f954efb" x="16" y="12" width="112" height="20"/>
+					<textElement/>
+					<text><![CDATA[De mi consideración:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1e27a91e-a08c-4fd2-b97c-4dc341fb84ca" x="16" y="177" width="100" height="20"/>
+					<textElement/>
+					<text><![CDATA[Atentamente,]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="9dfe26fb-a4a6-418e-b518-4ef5ae82f600" x="16" y="216" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{nombreDirectora}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="ed1b5329-5f4e-48a3-8f79-fe6e244db049" x="16" y="236" width="309" height="20"/>
+					<textElement/>
+					<text><![CDATA[DIRECTORA UNIDAD DE EDUCACIÓN CONTINUA]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="3b4cfc16-3dff-4f2d-ac03-9e43f1a7438c" x="16" y="51" width="525" height="111"/>
+					<textElement textAlignment="Justified"/>
+					<textFieldExpression><![CDATA[$F{cuerpoMemo}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<summary>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7af42017-9e99-471a-9ee4-e721eb840e70" x="0" y="13" width="555" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Elaborado por: " + $F{nombreElaborador}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

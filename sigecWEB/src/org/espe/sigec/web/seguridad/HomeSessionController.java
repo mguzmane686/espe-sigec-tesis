@@ -27,7 +27,7 @@ import org.richfaces.event.ItemChangeEvent;
 @SessionScoped
 public class HomeSessionController extends CommonController{
 	
-	
+	private String idPerfiles;
 	public void setSessionUser(UsuarioPerfil usuarioPerfil){
 		setUsuarioPerfil(usuarioPerfil);
 	}
@@ -110,5 +110,13 @@ public class HomeSessionController extends CommonController{
       
         return menuBar;
     }
+
+	public String getIdPerfiles() {
+		return idPerfiles;
+	}
+
+	public void setIdPerfiles(String idPerfiles) {
+		this.idPerfiles = idPerfiles;
+	}
     
 }

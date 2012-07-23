@@ -12,7 +12,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Edificio;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.GeneralFunctions;
@@ -33,13 +33,13 @@ public class EdificioController implements Serializable{
 	
 	private void initEntities(){
 		setEdificio(new Edificio());
-		getEdificio().setLugarCurso(new LugarCurso());
+		getEdificio().setLugarCurso(new Establecimiento());
 	}
 	
 	@PostConstruct
 	public void loadLugares(){
 		setItemsLugares(new ArrayList<SelectItem>());
-		for (LugarCurso lugarCurso: admGeneralServicio.findLugar()){
+		for (Establecimiento lugarCurso: admGeneralServicio.findLugar()){
 			getItemsLugares().add(new SelectItem(lugarCurso.getIdLugar(),lugarCurso.getNombre()));
 		}
 	}

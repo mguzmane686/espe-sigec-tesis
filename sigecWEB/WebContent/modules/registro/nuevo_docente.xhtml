@@ -58,11 +58,11 @@
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
 					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10" styleClass="campoRequerido" 
-						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" rendered="#{registroDocenteController.renderEditionButtons}"/>
+						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" rendered="#{registroDocenteController.renderEditionButtons}" validator="cedulaValidator"/>
 					<h:outputText value="#{registroDocenteController.profesor.persona.cedula}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
 
 					<h:outputLabel value="#{msg['nombres']}"  />
-					<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}">
+					<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
 						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
 					</h:panelGrid>
@@ -71,7 +71,7 @@
 
 
 					<h:outputLabel value="#{msg['apellidos']}"  />
-					<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}">
+					<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
 						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
 						<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
 					</h:panelGrid>
@@ -108,10 +108,6 @@
 						<f:selectItem itemLabel="No" itemValue="0" />
 					</h:selectOneRadio>
 					
-					<h:outputLabel value="Especialidad" />
-					<h:selectOneMenu  value="#{registroDocenteController.profesor.especialidad.idEspecialidad}" disabled="#{!registroDocenteController.renderEditionButtons}">
-						<f:selectItems value="#{registroDocenteController.especialidades}"></f:selectItems>
-					</h:selectOneMenu>	
 				</h:panelGrid>
 				<h:panelGroup rendered="false">
 					<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" listHeight="20" maxFilesQuantity="1"

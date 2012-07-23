@@ -62,7 +62,8 @@ public class RegistroDocenteController implements Serializable{
 		getProfesor().setTiempoComp(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
 		getProfesor().setEstadoSeleccion(SigecConstantes.ESTADO_INACTIVO_BOOLEANO);
 		getProfesor().setPersona(new Persona());
-		getProfesor().setEspecialidad(new Especialidad());
+		//TODO Verfificar cambio
+//		getProfesor().setEspecialidad(new Especialidad());
 		setFiles(new ArrayList<Persona>());
 		setUsuario(new Usuario());
 	}

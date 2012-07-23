@@ -12,7 +12,6 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
 import org.espe.sigec.web.utils.CommonController;
@@ -32,8 +31,8 @@ public class NuevoCursoController extends CommonController{
 	PlanificacionServicio planificacionServicio;
 	
 	private Collection<PensumAcademico> lstPensumAcademicos;
-	private Collection<ModuloCurso> lstModuloCursos;
-	private ModuloCurso moduloCurso;
+//	private Collection<ContenidoCurso> lstModuloCursos;
+//	private ContenidoCurso moduloCurso;
 	
 	private Collection<SelectItem> itemEspecialidades;
 	
@@ -50,8 +49,8 @@ public class NuevoCursoController extends CommonController{
 		getCurso().setEspecialidad(new Especialidad());
 		setPensumAcademicoNuevo(new PensumAcademico());
 		setLstPensumAcademicos(new ArrayList<PensumAcademico>());
-		setLstModuloCursos(new ArrayList<ModuloCurso>());
-		setModuloCurso(new ModuloCurso());
+//		setLstModuloCursos(new ArrayList<ContenidoCurso>());
+//		setModuloCurso(new ContenidoCurso());
 	}
 	
 	@PostConstruct
@@ -62,18 +61,18 @@ public class NuevoCursoController extends CommonController{
 	}
 	
 	public void btnAddModuloCurso(ActionEvent e){
-		getLstModuloCursos().add(getModuloCurso());
-		setModuloCurso(new ModuloCurso());
+//		getLstModuloCursos().add(getModuloCurso());
+//		setModuloCurso(new ContenidoCurso());
 	}
 	
 	public void btnAddTemaPensum(ActionEvent e){
-		getLstPensumAcademicos().add(pensumAcademicoNuevo);
+		getLstPensumAcademicos().add(getPensumAcademicoNuevo());
 		pensumAcademicoNuevo = new PensumAcademico();
 	}
 
 	public void btnSaveCurso(ActionEvent e){
 		try {
-			planificacionServicio.crearNuevoCursoModulo(getCurso(), getLstModuloCursos());
+			planificacionServicio.crearNuevoCurso(getCurso(), getLstPensumAcademicos());
 			initEntities();
 			FacesUtils.addInfoMessage("Curso creado satisfactoriamente");
 		} catch (Exception e1) {
@@ -113,17 +112,17 @@ public class NuevoCursoController extends CommonController{
 	public void setItemEspecialidades(Collection<SelectItem> itemEspecialidades) {
 		this.itemEspecialidades = itemEspecialidades;
 	}
-	public Collection<ModuloCurso> getLstModuloCursos() {
-		return lstModuloCursos;
-	}
-	public void setLstModuloCursos(Collection<ModuloCurso> lstModuloCursos) {
-		this.lstModuloCursos = lstModuloCursos;
-	}
-	public ModuloCurso getModuloCurso() {
-		return moduloCurso;
-	}
-	public void setModuloCurso(ModuloCurso moduloCurso) {
-		this.moduloCurso = moduloCurso;
-	}
+//	public Collection<ContenidoCurso> getLstModuloCursos() {
+//		return lstModuloCursos;
+//	}
+//	public void setLstModuloCursos(Collection<ContenidoCurso> lstModuloCursos) {
+//		this.lstModuloCursos = lstModuloCursos;
+//	}
+//	public ContenidoCurso getModuloCurso() {
+//		return moduloCurso;
+//	}
+//	public void setModuloCurso(ContenidoCurso moduloCurso) {
+//		this.moduloCurso = moduloCurso;
+//	}
 	
 }

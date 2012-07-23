@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.ModuloCurso;
+import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -53,23 +53,24 @@ public class ReporteCursoController implements Serializable {
 		
 		setLstCursos(cursoServicio.findCursos());
 		for (Curso curso : getLstCursos()) {
-			curso.setModuloCursoCollection(new ArrayList<ModuloCurso>());
+			curso.setPensumAcademicoCollection(new ArrayList<PensumAcademico>());
 		}
 	}
 		 
 	public void btnExpandContractCurso(Curso curso, boolean expanded) {
 		curso.setShowCursoPeriodoCollection(expanded);
 		if (expanded) {
-			curso.setModuloCursoCollection(cursoServicio.findModulosCurso(curso.getIdCurso()));
+//			curso.setModuloCursoCollection(cursoServicio.findModulosCurso(curso.getIdCurso()));
+			curso.setPensumAcademicoCollection(cursoServicio.findTemasModulo(curso.getIdCurso()));
 		}
 	}
 
-	public void btnExpandContractModulo(ModuloCurso modulo, boolean expanded) {
-		modulo.setShowPensum(expanded);
-		if (expanded) {
-			modulo.setPensumAcademicoCollection(cursoServicio.findTemasModulo(modulo.getIdModuloCurso()));
-		}
-	}
+//	public void btnExpandContractModulo(ContenidoCurso modulo, boolean expanded) {
+//		modulo.setShowPensum(expanded);
+//		if (expanded) {
+//			modulo.setPensumAcademicoCollection(cursoServicio.findTemasModulo(modulo.getIdModuloCurso()));
+//		}
+//	}
 	
 	public void btnShowCursoDetail(Curso curso) {
 		try {

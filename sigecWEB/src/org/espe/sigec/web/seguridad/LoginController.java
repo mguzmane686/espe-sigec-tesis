@@ -2,6 +2,7 @@ package org.espe.sigec.web.seguridad;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -42,11 +43,15 @@ public class LoginController implements Serializable{
 		if (success){
 			Usuario usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), getUsuario().getClave());
 			if(null != usuario){
-				UsuarioPerfil usuarioPerfil = loginServicio.getUsuarioPerfil(usuario);
+				Collection<UsuarioPerfil> usuarioPerfil = loginServicio.getUsuarioPerfil(usuario);
 				
 				if(usuarioPerfil !=null){
-				
-					((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUsuarioPerfil(usuarioPerfil);
+					String perfiles="";
+					for(UsuarioPerfil usuarioPerfilTMP : usuarioPerfil){
+						perfiles+=usuarioPerfilTMP.getUsuarioPerfilPK().getIdPerfil() + " ";
+					}
+					((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setIdPerfiles(perfiles);
+					((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUsuarioPerfil(usuarioPerfil.iterator().next());
 					try {
 //						((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setLstModulos(loginServicio.getMenuByProfile(usuario));
 //						((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).setUiPanelMenu(FacesUtils.buildUserMenu(loginServicio.getMenuByProfile(usuario)));

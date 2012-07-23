@@ -54,14 +54,14 @@
 	        	if (window.event) {
 	        		//IE
 	        		tecla = window.event.keyCode;
-	        		if(tecla == 122){
+	        		if(tecla == 116){
 	        			event.keyCode=0;
 	        			event.returnValue=false;
 	        		}
 	        	}else{
 	        		//firefox
 	        		tecla = e.which;
-	        		if(tecla == 122)
+	        		if(tecla == 116)
 	        			return true;
 	        	}
 	        }
