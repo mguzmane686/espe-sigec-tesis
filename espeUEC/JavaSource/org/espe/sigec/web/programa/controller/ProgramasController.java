@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Programa;
+import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.servicio.portal.PortalServicio;
 
 /**
@@ -24,7 +25,8 @@ public class ProgramasController implements Serializable{
 	@Inject 
 	private PortalServicio portalServicio;
 	private Programa programaCursoSelected;
-	private CursoPeriodo cursoPeriodoSeleccionado; 
+	private CursoPeriodo cursoPeriodoSeleccionado;
+	private ProgramaCurso programaCursoSeleccionado;
 	
 	private Collection<Programa> lstProgramaCursos;
 	
@@ -39,7 +41,7 @@ public class ProgramasController implements Serializable{
 	}
 	
 	public void btnAceptar(){
-		System.out.println(getCursoPeriodoSeleccionado().getModuloCursoPeriodoCollection());
+//		System.out.println(getCursoPeriodoSeleccionado().getModuloCursoPeriodoCollection());
 	}
 	public void btnShowProgramaDetalle(){
 		System.out.println("Uno");
@@ -67,6 +69,14 @@ public class ProgramasController implements Serializable{
 
 	public void setCursoPeriodoSeleccionado(CursoPeriodo cursoPeriodoSeleccionado) {
 		this.cursoPeriodoSeleccionado = cursoPeriodoSeleccionado;
+	}
+
+	public ProgramaCurso getProgramaCursoSeleccionado() {
+		return programaCursoSeleccionado;
+	}
+
+	public void setProgramaCursoSeleccionado(ProgramaCurso programaCursoSeleccionado) {
+		this.programaCursoSeleccionado = programaCursoSeleccionado;
 	}
 	
 	

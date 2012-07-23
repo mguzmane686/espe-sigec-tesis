@@ -68,6 +68,7 @@
 				        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
 					        <p:commandLink  value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
 					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
+					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
 					        </p:commandLink>
 					        <p:commandLink onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
 					        
@@ -85,6 +86,7 @@
 							<p:column headerText="#{programaCurso.nombre}">  
 				                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
 									<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
+									<f:setPropertyActionListener target="#{programasController.programaCursoSeleccionado}" value="#{curso}"></f:setPropertyActionListener>
 								</p:commandLink>
 				            </p:column>
 						</p:dataTable>

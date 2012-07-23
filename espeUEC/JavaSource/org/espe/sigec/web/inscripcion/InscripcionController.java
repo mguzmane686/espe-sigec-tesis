@@ -26,7 +26,7 @@ public class InscripcionController implements Serializable{
 	private InscripcionServicio inscripcionServicio;
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
-	
+//	private ProgramaCurso programaCurso;
 	private CursoPeriodo cursoPeriodo;
 	private String cedulaUsr;
 //	private CursoEstudiante cursoEstudiante;
@@ -111,5 +111,11 @@ public class InscripcionController implements Serializable{
 	public void setFindMode(boolean findMode) {
 		this.findMode = findMode;
 	}
+//	public ProgramaCurso getProgramaCurso() {
+//		return programaCurso;
+//	}
+//	public void setProgramaCurso(ProgramaCurso programaCurso) {
+//		this.programaCurso = programaCurso;
+//	}
 	
 }
