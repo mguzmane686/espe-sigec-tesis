@@ -5,7 +5,6 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Basic;
@@ -19,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -32,7 +30,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "persona")
+@Table(name = "sgct_rh_persona")
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")})
 public class Persona implements Serializable {
@@ -40,56 +38,58 @@ public class Persona implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_persona")
+    @Column(name = "per_id_persona")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="persona_seq")
     @SequenceGenerator(name="persona_seq", sequenceName="persona_seq", allocationSize = 1)
     private Integer idPersona;
     @Size(max = 10)
-    @Column(name = "cedula")
+    @Column(name = "per_cedula")
     private String cedula;
     @Size(max = 50)
-    @Column(name = "primer_nombre")
+    @Column(name = "per_primer_nombre")
     private String primerNombre;
     @Size(max = 50)
-    @Column(name = "segundo_nombre")
+    @Column(name = "per_segundo_nombre")
     private String segundoNombre;
     @Size(max = 50)
-    @Column(name = "primer_apellido")
+    @Column(name = "per_primer_apellido")
     private String primerApellido;
     @Size(max = 50)
-    @Column(name = "segundo_apellido")
+    @Column(name = "per_segundo_apellido")
     private String segundoApellido;
     @Size(max = 50)
-    @Column(name = "nacionalidad")
+    @Column(name = "per_nacionalidad")
     private String nacionalidad;
-    @Column(name = "fecha_nacimiento")
+    @Column(name = "per_lugar_nacimiento")
+    private String lugarNacimiento;
+    @Column(name = "per_fecha_nacimiento")
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
     @Size(max = 250)
-    @Column(name = "direccion")
+    @Column(name = "per_direccion")
     private String direccion;
     @Size(max = 250)
-    @Column(name = "mail")
+    @Column(name = "per_mail")
     private String mail;
     @Size(max = 20)
-    @Column(name = "telefono_celular")
+    @Column(name = "per_telefono_celular")
     private String telefonoCelular;
     @Size(max = 20)
-    @Column(name = "telefono_convencional")
+    @Column(name = "per_telefono_convencional")
     private String telefonoConvencional;
-    @Column(name = "foto")
+    @Column(name = "per_foto")
     private byte[] foto;
-    @Column(name = "referencia")
+    @Column(name = "per_referencia")
     private String referencia;
-    @Column(name = "profesion")
+    @Column(name = "per_profesion")
     private String profesion;
-    @Column(name = "es_contacto")
+    @Column(name = "per_es_contacto")
     private String esContacto;
-    @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
-    private Collection<Profesor> profesorCollection;
-    @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
-    private Collection<Estudiante> estudianteCollection;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    @Column(name = "per_estado_civil")
+    private String estadoCivil;
+   
+   
+    @JoinColumn(name = "usr_id_usuario", referencedColumnName = "usr_id_usuario")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
 
@@ -196,22 +196,6 @@ public class Persona implements Serializable {
         this.telefonoConvencional = telefonoConvencional;
     }
 
-    public Collection<Profesor> getProfesorCollection() {
-        return profesorCollection;
-    }
-
-    public void setProfesorCollection(Collection<Profesor> profesorCollection) {
-        this.profesorCollection = profesorCollection;
-    }
-
-    public Collection<Estudiante> getEstudianteCollection() {
-        return estudianteCollection;
-    }
-
-    public void setEstudianteCollection(Collection<Estudiante> estudianteCollection) {
-        this.estudianteCollection = estudianteCollection;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
@@ -275,5 +259,22 @@ public class Persona implements Serializable {
 
 	public void setProfesion(String profesion) {
 		this.profesion = profesion;
-	}    
+	}
+
+	public String getLugarNacimiento() {
+		return lugarNacimiento;
+	}
+
+	public void setLugarNacimiento(String lugarNacimiento) {
+		this.lugarNacimiento = lugarNacimiento;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+	
 }

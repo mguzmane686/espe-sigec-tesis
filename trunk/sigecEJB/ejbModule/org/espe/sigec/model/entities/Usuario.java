@@ -6,6 +6,7 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +27,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "sgct_sg_usuario")
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
@@ -35,18 +35,18 @@ public class Usuario implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_usuario")
+    @Column(name = "usr_id_usuario")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="usuario_seq")
     @SequenceGenerator(name="usuario_seq", sequenceName="usuario_seq", allocationSize = 1)
     private Integer idUsuario;
     @Size(max = 50)
-    @Column(name = "identificador")
+    @Column(name = "usr_identificador")
     private String identificador;
     @Size(max = 50)
-    @Column(name = "clave")
+    @Column(name = "usr_clave")
     private String clave;
     @Size(max = 1)
-    @Column(name = "estado_usr")
+    @Column(name = "usr_estado")
     private String estadoUsr;
 //    @ManyToMany(mappedBy = "usuarioCollection", fetch = FetchType.LAZY)
 //    private Collection<Perfil> perfilCollection;

@@ -24,7 +24,7 @@ import javax.validation.constraints.Size;
 public class DetallePresupuestoCursoPK implements Serializable {
 	@Basic(optional = false)
     @NotNull
-    @Column(name = "id_detalle")
+    @Column(name = "det_id_detalle")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="det_pre_cur")
     @SequenceGenerator(name="det_pre_cur", sequenceName="det_pre_cur")
     private BigInteger idDetalle;
@@ -35,7 +35,7 @@ public class DetallePresupuestoCursoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "cod_elemento")
+    @Column(name = "det_cod_elemento")
     private String codElemento;
     
     public DetallePresupuestoCursoPK() {

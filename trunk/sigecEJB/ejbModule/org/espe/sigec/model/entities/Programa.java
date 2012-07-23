@@ -31,7 +31,7 @@ import javax.validation.constraints.Size;
  * @author Roberto
  */
 @Entity
-@Table(name = "programa")
+@Table(name = "sgct_acd_programa")
 @NamedQueries({
     @NamedQuery(name = "Programa.findAll", query = "SELECT p FROM Programa p")})
 public class Programa implements Serializable {
@@ -39,23 +39,23 @@ public class Programa implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_programa")
+    @Column(name = "prg_id")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="programa_seq")
     @SequenceGenerator(name="programa_seq", sequenceName="programa_seq", allocationSize = 1)
     private Integer idPrograma;
     @Size(max = 250)
-    @Column(name = "nombre")
+    @Column(name = "prg_nombre")
     private String nombre;
     @Size(max = 1024)
-    @Column(name = "descripcion")
+    @Column(name = "prg_descripcion")
     private String descripcion;
-    @Column(name = "inicio")
+    @Column(name = "prg_inicio")
     @Temporal(TemporalType.DATE)
     private Date inicio;
-    @Column(name = "finalizacion")
+    @Column(name = "prg_finalizacion")
     @Temporal(TemporalType.DATE)
     private Date finalizacion;
-    @Column(name = "estado")
+    @Column(name = "prg_estado")
     private String estado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "programa", fetch = FetchType.LAZY)
     private Collection<ProgramaCurso> programaCursoCollection;

@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "especialidad")
+@Table(name = "sgct_acd_especialidad")
 @NamedQueries({
     @NamedQuery(name = "Especialidad.findAll", query = "SELECT e FROM Especialidad e")})
 public class Especialidad implements Serializable {
@@ -34,22 +34,25 @@ public class Especialidad implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_especialidad")
+    @Column(name = "esp_id_especialidad")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="especialidad_seq")
     @SequenceGenerator(name="especialidad_seq", sequenceName="especialidad_seq", allocationSize = 1)
     private Integer idEspecialidad;
     @Size(max = 50)
-    @Column(name = "nombre")
+    @Column(name = "esp_nombre")
     private String nombre;
     @Size(max = 250)
-    @Column(name = "descripcion")
+    @Column(name = "esp_descripcion")
     private String descripcion;
-    @Column(name="id_especialidad_prefijo")
+    @Column(name="esp_id_esp_pre")
     private String idEspecialidadPrefijo;
     @Size(max = 10)
     @OneToMany(mappedBy = "especialidad", fetch = FetchType.LAZY)
     private Collection<Curso> cursoCollection;
-
+    
+    @OneToMany(mappedBy = "especialidad", fetch = FetchType.LAZY)
+    private Collection<RangoAcademico> lstRangoAcademico;
+    
     public Especialidad() {
     }
 
@@ -121,5 +124,13 @@ public class Especialidad implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.Especialidad[ idEspecialidad=" + idEspecialidad + " ]";
     }
+
+	public Collection<RangoAcademico> getLstRangoAcademico() {
+		return lstRangoAcademico;
+	}
+
+	public void setLstRangoAcademico(Collection<RangoAcademico> lstRangoAcademico) {
+		this.lstRangoAcademico = lstRangoAcademico;
+	}
 
 }

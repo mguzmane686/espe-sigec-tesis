@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 public class AsistenciaEstudiantePK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_asistencia")
+    @Column(name = "ast_id_asistencia")
     private int idAsistencia;
     @Basic(optional = false)
     @NotNull

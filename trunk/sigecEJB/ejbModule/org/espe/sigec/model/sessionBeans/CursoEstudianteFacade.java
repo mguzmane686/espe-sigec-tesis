@@ -36,11 +36,15 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 
 	@Override
 	public int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo) {
+		if(idCursoPeriodo==null){
+			System.out.println("valor null no permitido");
+		}
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class);
 		criteria.add(Restrictions.eq("cursoEstudiantePK.idCursoPeriodo", new BigInteger(idCursoPeriodo.toString())));
 		
 		@SuppressWarnings("unchecked")
 		Collection<Usuario> lstUsuarios = criteria.list();
+		System.out.println(lstUsuarios.size());
 		return lstUsuarios.size();
 	}
     

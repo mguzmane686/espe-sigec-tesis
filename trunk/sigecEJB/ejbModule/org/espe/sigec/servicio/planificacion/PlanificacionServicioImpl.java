@@ -9,7 +9,6 @@ import javax.transaction.UserTransaction;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
@@ -17,7 +16,6 @@ import org.espe.sigec.model.entities.ProgramaCursoPK;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
-import org.espe.sigec.model.sessionBeans.ModuloCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaFacadeLocal;
@@ -31,8 +29,8 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	private PensumAcademicoFacadeLocal pensumAcademicoFacadeLocal;
 	@EJB
 	private CursoFacadeLocal cursoFacadeLocal;
-	@EJB
-	private ModuloCursoFacadeLocal moduloCursoFacadeLocal;
+//	@EJB
+//	private ModuloCursoFacadeLocal moduloCursoFacadeLocal;
 	@EJB
 	private EspecialidadFacadeLocal especialidadFacadeLocal;
 	@EJB
@@ -49,33 +47,35 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 		userTransaction.begin();
 		try {
 			cursoFacadeLocal.create(curso);
+			for(PensumAcademico pensumAcademicoTMP: lstPensumAcademicos){
+				pensumAcademicoTMP.setCurso(curso);
+				pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
+			}
+			
 			userTransaction.commit();
 		} catch (Exception e) {
 			userTransaction.rollback();
-			e.printStackTrace();
+			throw new Exception("Ocurrio un error al guardar el curso");
 		}
 		
-//		for(PensumAcademico pensumAcademicoTMP: lstPensumAcademicos){
-//			pensumAcademicoTMP.setCurso(curso);
-//			pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
-//		}
+		
 	}
 	
-	@Override
-	public void crearNuevoCursoModulo(Curso curso, Collection<ModuloCurso> lstModuloCursos) throws Exception{
-		userTransaction.begin();
-		try {
-			cursoFacadeLocal.create(curso);
-			for(ModuloCurso moduloCursoTMP: lstModuloCursos){
-				moduloCursoTMP.setCurso(curso);
-				moduloCursoFacadeLocal.create(moduloCursoTMP);
-			}
-			userTransaction.commit();
-		} catch (Exception e) {
-			userTransaction.rollback();
-			e.printStackTrace();
-		}
-	}
+//	@Override
+//	public void crearNuevoCursoModulo(Curso curso, Collection<ContenidoCurso> lstModuloCursos) throws Exception{
+//		userTransaction.begin();
+//		try {
+//			cursoFacadeLocal.create(curso);
+//			for(ContenidoCurso moduloCursoTMP: lstModuloCursos){
+//				moduloCursoTMP.setCurso(curso);
+//				moduloCursoFacadeLocal.create(moduloCursoTMP);
+//			}
+//			userTransaction.commit();
+//		} catch (Exception e) {
+//			userTransaction.rollback();
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Override
 	public Collection<Especialidad> findEspecialidades(){
@@ -90,11 +90,13 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 			
 			for(PensumAcademico pensumAcademicoTMP: lstPensumAcademicos){
 				if (pensumAcademicoTMP.isExistInBase()) {
+//					pensumAcademicoTMP.setCurso(curso);
 					pensumAcademicoFacadeLocal.edit(pensumAcademicoTMP);
-				}else{
+				}
+//				else{
 //					pensumAcademicoTMP.setCurso(curso);
 //					pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
-				}
+//				}
 			}
 		} catch (Exception e) {
 			userTransaction.rollback();
@@ -103,33 +105,34 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 		userTransaction.commit();
 	}
 	
-	@Override
-	public void editarCursoModulo(Curso curso,
-			Collection<ModuloCurso> lstModuloCursos) throws Exception {
-		userTransaction.begin();
-		try {
-			cursoFacadeLocal.edit(curso);
-			
-			for(ModuloCurso moduloCursoTMP: lstModuloCursos){
-				if (moduloCursoTMP.isExistInBase()) {
-					moduloCursoFacadeLocal.edit(moduloCursoTMP);
-				}else{
-					moduloCursoTMP.setCurso(curso);
-					moduloCursoFacadeLocal.create(moduloCursoTMP);
-				}
-			}
-		} catch (Exception e) {
-			userTransaction.rollback();
-		}
-		
-		userTransaction.commit();
-	}
+//	@Override
+//	public void editarCursoModulo(Curso curso,
+//			Collection<ContenidoCurso> lstModuloCursos) throws Exception {
+//		userTransaction.begin();
+//		try {
+//			cursoFacadeLocal.edit(curso);
+//			
+//			for(ContenidoCurso moduloCursoTMP: lstModuloCursos){
+//				if (moduloCursoTMP.isExistInBase()) {
+//					moduloCursoFacadeLocal.edit(moduloCursoTMP);
+//				}else{
+//					moduloCursoTMP.setCurso(curso);
+//					moduloCursoFacadeLocal.create(moduloCursoTMP);
+//				}
+//			}
+//		} catch (Exception e) {
+//			userTransaction.rollback();
+//		}
+//		
+//		userTransaction.commit();
+//	}
 	
 	@Override
 	public void crearPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCurso) throws Exception {
 		userTransaction.begin();
 		try {
 			programa.setEstado("1");
+			programa.setFinalizacion(programa.getInicio());
 			programaFacadeLocal.create(programa);
 			for(ProgramaCurso programaCurso: lstProgramaCurso){
 				programaCurso.getProgramaCursoPK().setIdPrograma(programa.getIdPrograma());

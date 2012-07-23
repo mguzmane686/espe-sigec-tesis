@@ -6,7 +6,7 @@ package org.espe.sigec.model.sessionBeans;
 
 import java.util.List;
 import javax.ejb.Local;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 
 /**
  *
@@ -15,17 +15,17 @@ import org.espe.sigec.model.entities.LugarCurso;
 @Local
 public interface LugarCursoFacadeLocal {
 
-    void create(LugarCurso lugarCurso) throws Exception;
+    void create(Establecimiento lugarCurso) throws Exception;
 
-    void edit(LugarCurso lugarCurso) throws Exception;
+    void edit(Establecimiento lugarCurso) throws Exception;
 
-    void remove(LugarCurso lugarCurso) throws Exception;
+    void remove(Establecimiento lugarCurso) throws Exception;
 
-    LugarCurso find(Object id);
+    Establecimiento find(Object id);
 
-    List<LugarCurso> findAll();
+    List<Establecimiento> findAll();
 
-    List<LugarCurso> findRange(int[] range);
+    List<Establecimiento> findRange(int[] range);
 
     int count();
     

@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.ModuloCurso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
@@ -17,10 +16,10 @@ import org.espe.sigec.model.entities.ProgramaCurso;
 @QPlanificacion
 public interface PlanificacionServicio {
 	void crearNuevoCurso(Curso curso, Collection<PensumAcademico> lstPensumAcademicos) throws Exception;
-	void crearNuevoCursoModulo(Curso curso, Collection<ModuloCurso> lstModuloCursos) throws Exception;
+//	void crearNuevoCursoModulo(Curso curso, Collection<ContenidoCurso> lstModuloCursos) throws Exception;
 	public Collection<Especialidad> findEspecialidades();
 	void editarCurso(Curso curso, Collection<PensumAcademico> lstPensumAcademicos) throws Exception;
-	void editarCursoModulo(Curso curso, Collection<ModuloCurso> lstModuloCursos) throws Exception;
+//	void editarCursoModulo(Curso curso, Collection<ContenidoCurso> lstModuloCursos) throws Exception;
 	void crearPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCurso) throws Exception;
 	void editarPrograma(Programa programa, Collection<ProgramaCurso> lstProgramaCursoActivar, Collection<ProgramaCurso> lstProgramaCursoRemover) throws Exception;
 	Collection<Programa> buscarPrograma();

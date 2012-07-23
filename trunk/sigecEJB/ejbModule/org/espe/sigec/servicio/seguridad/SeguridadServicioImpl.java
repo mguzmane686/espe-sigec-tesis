@@ -9,6 +9,7 @@ import javax.transaction.UserTransaction;
 import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.model.entities.Modulo;
 import org.espe.sigec.model.entities.Perfil;
+import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
@@ -54,12 +55,18 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 	}
 
 	@Override
-	public UsuarioPerfil getUsuarioPerfil(Usuario usuario) {
+	public Collection<UsuarioPerfil> getUsuarioPerfil(Usuario usuario) {
 		UsuarioPerfil id = new UsuarioPerfil(new UsuarioPerfilPK());
 		id.getUsuarioPerfilPK().setIdUsuario(usuario.getIdUsuario());
-		UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.findUsuarioPerfilByUserId(usuario.getIdUsuario()).iterator().next();
-		usuarioPerfil.setPersona(personaFacadeLocal.findPersonaByUser(usuario));
-		return usuarioPerfil;
+		Collection<UsuarioPerfil> lstUsuarioPerfil = usuarioPerfilFacadeLocal.findUsuarioPerfilByUserId(usuario.getIdUsuario());
+		
+		Persona persona = personaFacadeLocal.findPersonaByUser(usuario);
+		for(UsuarioPerfil usuarioPerfil: lstUsuarioPerfil){
+			usuarioPerfil.setPersona(persona);
+		}
+		
+//		usuarioPerfil.setPersona(personaFacadeLocal.findPersonaByUser(usuario));
+		return lstUsuarioPerfil;
 	}
 
 	@Override
@@ -99,7 +106,7 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 			userTransaction.commit();
 		} catch (Exception e) {
 			userTransaction.rollback();
-			new Exception("Ha ocurrido un error al crear el usuario", e);
+			throw new Exception("Ha ocurrido un error al crear el usuario", e);
 		}
 	}
 
@@ -112,6 +119,56 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 	public Collection<UsuarioPerfil> findPerfilesUsuario(Integer idUsuario) throws Exception {
 		return usuarioPerfilFacadeLocal.findUsuarioPerfilByUserId(idUsuario);
 		
+	}
+
+	@Override
+	public void actualizarUsuarioPerfil(Persona persona, Collection<Perfil> lstPerfiles) throws Exception {
+		userTransaction.begin();
+		try {
+			personaFacadeLocal.edit(persona);
+			for (Perfil perfil : lstPerfiles) {
+				UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil();
+				usuarioPerfilTMP.setEstado("1");
+				usuarioPerfilTMP.setPerfil(perfil);
+				
+				usuarioPerfilTMP.setUsuarioPerfilPK(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
+				
+				
+				if(perfil.isSelected()){
+					UsuarioPerfil tmpUsr = usuarioPerfilFacadeLocal.find(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
+					if(tmpUsr!=null){
+						perfil.setExistInBase(Boolean.TRUE);
+					}else{
+						perfil.setExistInBase(Boolean.FALSE);
+					}
+					
+					if(perfil.isExistInBase()){
+						
+						usuarioPerfilFacadeLocal.edit(usuarioPerfilTMP);
+					}else{
+						usuarioPerfilFacadeLocal.create(usuarioPerfilTMP);
+						if(perfil.getIdPerfil().equals("EST")){
+							Estudiante estudiante = new Estudiante();
+							estudiante.setPersona(persona);
+							estudianteFacadeLocal.create(estudiante);
+						}else if(perfil.getIdPerfil().equals("PRO")){
+							Profesor profesor = new Profesor();
+							profesor.setPersona(persona);
+							profesorFacadeLocal.create(profesor);
+						}
+					}
+				}else{
+					usuarioPerfilTMP.setEstado("0");
+					usuarioPerfilFacadeLocal.edit(usuarioPerfilTMP);
+				}
+			}
+			
+			userTransaction.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			userTransaction.rollback();
+			throw new Exception("Ha ocurrido un error al crear el usuario", e);
+		}
 	}
 	
 	

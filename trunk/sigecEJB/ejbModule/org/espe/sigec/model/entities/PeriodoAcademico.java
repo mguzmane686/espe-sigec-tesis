@@ -7,8 +7,8 @@ package org.espe.sigec.model.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +29,7 @@ import javax.validation.constraints.NotNull;
  * @author roberto
  */
 @Entity
-@Table(name = "periodo_academico")
+@Table(name = "sgct_acd_per_aca")
 @NamedQueries({
     @NamedQuery(name = "PeriodoAcademico.findAll", query = "SELECT p FROM PeriodoAcademico p")})
 public class PeriodoAcademico implements Serializable {
@@ -37,20 +37,20 @@ public class PeriodoAcademico implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_per_academico")
+    @Column(name = "paca_id")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="peraca_seq")
     @SequenceGenerator(name="peraca_seq", sequenceName="peraca_seq", allocationSize = 1)
     private Integer idPerAcademico;
-    @Column(name = "fecha_inicio")
+    @Column(name = "paca_fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
-    @Column(name = "fecha_fin")
+    @Column(name = "paca_fecha_fin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     @OneToMany(mappedBy = "periodoAcademico", fetch = FetchType.LAZY)
     private Collection<CursoPeriodo> cursoPeriodoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "periodoAcademico", fetch = FetchType.LAZY)
-    private Collection<DesempenioProfesor> desempenioProfesorCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "periodoAcademico", fetch = FetchType.LAZY)
+//    private Collection<DesempenioProfesor> desempenioProfesorCollection;
 
     public PeriodoAcademico() {
     }
@@ -91,37 +91,31 @@ public class PeriodoAcademico implements Serializable {
         this.cursoPeriodoCollection = cursoPeriodoCollection;
     }
 
-    public Collection<DesempenioProfesor> getDesempenioProfesorCollection() {
-        return desempenioProfesorCollection;
-    }
+//    public Collection<DesempenioProfesor> getDesempenioProfesorCollection() {
+//        return desempenioProfesorCollection;
+//    }
+//
+//    public void setDesempenioProfesorCollection(Collection<DesempenioProfesor> desempenioProfesorCollection) {
+//        this.desempenioProfesorCollection = desempenioProfesorCollection;
+//    }
 
-    public void setDesempenioProfesorCollection(Collection<DesempenioProfesor> desempenioProfesorCollection) {
-        this.desempenioProfesorCollection = desempenioProfesorCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idPerAcademico != null ? idPerAcademico.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PeriodoAcademico)) {
-            return false;
-        }
-        PeriodoAcademico other = (PeriodoAcademico) object;
-        if ((this.idPerAcademico == null && other.idPerAcademico != null) || (this.idPerAcademico != null && !this.idPerAcademico.equals(other.idPerAcademico))) {
-            return false;
-        }
-        return true;
-    }
+    
 
     @Override
     public String toString() {
         return "org.espe.sigec.model.entites.PeriodoAcademico[ idPerAcademico=" + idPerAcademico + " ]";
     }
+
+	@Override
+	public int hashCode() {
+		// TODO Auto-generated method stub
+		return super.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
     
 }

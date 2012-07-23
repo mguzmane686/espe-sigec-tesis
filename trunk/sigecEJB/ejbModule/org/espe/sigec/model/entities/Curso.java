@@ -6,6 +6,7 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,7 +31,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "curso")
+@Table(name = "sgct_acd_cur")
 @NamedQueries({
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c")})
 public class Curso implements Serializable {
@@ -38,45 +39,50 @@ public class Curso implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_curso")
+    @Column(name = "cur_id_curso")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="curso_seq")
     @SequenceGenerator(name="curso_seq", sequenceName="curso_seq", allocationSize = 1)
     private Integer idCurso;
     @Size(max = 250)
-    @Column(name = "nombre_curso")
+    @Column(name = "cur_nom_cur")
     private String nombreCurso;
+    @Column(name = "cur_nom_imp")
+    private String nombreImpresion;
     @Size(max = 500)
-    @Column(name = "generalidades_curso")
+    @Column(name = "cur_generalidades")
     private String generalidadesCurso;
     @Size(max = 1)
-    @Column(name = "estado_cur")
+    @Column(name = "cur_estado")
     private String estadoCur;
     
     @Size(max = 1)
-    @Column(name = "nivel_curso")
+    @Column(name = "cur_nivel")
     private String nivelCurso;
     @Size(max = 250)
-    @Column(name = "objetivo_general")
+    @Column(name = "cur_obj_gen")
     private String objetivoGeneral;
     @Size(max = 1024)
-    @Column(name = "objetivos_especificos")
+    @Column(name = "cur_obj_esp")
     private String objetivosEspecificos;
     @Size(max = 1024)
-    @Column(name = "perfil_participante")
+    @Column(name = "cur_per_par")
     private String perfilParticipante;
     @Size(max = 1024)
-    @Column(name = "perfil_docente")
+    @Column(name = "cur_per_doc")
     private String perfilDocente;
     
-    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
-    private Collection<ModuloCurso> moduloCursoCollection;
+//    @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
+//    private Collection<ModuloCurso> moduloCursoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso", fetch = FetchType.LAZY)
     private Collection<CursoProfesor> cursoProfesorCollection;
     @OneToMany(mappedBy = "curso", fetch = FetchType.LAZY)
     private Collection<CursoPeriodo> cursoPeriodoCollection;
-    @JoinColumn(name = "id_especialidad", referencedColumnName = "id_especialidad")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "esp_id_especialidad", referencedColumnName = "esp_id_especialidad")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Especialidad especialidad;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "curso", fetch = FetchType.LAZY)
+    private Collection<PensumAcademico> pensumAcademicoCollection;
     
     @Transient
     private boolean showCursoPeriodoCollection;
@@ -202,14 +208,14 @@ public class Curso implements Serializable {
 		this.objetivosEspecificos = objetivosEspecificos;
 	}
 
-	public Collection<ModuloCurso> getModuloCursoCollection() {
-		return moduloCursoCollection;
-	}
-
-	public void setModuloCursoCollection(
-			Collection<ModuloCurso> moduloCursoCollection) {
-		this.moduloCursoCollection = moduloCursoCollection;
-	}
+//	public Collection<ModuloCurso> getModuloCursoCollection() {
+//		return moduloCursoCollection;
+//	}
+//
+//	public void setModuloCursoCollection(
+//			Collection<ModuloCurso> moduloCursoCollection) {
+//		this.moduloCursoCollection = moduloCursoCollection;
+//	}
 
 	public String getPerfilParticipante() {
 		return perfilParticipante;
@@ -225,6 +231,23 @@ public class Curso implements Serializable {
 
 	public void setPerfilDocente(String perfilDocente) {
 		this.perfilDocente = perfilDocente;
+	}
+
+	public String getNombreImpresion() {
+		return nombreImpresion;
+	}
+
+	public void setNombreImpresion(String nombreImpresion) {
+		this.nombreImpresion = nombreImpresion;
+	}
+
+	public Collection<PensumAcademico> getPensumAcademicoCollection() {
+		return pensumAcademicoCollection;
+	}
+
+	public void setPensumAcademicoCollection(
+			Collection<PensumAcademico> pensumAcademicoCollection) {
+		this.pensumAcademicoCollection = pensumAcademicoCollection;
 	}
 	
 }

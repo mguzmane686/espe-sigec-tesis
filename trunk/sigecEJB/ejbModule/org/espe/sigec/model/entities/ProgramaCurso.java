@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
  * @author Roberto
  */
 @Entity
-@Table(name = "programa_curso")
+@Table(name = "sgct_acd_prg_cur")
 @NamedQueries({
     @NamedQuery(name = "ProgramaCurso.findAll", query = "SELECT p FROM ProgramaCurso p"),
     @NamedQuery(name = "ProgramaCurso.findByIdPrograma", query = "SELECT p FROM ProgramaCurso p WHERE p.programaCursoPK.idPrograma = :idPrograma"),
@@ -27,19 +27,19 @@ public class ProgramaCurso implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProgramaCursoPK programaCursoPK;
-    @Column(name = "fecha_inicio")
+    @Column(name = "pgcur_fecha_inicio")
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
-    @Column(name = "fecha_fin")
+    @Column(name = "pgcur_fecha_fin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
     @Size(max = 10)
-    @Column(name = "modalidad")
+    @Column(name = "pgcur_modalidad")
     private String modalidad;
-    @Column(name = "estado")
+    @Column(name = "pgcur_estado")
     private String estado;
     
-    @JoinColumn(name = "id_programa", referencedColumnName = "id_programa", insertable = false, updatable = false)
+    @JoinColumn(name = "prg_id", referencedColumnName = "prg_id", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Programa programa;
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)

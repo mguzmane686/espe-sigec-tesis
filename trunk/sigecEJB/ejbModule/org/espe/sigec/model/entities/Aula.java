@@ -5,7 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,7 +24,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "aula")
+@Table(name = "sgct_ifr_aula")
 @NamedQueries({
     @NamedQuery(name = "Aula.findAll", query = "SELECT a FROM Aula a")})
 public class Aula implements Serializable {
@@ -34,21 +33,21 @@ public class Aula implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(name = "id_aula")
+    @Column(name = "aul_id")
     private String idAula;
     @Size(max = 250)
-    @Column(name = "nombre_aula")
+    @Column(name = "aul_nombre")
     private String nombreAula;
     @Size(max = 250)
-    @Column(name = "descripcion_aula")
+    @Column(name = "aul_descripcion")
     private String descripcionAula;
-    @Column(name = "capacidad")
+    @Column(name = "aul_capacidad")
     private Integer capacidad;
-    @JoinColumn(name = "id_edificio", referencedColumnName = "id_edificio")
+    @JoinColumn(name = "edf_id_edificio", referencedColumnName = "edf_id_edificio")
     @ManyToOne(fetch = FetchType.LAZY)
     private Edificio edificio;
-    @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
-    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
+//    @OneToMany(mappedBy = "aula", fetch = FetchType.LAZY)
+//    private Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection;
 
     public Aula() {
     }
@@ -122,13 +121,13 @@ public class Aula implements Serializable {
 		this.capacidad = capacidad;
 	}
 
-	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
-		return moduloCursoPeriodoCollection;
-	}
-
-	public void setModuloCursoPeriodoCollection(
-			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
-		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
-	}
+//	public Collection<ModuloCursoPeriodo> getModuloCursoPeriodoCollection() {
+//		return moduloCursoPeriodoCollection;
+//	}
+//
+//	public void setModuloCursoPeriodoCollection(
+//			Collection<ModuloCursoPeriodo> moduloCursoPeriodoCollection) {
+//		this.moduloCursoPeriodoCollection = moduloCursoPeriodoCollection;
+//	}
     
 }

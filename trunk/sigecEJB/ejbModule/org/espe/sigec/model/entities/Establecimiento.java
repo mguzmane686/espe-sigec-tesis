@@ -23,38 +23,38 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "lugar_curso")
+@Table(name = "sgct_ifr_establecimiento")
 @NamedQueries({
-    @NamedQuery(name = "LugarCurso.findAll", query = "SELECT l FROM LugarCurso l")})
-public class LugarCurso implements Serializable {
+    @NamedQuery(name = "Establecimiento.findAll", query = "SELECT l FROM Establecimiento l")})
+public class Establecimiento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "id_lugar")
+    @Column(name = "etb_id")
     private String idLugar;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "nombre")
+    @Column(name = "etb_nombre")
     private String nombre;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
-    @Column(name = "direccion")
+    @Column(name = "etb_direccion")
     private String direccion;
     @OneToMany(mappedBy = "lugarCurso", fetch = FetchType.LAZY)
     private Collection<Edificio> edificioCollection;
 
-    public LugarCurso() {
+    public Establecimiento() {
     }
 
-    public LugarCurso(String idLugar) {
+    public Establecimiento(String idLugar) {
         this.idLugar = idLugar;
     }
 
-    public LugarCurso(String idLugar, String nombre, String direccion) {
+    public Establecimiento(String idLugar, String nombre, String direccion) {
         this.idLugar = idLugar;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -102,10 +102,10 @@ public class LugarCurso implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof LugarCurso)) {
+        if (!(object instanceof Establecimiento)) {
             return false;
         }
-        LugarCurso other = (LugarCurso) object;
+        Establecimiento other = (Establecimiento) object;
         if ((this.idLugar == null && other.idLugar != null) || (this.idLugar != null && !this.idLugar.equals(other.idLugar))) {
             return false;
         }

@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "modulo")
+@Table(name = "sgct_sg_modulo")
 @NamedQueries({
     @NamedQuery(name = "Modulo.findAll", query = "SELECT m FROM Modulo m")})
 public class Modulo implements Serializable {
@@ -34,21 +34,21 @@ public class Modulo implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_modulo")
+    @Column(name = "mdl_id_modulo")
     private Integer idModulo;
     @Size(max = 250)
-    @Column(name = "nombre")
+    @Column(name = "mdl_nombre")
     private String nombre;
     @Size(max = 250)
-    @Column(name = "descripcion")
+    @Column(name = "mdl_descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil")
+    @JoinColumn(name = "prf_id_perfil", referencedColumnName = "prf_id_perfil")
     @ManyToOne(fetch = FetchType.EAGER)
     private UsuarioPerfil usuarioPerfil;
     @OneToMany(mappedBy = "modulo", fetch = FetchType.EAGER)
     private Set<Opcion> opcionCollection;
     
-    @JoinColumn(name = "id_perfil", referencedColumnName = "id_perfil", insertable = false, updatable=false)
+    @JoinColumn(name = "prf_id_perfil", referencedColumnName = "prf_id_perfil", insertable = false, updatable=false)
     @ManyToOne(fetch = FetchType.LAZY)
     private Perfil idPerfil;
     

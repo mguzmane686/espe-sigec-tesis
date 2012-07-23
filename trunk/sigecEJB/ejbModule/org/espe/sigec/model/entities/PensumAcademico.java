@@ -5,6 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "pensum_academico")
+@Table(name = "sgct_acd_ctn_cur")
 @NamedQueries({
     @NamedQuery(name = "PensumAcademico.findAll", query = "SELECT p FROM PensumAcademico p")})
 public class PensumAcademico implements Serializable {
@@ -35,21 +36,24 @@ public class PensumAcademico implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_pensum")
+    @Column(name = "ctn_id_ctn_cur")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="pensum_seq")
     @SequenceGenerator(name="pensum_seq", sequenceName="pensum_seq", allocationSize = 1)
     private Integer idPensum;
-    @Column(name = "pensum_parent")
-    private Integer pensumParent;
+//    @Column(name = "pensum_parent")
+//    private Integer pensumParent;
     @Size(max = 250)
-    @Column(name = "tema")
+    @Column(name = "ctn_tema")
     private String tema;
     @Size(max = 500)
-    @Column(name = "descripcion")
+    @Column(name = "ctn_descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ModuloCurso moduloCurso;
+//    @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso")
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private ContenidoCurso moduloCurso;
+    @JoinColumn(name = "cur_id_curso", referencedColumnName = "cur_id_curso")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Curso curso;
     @Transient
     private boolean existInBase;
     
@@ -68,13 +72,13 @@ public class PensumAcademico implements Serializable {
         this.idPensum = idPensum;
     }
 
-    public Integer getPensumParent() {
-        return pensumParent;
-    }
-
-    public void setPensumParent(Integer pensumParent) {
-        this.pensumParent = pensumParent;
-    }
+//    public Integer getPensumParent() {
+//        return pensumParent;
+//    }
+//
+//    public void setPensumParent(Integer pensumParent) {
+//        this.pensumParent = pensumParent;
+//    }
 
     public String getTema() {
         return tema;
@@ -125,12 +129,20 @@ public class PensumAcademico implements Serializable {
 		this.existInBase = existInBase;
 	}
 
-	public ModuloCurso getModuloCurso() {
-		return moduloCurso;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public void setModuloCurso(ModuloCurso moduloCurso) {
-		this.moduloCurso = moduloCurso;
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
+
+//	public ContenidoCurso getModuloCurso() {
+//		return moduloCurso;
+//	}
+//
+//	public void setModuloCurso(ContenidoCurso moduloCurso) {
+//		this.moduloCurso = moduloCurso;
+//	}
     
 }

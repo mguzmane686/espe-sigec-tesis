@@ -7,12 +7,12 @@ package org.espe.sigec.model.entities;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,23 +26,20 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "asistencia_estudiante")
+@Table(name = "sgct_acd_asi_est")
 @NamedQueries({
     @NamedQuery(name = "AsistenciaEstudiante.findAll", query = "SELECT a FROM AsistenciaEstudiante a")})
 public class AsistenciaEstudiante implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected AsistenciaEstudiantePK asistenciaEstudiantePK;
-    @Column(name = "fecha_control")
-    @Temporal(TemporalType.DATE)
+    @Column(name = "ast_fecha_control")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaControl;
     @Size(max = 10)
-    @Column(name = "estado_asistencia")
+    @Column(name = "ast_estado_asistencia")
     private String estadoAsistencia;
-    @JoinColumns({
-        @JoinColumn(name = "id_estudiante", referencedColumnName = "id_estudiante" , insertable = false, updatable = false),
-        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
-        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso" , insertable = false, updatable = false)})
+    @JoinColumn(name = "est_id_estudiante", referencedColumnName = "est_id_estudiante")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private CursoEstudiante cursoEstudiante;
 

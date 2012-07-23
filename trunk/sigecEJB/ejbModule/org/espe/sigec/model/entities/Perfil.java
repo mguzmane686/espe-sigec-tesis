@@ -6,14 +6,12 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +25,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "perfil")
+@Table(name = "sgct_sg_perfil")
 @NamedQueries({
     @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p")})
 public class Perfil implements Serializable {
@@ -36,12 +34,12 @@ public class Perfil implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "id_perfil")
+    @Column(name = "prf_id_perfil")
     private String idPerfil;
     
-    @Column(name = "nombre", length = 250)
+    @Column(name = "prf_nombre", length = 250)
     private String nombre;
-    @Column(name = "descripcion", length = 250)
+    @Column(name = "prf_descripcion", length = 250)
     private String descripcion;
     
 //    @JoinTable(name = "usuario_perfil", joinColumns = {
@@ -58,7 +56,8 @@ public class Perfil implements Serializable {
     
     @Transient
     private boolean selected;
-    
+    @Transient
+    private boolean existInBase;
     public Perfil() {
     }
 
@@ -147,6 +146,14 @@ public class Perfil implements Serializable {
 
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+	}
+
+	public boolean isExistInBase() {
+		return existInBase;
+	}
+
+	public void setExistInBase(boolean existInBase) {
+		this.existInBase = existInBase;
 	}
     
 }

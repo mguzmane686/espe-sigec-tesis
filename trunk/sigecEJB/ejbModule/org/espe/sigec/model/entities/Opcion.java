@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
  * @author roberto
  */
 @Entity
-@Table(name = "opcion")
+@Table(name = "sgct_sg_opcion")
 @NamedQueries({
     @NamedQuery(name = "Opcion.findAll", query = "SELECT o FROM Opcion o")})
 public class Opcion implements Serializable {
@@ -31,22 +31,22 @@ public class Opcion implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_opcion")
+    @Column(name = "opc_id_opcion")
     private Integer idOpcion;
     @Size(max = 250)
-    @Column(name = "nombre")
+    @Column(name = "opc_nombre")
     private String nombre;
     @Size(max = 250)
-    @Column(name = "descripcion")
+    @Column(name = "opc_descripcion")
     private String descripcion;
     
-    @Column(name = "target")
+    @Column(name = "opc_target")
     private String targetUrl;
     
 //    @Size(max = 250)
 //    @Column(name = "URL")
 //    private String url;
-    @JoinColumn(name = "id_modulo", referencedColumnName = "id_modulo")
+    @JoinColumn(name = "mdl_id_modulo", referencedColumnName = "mdl_id_modulo")
     @ManyToOne(fetch = FetchType.EAGER)
     private Modulo modulo;
 

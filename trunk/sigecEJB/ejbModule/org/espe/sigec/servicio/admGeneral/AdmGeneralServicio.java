@@ -9,7 +9,7 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoCurso;
@@ -24,9 +24,9 @@ import org.espe.sigec.model.entities.Usuario;
 public interface AdmGeneralServicio {
 	
 	//Lugar
-	Collection<LugarCurso> findLugar();
-	void createLugar(LugarCurso lugarCurso) throws Exception;
-	void editLugar(LugarCurso lugarCurso) throws Exception;
+	Collection<Establecimiento> findLugar();
+	void createLugar(Establecimiento lugarCurso) throws Exception;
+	void editLugar(Establecimiento lugarCurso) throws Exception;
 	
 	//Edificio
 	Collection<Edificio> findEdificio();

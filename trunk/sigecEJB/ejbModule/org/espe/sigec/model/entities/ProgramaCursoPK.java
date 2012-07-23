@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
 public class ProgramaCursoPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Column(name = "id_programa")
+    @Column(name = "prg_id")
     private int idPrograma;
     @Basic(optional = false)
     @NotNull

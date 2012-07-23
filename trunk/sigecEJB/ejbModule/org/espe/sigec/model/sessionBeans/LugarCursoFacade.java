@@ -7,14 +7,14 @@ package org.espe.sigec.model.sessionBeans;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.espe.sigec.model.entities.LugarCurso;
+import org.espe.sigec.model.entities.Establecimiento;
 
 /**
  *
  * @author roberto
  */
 @Stateless
-public class LugarCursoFacade extends AbstractFacade<LugarCurso> implements LugarCursoFacadeLocal {
+public class LugarCursoFacade extends AbstractFacade<Establecimiento> implements LugarCursoFacadeLocal {
     @PersistenceContext(unitName = "prjSigecEJBTestPU")
     private EntityManager em;
 
@@ -23,7 +23,7 @@ public class LugarCursoFacade extends AbstractFacade<LugarCurso> implements Luga
     }
 
     public LugarCursoFacade() {
-        super(LugarCurso.class);
+        super(Establecimiento.class);
     }
     
 }
