@@ -50,6 +50,11 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.PensumAcademicoPeriodoCursoPK</class>
 		<class>org.espe.sigec.model.entities.RangoAcademicoProfesor</class>
 		<class>org.espe.sigec.model.entities.RangoAcademicoProfesorPK</class>
+		<class>org.espe.sigec.model.entities.InvitacionDocente</class>
+		<class>org.espe.sigec.model.entities.InvitacionDocentePK</class>
+		<class>org.espe.sigec.model.entities.Plantilla</class>
+		<class>org.espe.sigec.model.entities.SgctSgSecuencia</class>
+		<class>org.espe.sigec.model.entities.SgctSgSecuenciaPK</class>
 		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
