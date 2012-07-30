@@ -67,8 +67,9 @@ public class ReporteGenerico {
 		}
 	}
 	
-	public <T> byte [] generarReporteSimpleAsByte(String jasperFileName, Collection<T>lista){
+	public <T> byte [] generarReporteSimpleAsByte(String jasperFileName, Collection<T>lista) throws IOException{
 		setBeanCollectionDataSource(new JRBeanCollectionDataSource(lista));
+		byte [] s = null;
 		try {
 			String recursosReportes ="/WEB-INF/reportes/"+jasperFileName.concat(".jasper") ;
 			
@@ -79,23 +80,27 @@ public class ReporteGenerico {
 			
 			httpServletResponse.setHeader("Content-disposition", "attachment; filename=sigecPDFReport.pdf");
 			
-			/*
-			ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
-			JRExporter exporter = new JRPdfExporter();
-			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,servletOutputStream);
-            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-            exporter.setParameter(JRPdfExporterParameter.IS_ENCRYPTED, Boolean.TRUE);
-			exporter.setParameter(JRPdfExporterParameter.IS_128_BIT_KEY, Boolean.TRUE);
-			exporter.setParameter(JRPdfExporterParameter.USER_PASSWORD, "jasper");
-			exporter.setParameter(JRPdfExporterParameter.OWNER_PASSWORD, "reports");
-			exporter.setParameter(
-				JRPdfExporterParameter.PERMISSIONS, new Integer(PdfWriter.ALLOW_COPY | PdfWriter.ALLOW_PRINTING) );
-			*/
-			return JasperExportManager.exportReportToPdf(jasperPrint);
+			s = JasperExportManager.exportReportToPdf(jasperPrint);
+			
+			FacesContext ctx = FacesContext.getCurrentInstance();
+
+			if (!ctx.getResponseComplete()) {
+				String contentType = "application/pdf";
+				
+				httpServletResponse.setContentType(contentType);
+				ServletOutputStream out = httpServletResponse.getOutputStream();
+				out.write(s);
+				
+				out.flush();
+				out.close();
+				System.out.println("\nDescargado\n");
+				
+				ctx.responseComplete();
+			}
 		} catch (JRException e1) {
 			e1.printStackTrace();
 		}
-		return null;
+		return s;
 	}
 
 	public JasperPrint getJasperPrint() {
