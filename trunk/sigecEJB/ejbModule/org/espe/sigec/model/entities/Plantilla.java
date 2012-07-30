@@ -6,13 +6,12 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -24,18 +23,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "sgct_doc_plantilla", catalog = "sigec", schema = "public")
-@NamedQueries({
-    @NamedQuery(name = "Plantilla.findAll", query = "SELECT s FROM Plantilla s"),
-    @NamedQuery(name = "Plantilla.findByDocIdPlantilla", query = "SELECT s FROM Plantilla s WHERE s.docIdPlantilla = :docIdPlantilla"),
-    @NamedQuery(name = "Plantilla.findByDocNombre", query = "SELECT s FROM Plantilla s WHERE s.docNombre = :docNombre"),
-    @NamedQuery(name = "Plantilla.findByDocContenido", query = "SELECT s FROM Plantilla s WHERE s.docContenido = :docContenido")})
 public class Plantilla implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "doc_id_plantilla")
-    private Integer docIdPlantilla;
+    private Integer idPlantilla;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 512)
@@ -52,22 +46,22 @@ public class Plantilla implements Serializable {
     public Plantilla() {
     }
 
-    public Plantilla(Integer docIdPlantilla) {
-        this.docIdPlantilla = docIdPlantilla;
+    public Plantilla(Integer idPlantilla) {
+        this.idPlantilla = idPlantilla;
     }
 
-    public Plantilla(Integer docIdPlantilla, String docNombre, String docContenido) {
-        this.docIdPlantilla = docIdPlantilla;
+    public Plantilla(Integer idPlantilla, String docNombre, String docContenido) {
+        this.idPlantilla = idPlantilla;
         this.docNombre = docNombre;
         this.docContenido = docContenido;
     }
 
     public Integer getDocIdPlantilla() {
-        return docIdPlantilla;
+        return idPlantilla;
     }
 
-    public void setDocIdPlantilla(Integer docIdPlantilla) {
-        this.docIdPlantilla = docIdPlantilla;
+    public void setDocIdPlantilla(Integer idPlantilla) {
+        this.idPlantilla = idPlantilla;
     }
 
     public String getDocNombre() {
@@ -97,7 +91,7 @@ public class Plantilla implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (docIdPlantilla != null ? docIdPlantilla.hashCode() : 0);
+        hash += (idPlantilla != null ? idPlantilla.hashCode() : 0);
         return hash;
     }
 
@@ -108,7 +102,7 @@ public class Plantilla implements Serializable {
             return false;
         }
         Plantilla other = (Plantilla) object;
-        if ((this.docIdPlantilla == null && other.docIdPlantilla != null) || (this.docIdPlantilla != null && !this.docIdPlantilla.equals(other.docIdPlantilla))) {
+        if ((this.idPlantilla == null && other.idPlantilla != null) || (this.idPlantilla != null && !this.idPlantilla.equals(other.idPlantilla))) {
             return false;
         }
         return true;
@@ -116,7 +110,7 @@ public class Plantilla implements Serializable {
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entities.Plantilla[ docIdPlantilla=" + docIdPlantilla + " ]";
+        return "org.espe.sigec.model.entities.Plantilla[ idPlantilla=" + idPlantilla + " ]";
     }
     
 }
