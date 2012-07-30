@@ -33,7 +33,7 @@ import javax.validation.constraints.NotNull;
     @NamedQuery(name = "InvitacionDocente.findByDocNumInvit", query = "SELECT s FROM InvitacionDocente s WHERE s.invitacionDocentePK.docNumInvit = :docNumInvit"),
     @NamedQuery(name = "InvitacionDocente.findByPrfIdProfesor", query = "SELECT s FROM InvitacionDocente s WHERE s.invitacionDocentePK.prfIdProfesor = :prfIdProfesor"),
     @NamedQuery(name = "InvitacionDocente.findByIdCursoPeriodo", query = "SELECT s FROM InvitacionDocente s WHERE s.invitacionDocentePK.idCursoPeriodo = :idCursoPeriodo"),
-    @NamedQuery(name = "InvitacionDocente.findByDocFechaInivit", query = "SELECT s FROM InvitacionDocente s WHERE s.docFechaInivit = :docFechaInivit"),
+    @NamedQuery(name = "InvitacionDocente.findByDocFechaInivit", query = "SELECT s FROM InvitacionDocente s WHERE s.fechaInvitacion = :docFechaInivit"),
     @NamedQuery(name = "InvitacionDocente.findByDocValorPagar", query = "SELECT s FROM InvitacionDocente s WHERE s.docValorPagar = :docValorPagar")})
 public class InvitacionDocente  implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -43,7 +43,7 @@ public class InvitacionDocente  implements Serializable {
     @NotNull
     @Column(name = "doc_fecha_inivit")
     @Temporal(TemporalType.DATE)
-    private Date docFechaInivit;
+    private Date fechaInvitacion;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -66,9 +66,9 @@ public class InvitacionDocente  implements Serializable {
         this.invitacionDocentePK = invitacionDocentePK;
     }
 
-    public InvitacionDocente(InvitacionDocentePK invitacionDocentePK, Date docFechaInivit, BigDecimal docValorPagar) {
+    public InvitacionDocente(InvitacionDocentePK invitacionDocentePK, Date fechaInvitacion, BigDecimal docValorPagar) {
         this.invitacionDocentePK = invitacionDocentePK;
-        this.docFechaInivit = docFechaInivit;
+        this.fechaInvitacion = fechaInvitacion;
         this.docValorPagar = docValorPagar;
     }
 
@@ -84,15 +84,17 @@ public class InvitacionDocente  implements Serializable {
         this.invitacionDocentePK = invitacionDocentePK;
     }
 
-    public Date getDocFechaInivit() {
-        return docFechaInivit;
-    }
+    
 
-    public void setDocFechaInivit(Date docFechaInivit) {
-        this.docFechaInivit = docFechaInivit;
-    }
+    public Date getFechaInvitacion() {
+		return fechaInvitacion;
+	}
 
-    public BigDecimal getDocValorPagar() {
+	public void setFechaInvitacion(Date fechaInvitacion) {
+		this.fechaInvitacion = fechaInvitacion;
+	}
+
+	public BigDecimal getDocValorPagar() {
         return docValorPagar;
     }
 
