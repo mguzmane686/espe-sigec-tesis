@@ -1,7 +1,5 @@
 package org.espe.sigec.web.documentos;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,11 +10,8 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.espe.sigec.model.entities.CursoPeriodo;
@@ -68,7 +63,7 @@ public class InvitacionDocenteController {
 	
 	public void btnGenerarInvitacion(ActionEvent e) throws IOException{
 		Collection<Memo> lstMemos = new ArrayList<Memo>(1);
-		Map valuesMap = new HashMap();
+		Map<String, Object> valuesMap = new HashMap<String, Object>();
 		valuesMap.put("NOMBRE_DEL_CURSO", getLstCursoPeriodos().iterator().next().getCurso().getNombreCurso());
 		valuesMap.put("fecha_curso", getLstCursoPeriodos().iterator().next().getPeriodoAcademico().getFechaInicio());
 		valuesMap.put("lugar_a_dictarse", "Espe");
@@ -93,11 +88,8 @@ public class InvitacionDocenteController {
 		lstMemos.add(getMemo());
 		ReporteGenerico.getResource().generarReporteSimpleAsByte("invitacionProveedor",  lstMemos);
 		
-		 
-		
-		
-		
 	}
+	
 	public InvitacionDocente getInvitacionDocente() {
 		return invitacionDocente;
 	}
