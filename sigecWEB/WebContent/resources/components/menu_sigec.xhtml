@@ -227,6 +227,11 @@
         </rich:panelMenuGroup>
         
         <rich:panelMenuGroup label="Contrato automatico" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
+        	
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="#{msg.invitacion_docente}" action="doc_invitacion_docente.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+        	
         	<rich:panelMenuItem>
             	<a4j:commandLink value="Generar contrato" action="rep_contratos.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>

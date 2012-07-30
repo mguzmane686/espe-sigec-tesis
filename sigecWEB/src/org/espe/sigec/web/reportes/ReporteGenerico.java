@@ -66,6 +66,37 @@ public class ReporteGenerico {
 			e2.printStackTrace();
 		}
 	}
+	
+	public <T> byte [] generarReporteSimpleAsByte(String jasperFileName, Collection<T>lista){
+		setBeanCollectionDataSource(new JRBeanCollectionDataSource(lista));
+		try {
+			String recursosReportes ="/WEB-INF/reportes/"+jasperFileName.concat(".jasper") ;
+			
+			InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream(recursosReportes);
+			
+			setJasperPrint(JasperFillManager.fillReport(stream, new HashMap<String, Object>(), getBeanCollectionDataSource() ));
+			HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+			
+			httpServletResponse.setHeader("Content-disposition", "attachment; filename=sigecPDFReport.pdf");
+			
+			/*
+			ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+			JRExporter exporter = new JRPdfExporter();
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM,servletOutputStream);
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRPdfExporterParameter.IS_ENCRYPTED, Boolean.TRUE);
+			exporter.setParameter(JRPdfExporterParameter.IS_128_BIT_KEY, Boolean.TRUE);
+			exporter.setParameter(JRPdfExporterParameter.USER_PASSWORD, "jasper");
+			exporter.setParameter(JRPdfExporterParameter.OWNER_PASSWORD, "reports");
+			exporter.setParameter(
+				JRPdfExporterParameter.PERMISSIONS, new Integer(PdfWriter.ALLOW_COPY | PdfWriter.ALLOW_PRINTING) );
+			*/
+			return JasperExportManager.exportReportToPdf(jasperPrint);
+		} catch (JRException e1) {
+			e1.printStackTrace();
+		}
+		return null;
+	}
 
 	public JasperPrint getJasperPrint() {
 		return jasperPrint;
