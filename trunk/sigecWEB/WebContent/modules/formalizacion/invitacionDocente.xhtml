@@ -10,6 +10,11 @@
     	<h:outputStylesheet library="css" name="textos.css"/>    
     	<h:outputStylesheet library="css" name="bordes.css"/>
     	<h:outputStylesheet library="css" name="botones.css"/>
+    	<h:outputStylesheet>
+    		.tamanio{
+    			width:300px !important;
+    		}
+    	</h:outputStylesheet>
     		
         <h:form id="frmCurso">
         	
@@ -17,8 +22,9 @@
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
 	        		<h:panelGrid columns="4">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-	        				<a4j:commandButton value="#{msg['guardar']}"   
-	        					 image="/resources/images/save.png"/>
+	        				<h:commandButton value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
+	        					 image="/resources/images/save.png">
+	        					 </h:commandButton>
 	        				<h:outputLabel value="#{msg['guardar']}" />
 	        			</h:panelGrid>
 	        			
@@ -39,12 +45,29 @@
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="Administrar curso" id="pnlLanCur">
+        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
         		
-	        	<rich:collapsiblePanel header="Fecha de curso"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
+	        		<h:panelGrid columns="2">
+	        			<h:outputLabel value="#{msg.fecha_invitacion}" />
+	        			<rich:calendar value="#{invitacionDocenteController.invitacionDocente.fechaInvitacion}" datePattern="yyyy-MM-dd"></rich:calendar>
+	        			
+	        			<h:outputLabel value="Proveedor" />
+		        		<rich:select value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.prfIdProfesor}" enableManualInput="true" >
+		        			<f:selectItems value="#{invitacionDocenteController.lstProfesors}" 
+		        				var="prof" itemLabel="#{prof.persona.primerApellido} #{prof.persona.primerNombre}" itemValue="#{prof.idProfesor}" />
+		        		</rich:select>
+		        		
+		        		<h:outputLabel value="Curso" />
+		        		<rich:select value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.idCursoPeriodo}">
+		        			<f:selectItems value="#{invitacionDocenteController.lstCursoPeriodos}" 
+		        				var="curso" itemLabel="#{curso.curso.nombreCurso}" itemValue="#{curso.idCursoPeriodo}" />
+		        		</rich:select>
+	        		</h:panelGrid>
 	        		
+	        		<h:inputTextarea value="#{invitacionDocenteController.plantilla.docContenido}" />
 	        	</rich:collapsiblePanel>
         	</rich:panel>
         </h:form>
