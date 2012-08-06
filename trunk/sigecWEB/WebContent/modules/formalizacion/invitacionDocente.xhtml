@@ -23,7 +23,8 @@
 	        		<h:panelGrid columns="4">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
 	        				<h:commandButton value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
-	        					 image="/resources/images/save.png">
+	        					 image="/resources/images/save.png" type="submit">
+	        					 
 	        					 </h:commandButton>
 	        				<h:outputLabel value="#{msg['guardar']}" />
 	        			</h:panelGrid>
@@ -65,6 +66,9 @@
 		        			<f:selectItems value="#{invitacionDocenteController.lstCursoPeriodos}" 
 		        				var="curso" itemLabel="#{curso.curso.nombreCurso}" itemValue="#{curso.idCursoPeriodo}" />
 		        		</rich:select>
+		        		
+		        		<h:outputLabel value="Curso" />
+		        		<h:inputText value="#{invitacionDocenteController.invitacionDocente.docValorPagar}" />
 	        		</h:panelGrid>
 	        		
 	        		<h:outputText value="#{invitacionDocenteController.plantilla.docContenido}" />
