@@ -5,6 +5,9 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,6 +22,8 @@ public class InvitacionDocentePK implements Serializable{
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "doc_num_invit")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="invprof_seq")
+    @SequenceGenerator(name="invprof_seq", sequenceName="invprof_seq", allocationSize = 1)
     private String docNumInvit;
     @Basic(optional = false)
     @NotNull

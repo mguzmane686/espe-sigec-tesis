@@ -25,8 +25,13 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 	public void crearInivtacionDocente(InvitacionDocente invitacionDocente) throws Exception{
 		try {
 			userTransaction.begin();
+			int secuencial = invitacionDocenteFacadeLocal.count();
+			invitacionDocente.getInvitacionDocentePK().setDocNumInvit("SGCINV"+secuencial);
 			invitacionDocenteFacadeLocal.create(invitacionDocente);
+			userTransaction.commit();
 		} catch (Exception e) {
+			invitacionDocente.getInvitacionDocentePK().setDocNumInvit(null);
+			e.printStackTrace();
 			userTransaction.rollback();
 		}
 	}
