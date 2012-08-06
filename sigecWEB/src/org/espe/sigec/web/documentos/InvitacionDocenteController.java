@@ -24,6 +24,7 @@ import org.espe.sigec.model.views.Memo;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.servicio.documentos.DocumentoServicio;
+import org.espe.sigec.web.admGeneral.curso.NuevoCursoController;
 import org.espe.sigec.web.reportes.ReporteGenerico;
 import org.espe.sigec.web.seguridad.HomeSessionController;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -50,7 +51,7 @@ public class InvitacionDocenteController {
 	private Plantilla plantilla;
 	
 	private Memo memo;
-	
+	private boolean savedInvitacion;
 	public InvitacionDocenteController() {
 		initController();
 	}
@@ -107,15 +108,30 @@ public class InvitacionDocenteController {
 				getMemo().setNumeroInivitacion(getInvitacionDocente().getInvitacionDocentePK().getDocNumInvit());
 				
 				FacesUtils.addInfoMessage("Se genero exitosamente la invitacion");
-				FacesUtils.refresh();
-				ReporteGenerico.getResource().generarReporteSimpleAsByte("invitacionProveedor",  lstMemos);
-//				initController();
+//				FacesUtils.refresh();
+//				
+				setSavedInvitacion(Boolean.TRUE);
+				initController();
 				
 			} catch (Exception e1) {
 				FacesUtils.addErrorMessage("Ocurrio un error al guardar la invitacion");
 				e1.printStackTrace();
 			}
 		
+		}
+	}
+	
+	public void btnNuevaInvitacion(){
+		setSavedInvitacion(Boolean.FALSE);
+		initController();
+	}
+	public void lanzarPdfMemo(){
+		Collection<Memo> lstMemos = new ArrayList<Memo>(1);
+		lstMemos.add(getMemo());
+		try {
+			ReporteGenerico.getResource().generarReporteSimpleAsByte("invitacionProveedor",  lstMemos);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -173,6 +189,14 @@ public class InvitacionDocenteController {
 
 	public void setMemo(Memo memo) {
 		this.memo = memo;
+	}
+
+	public boolean isSavedInvitacion() {
+		return savedInvitacion;
+	}
+
+	public void setSavedInvitacion(boolean savedInvitacion) {
+		this.savedInvitacion = savedInvitacion;
 	}
 	
 	

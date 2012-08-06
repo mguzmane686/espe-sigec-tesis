@@ -21,24 +21,27 @@
         	<rich:panel header="Administrar curso">
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
 	        		<h:panelGrid columns="4">
-	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-	        				<h:commandButton value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
-	        					 image="/resources/images/save.png" type="submit">
+	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
+	        				<a4j:commandButton id="btnUno" value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
+	        					 image="/resources/images/save.png" type="submit" render="@form" >
 	        					 
-	        					 </h:commandButton>
+	        				</a4j:commandButton>
+	        				
+	        				
 	        				<h:outputLabel value="#{msg['guardar']}" />
 	        			</h:panelGrid>
 	        			
-	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-	        				<a4j:commandButton value="#{msg['editar']}"  
-	        					 image="/resources/images/edit.png"/>
-	        				<h:outputLabel value="#{msg['editar']}" />
+	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{invitacionDocenteController.savedInvitacion}">
+	        				<h:commandButton value="#{msg['editar']}"  
+	        					 image="/resources/images/button/pdf.png" action="#{invitacionDocenteController.lanzarPdfMemo}" >
+	        				</h:commandButton>
+	        				<h:outputLabel value="Generar PDF" />
 	        			</h:panelGrid>
 	        			
-	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-	        				<a4j:commandButton value="#{msg['cancelar']}"  
-	        					 image="/resources/images/cancel.png"/>
-	        				<h:outputLabel value="#{msg['cancelar']}" />
+	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{invitacionDocenteController.savedInvitacion}">
+	        				<a4j:commandButton value="Nueva invitacion" action="#{invitacionDocenteController.btnNuevaInvitacion}"  
+	        					 image="/resources/images/button/new_invitacion.png" render="@form" />
+	        				<h:outputLabel value="Nueva invitacion" />
 	        			</h:panelGrid>
 	        			
 	        			
@@ -49,7 +52,7 @@
         	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
         		
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
-					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        		
 	        		<h:panelGrid columns="2">
 	        			<h:outputLabel value="#{msg.fecha_invitacion}" />
