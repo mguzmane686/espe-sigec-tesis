@@ -94,6 +94,7 @@ public class ReporteGenerico {
 				out.flush();
 				out.close();
 				System.out.println("\nDescargado\n");
+				ctx.release();
 				
 				ctx.responseComplete();
 			}
