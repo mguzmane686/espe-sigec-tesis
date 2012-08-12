@@ -49,6 +49,10 @@ public class InvitacionDocente  implements Serializable {
     @NotNull
     @Column(name = "doc_valor_pagar")
     private BigDecimal docValorPagar;
+    
+    @Column(name = "doc_inv_estado")
+    private String estado;
+    
     @JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Profesor profesor;
@@ -152,5 +156,13 @@ public class InvitacionDocente  implements Serializable {
     public String toString() {
         return "org.espe.sigec.model.entities.InvitacionDocente[ invitacionDocentePK=" + invitacionDocentePK + " ]";
     }
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
     
 }

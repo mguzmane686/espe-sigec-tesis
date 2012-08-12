@@ -1,5 +1,6 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -24,4 +25,6 @@ public interface InvitacionDocenteFacadeLocal {
     List<InvitacionDocente> findRange(int[] range);
 
     int count();
+    
+    Collection<InvitacionDocente> verificarInivtacionDocente(Integer idProfesor) throws Exception;
 }
