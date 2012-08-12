@@ -29,14 +29,16 @@
         	<rich:panel header="Invitacion proveedor">
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" >
-					
+					<h:panelGroup layout="block" style="width:100%;">
+						<center>
+						<rich:dataScroller for="tblInvitaciones" fastControls="hide" 
+						renderIfSinglePage="false" ></rich:dataScroller>
+						</center>
+					</h:panelGroup>
 	        		<rich:dataTable id="tblInvitaciones" style="width:100%;" 
 	        			value="#{respuestaDocenteController.lstInvitacionDocentes}" var="invitacion" 
-	        			noDataLabel="No se encontraron datos" rows="15">
-	        			<f:facet name="header">
-	        				<rich:dataScroller for="tblInvitaciones" fastControls="hide" 
-						renderIfSinglePage="false" ></rich:dataScroller>
-	        			</f:facet>
+	        			noDataLabel="No se encontraron datos" rows="5">
+	        				
 	        			<rich:column>
 	        				<f:facet name="header">
 	        					<h:outputLabel value="Num. Inivtacion" />
