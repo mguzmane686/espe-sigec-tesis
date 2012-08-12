@@ -1,6 +1,7 @@
 package org.espe.sigec.web.documentos;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +25,6 @@ import org.espe.sigec.model.views.Memo;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.servicio.documentos.DocumentoServicio;
-import org.espe.sigec.web.admGeneral.curso.NuevoCursoController;
 import org.espe.sigec.web.reportes.ReporteGenerico;
 import org.espe.sigec.web.seguridad.HomeSessionController;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -33,9 +33,10 @@ import org.espe.sigec.web.utils.FacesUtils;
  * @author Roberto
  *
  */
+@SuppressWarnings("serial")
 @ManagedBean(name ="invitacionDocenteController")
 @ViewScoped
-public class InvitacionDocenteController {
+public class InvitacionDocenteController implements Serializable{
 	
 	@Inject
 	private CursoServicio cursoServicio;
