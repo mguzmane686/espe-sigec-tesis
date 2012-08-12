@@ -1,5 +1,7 @@
 package org.espe.sigec.servicio.documentos;
 
+import java.util.Collection;
+
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
@@ -38,5 +40,9 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 	@Override
 	public Plantilla obtenerPlantillaDocumento(Integer idPlantilla) {
 		return plantillaFacadeLocal.find(idPlantilla);
+	}
+	@Override
+	public Collection<InvitacionDocente> verificarInivtacionDocente(Integer idProfesor) throws Exception {
+		return invitacionDocenteFacadeLocal.verificarInivtacionDocente(idProfesor);
 	}
 }
