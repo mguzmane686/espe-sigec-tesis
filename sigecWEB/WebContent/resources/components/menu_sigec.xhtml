@@ -226,8 +226,9 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup label="Contrato automatico" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
-        	
+        <rich:panelMenuGroup id="pmgContratoAutomatico" label="Contrato automatico" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
+        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        	<f:attribute name="idMenuPanelGroup" value="pmgContratoAutomatico"/>
         	<rich:panelMenuItem>
             	<a4j:commandLink value="#{msg.invitacion_docente}" action="doc_invitacion_docente.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
@@ -243,6 +244,16 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
+        
+        <!-- MENU DE PROFESORES -->
+        <rich:panelMenuGroup id="pmgOpcionProfesores" label="Contrato automatico" rendered="#{fn:contains(homeSessionController.idPerfiles , 'PRO')}"
+        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        	<f:attribute name="idMenuPanelGroup" value="pmgOpcionProfesores"/>
+        	<rich:panelMenuItem>
+            	<a4j:commandLink value="Invitaciones pendientes" action="doc_respuesta_docente.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+        	
+        </rich:panelMenuGroup>
    </rich:panelMenu>
 </composite:implementation>
 </body>
