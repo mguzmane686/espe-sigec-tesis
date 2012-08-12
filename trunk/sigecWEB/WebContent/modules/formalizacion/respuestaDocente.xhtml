@@ -49,29 +49,13 @@
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
+        	<rich:panel header="Invitacion proveedor">
         		
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        		
 	        		<h:panelGrid columns="2">
-	        			<h:outputLabel value="#{msg.fecha_invitacion}" />
-	        			<rich:calendar value="#{invitacionDocenteController.invitacionDocente.fechaInvitacion}" datePattern="yyyy-MM-dd"></rich:calendar>
 	        			
-	        			<h:outputLabel value="Proveedor" />
-		        		<rich:select value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.prfIdProfesor}" enableManualInput="true" >
-		        			<f:selectItems value="#{invitacionDocenteController.lstProfesors}" 
-		        				var="prof" itemLabel="#{prof.persona.primerApellido} #{prof.persona.primerNombre}" itemValue="#{prof.idProfesor}" />
-		        		</rich:select>
-		        		
-		        		<h:outputLabel value="Curso" />
-		        		<rich:select value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.idCursoPeriodo}">
-		        			<f:selectItems value="#{invitacionDocenteController.lstCursoPeriodos}" 
-		        				var="curso" itemLabel="#{curso.curso.nombreCurso}" itemValue="#{curso.idCursoPeriodo}" />
-		        		</rich:select>
-		        		
-		        		<h:outputLabel value="#{msg.valor_a_cancelar}" />
-		        		<h:inputText value="#{invitacionDocenteController.invitacionDocente.docValorPagar}" />
 	        		</h:panelGrid>
 	        		
 	        		<h:outputText value="#{invitacionDocenteController.plantilla.docContenido}" />
