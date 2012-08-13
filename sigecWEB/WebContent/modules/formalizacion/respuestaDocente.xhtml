@@ -26,8 +26,8 @@
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="Invitacion proveedor">
-	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+        	<rich:panel header="#{msg.invitacion_proveedor}">
+	        	<rich:collapsiblePanel header="#{msg.inivitacion}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" >
 					<h:panelGroup layout="block" style="width:100%;">
 						<center>
@@ -37,13 +37,16 @@
 					</h:panelGroup>
 	        		<rich:dataTable id="tblInvitaciones" style="width:100%;" 
 	        			value="#{respuestaDocenteController.lstInvitacionDocentes}" var="invitacion" 
-	        			noDataLabel="No se encontraron datos" rows="5">
+	        			noDataLabel="No se encontraron datos" rows="10">
 	        				
 	        			<rich:column>
 	        				<f:facet name="header">
-	        					<h:outputLabel value="Num. Inivtacion" />
+	        					<h:outputLabel value="#{msg.num_invitacion}" />
 	        				</f:facet>
-	        				<h:outputText value="#{invitacion.invitacionDocentePK.docNumInvit}" />
+	        				<a4j:commandLink value="#{invitacion.invitacionDocentePK.docNumInvit}" render="rppShowInvitacion" 
+	        					oncomplete="#{rich:component('rppShowInvitacion')}.show()">
+	        					<f:setPropertyActionListener target="#{respuestaDocenteController.invitacionDocenteSelected}" value="#{invitacion}"></f:setPropertyActionListener>
+	        				</a4j:commandLink>
 	        			</rich:column>
 	        			
 	        			<rich:column>
@@ -62,5 +65,32 @@
 	        		</rich:dataTable>
 	        	</rich:collapsiblePanel>
         	</rich:panel>
+        	
+        	<rich:popupPanel id="rppShowInvitacion" domElementAttachment="form"
+        		header="Notificacion!!" 
+        		onmaskclick="#{rich:component('rppShowInvitacion')}.hide()" autosized="true">
+        		<h:panelGrid columns="1">
+	        		<h:outputLabel value="Ud. ha sido seleccionado para dictar el curso:" styleClass="label-bold"/>
+	        		<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" 
+	        			style="color: red; margin-left: 20px;"/>
+	        		
+        		</h:panelGrid>
+        		<h:panelGrid columns="2">
+        			<h:outputLabel value="#{msg.valor_a_cancelar}" styleClass="label-bold"/>
+        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.docValorPagar}" />
+        			
+        			<h:outputLabel value="Fecha de envio" styleClass="label-bold"/>
+        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.fechaInvitacion}" />
+        		</h:panelGrid>
+        		
+        		<h:outputLabel value="#{msg.responder_invitacion}" />
+        		
+        		<h:panelGrid columns="2" style="margin-left:auto; margin-right:auto;">
+        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this"
+        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
+        			<a4j:commandLink value="Rechazar" action="#{respuestaDocenteController.btnIgnorarInvitacion}" execute="@this"
+        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
+        		</h:panelGrid>
+        	</rich:popupPanel>
         </h:form>
 </ui:composition>
