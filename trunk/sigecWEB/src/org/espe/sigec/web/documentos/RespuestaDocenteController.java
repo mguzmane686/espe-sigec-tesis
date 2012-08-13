@@ -11,7 +11,6 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.InvitacionDocente;
-import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.documentos.DocumentoServicio;
 import org.espe.sigec.web.seguridad.HomeSessionController;
 
@@ -29,9 +28,11 @@ public class RespuestaDocenteController implements Serializable{
 	private DocumentoServicio documentoServicio;
 	
 	private Collection<InvitacionDocente> lstInvitacionDocentes;
+	private InvitacionDocente invitacionDocenteSelected;
 	
 	public RespuestaDocenteController() {
 		setLstInvitacionDocentes(new ArrayList<InvitacionDocente>());
+		setInvitacionDocenteSelected(new InvitacionDocente());
 	}
 
 	@PostConstruct
@@ -46,6 +47,25 @@ public class RespuestaDocenteController implements Serializable{
 		System.out.println("sxdsd");
 	}
 	
+	public void btnAceptarInvitacion(){
+		try {
+			getInvitacionDocenteSelected().setEstado("ACE");
+			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	public void btnIgnorarInvitacion(){
+		try {
+			getInvitacionDocenteSelected().setEstado("REC");
+			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+	}
 	public HomeSessionController getHomeSessionController() {
 		return homeSessionController;
 	}
@@ -61,6 +81,15 @@ public class RespuestaDocenteController implements Serializable{
 	public void setLstInvitacionDocentes(
 			Collection<InvitacionDocente> lstInvitacionDocentes) {
 		this.lstInvitacionDocentes = lstInvitacionDocentes;
+	}
+
+	public InvitacionDocente getInvitacionDocenteSelected() {
+		return invitacionDocenteSelected;
+	}
+
+	public void setInvitacionDocenteSelected(
+			InvitacionDocente invitacionDocenteSelected) {
+		this.invitacionDocenteSelected = invitacionDocenteSelected;
 	}
 	
 }
