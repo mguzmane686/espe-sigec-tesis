@@ -19,8 +19,8 @@ import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
+import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.espe.sigec.web.utils.SigecConstantes;
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
 

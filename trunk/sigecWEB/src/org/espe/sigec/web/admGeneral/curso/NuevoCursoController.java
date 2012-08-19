@@ -14,9 +14,9 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
+import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.CommonController;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.espe.sigec.web.utils.SigecConstantes;
 
 /**
  * @author roberto
