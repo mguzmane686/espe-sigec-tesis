@@ -50,4 +50,9 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 			throws Exception {
 		invitacionDocenteFacadeLocal.edit(invitacionDocente);
 	}
+	@Override
+	public Collection<InvitacionDocente> verificarInivtacionAceptada()
+			throws Exception {
+		return invitacionDocenteFacadeLocal.verificarInivtacionAceptada();
+	}
 }

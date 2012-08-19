@@ -27,4 +27,5 @@ public interface InvitacionDocenteFacadeLocal {
     int count();
     
     Collection<InvitacionDocente> verificarInivtacionDocente(Integer idProfesor) throws Exception;
+    Collection<InvitacionDocente> verificarInivtacionAceptada() throws Exception;
 }
