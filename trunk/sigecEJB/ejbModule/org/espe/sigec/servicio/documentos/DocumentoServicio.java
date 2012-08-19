@@ -11,4 +11,5 @@ public interface DocumentoServicio {
 	Plantilla obtenerPlantillaDocumento(Integer idPlantilla);
 	Collection<InvitacionDocente> verificarInivtacionDocente(Integer idProfesor) throws Exception;
 	void actualizarInvitacion(InvitacionDocente invitacionDocente) throws Exception;
+	Collection<InvitacionDocente> verificarInivtacionAceptada() throws Exception;
 }
