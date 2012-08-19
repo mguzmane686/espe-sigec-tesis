@@ -20,9 +20,9 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
+import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.seguridad.HomeSessionController;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.espe.sigec.web.utils.SigecConstantes;
 
 /**
  * @author roberto

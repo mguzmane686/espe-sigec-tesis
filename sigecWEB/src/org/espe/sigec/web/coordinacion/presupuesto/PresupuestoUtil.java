@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.espe.sigec.model.entities.DetallePresupuestoCurso;
-import org.espe.sigec.web.utils.SigecConstantes;
+import org.espe.sigec.utils.SigecConstantes;
 
 public class PresupuestoUtil {
 	private static final PresupuestoUtil PRESUPUESTO_UTIL = new PresupuestoUtil();

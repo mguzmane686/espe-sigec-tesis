@@ -86,7 +86,7 @@
         		<h:outputLabel value="#{msg.responder_invitacion}" />
         		
         		<h:panelGrid columns="2" style="margin-left:auto; margin-right:auto;">
-        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this"
+        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this" render="tblInvitaciones"
         				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
         			<a4j:commandLink value="Rechazar" action="#{respuestaDocenteController.btnIgnorarInvitacion}" execute="@this"
         				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>

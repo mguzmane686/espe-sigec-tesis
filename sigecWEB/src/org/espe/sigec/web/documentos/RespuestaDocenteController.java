@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.servicio.documentos.DocumentoServicio;
+import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.seguridad.HomeSessionController;
 
 /**
@@ -41,7 +42,6 @@ public class RespuestaDocenteController implements Serializable{
 			setLstInvitacionDocentes(documentoServicio.verificarInivtacionDocente(getHomeSessionController().getUsuarioPerfil().getUsuarioPerfilPK().getIdUsuario()));
 //			setLstInvitacionDocentes(documentoServicio.verificarInivtacionDocente(87));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("sxdsd");
@@ -49,8 +49,9 @@ public class RespuestaDocenteController implements Serializable{
 	
 	public void btnAceptarInvitacion(){
 		try {
-			getInvitacionDocenteSelected().setEstado("ACE");
+			getInvitacionDocenteSelected().setEstado(SigecConstantes.INVITACION_ACEPTADA);
 			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
+			setLstInvitacionDocentes(documentoServicio.verificarInivtacionDocente(getHomeSessionController().getUsuarioPerfil().getUsuarioPerfilPK().getIdUsuario()));
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -59,7 +60,7 @@ public class RespuestaDocenteController implements Serializable{
 	
 	public void btnIgnorarInvitacion(){
 		try {
-			getInvitacionDocenteSelected().setEstado("REC");
+			getInvitacionDocenteSelected().setEstado(SigecConstantes.INVITACION_RECHAZADA);
 			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
 		} catch (Exception e) {
 			

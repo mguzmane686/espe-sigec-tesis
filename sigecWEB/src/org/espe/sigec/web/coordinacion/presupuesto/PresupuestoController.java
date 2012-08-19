@@ -21,8 +21,8 @@ import org.espe.sigec.model.entities.DetallePresupuestoCurso;
 import org.espe.sigec.model.entities.DetallePresupuestoCursoPK;
 import org.espe.sigec.model.entities.PresupuestoCurso;
 import org.espe.sigec.servicio.coordinacion.PresupuestoServicio;
+import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.espe.sigec.web.utils.SigecConstantes;
 
 @SuppressWarnings("serial")
 @ManagedBean(name="presupuestoController")
