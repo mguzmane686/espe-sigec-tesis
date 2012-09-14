@@ -44,7 +44,6 @@ public class RespuestaDocenteController implements Serializable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("sxdsd");
 	}
 	
 	public void btnAceptarInvitacion(){

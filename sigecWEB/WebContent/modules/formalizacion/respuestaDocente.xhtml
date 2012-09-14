@@ -69,6 +69,11 @@
         	<rich:popupPanel id="rppShowInvitacion" domElementAttachment="form"
         		header="Notificacion!!" 
         		onmaskclick="#{rich:component('rppShowInvitacion')}.hide()" autosized="true">
+        		 <f:facet name="controls">
+		            <h:outputLink value="#" onclick="#{rich:component('rppShowInvitacion')}.hide(); return false;">
+		                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
+		            </h:outputLink>
+		        </f:facet>
         		<h:panelGrid columns="1">
 	        		<h:outputLabel value="Ud. ha sido seleccionado para dictar el curso:" styleClass="label-bold"/>
 	        		<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" 
