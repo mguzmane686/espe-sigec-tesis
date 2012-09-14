@@ -52,7 +52,7 @@
         	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
         		
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
-					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
 	        		<rich:dataTable value="#{invitacionesAceptadasController.lstInvitacionDocentes}" var="invitacion" 
 	        			noDataLabel="No se encontraron resultados" style="width:100%" rows="10" >
@@ -63,7 +63,9 @@
 	        				<f:facet name="header">
 	        					<h:outputLabel value="#{msg.fecha_invitacion}" />
 	        				</f:facet>
-	        				<a4j:commandLink value="#{invitacion.fechaInvitacion}" execute="@this"/>
+	        				<a4j:commandLink value="#{invitacion.fechaInvitacion}" execute="@this" oncomplete="#{rich:component('rppGenerarContrato')}.show();" render="rppGenerarContrato">
+	        					<f:setPropertyActionListener target="#{invitacionesAceptadasController.invitacionDocenteSelected}" value="#{invitacion}" />
+	        				</a4j:commandLink>
 	        			</rich:column>
 	        			
 	        			<rich:column>
@@ -96,5 +98,29 @@
 	        		</rich:dataTable>
 	        	</rich:collapsiblePanel>
         	</rich:panel>
+        	
+        	<rich:popupPanel id="rppGenerarContrato" domElementAttachment="form" header="Generar contrato" autosized="true">
+        		<f:facet name="controls">
+		            <h:outputLink value="#" onclick="#{rich:component('rppGenerarContrato')}.hide(); return false;">
+		                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
+		            </h:outputLink>
+		        </f:facet>
+		        <h:panelGroup layout="block">
+		        	<h:panelGrid columns="2">
+		        		<h:outputLabel value="Curso: " style="font-weight:bold;"/>
+		        		<h:outputText value="#{invitacionesAceptadasController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" />
+		        		
+		        		<h:outputLabel value="Profesor: " style="font-weight:bold;"/>
+		        		<h:outputText value="#{invitacionesAceptadasController.invitacionDocenteSelected.profesor.persona.primerApellido} #{invitacionesAceptadasController.invitacionDocenteSelected.profesor.persona.primerNombre}" />
+		        	</h:panelGrid>
+		        	
+		        	<h:panelGrid columns="2" style="margin:auto;">
+		        		<a4j:commandLink value="Aceptar" execute="@this" action="#{invitacionesAceptadasController.btnAecptarGenerarContrato}"
+		        			oncomplete="#{rich:component('rppGenerarContrato')}.hide();" />
+		        		<a4j:commandLink value="Cancelar" onclick="#{rich:component('rppGenerarContrato')}.hide(); return false;"></a4j:commandLink>
+		        	</h:panelGrid>
+		        	
+		        </h:panelGroup>
+        	</rich:popupPanel>
         </h:form>
 </ui:composition>
