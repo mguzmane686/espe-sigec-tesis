@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
+import org.espe.sigec.model.entities.ContratoProfesor;
 import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.Plantilla;
+import org.espe.sigec.model.sessionBeans.ContratoProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.InvitacionDocenteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PlantillaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.SgctSgSecuenciaFacadeLocal;
@@ -20,6 +22,9 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 	
 	@EJB
 	private PlantillaFacadeLocal plantillaFacadeLocal;
+	
+	@EJB
+	private ContratoProfesorFacadeLocal contratoProfesorFacadeLocal;
 	
 	@Resource
 	private UserTransaction userTransaction;
@@ -54,5 +59,10 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 	public Collection<InvitacionDocente> verificarInivtacionAceptada()
 			throws Exception {
 		return invitacionDocenteFacadeLocal.verificarInivtacionAceptada();
+	}
+	@Override
+	public void crearContratoDocente(ContratoProfesor contratoProfesor)
+			throws Exception {
+		contratoProfesorFacadeLocal.create(contratoProfesor);
 	}
 }

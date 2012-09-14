@@ -52,6 +52,9 @@ public class InvitacionDocente  implements Serializable {
     
     @Column(name = "doc_inv_estado")
     private String estado;
+    @Column(name = "genero_contrato")
+    private String generoContrato;
+    
     
     @JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
@@ -163,6 +166,14 @@ public class InvitacionDocente  implements Serializable {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+
+	public String getGeneroContrato() {
+		return generoContrato;
+	}
+
+	public void setGeneroContrato(String generoContrato) {
+		this.generoContrato = generoContrato;
 	}
     
 }
