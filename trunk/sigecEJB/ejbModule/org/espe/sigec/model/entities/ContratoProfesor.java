@@ -2,6 +2,7 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -44,6 +45,11 @@ public class ContratoProfesor implements Serializable{
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private InvitacionDocente sgctDocInvitacionPorf;
     
+    @Column(name = "prf_id_profesor")
+    private int  idProfesor;
+    
+    @Column(name = "id_curso_periodo")
+    private BigInteger idCursoPeriodo;
 
     public ContratoProfesor() {
     }
@@ -136,4 +142,23 @@ public class ContratoProfesor implements Serializable{
     public String toString() {
         return "org.espe.sigec.model.entities.ContratoProfesor[ sgctDocContratoProfPK=" + sgctDocContratoProfPK + " ]";
     }
+
+	public int  getIdProfesor() {
+		return idProfesor;
+	}
+
+	public void setIdProfesor(int  idProfesor) {
+		this.idProfesor = idProfesor;
+	}
+
+	public BigInteger getIdCursoPeriodo() {
+		return idCursoPeriodo;
+	}
+
+	public void setIdCursoPeriodo(BigInteger idCursoPeriodo) {
+		this.idCursoPeriodo = idCursoPeriodo;
+	}
+    
+    
+    
 }
