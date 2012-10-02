@@ -48,11 +48,15 @@ public class InvitacionesAceptadasController implements Serializable{
 		try {
 			getInvitacionDocenteSelected().setGeneroContrato(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
 			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
+			
 			ContratoProfesor contratoProfesor = new ContratoProfesor();
+			contratoProfesor.setIdCursoPeriodo(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo());
+			contratoProfesor.setIdProfesor(getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
+			contratoProfesor.setInvitacionDocente(getInvitacionDocenteSelected());
 			contratoProfesor.setContratoProfesorPK(new ContratoProfesorPK());
 			contratoProfesor.getContratoProfesorPK().setCtrNumContrato(1);
 			contratoProfesor.getContratoProfesorPK().setDocNumInvit(getInvitacionDocenteSelected().getInvitacionDocentePK().getDocNumInvit());
-//			documentoServicio.crearContratoDocente(contratoProfesor);
+			documentoServicio.crearContratoDocente(contratoProfesor);
 			FacesUtils.addInfoMessage("En contrato se genero correctamente");
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurrio un error al generar el contrato");
