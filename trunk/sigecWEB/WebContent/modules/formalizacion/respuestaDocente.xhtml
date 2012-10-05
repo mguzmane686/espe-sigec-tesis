@@ -74,28 +74,32 @@
 		                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
 		            </h:outputLink>
 		        </f:facet>
-        		<h:panelGrid columns="1">
-	        		<h:outputLabel value="Ud. ha sido seleccionado para dictar el curso:" styleClass="label-bold"/>
-	        		<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" 
-	        			style="color: red; margin-left: 20px;"/>
-	        		
-        		</h:panelGrid>
-        		<h:panelGrid columns="2">
-        			<h:outputLabel value="#{msg.valor_a_cancelar}" styleClass="label-bold"/>
-        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.docValorPagar}" />
-        			
-        			<h:outputLabel value="Fecha de envio" styleClass="label-bold"/>
-        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.fechaInvitacion}" />
-        		</h:panelGrid>
-        		
-        		<h:outputLabel value="#{msg.responder_invitacion}" />
-        		
-        		<h:panelGrid columns="2" style="margin-left:auto; margin-right:auto;">
-        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this" render="tblInvitaciones"
-        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
-        			<a4j:commandLink value="Rechazar" action="#{respuestaDocenteController.btnIgnorarInvitacion}" execute="@this"
-        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
-        		</h:panelGrid>
+        		<rich:panel>
+	        		<h:panelGrid columns="1">
+		        		<h:outputLabel value="Ud. ha sido seleccionado para dictar el curso:" styleClass="label-bold"/>
+		        		<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" 
+		        			style="color: red; margin-left: 20px;"/>
+		        		
+	        		</h:panelGrid>
+	        		<h:panelGrid columns="2">
+	        			<h:outputLabel value="#{msg.valor_a_cancelar}" styleClass="label-bold"/>
+	        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.docValorPagar}" />
+	        			
+	        			<h:outputLabel value="Fecha de envio" styleClass="label-bold"/>
+	        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.fechaInvitacion}" />
+	        		</h:panelGrid>
+	        		<center>
+		        		<h:panelGroup style="border: 1px solid #7D6E6E; background-color:#D4EBF2" >
+		        			<h:outputLabel value="#{msg.responder_invitacion}!!!" />
+		        		</h:panelGroup>
+	        		</center>
+	        		<h:panelGrid columns="2" style="margin-left:auto; margin-right:auto;">
+	        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this" render="tblInvitaciones"
+	        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
+	        			<a4j:commandLink value="Rechazar" action="#{respuestaDocenteController.btnIgnorarInvitacion}" execute="@this"
+	        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
+	        		</h:panelGrid>
+        		</rich:panel>
         	</rich:popupPanel>
         </h:form>
 </ui:composition>
