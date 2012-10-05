@@ -5,6 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -14,6 +17,9 @@ public class ContratoProfesorPK implements Serializable{
 	@Basic(optional = false)
     @NotNull
     @Column(name = "ctr_num_contrato")
+	
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="invprof_seq")
+    @SequenceGenerator(name="num_contrato_sec", sequenceName="num_contrato_sec", allocationSize = 1)
     private int ctrNumContrato;
     @Basic(optional = false)
     @NotNull
