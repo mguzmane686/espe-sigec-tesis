@@ -81,6 +81,7 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 		criteria.setFetchMode("peridoA", FetchMode.JOIN);
 		
 		criteria.add(Restrictions.eq("estado", SigecConstantes.INVITACION_ACEPTADA));
+		criteria.add(Restrictions.isNull("contratoGenerado"));
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
 	}
