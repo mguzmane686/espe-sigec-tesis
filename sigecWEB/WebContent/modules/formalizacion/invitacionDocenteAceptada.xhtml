@@ -20,7 +20,7 @@
         	
         	<rich:panel header="#{msg.invitaciones_aceptadas}">
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
-	        		<h:panelGrid columns="4">
+	        		<h:panelGrid columns="4" rendered="false">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        				<a4j:commandButton id="btnUno" value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
 	        					 image="/resources/images/save.png" type="submit" render="@form" >
@@ -49,7 +49,7 @@
         		</h:panelGroup>
         	</rich:panel>
         	
-        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
+        	<rich:panel header="Invitacion proveedor" id="pnlInvitacionDocente">
         		
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
@@ -105,7 +105,7 @@
 		                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
 		            </h:outputLink>
 		        </f:facet>
-		        <h:panelGroup layout="block">
+		        <rich:panel>
 		        	<h:panelGrid columns="2">
 		        		<h:outputLabel value="Curso: " style="font-weight:bold;"/>
 		        		<h:outputText value="#{invitacionesAceptadasController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" />
@@ -113,14 +113,18 @@
 		        		<h:outputLabel value="Profesor: " style="font-weight:bold;"/>
 		        		<h:outputText value="#{invitacionesAceptadasController.invitacionDocenteSelected.profesor.persona.primerApellido} #{invitacionesAceptadasController.invitacionDocenteSelected.profesor.persona.primerNombre}" />
 		        	</h:panelGrid>
-		        	
+		        	<center>
+			        	<h:panelGroup style="border: 1px solid #7D6E6E; background-color:#D4EBF2" >
+			        		<h:outputText value="Si desea generar el contrato presione Aceptar" style="font-weight:bold;"/>
+			        	</h:panelGroup>
+		        	</center>
 		        	<h:panelGrid columns="2" style="margin:auto;">
 		        		<a4j:commandLink value="Aceptar" execute="@this" action="#{invitacionesAceptadasController.btnAecptarGenerarContrato}"
-		        			oncomplete="#{rich:component('rppGenerarContrato')}.hide();" />
+		        			oncomplete="#{rich:component('rppGenerarContrato')}.hide();" render="pnlInvitacionDocente"/>
 		        		<a4j:commandLink value="Cancelar" onclick="#{rich:component('rppGenerarContrato')}.hide(); return false;"></a4j:commandLink>
 		        	</h:panelGrid>
 		        	
-		        </h:panelGroup>
+		        </rich:panel>
         	</rich:popupPanel>
         </h:form>
 </ui:composition>
