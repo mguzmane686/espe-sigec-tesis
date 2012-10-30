@@ -12,6 +12,7 @@ import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
+import org.espe.sigec.model.entities.EducacionFormacion;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.Persona;
@@ -25,6 +26,7 @@ import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
+import org.espe.sigec.model.sessionBeans.EducacionFormacionFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
@@ -61,7 +63,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private CursoPeriodoFacadeLocal cursoPeriodoFacadeLocal;
 	@EJB
 	private PresupuestoCursoFacadeLocal presupuestoCursoFacadeLocal;
-	
+	@EJB
+	private EducacionFormacionFacadeLocal educacionFormacionFacadeLocal;
 	
 	@Override
 	public void editAula(Aula aula) throws Exception {
@@ -128,10 +131,21 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 			usuarioPerfilFacadeLocal.create(usuarioPerfil);
 			
 			profesor.getPersona().setUsuario(usuario);
+			EducacionFormacion educacionFormacionTMP = null;
+			if(persona.getEducacionFormacion() !=null){
+				educacionFormacionTMP = persona.getEducacionFormacion(); 
+				persona.setEducacionFormacion(null);
+			}
 			personaFacadeLocal.create(persona);
+			
+			if(educacionFormacionTMP !=null){
+				educacionFormacionTMP.setIdPersona(persona.getIdPersona());
+				educacionFormacionFacadeLocal.create(educacionFormacionTMP);
+			}
 			profesorFacadeLocal.create(profesor);
 			userTransaction.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			userTransaction.rollback();
 		}
 	}
