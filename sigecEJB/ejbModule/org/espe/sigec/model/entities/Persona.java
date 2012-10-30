@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -93,10 +95,24 @@ public class Persona implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuario;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
+    private EducacionFormacion educacionFormacion;
+    
     public Persona() {
     }
 
-    public Persona(Integer idPersona) {
+    
+    public EducacionFormacion getEducacionFormacion() {
+		return educacionFormacion;
+	}
+
+
+	public void setEducacionFormacion(EducacionFormacion educacionFormacion) {
+		this.educacionFormacion = educacionFormacion;
+	}
+
+
+	public Persona(Integer idPersona) {
         this.idPersona = idPersona;
     }
 

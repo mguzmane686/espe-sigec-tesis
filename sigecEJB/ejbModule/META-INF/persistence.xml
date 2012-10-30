@@ -57,7 +57,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.SgctSgSecuenciaPK</class>
 		<class>org.espe.sigec.model.entities.ContratoProfesor</class>
 		<class>org.espe.sigec.model.entities.ContratoProfesorPK</class>
-		
+		<class>org.espe.sigec.model.entities.EducacionFormacion</class>
+		<class>org.espe.sigec.model.entities.EstudioComplementario</class>
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
 		</properties>

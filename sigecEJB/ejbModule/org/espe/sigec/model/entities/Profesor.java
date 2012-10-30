@@ -85,10 +85,22 @@ public class Profesor implements Serializable {
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
 //    Collection<RangoAcademicoProfesor> lstRangoAcademicoProfesor;
     
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
+    private Collection<EstudioComplementario> estudiosComplementarios;
+    
     public Profesor() {
     }
 
-    public Profesor(BigDecimal idProfesor) {
+    public Collection<EstudioComplementario> getEstudiosComplementarios() {
+		return estudiosComplementarios;
+	}
+
+	public void setEstudiosComplementarios(
+			Collection<EstudioComplementario> estudiosComplementarios) {
+		this.estudiosComplementarios = estudiosComplementarios;
+	}
+
+	public Profesor(BigDecimal idProfesor) {
         this.idProfesor = idProfesor;
     }
 
