@@ -58,14 +58,12 @@
 							<f:selectItem itemLabel="Primer apellido :" itemValue="ape"/>
 						</h:selectOneRadio>
 					</h:panelGrid>
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="2" style="margin-left: 80px;">
 						<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda" />
 						<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}"  
 							execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas"></a4j:commandLink>
 					</h:panelGrid>
 				</h:panelGroup>
-				
-				
 			</rich:collapsiblePanel>
 			
 			<rich:collapsiblePanel header="Criterios de busqueda"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
