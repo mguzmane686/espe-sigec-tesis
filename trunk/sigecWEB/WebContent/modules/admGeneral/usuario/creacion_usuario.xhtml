@@ -12,8 +12,6 @@
    	<h:outputStylesheet library="css" name="botones.css"/>
    	<h:outputScript library="js" name="validaciones.js" target="head"/>
    	
-   	
-   	
    	<h:outputScript library="js" name="jquery.effects.core.js" />
 	<h:outputScript library="js" name="jquery.effects.blind.js" />
     <h:outputStylesheet library="css" name="componentsCss.css" />
@@ -40,7 +38,7 @@
         }
    	</h:outputStylesheet>
    	<h:outputStylesheet library="css" name="tables.css" />
-
+   	
 	<h:form>
 		<rich:panel header="#{msg['etiqueta_nuevo_usuario']}">
 			<h:panelGroup layout="block" styleClass="roundCorner">
@@ -61,7 +59,7 @@
 					
 					<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
 					<h:panelGroup>
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
+						<h:inputSecret value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
 					</h:panelGroup>
 				</h:panelGrid>
 			</rich:collapsiblePanel>

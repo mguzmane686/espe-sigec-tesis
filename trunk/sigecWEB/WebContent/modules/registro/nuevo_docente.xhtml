@@ -20,6 +20,10 @@
    			text-align:center;
    			font-weight: bold;
    		}
+   		
+   		.alinear-vertical-top{
+   			vertical-align:top;
+   		}
    	</h:outputStylesheet>
 
 	<h:form>
@@ -54,80 +58,171 @@
 		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
 			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-			
-				<h:panelGrid columns="2">
-					<h:outputLabel value="#{msg['cedula']}"  style="padding-right:50px" />
-					<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10" styleClass="campoRequerido" 
-						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" rendered="#{registroDocenteController.renderEditionButtons}" validator="cedulaValidator"/>
-					<h:outputText value="#{registroDocenteController.profesor.persona.cedula}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-
-					<h:outputLabel value="#{msg['nombres']}"  />
-					<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
-						<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
-						<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
-					</h:panelGrid>
-					<h:outputText value="#{registroDocenteController.profesor.persona.primerNombre.concat(' ').concat(registroDocenteController.profesor.persona.segundoNombre)}" 
-						rendered="#{!registroDocenteController.renderEditionButtons}"/>
-
-
-					<h:outputLabel value="#{msg['apellidos']}"  />
-					<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
-						<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
-						<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
-					</h:panelGrid>
-					<h:outputText value="#{registroDocenteController.profesor.persona.primerApellido.concat(' ').concat(registroDocenteController.profesor.persona.segundoApellido)}" 
-						rendered="#{!registroDocenteController.renderEditionButtons}"/>
-
-					<h:outputLabel value="#{msg['fecha_nacimiento']}"/>
-					<rich:calendar value="#{registroDocenteController.profesor.persona.fechaNacimiento}" datePattern="#{msg['dd_MMM_yyyy']}" rendered="#{registroDocenteController.renderEditionButtons}"/>
-					<h:outputText value="#{registroDocenteController.profesor.persona.fechaNacimiento}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-					
-					<h:outputLabel value="#{msg['nacionalidad']}"  />
-					<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" rendered="#{registroDocenteController.renderEditionButtons}"/>
-					<h:outputText value="#{registroDocenteController.profesor.persona.nacionalidad}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-					
-					<h:outputLabel value="#{msg['direccion']}"  required="true"/>
-					<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" size="43" rendered="#{registroDocenteController.renderEditionButtons}"/>
-					<h:outputText value="#{registroDocenteController.profesor.persona.direccion}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-
-					<h:outputLabel value="#{msg['e_mail']}"  />
-					<h:inputText value="#{registroDocenteController.profesor.persona.mail}" size="43" rendered="#{registroDocenteController.renderEditionButtons}"/>
-					<h:outputText value="#{registroDocenteController.profesor.persona.mail}" size="43" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-
-					<h:outputLabel value="#{msg['celular']}"  required="true"/>
-					<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" onkeypress="return validateNumPP(event);" maxlength="20" rendered="#{registroDocenteController.renderEditionButtons}"/>
-					<h:outputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-					
-					<h:outputLabel value="#{msg['etiqueta_observacion']}"  />
-					<h:inputText value="#{registroDocenteController.profesor.observacion}" size="43" rendered="#{registroDocenteController.renderEditionButtons}"/>
-					<h:outputText value="#{registroDocenteController.profesor.observacion}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
-					
-					<h:outputLabel value="Tiempo completo" />
-					<h:selectOneRadio value="#{registroDocenteController.profesor.tiempoComp}" disabled="#{!registroDocenteController.renderEditionButtons}">
-						<f:selectItem itemLabel="Si" itemValue="1" />
-						<f:selectItem itemLabel="No" itemValue="0" />
-					</h:selectOneRadio>
-					
-				</h:panelGrid>
-				<h:panelGroup rendered="false">
-					<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" listHeight="20" maxFilesQuantity="1"
-		                id="upload" acceptedTypes="jpg, gif, png, bmp" >
-		                <a4j:ajax event="uploadcomplete" execute="@this" render="pnlImg" />
-		            </rich:fileUpload>
-		            
-		            <a4j:outputPanel ajaxRendered="true">
-	                    <rich:panel bodyClass="rich-laguna-panel-no-header">
-	                        <h:panelGrid columns="2" id="pnlImg">
-	                            <a4j:mediaOutput element="img" mimeType="image/jpeg" 
-	                                createContent="#{registroDocenteController.paint}" value="1"
-	                                style="width:100px; height:100px;" cacheable="false">
-	                            </a4j:mediaOutput>
-	                        </h:panelGrid>
-	                    </rich:panel>
-	                </a4j:outputPanel>
-                </h:panelGroup>
+				<h:panelGrid columns="2" columnClasses="alinear-vertical-top, alinear-vertical-top">
+					<h:panelGroup layout="block">
+						<h:panelGrid columns="2">
+							<h:outputLabel value="#{msg['cedula']}: "  style="padding-right:50px" />
+							<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10" styleClass="campoRequerido" 
+								required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" rendered="#{registroDocenteController.renderEditionButtons}" validator="cedulaValidator"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.cedula}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+		
+							<h:outputLabel value="#{msg['nombres']}: "  />
+							<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
+								<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
+								<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
+							</h:panelGrid>
+							<h:outputText value="#{registroDocenteController.profesor.persona.primerNombre.concat(' ').concat(registroDocenteController.profesor.persona.segundoNombre)}" 
+								rendered="#{!registroDocenteController.renderEditionButtons}"/>
+		
+		
+							<h:outputLabel value="#{msg['apellidos']}: "  />
+							<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
+								<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
+								<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
+							</h:panelGrid>
+							<h:outputText value="#{registroDocenteController.profesor.persona.primerApellido.concat(' ').concat(registroDocenteController.profesor.persona.segundoApellido)}" 
+								rendered="#{!registroDocenteController.renderEditionButtons}"/>
+		
+							<h:outputLabel value="#{msg['fecha_nacimiento']}: "/>
+							<rich:calendar value="#{registroDocenteController.profesor.persona.fechaNacimiento}" datePattern="#{msg['dd_MMM_yyyy']}" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.fechaNacimiento}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+							
+							<h:outputLabel value="#{msg['nacionalidad']}: "  />
+							<h:inputText value="#{registroDocenteController.profesor.persona.nacionalidad}" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.nacionalidad}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+							
+							<h:outputLabel value="#{msg['direccion']}: " />
+							<h:inputText value="#{registroDocenteController.profesor.persona.direccion}" size="43" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.direccion}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+		
+							<h:outputLabel value="#{msg['e_mail']}: "  />
+							<h:inputText value="#{registroDocenteController.profesor.persona.mail}" size="43" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.mail}" size="43" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+		
+							<h:outputLabel value="#{msg['celular']}: " />
+							<h:inputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" onkeypress="return validateNumPP(event);" maxlength="20" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.telefonoCelular}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+							
+							<h:outputLabel value="#{msg['etiqueta_telefono_convencional']}: " />
+							<h:inputText value="#{registroDocenteController.profesor.persona.telefonoConvencional}" onkeypress="return validateNumPP(event);" maxlength="20" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.persona.telefonoConvencional}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+							
+							<h:outputLabel value="#{msg['etiqueta_observacion']}: "  />
+							<h:inputText value="#{registroDocenteController.profesor.observacion}" size="43" rendered="#{registroDocenteController.renderEditionButtons}"/>
+							<h:outputText value="#{registroDocenteController.profesor.observacion}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+							
+							<h:outputLabel value="Tiempo completo: " />
+							<h:selectOneRadio value="#{registroDocenteController.profesor.tiempoComp}" disabled="#{!registroDocenteController.renderEditionButtons}">
+								<f:selectItem itemLabel="Si" itemValue="1" />
+								<f:selectItem itemLabel="No" itemValue="0" />
+							</h:selectOneRadio>
+							
+						</h:panelGrid>
+						<h:panelGroup rendered="false">
+							<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" listHeight="20" maxFilesQuantity="1"
+				                id="upload" acceptedTypes="jpg, gif, png, bmp" >
+				                <a4j:ajax event="uploadcomplete" execute="@this" render="pnlImg" />
+				            </rich:fileUpload>
+				            
+				            <a4j:outputPanel ajaxRendered="true">
+			                    <rich:panel bodyClass="rich-laguna-panel-no-header">
+			                        <h:panelGrid columns="2" id="pnlImg">
+			                            <a4j:mediaOutput element="img" mimeType="image/jpeg" 
+			                                createContent="#{registroDocenteController.paint}" value="1"
+			                                style="width:100px; height:100px;" cacheable="false">
+			                            </a4j:mediaOutput>
+			                        </h:panelGrid>
+			                    </rich:panel>
+			                </a4j:outputPanel>
+		                </h:panelGroup>
+	                </h:panelGroup>
+                
+                	<h:panelGroup layout="block">
+                		<h:panelGrid columns="2">
+                			<h:outputLabel value="#{msg.primaria}: " />
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="60"/>
+                			<h:outputLabel value="#{msg.secundaria}: " />
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="60"/>
+                			<h:outputLabel value="#{msg.universitaria}: " />
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="60"/>
+                			<h:outputLabel value="#{msg.postgrado}: " />
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" size="60"/>
+                		</h:panelGrid>
+                	</h:panelGroup>
+                </h:panelGrid>
+                
 			</rich:collapsiblePanel>
-
+			
+			<rich:collapsiblePanel header="#{msg.estudios_complementarios}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				<a4j:commandLink value="Agregar" execute="@this" oncomplete="#{rich:component('rppEstCompl')}.show();" 
+					style="float:right;" action="#{registroDocenteController.btnShowPopupAgragarEstudioComplemetario}" render="pgPopEstCompl"/>
+				
+				<rich:popupPanel id="rppEstCompl" domElementAttachment="form" modal="true" header="Agregar estudio complementario">
+					<f:facet name="controls">
+			            <h:outputLink value="#" onclick="#{rich:component('rppEstCompl')}.hide(); return false;">
+			                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
+			            </h:outputLink>
+			        </f:facet>
+			        
+			        <h:panelGrid columns="2" id="pgPopEstCompl">
+			        	<h:outputLabel value="#{msg.nombre_curso}: " />
+			        	<h:inputText value="#{registroDocenteController.estudioComplementario.nombreCurso}" />
+			        	<h:outputLabel value="#{msg.institucion}: " />
+			        	<h:inputText value="#{registroDocenteController.estudioComplementario.nombreInstitucion}" />
+			        	<h:outputLabel value="#{msg.certificacion_obtenida}: "/>
+			        	<h:inputText value="#{registroDocenteController.estudioComplementario.certificacionObtenida}" />
+			        	<h:outputLabel value="#{msg.duracion}: "/>
+			        	<h:inputText value="#{registroDocenteController.estudioComplementario.duracion}" />
+			        </h:panelGrid>
+			        
+			        <div style="display: table; width: 100%; margin: auto;">
+			        	<div style="display: table-row;">
+			        		<div style="display: table-cell; text-align: center;" >
+					        	<a4j:commandLink value="Agregar" execute="pgPopEstCompl"
+					        		action="#{registroDocenteController.btnAgregarEstudioComplemetario}" render="tblEstudioCompl" 
+					        		oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('rppEstCompl')}.hide();"/>
+					        </div>
+					        <div style="display: table-cell; text-align: center;">
+					        	<a4j:commandLink value="Cancelar" onclick="#{rich:component('rppEstCompl')}.hide(); return false;"></a4j:commandLink>
+					        </div>
+				        </div>
+			        </div>
+				</rich:popupPanel>
+				
+				<rich:dataTable id="tblEstudioCompl" value="#{registroDocenteController.lstEstudiosComplementarios}" var="items"
+					style="width:100%;" noDataLabel="No se encontraron registros">
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.nombre_curso}" />
+						</f:facet>
+						<h:outputText value="#{items.nombreCurso}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.institucion}" />
+						</f:facet>
+						<h:outputText value="#{items.nombreInstitucion}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.certificacion_obtenida}" />
+						</f:facet>
+						<h:outputText value="#{items.certificacionObtenida}" />
+					</rich:column>
+					
+					<rich:column>
+						<f:facet name="header">
+							<h:outputLabel value="#{msg.duracion}" />
+						</f:facet>
+						<h:outputText value="#{items.duracion}" />
+					</rich:column>
+				</rich:dataTable>
+			</rich:collapsiblePanel>
+			
+			
 			<rich:collapsiblePanel header="#{msg['ponderacion']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 			

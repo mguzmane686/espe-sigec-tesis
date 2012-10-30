@@ -14,7 +14,9 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.exception.UserValidateException;
+import org.espe.sigec.model.entities.EducacionFormacion;
 import org.espe.sigec.model.entities.Especialidad;
+import org.espe.sigec.model.entities.EstudioComplementario;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
@@ -42,6 +44,9 @@ public class RegistroDocenteController implements Serializable{
 	private boolean editMode;
 	private boolean renderEditionButtons;
 	private Collection<SelectItem> especialidades;
+	private Collection<EstudioComplementario> lstEstudiosComplementarios;
+	private EstudioComplementario estudioComplementario;
+	
 	public RegistroDocenteController() {
 		setProfesor((Profesor) FacesUtils.getFlashObject("profesor"));
 		setEditMode(Boolean.TRUE);
@@ -52,7 +57,6 @@ public class RegistroDocenteController implements Serializable{
 			setRenderEditionButtons(Boolean.TRUE);
 		}
 	}
-
 	
 	private void initEntities(){
 		setProfesor(new Profesor());
@@ -62,11 +66,15 @@ public class RegistroDocenteController implements Serializable{
 		getProfesor().setTiempoComp(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
 		getProfesor().setEstadoSeleccion(SigecConstantes.ESTADO_INACTIVO_BOOLEANO);
 		getProfesor().setPersona(new Persona());
+		getProfesor().getPersona().setEducacionFormacion(new EducacionFormacion());
 		//TODO Verfificar cambio
 //		getProfesor().setEspecialidad(new Especialidad());
 		setFiles(new ArrayList<Persona>());
 		setUsuario(new Usuario());
+		setLstEstudiosComplementarios(new ArrayList<EstudioComplementario>());
+		setEstudioComplementario(new EstudioComplementario());
 	}
+	
 	@PostConstruct
 	public void cargarEspecialidades(){
 		Collection<Especialidad> lstEspecialidades = admGeneralServicio.findEspecialidad();
@@ -76,6 +84,7 @@ public class RegistroDocenteController implements Serializable{
 			getEspecialidades().add(new SelectItem(especialidad.getIdEspecialidad(), especialidad.getNombre()));
 		}
 	}
+	
 	public void uploadImage(FileUploadEvent event) throws Exception {
         UploadedFile item = event.getUploadedFile();
         getProfesor().getPersona().setFoto(item.getData());
@@ -128,7 +137,13 @@ public class RegistroDocenteController implements Serializable{
 			e1.printStackTrace();
 		}
 	}
+	public void btnShowPopupAgragarEstudioComplemetario(){
+		setEstudioComplementario(new EstudioComplementario());
+	}
 	
+	public void btnAgregarEstudioComplemetario(){
+		getLstEstudiosComplementarios().add(getEstudioComplementario());
+	}
 	public Profesor getProfesor() {
 		return profesor;
 	}
@@ -153,34 +168,45 @@ public class RegistroDocenteController implements Serializable{
 		this.files = files;
 	}
 
-
 	public boolean isEditMode() {
 		return editMode;
 	}
-
 
 	public void setEditMode(boolean editMode) {
 		this.editMode = editMode;
 	}
 
-
 	public boolean isRenderEditionButtons() {
 		return renderEditionButtons;
 	}
-
 
 	public void setRenderEditionButtons(boolean renderEditionButtons) {
 		this.renderEditionButtons = renderEditionButtons;
 	}
 
-
 	public Collection<SelectItem> getEspecialidades() {
 		return especialidades;
 	}
 
-
 	public void setEspecialidades(Collection<SelectItem> especialidades) {
 		this.especialidades = especialidades;
+	}
+
+	public Collection<EstudioComplementario> getLstEstudiosComplementarios() {
+		return lstEstudiosComplementarios;
+	}
+
+	public void setLstEstudiosComplementarios(
+			Collection<EstudioComplementario> lstEstudiosComplementarios) {
+		this.lstEstudiosComplementarios = lstEstudiosComplementarios;
+	}
+
+	public EstudioComplementario getEstudioComplementario() {
+		return estudioComplementario;
+	}
+
+	public void setEstudioComplementario(EstudioComplementario estudioComplementario) {
+		this.estudioComplementario = estudioComplementario;
 	}
 	
 }
