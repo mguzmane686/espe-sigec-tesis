@@ -153,7 +153,17 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public void editProfesor(Usuario usuario, Persona persona, Profesor profesor) throws Exception{
 		userTransaction.begin();
 		try {
-			personaFacadeLocal.edit(persona);
+			Persona personaTMP = persona;
+			if(persona.getEducacionFormacion().getIdPersona()==null){
+				persona.getEducacionFormacion().setIdPersona(persona.getIdPersona());
+				educacionFormacionFacadeLocal.create(persona.getEducacionFormacion());
+			}else{
+				educacionFormacionFacadeLocal.edit(persona.getEducacionFormacion());
+			}
+//			personaTMP.setEducacionFormacion(null);
+			personaFacadeLocal.edit(personaTMP);
+			
+			
 			profesorFacadeLocal.edit(profesor);
 			userTransaction.commit();
 		} catch (Exception e) {
