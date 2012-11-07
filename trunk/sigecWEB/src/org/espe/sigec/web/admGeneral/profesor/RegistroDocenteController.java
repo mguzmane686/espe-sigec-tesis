@@ -46,6 +46,7 @@ public class RegistroDocenteController implements Serializable{
 	private Collection<SelectItem> especialidades;
 	private Collection<EstudioComplementario> lstEstudiosComplementarios;
 	private EstudioComplementario estudioComplementario;
+	private boolean renderPopupEstComp;
 	
 	public RegistroDocenteController() {
 		setProfesor((Profesor) FacesUtils.getFlashObject("profesor"));
@@ -55,6 +56,12 @@ public class RegistroDocenteController implements Serializable{
 			initEntities();
 			setEditMode(Boolean.FALSE);
 			setRenderEditionButtons(Boolean.TRUE);
+		}else{
+			if(getProfesor().getPersona().getEducacionFormacion() == null){
+				getProfesor().getPersona().setEducacionFormacion(new EducacionFormacion());
+			}
+			setLstEstudiosComplementarios(new ArrayList<EstudioComplementario>());
+			setEstudioComplementario(new EstudioComplementario());
 		}
 	}
 	
@@ -207,6 +214,14 @@ public class RegistroDocenteController implements Serializable{
 
 	public void setEstudioComplementario(EstudioComplementario estudioComplementario) {
 		this.estudioComplementario = estudioComplementario;
+	}
+
+	public boolean isRenderPopupEstComp() {
+		return renderPopupEstComp;
+	}
+
+	public void setRenderPopupEstComp(boolean renderPopupEstComp) {
+		this.renderPopupEstComp = renderPopupEstComp;
 	}
 	
 }

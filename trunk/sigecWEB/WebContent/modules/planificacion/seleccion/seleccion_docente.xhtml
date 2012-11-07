@@ -26,7 +26,10 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        	
 	        		<a4j:outputPanel ajaxRendered="true">
-	        		
+	        			<center>
+		        			<rich:dataScroller for="tblDocentes" renderIfSinglePage="false" fastControls="hide"/>
+		        		</center>
+		        		
 		        		<rich:dataTable id="tblDocentes" style="width:100%" value="#{seleccionPorfesorController.lstProfesors}" var="profesor" rows="5" rendered="#{!empty seleccionPorfesorController.lstProfesors}">
 		        			<f:facet name="header">
 		        				<h:outputLabel value="Docentes" />
@@ -74,10 +77,6 @@
 		        				</center>				
 		        			</rich:column>
 		        		</rich:dataTable>
-		        		<center>
-		        			<rich:dataScroller for="tblDocentes" renderIfSinglePage="false" fastControls="hide"/>
-		        		</center>
-		        		
 	        		</a4j:outputPanel>
 	        	</rich:collapsiblePanel>
         	</rich:panel>

@@ -140,13 +140,21 @@
                 	<h:panelGroup layout="block">
                 		<h:panelGrid columns="2">
                 			<h:outputLabel value="#{msg.primaria}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="60"/>
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
+                			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+                			
                 			<h:outputLabel value="#{msg.secundaria}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="60"/>
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
+                			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+                			
                 			<h:outputLabel value="#{msg.universitaria}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="60"/>
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
+                			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+                			
                 			<h:outputLabel value="#{msg.postgrado}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" size="60"/>
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
+                			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+                			
                 		</h:panelGrid>
                 	</h:panelGroup>
                 </h:panelGrid>
@@ -156,16 +164,14 @@
 			<rich:collapsiblePanel header="#{msg.estudios_complementarios}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<a4j:commandLink value="Agregar" execute="@this" oncomplete="#{rich:component('rppEstCompl')}.show();" 
-					style="float:right;" action="#{registroDocenteController.btnShowPopupAgragarEstudioComplemetario}" render="pgPopEstCompl"/>
+					style="float:right;" action="#{registroDocenteController.btnShowPopupAgragarEstudioComplemetario}" render="rppEstCompl, pgPopEstCompl">
+					<f:setPropertyActionListener target="#{registroDocenteController.renderPopupEstComp}" value="true"></f:setPropertyActionListener>
+				</a4j:commandLink>
 				
 				<rich:popupPanel id="rppEstCompl" domElementAttachment="form" modal="true" header="Agregar estudio complementario">
-					<f:facet name="controls">
-			            <h:outputLink value="#" onclick="#{rich:component('rppEstCompl')}.hide(); return false;">
-			                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
-			            </h:outputLink>
-			        </f:facet>
+					
 			        
-			        <h:panelGrid columns="2" id="pgPopEstCompl">
+			        <h:panelGrid columns="2" id="pgPopEstCompl" rendered="#{registroDocenteController.renderPopupEstComp}">
 			        	<h:outputLabel value="#{msg.nombre_curso}: " />
 			        	<h:inputText value="#{registroDocenteController.estudioComplementario.nombreCurso}" />
 			        	<h:outputLabel value="#{msg.institucion}: " />
@@ -181,10 +187,14 @@
 			        		<div style="display: table-cell; text-align: center;" >
 					        	<a4j:commandLink value="Agregar" execute="pgPopEstCompl"
 					        		action="#{registroDocenteController.btnAgregarEstudioComplemetario}" render="tblEstudioCompl" 
-					        		oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('rppEstCompl')}.hide();"/>
+					        		oncomplete="if(#{(facesContext.maximumSeverity.ordinal != 2)} ) #{rich:component('rppEstCompl')}.hide();">
+					        		<f:setPropertyActionListener target="#{registroDocenteController.renderPopupEstComp}" value="false" />
+					        	</a4j:commandLink>
 					        </div>
 					        <div style="display: table-cell; text-align: center;">
-					        	<a4j:commandLink value="Cancelar" onclick="#{rich:component('rppEstCompl')}.hide(); return false;"></a4j:commandLink>
+					        	<a4j:commandLink value="Cancelar" oncomplete="#{rich:component('rppEstCompl')}.hide();" execute="@this">
+					        		<f:setPropertyActionListener target="#{registroDocenteController.renderPopupEstComp}" value="false" />
+					        	</a4j:commandLink>
 					        </div>
 				        </div>
 			        </div>
