@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 	
     	<h:outputStylesheet library="css" name="textos.css"/>    
@@ -16,46 +17,36 @@
         	
         		<h:commandButton actionListener="#{reporteAulaController.btnPDF}" value="PDF" 
         		immediate="true" image="/resources/images/button/pdf.png"/>
-        	     		
+        		
 	        		<a4j:outputPanel ajaxRendered="true">
-	        		
-		        		<rich:dataTable id="tblAulas" style="width:100%" value="#{reporteAulaController.lstAulas}" var="aula" rows="15" rendered="#{!empty reporteAulaController.lstAulas}">
+	        			<h:commandLink>
+				            <p:graphicImage value="/resources/images/button/pdf.png" />  
+				            <p:dataExporter type="xls" target="tblAulas" fileName="cars" />  
+				        </h:commandLink>`
+				        
+		        		<p:dataTable id="tblAulas" style="width:100%" value="#{reporteAulaController.lstAulas}" var="aula" rows="15" paginator="true"  
+		        			rendered="#{!empty reporteAulaController.lstAulas}">
 		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
-			        			</f:facet>
+		        			<p:column headerText="#{msg['etiqueta_codigo']}">
 			        			<h:outputText value="#{aula.idAula}" />
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['lugar']}" />
-			        			</f:facet>
+		        			<p:column headerText="#{msg['lugar']}">
 			        			<h:outputText value="#{aula.edificio.lugarCurso.nombre}" />
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['edificio']}" />
-			        			</f:facet>
+		        			<p:column headerText="#{msg['edificio']}">
 			        			<h:outputText value="#{aula.edificio.nombre}" />	
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['nombre']}" />
-			        			</f:facet>
+		        			<p:column headerText="#{msg['nombre']}">
 			        			<h:outputText value="#{aula.nombreAula}" />	
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
-			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['descripcion']}" />
-			        			</f:facet>
+		        			<p:column headerText="#{msg['descripcion']}">
 			        			<h:outputText value="#{aula.descripcionAula}" />
-		        			</rich:column>
-			        	</rich:dataTable>
+		        			</p:column>
+			        	</p:dataTable>
 		        		
 		        		<center>
 		        			<rich:dataScroller for="tblAulas" renderIfSinglePage="false" fastControls="hide"/>

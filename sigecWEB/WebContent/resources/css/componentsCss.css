@@ -1,37 +1,48 @@
+
 @CHARSET "UTF-8";
 /* 
-    Document   : corpV2CssUtil
+    Document   : componentsCss
     Created on : May 16, 2012, 8:59:47 PM
     Author     : roberto
-    Description:
-        Purpose of the stylesheet follows.
+    Description: Purpose of the stylesheet follows.
 */
 
 /* 
    TODO customize this sample style
-   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+   Syntax recommendation http://www.w3.org/
 */
-.emulateField {
-    margin:1.3em 0; padding:0.4em; height:100%;
-    border-right: none;
-    border-bottom: none;
-    border-left: none;
-    border-top: 1px solid #F2F0EE;
-   }
-.legendField { 
-    font-size:100%; 
-    font-weight:normal; 
-    margin:-.8em 0 0; 
-    background:white; 
-    color:black; 
-    float:left; 
-    padding:0 1px; 
-}
-.estiloH + * { 
-    clear:left; 
+
+.mainDivCollap{
+    border-top-width:0px !important;
+    border-right-width:0px !important;
+    border-bottom-width: 0px !important;
+    border-left-width: 0px !important;
+    background:none repeat scroll 0 0 transparent !important;
 }
 
-.estiloLinkField { 
-    padding: .2em 1em; 
-    text-decoration: none; 
+.headerDivCollap{
+    border-top-width:0px !important;
+    border-right-width:0px !important;
+    border-bottom-width: 0px !important;
+    border-left-width: 0px !important;
+    
+    background-color:white !important;
+    background-image:none !important;
+    background:none repeat scroll 0 0 transparent !important;
 }
+
+.rf-cp-lbl-exp{
+	border-top-width:2px !important;
+	background-image:url("#{resource['images/icons:linexrepeat.png']}");
+	background-repeat:repeat-x;
+}
+
+.rf-cp-lbl-colps{
+	border-top-width:2px !important;
+	background-image:url("#{resource['images/icons:linexrepeat.png']}");
+	background-repeat:repeat-x;
+}
+
+
+
+
