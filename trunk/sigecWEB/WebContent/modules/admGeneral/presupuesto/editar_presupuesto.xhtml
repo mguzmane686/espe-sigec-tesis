@@ -13,7 +13,7 @@
    	
         <h:form id="frmPresupuesto">
         
-        <rich:panel header="Administrar Presupuesto">
+        <rich:panel header="#{msg.administrar_presupuesto}">
         	<h:panelGroup layout="block" styleClass="roundCorner" id="pnlMenuPresupuesto">
 	       		<h:panelGrid columns="4">
 	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarPresupuestoController.editMode}">
@@ -42,7 +42,7 @@
         	</h:panelGroup>
         </rich:panel>
        	
-        <rich:panel header="Administrar Presupuesto" id="pnlDatosPresupuesto">
+        <rich:panel header="#{msg.administrar_presupuesto}" id="pnlDatosPresupuesto">
        		<fieldset>
         		<legend>
         			<h:outputLabel value="#{msg['datos_presupuesto']}" styleClass="titulo"/>

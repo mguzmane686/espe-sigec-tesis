@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:a4j="http://richfaces.org/a4j" 
 	xmlns:rich="http://richfaces.org/rich" 
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 	
 	<h:outputStylesheet library="css" name="textos.css" />
@@ -19,8 +20,8 @@
 			<rich:collapsiblePanel header="#{msg.etiqueta_lista_programas}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
-				<rich:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;">
-					<rich:column>
+				<p:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;" rows="15" paginator="true">
+					<p:column>
 						<f:facet name="header">
 							<h:outputLabel value="#{msg.nombre}" />
 						</f:facet>
@@ -28,15 +29,15 @@
 							<f:setPropertyActionListener target="#{listaProgramaController.programaSelected}" value="#{programa}" />
 							<f:setPropertyActionListener target="#{administrarProgramaController.programa}" value="#{programa}" />
 						</a4j:commandLink>
-					</rich:column>
+					</p:column>
 					
-					<rich:column>
+					<p:column>
 						<f:facet name="header">
-							<h:outputLabel value="#{msg.descripcion} :" />
+							<h:outputLabel value="#{msg.descripcion}" />
 						</f:facet>
 						<h:outputLabel value="#{programa.descripcion }" />
-					</rich:column>
-				</rich:dataTable>
+					</p:column>
+				</p:dataTable>
 			</rich:collapsiblePanel>
 		</rich:panel>
 		

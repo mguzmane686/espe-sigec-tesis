@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 	
     	<h:outputStylesheet library="css" name="textos.css"/>    
@@ -16,40 +17,38 @@
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        		
-		        		<rich:dataTable id="tblEdificios" style="width:100%" value="#{reporteEdificioController.lstEdificios}" var="edificio" rows="15" rendered="#{!empty reporteEdificioController.lstEdificios}">
+		        		<p:dataTable id="tblEdificios" style="width:100%" value="#{reporteEdificioController.lstEdificios}" 
+		        			var="edificio" rows="15" rendered="#{!empty reporteEdificioController.lstEdificios}" paginator="true">
 		        			
-		        			<rich:column>
+		        			<p:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['etiqueta_codigo']}" />
 			        			</f:facet>
 			        			<a4j:commandLink value="#{edificio.idEdificio}" action="#{reporteEdificioController.btnShowEdificioDetail(edificio)}"></a4j:commandLink>
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
+		        			<p:column>
 			        			<f:facet name="header">
-			        				<h:outputLabel value="#{msg['lugar']}" />
+			        				<h:outputLabel value="#{msg.etiqueta_establecimiento}" />
 			        			</f:facet>
 			        			<h:outputText value="#{edificio.lugarCurso.nombre}" />
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
+		        			<p:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['nombre']}" />
 			        			</f:facet>
 			        			<h:outputText value="#{edificio.nombre}" />
-		        			</rich:column>
+		        			</p:column>
 		        			
-		        			<rich:column>
+		        			<p:column>
 			        			<f:facet name="header">
 			        				<h:outputLabel value="#{msg['descripcion']}" />
 			        			</f:facet>
 			        			<h:outputText value="#{edificio.descripcion}" />
-		        			</rich:column>
-			        	</rich:dataTable>
+		        			</p:column>
+			        	</p:dataTable>
 		        		
-		        		<center>
-		        			<rich:dataScroller for="tblEdificios" renderIfSinglePage="false" fastControls="hide"/>
-		        		</center>
 	        		</a4j:outputPanel>
         	</rich:panel>
         	

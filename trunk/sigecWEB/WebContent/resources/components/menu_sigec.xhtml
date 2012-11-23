@@ -42,46 +42,46 @@
             	</rich:panelMenuItem>
             
 	            <rich:panelMenuItem>
-	            	<a4j:commandLink value="Crear Usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
+	            	<a4j:commandLink value="Crear usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem> 
         	</rich:panelMenuGroup>
         	
-        	<rich:panelMenuGroup id="pmgAdmGeneralContactos" label="Contactos" rendered="#{fn:contains(homeSessionController.idPerfiles, 'ADM')}"
+        	<rich:panelMenuGroup id="pmgAdmGeneralContactos" label="#{msg.etiqueta_contactos}" rendered="#{fn:contains(homeSessionController.idPerfiles, 'ADM')}"
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralContactos"/>
         		
         		<rich:panelMenuItem>
-            		<a4j:commandLink value="Crear Contacto" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
+            		<a4j:commandLink value="#{msg.crear_contacto}" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
             	</rich:panelMenuItem>
             	<rich:panelMenuItem>
-            		<a4j:commandLink value="Lista de contactos" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
+            		<a4j:commandLink value="#{msg.etiqueta_lista_contactos}" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
             	</rich:panelMenuItem>
         	</rich:panelMenuGroup>	
         	
-        	<rich:panelMenuGroup id="pmgAdmGeneralLugares" label="Lugares" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
+        	<rich:panelMenuGroup id="pmgAdmGeneralLugares" label="#{msg.establecimientos}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralLugares"/>
         		
         		<rich:panelMenuItem>
-            		<a4j:commandLink value="Crear Lugar" action="adm_lugar.jsf?faces-redirect=true" execute="@this"/>
+            		<a4j:commandLink value="#{msg.crear_establecimiento}" action="adm_lugar.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
             	<rich:panelMenuItem>
-            		<a4j:commandLink value="Administrar Lugar" action="adm_reporte_lugar.jsf?faces-redirect=true" execute="@this"/>
+            		<a4j:commandLink value="#{msg.administrar_establecimiento}" action="adm_reporte_lugar.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
         	</rich:panelMenuGroup>
         	
-        	<rich:panelMenuGroup id="pmgAdmGeneralEdificio" label="Edificios" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}" 
+        	<rich:panelMenuGroup id="pmgAdmGeneralEdificio" label="#{msg.etiqueta_edificios}" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}" 
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralEdificio"/>
         		
         		<rich:panelMenuItem>
-            		<a4j:commandLink value="Crear Edificio" action="adm_edificio.jsf?faces-redirect=true" execute="@this"/>
+            		<a4j:commandLink value="#{msg.crear_edificio}" action="adm_edificio.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
             	<rich:panelMenuItem>
-            		<a4j:commandLink value="Administrar Edificios" action="adm_reporte_edificio.jsf?faces-redirect=true" execute="@this"/>
+            		<a4j:commandLink value="#{msg.administrar_edificio}" action="adm_reporte_edificio.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
         	</rich:panelMenuGroup>  

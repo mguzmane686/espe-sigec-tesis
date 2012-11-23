@@ -13,7 +13,7 @@
    	
         <h:form id="frmLugar">
         
-        <rich:panel header="Administrar lugar">
+        <rich:panel header="#{msg.administrar_establecimiento}">
         	<h:panelGroup layout="block" styleClass="roundCorner" id="pnlMenuLugar">
 	       		<h:panelGrid columns="4">
 	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{administrarLugarController.editMode}">
@@ -42,10 +42,10 @@
         	</h:panelGroup>
         </rich:panel>
        	
-        <rich:panel header="Administrar Lugar" id="pnlDatosLugar">
+        <rich:panel header="#{msg.administrar_establecimiento}" id="pnlDatosLugar">
        		<fieldset>
         		<legend>
-        			<h:outputLabel value="#{msg['datos_lugar']}" styleClass="titulo"/>
+        			<h:outputLabel value="#{msg.datos_establecimiento}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
         		        		

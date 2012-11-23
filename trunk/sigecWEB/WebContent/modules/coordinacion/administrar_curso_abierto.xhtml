@@ -75,21 +75,21 @@
 		        		</h:panelGroup>
 	        		</fieldset>
         		</h:panelGroup>
-	        	<rich:collapsiblePanel header="Fecha de curso"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+	        	<rich:collapsiblePanel header="#{msg.etiqueta_fecha_del_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
 	        		<h:panelGrid columns="2"  columnClasses="espacioDetalle">
-	        			<h:outputLabel value="Usuarios inscritos :" style="font-weight:bold;"/>
+	        			<h:outputLabel value="#{msg.etiqueta_usuarios_inscritos} :" style="font-weight:bold;"/>
 	        			<h:outputText value="#{administrarCursoController.numeroAlumnosInscritos}" style="font-weight:bold;"/>
 	        		
-	        			<h:outputLabel value="Fecha inicio :" />
+	        			<h:outputLabel value="#{msg.fecha_inicio}: " />
 	        			<rich:calendar rendered="false" value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaInicio}" datePattern="#{msg['dd_MMM_yyyy']}" disabled="true"/>
 	        			
 	        			<h:outputText value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaInicio}">
         					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
         				</h:outputText>
 			        				
-	        			<h:outputLabel value="Fecha Finalizacion :" />
+	        			<h:outputLabel value="#{msg.fecha_finalizacion}:" />
 	        			<rich:calendar rendered="false" value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaFin}" datePattern="#{msg['dd_MMM_yyyy']}" disabled="true"/>
 	        			<h:outputText value="#{administrarCursoController.cursoPeriodo.periodoAcademico.fechaFin}">
         					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
