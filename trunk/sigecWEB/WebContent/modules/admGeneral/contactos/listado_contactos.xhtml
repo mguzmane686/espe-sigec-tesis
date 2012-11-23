@@ -6,6 +6,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 
 	<h:outputStylesheet library="css" name="textos.css" />    
@@ -32,77 +33,77 @@
 					<h:outputLabel value="" />
 				</legend>
 				<h:panelGroup layout="block" style="width:100%;">
-					
-					<rich:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" var="contacto" rows="15" iterationStatusVar="numRow" style="width:100%;">
+					<h:commandLink>
+			            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
+			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" />  
+			        </h:commandLink>`
+					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow"
+						var="contacto" rows="15" style="width:100%;" paginator="true" >
 						
-						<rich:column style="text-align:center;">
+						<p:column style="text-align:center;">
 							<f:facet name="header">
-								<h:outputLabel value="Numero" />
+								<h:outputLabel value="#{msg.numero}" />
 							</f:facet>
-							<h:outputText value="#{numRow.index+1}" />
-						</rich:column>
-						
-						<rich:column filterValue="#{listadoContactosController.primerApellidoFilter}"
-			                filterExpression="#{fn:containsIgnoreCase(contacto.primerApellido, listadoContactosController.primerApellidoFilter)}">
-							<f:facet name="header">
-								<h:outputLabel value="Apellido" />
-								<h:inputText value="#{listadoContactosController.primerApellidoFilter}" onkeypress="if (event.keyCode == 13) return true;" styleClass="text-uppercase">
-		                            <a4j:ajax event="keyup" render="tblContactos@body, scrContactos" execute="@this scrContactos" onbeforesubmit="if (event.keyCode != 13)  return false;" limitRender="true"/>
-		                        </h:inputText>
-							</f:facet>
-							<a4j:commandLink value="#{contacto.primerApellido.concat(' ').concat(contacto.segundoApellido)}" 
+							<a4j:commandLink value="#{numRow + 1}" 
 								execute="@this" oncomplete="#{rich:component('detailContact')}.show()" render="detailContact">
 								<f:setPropertyActionListener target="#{listadoContactosController.personaSelected}" value="#{contacto}"></f:setPropertyActionListener>
-								</a4j:commandLink>
-						</rich:column>
+							</a4j:commandLink>
+						</p:column>
 						
-						<rich:column>
+						<p:column filterBy="#{contacto.primerApellido}" sortBy="#{contacto.primerApellido}"
+			                filterExpression="contains" footerText="contains">
+							<f:facet name="header">
+								<h:outputLabel value="Apellido" />
+							</f:facet>
+							<h:outputText value="#{contacto.primerApellido} #{contacto.segundoApellido}" />
+						</p:column>
+						
+						<p:column sortBy="#{contacto.primerNombre}" filterBy="#{contacto.primerNombre}"
+							filterExpression="contains" footerText="contains">
 							<f:facet name="header">
 								<h:outputLabel value="Nombre" />
 							</f:facet>
-							<h:outputText value="#{contacto.primerNombre.concat(' ').concat(contacto.segundoNombre)}" />
-						</rich:column>
+							<h:outputText value="#{contacto.primerNombre} #{contacto.segundoNombre}" />
+						</p:column>
 						
-						<rich:column>
+						<p:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
 							</f:facet>
 							<h:outputText value="#{contacto.telefonoConvencional}" />
-						</rich:column>
+						</p:column>
 						
-						<rich:column>
+						<p:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.celular}" />
 							</f:facet>
 							<h:outputText value="#{contacto.telefonoCelular}" />
-						</rich:column>
+						</p:column>
 						
-						<rich:column>
+						<p:column filterBy="#{contacto.mail}" filterMatchMode="contains">
 							<f:facet name="header">
-								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+								<h:outputLabel value="#{msg.e_mail}" />
 							</f:facet>
 							<h:outputText value="#{contacto.mail}" />
-						</rich:column>
+						</p:column>
 						
-						<rich:column>
+						<p:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.etiqueta_referencia}" />
 							</f:facet>
 							<h:outputText value="#{contacto.referencia}" />
-						</rich:column>
-					</rich:dataTable>
+						</p:column>
+					</p:dataTable>
 					
-					<rich:dataScroller id="scrContactos" for="tblContactos" fastControls="hide" renderIfSinglePage="false" 
-						maxPages="10" style="width:100%; text-align:center;" >
-					</rich:dataScroller>
 				</h:panelGroup>
 			</fieldset>
 		</rich:panel>
 		
 		<rich:popupPanel header="Contacto" id="detailContact" domElementAttachment="parent" autosized="true" onmaskclick="#{rich:component('detailContact')}.hide()">
 			<f:facet name="controls">
-				<h:outputLink value="#" onclick="#{rich:component('detailContact')}.hide(); return false;">X
-				</h:outputLink>
+				<h:outputLink value="#" onclick="#{rich:component('detailContact')}.hide(); return false;">
+	                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
+	            </h:outputLink>
 			</f:facet>
 						
 			<h:panelGrid columns="2" id="editGrid" styleClass="espacioDetalle">

@@ -46,27 +46,29 @@
 
 		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
 			
-			<rich:collapsiblePanel header="Criterios de busqueda"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+			<rich:collapsiblePanel header="#{msg.criterios_busqueda}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
 				<h:panelGroup>
 					<h:panelGrid columns="2">
 						<h:outputLabel value="Buscar por :" styleClass="label-bold"/>
 						<h:selectOneRadio value="#{creacionUsuarioController.filtroBusqueda}" id="somFiltroBusqueda">
-							<f:selectItem itemLabel="Usuario :" itemValue="usr"/>
+							<f:selectItem itemLabel="Usuario" itemValue="usr"/>
 							<f:selectItem itemLabel="#{msg.cedula}" itemValue="ced"/>
-							<f:selectItem itemLabel="Primer apellido :" itemValue="ape"/>
+							<f:selectItem itemLabel="Primer apellido" itemValue="ape"/>
 						</h:selectOneRadio>
 					</h:panelGrid>
 					<h:panelGrid columns="2" style="margin-left: 80px;">
-						<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda" />
-						<a4j:commandLink value="Buscar" action="#{creacionUsuarioController.btnFindUsr}"  
-							execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas"></a4j:commandLink>
+						<h:inputText value="#{creacionUsuarioController.txtFiltroBusqueda}" id="txtFiltroBusqueda" required="true" requiredMessage="El campo es requerido"/>
+						<a4j:commandLink action="#{creacionUsuarioController.btnFindUsr}"   
+							execute="somFiltroBusqueda txtFiltroBusqueda" render="tblPersonas">
+							<h:graphicImage library="images/button"  name="search_button.png" style="border:0px;"/>
+						</a4j:commandLink>
 					</h:panelGrid>
 				</h:panelGroup>
 			</rich:collapsiblePanel>
 			
-			<rich:collapsiblePanel header="Criterios de busqueda"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+			<rich:collapsiblePanel header="#{msg.criterios_busqueda}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<h:panelGroup id="tblPersonas">
 					<rich:dataTable value="#{creacionUsuarioController.lstPersonas}" var="lstPersona" style="width:100%" 
@@ -100,7 +102,7 @@
         
 	        <f:facet name="controls">
 	            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;">
-	                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
+	                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
 	            </h:outputLink>
 	        </f:facet>
 	        <h:panelGroup>
