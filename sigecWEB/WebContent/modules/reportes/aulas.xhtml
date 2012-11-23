@@ -20,8 +20,8 @@
         		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        			<h:commandLink>
-				            <p:graphicImage value="/resources/images/button/pdf.png" />  
-				            <p:dataExporter type="xls" target="tblAulas" fileName="cars" />  
+				            <p:graphicImage value="/resources/images/button/pdf.png" style="border:0px;"/>  
+				            <p:dataExporter type="xls" target="tblAulas" fileName="aulas" />  
 				        </h:commandLink>`
 				        
 		        		<p:dataTable id="tblAulas" style="width:100%" value="#{reporteAulaController.lstAulas}" var="aula" rows="15" paginator="true"  
