@@ -5,7 +5,6 @@
 	xmlns:f="http://java.sun.com/jsf/core" 
 	xmlns:a4j="http://richfaces.org/a4j" 
 	xmlns:rich="http://richfaces.org/rich" 
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
 
 	<h:outputStylesheet library="css" name="textos.css"></h:outputStylesheet>
@@ -58,11 +57,6 @@
 						<a4j:commandButton value="Atras" immediate="true" actionListener="#{presupuestoController.btnAtras}" image="/resources/images/go-back.png" />
 						<h:outputLabel value="Atras" />
 					</h:panelGrid>
-					
-					<h:commandButton value="Print" type="button" icon="ui-icon-print">  
-				        <p:printer target="datosPresu" />  
-				    </h:commandButton>
-					 
 				</h:panelGrid>
 			</h:panelGroup>
 		</rich:panel>

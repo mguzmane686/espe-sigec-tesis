@@ -49,13 +49,13 @@
         			<h:outputLabel value="#{msg['datos_edificio']}" styleClass="titulo"/>
         		</legend>
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="Lugar :" />
+        			<h:outputLabel value="#{msg.etiqueta_establecimiento}: " />
         			<h:outputText value="#{administrarEdificioController.edificio.lugarCurso.nombre}" />
         			
-        			<h:outputLabel value="#{msg['etiqueta_codigo']}:" />
+        			<h:outputLabel value="#{msg['etiqueta_codigo']}: " />
         			<h:outputText value="#{administrarEdificioController.edificio.idEdificio}" />   			
         			
-        			<h:outputLabel value="#{msg['nombre']}:"/>
+        			<h:outputLabel value="#{msg['nombre']}: "/>
         			<h:inputText rendered="#{administrarEdificioController.editMode}" value="#{administrarEdificioController.edificio.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
         			<h:outputText value="#{administrarEdificioController.edificio.nombre}" rendered="#{!administrarEdificioController.editMode}" />
         			

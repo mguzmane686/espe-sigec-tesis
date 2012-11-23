@@ -28,7 +28,7 @@
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
         	
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="Lugar :" />
+        			<h:outputLabel value="#{msg.etiqueta_establecimiento}: " />
         			<rich:select value="#{edificioController.edificio.lugarCurso.idLugar}">
         				<f:selectItems value="#{edificioController.itemsLugares}"/>
         			</rich:select>

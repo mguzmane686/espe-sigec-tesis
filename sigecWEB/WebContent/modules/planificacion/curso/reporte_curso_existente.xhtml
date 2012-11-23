@@ -26,16 +26,16 @@
 		        		<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoController.lstCursos}" var="curso" rows="10" 
 		        			rendered="#{!empty reporteCursoController.lstCursos}" rowClasses="even-row, odd-row">
 		        			<f:facet name="header">
-		        				<h:outputLabel value="Cursos" />
+		        				<h:outputLabel value="#{msg.etiqueta_curso}" />
 		        			</f:facet>
 		        			
 		        			<rich:column>
 		        				<a4j:commandLink rendered="#{!curso.showCursoPeriodoCollection}" action="#{reporteCursoController.btnExpandContractCurso(curso, true)}" render="tblCursos">
-		        					<h:graphicImage library="images/button" name="expand.png"/>
+		        					<h:graphicImage library="images/button" name="expand.png" style="border:0px;"/>
 		        				</a4j:commandLink>
 		        				
 		        				<a4j:commandLink rendered="#{curso.showCursoPeriodoCollection}" action="#{reporteCursoController.btnExpandContractCurso(curso, false)}" render="tblCursos">
-		        					<h:graphicImage library="images/button" name="contract.png"/>
+		        					<h:graphicImage library="images/button" name="contract.png" style="border:0px;"/>
 		        				</a4j:commandLink>
 		        			</rich:column>
 		        			
@@ -70,7 +70,7 @@
 		        						
 		        						<h:panelGroup layout="block" style="float:right">
 		        							 <a4j:commandLink render="table" action="#{reporteCursoController.sortByNames}" >
-		        							 	<h:graphicImage library="images/button" name="sortArrow.png" height="12"/>
+		        							 	<h:graphicImage library="images/button" name="sortArrow.png" height="12" style="border:0px;"/>
 		        							 </a4j:commandLink>
 		        						</h:panelGroup>
 	        						</h:panelGrid>	
