@@ -126,6 +126,7 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 		userTransaction.begin();
 		try {
 			personaFacadeLocal.edit(persona);
+			usuarioFacadeLocal.edit(persona.getUsuario());
 			for (Perfil perfil : lstPerfiles) {
 				UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil();
 				usuarioPerfilTMP.setEstado("1");
