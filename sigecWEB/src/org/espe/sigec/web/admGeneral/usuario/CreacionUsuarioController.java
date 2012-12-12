@@ -111,7 +111,7 @@ public class CreacionUsuarioController implements Serializable{
 	}
 	
 	public void btnFindUsr(){
-		setLstPersonas(admGeneralServicio.findPersonByCriteria(getFiltroBusqueda(), getTxtFiltroBusqueda()));
+		setLstPersonas(admGeneralServicio.findPersonByCriteria(getFiltroBusqueda(), getTxtFiltroBusqueda().trim()));
 	}
 	
 	public UsuarioPerfil getUsuarioPerfil() {
