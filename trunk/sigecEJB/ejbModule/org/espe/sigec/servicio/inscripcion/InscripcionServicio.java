@@ -8,6 +8,7 @@ import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
+import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
 /**
  * @author roberto
  *
@@ -19,4 +20,6 @@ public interface InscripcionServicio {
 	void inscripcionEstudianteCurso(Persona persona, CursoPeriodo cursoPeriodo) throws Exception;
 	Collection<CursoPeriodo> cargarCursoLanzado();
 	Estudiante buscarEstudinateByCedula(String cedula);
+	
+	CursoEstudianteFacadeLocal getCursoEstudianteFacadeLocal();
 }
