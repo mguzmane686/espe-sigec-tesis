@@ -13,6 +13,7 @@ import org.espe.sigec.model.sessionBeans.ContratoProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.InvitacionDocenteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PlantillaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.SgctSgSecuenciaFacadeLocal;
+import org.espe.sigec.utils.SigecConstantes;
 
 public class DocumentoServicioImpl implements DocumentoServicio{
 	@EJB
@@ -34,6 +35,7 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 			userTransaction.begin();
 			int secuencial = invitacionDocenteFacadeLocal.count();
 			invitacionDocente.getInvitacionDocentePK().setDocNumInvit("SGCINV"+secuencial);
+			invitacionDocente.setEstado(SigecConstantes.INVITACION_EMITIDA);
 			invitacionDocenteFacadeLocal.create(invitacionDocente);
 			userTransaction.commit();
 		} catch (Exception e) {
