@@ -81,7 +81,7 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 		}else if(criterio.equals("ced")){
 			criteria.add(Restrictions.eq("cedula", valor));
 		}else if(criterio.equals("ape")){
-			criteria.add(Restrictions.like("primerApellido", valor));
+			criteria.add(Restrictions.like("primerApellido", "%"+valor+"%"));
 		}
 		
 		

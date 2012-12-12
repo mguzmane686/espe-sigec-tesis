@@ -157,8 +157,14 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 					
 					estudiante = new Estudiante();
 					estudiante.setPersona(persona);
+					Estudiante estudianteTMP = estudianteFacadeLocal.buscarEstudinateByCedula(persona.getCedula());
+					if(estudianteTMP == null){
+						estudianteFacadeLocal.create(estudiante);
+					}else{
+						estudiante = estudianteTMP;
+					}
 					
-					estudianteFacadeLocal.create(estudiante);
+					
 				}
 			}
 			
@@ -172,6 +178,12 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 				cursoEstudiante.setEstadoPago("DEBE");
 				//ojo
 				cursoEstudiante.setIdPrograma(cursoPeriodo.getProgramaCurso().getProgramaCursoPK().getIdPrograma());
+				
+				CursoEstudiante cursoEstudianteTMP = cursoEstudianteFacadeLocal.find(cursoEstudiante.getCursoEstudiantePK());
+				if(cursoEstudianteTMP != null){
+					throw new Exception("El estudiante ya se encuentra inscrito en ese curso");
+				}
+				
 				cursoEstudianteFacadeLocal.create(cursoEstudiante);
 				
 				if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())) >= cursoPeriodo.getMinimoEstudiantes()){
@@ -193,6 +205,10 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 			}
 		}
 		
+	}
+	@Override
+	public CursoEstudianteFacadeLocal getCursoEstudianteFacadeLocal() {
+		return cursoEstudianteFacadeLocal;
 	}
 	
 }
