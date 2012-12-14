@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	<h:outputStylesheet>
+    		.tamanio{
+    			width:300px !important;
+    		}
+    	</h:outputStylesheet>
+    		
+        <h:form id="frmCurso">
+        	
+        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
+        		
+	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
+					<p:dataTable value="#{invitacionEmitidaController.lstInvitacionDocentes}" var="invitacion" paginator="true" rows="15" rowIndexVar="num_row">
+	        			
+	        			<p:column headerText="Num.">
+	        				 <p:commandLink value="#{num_row+1}" process="@this" oncomplete="detalleInvitacion.show()" update="@form">
+	        				 	<f:setPropertyActionListener target="#{invitacionEmitidaController.invitacionDocenteSelected}" value="#{invitacion}"></f:setPropertyActionListener>
+	        				 </p:commandLink>
+	        			</p:column>
+	        			
+	        			<p:column headerText="#{msg.etiqueta_curso}">
+	        				 <h:outputText value="#{invitacion.cursoPeriodo.curso.nombreCurso}" />
+	        			</p:column>
+	        			
+	        			<p:column headerText="Docente">
+	        				 <h:outputText value="#{invitacion.profesor.persona.primerNombre} #{invitacion.profesor.persona.primerApellido}" />
+	        			</p:column>
+	        		</p:dataTable>
+	        		
+	        	</rich:collapsiblePanel>
+	        	
+	        	<p:dialog widgetVar="detalleInvitacion" modal="true">
+	        		<h:panelGroup layout="block" id="detalleInvitacion">
+	        			<h:outputText value="#{invitacionEmitidaController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" />
+	        		</h:panelGroup>
+	        		
+	        		<p:selectOneMenu>
+	        			<f:selectItem itemLabel="Emitida" itemValue=""/>
+	        			<f:selectItem itemLabel="Aceptada" itemValue=""/>
+	        			<f:selectItem itemLabel="Rechazada" itemValue=""/>
+	        		</p:selectOneMenu>
+	        		<p:commandButton value="Aceptar" oncomplete="detalleInvitacion.hide()"></p:commandButton>
+	        		<p:commandButton value="Cancelar" oncomplete="detalleInvitacion.hide()"></p:commandButton>
+	        	</p:dialog>
+        	</rich:panel>
+        </h:form>
+</ui:composition>

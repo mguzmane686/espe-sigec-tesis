@@ -55,7 +55,7 @@
 						<h:selectOneRadio value="#{creacionUsuarioController.filtroBusqueda}" id="somFiltroBusqueda">
 							<f:selectItem itemLabel="Usuario" itemValue="usr"/>
 							<f:selectItem itemLabel="#{msg.cedula}" itemValue="ced"/>
-							<f:selectItem itemLabel="Primer apellido" itemValue="ape"/>
+							<f:selectItem itemLabel="#{msg.primer_apellido}" itemValue="ape"/>
 						</h:selectOneRadio>
 					</h:panelGrid>
 					<h:panelGrid columns="2" style="margin-left: 80px;">
@@ -72,7 +72,7 @@
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<h:panelGroup id="tblPersonas">
 					<rich:dataTable value="#{creacionUsuarioController.lstPersonas}" var="lstPersona" style="width:100%" 
-						rendered="#{!empty creacionUsuarioController.lstPersonas}">
+						rendered="#{!empty creacionUsuarioController.lstPersonas}" >
 						<rich:column>
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.cedula}" />
