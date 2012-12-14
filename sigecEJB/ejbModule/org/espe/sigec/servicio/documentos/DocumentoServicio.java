@@ -15,4 +15,5 @@ public interface DocumentoServicio {
 	Collection<InvitacionDocente> verificarInivtacionAceptada() throws Exception;
 	
 	void crearContratoDocente(ContratoProfesor contratoProfesor) throws Exception;
+	Collection<InvitacionDocente> findInvitacionesByEstado(String estadoInvitacion) throws Exception;
 }

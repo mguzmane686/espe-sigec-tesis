@@ -28,4 +28,5 @@ public interface InvitacionDocenteFacadeLocal {
     
     Collection<InvitacionDocente> verificarInivtacionDocente(Integer idProfesor) throws Exception;
     Collection<InvitacionDocente> verificarInivtacionAceptada() throws Exception;
+    Collection<InvitacionDocente> findInvitacionesByEstado(String estadoInvitacion) throws Exception;
 }

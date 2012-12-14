@@ -85,4 +85,32 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
 	}
+	
+	
+	@Override
+	public Collection<InvitacionDocente> findInvitacionesByEstado(String estadoInvitacion) throws Exception {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
+		criteria.createAlias("profesor", "profesorA");
+		criteria.setFetchMode("profesorA", FetchMode.JOIN);
+		
+		criteria.createAlias("profesorA.persona", "perProfA");
+		criteria.setFetchMode("perProfA", FetchMode.JOIN);
+		
+		criteria.createAlias("perProfA.usuario", "perUsrA");
+		criteria.setFetchMode("perUsrA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodo", "cursoPeriodoA");
+		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
+		criteria.setFetchMode("cursoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.periodoAcademico", "peridoA");
+		criteria.setFetchMode("peridoA", FetchMode.JOIN);
+		
+		criteria.add(Restrictions.eq("estado", estadoInvitacion));
+		criteria.add(Restrictions.isNull("contratoGenerado"));
+		Collection<InvitacionDocente> lst = criteria.list(); 
+		return lst;
+	}
 }
