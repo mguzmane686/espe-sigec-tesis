@@ -37,7 +37,7 @@
 			            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
 			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" />  
 			        </h:commandLink>`
-					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow"
+					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow" 
 						var="contacto" rows="15" style="width:100%;" paginator="true" >
 						
 						<p:column style="text-align:center;">
@@ -51,8 +51,11 @@
 							</a4j:commandLink>
 						</p:column>
 						
+						<p:column headerText="#{msg.cedula}">
+							<h:outputText value="#{contacto.cedula}" />
+						</p:column>
 						<p:column filterBy="#{contacto.primerApellido}" sortBy="#{contacto.primerApellido}"
-			                filterExpression="contains" footerText="contains">
+			                filterExpression="contains" >
 							<f:facet name="header">
 								<h:outputLabel value="Apellido" />
 							</f:facet>
@@ -60,7 +63,7 @@
 						</p:column>
 						
 						<p:column sortBy="#{contacto.primerNombre}" filterBy="#{contacto.primerNombre}"
-							filterExpression="contains" footerText="contains">
+							filterExpression="contains" >
 							<f:facet name="header">
 								<h:outputLabel value="Nombre" />
 							</f:facet>
@@ -134,6 +137,9 @@
      				<h:inputText value="#{listadoContactosController.personaSelected.primerApellido}" />
      				<h:inputText value="#{listadoContactosController.personaSelected.segundoApellido}" />
      			</h:panelGrid>
+     			
+     			<h:outputLabel value="#{msg.cedula} :" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.cedula}" />
      			
      			<h:outputLabel value="#{msg.direccion} :" />
      			<sigecComp:textField value="#{listadoContactosController.personaSelected.direccion}" editMode="#{listadoContactosController.editContactMode}"/>
