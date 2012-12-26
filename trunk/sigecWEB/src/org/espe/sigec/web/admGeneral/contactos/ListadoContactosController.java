@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.reportes.ReporteGenerico;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author roberto
@@ -28,6 +29,8 @@ public class ListadoContactosController implements Serializable{
 	private Persona personaSelected;
 	private String primerApellidoFilter;
 	private String primerNombreFilter;
+	
+	private boolean editContactMode;
 	@PostConstruct
 	public void cargarContactos(){
 		setLstPersonas(admGeneralServicio.cargarContactos());
@@ -36,6 +39,25 @@ public class ListadoContactosController implements Serializable{
 	
 	public ListadoContactosController() {
 		
+	}
+	
+	public void btnEditarContacto(){
+		setEditContactMode(Boolean.TRUE);
+	}
+	
+	public void btnCancelEditarContacto(){
+		setEditContactMode(Boolean.FALSE);
+	}
+	
+	public void btnGuardarContacto(){
+		try {
+			admGeneralServicio.editPersona(getPersonaSelected());
+			setEditContactMode(Boolean.FALSE);
+			FacesUtils.addInfoMessage("Contacto actualizado");
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage("Ocurrio un error al actualizar el contacto");
+			e.printStackTrace();
+		}
 	}
 
 	public Collection<Persona> getLstPersonas() {
@@ -73,6 +95,14 @@ public class ListadoContactosController implements Serializable{
 	public void btnPDF(ActionEvent e){
 		ReporteGenerico reporteGenerico = new ReporteGenerico();
 		reporteGenerico.generarReporteSimple("contactos",getLstPersonas());
+	}
+
+	public boolean isEditContactMode() {
+		return editContactMode;
+	}
+
+	public void setEditContactMode(boolean editContactMode) {
+		this.editContactMode = editContactMode;
 	}
 	
 }

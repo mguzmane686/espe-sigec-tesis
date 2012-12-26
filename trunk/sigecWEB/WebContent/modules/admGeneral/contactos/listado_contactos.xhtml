@@ -47,6 +47,7 @@
 							<a4j:commandLink value="#{numRow + 1}" 
 								execute="@this" oncomplete="#{rich:component('detailContact')}.show()" render="detailContact">
 								<f:setPropertyActionListener target="#{listadoContactosController.personaSelected}" value="#{contacto}"></f:setPropertyActionListener>
+								<f:setPropertyActionListener target="#{listadoContactosController.editContactMode}" value="false"></f:setPropertyActionListener>
 							</a4j:commandLink>
 						</p:column>
 						
@@ -99,37 +100,55 @@
 			</fieldset>
 		</rich:panel>
 		
-		<rich:popupPanel header="Contacto" id="detailContact" domElementAttachment="parent" autosized="true" onmaskclick="#{rich:component('detailContact')}.hide()">
+		<rich:popupPanel header="Contacto" id="detailContact" domElementAttachment="form" autosized="true" onmaskclick="#{rich:component('detailContact')}.hide()">
 			<f:facet name="controls">
 				<h:outputLink value="#" onclick="#{rich:component('detailContact')}.hide(); return false;">
 	                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
 	            </h:outputLink>
 			</f:facet>
-						
+			
+			<h:panelGrid columns="2" id="btnPopupSection">
+				<a4j:commandLink value="Editar" action="#{listadoContactosController.btnEditarContacto}" 
+					rendered="#{!listadoContactosController.editContactMode}" execute="@this" render="btnPopupSection editGrid"></a4j:commandLink>
+				<a4j:commandLink value="Guardar" action="#{listadoContactosController.btnGuardarContacto}" execute="@this editGrid" render="btnPopupSection editGrid"
+					rendered="#{listadoContactosController.editContactMode}"></a4j:commandLink>
+				<a4j:commandLink value="Cancelar" action="#{listadoContactosController.btnCancelEditarContacto}" execute="@this" render="btnPopupSection editGrid" 
+					rendered="#{listadoContactosController.editContactMode}" ></a4j:commandLink>
+			</h:panelGrid>
 			<h:panelGrid columns="2" id="editGrid" styleClass="espacioDetalle">
 				<h:outputLabel value="#{msg.etiqueta_profesion} :" />
      			<h:outputText value="#{listadoContactosController.personaSelected.profesion}" />
      			
 				<h:outputLabel value="#{msg.nombre} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.primerNombre.concat(' ').concat(listadoContactosController.personaSelected.segundoNombre)}" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.primerNombre.concat(' ').concat(listadoContactosController.personaSelected.segundoNombre)}" 
+     				rendered="#{!listadoContactosController.editContactMode}"/>
+     			<h:panelGrid columns="2" rendered="#{listadoContactosController.editContactMode}">
+     				<h:inputText value="#{listadoContactosController.personaSelected.primerNombre}" />
+     				<h:inputText value="#{listadoContactosController.personaSelected.segundoNombre}" />
+     			</h:panelGrid>
      			
      			<h:outputLabel value="#{msg.apellidos} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.primerApellido.concat(' ').concat(listadoContactosController.personaSelected.segundoApellido)}" />
+     			<h:outputText value="#{listadoContactosController.personaSelected.primerApellido.concat(' ').concat(listadoContactosController.personaSelected.segundoApellido)}" 
+     				rendered="#{!listadoContactosController.editContactMode}"/>
+     			<h:panelGrid columns="2" rendered="#{listadoContactosController.editContactMode}">
+     				<h:inputText value="#{listadoContactosController.personaSelected.primerApellido}" />
+     				<h:inputText value="#{listadoContactosController.personaSelected.segundoApellido}" />
+     			</h:panelGrid>
      			
      			<h:outputLabel value="#{msg.direccion} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.direccion}" />
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.direccion}" editMode="#{listadoContactosController.editContactMode}"/>
      			
      			<h:outputLabel value="#{msg.e_mail} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.mail}" />
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.mail}" editMode="#{listadoContactosController.editContactMode}"/>
      			
      			<h:outputLabel value="#{msg.etiqueta_telefono_convencional} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.telefonoConvencional}" />
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.telefonoConvencional}" editMode="#{listadoContactosController.editContactMode}"/>
      			
      			<h:outputLabel value="#{msg.celular} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.telefonoCelular}" />
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.telefonoCelular}" editMode="#{listadoContactosController.editContactMode}"/>
      			
      			<h:outputLabel value="#{msg.etiqueta_referencia} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.referencia}" />
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.referencia}" editMode="#{listadoContactosController.editContactMode}"/>
 			</h:panelGrid>
 		</rich:popupPanel>
 		
