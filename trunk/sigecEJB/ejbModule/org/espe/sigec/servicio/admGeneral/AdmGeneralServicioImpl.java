@@ -294,4 +294,10 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		return personaFacadeLocal.findPersonByCriteria(creiterio, valor);
 	}
 
+	@Override
+	public void editPersona(Persona persona) throws Exception {
+		personaFacadeLocal.edit(persona);
+		
+	}
+
 }
