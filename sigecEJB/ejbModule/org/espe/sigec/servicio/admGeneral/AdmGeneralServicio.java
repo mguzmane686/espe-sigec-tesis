@@ -77,5 +77,5 @@ public interface AdmGeneralServicio {
 	
 	Collection<Persona> findPersonByCriteria(String creiterio, String valor);
 	
-	
+	void editPersona(Persona persona) throws Exception;
 }
