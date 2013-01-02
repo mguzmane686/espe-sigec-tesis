@@ -99,10 +99,10 @@
 	        	</rich:collapsiblePanel>
         	</rich:panel>
         	
-        	<rich:popupPanel id="rppGenerarContrato" domElementAttachment="form" header="Generar contrato" autosized="true">
+        	<rich:popupPanel id="rppGenerarContrato" domElementAttachment="form" header="Generar contrato?" autosized="true">
         		<f:facet name="controls">
 		            <h:outputLink value="#" onclick="#{rich:component('rppGenerarContrato')}.hide(); return false;">
-		                <h:graphicImage library="org.richfaces" name="close_act.gif"/>
+		                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
 		            </h:outputLink>
 		        </f:facet>
 		        <rich:panel>
@@ -119,9 +119,9 @@
 			        	</h:panelGroup>
 		        	</center>
 		        	<h:panelGrid columns="2" style="margin:auto;">
-		        		<a4j:commandLink value="Aceptar" execute="@this" action="#{invitacionesAceptadasController.btnAecptarGenerarContrato}"
+		        		<a4j:commandButton value="Aceptar" execute="@this" action="#{invitacionesAceptadasController.btnAecptarGenerarContrato}"
 		        			oncomplete="#{rich:component('rppGenerarContrato')}.hide();" render="pnlInvitacionDocente"/>
-		        		<a4j:commandLink value="Cancelar" onclick="#{rich:component('rppGenerarContrato')}.hide(); return false;"></a4j:commandLink>
+		        		<a4j:commandButton value="Cancelar" onclick="#{rich:component('rppGenerarContrato')}.hide(); return false;" />
 		        	</h:panelGrid>
 		        	
 		        </rich:panel>
