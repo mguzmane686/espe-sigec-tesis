@@ -78,7 +78,7 @@ public class InscripcionController implements Serializable{
 			inscripcionServicio.inscripcionEstudianteCurso(getPersona(), getCursoPeriodo());
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha inscrito al curso", null));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ocurrio un error", null));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getLocalizedMessage(), null));
 			e.printStackTrace();
 		}
 		
