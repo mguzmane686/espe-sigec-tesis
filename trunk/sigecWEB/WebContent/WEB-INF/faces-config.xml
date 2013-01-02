@@ -8,6 +8,11 @@
 			<base-name>org.espe.sigec.web.utils.sigec_msg</base-name>
 			<var>msg</var>
 		</resource-bundle>
+		
+		<resource-bundle>
+			<base-name>org.espe.sigec.common.resource.sigec_client_messages</base-name>
+			<var>msg_client</var>
+		</resource-bundle>
 	</application>
 	<lifecycle>
 		<phase-listener>org.espe.sigec.web.utils.SigecLifeCycle</phase-listener>
