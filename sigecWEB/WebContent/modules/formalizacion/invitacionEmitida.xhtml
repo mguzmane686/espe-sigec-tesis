@@ -77,10 +77,15 @@
 			        		</p:selectOneMenu>
 		        		</h:panelGrid>
 	        		</h:panelGrid>
-	        		<p:commandButton value="Aceptar" oncomplete="detalleInvitacion.hide()" 
-	        			action="#{invitacionEmitidaController.btnAceptarCambioEstadoInv}" process="@this pgChgEstadoInv" update="tblInvitaciones"/>
-	        		<p:commandButton value="Cancelar" oncomplete="detalleInvitacion.hide()" 
-	        			action="#{invitacionEmitidaController.btnCancelarCambioEstadoInv}" process="@this" />
+	        		
+	        		<h:panelGroup>
+	        			<h:panelGrid columns="2" style="margin:auto;">
+			        		<p:commandButton value="Aceptar" oncomplete="detalleInvitacion.hide()" 
+			        			action="#{invitacionEmitidaController.btnAceptarCambioEstadoInv}" process="@this pgChgEstadoInv" update="tblInvitaciones"/>
+			        		<p:commandButton value="Cancelar" oncomplete="detalleInvitacion.hide()" 
+			        			action="#{invitacionEmitidaController.btnCancelarCambioEstadoInv}" process="@this" />
+		        		</h:panelGrid>
+	        		</h:panelGroup> 
 	        	</p:dialog>
         	</rich:panel>
         </h:form>
