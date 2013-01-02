@@ -20,16 +20,38 @@ public class InvitacionEmitidaController implements Serializable{
 	private Collection<InvitacionDocente> lstInvitacionDocentes;
 	private InvitacionDocente invitacionDocenteSelected;
 	
+	private String estadoInvFilter;
 	@Inject
 	private DocumentoServicio documentoServicio;
 	
 	@PostConstruct
 	public void cargarInvitacionesEmitidasNoRespondidas(){
 		try {
-			setLstInvitacionDocentes(documentoServicio.findInvitacionesByEstado(SigecConstantes.INVITACION_EMITIDA));
+			setEstadoInvFilter("ALL");
+			setLstInvitacionDocentes(documentoServicio.findInvitacionesByEstado(getEstadoInvFilter()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void btnBuscarInvitacion(){
+		try {
+			setLstInvitacionDocentes(documentoServicio.findInvitacionesByEstado(getEstadoInvFilter()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void btnAceptarCambioEstadoInv(){
+		try {
+			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void btnCancelarCambioEstadoInv(){
+		setInvitacionDocenteSelected(null);
+		
 	}
 
 	public void btnActualizarEstadoInvitacion(ActionEvent e){
@@ -52,6 +74,14 @@ public class InvitacionEmitidaController implements Serializable{
 	public void setInvitacionDocenteSelected(
 			InvitacionDocente invitacionDocenteSelected) {
 		this.invitacionDocenteSelected = invitacionDocenteSelected;
+	}
+
+	public String getEstadoInvFilter() {
+		return estadoInvFilter;
+	}
+
+	public void setEstadoInvFilter(String estadoInvFilter) {
+		this.estadoInvFilter = estadoInvFilter;
 	}
 	
 }
