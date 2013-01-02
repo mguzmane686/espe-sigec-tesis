@@ -54,6 +54,7 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 		
 		criteria.add(Restrictions.eq("perUsrA.idUsuario", idProfesor));
 		criteria.add(Restrictions.eq("estado", SigecConstantes.INVITACION_EMITIDA));
+		@SuppressWarnings("unchecked")
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
 	}
@@ -82,6 +83,7 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 		
 		criteria.add(Restrictions.eq("estado", SigecConstantes.INVITACION_ACEPTADA));
 		criteria.add(Restrictions.isNull("contratoGenerado"));
+		@SuppressWarnings("unchecked")
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
 	}
@@ -108,8 +110,13 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 		criteria.createAlias("cursoPeriodoA.periodoAcademico", "peridoA");
 		criteria.setFetchMode("peridoA", FetchMode.JOIN);
 		
-		criteria.add(Restrictions.eq("estado", estadoInvitacion));
+		
+		if(!estadoInvitacion.equals("ALL")){
+			criteria.add(Restrictions.eq("estado", estadoInvitacion));
+		}
+		
 		criteria.add(Restrictions.isNull("contratoGenerado"));
+		@SuppressWarnings("unchecked")
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
 	}
