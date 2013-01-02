@@ -4,7 +4,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich">
+      xmlns:a4j="http://richfaces.org/a4j" xmlns:rich="http://richfaces.org/rich"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -100,9 +101,15 @@
 
 	<a4j:status onstart="#{rich:component('statusPanel')}.show();" onstop="#{rich:component('statusPanel')}.hide();" />
     
-    <rich:popupPanel id="statusPanel" autosized="true">
+    <rich:popupPanel id="statusPanel" autosized="true" header="#{msg.status_procesando}">
 		<h:graphicImage library="images" name="ajax_status.gif" />
 	</rich:popupPanel>
+	
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+	<p:dialog modal="true" widgetVar="statusDialog" header="#{msg.status_procesando}" draggable="false" closable="false">
+		<h:graphicImage library="images" name="ajax_status.gif" />
+	</p:dialog> 
+
     </h:body>
 
 </html>
