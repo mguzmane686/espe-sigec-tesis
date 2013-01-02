@@ -106,15 +106,16 @@
 	                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
 	            </h:outputLink>
 			</f:facet>
-			
-			<h:panelGrid columns="2" id="btnPopupSection">
-				<a4j:commandLink value="Editar" action="#{listadoContactosController.btnEditarContacto}" 
-					rendered="#{!listadoContactosController.editContactMode}" execute="@this" render="btnPopupSection editGrid"></a4j:commandLink>
-				<a4j:commandLink value="Guardar" action="#{listadoContactosController.btnGuardarContacto}" execute="@this editGrid" render="btnPopupSection editGrid"
-					rendered="#{listadoContactosController.editContactMode}"></a4j:commandLink>
-				<a4j:commandLink value="Cancelar" action="#{listadoContactosController.btnCancelEditarContacto}" execute="@this" render="btnPopupSection editGrid" 
-					rendered="#{listadoContactosController.editContactMode}" ></a4j:commandLink>
-			</h:panelGrid>
+			<h:panelGroup layout="block" style="width:100%">
+				<h:panelGrid columns="2" id="btnPopupSection" style="margin:auto;">
+					<a4j:commandLink value="Editar" action="#{listadoContactosController.btnEditarContacto}" 
+						rendered="#{!listadoContactosController.editContactMode}" execute="@this" render="btnPopupSection editGrid"></a4j:commandLink>
+					<a4j:commandLink value="Guardar" action="#{listadoContactosController.btnGuardarContacto}" execute="@this editGrid" render="btnPopupSection editGrid"
+						rendered="#{listadoContactosController.editContactMode}"></a4j:commandLink>
+					<a4j:commandLink value="Cancelar" action="#{listadoContactosController.btnCancelEditarContacto}" execute="@this" render="btnPopupSection editGrid" 
+						rendered="#{listadoContactosController.editContactMode}" ></a4j:commandLink>
+				</h:panelGrid>
+			</h:panelGroup>
 			<h:panelGrid columns="2" id="editGrid" styleClass="espacioDetalle">
 				<h:outputLabel value="#{msg.etiqueta_profesion} :" />
      			<h:outputText value="#{listadoContactosController.personaSelected.profesion}" />
