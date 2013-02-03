@@ -12,11 +12,12 @@
 <composite:interface>
 	<composite:attribute name="editMode" default="false"/>
 	<composite:attribute name="value" required="true"/>
+	<composite:attribute name="required" default="false"/>
 </composite:interface>
 <composite:implementation>
 	<div id="#{cc.clientId}">
 		<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
-		<h:inputText value="#{cc.attrs.value}" rendered="#{cc.attrs.editMode}"/>
+		<h:inputText value="#{cc.attrs.value}" rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}"/>
 	</div>
 </composite:implementation>
 </body>
