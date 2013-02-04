@@ -157,11 +157,7 @@ body {
 	font-size:10px;
 	color: #FFFFFF;
 }
-#layer03_holder #center input {
-	background-color:#454544;
-	border:solid 1px #d2d0b5;
-	color: #000000;
-}
+
 #layer03_holder #center #button {
 	margin-top:5px;
 	background-color: #CCCCCC;

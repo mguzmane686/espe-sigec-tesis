@@ -4,7 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:composite="http://java.sun.com/jsf/composite"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:a4j="http://richfaces.org/a4j"
+	  xmlns:rich="http://richfaces.org/rich">
 <head>
 <title>Not present in rendered output</title>
 </head>
@@ -13,11 +15,42 @@
 	<composite:attribute name="editMode" default="false"/>
 	<composite:attribute name="value" required="true"/>
 	<composite:attribute name="required" default="false"/>
+	<composite:valueHolder name="Input"/>
+	<composite:attribute name="label"/>
 </composite:interface>
 <composite:implementation>
+	<style>
+		.rmsg-parent-cmp{
+			width: 20px !important;
+			display: block;
+		}
+		
+		.rmsg-parent-cmp .rf-msg-det {
+            visibility: hidden;
+            height: 14px !important ;
+        }
+        
+		.rmsg-parent-cmp .rf-msg-err{
+			background-image: url('#{resource['images:circle-alert.png']}') !important;
+			width: 6px !important;
+			height: 14px !important ;
+		}
+		
+		.cajaRequerida{
+			background-color:#FBEFFB !important;
+			background-image: none !important;
+		}
+	</style>
 	<div id="#{cc.clientId}">
-		<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
-		<h:inputText value="#{cc.attrs.value}" rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}"/>
+		<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+			<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
+			<h:inputText id="Input" value="#{cc.attrs.value}" styleClass="#{(cc.attrs.required == 'true') ? 'cajaRequerida' : '' }" 
+				rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.label} es obligatorio"/>
+			<rich:message for="Input" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
+				<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
+			</rich:message>
+			
+		</h:panelGrid>
 	</div>
 </composite:implementation>
 </body>
