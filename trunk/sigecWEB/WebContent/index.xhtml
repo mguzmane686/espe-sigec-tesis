@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -12,14 +12,6 @@
 		<ui:define name="title">Login</ui:define>
 
 		<ui:define name="body">
-		<script type="text/javascript">
-		//<![CDATA[
-		A4J.AJAX.onError = function(req, status, message) {
-			alert('sd');
-		        *window.location.reload();*
-		}
-		//]]>
-		</script>
 				
 			<h:outputStylesheet library="css" name="stylelog.css"/>
 			
@@ -51,7 +43,7 @@
 									<td><h:panelGrid columns="2">
 											<h:outputLabel value="Usuario" />
 											<h:inputText value="#{loginController.usuario.identificador}" required="true" id="textfield" size="30" requiredMessage="Campo usuario requerido"/>
-	
+											
 											<h:outputLabel value="Clave" />
 											<h:inputSecret value="#{loginController.usuario.clave}" required="true" id="textfield2" style="margin-top:5px;" size="30" requiredMessage="Campo clave requerido"/>
 										</h:panelGrid> 
@@ -72,7 +64,7 @@
 						<h:panelGroup layout="block" id="left"/>
 							<h:panelGroup layout="block" id="center" rendered="true">
 								<h:outputLabel value="Si no tiene una cuenta creela" rendered="false"/>
-								<a4j:commandLink value="&nbsp; aqui" actionListener="#{loginController.btnCreateAccount}" immediate="true" rendered="false"></a4j:commandLink> 
+								<a4j:commandLink value=" aqui" actionListener="#{loginController.btnCreateAccount}" immediate="true" rendered="false"></a4j:commandLink> 
 							</h:panelGroup>
 							
 							

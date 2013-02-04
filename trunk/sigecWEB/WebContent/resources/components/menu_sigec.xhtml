@@ -24,7 +24,7 @@
        topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc">
        
        <rich:panelMenuGroup id="pmgAdmGeneral" label="#{msg['etiqueta_adm_general']}" rendered="#{fn:contains(homeSessionController.idPerfiles,'ADM')}" 
-       		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+       		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true" style="overflow-y:auto; max-height:400px;">
        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneral"/>
         	
         	<rich:panelMenuGroup id="pmgAdmGeneralUsuario" label="Usuarios" rendered="#{fn:contains(homeSessionController.idPerfiles,'ADM')}"

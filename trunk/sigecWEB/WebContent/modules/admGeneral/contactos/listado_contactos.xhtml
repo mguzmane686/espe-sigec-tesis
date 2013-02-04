@@ -23,6 +23,8 @@
    			text-align:center;
    			font-weight: bold;
    		}
+   		
+   		
    	</h:outputStylesheet>
    	
 	<h:form id="frmContactos">
@@ -106,16 +108,7 @@
 	                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
 	            </h:outputLink>
 			</f:facet>
-			<h:panelGroup layout="block" style="width:100%">
-				<h:panelGrid columns="2" id="btnPopupSection" style="margin:auto;">
-					<a4j:commandLink value="Editar" action="#{listadoContactosController.btnEditarContacto}" 
-						rendered="#{!listadoContactosController.editContactMode}" execute="@this" render="btnPopupSection editGrid"></a4j:commandLink>
-					<a4j:commandLink value="Guardar" action="#{listadoContactosController.btnGuardarContacto}" execute="@this editGrid" render="btnPopupSection editGrid"
-						rendered="#{listadoContactosController.editContactMode}"></a4j:commandLink>
-					<a4j:commandLink value="Cancelar" action="#{listadoContactosController.btnCancelEditarContacto}" execute="@this" render="btnPopupSection editGrid" 
-						rendered="#{listadoContactosController.editContactMode}" ></a4j:commandLink>
-				</h:panelGrid>
-			</h:panelGroup>
+			<rich:panel>
 			<h:panelGrid columns="2" id="editGrid" styleClass="espacioDetalle">
 				<h:outputLabel value="#{msg.etiqueta_profesion} :" />
      			<h:outputText value="#{listadoContactosController.personaSelected.profesion}" />
@@ -124,7 +117,7 @@
      			<h:outputText value="#{listadoContactosController.personaSelected.primerNombre.concat(' ').concat(listadoContactosController.personaSelected.segundoNombre)}" 
      				rendered="#{!listadoContactosController.editContactMode}"/>
      			<h:panelGrid columns="2" rendered="#{listadoContactosController.editContactMode}">
-     				<h:inputText value="#{listadoContactosController.personaSelected.primerNombre}" />
+     				<sigecComp:textField value="#{listadoContactosController.personaSelected.primerNombre}" editMode="true" required="true" label="#{msg.nombre}"/>
      				<h:inputText value="#{listadoContactosController.personaSelected.segundoNombre}" />
      			</h:panelGrid>
      			
@@ -132,15 +125,15 @@
      			<h:outputText value="#{listadoContactosController.personaSelected.primerApellido.concat(' ').concat(listadoContactosController.personaSelected.segundoApellido)}" 
      				rendered="#{!listadoContactosController.editContactMode}"/>
      			<h:panelGrid columns="2" rendered="#{listadoContactosController.editContactMode}">
-     				<h:inputText value="#{listadoContactosController.personaSelected.primerApellido}" />
-     				<h:inputText value="#{listadoContactosController.personaSelected.segundoApellido}" />
+     				<sigecComp:textField value="#{listadoContactosController.personaSelected.primerApellido}" editMode="true" required="true" label="#{msg.apellidos}"/>
+     				<sigecComp:textField value="#{listadoContactosController.personaSelected.segundoApellido}" editMode="true" required="false" label="#{msg.apellidos}"/>
      			</h:panelGrid>
      			
      			<h:outputLabel value="#{msg.cedula} :" />
      			<h:outputText value="#{listadoContactosController.personaSelected.cedula}" />
      			
      			<h:outputLabel value="#{msg.direccion} :" />
-     			<sigecComp:textField value="#{listadoContactosController.personaSelected.direccion}" editMode="#{listadoContactosController.editContactMode}"/>
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.direccion}" editMode="#{listadoContactosController.editContactMode}" />
      			
      			<h:outputLabel value="#{msg.e_mail} :" />
      			<sigecComp:textField value="#{listadoContactosController.personaSelected.mail}" editMode="#{listadoContactosController.editContactMode}"/>
@@ -154,6 +147,18 @@
      			<h:outputLabel value="#{msg.etiqueta_referencia} :" />
      			<sigecComp:textField value="#{listadoContactosController.personaSelected.referencia}" editMode="#{listadoContactosController.editContactMode}"/>
 			</h:panelGrid>
+			</rich:panel>
+			<h:panelGroup layout="block" style="width:100%" styleClass="rf-pp-hdr">
+				
+				<h:panelGrid columns="2" id="btnPopupSection" style="margin:auto;">
+					<a4j:commandLink value="Editar" action="#{listadoContactosController.btnEditarContacto}" styleClass="buttonCss" 
+						rendered="#{!listadoContactosController.editContactMode}" execute="@this" render="btnPopupSection editGrid"></a4j:commandLink>
+					<a4j:commandLink value="Guardar" action="#{listadoContactosController.btnGuardarContacto}" execute="@this editGrid" render="btnPopupSection editGrid"
+						rendered="#{listadoContactosController.editContactMode}"></a4j:commandLink>
+					<a4j:commandLink value="Cancelar" action="#{listadoContactosController.btnCancelEditarContacto}" execute="@this" render="btnPopupSection editGrid" 
+						rendered="#{listadoContactosController.editContactMode}" ></a4j:commandLink>
+				</h:panelGrid>
+			</h:panelGroup>
 		</rich:popupPanel>
 		
 	</h:form>
