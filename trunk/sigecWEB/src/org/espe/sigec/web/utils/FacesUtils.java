@@ -194,6 +194,9 @@ public class FacesUtils {
     public static Object getFlashObject (String key){
     	return FacesContext.getCurrentInstance().getExternalContext().getFlash().get(key);
     }
+    public static Object removeFlashObject (String key){
+    	return FacesContext.getCurrentInstance().getExternalContext().getFlash().remove(key);
+    }
     
     public static void putSessionObject (String key, Object object){
     	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();

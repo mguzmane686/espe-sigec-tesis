@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
@@ -23,6 +25,7 @@ import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SessionBean;
 import org.richfaces.event.FileUploadEvent;
 import org.richfaces.model.UploadedFile;
 
@@ -34,7 +37,8 @@ import org.richfaces.model.UploadedFile;
 @ManagedBean(name="registroDocenteController")
 @ViewScoped
 public class RegistroDocenteController implements Serializable{
-	
+	@ManagedProperty(value = "#{sessionBean}")
+	private SessionBean sessionBean;
 	@Inject
 	private AdmGeneralServicio admGeneralServicio;
 	
@@ -47,7 +51,7 @@ public class RegistroDocenteController implements Serializable{
 	private Collection<EstudioComplementario> lstEstudiosComplementarios;
 	private EstudioComplementario estudioComplementario;
 	private boolean renderPopupEstComp;
-	
+	private int row;
 	public RegistroDocenteController() {
 		setProfesor((Profesor) FacesUtils.getFlashObject("profesor"));
 		setEditMode(Boolean.TRUE);
@@ -60,6 +64,7 @@ public class RegistroDocenteController implements Serializable{
 			if(getProfesor().getPersona().getEducacionFormacion() == null){
 				getProfesor().getPersona().setEducacionFormacion(new EducacionFormacion());
 			}
+			
 			setLstEstudiosComplementarios(new ArrayList<EstudioComplementario>());
 			setEstudioComplementario(new EstudioComplementario());
 		}
@@ -80,6 +85,9 @@ public class RegistroDocenteController implements Serializable{
 		setUsuario(new Usuario());
 		setLstEstudiosComplementarios(new ArrayList<EstudioComplementario>());
 		setEstudioComplementario(new EstudioComplementario());
+		
+		
+		
 	}
 	
 	@PostConstruct
@@ -90,23 +98,26 @@ public class RegistroDocenteController implements Serializable{
 		for(Especialidad especialidad: lstEspecialidades){
 			getEspecialidades().add(new SelectItem(especialidad.getIdEspecialidad(), especialidad.getNombre()));
 		}
+		getSessionBean().setRenderimage(Boolean.FALSE);
+		if(getProfesor().getPersona().getFoto()!=null){
+			getSessionBean().setRenderimage(Boolean.TRUE);
+			getSessionBean().setData(getProfesor().getPersona().getFoto());
+		}
 	}
 	
+	@PreDestroy
+	public void borrarSessionBean(){
+		FacesUtils.removeManagedBean("sessionBean");
+	}
 	public void uploadImage(FileUploadEvent event) throws Exception {
         UploadedFile item = event.getUploadedFile();
         getProfesor().getPersona().setFoto(item.getData());
+        getSessionBean().setData(item.getData());
+        getSessionBean().setRenderimage(Boolean.TRUE);
+        
+        this.row++;
 //        files.add(getProfesor().getPersona());
-        FacesUtils.refresh();
-    }
-	
-	public  synchronized void  paint(OutputStream stream, Object object) throws IOException {
-        try {
-        	stream.write(getProfesor().getPersona().getFoto());
-            stream.close();	
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+//        FacesUtils.refresh();
     }
 	
 	public void btnSaveProfesor(ActionEvent e){
@@ -129,6 +140,16 @@ public class RegistroDocenteController implements Serializable{
 		}
 	}
 	
+	public void paint(OutputStream stream, Object object) throws IOException {
+		
+        try {
+        	stream.write(getProfesor().getPersona().getFoto());
+            stream.close();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+	
 	public void btnCancelSaveProfesor(ActionEvent e){
 		setRenderEditionButtons(Boolean.FALSE);
 	}
@@ -139,6 +160,7 @@ public class RegistroDocenteController implements Serializable{
 
 	public void btnAtrasListaProfesor(ActionEvent e){
 		try {
+			FacesUtils.removeFlashObject("profesor");
 			FacesUtils.redirectPage("coor_seleccion_docente.jsf");
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -223,5 +245,24 @@ public class RegistroDocenteController implements Serializable{
 	public void setRenderPopupEstComp(boolean renderPopupEstComp) {
 		this.renderPopupEstComp = renderPopupEstComp;
 	}
+
+	public SessionBean getSessionBean() {
+		return sessionBean;
+	}
+
+	public void setSessionBean(SessionBean sessionBean) {
+		this.sessionBean = sessionBean;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+	
+	
+	
 	
 }
