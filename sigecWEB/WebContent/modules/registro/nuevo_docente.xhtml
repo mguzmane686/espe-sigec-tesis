@@ -24,6 +24,8 @@
    		.alinear-vertical-top{
    			vertical-align:top;
    		}
+   		
+   		
    	</h:outputStylesheet>
 
 	<h:form>
@@ -118,22 +120,31 @@
 							</h:selectOneRadio>
 							
 						</h:panelGrid>
-						<h:panelGroup rendered="false">
-							<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" listHeight="20" maxFilesQuantity="1"
-				                id="upload" acceptedTypes="jpg, gif, png, bmp" >
-				                <a4j:ajax event="uploadcomplete" execute="@this" render="pnlImg" />
+						<h:panelGroup layout="block">
+						<style>
+							
+						</style>
+						
+							<rich:fileUpload fileUploadListener="#{registroDocenteController.uploadImage}" styleClass="cssUpload" uploadLabel="cargarArchivo" style="width:200px;"  
+								listHeight="0" maxFilesQuantity="1" render="idPanelImage" execute="@this" addLabel="Agregar" clearAllLabel="Borrar" clearLabel="remover"
+				                id="upload" acceptedTypes="jpg, gif, png, bmp" rendered="#{registroDocenteController.renderEditionButtons}">
+				                <a4j:ajax event="uploadcomplete" execute="@this" render="idPanelImage" />
 				            </rich:fileUpload>
 				            
-				            <a4j:outputPanel ajaxRendered="true">
-			                    <rich:panel bodyClass="rich-laguna-panel-no-header">
-			                        <h:panelGrid columns="2" id="pnlImg">
-			                            <a4j:mediaOutput element="img" mimeType="image/jpeg" 
-			                                createContent="#{registroDocenteController.paint}" value="1"
-			                                style="width:100px; height:100px;" cacheable="false">
-			                            </a4j:mediaOutput>
-			                        </h:panelGrid>
-			                    </rich:panel>
-			                </a4j:outputPanel>
+				            <h:panelGroup id="idPanelImage">
+				            	
+					            <rich:panel style="width:198px; text-align:center">
+					            	<h:panelGroup rendered="#{!sessionBean.renderimage}" style="text-align:center;" layout="block">
+						            	<h:graphicImage library="images/icons" name="sinfoto.png"/>
+						            </h:panelGroup>
+									<a4j:mediaOutput element="img" mimeType="image/jpeg" 
+										createContent="#{sessionBean.paint}" value="#{registroDocenteController.row}" id="imgFoto" style="height:140px;width:120px;" 
+										cacheable="false" rendered="#{sessionBean.renderimage}">
+										
+									</a4j:mediaOutput>
+								</rich:panel>
+			                </h:panelGroup>
+			                
 		                </h:panelGroup>
 	                </h:panelGroup>
                 
