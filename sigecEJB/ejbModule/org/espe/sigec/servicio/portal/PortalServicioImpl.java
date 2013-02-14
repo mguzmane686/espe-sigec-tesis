@@ -4,8 +4,11 @@ import java.util.Collection;
 
 import javax.ejb.EJB;
 
+import org.espe.sigec.model.entities.Encuesta;
+import org.espe.sigec.model.entities.EncuestaPK;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
+import org.espe.sigec.model.sessionBeans.EncuestaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaFacadeLocal;
 
@@ -15,6 +18,9 @@ public class PortalServicioImpl implements PortalServicio{
 	
 	@EJB
 	private ProgramaFacadeLocal programaFacadeLocal;
+	
+	@EJB
+	private EncuestaFacadeLocal encuestaFacadeLocal;
 	
 	@Override
 	public Collection<ProgramaCurso> buscarPrograma() {
@@ -26,4 +32,19 @@ public class PortalServicioImpl implements PortalServicio{
 		return programaFacadeLocal.cargarProgramaActivoPortal();
 	}
 
+	@Override
+	public void guardarEncuesta(Encuesta encuesta) {
+		try {
+			encuestaFacadeLocal.create(encuesta);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public Encuesta buscarEncuesta(EncuestaPK encuestaPK) {
+		return encuestaFacadeLocal.find(encuestaPK);
+	}
+
+	
 }
