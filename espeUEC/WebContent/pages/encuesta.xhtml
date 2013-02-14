@@ -16,7 +16,7 @@
 			<ul>
 				<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
 				<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
-				<li><a href="services.jsf">#{msg.etiqueta_programas}</a></li>
+				<li><a href="programas.jsf">#{msg.etiqueta_programas}</a></li>
 				<li class="selected"><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
 				<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
 			</ul>
@@ -31,9 +31,23 @@
 				font-weight: bold;
 			}
 		</h:outputStylesheet>
+		<style>
+			.col1, .col2{
+				font-weight:bold;
+			}
+			.col1{
+				width: 30px;
+			}
+			
+			.col2{
+				width: 520px;
+			}
+		</style>
+		
 		<div class="background">
 			<div id="solutions">
 				<h:form id="frmEncuesta">
+				<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" process="@this tabsEncuesta"></p:commandButton>
 					<p:panel header="#{msg.etiqueta_evaluacion_eventos}">
 						<uec:groupPanel style="text-align:center;">
 							<h:outputText value="#{msg.etiqueta_ESPE}" style="font-size:20px; text-align:center;" styleClass="label-bold"/>
@@ -74,7 +88,7 @@
 								
 								<h:outputText value="#{msg.etiqueta_fecha} :" styleClass="label-bold" style="display:block; width:150px;"/>
 								<p:inplace label="#{msg.etiqueta_points.concat(msg.etiqueta_points).concat(msg.etiqueta_points).concat(msg.etiqueta_points)}">								
-									<p:calendar pattern="dd/MM/yyyy" style="margin-bottom: 0px;" />
+									<p:calendar pattern="dd/MM/yyyy" style="margin-bottom: 0px;" value="#{encuestaController.encuesta.fechaEncuesta}"/>
 								</p:inplace>
 							</h:panelGrid>
 						</uec:groupPanel>
@@ -129,57 +143,46 @@
 						<uec:groupPanel style="text-align:center;">
 							<h:outputText value="Indique su percepcion marcando la calificacion de 1 a 5, siendo 1 lo muy insatisfactorio y 5 lo muy satisfactorio" styleClass="label-bold" style="color:red; text-align:center;"/>
 						</uec:groupPanel>
-						<style>
-							.col1, .col2{
-								font-weight:bold;
-							}
-							.col1{
-								width: 30px;
-							}
-							
-							.col2{
-								width: 520px;
-							}
-						</style>
 						
-						<p:tabView>
+						
+						<p:tabView id="tabsEncuesta">
 							<p:tab title="CONTENIDO">
 								<uec:groupPanel>
-									<uec:rowOptionPanel centerlabel="#{msg.etiqueta_grado_cumplimiento_programacion}" leftlabel="A1" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Los temas han generado un nivel" leftlabel="A2" optionValue="" />
-									<uec:rowOptionPanel centerlabel="El taller cubrio sus espectativas de forma" leftlabel="A3" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Los conocimientos adquiridos son aplicables a la realidad laboral" leftlabel="A4" optionValue="" />
+									<uec:rowOptionPanel centerlabel="#{msg.etiqueta_grado_cumplimiento_programacion}" leftlabel="A1" optionValue="#{encuestaController.encuesta.ctnCumplimiento}" />
+									<uec:rowOptionPanel centerlabel="Los temas han generado un nivel" leftlabel="A2" optionValue="#{encuestaController.encuesta.ctnTemas}" />
+									<uec:rowOptionPanel centerlabel="El taller cubrio sus espectativas de forma" leftlabel="A3" optionValue="#{encuestaController.encuesta.ctnEspectativas}" />
+									<uec:rowOptionPanel centerlabel="Los conocimientos adquiridos son aplicables a la realidad laboral" leftlabel="A4" optionValue="#{encuestaController.encuesta.ctnConocimiento}" />
 								</uec:groupPanel>
 							</p:tab>
 							
 							<p:tab title="EL NIVEL EN EL FACILITADOR">
 								<uec:groupPanel>
-									<uec:rowOptionPanel centerlabel="La exposicion en el contenido y el objetivo del curso fue" leftlabel="B1" optionValue="" />
-									<uec:rowOptionPanel centerlabel="El conocimiento del tema tratado me parecio" leftlabel="B2" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Expone los conceptos con claridad y presicion de forma" leftlabel="B3" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Porporciona una clase participativa en el aula" leftlabel="B4" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Facilita el aprendizaje en forma dinamica" leftlabel="B5" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Mantiene cordialidad con el estudiante de forma" leftlabel="B6" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Contesta las preguntas en forma clara y completa" leftlabel="B7" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Utiliza adecuadamente los recursos en el aula" leftlabel="B8" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Puntualidad" leftlabel="B9" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Claridad de atencion de inquietudes" leftlabel="B10" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Involucra valores y actitudes positivas" leftlabel="B11" optionValue="" />
+									<uec:rowOptionPanel centerlabel="La exposicion en el contenido y el objetivo del curso fue" leftlabel="B1" optionValue="#{encuestaController.encuesta.fctContenido}" />
+									<uec:rowOptionPanel centerlabel="El conocimiento del tema tratado me parecio" leftlabel="B2" optionValue="#{encuestaController.encuesta.fctConocimiento}" />
+									<uec:rowOptionPanel centerlabel="Expone los conceptos con claridad y presicion de forma" leftlabel="B3" optionValue="#{encuestaController.encuesta.fctConcepto}" />
+									<uec:rowOptionPanel centerlabel="Porporciona una clase participativa en el aula" leftlabel="B4" optionValue="#{encuestaController.encuesta.fctParticipativo}" />
+									<uec:rowOptionPanel centerlabel="Facilita el aprendizaje en forma dinamica" leftlabel="B5" optionValue="#{encuestaController.encuesta.fctAprendizaje}" />
+									<uec:rowOptionPanel centerlabel="Mantiene cordialidad con el estudiante de forma" leftlabel="B6" optionValue="#{encuestaController.encuesta.fctCordialidad}" />
+									<uec:rowOptionPanel centerlabel="Contesta las preguntas en forma clara y completa" leftlabel="B7" optionValue="#{encuestaController.encuesta.fctRespuesta}" />
+									<uec:rowOptionPanel centerlabel="Utiliza adecuadamente los recursos en el aula" leftlabel="B8" optionValue="#{encuestaController.encuesta.fctRecursos}" />
+									<uec:rowOptionPanel centerlabel="Puntualidad" leftlabel="B9" optionValue="#{encuestaController.encuesta.fctPuntualidad}" />
+									<uec:rowOptionPanel centerlabel="Claridad de atencion de inquietudes" leftlabel="B10" optionValue="#{encuestaController.encuesta.fctInquietud}" />
+									<uec:rowOptionPanel centerlabel="Involucra valores y actitudes positivas" leftlabel="B11" optionValue="#{encuestaController.encuesta.fctActitud}" />
 								</uec:groupPanel>
 							</p:tab>
 							<p:tab title="MATERIAL DE APOYO">
 								<uec:groupPanel>
-									<uec:rowOptionPanel centerlabel="El material impreso que le fue proporcionado fue" leftlabel="C1" optionValue="" />
-									<uec:rowOptionPanel centerlabel="La claridad de impresion y presentacion es" leftlabel="C2" optionValue="" />
+									<uec:rowOptionPanel centerlabel="El material impreso que le fue proporcionado fue" leftlabel="C1" optionValue="#{encuestaController.encuesta.mtaMaterial}" />
+									<uec:rowOptionPanel centerlabel="La claridad de impresion y presentacion es" leftlabel="C2" optionValue="#{encuestaController.encuesta.mtaClaridad}" />
 								</uec:groupPanel>
 							</p:tab>
 							<p:tab title="ORGANIZACION Y DESARROLLO DEL PROGRAMA">
 								<uec:groupPanel>
-									<uec:rowOptionPanel centerlabel="El grado de satisfaccion respecto a la organizacion del evento es" leftlabel="D1" optionValue="" />
-									<uec:rowOptionPanel centerlabel="Los documentos disponibles fueron" leftlabel="D2" optionValue="" />
-									<uec:rowOptionPanel centerlabel="la organizacion logistica fue" leftlabel="D3" optionValue="" />
-									<uec:rowOptionPanel centerlabel="La puntualidad en los horarios establecidos fue" leftlabel="D4" optionValue="" />
-									<uec:rowOptionPanel centerlabel="el servicio de refrigerio le parecio" leftlabel="D5" optionValue="" />
+									<uec:rowOptionPanel centerlabel="El grado de satisfaccion respecto a la organizacion del evento es" leftlabel="D1" optionValue="#{encuestaController.encuesta.odpSatisfaccion}" />
+									<uec:rowOptionPanel centerlabel="Los documentos disponibles fueron" leftlabel="D2" optionValue="#{encuestaController.encuesta.odpDisponibilidad}" />
+									<uec:rowOptionPanel centerlabel="la organizacion logistica fue" leftlabel="D3" optionValue="#{encuestaController.encuesta.odpLogistica}" />
+									<uec:rowOptionPanel centerlabel="La puntualidad en los horarios establecidos fue" leftlabel="D4" optionValue="#{encuestaController.encuesta.odpPuntualidad}" />
+									<uec:rowOptionPanel centerlabel="el servicio de refrigerio le parecio" leftlabel="D5" optionValue="#{encuestaController.encuesta.odpServicio}" />
 								</uec:groupPanel>
 							</p:tab>
 						</p:tabView>
@@ -187,14 +190,14 @@
 						<uec:groupPanel>
 							<h:panelGrid columns="2">
 								<h:outputText value="Recomendaria que el facilitador dicte este curso, en otra oportunidad?" />
-								<p:selectOneRadio>
+								<p:selectOneRadio value="#{encuestaController.encuesta.recomendar}">
 									<f:selectItem itemLabel="SI" itemValue="SI"/>
 									<f:selectItem itemLabel="NO" itemValue="NO"/>
 								</p:selectOneRadio>
 								<h:panelGrid columns="2">
 									<h:outputText value="Motivo" />
 									<p:inplace label="#{msg.etiqueta_points.concat(msg.etiqueta_points).concat(msg.etiqueta_points).concat(msg.etiqueta_points)}">
-										<p:inputText size="88"></p:inputText>
+										<p:inputText size="88" maxlength="255" value="#{encuestaController.encuesta.motivoRecomendacion}"></p:inputText>
 									</p:inplace>
 								</h:panelGrid>
 							</h:panelGrid>
@@ -208,5 +211,12 @@
 	</div> <!-- /#contents -->
 	<ui:include src="/pages/footerPage.xhtml" />
 	<!-- /#footer -->
+	
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+	              
+	<p:dialog modal="true" widgetVar="statusDialog" header="Status"   
+	        draggable="false" closable="false">  
+	    <p:graphicImage value="/design/ajaxloadingbar.gif" />  
+	</p:dialog>  
 </body>
 </html>
