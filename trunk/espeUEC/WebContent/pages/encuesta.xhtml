@@ -95,6 +95,12 @@
 						
 						<uec:groupPanel>
 							<h:panelGrid columns="2">
+								<p:panel>
+									<p:inputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula"/>
+									<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="buscar" 
+										process="@this txtCedula"></p:commandLink>
+								</p:panel>
+								<p:spacer></p:spacer>
 								<h:outputText value="Nombres y apellidos :" styleClass="label-bold" style="display:block; width:150px;"/>								
 								<p:inplace label="#{msg.etiqueta_points.concat(msg.etiqueta_points).concat(msg.etiqueta_points).concat(msg.etiqueta_points)}">
 									<p:inputText value="" size="88"/>
