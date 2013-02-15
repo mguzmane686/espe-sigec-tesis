@@ -3,13 +3,12 @@
 	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:uec="http://java.sun.com/jsf/composite/components">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Business Solutions</title>
-	<h:outputStylesheet library="css" name="style.css"/>
-</h:head>
+	
+	<ui:composition template="/templates/generalTemplate.xhtml">
+	
+	<ui:define name="pageTitle">Inicio</ui:define>
 
-<body>
+	<ui:define name="pageHeader">
 	<div id="header">
 		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 		<div id="navigation">
@@ -25,6 +24,11 @@
 			
 		</div>
 	</div> <!-- /#header -->
+	</ui:define>
+
+	<ui:define name="body">
+	<h:outputStylesheet library="css" name="style.css"/>
+	<h:outputStylesheet library="css" name="imageLinks.css" />
 	<div id="contents">
 		<h:outputStylesheet>
 			.label-bold{
@@ -46,7 +50,7 @@
 		
 		<div class="background">
 			<div id="solutions">
-				<h:form id="frmEncuesta">
+				
 				<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" process="@this tabsEncuesta"></p:commandButton>
 					<p:panel header="#{msg.etiqueta_evaluacion_eventos}">
 						<uec:groupPanel style="text-align:center;">
@@ -209,20 +213,10 @@
 							</h:panelGrid>
 						</uec:groupPanel>
 					</p:panel>
-					
-					
-				</h:form>
+				
 			</div>
 		</div>
 	</div> <!-- /#contents -->
-	<ui:include src="/pages/footerPage.xhtml" />
-	<!-- /#footer -->
-	
-	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
-	              
-	<p:dialog modal="true" widgetVar="statusDialog" header="Status"   
-	        draggable="false" closable="false">  
-	    <p:graphicImage value="/design/ajaxloadingbar.gif" />  
-	</p:dialog>  
-</body>
+	</ui:define>
+	</ui:composition>
 </html>

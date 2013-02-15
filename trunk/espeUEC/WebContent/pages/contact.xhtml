@@ -1,87 +1,100 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" 
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Business Solutions</title>
-	
-	<style>
-		
-		.cabecera {
-			width: 960px;
-			margin: 0 auto;
-			padding: 40px 0;
-			position: relative;
-		}
-		.logoCabecera {
-			display: block;
-			padding: 0 0 35px 20px;
-		}
-		.bodyStyle{
-			background-color: #0c2635; 
-			margin: 0;
-		}
-		.contenido {
-			background: url('#{resource['images:bg-content.gif']}') repeat;
-			width: 960px;
-			margin: 0 auto;
-			padding: 40px 0;
-			position: relative;
-		}
-		img {
-			border: 0;
-		}
-		body {
-			background-color: #0c2635; 
-			margin: 0;
-		}
-	</style>
-</h:head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<body>
-	<h:form id="frmUno">
-	
-	<h:panelGrid columns="1" style="width:100%;">
-		<h:panelGroup styleClass="bodyStyle" layout="block">
-			<h:panelGroup class="cabecera" layout="block">
-				<a class="logoCabecera" href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-				<p:breadCrumb>  
-				    <p:menuitem value="#{msg.etiqueta_Inicio}" url="index.jsf" />  
-				    <p:menuitem value="#{msg.etiqueta_nosotros}" url="about.jsf" />  
-				    <p:menuitem value="#{msg.etiqueta_programas}" url="programas.jsf" />  
-				    <p:menuitem value="#{msg.etiqueta_encuesta}" url="encuesta.jsf" />  
-				    <p:menuitem value="#{msg.etiqueta_contacto}" url="contact.jsf" />  
-				</p:breadCrumb> 
-			</h:panelGroup>
-		</h:panelGroup>
-		
-		<p:panel>
-			<div class="contenido ">
-		<div class="background">
-			<div id="contacts">
-				<p>
-					
-				</p>
+<ui:composition template="/templates/generalTemplate.xhtml">
+
+	<ui:define name="pageTitle">Inicio</ui:define>
+
+	<ui:define name="pageHeader">
+		<h:outputStylesheet library="css" name="style.css" />
+		<div id="header">
+			<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
+			<div id="navigation">
 				<ul>
-					<li>
-						<p>
-							<b>Campus Politécnico</b>
-							Av. Gral. Rumiñahui s/n Sangolquí - Ecuador <br/>
-							Tel: +593(02) 2334951 Ext: 2195, 2190, 2191 <br/>
-							Email: oaguananga@espe.edu.ec <br/> smpazminio1@espe.edu.ec <br/> gmandrade@espe.edu.ec
-						</p>
-					</li>
-					
+					<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
+					<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
+					<li><a href="programas.jsf">#{msg.etiqueta_programas}</a></li>
+					<li><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
+					<li class="selected"> <a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
 				</ul>
 			</div>
+			<div id="search"></div>
 		</div>
-	</div>
-		</p:panel>
-	</h:panelGrid>
-	
-	<ui:include src="/pages/footerPage.xhtml" />
-	<!-- /#footer -->
-	</h:form>
-</body>
+		<!-- /#header -->
+	</ui:define>
+
+	<ui:define name="body">
+		<style>
+			.cabecera {
+				width: 960px;
+				margin: 0 auto;
+				padding: 40px 0;
+				position: relative;
+			}
+			
+			.logoCabecera {
+				display: block;
+				padding: 0 0 35px 20px;
+			}
+			
+			.bodyStyle {
+				background-color: #0c2635;
+				margin: 0;
+			}
+			
+			.contenido {
+				background: url('#{resource[' images :     bg-content.gif ']}') repeat;
+				width: 960px;
+				margin: 0 auto;
+				padding: 40px 0;
+				position: relative;
+			}
+			
+			img {
+				border: 0;
+			}
+			
+			body {
+				background-color: #0c2635;
+				margin: 0;
+			}
+			.btnAceptar {
+				background: url('#{resource[' images/ icons :     button_cancel.png ']}')
+					!important;
+				background-repeat: no-repeat !important;
+			}
+		</style>
+		<h:outputStylesheet library="css" name="imageLinks.css" />
+		<div id="contents">
+			<div class="background">
+				<div id="services">
+					<h:panelGrid columns="1" style="width:100%;">
+						<div class="contenido ">
+							<div id="contacts">
+								<p></p>
+								<ul>
+									<li>
+										<p>
+											<b>Campus Politécnico</b> Av. Gral. Rumiñahui s/n Sangolquí -
+											Ecuador <br /> Tel: +593(02) 2334951 Ext: 2195, 2190, 2191 <br />
+											Email: oaguananga@espe.edu.ec <br /> smpazminio1@espe.edu.ec
+											<br /> gmandrade@espe.edu.ec
+										</p>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+
+					</h:panelGrid>
+				</div>
+			</div>
+		</div>
+		<!-- /#contents -->
+	</ui:define>
+</ui:composition>
 </html>
