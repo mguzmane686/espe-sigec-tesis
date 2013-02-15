@@ -11,7 +11,9 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Encuesta;
 import org.espe.sigec.model.entities.EncuestaPK;
+import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.servicio.curso.CursoServicio;
+import org.espe.sigec.servicio.inscripcion.InscripcionServicio;
 import org.espe.sigec.servicio.portal.PortalServicio;
 
 /**
@@ -27,9 +29,13 @@ public class EncuestaController implements Serializable{
 	
 	@Inject
 	private PortalServicio portalServicio;
+	@Inject
+	private InscripcionServicio inscripcionServicio;
 	
 	private Encuesta encuesta;
 	private String cedulaEstudiante;
+	
+	private Estudiante estudiante;
 	
 	Collection<CursoPeriodo> lstCursosAbiertos;
 	public EncuestaController() {
@@ -45,7 +51,11 @@ public class EncuestaController implements Serializable{
 	}
 	
 	public void btnBuscarPersona(){
-		
+		if(getCedulaEstudiante()!=null){
+			System.out.println("Ingresa a buscar");
+			setEstudiante(inscripcionServicio.buscarEstudinateByCedula(getCedulaEstudiante()));
+			System.out.println(getEstudiante());
+		}
 	}
 	
 	@PostConstruct
@@ -78,6 +88,16 @@ public class EncuestaController implements Serializable{
 
 	public void setCedulaEstudiante(String cedulaEstudiante) {
 		this.cedulaEstudiante = cedulaEstudiante;
+	}
+
+
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
+
+
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
 	}
 	
 }

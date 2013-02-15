@@ -11,4 +11,8 @@
 			<var>msg</var>
 		</resource-bundle>
 	</application>
+	
+	<lifecycle>
+		<phase-listener>org.espe.sigec.web.utils.UECLifeCycle</phase-listener>
+	</lifecycle>
 </faces-config>
