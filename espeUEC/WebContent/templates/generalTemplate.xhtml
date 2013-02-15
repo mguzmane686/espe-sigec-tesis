@@ -4,13 +4,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<h:outputStylesheet library="css" name="style.css" />
+	
 	<title>
 		<ui:insert name="pageTitle">Page Title</ui:insert>
 	</title>
 </h:head>
 
 <h:body>
+	
 	<ui:insert name="pageHeader">Page Header</ui:insert>
 	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
               
@@ -20,7 +21,9 @@
 	</p:dialog>  
 
 	<h:form id="frmUEC"  prependId="false">
-		<ui:insert name="body">Page Body</ui:insert>
+		<p:panel>
+			<ui:insert name="body">Page Body</ui:insert>
+		</p:panel>
 	</h:form>
 	<ui:insert name="footerPage">
 	
@@ -28,6 +31,7 @@
 		<ui:include src="/pages/footerPage.xhtml" />
 	</ui:insert>
 	</ui:insert>
+	
 </h:body>
 
 </html>
