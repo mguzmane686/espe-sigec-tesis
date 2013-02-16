@@ -1,17 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+<html>
 	
-	<ui:composition template="/templates/generalTemplate.xhtml">
+	<ui:composition template="/templates/generalTemplate.xhtml"
+		xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+		xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
 	
 	<ui:define name="pageTitle">Inicio</ui:define>
 
 	<ui:define name="pageHeader">
 	<h:outputStylesheet library="css" name="style.css" />
-	<div id="header">
+	<h:panelGroup layout="block" id="header">
 		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-		<div id="navigation">
+		<h:panelGroup layout="block" id="navigation">
 			<ul>
 				<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
 				<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
@@ -19,34 +20,19 @@
 				<li><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
 				<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
 			</ul>
-		</div>
-		<div id="search">
-			
-		</div>
-	</div> <!-- /#header -->
+		</h:panelGroup>
+		<h:panelGroup id="search" layout="block"/>
+	</h:panelGroup> <!-- /#header -->
 	</ui:define>
-
-	<h:outputStylesheet>
-		.centrarCelda{
-			text-align:center !important;
-		}
-	</h:outputStylesheet>
+	
 	<ui:define name="body">
 	
 	<h:outputStylesheet library="css" name="imageLinks.css" />
-	<div id="contents">
-		<style>
-        	.btnAceptar{
-				background: url('#{resource['images/icons:button_cancel.png']}') !important;
-				background-repeat: no-repeat !important;
-			}
-        </style>
-		<div class="background">
-			<div id="services">
-			
-				
+	<h:panelGroup layout="block" id="contents">
+		
+		<h:panelGroup layout="block" class="background">
+			<h:panelGroup layout="block" id="services">
 				<p>
-				
 				<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso??" widgetVar="prograDialog" maximizable="false" minimizable="false"
 					showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true"> 
 				        
@@ -72,17 +58,12 @@
 					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
 					        </p:commandLink>
 					        <p:commandLink onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
-					        
 				        </h:panelGrid>
-				        
 			        </p:outputPanel>  
 			    </p:dialog>
 			    
 				<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
-					
-					 
 	                <p:column  headerText="Programas" >
-	                	
 						<p:dataTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">
 							<p:column headerText="#{programaCurso.nombre}">  
 				                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
@@ -92,13 +73,11 @@
 				            </p:column>
 						</p:dataTable>
 					</p:column>
-							
 				</p:dataTable>
-					
 				</p>
-			</div>
-		</div>
-	</div> <!-- /#contents -->
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGroup> <!-- /#contents -->
 	</ui:define>
 	</ui:composition>
 </html>

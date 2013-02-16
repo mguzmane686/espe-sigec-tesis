@@ -9,8 +9,8 @@
 	<ui:define name="pageTitle">Inicio</ui:define>
 	
 	<ui:define name="pageHeader">
-		<div id="header">
-			<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
+		<h:panelGroup id="header" layout="block">
+			<a href="index.jsf" id="logo">-<h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
 			<h:panelGroup layout="block" id="navigation">
 				<ul>
 					<h:form>
@@ -22,31 +22,29 @@
 					</h:form>
 				</ul>
 			</h:panelGroup>
-			<div id="search" >
-				
-			</div>
-		</div>
+			<h:panelGroup id="search" layout="block"/>
+		</h:panelGroup>
 		<!-- /#header -->
 	</ui:define>
 	
 	<ui:define name="adbox">	
-		<div id="adbox">
-			<div class="body">
-				<div class="images">
+		<h:panelGroup id="adbox" layout="block">
+			<h:panelGroup class="body" layout="block">
+				<h:panelGroup class="images" layout="block">
 					<h:graphicImage library="images" name="discussing2.jpg" alt="Img" styleClass="preview" />
 					<h:graphicImage library="images" name="shake-hands.jpg" width="230px" height="144" />
 					<h:graphicImage library="images" name="professionals.jpg" alt="Img" height="135" width="230px" styleClass="last" />
-				</div>
-				<div class="details">
+				</h:panelGroup>
+				<h:panelGroup class="details" layout="block">
 					<p>
-						<span> 
+						<h:panelGroup> 
 							<h:outputLabel value="#{homeController.mensajeLeftHeader}" />
-						</span>
+						</h:panelGroup>
 						<h:outputLabel value="#{homeController.mensajeLeft}" /> 
 					</p>
-				</div>
-			</div>
-			<div class="footer">
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup layout="block" class="footer">
 				<ul>
 					<li class="selected">
 						<a href="index.jsf"> 
@@ -69,21 +67,18 @@
 							<a href="index.jsf"> <h:outputLabel value="#{homeController.rightTopFooter}"/> </a><br /> <h:outputLabel value="#{homeController.rightFooter}"/>
 						</p></li>
 				</ul>
-				<span class="bottom-shadow"></span>
-			</div>
-		</div>
+				<h:panelGroup class="bottom-shadow"/>
+			</h:panelGroup>
+		</h:panelGroup>
 		<!-- /#adbox -->
 	</ui:define>
 	
 	<ui:define name="body">
-		<div id="contents">
-			<div class="body">
-				
-				<div id="main">
-					
-				</div>
-			</div>
-		</div>
+		<h:panelGroup id="contents" layout="block">
+			<h:panelGroup layout="block" class="body">
+				<h:panelGroup id="main" layout="block"/>
+			</h:panelGroup>
+		</h:panelGroup>
 		<!-- /#contents -->
 	</ui:define>
 </ui:composition>

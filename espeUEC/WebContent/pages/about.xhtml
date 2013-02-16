@@ -6,9 +6,9 @@
 
 	<ui:define name="pageHeader">
 	<h:outputStylesheet library="css" name="style.css" />
-		<div id="header">
+		<h:panelGroup layout="block" id="header">
 			<a href="index.jsf" id="logo"> <h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-			<div id="navigation">
+			<h:panelGroup layout="block" id="navigation">
 				<ul>
 					<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
 					<li class="selected"><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
@@ -16,18 +16,17 @@
 					<li><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
 					<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
 				</ul>
-			</div>
-			<div id="search">
-			</div>
-		</div>
+			</h:panelGroup>
+			<h:panelGroup layout="block" id="search" />
+		</h:panelGroup>
 		<!-- /#header -->
 	</ui:define>
 
 	<ui:define name="body">
 	
-		<div id="contents">
-			<div class="background">
-				<div id="services">
+		<h:panelGroup layout="block" id="contents">
+			<h:panelGroup layout="block" class="background">
+				<h:panelGroup layout="block" id="services">
 				<h3>Cursos UEC / Información General</h3>
 				<p>
 					La Unidad de Educación Continua coordina la planificación y ejecución de cursos especiales orientados a actualizar los conocimientos de los profesionales y satisfacer requerimientos de capacitación de organizaciones públicas o privadas, que demanden tales servicios, para lo cual ejecuta procesos de elaboración de propuestas de capacitación y de soporte administrativo en la realización de los cursos.
@@ -65,15 +64,13 @@
 <br/>
 • Diseñar y ejecutar acciones integrales de difusión y comercialización, a través de procesos de comunicación éticos y efectivos para posicionar la oferta académica de Educación continua de la ESPE dentro de los diez centros de preferencia del mercado y mejorar los niveles de ingresos provenientes de estos servicios.
 				</p>
-				
-			</div>
-		</div>
-		</div>
+			</h:panelGroup>
+		</h:panelGroup>
+		</h:panelGroup>
 		<!-- /#contents -->
 	</ui:define>
 	<ui:define name="footerPage">
 		<ui:include src="/pages/footerPage.xhtml" />
-		<!-- /#footer -->
 	</ui:define>
 </ui:composition>
 </html>
