@@ -590,4 +590,24 @@ img {
 
 .label-bold{
 	font-weight: bold;
+	font-size: 11px;
+}
+
+.colorLetras{
+	color:white;
+}
+
+.tamanioLabel{
+	display:block; 
+	width:250px;
+}
+
+.centrarCelda{
+	text-align:center !important;
+}
+
+
+.btnAceptar{
+	background: url('#{resource['images/icons:button_cancel.png']}') !important;
+	background-repeat: no-repeat !important;
 }

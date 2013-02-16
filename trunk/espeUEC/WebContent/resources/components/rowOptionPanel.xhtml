@@ -18,8 +18,8 @@
 <composite:implementation>
 	<div id="#{cc.clientId}">
 		<h:panelGrid columns="3" border="1" columnClasses="col1, col2, col3">
-			<h:outputText value="#{cc.attrs.leftlabel}" />
-			<h:outputText value="#{cc.attrs.centerlabel} :" />
+			<h:outputText value="#{cc.attrs.leftlabel}" styleClass="label-bold"/>
+			<h:outputText value="#{cc.attrs.centerlabel} :" styleClass="label-bold"/>
 			<p:rating value="#{cc.attrs.optionValue}" stars="5"></p:rating>
 		</h:panelGrid>
 	</div>
