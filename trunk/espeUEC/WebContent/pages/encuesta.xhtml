@@ -4,7 +4,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:uec="http://java.sun.com/jsf/composite/components">
 	
-	<ui:composition template="/templates/generalTemplate.xhtml">
+	<ui:composition template="/templates/generalTemplate.xhtml" xmlns:uec="http://java.sun.com/jsf/composite/components">
 	
 	<ui:define name="pageTitle">Inicio</ui:define>
 
@@ -29,30 +29,14 @@
 	<ui:define name="body">
 	<h:outputStylesheet library="css" name="style.css"/>
 	<h:outputStylesheet library="css" name="imageLinks.css" />
+	<h:outputStylesheet library="primefaces-bluesky" name="theme.css" />
 	<div id="contents">
-		<h:outputStylesheet>
-			.label-bold{
-				font-weight: bold;
-			}
-		</h:outputStylesheet>
-		<style>
-			.col1, .col2{
-				font-weight:bold;
-			}
-			.col1{
-				width: 30px;
-			}
-			
-			.col2{
-				width: 520px;
-			}
-		</style>
 		
 		<div class="background">
 			<div id="solutions">
 				
 				<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" process="@this tabsEncuesta"></p:commandButton>
-					<p:panel header="#{msg.etiqueta_evaluacion_eventos}">
+					<!--p:panel header="#{msg.etiqueta_evaluacion_eventos}"-->
 						<uec:groupPanel style="text-align:center;">
 							<h:outputText value="#{msg.etiqueta_ESPE}" style="font-size:20px; text-align:center;" styleClass="label-bold"/>
 						</uec:groupPanel>
@@ -212,7 +196,7 @@
 								</h:panelGrid>
 							</h:panelGrid>
 						</uec:groupPanel>
-					</p:panel>
+					<!--/p:panel-->
 				
 			</div>
 		</div>

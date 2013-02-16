@@ -573,3 +573,21 @@ img {
 }
 
 /*------------------------------ For IE6 ------------------------------*/
+
+
+.col1, .col2{
+	font-weight:bold;
+}
+
+.col1{
+	width: 30px;
+}
+
+.col2{
+	width: 520px;
+}
+
+
+.label-bold{
+	font-weight: bold;
+}
