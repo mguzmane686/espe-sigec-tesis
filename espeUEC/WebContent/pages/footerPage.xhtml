@@ -2,24 +2,24 @@
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<h:panelGroup layout="block" id="footer" styleClass="colorLetras">
-		<h:panelGrid >
+		<h:panelGrid rendered="false">
 			<h:outputLabel value="Email" />
 			 <a href='mailto:gmandrade@espe.edu.ec' style="margin-left: 30px;">gmandrade@espe.edu.ec</a>
 			 <a href='mailto:oaguananga@espe.edu.ec' style="margin-left: 30px;">oaguananga@espe.edu.ec</a>
 			 <a href='mailto:smpazminio1@espe.edu.ec' style="margin-left: 30px;">smpazminio1@espe.edu.ec</a>
 		</h:panelGrid>
 		
-		<h:panelGrid>
+		<h:panelGrid rendered="false">
 			<h:outputLabel value="#{msg.etiqueta_direccion}" />
 			<h:outputText value="Av. Gral. Rumiñahui s/n Sangolquí - Ecuador  Campus Politécnico  BLOQUE CENTRAL TERCER PISO" style="margin-left: 30px;"/>
 		</h:panelGrid>
 		
-		<h:panelGrid>
+		<h:panelGrid rendered="false">
 			<h:outputLabel value="#{msg.etiqueta_telefono}" />
 			<h:outputText value="+593(02) 2334951 Ext: 2195, 2190, 2191" style="margin-left: 30px;"/>
 		</h:panelGrid>
 		
-		<h:panelGroup class="footnote" style="margin:auto;text-align:center">&copy; Copyright &copy; 2012. All rights reserved</h:panelGroup>
+		<h:panelGroup style="margin:auto;text-align:center">&copy; Copyright &copy; 2012. All rights reserved</h:panelGroup>
 	</h:panelGroup>
 	<!-- /#footer -->
 </ui:composition>
