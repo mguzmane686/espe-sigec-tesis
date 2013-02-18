@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 
-<ui:composition template="/templates/generalTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition template="/templates/common.xhtml" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,52 +10,16 @@
 	<ui:define name="pageTitle">Inicio</ui:define>
 
 	<ui:define name="pageHeader">
-		<h:outputStylesheet library="css" name="style.css" />
-		<h:panelGroup layout="block" id="header">
-			<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-			<h:panelGroup layout="block" id="navigation">
-				<ul>
-					<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
-					<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
-					<li><a href="programas.jsf">#{msg.etiqueta_programas}</a></li>
-					<li><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
-					<li class="selected"> <a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
-				</ul>
-			</h:panelGroup>
-			<h:panelGroup layout="block" id="search"/>
-		</h:panelGroup>
-		<!-- /#header -->
+		
 	</ui:define>
 
 	<ui:define name="body">
-		
-		<h:outputStylesheet library="css" name="imageLinks.css" />
-		<h:panelGroup layout="block" id="contents">
-			<h:panelGroup layout="block" class="background">
-				<h:panelGroup layout="block" id="services">
-					<h:panelGrid columns="1" style="width:100%;">
-						<h:panelGroup layout="block" class="contenido ">
-							<h:panelGroup layout="block" id="contacts">
-								<p></p>
-								<ul>
-									<li>
-										<p>
-											<b>Campus Politécnico</b> Av. Gral. Rumiñahui s/n Sangolquí -
-											Ecuador <br /> Tel: +593(02) 2334951 Ext: 2195, 2190, 2191 <br />
-											Email: oaguananga@espe.edu.ec <br /> smpazminio1@espe.edu.ec
-											<br /> gmandrade@espe.edu.ec
-										</p>
-									</li>
-
-								</ul>
-							</h:panelGroup>
-						</h:panelGroup>
-
-					</h:panelGrid>
-				</h:panelGroup>
-			</h:panelGroup>
-		</h:panelGroup>
-		<!-- /#contents -->
+		<p:panel header="Campus Politécnico">
+			
+			Ecuador <br /> Tel: +593(02) 2334951 Ext: 2195, 2190, 2191 <br />
+			Email: oaguananga@espe.edu.ec <br /> smpazminio1@espe.edu.ec
+			<br /> gmandrade@espe.edu.ec
+		</p:panel>
 	</ui:define>
 </ui:composition>
 </html>

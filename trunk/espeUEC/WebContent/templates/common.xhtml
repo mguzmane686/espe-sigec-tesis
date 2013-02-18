@@ -5,43 +5,44 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<head>
-	<title>
-		<ui:insert name="pageTitle">Page Title</ui:insert>
-	</title>
-</head>
+<h:head>
+	<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
+</h:head>
 
-<body bgcolor="#ffffff">
-	<table style="border: 1px solid #CAD6E0" align="center" cellpadding="0" cellspacing="0" border="0" width="100%;">
-		<tbody>
-			<tr>
-				<td align="center" valign="middle" width="100%" bgcolor="#E4EBEB">
-					<ui:insert name="pageHeader">Page Header</ui:insert>
-				</td>
-			</tr>
-			<tr>
-				<td height="1" width="100%" bgcolor="#CAD6E0"></td>
-			</tr>
-
-			<tr>
-				<td width="100%" colspan="2">
-					<table width="100%" align="left" cellpadding="0" cellspacing="0" border="0">
-						<tbody>
-							<tr>
-								<td align="center" width="100%" valign="middle">
-									<ui:insert name="body">Page Body</ui:insert>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
-
-			<tr>
-				<td colspan="2" valign="bottom" height="1" width="100%" bgcolor="#CAD6E0"></td>
-			</tr>
-		</tbody>
-	</table>
-</body>
+<h:body style="background-color: rgb(12,38,53)">
+	
+	<h:panelGroup layout="block" style="width: 960px;
+	margin: auto; text-align:center; padding: 40px 0; position: relative;">
+		
+		<h:graphicImage library="images" name="logo.jpg" alt="LOGO" style="border:0px; margin:auto;"/>
+	</h:panelGroup>
+	<h:panelGroup layout="block" style="width:100%; background: url('#{resource['images:bg-content.gif']}') repeat;">	
+		<h:panelGrid id="pgContent" style="width:100%; ">
+			<ui:insert name="pageHeader">Page Header</ui:insert>
+			<ui:insert name="body">Page Body</ui:insert>
+		</h:panelGrid>
+		
+		<h:panelGroup  layout="block" style=" 
+			padding: 20px 0 20px; width:100%; 
+			color: #fdfffa;"/>
+			
+		<p:dock>
+			<p:menuitem value="#{msg.etiqueta_Inicio}" icon="#{resource['images/icons:inicio.png']}" 
+				url="/pages/index.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
+			<p:menuitem value="#{msg.etiqueta_nosotros}" icon="#{resource['images/icons:inicio.png']}" 
+				url="/pages/about.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
+			<p:menuitem value="#{msg.etiqueta_programas}" icon="#{resource['images/icons:inicio.png']}" 
+				url="/pages/programas.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+			<p:menuitem value="#{msg.etiqueta_encuesta}" icon="#{resource['images/icons:inicio.png']}" 
+				url="/pages/encuesta.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+			<p:menuitem value="#{msg.etiqueta_contacto}" icon="#{resource['images/icons:inicio.png']}" 
+				url="/pages/contact.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+		</p:dock>
+	</h:panelGroup>
+	
+	<p:panel>
+		<ui:include src="/pages/footerPage.xhtml" />
+	</p:panel>
+</h:body>
 
 </html>

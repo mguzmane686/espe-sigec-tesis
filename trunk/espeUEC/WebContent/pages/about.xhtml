@@ -1,32 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/templates/generalTemplate.xhtml">
+<ui:composition template="/templates/common.xhtml">
 	<ui:define name="pageTitle">Inicio</ui:define>
 
 	<ui:define name="pageHeader">
-	<h:outputStylesheet library="css" name="style.css" />
-		<h:panelGroup layout="block" id="header">
-			<a href="index.jsf" id="logo"> <h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-			<h:panelGroup layout="block" id="navigation">
-				<ul>
-					<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
-					<li class="selected"><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
-					<li><a href="programas.jsf">#{msg.etiqueta_programas}</a></li>
-					<li><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
-					<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
-				</ul>
-			</h:panelGroup>
-			<h:panelGroup layout="block" id="search" />
-		</h:panelGroup>
-		<!-- /#header -->
+	
 	</ui:define>
 
 	<ui:define name="body">
 	
-		<h:panelGroup layout="block" id="contents">
-			<h:panelGroup layout="block" class="background">
-				<h:panelGroup layout="block" id="services">
+		<h:panelGroup layout="block" style="background-color:white;">
+			<h:panelGroup layout="block">
+				<h:panelGroup layout="block">
 				<h3>Cursos UEC / Información General</h3>
 				<p>
 					La Unidad de Educación Continua coordina la planificación y ejecución de cursos especiales orientados a actualizar los conocimientos de los profesionales y satisfacer requerimientos de capacitación de organizaciones públicas o privadas, que demanden tales servicios, para lo cual ejecuta procesos de elaboración de propuestas de capacitación y de soporte administrativo en la realización de los cursos.
@@ -67,10 +53,8 @@
 			</h:panelGroup>
 		</h:panelGroup>
 		</h:panelGroup>
-		<!-- /#contents -->
+		
 	</ui:define>
-	<ui:define name="footerPage">
-		<ui:include src="/pages/footerPage.xhtml" />
-	</ui:define>
+	
 </ui:composition>
 </html>

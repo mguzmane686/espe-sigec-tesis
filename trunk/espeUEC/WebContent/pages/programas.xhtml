@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	
-	<ui:composition template="/templates/generalTemplate.xhtml"
+	<ui:composition template="/templates/common.xhtml"
 		xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
 		xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:p="http://primefaces.org/ui">
@@ -9,25 +9,12 @@
 	<ui:define name="pageTitle">Inicio</ui:define>
 
 	<ui:define name="pageHeader">
-	<h:outputStylesheet library="css" name="style.css" />
-	<h:panelGroup layout="block" id="header">
-		<a href="index.jsf" id="logo"><h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-		<h:panelGroup layout="block" id="navigation">
-			<ul>
-				<li class="first"><a href="index.jsf">#{msg.etiqueta_Inicio}</a></li>
-				<li><a href="about.jsf">#{msg.etiqueta_nosotros}</a></li>
-				<li class="selected"><a href="programas.jsf">#{msg.etiqueta_programas}</a></li>
-				<li><a href="encuesta.jsf">#{msg.etiqueta_encuesta}</a></li>
-				<li><a href="contact.jsf">#{msg.etiqueta_contacto}</a></li>
-			</ul>
-		</h:panelGroup>
-		<h:panelGroup id="search" layout="block"/>
-	</h:panelGroup> <!-- /#header -->
+	
 	</ui:define>
 	
 	<ui:define name="body">
 	
-	<h:outputStylesheet library="css" name="imageLinks.css" />
+	<h:form>
 	<h:panelGroup layout="block" id="contents">
 		
 		<h:panelGroup layout="block" class="background">
@@ -78,6 +65,7 @@
 			</h:panelGroup>
 		</h:panelGroup>
 	</h:panelGroup> <!-- /#contents -->
+	</h:form>
 	</ui:define>
 	</ui:composition>
 </html>

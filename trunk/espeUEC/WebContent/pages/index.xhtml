@@ -5,81 +5,50 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="/templates/homeTemplate.xhtml">
+<ui:composition template="/templates/common.xhtml">
 	<ui:define name="pageTitle">Inicio</ui:define>
 	
 	<ui:define name="pageHeader">
-		<h:panelGroup id="header" layout="block">
-			<a href="index.jsf" id="logo">-<h:graphicImage library="images" name="logo.jpg" alt="LOGO" /></a>
-			<h:panelGroup layout="block" id="navigation">
-				<ul>
-					<h:form>
-						<li class="first selected"><h:commandLink value="#{msg.etiqueta_Inicio}" action="index.jsf" /></li>
-						<li><h:commandLink action="about.jsf" value="#{msg.etiqueta_nosotros}"/></li>
-						<li><h:commandLink action="programas.jsf" value="#{msg.etiqueta_programas}"/></li>
-						<li><h:commandLink action="encuesta.jsf" value="#{msg.etiqueta_encuesta}"/></li>
-						<li><h:commandLink action="contact.jsf" value="#{msg.etiqueta_contacto}"/></li>
-					</h:form>
-				</ul>
-			</h:panelGroup>
-			<h:panelGroup id="search" layout="block"/>
-		</h:panelGroup>
-		<!-- /#header -->
+		
 	</ui:define>
 	
-	<ui:define name="adbox">	
-		<h:panelGroup id="adbox" layout="block">
-			<h:panelGroup class="body" layout="block">
-				<h:panelGroup class="images" layout="block">
-					<h:graphicImage library="images" name="discussing2.jpg" alt="Img" styleClass="preview" />
-					<h:graphicImage library="images" name="shake-hands.jpg" width="230px" height="144" />
-					<h:graphicImage library="images" name="professionals.jpg" alt="Img" height="135" width="230px" styleClass="last" />
-				</h:panelGroup>
-				<h:panelGroup class="details" layout="block">
-					<p>
-						<h:panelGroup> 
-							<h:outputLabel value="#{homeController.mensajeLeftHeader}" />
-						</h:panelGroup>
-						<h:outputLabel value="#{homeController.mensajeLeft}" /> 
-					</p>
-				</h:panelGroup>
-			</h:panelGroup>
-			<h:panelGroup layout="block" class="footer">
-				<ul>
-					<li class="selected">
-						<a href="index.jsf"> 
-							<h:graphicImage library="images" name="meeting2.jpg" alt="Img" />
-						</a>
-						<p>
-							<a href="index.jsf"> <h:outputLabel value="#{homeController.leftTopFooter}" /> </a><br /> <h:outputLabel value="#{homeController.leftFooter}"/>
-						</p>
-					</li>
-					<li>
-						<a href="index.jsf">
-							<h:graphicImage library="images" name="flags2.jpg" alt="Img" />
-						</a>
-						<p>
-							<a href="index.jsf"> <h:outputLabel value="#{homeController.centerTopFooter}"/> </a><br /> <h:outputLabel value="#{homeController.centerFooter}"/>
-						</p>
-					</li>
-					<li><a href="index.jsf"> <h:graphicImage library="images" name="boys.jpg" alt="Img" /></a>
-						<p>
-							<a href="index.jsf"> <h:outputLabel value="#{homeController.rightTopFooter}"/> </a><br /> <h:outputLabel value="#{homeController.rightFooter}"/>
-						</p></li>
-				</ul>
-				<h:panelGroup class="bottom-shadow"/>
-			</h:panelGroup>
-		</h:panelGroup>
-		<!-- /#adbox -->
-	</ui:define>
+	
 	
 	<ui:define name="body">
-		<h:panelGroup id="contents" layout="block">
-			<h:panelGroup layout="block" class="body">
-				<h:panelGroup id="main" layout="block"/>
-			</h:panelGroup>
+
+		<h:panelGroup layout="block" style="width:960px; margin:auto; padding-top: 40px;">
+			<h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="background-color: rgb(255, 255, 255)">
+				<h:panelGroup>
+					<h:outputLabel value="#{homeController.mensajeLeftHeader}" />
+					<h:outputLabel value="#{homeController.mensajeLeft}" />
+				</h:panelGroup> 
+				<h:graphicImage library="images" name="discussing2.jpg" alt="Img"/>
+				
+				<h:panelGroup class="images" layout="block">
+					<h:graphicImage library="images" name="shake-hands.jpg" width="230px" height="144" />
+					<h:graphicImage library="images" name="professionals.jpg" alt="Img" height="135" width="230px"/>
+				</h:panelGroup>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="3" cellpadding="0" cellspacing="0" style="width:100%; background-color: rgb(220,220, 220) ">
+				<h:panelGroup>
+					<h:graphicImage library="images" name="meeting2.jpg" alt="Img" />
+					<h:outputLabel value="#{homeController.leftTopFooter}" />
+					<h:outputLabel value="#{homeController.leftFooter}"/>
+				</h:panelGroup>
+				<h:panelGroup>
+					<h:graphicImage library="images" name="flags2.jpg" alt="Img" />
+					<h:outputLabel value="#{homeController.centerTopFooter}"/>
+					<h:outputLabel value="#{homeController.centerFooter}"/>
+				</h:panelGroup>
+				
+				<h:panelGroup>
+					<h:graphicImage library="images" name="boys.jpg" alt="Img" />
+					<h:outputLabel value="#{homeController.rightTopFooter}"/>
+					<h:outputLabel value="#{homeController.rightFooter}"/>
+				</h:panelGroup>
+			</h:panelGrid>
 		</h:panelGroup>
-		<!-- /#contents -->
 	</ui:define>
 </ui:composition>
 </html>

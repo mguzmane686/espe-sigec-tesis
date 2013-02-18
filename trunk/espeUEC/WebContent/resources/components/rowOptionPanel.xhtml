@@ -16,6 +16,19 @@
 	<composite:attribute name="optionValue" required="true" />
 </composite:interface>
 <composite:implementation>
+<style>
+	.col1, .col2{
+		font-weight:bold;
+	}
+	
+	.col1{
+		width: 30px;
+	}
+	
+	.col2{
+		width: 520px;
+	}
+</style>
 	<div id="#{cc.clientId}">
 		<h:panelGrid columns="3" border="1" columnClasses="col1, col2, col3">
 			<h:outputText value="#{cc.attrs.leftlabel}" styleClass="label-bold"/>
