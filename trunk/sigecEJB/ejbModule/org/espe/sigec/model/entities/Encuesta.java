@@ -2,6 +2,7 @@ package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -80,7 +81,7 @@ public class Encuesta implements Serializable{
     private String motivoRecomendacion;
     
     @Column(name = "ect_fecha")
-    private Integer fechaEncuesta;
+    private Date fechaEncuesta;
     
     public Encuesta() {
     }
@@ -302,11 +303,11 @@ public class Encuesta implements Serializable{
         return "org.espe.sigec.model.entities.SgctStdEncuesta[ sgctStdEncuestaPK=" + sgctStdEncuestaPK + " ]";
     }
 
-	public Integer getFechaEncuesta() {
+	public Date getFechaEncuesta() {
 		return fechaEncuesta;
 	}
 
-	public void setFechaEncuesta(Integer fechaEncuesta) {
+	public void setFechaEncuesta(Date fechaEncuesta) {
 		this.fechaEncuesta = fechaEncuesta;
 	}
 
