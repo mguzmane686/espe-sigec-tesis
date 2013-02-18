@@ -10,7 +10,13 @@
 </h:head>
 
 <h:body style="background-color: rgb(12,38,53)">
-	
+	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+              
+	<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false"   
+	        draggable="false" closable="false">  
+		<h:graphicImage library="images" name="ajax-loader.gif"/>  
+	</p:dialog> 
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />  
 	<h:panelGroup layout="block" style="width: 960px;
 	margin: auto; text-align:center; padding: 40px 0; position: relative;">
 		

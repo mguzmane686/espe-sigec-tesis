@@ -1,6 +1,7 @@
 package org.espe.sigec.web.encuesta;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -8,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Encuesta;
 import org.espe.sigec.model.entities.EncuestaPK;
@@ -15,6 +17,7 @@ import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.servicio.curso.CursoServicio;
 import org.espe.sigec.servicio.inscripcion.InscripcionServicio;
 import org.espe.sigec.servicio.portal.PortalServicio;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author Roberto
@@ -40,6 +43,7 @@ public class EncuestaController implements Serializable{
 	Collection<CursoPeriodo> lstCursosAbiertos;
 	public EncuestaController() {
 		setEncuesta(new Encuesta());
+		getEncuesta().setFechaEncuesta(Calendar.getInstance().getTime());
 	}
 	
 	
@@ -51,10 +55,15 @@ public class EncuestaController implements Serializable{
 	}
 	
 	public void btnBuscarPersona(){
-		if(getCedulaEstudiante()!=null){
+		if(StringUtils.isNotEmpty(getCedulaEstudiante())){
 			System.out.println("Ingresa a buscar");
-			setEstudiante(inscripcionServicio.buscarEstudinateByCedula(getCedulaEstudiante()));
-			System.out.println(getEstudiante());
+			Estudiante estudiante =inscripcionServicio.buscarEstudinateByCedula(getCedulaEstudiante());
+			
+			if(estudiante!=null){
+				setEstudiante(estudiante);	
+			}else{
+				FacesUtils.addInfoMessage("No se encontro ningun estudiante");
+			}
 		}
 	}
 	

@@ -56,34 +56,27 @@
 							
 					<uec:groupPanel>
 						<h:panelGrid columns="3">
-							<h:outputText value="Nombres y apellidos :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:inputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula"/>
+							<h:outputText value="Estudiante :" styleClass="label-bold" style="display:block; width:150px;"/>
+							<p:inputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula" validator="cedulaValidator"/>
 							<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="buscar" 
-								process="@this txtCedula"></p:commandLink>
+								process="@this txtCedula" update="pgPersonaFnd"></p:commandLink>
 						</h:panelGrid>
-						<h:panelGrid columns="2">
+						<h:panelGrid columns="2" id="pgPersonaFnd">
 							<h:outputText value="Nombres y apellidos :" styleClass="label-bold" style="display:block; width:150px;"/>								
-							<p:inputText value="" size="88"/>
+							<h:outputText value="#{encuestaController.estudiante.persona.primerNombre}"/>
 							
 							<h:outputText value="E-mail :" styleClass="label-bold" style="display:block; width:150px;"/>								
-							<p:inputText value="" size="88"/>
+							<h:outputText value="#{encuestaController.estudiante.persona.mail}"/>
 							
 							<h:outputText value="Telf. :" styleClass="label-bold" style="display:block; width:150px;"/>								
-							<p:inputText value="" size="88"/>
-						</h:panelGrid>
-					</uec:groupPanel>
-					
-					<uec:groupPanel>
-						<h:panelGrid columns="2">
-							<h:outputText value="Edad :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:inputText value=""/>
+							<h:outputText value="#{encuestaController.estudiante.persona.telefonoCelular}" />
 						</h:panelGrid>
 					</uec:groupPanel>
 					
 					<uec:groupPanel>
 						<h:panelGrid columns="2">
 							<h:outputText value="Actividad :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:selectOneMenu style="line-height: 10px;">
+							<p:selectOneMenu style="line-height: 10px;" >
 								<f:selectItem itemLabel="Estudiante" itemValue="EST"/>
 								<f:selectItem itemLabel="Docente" itemValue="DCT"/>
 								<f:selectItem itemLabel="Militar" itemValue="MLT"/>
@@ -91,12 +84,6 @@
 								<f:selectItem itemLabel="Empleado privado" itemValue="EP"/>
 								<f:selectItem itemLabel="Emprendedor" itemValue="EPR"/>
 							</p:selectOneMenu>
-							
-							<h:outputText value="Genero :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:selectOneRadio>
-								<f:selectItem itemLabel="Femenino" itemValue="F"/>
-								<f:selectItem itemLabel="Masculino" itemValue="M"/>
-							</p:selectOneRadio>
 						</h:panelGrid>
 						
 					</uec:groupPanel>
