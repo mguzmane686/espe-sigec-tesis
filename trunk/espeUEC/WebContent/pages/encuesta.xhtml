@@ -14,13 +14,13 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<h:form>
+		<h:form id="frmEncuesta">
 		<h:panelGroup layout="block" id="contents">
 			
 			<h:panelGroup layout="block" styleClass="background">
-				<h:panelGroup id="solutions" layout="block">
+				<h:panelGroup id="pgEncuesta" layout="block">
 					
-					<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" process="@this tabsEncuesta"></p:commandButton>
+					<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" process="@this @form" update="@form"></p:commandButton>
 						<!--p:panel header="#{msg.etiqueta_evaluacion_eventos}"-->
 					<uec:groupPanel style="text-align:center;">
 						<h:outputText value="#{msg.etiqueta_ESPE}" style="font-size:20px; text-align:center;" styleClass="label-bold"/>
@@ -33,33 +33,37 @@
 						<h:outputText value="#{msg.etiqueta_UEC}" style="font-size:14px; text-align:center;" styleClass="label-bold"/>
 					</uec:groupPanel>
 					
-					<uec:groupPanel>
-						<h:panelGrid columns="2">
-							<h:outputText value="#{msg.etiqueta_empresa_institucion} :" styleClass="label-bold" style="display:block; width:150px;"/>								
-							<p:inputText value="" size="88"/>
-													
-							<h:outputText value="#{msg.etiqueta_facilitador} :" styleClass="label-bold" style="display:block; width:150px;"/>								
-							<p:inputText value="" size="88"/>
-							
-							<h:outputText value="#{msg.etiqueta_nombre_curso} :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:selectOneMenu>
-								<f:selectItems value="#{encuestaController.lstCursosAbiertos}" var="itemCurso" itemLabel="#{itemCurso.curso.nombreCurso}" itemValue="#{itemCurso.idCursoPeriodo}"></f:selectItems>
-							</p:selectOneMenu>
-							
-							<h:outputText value="#{msg.etiqueta_lugar} :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:inputText value="" size="88"/>
-							
-							<h:outputText value="#{msg.etiqueta_fecha} :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:calendar pattern="dd/MM/yyyy" style="margin-bottom: 0px;" value="#{encuestaController.encuesta.fechaEncuesta}"/>
-						</h:panelGrid>
+					<uec:groupPanel id="ctnCurso">
+						<h:panelGroup id="pgCurso">
+							<h:panelGrid columns="2"  rendered="#{encuestaController.showListaCursos}">
+								<h:outputText value="#{msg.etiqueta_empresa_institucion} :" styleClass="label-bold" style="display:block; width:150px;"/>								
+								<p:inputText value="#{encuestaController.encuesta.institucion}" size="88" required="true" requiredMessage="El campo #{msg.etiqueta_empresa_institucion} es obligatorio"/>
+														
+								<h:outputText value="#{msg.etiqueta_facilitador} :" styleClass="label-bold" style="display:block; width:150px;"/>								
+								<p:inputText value="#{encuestaController.cursoEstudianteSeleccionado.idPrograma}" size="88"/>
+								
+								<h:outputText value="#{msg.etiqueta_nombre_curso} :" styleClass="label-bold" style="display:block; width:150px;" />
+								<p:selectOneMenu value="#{encuestaController.encuesta.encuestaPK.idCursoPeriodo}" >
+									<f:selectItems value="#{encuestaController.lstCursosEstudiante}" var="itemCurso" itemLabel="#{itemCurso.programaCurso.cursoPeriodo.curso.nombreCurso}" itemValue="#{itemCurso.cursoEstudiantePK.idCursoPeriodo}"></f:selectItems>
+								</p:selectOneMenu>
+								
+								<h:outputText value="#{msg.etiqueta_lugar} :" styleClass="label-bold" style="display:block; width:150px;"/>
+								<p:inputText value="#{encuestaController.cursoEstudianteSeleccionado.programaCurso.cursoPeriodo.lugarCapacitacion}" size="88"/>
+								
+								<h:outputText value="#{msg.etiqueta_fecha} :" styleClass="label-bold" style="display:block; width:150px;"/>
+								<p:calendar pattern="dd/MM/yyyy" style="margin-bottom: 0px;" value="#{encuestaController.encuesta.fechaEncuesta}"/>
+							</h:panelGrid>
+						</h:panelGroup>
 					</uec:groupPanel>
 							
-					<uec:groupPanel>
+					<uec:groupPanel id="pgBusqueda">
 						<h:panelGrid columns="3">
 							<h:outputText value="Estudiante :" styleClass="label-bold" style="display:block; width:150px;"/>
 							<p:inputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula" validator="cedulaValidator"/>
 							<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="buscar" 
-								process="@this txtCedula" update="pgPersonaFnd"></p:commandLink>
+								process="@this txtCedula" update="pgPersonaFnd :frmEncuesta:ctnCurso:pgCurso"/>
+							
+							
 						</h:panelGrid>
 						<h:panelGrid columns="2" id="pgPersonaFnd">
 							<h:outputText value="Nombres y apellidos :" styleClass="label-bold" style="display:block; width:150px;"/>								
