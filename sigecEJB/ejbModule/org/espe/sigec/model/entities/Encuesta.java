@@ -1,12 +1,16 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -29,7 +33,7 @@ public class Encuesta implements Serializable{
 	
 	
 	@EmbeddedId
-    protected EncuestaPK sgctStdEncuestaPK;
+    protected EncuestaPK encuestaPK;
     @Column(name = "ctn_cumplimiento")
     private Integer ctnCumplimiento;
     @Column(name = "ctn_temas")
@@ -77,32 +81,47 @@ public class Encuesta implements Serializable{
     @Column(name = "recomendar")
     private String recomendar;
     
+    @Column(name = "ect_institucion")
+    private String institucion;
+    
     @Column(name = "rec_motivo")
     private String motivoRecomendacion;
     
     @Column(name = "ect_fecha")
     private Date fechaEncuesta;
     
+    @JoinColumns({
+        @JoinColumn(name = "prg_id", referencedColumnName = "prg_id", insertable = false, updatable = false),
+        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private ProgramaCurso programaCurso;
+    
+    @JoinColumns({
+        @JoinColumn(name = "est_id_estudiante", referencedColumnName = "est_id_estudiante", insertable = false, updatable = false),
+        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)})
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private CursoEstudiante cursoEstudiante;
+    
     public Encuesta() {
     }
 
-    public Encuesta(EncuestaPK sgctStdEncuestaPK) {
-        this.sgctStdEncuestaPK = sgctStdEncuestaPK;
+    public Encuesta(EncuestaPK encuestaPK) {
+        this.encuestaPK = encuestaPK;
     }
 
-    public Encuesta(int prgId, BigDecimal idCursoPeriodo, int estIdEstudiante) {
-        this.sgctStdEncuestaPK = new EncuestaPK(prgId, idCursoPeriodo, estIdEstudiante);
+    public Encuesta(int prgId, BigInteger idCursoPeriodo, int estIdEstudiante) {
+        this.encuestaPK = new EncuestaPK(prgId, idCursoPeriodo, estIdEstudiante);
     }
 
-    public EncuestaPK getSgctStdEncuestaPK() {
-        return sgctStdEncuestaPK;
-    }
+    public EncuestaPK getEncuestaPK() {
+		return encuestaPK;
+	}
 
-    public void setSgctStdEncuestaPK(EncuestaPK sgctStdEncuestaPK) {
-        this.sgctStdEncuestaPK = sgctStdEncuestaPK;
-    }
+	public void setEncuestaPK(EncuestaPK encuestaPK) {
+		this.encuestaPK = encuestaPK;
+	}
 
-    public Integer getCtnCumplimiento() {
+	public Integer getCtnCumplimiento() {
         return ctnCumplimiento;
     }
 
@@ -281,7 +300,7 @@ public class Encuesta implements Serializable{
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (sgctStdEncuestaPK != null ? sgctStdEncuestaPK.hashCode() : 0);
+        hash += (encuestaPK != null ? encuestaPK.hashCode() : 0);
         return hash;
     }
 
@@ -292,7 +311,7 @@ public class Encuesta implements Serializable{
             return false;
         }
         Encuesta other = (Encuesta) object;
-        if ((this.sgctStdEncuestaPK == null && other.sgctStdEncuestaPK != null) || (this.sgctStdEncuestaPK != null && !this.sgctStdEncuestaPK.equals(other.sgctStdEncuestaPK))) {
+        if ((this.encuestaPK == null && other.encuestaPK != null) || (this.encuestaPK != null && !this.encuestaPK.equals(other.encuestaPK))) {
             return false;
         }
         return true;
@@ -300,7 +319,7 @@ public class Encuesta implements Serializable{
 
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entities.SgctStdEncuesta[ sgctStdEncuestaPK=" + sgctStdEncuestaPK + " ]";
+        return "org.espe.sigec.model.entities.SgctStdEncuesta[ encuestaPK=" + encuestaPK + " ]";
     }
 
 	public Date getFechaEncuesta() {
@@ -325,6 +344,30 @@ public class Encuesta implements Serializable{
 
 	public void setMotivoRecomendacion(String motivoRecomendacion) {
 		this.motivoRecomendacion = motivoRecomendacion;
+	}
+
+	public ProgramaCurso getProgramaCurso() {
+		return programaCurso;
+	}
+
+	public void setProgramaCurso(ProgramaCurso programaCurso) {
+		this.programaCurso = programaCurso;
+	}
+
+	public CursoEstudiante getCursoEstudiante() {
+		return cursoEstudiante;
+	}
+
+	public void setCursoEstudiante(CursoEstudiante cursoEstudiante) {
+		this.cursoEstudiante = cursoEstudiante;
+	}
+
+	public String getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(String institucion) {
+		this.institucion = institucion;
 	}
 	
 }

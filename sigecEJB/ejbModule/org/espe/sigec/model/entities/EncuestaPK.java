@@ -1,7 +1,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ public class EncuestaPK implements Serializable{
 	    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
 	    @Basic(optional = false)
 	    @Column(name = "id_curso_periodo")
-	    private BigDecimal idCursoPeriodo;
+	    private BigInteger idCursoPeriodo;
 	    @Basic(optional = false)
 	    @Column(name = "est_id_estudiante")
 	    private int estIdEstudiante;
@@ -24,7 +24,7 @@ public class EncuestaPK implements Serializable{
 	    public EncuestaPK() {
 	    }
 
-	    public EncuestaPK(int prgId, BigDecimal idCursoPeriodo, int estIdEstudiante) {
+	    public EncuestaPK(int prgId, BigInteger idCursoPeriodo, int estIdEstudiante) {
 	        this.prgId = prgId;
 	        this.idCursoPeriodo = idCursoPeriodo;
 	        this.estIdEstudiante = estIdEstudiante;
@@ -38,11 +38,11 @@ public class EncuestaPK implements Serializable{
 	        this.prgId = prgId;
 	    }
 
-	    public BigDecimal getIdCursoPeriodo() {
+	    public BigInteger getIdCursoPeriodo() {
 	        return idCursoPeriodo;
 	    }
 
-	    public void setIdCursoPeriodo(BigDecimal idCursoPeriodo) {
+	    public void setIdCursoPeriodo(BigInteger idCursoPeriodo) {
 	        this.idCursoPeriodo = idCursoPeriodo;
 	    }
 

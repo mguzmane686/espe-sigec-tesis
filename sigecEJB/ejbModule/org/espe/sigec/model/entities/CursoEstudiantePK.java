@@ -93,5 +93,8 @@ public class CursoEstudiantePK implements Serializable {
 	public void setIdCursoPeriodo(BigInteger idCursoPeriodo) {
 		this.idCursoPeriodo = idCursoPeriodo;
 	}
-    
+
+	public BigInteger getIdCursoPeriodo() {
+		return idCursoPeriodo;
+	}
 }
