@@ -11,9 +11,11 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -41,11 +43,29 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 		}
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class);
 		criteria.add(Restrictions.eq("cursoEstudiantePK.idCursoPeriodo", new BigInteger(idCursoPeriodo.toString())));
-		
 		@SuppressWarnings("unchecked")
 		Collection<Usuario> lstUsuarios = criteria.list();
 		System.out.println(lstUsuarios.size());
 		return lstUsuarios.size();
+	}
+
+	
+	@Override
+	public Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class, "cursoEstudianteA");
+		criteria.add(Restrictions.eq("cursoEstudianteA.cursoEstudiantePK.idEstudiante", idEstudiante));
+		criteria.createAlias("cursoEstudianteA.programaCurso", "programaCursoA");
+		criteria.setFetchMode("programaCursoA", FetchMode.JOIN);
+		
+		criteria.createAlias("programaCursoA.cursoPeriodo", "cursoPeriodoA");
+		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
+		criteria.setFetchMode("cursoA", FetchMode.JOIN);
+		
+		@SuppressWarnings("unchecked")
+		Collection<CursoEstudiante> lstCursosEstudiante = criteria.list();
+		return lstCursosEstudiante;
 	}
     
 }

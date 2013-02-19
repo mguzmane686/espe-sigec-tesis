@@ -5,6 +5,7 @@
 package org.espe.sigec.model.sessionBeans;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.CursoEstudiante;
@@ -31,5 +32,7 @@ public interface CursoEstudianteFacadeLocal {
     int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo);
     
     int count();
+    
+    Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante);
     
 }
