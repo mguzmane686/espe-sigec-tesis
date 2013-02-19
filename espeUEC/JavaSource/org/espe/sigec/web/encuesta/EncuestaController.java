@@ -10,7 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
-import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.Encuesta;
 import org.espe.sigec.model.entities.EncuestaPK;
 import org.espe.sigec.model.entities.Estudiante;
@@ -37,49 +37,72 @@ public class EncuestaController implements Serializable{
 	
 	private Encuesta encuesta;
 	private String cedulaEstudiante;
+	private Collection<CursoEstudiante> lstCursosEstudiante; 
+	
+	private CursoEstudiante cursoEstudianteSeleccionado;
 	
 	private Estudiante estudiante;
 	
-	Collection<CursoPeriodo> lstCursosAbiertos;
+	
+	private boolean showListaCursos;
+	
 	public EncuestaController() {
 		setEncuesta(new Encuesta());
+		getEncuesta().setEncuestaPK(new EncuestaPK());
 		getEncuesta().setFechaEncuesta(Calendar.getInstance().getTime());
 	}
 	
 	
 	public void btnGuardarEncuesta(){
 		System.out.println("Guardando encuesta");
-//		portalServicio.guardarEncuesta(getEncuesta());
-		EncuestaPK encuestaPK = new EncuestaPK();
-		portalServicio.buscarEncuesta(encuestaPK);
+		getEncuesta().setCursoEstudiante(getCursoEstudianteSeleccionado());
+		getEncuesta().getEncuestaPK().setEstIdEstudiante(getEstudiante().getIdEstudiante());
+		getEncuesta().getEncuestaPK().setIdCursoPeriodo(getCursoEstudianteSeleccionado().getCursoEstudiantePK().getIdCursoPeriodo());
+		getEncuesta().getEncuestaPK().setPrgId(getCursoEstudianteSeleccionado().getIdPrograma());
+		try {
+			portalServicio.guardarEncuesta(getEncuesta());
+			FacesUtils.addInfoMessage("Encuesta guardada");
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage("Ocurrion un erro al guardar la encuesta");
+		}
+		
 	}
 	
 	public void btnBuscarPersona(){
 		if(StringUtils.isNotEmpty(getCedulaEstudiante())){
 			System.out.println("Ingresa a buscar");
-			Estudiante estudiante =inscripcionServicio.buscarEstudinateByCedula(getCedulaEstudiante());
+			Estudiante estudiante = inscripcionServicio.buscarEstudinateByCedula(getCedulaEstudiante());
 			
 			if(estudiante!=null){
-				setEstudiante(estudiante);	
+				setEstudiante(estudiante);
+				//BUSCAMOS LOS CURSOS DEL ESTUDINATE
+				FacesUtils.addInfoMessage("Estudiante encontrado");
+				buscarCursosEstudiante(estudiante.getIdEstudiante());
 			}else{
 				FacesUtils.addInfoMessage("No se encontro ningun estudiante");
 			}
 		}
 	}
 	
+	/**
+	 * @param idEstudiante
+	 * Busca los cursos en los cuales el estudiante esta inscrito
+	 */
+	private void buscarCursosEstudiante(int idEstudiante){
+		Collection<CursoEstudiante> lstCursoEstudiantesTMP = portalServicio.buscarCursosEstudiante(idEstudiante); 
+		setShowListaCursos(Boolean.FALSE);
+		
+		if(lstCursoEstudiantesTMP !=null){
+			setLstCursosEstudiante(lstCursoEstudiantesTMP);
+			setCursoEstudianteSeleccionado(lstCursoEstudiantesTMP.iterator().next());
+			setShowListaCursos(Boolean.TRUE);
+		}else{
+			FacesUtils.addInfoMessage("No se encontro ningun curso para el estudiante");
+		}
+	}
 	@PostConstruct
 	public void initController(){
-		setLstCursosAbiertos(cursoServicio.findCursoAbierto());
-//		getEncuesta().setCtnConocimiento(10);
-	}
-
-	public Collection<CursoPeriodo> getLstCursosAbiertos() {
-		return lstCursosAbiertos;
-	}
-
-	public void setLstCursosAbiertos(Collection<CursoPeriodo> lstCursosAbiertos) {
-		this.lstCursosAbiertos = lstCursosAbiertos;
-	}
+	}	
 
 	public Encuesta getEncuesta() {
 		return encuesta;
@@ -107,6 +130,38 @@ public class EncuestaController implements Serializable{
 
 	public void setEstudiante(Estudiante estudiante) {
 		this.estudiante = estudiante;
+	}
+
+
+	public Collection<CursoEstudiante> getLstCursosEstudiante() {
+		return lstCursosEstudiante;
+	}
+
+
+	public void setLstCursosEstudiante(
+			Collection<CursoEstudiante> lstCursosEstudiante) {
+		this.lstCursosEstudiante = lstCursosEstudiante;
+	}
+
+
+	public boolean isShowListaCursos() {
+		return showListaCursos;
+	}
+
+
+	public void setShowListaCursos(boolean showListaCursos) {
+		this.showListaCursos = showListaCursos;
+	}
+
+
+	public CursoEstudiante getCursoEstudianteSeleccionado() {
+		return cursoEstudianteSeleccionado;
+	}
+
+
+	public void setCursoEstudianteSeleccionado(
+			CursoEstudiante cursoEstudianteSeleccionado) {
+		this.cursoEstudianteSeleccionado = cursoEstudianteSeleccionado;
 	}
 	
 }
