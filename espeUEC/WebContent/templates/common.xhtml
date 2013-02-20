@@ -42,7 +42,7 @@
 		url="/pages/contact.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
 </p:dock>
 
-<h:body style="background-color: rgb(12,38,53)">
+<h:body style="background-color: rgb(12,38,53)" onkeydown="if(bloquearTeclas(event)) return false;">
 	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
               
 	<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false" draggable="false" closable="false">  
