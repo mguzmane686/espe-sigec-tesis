@@ -59,15 +59,18 @@
 					<uec:groupPanel id="pgBusqueda">
 						<h:panelGrid columns="3">
 							<h:outputText value="Estudiante :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:inputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula" validator="cedulaValidator"/>
-							<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="buscar" 
-								process="@this txtCedula" update="pgPersonaFnd :frmEncuesta:ctnCurso:pgCurso"/>
+							
+							<uec:extendedInputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula" required="true" mensajeRequerido="campo requerido">
+								<f:validator for="input" validatorId="cedulaValidator" />
+							</uec:extendedInputText>
+							<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="Buscar" 
+								process="@this txtCedula" update="pgPersonaFnd :frmEncuesta:ctnCurso:pgCurso pgBusqueda"/>
 							
 							
 						</h:panelGrid>
 						<h:panelGrid columns="2" id="pgPersonaFnd">
 							<h:outputText value="Nombres y apellidos :" styleClass="label-bold" style="display:block; width:150px;"/>								
-							<h:outputText value="#{encuestaController.estudiante.persona.primerNombre}"/>
+							<h:outputText value="#{encuestaController.estudiante.persona.nombreCompleto}"/>
 							
 							<h:outputText value="E-mail :" styleClass="label-bold" style="display:block; width:150px;"/>								
 							<h:outputText value="#{encuestaController.estudiante.persona.mail}"/>
@@ -80,7 +83,7 @@
 					<uec:groupPanel>
 						<h:panelGrid columns="2">
 							<h:outputText value="Actividad :" styleClass="label-bold" style="display:block; width:150px;"/>
-							<p:selectOneMenu style="line-height: 10px;" >
+							<p:selectOneMenu style="line-height: 10px;" value="#{encuestaController.encuesta.actividad}">
 								<f:selectItem itemLabel="Estudiante" itemValue="EST"/>
 								<f:selectItem itemLabel="Docente" itemValue="DCT"/>
 								<f:selectItem itemLabel="Militar" itemValue="MLT"/>
