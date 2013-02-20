@@ -12,7 +12,7 @@ public interface PortalServicio {
 	Collection<ProgramaCurso> buscarPrograma();
 	Collection<Programa> buscarProgramaActivo();
 	
-	void guardarEncuesta(Encuesta encuesta);
+	void guardarEncuesta(Encuesta encuesta) throws Exception;
 	Encuesta buscarEncuesta(EncuestaPK encuestaPK);
 	
 	Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante);

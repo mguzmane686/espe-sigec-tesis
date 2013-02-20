@@ -20,10 +20,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -31,12 +33,13 @@ import javax.validation.constraints.Size;
  *
  * @author roberto
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "sgct_rh_persona")
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")})
 public class Persona implements Serializable {
-    private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @NotNull
@@ -89,6 +92,27 @@ public class Persona implements Serializable {
     private String esContacto;
     @Column(name = "per_estado_civil")
     private String estadoCivil;
+    @Transient
+    private String nombreCompleto;
+    
+    @PostLoad
+    private void llenarNombreCompleto(){
+    	StringBuilder nombreCompleto = new StringBuilder();
+    	if(this.primerNombre !=null){
+    		nombreCompleto.append(this.primerNombre + " ");
+    	}
+    	if(this.segundoNombre !=null){
+    		nombreCompleto.append(this.segundoNombre + " ");
+    	}
+    	if(this.primerApellido !=null){
+    		nombreCompleto.append(this.primerApellido+ " ");
+    	}
+    	if(this.segundoApellido !=null){
+    		nombreCompleto.append(this.segundoApellido);
+    	}
+    	setNombreCompleto(nombreCompleto.toString());
+    }
+    
    
    
     @JoinColumn(name = "usr_id_usuario", referencedColumnName = "usr_id_usuario")
@@ -291,6 +315,16 @@ public class Persona implements Serializable {
 
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
+	}
+
+
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
 	}
 	
 }
