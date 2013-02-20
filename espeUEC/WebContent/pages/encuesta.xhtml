@@ -63,11 +63,11 @@
 								<f:validator for="input" validatorId="cedulaValidator" />
 							</uec:extendedInputText>
 							<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="Buscar" 
-								process="@this txtCedula" update="pgPersonaFnd :frmEncuesta:ctnCurso:pgCurso pgBusqueda"/>
+								process="@this txtCedula" update=":frmEncuesta:ctnCurso:pgCurso pgBusqueda :frmEncuesta:pgActividad"/>
 							
 							
 						</h:panelGrid>
-						<h:panelGrid columns="2" id="pgPersonaFnd">
+						<h:panelGrid columns="2" id="pgPersonaFnd" rendered="#{encuestaController.showListaCursos}">
 							<h:outputText value="Nombres y apellidos :" styleClass="label-bold" style="display:block; width:150px;"/>								
 							<h:outputText value="#{encuestaController.estudiante.persona.nombreCompleto}"/>
 							
@@ -79,8 +79,8 @@
 						</h:panelGrid>
 					</uec:groupPanel>
 					
-					<uec:groupPanel>
-						<h:panelGrid columns="2">
+					<uec:groupPanel id="pgActividad">
+						<h:panelGrid columns="2"  rendered="#{encuestaController.showListaCursos}">
 							<h:outputText value="Actividad :" styleClass="label-bold" style="display:block; width:150px;"/>
 							<p:selectOneMenu style="line-height: 10px;" value="#{encuestaController.encuesta.actividad}">
 								<f:selectItem itemLabel="Estudiante" itemValue="EST"/>
@@ -95,7 +95,7 @@
 					</uec:groupPanel>
 					
 					<uec:groupPanel style="text-align:center;">
-						<h:outputText value="Indique su percepcion marcando la calificacion de 1 a 5, siendo 1 lo muy insatisfactorio y 5 lo muy satisfactorio" styleClass="label-bold" style="color:red; text-align:center;"/>
+						<h:outputText value="#{msg.etiqueta_encuesta_tabs}" styleClass="label-bold" style="color:red; text-align:center; font-size:14px;"/>
 					</uec:groupPanel>
 					
 					

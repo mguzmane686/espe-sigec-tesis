@@ -63,7 +63,7 @@ public class EncuestaController implements Serializable{
 			portalServicio.guardarEncuesta(getEncuesta());
 			FacesUtils.addInfoMessage("Encuesta guardada");
 		} catch (Exception e) {
-			FacesUtils.addErrorMessage("Ocurrion un erro al guardar la encuesta");
+			FacesUtils.addErrorMessage("Ya existe una encuesta sobre este curso!!");
 		}
 		
 	}
