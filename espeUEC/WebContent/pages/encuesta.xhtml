@@ -37,8 +37,7 @@
 						<h:panelGroup id="pgCurso">
 							<h:panelGrid columns="2"  rendered="#{encuestaController.showListaCursos}">
 								<h:outputText value="#{msg.etiqueta_empresa_institucion} :" styleClass="label-bold" style="display:block; width:150px;"/>								
-								<p:inputText value="#{encuestaController.encuesta.institucion}" size="88" required="true" requiredMessage="El campo #{msg.etiqueta_empresa_institucion} es obligatorio"/>
-														
+								<uec:extendedInputText value="#{encuestaController.encuesta.institucion}" required="true" requiredMessage="El campo #{msg.etiqueta_empresa_institucion} es obligatorio" size="88"/>						
 								<h:outputText value="#{msg.etiqueta_facilitador} :" styleClass="label-bold" style="display:block; width:150px;"/>								
 								<p:inputText value="#{encuestaController.cursoEstudianteSeleccionado.idPrograma}" size="88"/>
 								
@@ -60,7 +59,7 @@
 						<h:panelGrid columns="3">
 							<h:outputText value="Estudiante :" styleClass="label-bold" style="display:block; width:150px;"/>
 							
-							<uec:extendedInputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula" required="true" mensajeRequerido="campo requerido">
+							<uec:extendedInputText value="#{encuestaController.cedulaEstudiante}" id="txtCedula" required="true" requiredMessage="campo requerido">
 								<f:validator for="input" validatorId="cedulaValidator" />
 							</uec:extendedInputText>
 							<p:commandLink action="#{encuestaController.btnBuscarPersona}" value="Buscar" 
