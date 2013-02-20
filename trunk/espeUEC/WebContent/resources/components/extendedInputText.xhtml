@@ -13,8 +13,9 @@
 <body>
 <composite:interface>
 	<composite:attribute name="value" required="true" />
-	<composite:attribute name="mensajeRequerido"/>
+	<composite:attribute name="requiredMessage"/>
 	<composite:attribute name="required" default="false"/>
+	<composite:attribute name="size" default=""/>
 	
 	<composite:editableValueHolder name="input" targets="txtValue" />
 </composite:interface>
@@ -22,7 +23,8 @@
 	<div id="{cc.clientId}" style="display:table; margin:auto;">
 		<div style="display:table-row; ">
 			<div style="display:table-cell; vertical-align:top;">
-				<p:inputText id="txtValue" value="#{cc.attrs.value}" required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.mensajeRequerido}">
+				<p:inputText id="txtValue" value="#{cc.attrs.value}" size="#{cc.attrs.size}" 
+					required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}">
 					<composite:insertChildren />
 				</p:inputText>
 			</div>
