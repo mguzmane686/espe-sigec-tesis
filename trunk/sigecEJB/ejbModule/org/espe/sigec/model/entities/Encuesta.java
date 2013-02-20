@@ -27,8 +27,6 @@ public class Encuesta implements Serializable{
 //	private String lugar;
 //	private Date fecha;
 //	private String edad;
-//	private String actividad;
-//	
 	
 	
 	
@@ -89,6 +87,9 @@ public class Encuesta implements Serializable{
     
     @Column(name = "ect_fecha")
     private Date fechaEncuesta;
+    
+    @Column(name = "ect_actividad")
+    private String actividad;
     
     @JoinColumns({
         @JoinColumn(name = "prg_id", referencedColumnName = "prg_id", insertable = false, updatable = false),
@@ -368,6 +369,14 @@ public class Encuesta implements Serializable{
 
 	public void setInstitucion(String institucion) {
 		this.institucion = institucion;
+	}
+
+	public String getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(String actividad) {
+		this.actividad = actividad;
 	}
 	
 }

@@ -38,11 +38,11 @@ public class PortalServicioImpl implements PortalServicio{
 	}
 
 	@Override
-	public void guardarEncuesta(Encuesta encuesta) {
+	public void guardarEncuesta(Encuesta encuesta) throws Exception{
 		try {
 			encuestaFacadeLocal.create(encuesta);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new Exception(e);
 		}
 	}
 
