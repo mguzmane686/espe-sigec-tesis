@@ -149,7 +149,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 					throw new Exception("El identificador ya existe");
 				}
 			}else{
-				UsuarioPerfilPK usuarioPerfilPK = new UsuarioPerfilPK(persona.getIdPersona(), "EST");
+				UsuarioPerfilPK usuarioPerfilPK = new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST");
 				UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.find(usuarioPerfilPK);
 				if(usuarioPerfil==null){
 					UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
@@ -165,6 +165,9 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 					}
 					
 					
+				}else{
+					Estudiante estudianteTMP = estudianteFacadeLocal.buscarEstudinateByCedula(persona.getCedula());
+					estudiante = estudianteTMP;
 				}
 			}
 			
@@ -197,6 +200,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 			}
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			userTransaction.rollback();
 			if(e.getMessage().contains("El identificador ya existe")){
 				throw new UserValidateException("UserValidateException");
