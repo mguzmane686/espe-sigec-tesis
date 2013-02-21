@@ -64,13 +64,16 @@
 					<h:panelGroup layout="block">
 						<h:panelGrid columns="2">
 							<h:outputLabel value="#{msg['cedula']}: "  style="padding-right:50px" />
-							<h:inputText value="#{registroDocenteController.profesor.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10" styleClass="campoRequerido" 
-								required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" rendered="#{registroDocenteController.renderEditionButtons}" validator="cedulaValidator"/>
-							<h:outputText value="#{registroDocenteController.profesor.persona.cedula}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+							
+							<sigecComp:textField value="#{registroDocenteController.profesor.persona.cedula}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="El campo #{msg['cedula']} es obligatorio" onkeypressScript="return validateNumPP(event);">
+								<f:validator validatorId="cedulaValidator" for="Input"/>
+							</sigecComp:textField>
+							
+							
 		
 							<h:outputLabel value="#{msg['nombres']}: "  />
 							<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
-								<h:inputText value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
+								<sigecComp:textField value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" editMode="true" label="El campo #{msg['nombre']} es obligatorio" />
 								<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
 							</h:panelGrid>
 							<h:outputText value="#{registroDocenteController.profesor.persona.primerNombre.concat(' ').concat(registroDocenteController.profesor.persona.segundoNombre)}" 
@@ -79,7 +82,7 @@
 		
 							<h:outputLabel value="#{msg['apellidos']}: "  />
 							<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
-								<h:inputText value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
+								<sigecComp:textField value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" editMode="true" label="El campo #{msg['apellidos']} es obligatorio" />
 								<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
 							</h:panelGrid>
 							<h:outputText value="#{registroDocenteController.profesor.persona.primerApellido.concat(' ').concat(registroDocenteController.profesor.persona.segundoApellido)}" 
@@ -151,12 +154,11 @@
                 	<h:panelGroup layout="block">
                 		<h:panelGrid columns="2">
                 			<h:outputLabel value="#{msg.primaria}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
-                			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+                			
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="El campo #{msg.primaria} es obligatorio" />
                 			
                 			<h:outputLabel value="#{msg.secundaria}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
-                			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="El campo #{msg.secundaria} es obligatorio" />
                 			
                 			<h:outputLabel value="#{msg.universitaria}: " />
                 			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>

@@ -17,6 +17,8 @@
 	<composite:attribute name="required" default="false"/>
 	<composite:valueHolder name="Input"/>
 	<composite:attribute name="label"/>
+	<composite:attribute name="onkeypressScript"/>
+	
 </composite:interface>
 <composite:implementation>
 	<style>
@@ -44,8 +46,11 @@
 	<div id="#{cc.clientId}">
 		<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
 			<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
-			<h:inputText id="Input" value="#{cc.attrs.value}" styleClass="#{(cc.attrs.required == 'true') ? 'cajaRequerida' : '' }" 
-				rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.label} es obligatorio"/>
+			<h:inputText id="Input" value="#{cc.attrs.value}" styleClass="#{(cc.attrs.required == 'true') ? 'cajaRequerida' : '' }"
+				onkeypress="#{cc.attrs.onkeypressScript}" 
+				rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.label} es obligatorio">
+				<composite:insertChildren />
+			</h:inputText>
 			<rich:message for="Input" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
 				<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
 			</rich:message>
