@@ -77,7 +77,7 @@
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.cedula}" />
 							</f:facet>
-							<a4j:commandLink value="#{lstPersona.cedula}" oncomplete="#{rich:component('popup')}.show()" execute="@this" render="popup">
+							<a4j:commandLink value="#{lstPersona.cedula}" oncomplete="#{rich:component('popup')}.show()" execute="@this" render="popup pnlDatosPersona">
 								<f:setPropertyActionListener target="#{creacionUsuarioController.personaSeleccionadaBucarPerfil}" value="#{lstPersona}"></f:setPropertyActionListener>
 							</a4j:commandLink>
 						</rich:column>
@@ -115,25 +115,26 @@
 							
 							<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
 							<h:panelGroup>
-								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
+								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" label="El campo #{msg['clave']} es obligatorio" editMode="true"/>
 							</h:panelGroup>
 						</h:panelGrid>
 						
 						<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
 							<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
 							
-							<h:inputText value="#{creacionUsuarioController.personaSeleccionada.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
-								required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido"/>
+							<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.cedula}" required="true" label="El campo #{msg['cedula']} es obligatorio" editMode="true" onkeypressScript="return validateNumPP(event);">
+								<f:validator  for="Input" validatorId="cedulaValidator"></f:validator>
+							</sigecComp:textField>
 		
 							<h:outputLabel value="#{msg['nombres']} :" />
 							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido" />
+								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.primerNombre}" required="true" label="El campo #{msg['nombre']} es obligatorio" editMode="true"/>
 								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoNombre}"/>
 							</h:panelGrid>	
 							
 							<h:outputLabel value="#{msg['apellidos']} :" />
 							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
+								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="true" label="El campo #{msg['apellidos']} es obligatorio" editMode="true"/>
 								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoApellido}" />
 							</h:panelGrid>
 		
@@ -187,7 +188,7 @@
 	        </h:panelGroup>
 	        <h:panelGroup layout="block" style="width:100%; margin:auto; ">
 	        	<h:panelGrid columns="2" style="margin:auto;">
-	        		<a4j:commandLink value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popup')}.hide();" execute="pnlDatosPersona, tblPerfilesEdit" render="tblPersonas" action="#{creacionUsuarioController.btnActualizarUsuario}"></a4j:commandLink>
+	        		<a4j:commandLink value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popup')}.hide();" execute="pnlDatosPersona, tblPerfilesEdit" render="tblPersonas pnlDatosPersona" action="#{creacionUsuarioController.btnActualizarUsuario}"></a4j:commandLink>
 	        		<a4j:commandLink value="Cancelar" oncomplete="#{rich:component('popup')}.hide();" execute="@this"></a4j:commandLink>
 	        	</h:panelGrid>
 	        </h:panelGroup>

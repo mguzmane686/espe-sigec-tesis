@@ -55,12 +55,10 @@
 				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
-					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio" styleClass="campoRequerido"/>
+					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" editMode="true" label="El campo #{msg['identificador']} es obligatorio" />
 					
 					<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
-					<h:panelGroup>
-						<h:inputSecret value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo #{msg['clave']} es obligatorio" styleClass="campoRequerido"/>
-					</h:panelGroup>
+					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" editMode="true" label="El campo #{msg['clave']} es obligatorio" />
 				</h:panelGrid>
 			</rich:collapsiblePanel>
 			
@@ -69,13 +67,13 @@
 			
 				<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
 					<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
+					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" required="true" editMode="true" label="El campo #{msg['cedula']} es obligatorio" onkeypressScript="return validateNumPP(event);">
+						<f:validator for="Input" validatorId="cedulaValidator"></f:validator>
+					</sigecComp:textField>
 					
-					<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"  
-						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio" styleClass="campoRequerido" validator="cedulaValidator"/>
-
 					<h:outputLabel value="#{msg['nombres']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido" />
+						<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" editMode="true" label="El campo #{msg['nombre']} es obligatorio" />
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoNombre}"/>
 					</h:panelGrid>	
 						
@@ -84,7 +82,7 @@
 
 					<h:outputLabel value="#{msg['apellidos']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
+						<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.primerApellido}" required="true" editMode="true" label="El campo #{msg['apellidos']} es obligatorio" />
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoApellido}" />
 					</h:panelGrid>
 
