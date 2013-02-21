@@ -31,7 +31,7 @@ a:link:hover, a:visited:hover  {
 .campoRequerido {
 	background-image: url('') !important;
 	background-repeat: no-repeat !important;
-	background-color: #FCFC99 !important;
+	background-color: #FBEFFB !important;
 	background-position: right !important;
 	position: relative;
 }
