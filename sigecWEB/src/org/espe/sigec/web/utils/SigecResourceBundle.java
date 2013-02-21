@@ -12,7 +12,7 @@ public class SigecResourceBundle {
 	private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("org.espe.sigec.web.utils.sigec_msg");
 	
 	/**
-	 * Permite la obtención del valor de la clave del archivo de propiedades general
+	 * Permite la obtencion del valor de la clave del archivo de propiedades general
 	 * @param  key							- Clave del archivo de propiedades que se desea obtener
 	 * @return								- Valor de la clave ingresadaS
 	 * @throws MissingResourceException
@@ -22,9 +22,9 @@ public class SigecResourceBundle {
 	}
 	
 	/**
-	 * Permite la obtención del valor de la clave del archivo de propiedades general con la asignación de los parámetros
+	 * Permite la obtención del valor de la clave del archivo de propiedades general con la asignacion de los paraametros
 	 * @param  key							- Clave del archivo de propiedades que se desea obtener
-	 * @param  parameters					- Parámetros del mensaje
+	 * @param  parameters					- Parametros del mensaje
 	 * @return								- Valor de la clave ingresada
 	 * @throws MissingResourceException
 	 */
@@ -33,9 +33,9 @@ public class SigecResourceBundle {
 	}
 	
 	/**
-	 * Permite la obtención del valor de la clave del archivo de propiedades general en formato <code>Integer</code>
+	 * Permite la obtencion del valor de la clave del archivo de propiedades general en formato <code>Integer</code>
 	 * @param  key							- Clave del archivo de propiedades que se desea obtener
-	 * @param  parameters					- Parámetros del mensaje
+	 * @param  parameters					- Parametros del mensaje
 	 * @return								- Valor de la clave ingresada
 	 * @throws MissingResourceException
 	 */

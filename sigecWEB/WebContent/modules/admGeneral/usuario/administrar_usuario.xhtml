@@ -187,7 +187,7 @@
 	        </h:panelGroup>
 	        <h:panelGroup layout="block" style="width:100%; margin:auto; ">
 	        	<h:panelGrid columns="2" style="margin:auto;">
-	        		<a4j:commandLink value="Aceptar" oncomplete="#{rich:component('popup')}.hide();" execute="pnlDatosPersona, tblPerfilesEdit" render="tblPersonas" action="#{creacionUsuarioController.btnActualizarUsuario}"></a4j:commandLink>
+	        		<a4j:commandLink value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popup')}.hide();" execute="pnlDatosPersona, tblPerfilesEdit" render="tblPersonas" action="#{creacionUsuarioController.btnActualizarUsuario}"></a4j:commandLink>
 	        		<a4j:commandLink value="Cancelar" oncomplete="#{rich:component('popup')}.hide();" execute="@this"></a4j:commandLink>
 	        	</h:panelGrid>
 	        </h:panelGroup>
