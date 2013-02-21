@@ -1,20 +1,23 @@
 <?xml version="1.0"?>
 <faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
-	<application>
-		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
-		<resource-bundle>
-			<base-name>org.espe.sigec.web.utils.sigec_msg</base-name>
-			<var>msg</var>
-		</resource-bundle>
-		
-		<resource-bundle>
-			<base-name>org.espe.sigec.common.resource.sigec_client_messages</base-name>
-			<var>msg_client</var>
-		</resource-bundle>
-	</application>
-	<lifecycle>
-		<phase-listener>org.espe.sigec.web.utils.SigecLifeCycle</phase-listener>
-	</lifecycle>
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+ <validator>
+  <validator-id>cedulaValidator</validator-id>
+  <validator-class>org.espe.sigec.web.utils.CedulaValidator</validator-class>
+ </validator>
+ <application>
+  <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+  <resource-bundle>
+   <base-name>org.espe.sigec.web.utils.sigec_msg</base-name>
+   <var>msg</var>
+  </resource-bundle>
+  <resource-bundle>
+   <base-name>org.espe.sigec.common.resource.sigec_client_messages</base-name>
+   <var>msg_client</var>
+  </resource-bundle>
+ </application>
+ <lifecycle>
+  <phase-listener>org.espe.sigec.web.utils.SigecLifeCycle</phase-listener>
+ </lifecycle>
 </faces-config>
