@@ -51,9 +51,7 @@
 				<h:panelGrid columns="2">
 				
 					<h:outputLabel value="#{msg.nombre} :" />
-					<h:inputText value="#{administrarProgramaController.programa.nombre}" size="80" styleClass="campoRequerido" 
-						required="true" requiredMessage="El campo nombre es obligatorio" rendered="#{administrarProgramaController.editMode}"/>
-					<h:outputText value="#{administrarProgramaController.programa.nombre}" size="80" rendered="#{!administrarProgramaController.editMode}"/>
+					<sigecComp:textField value="#{administrarProgramaController.programa.nombre}" editMode="#{administrarProgramaController.editMode}" required="true" label="#{msg.nombre}" size="80"></sigecComp:textField>
 					
 					<h:outputLabel value="#{msg.descripcion} :" />
 					<h:outputText value="#{administrarProgramaController.programa.descripcion}" size="80" rendered="#{!administrarProgramaController.editMode}"/>
@@ -61,7 +59,7 @@
 					
 					<h:outputLabel value="Fecha inicio" />
 					<h:outputText value="#{administrarProgramaController.programa.inicio}" rendered="#{!administrarProgramaController.editMode}"/>
-					<rich:calendar value="#{administrarProgramaController.programa.inicio}" rendered="#{administrarProgramaController.editMode}"/>
+					<rich:calendar value="#{administrarProgramaController.programa.inicio}" rendered="#{administrarProgramaController.editMode}" required="true" requiredMessage="El campo Fecha inicio es obligatorio"/>
 					
 					<h:outputLabel value="Estado" />
 					<h:outputText value="#{administrarProgramaController.programa.estado=='1'?'Activo':'Inactivo'}" rendered="#{!administrarProgramaController.editMode}"/>
