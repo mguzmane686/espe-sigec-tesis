@@ -56,10 +56,7 @@
 	        			<h:outputText value="#{edicionCursoController.curso.especialidad.nombre}" />
 	        			
 	        			<h:outputLabel value="#{msg['nombre']}:"/>
-	        			<h:inputText value="#{edicionCursoController.curso.nombreCurso}" size="72" required="true" 
-	        				requiredMessage="El campo Nombre es obligatorio"
-	        				rendered="#{edicionCursoController.renderEditButtons}"/>
-	        			<h:outputText value="#{edicionCursoController.curso.nombreCurso}" rendered="#{!edicionCursoController.renderEditButtons}"/>
+	        			<sigecComp:textField value="#{edicionCursoController.curso.nombreCurso}" editMode="#{edicionCursoController.renderEditButtons}" required="true" label="#{msg['nombre']}" size="72" />
 	        			
 	        			<h:outputLabel value="#{msg.etiqueta_generalidades} :" />
 						<h:inputTextarea value="#{edicionCursoController.curso.generalidadesCurso}" cols="70"  
