@@ -53,12 +53,10 @@
         			<h:outputText value="#{administrarLugarController.lugarCurso.idLugar}" />
         			
         			<h:outputLabel value="#{msg['nombre']}:" />
-        			<h:inputText rendered="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
-        			<h:outputText value="#{administrarLugarController.lugarCurso.nombre}" rendered="#{!administrarLugarController.editMode}" />
+        			<sigecComp:textField value="#{administrarLugarController.lugarCurso.nombre}" size="72" required="true" label="#{msg['nombre']}" editMode="#{administrarLugarController.editMode}"/>
         			
         			<h:outputLabel value="#{msg['direccion']}:"/>
-        			<h:inputText rendered="#{administrarLugarController.editMode}" value="#{administrarLugarController.lugarCurso.direccion}" size="72" required="true" requiredMessage="El campo #{msg['direccion']} es obligatorio"/>
-        			<h:outputText value="#{administrarLugarController.lugarCurso.direccion}" rendered="#{!administrarLugarController.editMode}" />
+        			<sigecComp:textField value="#{administrarLugarController.lugarCurso.direccion}" size="72" required="true" label="#{msg['direccion']}" editMode="#{administrarLugarController.editMode}"/>
         		
         		</h:panelGrid>
         	</fieldset>	

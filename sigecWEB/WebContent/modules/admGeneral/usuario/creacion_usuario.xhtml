@@ -55,10 +55,10 @@
 				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
-					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" editMode="true" label="El campo #{msg['identificador']} es obligatorio" />
+					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" editMode="true" label="#{msg['identificador']}" />
 					
 					<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
-					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" editMode="true" label="El campo #{msg['clave']} es obligatorio" />
+					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" editMode="true" label="#{msg['clave']}" />
 				</h:panelGrid>
 			</rich:collapsiblePanel>
 			
@@ -73,7 +73,7 @@
 					
 					<h:outputLabel value="#{msg['nombres']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-						<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" editMode="true" label="El campo #{msg['nombre']} es obligatorio" />
+						<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.primerNombre}" required="true" editMode="true" label="#{msg['nombre']}" />
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoNombre}"/>
 					</h:panelGrid>	
 						
@@ -82,7 +82,7 @@
 
 					<h:outputLabel value="#{msg['apellidos']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-						<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.primerApellido}" required="true" editMode="true" label="El campo #{msg['apellidos']} es obligatorio" />
+						<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.persona.primerApellido}" required="true" editMode="true" label="#{msg['apellidos']}" />
 						<h:inputText value="#{creacionUsuarioController.usuarioPerfil.persona.segundoApellido}" />
 					</h:panelGrid>
 

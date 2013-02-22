@@ -52,17 +52,19 @@
 				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
-					<h:inputText value="#{admContactoController.persona.cedula}" onkeypress="return validateNumPP(event);" maxlength="10"/>
+					<sigecComp:textField value="#{admContactoController.persona.primerNombre}" required="false" editMode="true" label="#{msg['cedula']}" onkeypressScript="return validateNumPP(event);">
+						<f:validator for="Input" validatorId="cedulaValidator" />
+					</sigecComp:textField>
 					
 					<h:outputLabel value="#{msg['nombres']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-						<h:inputText value="#{admContactoController.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
+						<sigecComp:textField value="#{admContactoController.persona.primerNombre}" required="true" editMode="true" label="#{msg['nombre']}"/>
 						<h:inputText value="#{admContactoController.persona.segundoNombre}"/>
 					</h:panelGrid>	
 					
 					<h:outputLabel value="#{msg['apellidos']} :" />
 					<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-						<h:inputText value="#{admContactoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio" styleClass="campoRequerido"/>
+						<sigecComp:textField value="#{admContactoController.persona.primerApellido}" required="true" editMode="true" label="#{msg['apellidos']}"/>
 						<h:inputText value="#{admContactoController.persona.segundoApellido}" />
 					</h:panelGrid>
 
@@ -82,11 +84,11 @@
 					<h:outputLabel value="#{msg['celular']} :" />
 					<h:inputText value="#{admContactoController.persona.telefonoCelular}" maxlength="15" onkeypress="return validateNumPP(event);"/>
 					
-					<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
+					<h:outputLabel value="#{msg.etiqueta_telefono_convencional} : " />
 					<h:inputText value="#{admContactoController.persona.telefonoConvencional}" maxlength="15" onkeypress="return validateNumPP(event);"/>
 					
-					<h:outputLabel value="#{msg.etiqueta_referencia}" />
-					<h:inputText value="#{admContactoController.persona.referencia}" size="43" styleClass="campoRequerido"/>
+					<h:outputLabel value="#{msg.etiqueta_referencia} : " />
+					<sigecComp:textField value="#{admContactoController.persona.referencia}" size="43" required="true" editMode="true" label="#{msg.etiqueta_referencia}"/>
 				</h:panelGrid>
 			</rich:collapsiblePanel>
 		</rich:panel>

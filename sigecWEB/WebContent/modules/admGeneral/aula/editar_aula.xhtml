@@ -59,8 +59,7 @@
         			<h:outputText value="#{administrarAulaController.aula.idAula}" />
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
-        			<h:inputText rendered="#{administrarAulaController.editMode}" value="#{administrarAulaController.aula.nombreAula}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
-        			<h:outputText value="#{administrarAulaController.aula.nombreAula}" rendered="#{!administrarAulaController.editMode}"/>
+        			<sigecComp:textField value="#{administrarAulaController.aula.nombreAula}" required="true" label="#{msg['nombre']}" editMode="#{administrarAulaController.editMode}" ></sigecComp:textField>
         			
         			<h:outputLabel value="#{msg['descripcion']}:" />
         			<h:inputTextarea rendered="#{administrarAulaController.editMode}" value="#{administrarAulaController.aula.descripcionAula}" style="width:40em"/>

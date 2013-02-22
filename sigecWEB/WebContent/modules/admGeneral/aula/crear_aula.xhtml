@@ -29,19 +29,19 @@
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
         	
         		<h:panelGrid columns="2">
-        			<h:outputLabel value="Lugar :" />
-        			<rich:select valueChangeListener="#{aulaController.someChangeLugar}" defaultLabel="Seleccione">
+        			<h:outputLabel value="#{msg['etiqueta_establecimiento']} :" />
+        			<rich:select valueChangeListener="#{aulaController.someChangeLugar}" defaultLabel="Seleccione" required="true" requiredMessage="El campo #{msg['etiqueta_establecimiento']} es obligarotio">
         				<f:selectItems value="#{aulaController.itemsLugares}"/>
         				<a4j:ajax execute="@this" render="somEdificio" event="selectitem"/>
         			</rich:select>
         			
         			<h:outputLabel value="#{msg['etiqueta_edificio']}:" />
-        			<rich:select id="somEdificio" value="#{aulaController.aula.edificio.idEdificio}" defaultLabel="Seleccione">
+        			<rich:select id="somEdificio" value="#{aulaController.aula.edificio.idEdificio}" defaultLabel="Seleccione" required="true" requiredMessage="El campo #{msg['etiqueta_edificio']} es obligarotio">
         				<f:selectItems value="#{aulaController.itemsEdificios}"/>
         			</rich:select>
         			
         			<h:outputLabel value="#{msg['nombre']}:"/>
-        			<h:inputText value="#{aulaController.aula.nombreAula}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio" styleClass="campoRequerido"/>
+        			<sigecComp:textField value="#{aulaController.aula.nombreAula}" size="72" required="true" label="#{msg['nombre']}" editMode="true"/>
         			
         			<h:outputLabel value="#{msg['descripcion']}:" />
         			<h:inputTextarea value="#{aulaController.aula.descripcionAula}" style="width:40em"/>

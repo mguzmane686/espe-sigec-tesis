@@ -56,8 +56,7 @@
         			<h:outputText value="#{administrarEdificioController.edificio.idEdificio}" />   			
         			
         			<h:outputLabel value="#{msg['nombre']}: "/>
-        			<h:inputText rendered="#{administrarEdificioController.editMode}" value="#{administrarEdificioController.edificio.nombre}" size="72" required="true" requiredMessage="El campo Nombre es obligatorio"/>
-        			<h:outputText value="#{administrarEdificioController.edificio.nombre}" rendered="#{!administrarEdificioController.editMode}" />
+        			<sigecComp:textField value="#{administrarEdificioController.edificio.nombre}" size="72" required="true" label="#{msg['nombre']}" editMode="#{administrarEdificioController.editMode}" />
         			
         			<h:outputLabel value="#{msg['descripcion']}:" />
         			<h:inputTextarea rendered="#{administrarEdificioController.editMode}" value="#{administrarEdificioController.edificio.descripcion}" style="width:40em"/>

@@ -65,7 +65,7 @@
 						<h:panelGrid columns="2">
 							<h:outputLabel value="#{msg['cedula']}: "  style="padding-right:50px" />
 							
-							<sigecComp:textField value="#{registroDocenteController.profesor.persona.cedula}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="El campo #{msg['cedula']} es obligatorio" onkeypressScript="return validateNumPP(event);">
+							<sigecComp:textField value="#{registroDocenteController.profesor.persona.cedula}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg['cedula']}" onkeypressScript="return validateNumPP(event);">
 								<f:validator validatorId="cedulaValidator" for="Input"/>
 							</sigecComp:textField>
 							
@@ -73,7 +73,7 @@
 		
 							<h:outputLabel value="#{msg['nombres']}: "  />
 							<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
-								<sigecComp:textField value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" editMode="true" label="El campo #{msg['nombre']} es obligatorio" />
+								<sigecComp:textField value="#{registroDocenteController.profesor.persona.primerNombre}" required="true" editMode="true" label= "#{msg['nombre']}" />
 								<h:inputText value="#{registroDocenteController.profesor.persona.segundoNombre}" />
 							</h:panelGrid>
 							<h:outputText value="#{registroDocenteController.profesor.persona.primerNombre.concat(' ').concat(registroDocenteController.profesor.persona.segundoNombre)}" 
@@ -82,7 +82,7 @@
 		
 							<h:outputLabel value="#{msg['apellidos']}: "  />
 							<h:panelGrid columns="2" rendered="#{registroDocenteController.renderEditionButtons}" cellpadding="0" cellspacing="0">
-								<sigecComp:textField value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" editMode="true" label="El campo #{msg['apellidos']} es obligatorio" />
+								<sigecComp:textField value="#{registroDocenteController.profesor.persona.primerApellido}" required="true" editMode="true" label="#{msg['apellidos']}" />
 								<h:inputText value="#{registroDocenteController.profesor.persona.segundoApellido}" />
 							</h:panelGrid>
 							<h:outputText value="#{registroDocenteController.profesor.persona.primerApellido.concat(' ').concat(registroDocenteController.profesor.persona.segundoApellido)}" 
@@ -155,10 +155,10 @@
                 		<h:panelGrid columns="2">
                 			<h:outputLabel value="#{msg.primaria}: " />
                 			
-                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="El campo #{msg.primaria} es obligatorio" />
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.primaria}" />
                 			
                 			<h:outputLabel value="#{msg.secundaria}: " />
-                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="El campo #{msg.secundaria} es obligatorio" />
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.secundaria}" />
                 			
                 			<h:outputLabel value="#{msg.universitaria}: " />
                 			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
