@@ -115,14 +115,14 @@
 							
 							<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
 							<h:panelGroup>
-								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" label="El campo #{msg['clave']} es obligatorio" editMode="true"/>
+								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" label="#{msg['clave']}" editMode="true"/>
 							</h:panelGroup>
 						</h:panelGrid>
 						
 						<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
 							<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
 							
-							<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.cedula}" required="true" label="El campo #{msg['cedula']} es obligatorio" editMode="true" onkeypressScript="return validateNumPP(event);">
+							<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.cedula}" required="true" label="#{msg['cedula']}" editMode="true" onkeypressScript="return validateNumPP(event);">
 								<f:validator  for="Input" validatorId="cedulaValidator"></f:validator>
 							</sigecComp:textField>
 		
@@ -134,7 +134,7 @@
 							
 							<h:outputLabel value="#{msg['apellidos']} :" />
 							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="true" label="El campo #{msg['apellidos']} es obligatorio" editMode="true"/>
+								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="true" label="#{msg['apellidos']}" editMode="true"/>
 								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoApellido}" />
 							</h:panelGrid>
 		
