@@ -33,7 +33,7 @@
         			<rich:inputNumberSpinner value="#{presupuestoAdmController.presupuesto.codigoAnio}" minValue="2000" maxValue="2100"/>
         		    
         			<h:outputLabel value="Cantidad" />
-        			<h:inputText value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" requiredMessage="El campo Cantidad es obligatorio"/>
+        			<sigecComp:textField value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" label="Cantidad" editMode="true"></sigecComp:textField>
         		</h:panelGrid>
         	</fieldset>	
        	</rich:panel>
