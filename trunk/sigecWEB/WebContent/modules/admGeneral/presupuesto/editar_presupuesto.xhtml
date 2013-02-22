@@ -62,8 +62,7 @@
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.codigoAnio}" />
         						
         			<h:outputLabel value="Cantidad Inicial" />
-        			<h:inputText rendered="#{administrarPresupuestoController.editMode}" value="#{administrarPresupuestoController.presupuesto.recursoInicial}" required="true" requiredMessage="El campo Cantidad es obligatorio"/>
-        			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoInicial}" rendered="#{!administrarPresupuestoController.editMode}" />			
+        			<sigecComp:textField value="#{administrarPresupuestoController.presupuesto.recursoInicial}" editMode="#{administrarPresupuestoController.editMode}" label="Cantidad Inicial" required="true"></sigecComp:textField>			
                 	
                 	<h:outputLabel value="Cantidad Actual" />
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoActual}"/>			

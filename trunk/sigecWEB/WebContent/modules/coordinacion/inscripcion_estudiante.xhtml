@@ -29,7 +29,7 @@
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
 						<a4j:commandButton value="#{msg['guardar']}"  
 							actionListener="#{inscripcionAlumnoCursoController.btnInscripcionEstudinateCurso}" 
-							image="/resources/images/save.png" render="pnlDocente, pgBtnInscrip"/>
+							image="/resources/images/save.png" render="pnlDocente, pgBtnInscrip, pgDatosAlumno"/>
 						<h:outputLabel value="#{msg['guardar']}" />
 					</h:panelGrid>
 					
@@ -56,11 +56,12 @@
 				</legend>
 				<h:panelGrid columns="3" id="pgBusqueda">
 					<h:outputLabel value="#{msg['cedula']} :" />					
-					<h:inputText value="#{inscripcionAlumnoCursoController.cedulaUsr}" required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"
-						onkeypress="return validateNumPP(event);" maxlength="10"/>
+					<sigecComp:textField value="#{inscripcionAlumnoCursoController.cedulaUsr}" required="true" editMode="true" label="#{msg['cedula']}" onkeypressScript="return validateNumPP(event);">
+						<f:validator for="Input" validatorId="cedulaValidator"></f:validator>
+					</sigecComp:textField>
 					
-					<a4j:commandLink actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno">
-						<h:graphicImage library="images/button" name="search_button.png" height="20px"/>
+					<a4j:commandLink actionListener="#{inscripcionAlumnoCursoController.btnBuscarEstudiante}" execute="pgBusqueda" render="pgDatosAlumno pgBusqueda">
+						<h:graphicImage library="images/button" name="search_button.png" height="20px" style="border:0px;"/>
 					</a4j:commandLink>
 				</h:panelGrid>
 			</fieldset>	
@@ -73,23 +74,24 @@
 				
 				<h:panelGrid columns="2" id="pgDatosAlumno">
         			<h:outputLabel value="Identificador :" styleClass="label-bold espacioDetalle" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
-        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
+        			<sigecComp:textField value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.identificador}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
+        				required="true" editMode="true" label="Identificador"/>
         			
         			<h:outputLabel value="Clave :" styleClass="label-bold" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
-        			<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
-	        
+        			<sigecComp:textField value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.usuario.clave}" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
+        				required="true" editMode="true" label="Clave"/>
 				
 					<h:outputLabel value="Curso :" />
 					<rich:select  required="true" requiredMessage="El campo Curso es obligatorio">
 						<f:selectItems value="#{inscripcionAlumnoCursoController.itemCursos}"></f:selectItems>
 					</rich:select>
+					
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
-					<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}" 
-						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
-					<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}"
-	        			onkeypress="return validateNumPP(event);" maxlength="10" 
-						rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"
-						required="true" requiredMessage="El campo #{msg['cedula']} es obligatorio"/>
+					<sigecComp:textField value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.cedula}" 
+        				required="#{inscripcionAlumnoCursoController.showFieldsNewStudent}" editMode="#{inscripcionAlumnoCursoController.showFieldsNewStudent}" label="#{msg['cedula']}" onkeypressScript="return validateNumPP(event);">
+        				<f:validator for="Input" validatorId="cedulaValidator"/>
+        			</sigecComp:textField>
+        				
 						
 					<h:outputLabel value="#{msg['nombres']} :"  />
 					<h:panelGrid columns="2" rendered="#{!inscripcionAlumnoCursoController.showFieldsNewStudent}">
@@ -97,15 +99,17 @@
 						<h:outputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerApellido} #{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoApellido}" /> 
 					</h:panelGrid>
 					<h:panelGrid columns="2" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
-						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre}" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio"/>
+						<sigecComp:textField value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerNombre}" 
+        				required="true" editMode="true" label="#{msg['nombres']}"/>
 						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoNombre}"/>
 					</h:panelGrid>
 					
 					
 					<h:outputLabel value="#{msg['apellidos']} :" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}"/>
 					<h:panelGrid columns="2" rendered="#{inscripcionAlumnoCursoController.showFieldsNewStudent}">
-						<h:inputText value="#{administrativoController.persona.primerApellido}" required="true" requiredMessage="El campo #{msg['apellidos']} es obligatorio"/>
-						<h:inputText value="#{administrativoController.persona.segundoApellido}" />
+						<sigecComp:textField value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.primerApellido}" 
+        				required="true" editMode="true" label="#{msg['apellidos']}"/>
+						<h:inputText value="#{inscripcionAlumnoCursoController.cursoEstudiante.estudiante.persona.segundoApellido}" />
 					</h:panelGrid>
 					
 					
