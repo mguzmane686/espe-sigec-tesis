@@ -86,6 +86,7 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 			Collection<PensumAcademico> lstPensumAcademicos) throws Exception {
 		userTransaction.begin();
 		try {
+			curso.setPensumAcademicoCollection(null);
 			cursoFacadeLocal.edit(curso);
 			
 			for(PensumAcademico pensumAcademicoTMP: lstPensumAcademicos){
@@ -93,16 +94,25 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 //					pensumAcademicoTMP.setCurso(curso);
 					pensumAcademicoFacadeLocal.edit(pensumAcademicoTMP);
 				}
-//				else{
-//					pensumAcademicoTMP.setCurso(curso);
-//					pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
-//				}
+				else{
+					pensumAcademicoTMP.setCurso(curso);
+					pensumAcademicoFacadeLocal.create(pensumAcademicoTMP);
+				}
+			}
+			userTransaction.commit();
+			try {
+				curso.setPensumAcademicoCollection(lstPensumAcademicos);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			userTransaction.rollback();
 		}
 		
-		userTransaction.commit();
+		
+		
+		
 	}
 	
 //	@Override
