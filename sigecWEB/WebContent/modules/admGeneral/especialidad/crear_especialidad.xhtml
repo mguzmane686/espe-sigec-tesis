@@ -30,7 +30,7 @@
         		</legend>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="#{msg['nombre']}:" />
-        			<h:inputText value="#{especialidadController.especialidad.nombre}" size="72" required="true" requiredMessage="El campo #{msg['nombre']} es obligatorio" styleClass="campoRequerido"/>
+        			<sigecComp:textField value="#{especialidadController.especialidad.nombre}" required="true" editMode="true" size="72" label="#{msg['nombre']}"></sigecComp:textField>
         			
         			<h:outputLabel value="#{msg['descripcion']}:"/>
         			<h:inputText value="#{especialidadController.especialidad.descripcion}" size="72" />

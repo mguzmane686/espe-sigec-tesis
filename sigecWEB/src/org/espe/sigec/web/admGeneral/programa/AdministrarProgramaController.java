@@ -17,6 +17,8 @@ import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.model.entities.ProgramaCursoPK;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
+import org.espe.sigec.utils.SigecClientResourceBoundle;
+import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.FacesUtils;
 
 @SuppressWarnings("serial")
@@ -37,6 +39,7 @@ public class AdministrarProgramaController implements Serializable{
 		setPrograma((Programa) FacesUtils.getFlashObject("programa"));
 		if(getPrograma() ==null){
 			setPrograma(new Programa());
+			getPrograma().setEstado(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
 			setEditMode(Boolean.TRUE);
 			setNewProgram(Boolean.TRUE);
 		}else{
@@ -152,10 +155,14 @@ public class AdministrarProgramaController implements Serializable{
 						lst.add(obj);
 					}
 				}
-				planificacionServicio.crearPrograma(getPrograma(), lst);
-				setNewProgram(Boolean.FALSE);
-				setEditMode(Boolean.FALSE);
-				FacesUtils.addInfoMessage("Programa creado");
+				if(lst.size()>0){
+					planificacionServicio.crearPrograma(getPrograma(), lst);
+					setNewProgram(Boolean.FALSE);
+					setEditMode(Boolean.FALSE);
+					FacesUtils.addInfoMessage("Programa creado");
+				}else{
+					FacesUtils.addErrorMessage("Seleccione al menos un curso");
+				}
 			}
 			
 		} catch (Exception e) {
