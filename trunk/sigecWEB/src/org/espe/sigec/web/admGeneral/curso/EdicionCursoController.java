@@ -62,6 +62,7 @@ public class EdicionCursoController {
 			FacesUtils.addInfoMessage("El curso se edito con &eacutexito");
 			setRenderEditButtons(Boolean.FALSE);
 		} catch (Exception e1) {
+			e1.printStackTrace();
 			FacesUtils.addErrorMessage("El curso no pudo editarse");
 		}
 	}
