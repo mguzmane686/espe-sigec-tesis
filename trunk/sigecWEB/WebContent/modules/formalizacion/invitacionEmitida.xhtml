@@ -78,11 +78,11 @@
 		        		</h:panelGrid>
 	        		</h:panelGrid>
 	        		
-	        		<h:panelGroup>
+	        		<h:panelGroup layout="block" style="width:100%" styleClass="rf-pp-hdr">
 	        			<h:panelGrid columns="2" style="margin:auto;">
-			        		<p:commandButton value="Aceptar" oncomplete="detalleInvitacion.hide()" 
+			        		<p:commandLink value="Aceptar" oncomplete="detalleInvitacion.hide()" 
 			        			action="#{invitacionEmitidaController.btnAceptarCambioEstadoInv}" process="@this pgChgEstadoInv" update="tblInvitaciones"/>
-			        		<p:commandButton value="Cancelar" oncomplete="detalleInvitacion.hide()" 
+			        		<p:commandLink value="Cancelar" oncomplete="detalleInvitacion.hide()" 
 			        			action="#{invitacionEmitidaController.btnCancelarCambioEstadoInv}" process="@this" />
 		        		</h:panelGrid>
 	        		</h:panelGroup> 
