@@ -78,7 +78,7 @@
 	        		<h:panelGrid columns="1">
 		        		<h:outputLabel value="Ud. ha sido seleccionado para dictar el curso:" styleClass="label-bold"/>
 		        		<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" 
-		        			style="color: red; margin-left: 20px;"/>
+		        			style="margin-left: 20px;"/>
 		        		
 	        		</h:panelGrid>
 	        		<h:panelGrid columns="2">
@@ -88,17 +88,19 @@
 	        			<h:outputLabel value="Fecha de envio" styleClass="label-bold"/>
 	        			<h:outputText value="#{respuestaDocenteController.invitacionDocenteSelected.fechaInvitacion}" />
 	        		</h:panelGrid>
-	        		<center>
-		        		<h:panelGroup style="border: 1px solid #7D6E6E; background-color:#D4EBF2" >
-		        			<h:outputLabel value="#{msg.responder_invitacion}!!!" />
-		        		</h:panelGroup>
-	        		</center>
-	        		<h:panelGrid columns="2" style="margin-left:auto; margin-right:auto;">
-	        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this" render="tblInvitaciones"
-	        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
-	        			<a4j:commandLink value="Rechazar" action="#{respuestaDocenteController.btnIgnorarInvitacion}" execute="@this"
-	        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
-	        		</h:panelGrid>
+	        		
+	        		<h:panelGroup layout="block" style="padding-top: 10px; padding-bottom: 10px;margin-bottom: 10px; margin-top: 10px; border: 1px solid #7D6E6E; background-color:#D4EBF2; text-align:center; width:100%;" >
+	        			<h:outputLabel value="#{msg.responder_invitacion}!!!" style="color: red;"/>
+	        		</h:panelGroup>
+	        		
+	        		<h:panelGroup layout="block" style="width:100%" styleClass="rf-pp-hdr">
+		        		<h:panelGrid columns="2" style="margin-left:auto; margin-right:auto;">
+		        			<a4j:commandLink value="Aceptar" action="#{respuestaDocenteController.btnAceptarInvitacion}" execute="@this" render="tblInvitaciones"
+		        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
+		        			<a4j:commandLink value="Rechazar" action="#{respuestaDocenteController.btnIgnorarInvitacion}" execute="@this"
+		        				oncomplete="#{rich:component('rppShowInvitacion')}.hide()"></a4j:commandLink>
+		        		</h:panelGrid>
+	        		</h:panelGroup>
         		</rich:panel>
         	</rich:popupPanel>
         </h:form>
