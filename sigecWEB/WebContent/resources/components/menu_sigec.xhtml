@@ -31,7 +31,7 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralUsuario"/>
         		
-        		<rich:panelMenuItem execute="@this">
+        		<rich:panelMenuItem execute="@this" action="adm_administrativo.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="Administrar usuarios" action="adm_administrativo.jsf?faces-redirect=true">
 	            		<rich:tooltip id="tt1" styleClass="tooltip" layout="block">
 			                <span style="white-space: nowrap"> 
@@ -41,7 +41,7 @@
 	            	</a4j:commandLink>
             	</rich:panelMenuItem>
             
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="adm_usuario.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="Crear usuario" action="adm_usuario.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem> 
         	</rich:panelMenuGroup>
@@ -50,10 +50,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralContactos"/>
         		
-        		<rich:panelMenuItem>
+        		<rich:panelMenuItem action="adm_contacto.jsf?faces-redirect=true">
             		<a4j:commandLink value="#{msg.crear_contacto}" action="adm_contacto.jsf?faces-redirect=true"></a4j:commandLink>
             	</rich:panelMenuItem>
-            	<rich:panelMenuItem>
+            	
+            	<rich:panelMenuItem action="adm_lista_contactos.jsf?faces-redirect=true">
             		<a4j:commandLink value="#{msg.etiqueta_lista_contactos}" action="adm_lista_contactos.jsf?faces-redirect=true"></a4j:commandLink>
             	</rich:panelMenuItem>
         	</rich:panelMenuGroup>	
@@ -62,11 +63,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralLugares"/>
         		
-        		<rich:panelMenuItem>
+        		<rich:panelMenuItem action="adm_lugar.jsf?faces-redirect=true">
             		<a4j:commandLink value="#{msg.crear_establecimiento}" action="adm_lugar.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
-            	<rich:panelMenuItem>
+            	<rich:panelMenuItem action="adm_reporte_lugar.jsf?faces-redirect=true">
             		<a4j:commandLink value="#{msg.administrar_establecimiento}" action="adm_reporte_lugar.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
@@ -76,11 +77,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralEdificio"/>
         		
-        		<rich:panelMenuItem>
+        		<rich:panelMenuItem action="adm_edificio.jsf?faces-redirect=true">
             		<a4j:commandLink value="#{msg.crear_edificio}" action="adm_edificio.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
-            	<rich:panelMenuItem>
+            	<rich:panelMenuItem action="adm_reporte_edificio.jsf?faces-redirect=true">
             		<a4j:commandLink value="#{msg.administrar_edificio}" action="adm_reporte_edificio.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
@@ -90,11 +91,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralAulas"/>
         		
-        		<rich:panelMenuItem>
+        		<rich:panelMenuItem action="adm_aula.jsf?faces-redirect=true">
             		<a4j:commandLink value="Crear Aula" action="adm_aula.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
-            	<rich:panelMenuItem>
+            	<rich:panelMenuItem action="adm_reporte_aula.jsf?faces-redirect=true">
             		<a4j:commandLink value="Administrar Aulas" action="adm_reporte_aula.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
@@ -104,11 +105,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralEspecialidades"/>
         		
-        		<rich:panelMenuItem>
+        		<rich:panelMenuItem action="adm_especialidad.jsf?faces-redirect=true">
             		<a4j:commandLink value="Crear Especialidad" action="adm_especialidad.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
-            	<rich:panelMenuItem>
+            	<rich:panelMenuItem action="adm_reporte_especialidad.jsf?faces-redirect=true">
             		<a4j:commandLink value="Administrar Especialidades" action="adm_reporte_especialidad.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
@@ -118,11 +119,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralProgramas"/>
         		
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="pla_admistrar_programa.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="#{msg.etiqueta_crear_programa}" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
 	            </rich:panelMenuItem>
 	            
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="pla_listado_programas.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="#{msg.etiqueta_programas_existentes}" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
@@ -130,11 +131,11 @@
             <rich:panelMenuGroup id="pmgAdmGeneralCursos" label="Curso"
             	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralCursos"/>
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="pla_creacion_curso.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="#{msg['crear_curso']}" action="pla_creacion_curso.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
 	            
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="reporte_cursos.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="#{msg['cursos_existentes']}" action="reporte_cursos.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
@@ -143,11 +144,11 @@
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralPresupuesto"/>
 
-        		<rich:panelMenuItem>
+        		<rich:panelMenuItem action="adm_presupuesto.jsf?faces-redirect=true">
             		<a4j:commandLink value="Crear Presupuesto" action="adm_presupuesto.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
-            	<rich:panelMenuItem>
+            	<rich:panelMenuItem action="adm_reporte_presupuesto.jsf?faces-redirect=true">
             		<a4j:commandLink value="Administrar Presupuesto" action="adm_reporte_presupuesto.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             	
@@ -161,29 +162,30 @@
         	
         	<rich:panelMenuGroup label="Curso" id="pmgCoordinacionCurso" execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
         		<f:attribute name="idMenuPanelGroup" value="pmgCoordinacionCurso"/>
-	        	<rich:panelMenuItem>
+	        	<rich:panelMenuItem action="coor_lanzar_curso.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="Abrir curso" action="coor_lanzar_curso.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
 	        
-	        	<rich:panelMenuItem>
+	        	<rich:panelMenuItem action="coor_reporte_curso_abierto.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="Cursos abiertos" action="coor_reporte_curso_abierto.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
             
             <rich:panelMenuGroup label="Docente" id="pmgCoordinacionDocente" execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
             	<f:attribute name="idMenuPanelGroup" value="pmgCoordinacionDocente"/>
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="coor_registro_nuevo_docente.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="#{msg['registar_docente']}" action="coor_registro_nuevo_docente.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
 	            
-	            <rich:panelMenuItem>
+	            <rich:panelMenuItem action="coor_seleccion_docente.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="#{msg['seleccion_docente']}" action="coor_seleccion_docente.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup label="#{msg['etiqueta_inscripcion']}" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM') or fn:contains(homeSessionController.idPerfiles , 'EST')}">
-        	<rich:panelMenuItem>
+        <rich:panelMenuGroup id="pmgInscripcion" label="#{msg['etiqueta_inscripcion']}" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM') or fn:contains(homeSessionController.idPerfiles , 'EST')}">
+        	<f:attribute name="idMenuPanelGroup" value="pmgInscripcion"/>
+        	<rich:panelMenuItem action="coor_inscripcion_estudiante.jsf?faces-redirect=true">
             	<a4j:commandLink value="#{msg['etiqueta_inscripcion']}" action="coor_inscripcion_estudiante.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
@@ -191,37 +193,37 @@
         <rich:panelMenuGroup id="pmgReportes" label="#{msg['etiqueta_reportes']}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgReportes"/>
-        	<rich:panelMenuItem>
+        	<rich:panelMenuItem action="rep_lugares.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Lugares" action="rep_lugares.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_edificios.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Edificios" action="rep_edificios.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_aulas.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Aulas" action="rep_aulas.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_especialidades.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Especialidades" action="rep_especialidades.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_presupuestos.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Presupuestos" action="rep_presupuestos.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_usuarios.jsf?faces-redirect=true">
 	            <a4j:commandLink value="Reporte Usuarios" action="rep_usuarios.jsf?faces-redirect=true" execute="@this"/>
 	        </rich:panelMenuItem>  
-	        <rich:panelMenuItem>
+	        <rich:panelMenuItem action="rep_contactos.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Contactos" action="rep_contactos.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_profesores.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Profesores" action="rep_profesores.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_cursos_existentes.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Cursos Existentes" action="rep_cursos_existentes.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_cursos.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Cursos Periodo" action="rep_cursos.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
             </rich:panelMenuItem>
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="rep_cursos_presupuestos.jsf?faces-redirect=true">
             	<a4j:commandLink value="Reporte Cursos Presupuesto" action="rep_cursos_presupuestos.jsf?faces-redirect=true" execute="@this"></a4j:commandLink>
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
@@ -229,15 +231,15 @@
         <rich:panelMenuGroup id="pmgContratoAutomatico" label="Contrato automatico" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         	<f:attribute name="idMenuPanelGroup" value="pmgContratoAutomatico"/>
-        	<rich:panelMenuItem>
+        	<rich:panelMenuItem action="doc_invitacion_docente.jsf?faces-redirect=true" execute="@this">
             	<a4j:commandLink value="#{msg.invitacion_docente}" action="doc_invitacion_docente.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
         	
-        	<rich:panelMenuItem>
+        	<rich:panelMenuItem action="doc_invitacion_docente_aceptada.jsf?faces-redirect=true" execute="@this">
             	<a4j:commandLink value="#{msg.invitaciones_aceptadas}" action="doc_invitacion_docente_aceptada.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
             
-            <rich:panelMenuItem>
+            <rich:panelMenuItem action="doc_invitacion_emitida.jsf?faces-redirect=true" execute="@this">
             	<a4j:commandLink value="#{msg.invitacion_emitida}" action="doc_invitacion_emitida.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
@@ -253,7 +255,7 @@
         <rich:panelMenuGroup id="pmgOpcionProfesores" label="Contrato automatico" rendered="#{fn:contains(homeSessionController.idPerfiles , 'PRO')}"
         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         	<f:attribute name="idMenuPanelGroup" value="pmgOpcionProfesores"/>
-        	<rich:panelMenuItem>
+        	<rich:panelMenuItem action="doc_respuesta_docente.jsf?faces-redirect=true">
             	<a4j:commandLink value="Invitaciones pendientes" action="doc_respuesta_docente.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
         	
