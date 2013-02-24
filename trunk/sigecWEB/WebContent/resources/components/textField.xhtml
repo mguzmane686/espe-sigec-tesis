@@ -22,28 +22,6 @@
 	
 </composite:interface>
 <composite:implementation>
-	<style>
-		.rmsg-parent-cmp{
-			width: 20px !important;
-			display: block;
-		}
-		
-		.rmsg-parent-cmp .rf-msg-det {
-            visibility: hidden;
-            height: 14px !important ;
-        }
-        
-		.rmsg-parent-cmp .rf-msg-err{
-			background-image: url('#{resource['images:circle-alert.png']}') !important;
-			width: 6px !important;
-			height: 14px !important ;
-		}
-		
-		.cajaRequerida{
-			background-color:#FBEFFB !important;
-			background-image: none !important;
-		}
-	</style>
 	<div id="#{cc.clientId}">
 		<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
 			<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
