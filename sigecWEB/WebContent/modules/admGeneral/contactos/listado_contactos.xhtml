@@ -35,7 +35,7 @@
 					<h:commandLink>
 			            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
 			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" excludeColumns="0"/>  
-			        </h:commandLink>`
+			        </h:commandLink>
 					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow" 
 						var="contacto" rows="15" paginator="true" style="width:700px; overflow-x:auto;">
 						
@@ -43,7 +43,7 @@
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.numero}" />
 							</f:facet>
-							<a4j:commandLink value="#{numRow}" 
+							<a4j:commandLink value="#{numRow+1}" 
 								execute="@this" oncomplete="#{rich:component('detailContact')}.show()" render="detailContact">
 								<f:setPropertyActionListener target="#{listadoContactosController.personaSelected}" value="#{contacto}" />
 								<f:setPropertyActionListener target="#{listadoContactosController.editContactMode}" value="false" />
