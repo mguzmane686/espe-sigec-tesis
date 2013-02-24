@@ -32,7 +32,7 @@
 	        			</h:panelGrid>
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{invitacionDocenteController.savedInvitacion}">
-	        				<h:commandButton value="#{msg['editar']}"  
+	        				<h:commandButton value="Generar PDF"  
 	        					 image="/resources/images/button/pdf.png" action="#{invitacionDocenteController.lanzarPdfMemo}" >
 	        				</h:commandButton>
 	        				<h:outputLabel value="Generar PDF" />
@@ -55,23 +55,49 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        		
 	        		<h:panelGrid columns="2">
-	        			<h:outputLabel value="#{msg.fecha_invitacion}" />
-	        			<rich:calendar value="#{invitacionDocenteController.invitacionDocente.fechaInvitacion}" datePattern="yyyy-MM-dd"></rich:calendar>
+	        			<h:outputLabel value="#{msg.fecha_invitacion}: " />
+	        			<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+	        				<rich:calendar id="rcFechaInv" value="#{invitacionDocenteController.invitacionDocente.fechaInvitacion}" datePattern="yyyy-MM-dd"
+	        					required="true" requiredMessage="El campo #{msg.fecha_invitacion} es obligatorio"></rich:calendar>
+	        				<rich:message for="rcFechaInv" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
+								<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
+							</rich:message>
+	        			</h:panelGrid>
 	        			
-	        			<h:outputLabel value="Proveedor" />
-		        		<rich:select value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.prfIdProfesor}" enableManualInput="true" >
-		        			<f:selectItems value="#{invitacionDocenteController.lstProfesors}" 
-		        				var="prof" itemLabel="#{prof.persona.primerApellido} #{prof.persona.primerNombre}" itemValue="#{prof.idProfesor}" />
-		        		</rich:select>
+	        			<h:outputLabel value="Proveedor: " />
+	        			<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+	        				<rich:select id="rsProveedor" value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.prfIdProfesor}" enableManualInput="true" 
+	        					required="true" requiredMessage="El campo Proveedor es obligarotio" validatorMessage="El campo Proveedor es obligarotio">
+		        				<f:selectItems value="#{invitacionDocenteController.lstProfesors}" 
+			        				var="prof" itemLabel="#{prof.persona.primerApellido} #{prof.persona.primerNombre}" itemValue="#{prof.idProfesor}" />
+		        			</rich:select>
+	        				<rich:message for="rsProveedor" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
+								<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
+							</rich:message>
+	        			</h:panelGrid>
 		        		
-		        		<h:outputLabel value="Curso" />
-		        		<rich:select value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.idCursoPeriodo}">
-		        			<f:selectItems value="#{invitacionDocenteController.lstCursoPeriodos}" 
-		        				var="curso" itemLabel="#{curso.curso.nombreCurso}" itemValue="#{curso.idCursoPeriodo}" />
-		        		</rich:select>
 		        		
-		        		<h:outputLabel value="#{msg.valor_a_cancelar}" />
-		        		<h:inputText value="#{invitacionDocenteController.invitacionDocente.docValorPagar}" />
+		        		<h:outputLabel value="Curso: " />
+		        		<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+			        		<rich:select id="rsCurso" value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.idCursoPeriodo}"
+			        			required="true" requiredMessage="El campo Curso el obligatorio">
+			        			<f:selectItems value="#{invitacionDocenteController.lstCursoPeriodos}" 
+			        				var="curso" itemLabel="#{curso.curso.nombreCurso}" itemValue="#{curso.idCursoPeriodo}" />
+			        		</rich:select>
+			        		
+			        		<rich:message for="rsCurso" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
+								<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
+							</rich:message>
+		        		</h:panelGrid>
+		        		
+		        		<h:outputLabel value="#{msg.valor_a_cancelar}: " />
+		        		<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+		        			<h:inputText id="txtValCancel" value="#{invitacionDocenteController.invitacionDocente.docValorPagar}" 
+		        				required="true" requiredMessage="El campo #{msg.valor_a_cancelar} es obligatorio"/>
+		        			<rich:message for="txtValCancel" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
+								<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
+							</rich:message>
+		        		</h:panelGrid>
 	        		</h:panelGrid>
 	        		
 	        		<h:outputText value="#{invitacionDocenteController.plantilla.docContenido}" />

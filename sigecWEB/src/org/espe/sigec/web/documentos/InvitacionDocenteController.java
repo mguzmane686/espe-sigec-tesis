@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,6 +61,7 @@ public class InvitacionDocenteController implements Serializable{
 	private void initController(){
 		setInvitacionDocente(new InvitacionDocente());
 		getInvitacionDocente().setInvitacionDocentePK(new InvitacionDocentePK());
+		getInvitacionDocente().setFechaInvitacion(Calendar.getInstance().getTime());
 //		getInvitacionDocente().setProfesor(new Profesor());
 	}
 	@PostConstruct
