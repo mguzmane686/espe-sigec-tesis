@@ -19,6 +19,7 @@ import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.richfaces.event.DataScrollEvent;
 
 /**
  * @author roberto
@@ -110,6 +111,12 @@ public class CreacionUsuarioController implements Serializable{
 		}
 	}
 	
+	public void scrollListener(DataScrollEvent e){
+		System.out.println("Pagina "+e.getPage());
+		System.out.println("Old "+e.getOldScrolVal());
+		System.out.println("New "+e.getNewScrolVal());
+		System.out.println(e);
+	}
 	public void btnFindUsr(){
 		setLstPersonas(admGeneralServicio.findPersonByCriteria(getFiltroBusqueda(), getTxtFiltroBusqueda().trim()));
 	}

@@ -71,9 +71,19 @@
 			<rich:collapsiblePanel header="Resultados"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<h:panelGroup id="tblPersonas">
-					<rich:dataTable value="#{creacionUsuarioController.lstPersonas}" var="lstPersona" style="width:100%" 
-						rendered="#{!empty creacionUsuarioController.lstPersonas}" >
-						<rich:column>
+					<h:panelGroup layout="block" style="width:100; text-align:center;" styleClass="rf-pp-hdr">
+						<rich:dataScroller for="tblUsuarios" renderIfSinglePage="false" style="margin:auto;" fastControls="hide" scrollListener="#{creacionUsuarioController.scrollListener}"/>
+					</h:panelGroup>
+					<rich:dataTable id="tblUsuarios" value="#{creacionUsuarioController.lstPersonas}" var="lstPersona" style="width:100%" 
+						rendered="#{!empty creacionUsuarioController.lstPersonas}" rows="15" iterationStatusVar="numRow">
+						<rich:column style="text-align:center;">
+							<f:facet name="header">
+								<h:outputLabel value="#" />
+							</f:facet>
+							<h:outputText value="#{numRow.index +1}" />
+						</rich:column>
+						
+						<rich:column style="text-align:center;">
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.cedula}" />
 							</f:facet>
