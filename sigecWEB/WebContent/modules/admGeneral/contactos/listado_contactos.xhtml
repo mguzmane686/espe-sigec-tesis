@@ -30,17 +30,14 @@
 	<h:form id="frmContactos">
 		<rich:panel header="#{msg['etiqueta_lista_contactos']}">
 			
-			<fieldset>
-				<legend>
-					<h:outputLabel value="" />
-				</legend>
-				<h:panelGroup layout="block" style="width:100%;">
+			
+				<h:panelGroup layout="block" style="width:100%;" id="pgTableContainer">
 					<h:commandLink>
 			            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
-			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" />  
+			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" excludeColumns="0"/>  
 			        </h:commandLink>`
 					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow" 
-						var="contacto" rows="15" style="width:100%;" paginator="true" >
+						var="contacto" rows="15" paginator="true" style="width:700px; overflow-x:auto;">
 						
 						<p:column style="text-align:center;">
 							<f:facet name="header">
@@ -99,7 +96,6 @@
 					</p:dataTable>
 					
 				</h:panelGroup>
-			</fieldset>
 		</rich:panel>
 		
 		<rich:popupPanel header="Contacto" id="detailContact" domElementAttachment="form" autosized="true" onmaskclick="#{rich:component('detailContact')}.hide()">
