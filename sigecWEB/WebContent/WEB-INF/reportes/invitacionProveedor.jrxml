@@ -44,7 +44,7 @@
 				</staticText>
 				<image>
 					<reportElement uuid="5c1400b5-48a4-4115-a7f1-7f64cce79bee" x="482" y="8" width="59" height="44"/>
-					<imageExpression><![CDATA["C:\\projects\\workspaceSTS64_28\\sigecWEB\\WebContent\\resources\\images\\logo_espe.png"]]></imageExpression>
+					<imageExpression><![CDATA["http://localhost:8080/sigecWEB/resources/images/logo_espe.png"]]></imageExpression>
 				</image>
 				<textField>
 					<reportElement uuid="eb81ba42-6943-46c3-93b0-74b79b753c8d" x="87" y="14" width="121" height="20"/>
