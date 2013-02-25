@@ -69,6 +69,19 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 		return lstUsuarioPerfil;
 	}
 
+	private void elimiarEspaciosPersona(Persona persona){
+		if(persona.getUsuario().getIdentificador()!=null){persona.getUsuario().getIdentificador().trim();}
+		if(persona.getUsuario().getClave()!=null){persona.getUsuario().getClave().trim();}
+		if(persona.getPrimerNombre()!=null){persona.getPrimerNombre().trim();}
+		if(persona.getPrimerApellido()!=null){persona.getPrimerApellido().trim();}
+				
+		if(persona.getSegundoNombre()!=null){persona.getSegundoNombre().trim();}
+		if(persona.getSegundoApellido()!=null){persona.getSegundoApellido().trim();}
+		if(persona.getMail()!=null){persona.getMail().trim();}
+		if(persona.getDireccion()!=null){persona.getDireccion().trim();}
+		if(persona.getNacionalidad()!=null){persona.getNacionalidad().trim();}
+	}
+	
 	@Override
 	public void crearUsuario(UsuarioPerfil usuarioPerfil) throws Exception{
 		userTransaction.begin();
@@ -79,6 +92,7 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 				usuarioFacadeLocal.create(usuarioPerfil.getUsuario());
 				usuarioPerfil.getPersona().setUsuario(usuarioPerfil.getUsuario());
 				//se crea la persona
+				elimiarEspaciosPersona(usuarioPerfil.getPersona());
 				personaFacadeLocal.create(usuarioPerfil.getPersona());
 				usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuarioPerfil.getUsuario().getIdUsuario());
 				for (Perfil perfil : usuarioPerfil.getLstPerfils()) {
