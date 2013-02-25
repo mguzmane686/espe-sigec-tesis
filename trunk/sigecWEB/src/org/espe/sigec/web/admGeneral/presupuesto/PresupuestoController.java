@@ -40,7 +40,6 @@ public class PresupuestoController implements Serializable{
 		this.presupuesto = presupuesto;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void btnSavePresupuesto(ActionEvent e){
 		try {
 					
