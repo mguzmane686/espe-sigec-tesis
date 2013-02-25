@@ -12,10 +12,10 @@ import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
-import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.Establecimiento;
+import org.espe.sigec.model.entities.HistoricoCursoEstado;
+import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.PeriodoAcademico;
-import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoFacadeLocal;
@@ -127,8 +127,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	}
 
 	@Override
-	public Collection<Profesor> findProfesoresSeleccionados() {
-		return profesorFacadeLocal.findProfesoresSeleccionados();
+	public Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo) {
+		return profesorFacadeLocal.findProfesoresSeleccionados(idCursoPeriodo);
 	}
 	
 }

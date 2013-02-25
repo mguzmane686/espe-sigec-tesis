@@ -70,8 +70,6 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 	@Override
 	public Collection<InvitacionDocente> findInvitacionesByEstado(
 			String estadoInvitacion) throws Exception {
-		// TODO Auto-generated method stub
-		
 		return invitacionDocenteFacadeLocal.findInvitacionesByEstado(estadoInvitacion);
 	}
 }
