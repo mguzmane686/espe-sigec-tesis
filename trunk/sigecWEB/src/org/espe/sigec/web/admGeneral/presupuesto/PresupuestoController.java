@@ -1,8 +1,8 @@
 package org.espe.sigec.web.admGeneral.presupuesto;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -24,13 +24,14 @@ public class PresupuestoController implements Serializable{
 	
 	private Presupuesto presupuesto;
 
-	@SuppressWarnings("deprecation")
 	public PresupuestoController(){
-		setPresupuesto(new Presupuesto());
-		java.util.Date fecha = new Date();
-		presupuesto.setCodigoAnio(String.valueOf(fecha.getYear()+1900));
+		initController();
 	}
 	
+	private void initController(){
+		setPresupuesto(new Presupuesto());
+		presupuesto.setCodigoAnio(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)));
+	}
 	public Presupuesto getPresupuesto() {
 		return presupuesto;
 	}
@@ -51,26 +52,32 @@ public class PresupuestoController implements Serializable{
 				}
 				else{
 					
-					Date fechaInicio = new Date();
-					Date fechaFin = new Date(); 
+					Calendar fechaInicio = Calendar.getInstance();
+					Calendar fechaFin = Calendar.getInstance();
 					
-					fechaInicio.setDate(1);
-					fechaInicio.setMonth(0);
-					fechaInicio.setYear(Integer.valueOf(presupuesto.getCodigoAnio()) - 1900);
+					fechaInicio.set(Calendar.DATE, 1);
+					fechaInicio.set(Calendar.MONTH, 0);
+					fechaInicio.set(Calendar.YEAR, Integer.valueOf(presupuesto.getCodigoAnio()));
 					
-					fechaFin.setDate(31);
-					fechaFin.setMonth(11);
-					fechaFin.setYear(Integer.valueOf(presupuesto.getCodigoAnio()) - 1900);
+					System.out.println(fechaInicio.getTime());
+					
+					fechaFin.set(Calendar.DATE, 31);
+					fechaFin.set(Calendar.MONTH, 11);
+					fechaFin.set(Calendar.YEAR, Integer.valueOf(presupuesto.getCodigoAnio()));
 			
 					presupuesto.setRecursoActual(presupuesto.getRecursoInicial());
-					presupuesto.setFechaInicio(fechaInicio);
-					presupuesto.setFechaFin(fechaFin);
+					presupuesto.setFechaInicio(fechaInicio.getTime());
+					presupuesto.setFechaFin(fechaFin.getTime());
+					
+					System.out.println(presupuesto.getFechaInicio());
+					System.out.println(presupuesto.getFechaFin());
 					
 					admGeneralServicio.createPresupuesto(getPresupuesto());
 					generarCodigoPresupuesto(presupuesto.getIdPresupuesto());
 					admGeneralServicio.editPresupuesto(getPresupuesto());
 					setPresupuesto(new Presupuesto());
 					FacesUtils.addInfoMessage("El presupuesto se cre&oacute exitosamente");
+					initController();
 				}
 						
 		} catch (Exception e1) {
