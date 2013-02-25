@@ -10,7 +10,7 @@
    	<h:outputStylesheet library="css" name="textos.css"/>    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
-   	
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
         <h:form id="frmPresupuesto">
        	
         <rich:panel header="#{msg['creacion_presupuesto']}">
@@ -33,7 +33,7 @@
         			<rich:inputNumberSpinner value="#{presupuestoAdmController.presupuesto.codigoAnio}" minValue="2000" maxValue="2100"/>
         		    
         			<h:outputLabel value="Cantidad" />
-        			<sigecComp:textField value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" label="Cantidad" editMode="true"></sigecComp:textField>
+        			<sigecComp:textField value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" label="Cantidad" editMode="true" onkeypressScript="return validateNumPP(event);"/>
         		</h:panelGrid>
         	</fieldset>	
        	</rich:panel>

@@ -10,9 +10,9 @@
    	<h:outputStylesheet library="css" name="textos.css"/>    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
    	
-        <h:form id="frmPresupuesto">
-        
+    <h:form id="frmPresupuesto">
         <rich:panel header="#{msg.administrar_presupuesto}">
         	<h:panelGroup layout="block" styleClass="roundCorner" id="pnlMenuPresupuesto">
 	       		<h:panelGrid columns="4">
@@ -62,7 +62,7 @@
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.codigoAnio}" />
         						
         			<h:outputLabel value="Cantidad Inicial" />
-        			<sigecComp:textField value="#{administrarPresupuestoController.presupuesto.recursoInicial}" editMode="#{administrarPresupuestoController.editMode}" label="Cantidad Inicial" required="true"></sigecComp:textField>			
+        			<sigecComp:textField value="#{administrarPresupuestoController.presupuesto.recursoInicial}" editMode="#{administrarPresupuestoController.editMode}" label="Cantidad Inicial" required="true" onkeypressScript="return validateNumPP(event);"/>			
                 	
                 	<h:outputLabel value="Cantidad Actual" />
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoActual}"/>			
