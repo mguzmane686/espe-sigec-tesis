@@ -74,14 +74,14 @@
 
 								<h:outputText value="Nombre :" />
 								<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
-									<p:inputText
+									<p:inputText 
 										value="#{inscripcionController.persona.primerNombre}"
 										rendered="#{!inscripcionController.findMode}" />
 									<p:inputText
 										value="#{inscripcionController.persona.segundoNombre}"
 										rendered="#{!inscripcionController.findMode}" />
 
-									<h:outputText
+									<h:outputText style="padding-right: 10px;"
 										value="#{inscripcionController.persona.primerNombre}"
 										rendered="#{inscripcionController.findMode}" />
 									<h:outputText
@@ -99,7 +99,7 @@
 										value="#{inscripcionController.persona.segundoApellido}"
 										rendered="#{!inscripcionController.findMode}" />
 
-									<h:outputText
+									<h:outputText style="padding-right: 10px;"
 										value="#{inscripcionController.persona.primerApellido}"
 										rendered="#{inscripcionController.findMode}" />
 									<h:outputText
