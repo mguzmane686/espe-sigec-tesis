@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.servicio.documentos.DocumentoServicio;
-import org.espe.sigec.utils.SigecConstantes;
 
 @SuppressWarnings("serial")
 @ManagedBean(name ="invitacionEmitidaController")

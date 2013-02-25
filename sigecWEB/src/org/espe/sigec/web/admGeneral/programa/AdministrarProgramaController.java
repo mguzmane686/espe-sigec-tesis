@@ -17,7 +17,6 @@ import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.model.entities.ProgramaCursoPK;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
-import org.espe.sigec.utils.SigecClientResourceBoundle;
 import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -113,6 +112,7 @@ public class AdministrarProgramaController implements Serializable{
 	
 	public void btnAtras(){
 		try {
+			FacesUtils.removeFlashObject("programa");
 			FacesUtils.redirectPage("pla_listado_programas.jsf");
 		} catch (IOException e) {
 			e.printStackTrace();

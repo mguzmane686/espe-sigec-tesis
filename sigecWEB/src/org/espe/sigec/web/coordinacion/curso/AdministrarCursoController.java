@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
+import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -29,7 +30,7 @@ public class AdministrarCursoController {
 	private CursoPeriodo cursoPeriodo;
 	private boolean editMode;
 	private int numeroAlumnosInscritos;
-	private Collection<Profesor> itemsProfesor;
+	private Collection<InvitacionDocente> itemsProfesor;
 	private Profesor profesorSelected;
 	
 	public AdministrarCursoController() {
@@ -47,10 +48,10 @@ public class AdministrarCursoController {
 			System.out.println("Error al cargar el numero de estudiantes inscritos");
 		}		
 	}
-
+	
 	public void btnEdit(ActionEvent e){
 		setEditMode(Boolean.TRUE);
-		setItemsProfesor(coordinacionServicio.findProfesoresSeleccionados());
+		setItemsProfesor(coordinacionServicio.findProfesoresSeleccionados(getCursoPeriodo().getIdCursoPeriodo()));
 	}
 	
 	public void btnCancelEdit(ActionEvent e){
@@ -110,11 +111,11 @@ public class AdministrarCursoController {
 		this.numeroAlumnosInscritos = numeroAlumnosInscritos;
 	}
 
-	public Collection<Profesor> getItemsProfesor() {
+	public Collection<InvitacionDocente> getItemsProfesor() {
 		return itemsProfesor;
 	}
 
-	public void setItemsProfesor(Collection<Profesor> itemsProfesor) {
+	public void setItemsProfesor(Collection<InvitacionDocente> itemsProfesor) {
 		this.itemsProfesor = itemsProfesor;
 	}
 
