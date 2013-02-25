@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.espe.sigec.web.utils.PortalResourceBundle;
+
 @SuppressWarnings("serial")
 @ManagedBean(name="homeController")
 @ViewScoped
@@ -22,12 +24,9 @@ public class HomeController implements Serializable{
 	private String rightFooter;
 	
 	public HomeController() {
-		setMensajeLeft("planifica, organiza, ejecuta y controla " +
-				"eventos de educación continua y capacitación con profesionales altamente calificados, " +
-				"orientados a satisfacer requerimientos internos, de empresas públicas, privadas y del público en general, " +
-				"fortaleciendo así la vinculación de nuestra institución con la sociedad");
-		setMensajeLeftHeader("El Centro de Educación Continua de la Universidad de las Fuerzas Armadas – ESPE");
-		
+		setMensajeLeftHeader(PortalResourceBundle.getString("mensaje_left_header"));
+		setMensajeLeft(PortalResourceBundle.getString("mensaje_left"));
+/*
 		setLeftTopFooter("cabecera");
 		setLeftFooter("detalle");
 		
@@ -36,7 +35,7 @@ public class HomeController implements Serializable{
 		
 		setRightTopFooter("cabecera");
 		setRightFooter("detalle");
-		
+	*/	
 		
 		
 		
