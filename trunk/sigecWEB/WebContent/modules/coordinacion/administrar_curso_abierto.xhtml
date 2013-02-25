@@ -65,12 +65,12 @@
 		        		
 		        		<h:panelGroup rendered="#{administrarCursoController.editMode}">
 		        			<h:panelGrid columns="2">
-			        			<h:outputLabel value="Profesor :" />
-			        			<h:selectOneMenu value="#{administrarCursoController.profesorSelected}">
+			        			<h:outputLabel value="Profesor :" style="display:block; width:120px;"/>
+			        			<rich:select>
 			        				<f:selectItems value="#{administrarCursoController.itemsProfesor}" var="prof"
-			        					itemLabel="#{prof.persona.primerNombre}" itemValue="#{prof}"/>
+			        					itemLabel="#{prof.profesor.persona.primerNombre}" itemValue="#{prof.profesor.idProfesor}"/>
 			        					
-			        			</h:selectOneMenu>
+			        			</rich:select>
 		        			</h:panelGrid>
 		        		</h:panelGroup>
 	        		</fieldset>

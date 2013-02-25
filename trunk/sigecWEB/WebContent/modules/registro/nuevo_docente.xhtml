@@ -155,17 +155,17 @@
                 		<h:panelGrid columns="2">
                 			<h:outputLabel value="#{msg.primaria}: " />
                 			
-                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.primaria}" />
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="40" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.primaria}" />
                 			
                 			<h:outputLabel value="#{msg.secundaria}: " />
-                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.secundaria}" />
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="40" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.secundaria}" />
                 			
                 			<h:outputLabel value="#{msg.universitaria}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="40" rendered="#{registroDocenteController.renderEditionButtons}"/>
                 			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
                 			
                 			<h:outputLabel value="#{msg.postgrado}: " />
-                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" size="60" rendered="#{registroDocenteController.renderEditionButtons}"/>
+                			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" size="40" rendered="#{registroDocenteController.renderEditionButtons}"/>
                 			<h:outputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPostgrado}" rendered="#{!registroDocenteController.renderEditionButtons}"/>
                 			
                 		</h:panelGrid>

@@ -115,18 +115,7 @@
             	
         	</rich:panelMenuGroup>   
         	
-        	<rich:panelMenuGroup id="pmgAdmGeneralProgramas" label="#{msg.etiqueta_programa}"
-        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
-        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralProgramas"/>
-        		
-	            <rich:panelMenuItem action="pla_admistrar_programa.jsf?faces-redirect=true">
-	            	<a4j:commandLink value="#{msg.etiqueta_crear_programa}" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
-	            </rich:panelMenuItem>
-	            
-	            <rich:panelMenuItem action="pla_listado_programas.jsf?faces-redirect=true">
-	            	<a4j:commandLink value="#{msg.etiqueta_programas_existentes}" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
-	            </rich:panelMenuItem>
-            </rich:panelMenuGroup>
+        	
             
             <rich:panelMenuGroup id="pmgAdmGeneralCursos" label="Curso"
             	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
@@ -160,6 +149,19 @@
         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
         	<f:attribute name="idMenuPanelGroup" value="pmgCoordinacion"/>
         	
+        	<rich:panelMenuGroup id="pmgAdmGeneralProgramas" label="#{msg.etiqueta_programa}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralProgramas"/>
+        		
+	            <rich:panelMenuItem action="pla_admistrar_programa.jsf?faces-redirect=true">
+	            	<a4j:commandLink value="#{msg.etiqueta_crear_programa}" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
+	            </rich:panelMenuItem>
+	            
+	            <rich:panelMenuItem action="pla_listado_programas.jsf?faces-redirect=true">
+	            	<a4j:commandLink value="#{msg.etiqueta_programas_existentes}" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
+	            </rich:panelMenuItem>
+            </rich:panelMenuGroup>
+            
         	<rich:panelMenuGroup label="Curso" id="pmgCoordinacionCurso" execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
         		<f:attribute name="idMenuPanelGroup" value="pmgCoordinacionCurso"/>
 	        	<rich:panelMenuItem action="coor_lanzar_curso.jsf?faces-redirect=true">

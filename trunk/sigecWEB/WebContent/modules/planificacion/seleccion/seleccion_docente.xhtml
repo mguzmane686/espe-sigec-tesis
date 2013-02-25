@@ -12,7 +12,7 @@
     	<h:outputStylesheet library="css" name="botones.css"/>
     	
         <h:form id="frmSeleDocen">
-        	<rich:panel header="#{msg['seleccion_docente']}">
+        	<rich:panel header="#{msg['seleccion_docente']}" rendered="false">
 				<h:panelGroup layout="block" styleClass="roundCorner">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
 						<a4j:commandButton value="#{msg['guardar']}" actionListener="#{seleccionPorfesorController.btnSaveSeleccionProfesor}" image="/resources/images/save.png" render="pnlDocente"/>
@@ -21,14 +21,14 @@
 				</h:panelGroup>
 			</rich:panel>
 			
-        	<rich:panel header="Seleccion">
+        	<rich:panel header="#{msg['seleccion_docente']}">
         		<rich:collapsiblePanel header="#{msg['seleccion_docente']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        	
 	        		<a4j:outputPanel ajaxRendered="true">
-	        			<center>
+	        			<h:panelGroup layout="block" styleClass="rf-pp-hdr" style="text-align:center;">
 		        			<rich:dataScroller for="tblDocentes" renderIfSinglePage="false" fastControls="hide"/>
-		        		</center>
+		        		</h:panelGroup>
 		        		
 		        		<rich:dataTable id="tblDocentes" style="width:100%" value="#{seleccionPorfesorController.lstProfesors}" var="profesor" rows="5" rendered="#{!empty seleccionPorfesorController.lstProfesors}">
 		        			<f:facet name="header">
@@ -57,15 +57,15 @@
 		        				<f:facet name="header">
 		        					<h:outputText value="#{msg['ponderacion']}" />
 		        				</f:facet>
-		        				
-		        				<rich:progressBar mode="client" value="#{profesor.ponderacion}"
-						            minValue="0" maxValue="100">
-						            <h:outputText value="#{profesor.ponderacion} %" />
-						        </rich:progressBar>
-						        				
+		        				<center>
+			        				<rich:progressBar mode="client" value="#{profesor.ponderacion}"
+							            minValue="0" maxValue="100">
+							            <h:outputText value="#{profesor.ponderacion} %" />
+							        </rich:progressBar>
+				        		</center>		
 		        			</rich:column>
 		        			
-		        			<rich:column>
+		        			<rich:column rendered="false">
 		        				<f:facet name="header">
 		        					<h:outputText value="Seleccionar" />
 		        				</f:facet>
