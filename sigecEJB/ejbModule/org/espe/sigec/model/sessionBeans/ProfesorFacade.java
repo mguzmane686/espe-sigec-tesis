@@ -4,12 +4,14 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.Profesor;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -52,15 +54,23 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Profesor> findProfesoresSeleccionados() {
-		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Profesor.class);
-		crit.createAlias("persona", "personaA");
+	public Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo) {
+		
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
+		crit.createAlias("cursoPeriodo", "cursoPeriodoA");
+		crit.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		crit.add(Restrictions.eq("cursoPeriodoA.idCursoPeriodo", idCursoPeriodo));
+		
+		crit.createAlias("profesor", "profesorA");
+		crit.setFetchMode("profesorA", FetchMode.JOIN);
+		
+		crit.createAlias("profesorA.persona", "personaA");
     	crit.setFetchMode("personaA", FetchMode.JOIN);
-    	crit.add(Restrictions.eq("estadoSeleccion", "1"));
-    	
-		return crit.list();
+    	@SuppressWarnings("unchecked")
+		Collection<InvitacionDocente> lst = crit.list();
+    			 
+		return lst;
 	}
 
 	@SuppressWarnings("unchecked")
