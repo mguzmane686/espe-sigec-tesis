@@ -80,6 +80,10 @@ public class CreacionUsuarioController implements Serializable{
 			}
 			seguridadServicio.crearUsuario(getUsuarioPerfil());
 			FacesUtils.addInfoMessage("Usuario creado");
+			initEntities();
+			for(Perfil perfil: getLstPerfils()){
+				perfil.setSelected(Boolean.FALSE);
+			}
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurrio un error al guardar el usuario");
 		}
