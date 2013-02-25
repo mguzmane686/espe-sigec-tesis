@@ -70,16 +70,41 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 	}
 
 	private void elimiarEspaciosPersona(Persona persona){
-		if(persona.getUsuario().getIdentificador()!=null){persona.getUsuario().getIdentificador().trim();}
-		if(persona.getUsuario().getClave()!=null){persona.getUsuario().getClave().trim();}
-		if(persona.getPrimerNombre()!=null){persona.getPrimerNombre().trim();}
-		if(persona.getPrimerApellido()!=null){persona.getPrimerApellido().trim();}
+		if(persona.getUsuario().getIdentificador()!=null){
+			persona.getUsuario().setIdentificador(persona.getUsuario().getIdentificador().trim());
+		}
+		
+		if(persona.getUsuario().getClave()!=null){
+			persona.getUsuario().setClave(persona.getUsuario().getClave().trim());
+		}
+		
+		if(persona.getPrimerNombre()!=null){
+			persona.setPrimerNombre(persona.getPrimerNombre().trim());
+		}
+		
+		if(persona.getPrimerApellido()!=null){
+			persona.setPrimerApellido(persona.getPrimerApellido().trim());
+		}
 				
-		if(persona.getSegundoNombre()!=null){persona.getSegundoNombre().trim();}
-		if(persona.getSegundoApellido()!=null){persona.getSegundoApellido().trim();}
-		if(persona.getMail()!=null){persona.getMail().trim();}
-		if(persona.getDireccion()!=null){persona.getDireccion().trim();}
-		if(persona.getNacionalidad()!=null){persona.getNacionalidad().trim();}
+		if(persona.getSegundoNombre()!=null){
+			persona.setSegundoNombre(persona.getSegundoNombre().trim());
+		}
+		
+		if(persona.getSegundoApellido()!=null){
+			persona.setSegundoApellido(persona.getSegundoApellido().trim());
+		}
+		
+		if(persona.getMail()!=null){
+			persona.setMail(persona.getMail().trim());
+		}
+		
+		if(persona.getDireccion()!=null){
+			persona.setDireccion(persona.getDireccion().trim());
+		}
+		
+		if(persona.getNacionalidad()!=null){
+			persona.setNacionalidad(persona.getNacionalidad().trim());
+		}
 	}
 	
 	@Override
