@@ -55,13 +55,21 @@ public class EncuestaController implements Serializable{
 	
 	public void btnGuardarEncuesta(){
 		System.out.println("Guardando encuesta");
-		getEncuesta().setCursoEstudiante(getCursoEstudianteSeleccionado());
-		getEncuesta().getEncuestaPK().setEstIdEstudiante(getEstudiante().getIdEstudiante());
-		getEncuesta().getEncuestaPK().setIdCursoPeriodo(getCursoEstudianteSeleccionado().getCursoEstudiantePK().getIdCursoPeriodo());
-		getEncuesta().getEncuestaPK().setPrgId(getCursoEstudianteSeleccionado().getIdPrograma());
+		
 		try {
-			portalServicio.guardarEncuesta(getEncuesta());
-			FacesUtils.addInfoMessage("Encuesta guardada");
+			if(getCursoEstudianteSeleccionado()!=null){
+				getEncuesta().setCursoEstudiante(getCursoEstudianteSeleccionado());
+				getEncuesta().getEncuestaPK().setEstIdEstudiante(getEstudiante().getIdEstudiante());
+				getEncuesta().getEncuestaPK().setIdCursoPeriodo(getCursoEstudianteSeleccionado().getCursoEstudiantePK().getIdCursoPeriodo());
+				getEncuesta().getEncuestaPK().setPrgId(getCursoEstudianteSeleccionado().getIdPrograma());
+				
+				portalServicio.guardarEncuesta(getEncuesta());
+				
+				setCursoEstudianteSeleccionado(null);
+				FacesUtils.addInfoMessage("Encuesta guardada");
+			}else{
+				FacesUtils.addErrorMessage("Debe identificarse como estudiante");
+			}
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ya existe una encuesta sobre este curso!!");
 		}
@@ -92,7 +100,7 @@ public class EncuestaController implements Serializable{
 		Collection<CursoEstudiante> lstCursoEstudiantesTMP = portalServicio.buscarCursosEstudiante(idEstudiante); 
 		setShowListaCursos(Boolean.FALSE);
 		
-		if(lstCursoEstudiantesTMP !=null){
+		if(lstCursoEstudiantesTMP !=null && lstCursoEstudiantesTMP.size()>0){
 			setLstCursosEstudiante(lstCursoEstudiantesTMP);
 			setCursoEstudianteSeleccionado(lstCursoEstudiantesTMP.iterator().next());
 			setShowListaCursos(Boolean.TRUE);
