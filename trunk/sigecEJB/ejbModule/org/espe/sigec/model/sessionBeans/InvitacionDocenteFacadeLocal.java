@@ -1,5 +1,6 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface InvitacionDocenteFacadeLocal {
     Collection<InvitacionDocente> verificarInivtacionDocente(Integer idProfesor) throws Exception;
     Collection<InvitacionDocente> verificarInivtacionAceptada() throws Exception;
     Collection<InvitacionDocente> findInvitacionesByEstado(String estadoInvitacion) throws Exception;
+    
+    InvitacionDocente verificarUltimaInivtacionDocente(BigInteger idCursoPeriodo, Integer idProfesor) throws Exception;
 }

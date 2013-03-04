@@ -15,6 +15,7 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.InvitacionDocente;
+import org.espe.sigec.model.entities.InvitacionDocentePK;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
@@ -23,9 +24,11 @@ import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.HistoricoCursoEstadoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.InvitacionDocenteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
+import org.espe.sigec.utils.SigecClientResourceBoundle;
 
 /**
  * @author roberto
@@ -52,7 +55,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	private EdificioFacadeLocal edificioFacadeLocal;
 	@EJB
 	private ProfesorFacadeLocal profesorFacadeLocal;
-	
+	@EJB
+	private InvitacionDocenteFacadeLocal invitacionDocenteFacadeLocal; 
 	@Resource
 	private UserTransaction userTransaction;
 	@Override
@@ -119,6 +123,21 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 			historicoCursoEstadoFacadeLocal.create(cursoPeriodo.getHistoricoCursoEstadoCollection());
 		}
 		cursoPeriodoFacadeLocal.edit(cursoPeriodo);
+		
+		if(cursoPeriodo.getIdProfesor() != null){
+			InvitacionDocente invitacionDocente = null;
+			
+			try {
+				invitacionDocente = invitacionDocenteFacadeLocal.verificarUltimaInivtacionDocente(cursoPeriodo.getIdCursoPeriodo().toBigInteger(), cursoPeriodo.getIdProfesor().intValue());
+				if(invitacionDocente!=null){
+					invitacionDocente.setEstado(SigecClientResourceBoundle.getString("doc_estado_invitacion_prof_seleccionado"));
+					invitacionDocenteFacadeLocal.edit(invitacionDocente);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
 	}
 
 	@Override
