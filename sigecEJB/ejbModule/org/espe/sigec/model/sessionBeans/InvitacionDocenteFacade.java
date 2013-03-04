@@ -1,5 +1,6 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.ejb.Stateless;
@@ -11,6 +12,7 @@ import org.espe.sigec.utils.SigecConstantes;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 /**
  * @author Roberto
@@ -119,5 +121,19 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 		@SuppressWarnings("unchecked")
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
+	}
+
+	@Override
+	public InvitacionDocente verificarUltimaInivtacionDocente(
+			BigInteger idCursoPeriodo, Integer idProfesor) throws Exception {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
+		criteria.add(Restrictions.eq("invitacionDocentePK.idCursoPeriodo", idCursoPeriodo));
+		criteria.add(Restrictions.eq("invitacionDocentePK.prfIdProfesor", idProfesor));
+		criteria.addOrder(Order.desc("invitacionDocentePK.docNumInvit"));
+		Collection<InvitacionDocente> lst = criteria.list(); 
+		if(lst != null && !lst.isEmpty()){
+			return lst.iterator().next();
+		}
+		return null;
 	}
 }
