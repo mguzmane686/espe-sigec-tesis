@@ -123,19 +123,34 @@ public class AdministrarProgramaController implements Serializable{
 		try {
 			if(!isNewProgram()){
 				Collection<ProgramaCurso> lstInactivar = new ArrayList<ProgramaCurso>();
-				for(int i=0; i<lstProgramaCursosClone.size();i++){
-					if(!((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
-						lstInactivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
+				for(ProgramaCurso programaCursoClone : lstProgramaCursosClone){
+					for(ProgramaCurso programaCurso: lstProgramaCursos){
+						if(programaCursoClone.equals(programaCurso) && !programaCurso.isSelected()){
+							lstInactivar.add(programaCurso);
+						}
 					}
-					i++;
 				}
+				
+//				for(int i=0; i<lstProgramaCursosClone.size();i++){
+//					if(!((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
+//						lstInactivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
+//					}
+//					i++;
+//				}
 				Collection<ProgramaCurso> lstActivar = new ArrayList<ProgramaCurso>();
-				for(int i=lstProgramaCursosClone.size(); i<lstProgramaCursos.size();i++){
-					if(((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
-						lstActivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
+//				for(int i=lstProgramaCursosClone.size(); i<lstProgramaCursos.size();i++){
+//					if(((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
+//						lstActivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
+//					}
+//					i++;
+//				}
+				
+				for(ProgramaCurso programaCurso: lstProgramaCursos){
+					if(programaCurso.isSelected()){
+						lstActivar.add(programaCurso);
 					}
-					i++;
 				}
+				
 				
 				planificacionServicio.editarPrograma(getPrograma(), lstActivar, lstInactivar);
 				Collection<ProgramaCurso> lst = new ArrayList<ProgramaCurso>();
@@ -147,7 +162,14 @@ public class AdministrarProgramaController implements Serializable{
 				setLstProgramaCursos(lst);
 				setEditMode(Boolean.FALSE);
 				setNewProgram(Boolean.FALSE);
-				FacesUtils.addInfoMessage("Programa actualizado");
+				try {
+					planificacionServicio.editarPrograma(getPrograma(), lstActivar, lstInactivar);
+					FacesUtils.addInfoMessage("Programa actualizado");
+				} catch (Exception e) {
+					FacesUtils.addErrorMessage("Ocurrio un error al actualizar el programa");
+				}
+				
+				
 			}else{
 				Collection<ProgramaCurso> lst = new ArrayList<ProgramaCurso>();
 				for(ProgramaCurso obj: lstProgramaCursos){
