@@ -1,16 +1,26 @@
 package org.espe.sigec.web.utils;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.faces.FacesException;
+import javax.faces.FactoryFinder;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.context.ResponseWriter;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.faces.render.RenderKit;
+import javax.faces.render.RenderKitFactory;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.web.seguridad.HomeSessionController;
@@ -82,8 +92,48 @@ public class SigecLifeCycle implements PhaseListener{
 			FacesContext facesContext = event.getFacesContext();
 			saveMessages(facesContext);
 		}
+		
+//		FacesContext facesContext = event.getFacesContext();
+		HttpSession session = (HttpSession) event.getFacesContext().getExternalContext().getSession(false);
+
+		if (session == null) {
+//			NavigationHandler nh = facesContext.getApplication()
+//					.getNavigationHandler();
+//			nh.handleNavigation(facesContext, null, "loginPage");
+			doRedirect(event.getFacesContext(), "/salir.html");
+		}else if(session.isNew()){
+			System.out.println("Session creada con la peticion");
+		}
 	}
 
+	private void doRedirect(FacesContext fc, String redirectPage) throws FacesException {
+		ExternalContext ec = fc.getExternalContext();
+		try {
+			if (ec.isResponseCommitted()) {
+				// redirect is not possible
+				return;
+			}
+
+			// fix for renderer kit (Mojarra's and PrimeFaces's ajax redirect)
+			if ((fc.getPartialViewContext().isPartialRequest()) && fc.getResponseWriter() == null && fc.getRenderKit() == null) {
+				ServletResponse response = (ServletResponse) ec.getResponse();
+				ServletRequest request = (ServletRequest) ec.getRequest();
+				response.setCharacterEncoding(request.getCharacterEncoding());
+
+				RenderKitFactory factory = (RenderKitFactory) FactoryFinder.getFactory(FactoryFinder.RENDER_KIT_FACTORY);
+
+				RenderKit renderKit = factory.getRenderKit(fc, fc.getApplication().getViewHandler().calculateRenderKitId(fc));
+
+				ResponseWriter responseWriter = renderKit.createResponseWriter(response.getWriter(), null, request.getCharacterEncoding());
+				fc.setResponseWriter(responseWriter);
+			}
+
+			ec.redirect(ec.getRequestContextPath() + (redirectPage != null ? redirectPage : ""));
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new FacesException(e);
+		}
+	}
 	/**
 	 * Remove the messages that are not associated with any particular component
 	 * from the faces context and store them to the user's session.
