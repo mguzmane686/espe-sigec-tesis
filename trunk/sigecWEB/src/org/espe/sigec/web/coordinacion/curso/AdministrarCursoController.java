@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.InvitacionDocente;
+import org.espe.sigec.model.entities.InvitacionDocentePK;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.utils.FacesUtils;
