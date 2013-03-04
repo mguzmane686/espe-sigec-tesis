@@ -51,7 +51,7 @@
         	
         	<rich:panel header="Administrar curso" id="pnlLanCur">
         		<h:panelGroup rendered="#{(administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaAsignacionProfesor == '1') and 
-        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0')}">
+        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0') and (administrarCursoController.cursoPeriodo.idProfesor == null)}">
         			<fieldset style="border-color:red">
 		        		<legend>
 		        			<h:outputLabel value="Alerta!!!" styleClass="titulo" style="color:#1394EB;"/>
@@ -59,25 +59,26 @@
 		        		</legend>
 		        		
 		        		<h:panelGroup style="width:100%; background-color:#CEDE64;" layout="block">
-			        		<h:outputLabel value="El curso ya ha cumplido con el minimo de estudiantes" styleClass="titulo" style="color:#3D413F"/>
-			        		<h:outputLabel value="y se debe asignar un profesor al curso" styleClass="titulo" style="color:#3D413F"/>
+			        		<h:outputLabel value="#{msg.curso_completo_inscritos}" styleClass="titulo" style="color:#3D413F"/>
 		        		</h:panelGroup>
 		        		
-		        		<h:panelGroup rendered="#{administrarCursoController.editMode}">
+		        		
+	        		</fieldset>
+        		</h:panelGroup>
+	        	<rich:collapsiblePanel header="#{msg.etiqueta_fecha_del_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        		
+	        		<h:panelGroup rendered="#{administrarCursoController.editMode}">
 		        			<h:panelGrid columns="2">
 			        			<h:outputLabel value="Profesor :" style="display:block; width:120px;"/>
-			        			<rich:select>
+			        			<rich:select value="#{administrarCursoController.cursoPeriodo.idProfesor}">
 			        				<f:selectItems value="#{administrarCursoController.itemsProfesor}" var="prof"
 			        					itemLabel="#{prof.profesor.persona.primerNombre}" itemValue="#{prof.profesor.idProfesor}"/>
 			        					
 			        			</rich:select>
 		        			</h:panelGrid>
 		        		</h:panelGroup>
-	        		</fieldset>
-        		</h:panelGroup>
-	        	<rich:collapsiblePanel header="#{msg.etiqueta_fecha_del_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
-					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-	        		
+		        		
 	        		<h:panelGrid columns="2"  columnClasses="espacioDetalle">
 	        			<h:outputLabel value="#{msg.etiqueta_usuarios_inscritos} :" style="font-weight:bold;"/>
 	        			<h:outputText value="#{administrarCursoController.numeroAlumnosInscritos}" style="font-weight:bold;"/>
