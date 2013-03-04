@@ -58,7 +58,13 @@ public class CursoPeriodo implements Serializable {
     @Size(max = 20)
     @Column(name = "cper_modalidad")
     private String modalidad;
-      
+    
+    @Column(name = "prf_id_profesor")
+    private BigDecimal idProfesor;
+    
+    @JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Profesor profesor;
     
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<PensumAcademicoPeriodoCurso> lstPensumAcademicoPerCursoCollection;
@@ -271,6 +277,22 @@ public class CursoPeriodo implements Serializable {
 
 	public void setProgramaCurso(ProgramaCurso programaCurso) {
 		this.programaCurso = programaCurso;
+	}
+
+	public BigDecimal getIdProfesor() {
+		return idProfesor;
+	}
+
+	public void setIdProfesor(BigDecimal idProfesor) {
+		this.idProfesor = idProfesor;
+	}
+
+	public Profesor getProfesor() {
+		return profesor;
+	}
+
+	public void setProfesor(Profesor profesor) {
+		this.profesor = profesor;
 	}
 	
 	
