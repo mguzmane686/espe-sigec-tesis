@@ -24,6 +24,10 @@ import javax.validation.constraints.Size;
 public class DetallePresupuestoCursoPK implements Serializable {
 	@Basic(optional = false)
     @NotNull
+    @Column(name = "pre_id")
+    private int preId;
+	@Basic(optional = false)
+    @NotNull
     @Column(name = "det_id_detalle")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="det_pre_cur")
     @SequenceGenerator(name="det_pre_cur", sequenceName="det_pre_cur")
@@ -41,12 +45,13 @@ public class DetallePresupuestoCursoPK implements Serializable {
     public DetallePresupuestoCursoPK() {
     }
 
-    public DetallePresupuestoCursoPK(BigInteger idDetalle, BigInteger idCursoPeriodo, String codElemento) {
-        this.idDetalle = idDetalle;
+    public DetallePresupuestoCursoPK(int preId, BigInteger idCursoPeriodo, BigInteger detIdDetalle, String codElemento) {
+        this.preId = preId;
         this.idCursoPeriodo = idCursoPeriodo;
+        this.idDetalle = detIdDetalle;
         this.codElemento = codElemento;
     }
-
+    
     public BigInteger getIdCursoPeriodo() {
         return idCursoPeriodo;
     }
@@ -62,12 +67,13 @@ public class DetallePresupuestoCursoPK implements Serializable {
     public void setCodElemento(String codElemento) {
         this.codElemento = codElemento;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idDetalle != null ? idDetalle.hashCode() : 0);
+        hash += (int) preId;
         hash += (idCursoPeriodo != null ? idCursoPeriodo.hashCode() : 0);
+        hash += (idDetalle != null ? idDetalle.hashCode() : 0);
         hash += (codElemento != null ? codElemento.hashCode() : 0);
         return hash;
     }
@@ -79,10 +85,13 @@ public class DetallePresupuestoCursoPK implements Serializable {
             return false;
         }
         DetallePresupuestoCursoPK other = (DetallePresupuestoCursoPK) object;
-        if ((this.idDetalle == null && other.idDetalle != null) || (this.idDetalle != null && !this.idDetalle.equals(other.idDetalle))) {
+        if (this.preId != other.preId) {
             return false;
         }
         if ((this.idCursoPeriodo == null && other.idCursoPeriodo != null) || (this.idCursoPeriodo != null && !this.idCursoPeriodo.equals(other.idCursoPeriodo))) {
+            return false;
+        }
+        if ((this.idDetalle == null && other.idDetalle != null) || (this.idDetalle != null && !this.idDetalle.equals(other.idDetalle))) {
             return false;
         }
         if ((this.codElemento == null && other.codElemento != null) || (this.codElemento != null && !this.codElemento.equals(other.codElemento))) {
@@ -90,10 +99,10 @@ public class DetallePresupuestoCursoPK implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
-        return "org.espe.sigec.model.entities.DetallePresupuestoCursoPK[ idDetalle=" + idDetalle + ", idCursoPeriodo=" + idCursoPeriodo + ", codElemento=" + codElemento + " ]";
+        return "org.espe.sigec.model.entities.SgctFncDetPresCurPK[ preId=" + preId + ", idCursoPeriodo=" + idCursoPeriodo + ", detIdDetalle=" + idDetalle + ", codElemento=" + codElemento + " ]";
     }
 
 	public BigInteger getIdDetalle() {
@@ -102,6 +111,14 @@ public class DetallePresupuestoCursoPK implements Serializable {
 
 	public void setIdDetalle(BigInteger idDetalle) {
 		this.idDetalle = idDetalle;
+	}
+
+	public int getPreId() {
+		return preId;
+	}
+
+	public void setPreId(int preId) {
+		this.preId = preId;
 	}
     
 }

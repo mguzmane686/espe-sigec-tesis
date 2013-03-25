@@ -17,6 +17,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Profesor</class>
 		<class>org.espe.sigec.model.entities.PresupuestoCurso</class>
 		<class>org.espe.sigec.model.entities.Presupuesto</class>
+		<class>org.espe.sigec.model.entities.PresupuestoDetalle</class>
+		<class>org.espe.sigec.model.entities.PresupuestoDetallePK</class>
 		<class>org.espe.sigec.model.entities.Persona</class>
 		<class>org.espe.sigec.model.entities.PeriodoAcademico</class>
 		<class>org.espe.sigec.model.entities.Perfil</class>

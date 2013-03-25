@@ -62,6 +62,9 @@ public class Presupuesto implements Serializable {
     @OneToMany(mappedBy = "presupuesto", fetch = FetchType.LAZY)
     private Collection<PresupuestoCurso> presupuestoCursoCollection;
 
+    @OneToMany(mappedBy = "presupuesto", fetch = FetchType.LAZY)
+    private Collection<PresupuestoDetalle> lstPresupuestoDetalles;
+    
     public Presupuesto() {
     }
 
@@ -157,6 +160,15 @@ public class Presupuesto implements Serializable {
 
 	public void setIdPrefijoPresupuesto(String idPrefijoPresupuesto) {
 		this.idPrefijoPresupuesto = idPrefijoPresupuesto;
+	}
+
+	public Collection<PresupuestoDetalle> getLstPresupuestoDetalles() {
+		return lstPresupuestoDetalles;
+	}
+
+	public void setLstPresupuestoDetalles(
+			Collection<PresupuestoDetalle> lstPresupuestoDetalles) {
+		this.lstPresupuestoDetalles = lstPresupuestoDetalles;
 	}
     
 }
