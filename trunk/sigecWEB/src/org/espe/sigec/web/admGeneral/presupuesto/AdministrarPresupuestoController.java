@@ -1,6 +1,8 @@
 package org.espe.sigec.web.admGeneral.presupuesto;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -9,6 +11,7 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.Presupuesto;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -23,11 +26,22 @@ public class AdministrarPresupuestoController {
 	@Inject
 	AdmGeneralServicio admGeneralServicio;
 	
-	Presupuesto presupuesto;
+	private Presupuesto presupuesto;
 	private boolean editMode;
+	
+	private Collection<PresupuestoDetalle> lstPresupuestoDetalles;
 	
 	public AdministrarPresupuestoController(){
 		setPresupuesto((Presupuesto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("presupuestoToEdit"));
+		setLstPresupuestoDetalles(new ArrayList<PresupuestoDetalle>());
+	}
+	
+	public void btnAgregarDetalle(){
+		getLstPresupuestoDetalles().add(new PresupuestoDetalle());
+	}
+	
+	public void btnEliminarDetalle(PresupuestoDetalle presupuestoDetalle){
+		getLstPresupuestoDetalles().remove(presupuestoDetalle);
 	}
 	
 	public Presupuesto getPresupuesto() {
@@ -72,5 +86,15 @@ public class AdministrarPresupuestoController {
 			e1.printStackTrace();
 		}
 	}
+
+	public Collection<PresupuestoDetalle> getLstPresupuestoDetalles() {
+		return lstPresupuestoDetalles;
+	}
+
+	public void setLstPresupuestoDetalles(
+			Collection<PresupuestoDetalle> lstPresupuestoDetalles) {
+		this.lstPresupuestoDetalles = lstPresupuestoDetalles;
+	}
+	
 	
 }

@@ -42,7 +42,7 @@
         	<rich:collapsiblePanel id="rcpDetalles" header="Detalles presupuesto"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<a4j:commandButton value="Agregar detalle" 
-					action="#{presupuestoAdmController.btnAgregarPresupuesto}" render="pnlPresupuesto" execute="@this tblPreDetalleCont"/>
+					action="#{presupuestoAdmController.btnAgregarPresupuesto}" render="pnlPresupuesto" execute="@this tblPreDetalleCont" limitRender="true"/>
 				
 				
 				<h:panelGroup layout="block" id="tblPreDetalle">
@@ -66,7 +66,8 @@
 							<f:facet name="header">
 								Accion
 							</f:facet>
-							<a4j:commandButton action="#{presupuestoAdmController.btnEliminarDetalle(presuDetalle)}" execute="@this tblPreDetalleCont" render="pnlPresupuesto" immediate="true"/>
+							<a4j:commandButton action="#{presupuestoAdmController.btnEliminarDetalle(presuDetalle)}" 
+								execute="@this tblPreDetalleCont" render="tblPreDetalleCont" immediate="true" limitRender="true"/>
 						</rich:column>
 					</rich:dataTable>
 				</h:panelGroup>

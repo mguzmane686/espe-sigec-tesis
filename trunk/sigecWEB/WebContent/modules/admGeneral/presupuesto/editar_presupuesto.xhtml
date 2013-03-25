@@ -69,6 +69,23 @@
                 	
         		</h:panelGrid>
         	</fieldset>	
+        	
+        	<a4j:commandButton action="#{administrarPresupuestoController.btnAgregarDetalle}" execute="@this tblDetalle" render="tblDetalle" limitRender="true"/>
+        	<rich:dataTable id="tblDetalle" value="#{administrarPresupuestoController.lstPresupuestoDetalles}" var="detPresupuesto">
+        		<rich:column>
+        			<f:facet name="header">
+        				Nombre
+        			</f:facet>
+        			<h:inputText value="#{detPresupuesto.preDetDescripcion}" />
+        		</rich:column>
+        		
+        		<rich:column>
+        			<f:facet name="header">
+        				#{msg.etiqueta_accion}
+        			</f:facet>
+        			<a4j:commandButton value="#{msg.etiqueta_eliminar}" render="tblDetalle" execute="@this" action="#{administrarPresupuestoController.btnEliminarDetalle(detPresupuesto)}" limitRender="true"/>
+        		</rich:column>
+        	</rich:dataTable>
        	</rich:panel>
        	
        </h:form>
