@@ -61,9 +61,10 @@ public class DetallePresupuestoCurso implements Serializable {
         this.detallePresupuestoCursoPK = detallePresupuestoCursoPK;
     }
     
-    public DetallePresupuestoCurso(BigInteger idDetalle, BigInteger idCursoPeriodo, String codElemento) {
-        this.detallePresupuestoCursoPK = new DetallePresupuestoCursoPK(idDetalle, idCursoPeriodo, codElemento);
+    public DetallePresupuestoCurso(int preId, BigInteger idCursoPeriodo, BigInteger detIdDetalle, String detCodElemento) {
+        this.detallePresupuestoCursoPK = new DetallePresupuestoCursoPK(preId, idCursoPeriodo, detIdDetalle, detCodElemento);
     }
+    
     public DetallePresupuestoCursoPK getDetallePresupuestoCursoPK() {
         return detallePresupuestoCursoPK;
     }
