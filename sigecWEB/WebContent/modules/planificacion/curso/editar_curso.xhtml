@@ -92,10 +92,10 @@
 	        	<rich:collapsiblePanel header="#{msg.etiqueta_modulos_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        	
-	        		<a4j:outputPanel ajaxRendered="true">
+	        		
 		        		<h:panelGroup layout="block">
 		   					<a4j:commandButton id="btnNuevoTema" rendered="#{edicionCursoController.renderEditButtons}" 
-		   						value="Nuevo #{msg.etiqueta_modulo}" onclick="#{rich:component('popupNuevoModulo')}.show()" immediate="true"/>
+		   						value="Nuevo #{msg.etiqueta_modulo}" oncomplete="#{rich:component('popupNuevoModulo')}.show()" execute="@this" render="tblTemario pgDatosTema"/>
 		   					<script>
 		   						$("#frmCurso\\:btnNuevoTema").live('click',function(){
 		   							$("#frmNuevoCurso\\:txtNomTem").attr('value','');
@@ -105,14 +105,13 @@
 			   					});
 		   					</script>
 		   				</h:panelGroup>
-		        		<rich:panel rendered="#{empty edicionCursoController.curso.pensumAcademicoCollection}">
-		        			#{msg.etiqueta_curso_sin_modulos}
-		        		</rich:panel>
-		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.pensumAcademicoCollection}" var="modulo" rows="5" >
+		        		
+		        		
+		        		<a4j:outputPanel ajaxRendered="true">
+		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.pensumAcademicoCollection}" var="modulo" rows="5" noDataLabel="#{msg.etiqueta_curso_sin_modulos}">
 		        			<f:facet name="header">
 		        				<h:outputLabel value="#{msg.etiqueta_modulos}" />
 		        			</f:facet>
-		        			
 		        			
 		        			<rich:column>
 			        			<f:facet name="header">
@@ -129,40 +128,43 @@
 			        			<h:inputText value="#{modulo.descripcion}" style="width:100%" rendered="#{edicionCursoController.renderEditButtons}"/>
 			        			<h:outputText value="#{modulo.descripcion}" style="width:100%" rendered="#{!edicionCursoController.renderEditButtons}"/>
 		        			</rich:column>
-		        			
-		        			
+		        			<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
 		        		</rich:dataTable>
-		        		<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
+		        		
 	        		</a4j:outputPanel>
+	        		
+	        		
 	        	</rich:collapsiblePanel>
+	        	
+				<rich:popupPanel id="popupNuevoModulo" header="#{msg.etiqueta_agregar_modulos_curso}" modal="true" resizeable="false" autosized="true" domElementAttachment="form">
+		        
+			        <f:facet name="controls">
+			            <h:outputLink value="#" onclick="#{rich:component('popupNuevoModulo')}.hide(); return false;">
+			                    X
+			                </h:outputLink>
+			        </f:facet>
+			        
+			        <h:panelGrid columns="2" id="pgDatosTema">
+			        	<h:outputLabel value="Tema" />
+			        	<h:inputText id="txtNomTem" value="#{edicionCursoController.pensumAcademicoNuevo.tema}" tabindex="1"/>
+			        	
+			        	<h:outputLabel value="#{msg['descripcion']}" />
+			        	<h:inputText id="txtDetTem" value="#{edicionCursoController.pensumAcademicoNuevo.descripcion}" tabindex="2"/>
+			        	
+			        </h:panelGrid>
+				        
+			        <h:panelGroup layout="block" style="text-align:right; width:100%">
+			        <a4j:commandButton value="#{msg['etiqueta_aniadir_Tema']}" styleClass="btnAux addBtn" 
+			        	actionListener="#{edicionCursoController.btnAddModuloCurso}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoModulo')}.hide()"
+			        	render="tblTemario"/>
+			        
+			        <a4j:commandButton value="#{msg['cancelar']}" styleClass="btnAux removeBtn" style="width:70px"
+						onclick="#{rich:component('popupNuevoModulo')}.hide(); return false;" />
+			        </h:panelGroup>
+			    </rich:popupPanel>
         	</rich:panel>
         	
         </h:form>
         
-        <rich:popupPanel id="popupNuevoModulo" header="#{msg.etiqueta_agregar_modulos_curso}" modal="true" resizeable="false" autosized="true" keepVisualState="true">
-		        
-	        <f:facet name="controls">
-	            <h:outputLink value="#" onclick="#{rich:component('popupNuevoModulo')}.hide(); return false;">
-	                    X
-	                </h:outputLink>
-	        </f:facet>
-	        <h:form id="frmNuevoCurso">
-		        <h:panelGrid columns="2" id="pgDatosTema">
-		        	<h:outputLabel value="Tema" />
-		        	<h:inputText id="txtNomTem" value="#{edicionCursoController.pensumAcademicoNuevo.tema}" tabindex="1"/>
-		        	
-		        	<h:outputLabel value="#{msg['descripcion']}" />
-		        	<h:inputText id="txtDetTem" value="#{edicionCursoController.pensumAcademicoNuevo.descripcion}" tabindex="2"/>
-		        	
-		        </h:panelGrid>
-		        
-		        <h:panelGroup layout="block" style="text-align:right; width:100%">
-		        <a4j:commandButton value="#{msg['etiqueta_aniadir_Tema']}" styleClass="btnAux addBtn" 
-		        	actionListener="#{edicionCursoController.btnAddModuloCurso}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoModulo')}.hide()"/>
-		        
-		        <a4j:commandButton value="#{msg['cancelar']}" styleClass="btnAux removeBtn" style="width:70px" immediate="true"
-				oncomplete="#{rich:component('popupNuevoModulo')}.hide()" />
-		        </h:panelGroup>
-	        </h:form>
-	    </rich:popupPanel>
+        
 </ui:composition>
