@@ -11,7 +11,7 @@
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
    	<h:outputScript library="js" name="validaciones.js" target="head"/>
-        <h:form id="frmPresupuesto">
+    <h:form id="frmPresupuesto">
        	
         <rich:panel header="#{msg['creacion_presupuesto']}">
        		<h:panelGroup layout="block" styleClass="roundCorner">
@@ -24,10 +24,10 @@
         </rich:panel>
        	
         <rich:panel header="#{msg['creacion_presupuesto']}" id="pnlPresupuesto">
-       		<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_presupuesto']}" styleClass="titulo"/>
-        		</legend>
+       		
+       		<rich:collapsiblePanel header="#{msg['datos_presupuesto']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				
         		<h:panelGrid columns="2">
         			<h:outputLabel value="#{msg['etiqueta_anio']}" />
         			<rich:inputNumberSpinner value="#{presupuestoAdmController.presupuesto.codigoAnio}" minValue="2000" maxValue="2100"/>
@@ -35,7 +35,42 @@
         			<h:outputLabel value="Cantidad" />
         			<sigecComp:textField value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" label="Cantidad" editMode="true" onkeypressScript="return validateNumPP(event);"/>
         		</h:panelGrid>
-        	</fieldset>	
+        		
+        		
+        	</rich:collapsiblePanel>
+        	
+        	<rich:collapsiblePanel id="rcpDetalles" header="Detalles presupuesto"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				<a4j:commandButton value="Agregar detalle" 
+					action="#{presupuestoAdmController.btnAgregarPresupuesto}" render="pnlPresupuesto" execute="@this tblPreDetalleCont"/>
+				
+				
+				<h:panelGroup layout="block" id="tblPreDetalle">
+					<rich:dataTable id="tblPreDetalleCont" value="#{presupuestoAdmController.presupuesto.lstPresupuestoDetalles}" var="presuDetalle"
+						noDataLabel="sin detalles" >
+						<rich:column>
+							<f:facet name="header">
+								Nombre
+							</f:facet>
+							<sigecComp:textField value="#{presuDetalle.preDetDescripcion}" required="true" label="Nombre" editMode="true"></sigecComp:textField>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								Valor
+							</f:facet>
+							<h:inputText value="#{presuDetalle.preDetValorInicial}" onkeypress="return validateNumPP(event);"/>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								Accion
+							</f:facet>
+							<a4j:commandButton action="#{presupuestoAdmController.btnEliminarDetalle(presuDetalle)}" execute="@this tblPreDetalleCont" render="pnlPresupuesto" immediate="true"/>
+						</rich:column>
+					</rich:dataTable>
+				</h:panelGroup>
+			</rich:collapsiblePanel>	
        	</rich:panel>
        	
        </h:form>
