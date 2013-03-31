@@ -94,8 +94,8 @@
 	        	
 	        		
 		        		<h:panelGroup layout="block">
-		   					<a4j:commandButton id="btnNuevoTema" rendered="#{edicionCursoController.renderEditButtons}" 
-		   						value="Nuevo #{msg.etiqueta_modulo}" oncomplete="#{rich:component('popupNuevoModulo')}.show()" execute="@this" render="tblTemario pgDatosTema"/>
+		   					<a4j:commandButton id="btnNuevoTema" rendered="#{edicionCursoController.renderEditButtons}" limitRender="true" 
+		   						value="Nuevo #{msg.etiqueta_modulo}" oncomplete="#{rich:component('popupNuevoModulo')}.show()" execute="@this tblTemario" render="tblTemario"/>
 		   					<script>
 		   						$("#frmCurso\\:btnNuevoTema").live('click',function(){
 		   							$("#frmNuevoCurso\\:txtNomTem").attr('value','');
@@ -107,7 +107,7 @@
 		   				</h:panelGroup>
 		        		
 		        		
-		        		<a4j:outputPanel ajaxRendered="true">
+		        		
 		        		<rich:dataTable id="tblTemario" style="width:100%" value="#{edicionCursoController.curso.pensumAcademicoCollection}" var="modulo" rows="5" noDataLabel="#{msg.etiqueta_curso_sin_modulos}">
 		        			<f:facet name="header">
 		        				<h:outputLabel value="#{msg.etiqueta_modulos}" />
@@ -131,7 +131,7 @@
 		        			<rich:dataScroller for="tblTemario" renderIfSinglePage="false"></rich:dataScroller>
 		        		</rich:dataTable>
 		        		
-	        		</a4j:outputPanel>
+	        		
 	        		
 	        		
 	        	</rich:collapsiblePanel>
@@ -156,7 +156,7 @@
 			        <h:panelGroup layout="block" style="text-align:right; width:100%">
 			        <a4j:commandButton value="#{msg['etiqueta_aniadir_Tema']}" styleClass="btnAux addBtn" 
 			        	actionListener="#{edicionCursoController.btnAddModuloCurso}" execute="pgDatosTema" oncomplete="#{rich:component('popupNuevoModulo')}.hide()"
-			        	render="tblTemario"/>
+			        	render="tblTemario" limitRender="true"/>
 			        
 			        <a4j:commandButton value="#{msg['cancelar']}" styleClass="btnAux removeBtn" style="width:70px"
 						onclick="#{rich:component('popupNuevoModulo')}.hide(); return false;" />
