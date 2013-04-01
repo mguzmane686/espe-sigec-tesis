@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
+import org.apache.commons.lang.SerializationUtils;
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
@@ -18,6 +19,7 @@ import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoCurso;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
@@ -31,6 +33,7 @@ import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PersonaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PresupuestoCursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.PresupuestoDetalleFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PresupuestoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.model.sessionBeans.UsuarioFacadeLocal;
@@ -65,6 +68,8 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	private PresupuestoCursoFacadeLocal presupuestoCursoFacadeLocal;
 	@EJB
 	private EducacionFormacionFacadeLocal educacionFormacionFacadeLocal;
+	@EJB
+	private PresupuestoDetalleFacadeLocal presupuestoDetalleFacadeLocal;
 	
 	@Override
 	public void editAula(Aula aula) throws Exception {
@@ -237,7 +242,23 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 
 	@Override
 	public void editPresupuesto(Presupuesto presupuesto) throws Exception {
-		presupuestoFacadeLocal.edit(presupuesto);
+		userTransaction.begin();
+		try {
+			
+			for(PresupuestoDetalle presupuestoDetalle: presupuesto.getLstPresupuestoDetalles()){
+				presupuestoDetalle.getPresupuestoDetallePK().setPreId(presupuesto.getIdPresupuesto());
+				presupuestoDetalleFacadeLocal.create(presupuestoDetalle);
+			}
+			presupuesto.setLstPresupuestoDetalles(null);
+			presupuestoFacadeLocal.edit(presupuesto);
+			
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+			throw new Exception("Ocurrio un error al actualizar el presupuesto!");
+		}
+		
+		
 	}
 
 	@Override
