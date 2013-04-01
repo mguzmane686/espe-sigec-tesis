@@ -50,6 +50,13 @@
 						noDataLabel="sin detalles" >
 						<rich:column>
 							<f:facet name="header">
+								#{msg.etiqueta_codigo}
+							</f:facet>
+							<sigecComp:textField value="#{presuDetalle.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="true"></sigecComp:textField>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
 								Nombre
 							</f:facet>
 							<sigecComp:textField value="#{presuDetalle.preDetDescripcion}" required="true" label="Nombre" editMode="true"></sigecComp:textField>
@@ -64,7 +71,7 @@
 						
 						<rich:column>
 							<f:facet name="header">
-								Accion
+								#{msg.etiqueta_accion}
 							</f:facet>
 							<a4j:commandButton action="#{presupuestoAdmController.btnEliminarDetalle(presuDetalle)}" 
 								execute="@this tblPreDetalleCont" render="tblPreDetalleCont" immediate="true" limitRender="true"/>

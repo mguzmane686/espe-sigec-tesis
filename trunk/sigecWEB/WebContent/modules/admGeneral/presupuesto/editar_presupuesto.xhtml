@@ -74,18 +74,26 @@
 	        		render="tblDetalle" limitRender="true" rendered="#{administrarPresupuestoController.editMode}"/>
 	        	<rich:dataTable id="tblDetalle" value="#{administrarPresupuestoController.lstPresupuestoDetalles}" var="detPresupuesto"
 	        		noDataLabel="Sin registros" style="width:100%">
+	        		
+	        		<rich:column style="text-align:center; margin:auto;">
+						<f:facet name="header">
+							#{msg.etiqueta_codigo}
+						</f:facet>
+						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode}"></sigecComp:textField>
+					</rich:column>
+						
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.nombre}
 	        			</f:facet>
-	        			<h:inputText value="#{detPresupuesto.preDetDescripcion}" />
+	        			<sigecComp:textField value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="true"></sigecComp:textField>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.etiqueta_valor_inicial}
 	        			</f:facet>
-	        			<h:inputText value="#{detPresupuesto.preDetValorInicial}" />
+	        			<sigecComp:textField value="#{detPresupuesto.preDetValorInicial}" required="true" label="#{msg.etiqueta_valor_inicial}" editMode="true"></sigecComp:textField>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">

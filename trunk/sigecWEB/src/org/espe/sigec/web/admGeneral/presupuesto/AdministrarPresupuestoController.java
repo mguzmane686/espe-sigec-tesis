@@ -1,6 +1,7 @@
 package org.espe.sigec.web.admGeneral.presupuesto;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -10,8 +11,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoDetalle;
+import org.espe.sigec.model.entities.PresupuestoDetallePK;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.web.utils.FacesUtils;
 
@@ -30,6 +33,7 @@ public class AdministrarPresupuestoController {
 	private boolean editMode;
 	
 	private Collection<PresupuestoDetalle> lstPresupuestoDetalles;
+	private Collection<PresupuestoDetalle> lstPresupuestoDetallesClone;
 	
 	public AdministrarPresupuestoController(){
 		setPresupuesto((Presupuesto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("presupuestoToEdit"));
@@ -37,11 +41,34 @@ public class AdministrarPresupuestoController {
 	}
 	
 	public void btnAgregarDetalle(){
-		getLstPresupuestoDetalles().add(new PresupuestoDetalle());
+		getLstPresupuestoDetalles().add(new PresupuestoDetalle(new PresupuestoDetallePK()));
+		SerializationUtils.clone(getPresupuesto());
 	}
 	
 	public void btnEliminarDetalle(PresupuestoDetalle presupuestoDetalle){
 		getLstPresupuestoDetalles().remove(presupuestoDetalle);
+	}
+	
+	public void btnEdit(ActionEvent e){
+		setEditMode(Boolean.TRUE);
+		setLstPresupuestoDetallesClone((Collection<PresupuestoDetalle>)SerializationUtils.clone((Serializable)getLstPresupuestoDetalles()));
+	}
+	
+	public void btnCancelEdit(ActionEvent e){
+		setEditMode(Boolean.FALSE);
+		setLstPresupuestoDetalles((Collection<PresupuestoDetalle>)SerializationUtils.clone((Serializable)getLstPresupuestoDetallesClone()));
+	}
+	
+	public void btnSave(ActionEvent e){
+		try {
+			setEditMode(Boolean.FALSE);
+			getPresupuesto().setLstPresupuestoDetalles(getLstPresupuestoDetalles());
+			admGeneralServicio.editPresupuesto(getPresupuesto());
+			FacesUtils.addInfoMessage("Presupuesto actualizado exitosamente");
+		} catch (Exception e1) {
+			FacesUtils.addInfoMessage("Ha ocurrido un error al editar el presupuesto");
+			e1.printStackTrace();
+		}
 	}
 	
 	public Presupuesto getPresupuesto() {
@@ -60,25 +87,6 @@ public class AdministrarPresupuestoController {
 		this.editMode = editMode;
 	}
 	
-	public void btnEdit(ActionEvent e){
-		setEditMode(Boolean.TRUE);
-	}
-	
-	public void btnCancelEdit(ActionEvent e){
-		setEditMode(Boolean.FALSE);
-	}
-	
-	public void btnSave(ActionEvent e){
-		try {
-			setEditMode(Boolean.FALSE);
-			admGeneralServicio.editPresupuesto(getPresupuesto());
-			FacesUtils.addInfoMessage("Presupuesto actualizado exitosamente");
-		} catch (Exception e1) {
-			FacesUtils.addInfoMessage("Ha ocurrido un error al editar el presupuesto");
-			e1.printStackTrace();
-		}
-	}
-	
 	public void btnReturnReportePresupuesto(ActionEvent e){
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("adm_reporte_presupuesto.jsf");
@@ -94,6 +102,15 @@ public class AdministrarPresupuestoController {
 	public void setLstPresupuestoDetalles(
 			Collection<PresupuestoDetalle> lstPresupuestoDetalles) {
 		this.lstPresupuestoDetalles = lstPresupuestoDetalles;
+	}
+
+	public Collection<PresupuestoDetalle> getLstPresupuestoDetallesClone() {
+		return lstPresupuestoDetallesClone;
+	}
+
+	public void setLstPresupuestoDetallesClone(
+			Collection<PresupuestoDetalle> lstPresupuestoDetallesClone) {
+		this.lstPresupuestoDetallesClone = lstPresupuestoDetallesClone;
 	}
 	
 	
