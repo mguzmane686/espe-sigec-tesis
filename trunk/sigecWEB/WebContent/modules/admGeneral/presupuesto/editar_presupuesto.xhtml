@@ -43,10 +43,8 @@
         </rich:panel>
        	
         <rich:panel header="#{msg.administrar_presupuesto}" id="pnlDatosPresupuesto">
-       		<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_presupuesto']}" styleClass="titulo"/>
-        		</legend>
+       		<rich:collapsiblePanel header="#{msg['datos_presupuesto']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
         		<h:panelGrid columns="2">
         		
         			<h:outputText value="#{msg['etiqueta_codigo']}" />
@@ -68,24 +66,43 @@
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoActual}"/>			
                 	
         		</h:panelGrid>
-        	</fieldset>	
+        	</rich:collapsiblePanel>
         	
-        	<a4j:commandButton action="#{administrarPresupuestoController.btnAgregarDetalle}" execute="@this tblDetalle" render="tblDetalle" limitRender="true"/>
-        	<rich:dataTable id="tblDetalle" value="#{administrarPresupuestoController.lstPresupuestoDetalles}" var="detPresupuesto">
-        		<rich:column>
-        			<f:facet name="header">
-        				Nombre
-        			</f:facet>
-        			<h:inputText value="#{detPresupuesto.preDetDescripcion}" />
-        		</rich:column>
-        		
-        		<rich:column>
-        			<f:facet name="header">
-        				#{msg.etiqueta_accion}
-        			</f:facet>
-        			<a4j:commandButton value="#{msg.etiqueta_eliminar}" render="tblDetalle" execute="@this" action="#{administrarPresupuestoController.btnEliminarDetalle(detPresupuesto)}" limitRender="true"/>
-        		</rich:column>
-        	</rich:dataTable>
+        	<rich:collapsiblePanel header="#{msg['datos_presupuesto']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        	<a4j:commandButton action="#{administrarPresupuestoController.btnAgregarDetalle}" execute="@this tblDetalle" value="Agregar detalle" 
+	        		render="tblDetalle" limitRender="true" rendered="#{administrarPresupuestoController.editMode}"/>
+	        	<rich:dataTable id="tblDetalle" value="#{administrarPresupuestoController.lstPresupuestoDetalles}" var="detPresupuesto"
+	        		noDataLabel="Sin registros" style="width:100%">
+	        		<rich:column style="text-align:center;">
+	        			<f:facet name="header">
+	        				#{msg.nombre}
+	        			</f:facet>
+	        			<h:inputText value="#{detPresupuesto.preDetDescripcion}" />
+	        		</rich:column>
+	        		
+	        		<rich:column style="text-align:center;">
+	        			<f:facet name="header">
+	        				#{msg.etiqueta_valor_inicial}
+	        			</f:facet>
+	        			<h:inputText value="#{detPresupuesto.preDetValorInicial}" />
+	        		</rich:column>
+	        		
+	        		<rich:column style="text-align:center;">
+	        			<f:facet name="header">
+	        				#{msg.etiqueta_valor_actual}
+	        			</f:facet>
+	        			<h:outputText value="#{detPresupuesto.preDetValorVariable}" />
+	        		</rich:column>
+	        		
+	        		<rich:column style="text-align:center;">
+	        			<f:facet name="header">
+	        				#{msg.etiqueta_accion}
+	        			</f:facet>
+	        			<a4j:commandButton value="#{msg.etiqueta_eliminar}" render="tblDetalle" execute="@this" action="#{administrarPresupuestoController.btnEliminarDetalle(detPresupuesto)}" limitRender="true"/>
+	        		</rich:column>
+	        	</rich:dataTable>
+        	</rich:collapsiblePanel>
        	</rich:panel>
        	
        </h:form>
