@@ -95,7 +95,7 @@
 	        			<h:outputText value="#{detPresupuesto.preDetValorVariable}" />
 	        		</rich:column>
 	        		
-	        		<rich:column style="text-align:center;">
+	        		<rich:column style="text-align:center;" rendered="#{administrarPresupuestoController.editMode}">
 	        			<f:facet name="header">
 	        				#{msg.etiqueta_accion}
 	        			</f:facet>
