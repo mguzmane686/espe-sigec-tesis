@@ -57,6 +57,7 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 						
 						objDetPresCurso.getDetallePresupuestoCursoPK().setIdCursoPeriodo(BigInteger.valueOf(cursoPeriodo.getIdCursoPeriodo().longValue()));
 						objDetPresCurso.setPresupuestoCurso(presupuestoCurso);
+						objDetPresCurso.getDetallePresupuestoCursoPK().setPreId(presupuestoCurso.getPresupuesto().getIdPresupuesto());
 						objDetPresCurso.getDetallePresupuestoCursoPK().setIdDetalle(BigInteger.valueOf(i));
 						
 						if(objDetPresCurso.getDescripcionCatalogo()!=null){
@@ -81,6 +82,7 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 					throw new Exception("No se ha asignado un presupuesto para el anio especificado");
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				userTransaction.rollback();
 				throw new Exception(e);
 			}

@@ -1,6 +1,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import javax.persistence.Column;
@@ -20,9 +21,9 @@ public class PresupuestoDetalle implements Serializable {
     @Column(name = "pre_det_descripcion")
     private String preDetDescripcion;
     @Column(name = "pre_det_valor_inicial")
-    private BigInteger preDetValorInicial;
+    private BigDecimal preDetValorInicial;
     @Column(name = "pre_det_valor_variable")
-    private BigInteger preDetValorVariable;
+    private BigDecimal preDetValorVariable;
 
     
     @JoinColumn(name = "pre_id", referencedColumnName = "pre_id", insertable =false, updatable = false)
@@ -56,19 +57,19 @@ public class PresupuestoDetalle implements Serializable {
         this.preDetDescripcion = preDetDescripcion;
     }
 
-    public BigInteger getPreDetValorInicial() {
+    public BigDecimal getPreDetValorInicial() {
         return preDetValorInicial;
     }
 
-    public void setPreDetValorInicial(BigInteger preDetValorInicial) {
+    public void setPreDetValorInicial(BigDecimal preDetValorInicial) {
         this.preDetValorInicial = preDetValorInicial;
     }
 
-    public BigInteger getPreDetValorVariable() {
+    public BigDecimal getPreDetValorVariable() {
         return preDetValorVariable;
     }
 
-    public void setPreDetValorVariable(BigInteger preDetValorVariable) {
+    public void setPreDetValorVariable(BigDecimal preDetValorVariable) {
         this.preDetValorVariable = preDetValorVariable;
     }
 

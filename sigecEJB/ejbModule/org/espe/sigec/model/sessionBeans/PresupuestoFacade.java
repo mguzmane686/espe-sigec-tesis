@@ -5,12 +5,14 @@
 package org.espe.sigec.model.sessionBeans;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.Presupuesto;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -46,6 +48,14 @@ public class PresupuestoFacade extends AbstractFacade<Presupuesto> implements Pr
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Presupuesto.class);
     	crit.add(Restrictions.eq("codigoAnio", codigoAnio));
 		return crit.list();
+	}
+
+	@Override
+	public List<PresupuestoDetalle> findPresupuestoDetalles(int presupuestoId) {
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(PresupuestoDetalle.class);
+		crit.add(Restrictions.eq("presupuestoDetallePK.preId", presupuestoId));
+		Collection<PresupuestoDetalle> lst = crit.list();
+		return (List<PresupuestoDetalle>) lst;
 	}
     
 }

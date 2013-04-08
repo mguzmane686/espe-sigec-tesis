@@ -13,6 +13,7 @@ import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoCurso;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.model.entities.Usuario;
 
@@ -78,4 +79,6 @@ public interface AdmGeneralServicio {
 	Collection<Persona> findPersonByCriteria(String creiterio, String valor);
 	
 	void editPersona(Persona persona) throws Exception;
+	
+	Collection<PresupuestoDetalle> findBuscarDetallePresupuesto(int presupuestoId);
 }

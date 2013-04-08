@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.admGeneral;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
@@ -7,7 +8,6 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
-import org.apache.commons.lang.SerializationUtils;
 import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
@@ -237,7 +237,33 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 
 	@Override
 	public void createPresupuesto(Presupuesto presupuesto) throws Exception {
-		presupuestoFacadeLocal.create(presupuesto);
+		Collection<PresupuestoDetalle> lstPresupuestoDetalles = presupuesto.getLstPresupuestoDetalles();
+		presupuesto.setLstPresupuestoDetalles(null);
+		userTransaction.begin();
+		try {
+			BigDecimal recursoInicial = BigDecimal.ZERO;
+			
+			for(PresupuestoDetalle presupuestoDetalle: lstPresupuestoDetalles){
+				recursoInicial = recursoInicial.add(presupuestoDetalle.getPreDetValorInicial());
+			}
+			presupuesto.setRecursoInicial(recursoInicial.plus());
+			presupuesto.setIdPrefijoPresupuesto("PRE".concat(presupuesto.getCodigoAnio()));
+			presupuestoFacadeLocal.create(presupuesto);
+			
+			for(PresupuestoDetalle presupuestoDetalle: lstPresupuestoDetalles){
+				presupuestoDetalle.setPresupuesto(presupuesto);
+				presupuestoDetalle.getPresupuestoDetallePK().setPreId(presupuesto.getIdPresupuesto());
+				presupuestoDetalleFacadeLocal.create(presupuestoDetalle);
+			}
+			
+			userTransaction.commit();
+			presupuesto.setLstPresupuestoDetalles(lstPresupuestoDetalles);
+		} catch (Exception e) {
+			presupuesto.setLstPresupuestoDetalles(lstPresupuestoDetalles);
+			userTransaction.rollback();
+			throw new Exception("Ocurrio un error al actualizar el presupuesto!");
+		}
+		
 	}
 
 	@Override
@@ -319,6 +345,11 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 	public void editPersona(Persona persona) throws Exception {
 		personaFacadeLocal.edit(persona);
 		
+	}
+
+	@Override
+	public Collection<PresupuestoDetalle> findBuscarDetallePresupuesto(int presupuestoId) {
+		return presupuestoFacadeLocal.findPresupuestoDetalles(presupuestoId);
 	}
 
 }
