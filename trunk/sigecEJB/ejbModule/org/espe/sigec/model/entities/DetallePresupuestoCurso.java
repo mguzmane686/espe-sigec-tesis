@@ -46,6 +46,9 @@ public class DetallePresupuestoCurso implements Serializable {
     @Column(name = "det_costo_total")
     private BigDecimal costoTotal;
     
+    @Column(name = "id_cuenta")
+    private String idCuenta;
+    
     @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private PresupuestoCurso presupuestoCurso;
@@ -179,6 +182,15 @@ public class DetallePresupuestoCurso implements Serializable {
 
 	public void setCostoTotalUSD(BigDecimal costoTotalUSD) {
 		CostoTotalUSD = costoTotalUSD;
+	}
+
+	public String getIdCuenta() {
+		return idCuenta;
+	}
+
+	public void setIdCuenta(String idCuenta) {
+		this.idCuenta = idCuenta;
 	} 
+
 	
 }
