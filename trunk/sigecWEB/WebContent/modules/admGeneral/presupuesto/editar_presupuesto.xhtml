@@ -58,13 +58,14 @@
         			
         			<h:outputLabel value="#{msg['etiqueta_anio']}" />
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.codigoAnio}" />
-        						
+        			
+        			<!-- 			
         			<h:outputLabel value="Cantidad Inicial" />
         			<sigecComp:textField value="#{administrarPresupuestoController.presupuesto.recursoInicial}" editMode="#{administrarPresupuestoController.editMode}" label="Cantidad Inicial" required="true" onkeypressScript="return validateNumPP(event);"/>			
                 	
                 	<h:outputLabel value="Cantidad Actual" />
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.recursoActual}"/>			
-                	
+                	 -->
         		</h:panelGrid>
         	</rich:collapsiblePanel>
         	
@@ -79,21 +80,21 @@
 						<f:facet name="header">
 							#{msg.etiqueta_codigo}
 						</f:facet>
-						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode}"></sigecComp:textField>
+						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null) }"></sigecComp:textField>
 					</rich:column>
 						
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.nombre}
 	        			</f:facet>
-	        			<sigecComp:textField value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="true"></sigecComp:textField>
+	        			<sigecComp:textField value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="#{administrarPresupuestoController.editMode}"></sigecComp:textField>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.etiqueta_valor_inicial}
 	        			</f:facet>
-	        			<sigecComp:textField value="#{detPresupuesto.preDetValorInicial}" required="true" label="#{msg.etiqueta_valor_inicial}" editMode="true"></sigecComp:textField>
+	        			<sigecComp:textField value="#{detPresupuesto.preDetValorInicial}" required="true" label="#{msg.etiqueta_valor_inicial}" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null) }"></sigecComp:textField>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
@@ -107,7 +108,7 @@
 	        			<f:facet name="header">
 	        				#{msg.etiqueta_accion}
 	        			</f:facet>
-	        			<a4j:commandButton value="#{msg.etiqueta_eliminar}" render="tblDetalle" execute="@this" action="#{administrarPresupuestoController.btnEliminarDetalle(detPresupuesto)}" limitRender="true"/>
+	        			<a4j:commandButton value="#{msg.etiqueta_eliminar}" render="tblDetalle" execute="@this" action="#{administrarPresupuestoController.btnEliminarDetalle(detPresupuesto)}" limitRender="true" rendered="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null) }"/>
 	        		</rich:column>
 	        	</rich:dataTable>
         	</rich:collapsiblePanel>
