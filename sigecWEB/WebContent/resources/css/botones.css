@@ -80,3 +80,11 @@ input[type='submit'].logoutBtn {
 	background-color:#FBEFFB !important;
 	background-image: none !important;
 }
+
+.centrarElemento{
+	text-align: center !important;
+}
+
+.texto-mayuscula{
+	text-transform: uppercase !important;
+}

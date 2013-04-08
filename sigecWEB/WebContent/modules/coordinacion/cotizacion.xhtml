@@ -172,7 +172,7 @@
 							<h:outputLabel value="Cantidad" />
 						</f:facet>
 						<h:panelGroup layout="block" style="text-align:center;">
-							<h:inputText value="#{detalle.cantidad}" rendered="#{!presupuestoController.editMode}" style="text-align:right" />
+							<h:inputText value="#{detalle.cantidad}" rendered="#{!presupuestoController.editMode}" style="text-align:right" size="10"/>
 							<h:outputText value="#{detalle.cantidad}" rendered="#{presupuestoController.editMode}"/>
 						</h:panelGroup>
 					</rich:column>
@@ -182,7 +182,7 @@
 							<h:outputLabel value="Costo unitario USD." />
 						</f:facet>
 						<h:panelGroup layout="block" style="text-align:center;">
-							<h:inputText value="#{detalle.costoUnitario}" rendered="#{!presupuestoController.editMode}" style="text-align:right"/>
+							<h:inputText value="#{detalle.costoUnitario}" rendered="#{!presupuestoController.editMode}" style="text-align:right" size="10"/>
 							<h:outputText value="#{detalle.costoUnitario}" rendered="#{presupuestoController.editMode}" style="text-align:right" converter="org.espe.sigec.numberConverter"/>
 						</h:panelGroup>
 					</rich:column>
@@ -195,6 +195,13 @@
 					</rich:column>
 					
 					
+					<rich:column style="text-align:right;">
+						<f:facet name="header">
+							<h:outputLabel value="Cuenta" />
+						</f:facet>
+						
+					</rich:column>
+					
 					<f:facet name="footer">
 			            <rich:columnGroup>
 			                <rich:column colspan="5" style="text-align:right" styleClass="rf-dt-shdr-c">
@@ -204,6 +211,7 @@
 			                <rich:column style="text-align:right">
 			                    <h:outputText id="txtTotal" value="#{presupuestoController.totalLista}" converter="org.espe.sigec.numberConverter"/>
 			                </rich:column>
+			                <rich:column styleClass="rf-dt-shdr-c"/>
 			            </rich:columnGroup>
 			        </f:facet>
 				</rich:dataTable>

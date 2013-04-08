@@ -2,9 +2,9 @@ package org.espe.sigec.web.admGeneral.presupuesto;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -37,9 +37,13 @@ public class AdministrarPresupuestoController {
 	
 	public AdministrarPresupuestoController(){
 		setPresupuesto((Presupuesto) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("presupuestoToEdit"));
-		setLstPresupuestoDetalles(new ArrayList<PresupuestoDetalle>());
+		
 	}
 	
+	@PostConstruct
+	public void cargarListas(){
+		setLstPresupuestoDetalles(admGeneralServicio.findBuscarDetallePresupuesto(getPresupuesto().getIdPresupuesto()));
+	}
 	public void btnAgregarDetalle(){
 		getLstPresupuestoDetalles().add(new PresupuestoDetalle(new PresupuestoDetallePK()));
 		SerializationUtils.clone(getPresupuesto());

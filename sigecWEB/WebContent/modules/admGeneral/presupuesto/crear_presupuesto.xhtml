@@ -32,8 +32,10 @@
         			<h:outputLabel value="#{msg['etiqueta_anio']}" />
         			<rich:inputNumberSpinner value="#{presupuestoAdmController.presupuesto.codigoAnio}" minValue="2000" maxValue="2100"/>
         		    
+        		    <!-- 
         			<h:outputLabel value="Cantidad" />
         			<sigecComp:textField value="#{presupuestoAdmController.presupuesto.recursoInicial}" required="true" label="Cantidad" editMode="true" onkeypressScript="return validateNumPP(event);"/>
+        			 -->
         		</h:panelGrid>
         		
         		
@@ -42,17 +44,18 @@
         	<rich:collapsiblePanel id="rcpDetalles" header="Detalles presupuesto"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<a4j:commandButton value="Agregar detalle" 
-					action="#{presupuestoAdmController.btnAgregarPresupuesto}" render="pnlPresupuesto" execute="@this tblPreDetalleCont" limitRender="true"/>
+					action="#{presupuestoAdmController.btnAgregarPresupuesto}" render="tblPreDetalle" execute="@this tblPreDetalleCont" limitRender="true"/>
 				
 				
-				<h:panelGroup layout="block" id="tblPreDetalle">
+				<h:panelGroup layout="block" id="tblPreDetalle" >
 					<rich:dataTable id="tblPreDetalleCont" value="#{presupuestoAdmController.presupuesto.lstPresupuestoDetalles}" var="presuDetalle"
-						noDataLabel="sin detalles" >
+						noDataLabel="sin detalles" style="width:100%">
 						<rich:column>
 							<f:facet name="header">
 								#{msg.etiqueta_codigo}
 							</f:facet>
-							<sigecComp:textField value="#{presuDetalle.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="true"></sigecComp:textField>
+							<sigecComp:textField value="#{presuDetalle.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="true" inputTextClass="texto-mayuscula"/>
+							
 						</rich:column>
 						
 						<rich:column>
@@ -62,18 +65,18 @@
 							<sigecComp:textField value="#{presuDetalle.preDetDescripcion}" required="true" label="Nombre" editMode="true"></sigecComp:textField>
 						</rich:column>
 						
-						<rich:column>
+						<rich:column style="text-align:center;">
 							<f:facet name="header">
 								Valor
 							</f:facet>
-							<h:inputText value="#{presuDetalle.preDetValorInicial}" onkeypress="return validateNumPP(event);"/>
+							<sigecComp:textField value="#{presuDetalle.preDetValorInicial}" required="true" label="Valor" editMode="true" onkeypressScript="return validateNumPP(event);"/>
 						</rich:column>
 						
-						<rich:column>
+						<rich:column styleClass="centrarElemento">
 							<f:facet name="header">
 								#{msg.etiqueta_accion}
 							</f:facet>
-							<a4j:commandButton action="#{presupuestoAdmController.btnEliminarDetalle(presuDetalle)}" 
+							<a4j:commandButton action="#{presupuestoAdmController.btnEliminarDetalle(presuDetalle)}" value="Eliminar" 
 								execute="@this tblPreDetalleCont" render="tblPreDetalleCont" immediate="true" limitRender="true"/>
 						</rich:column>
 					</rich:dataTable>
