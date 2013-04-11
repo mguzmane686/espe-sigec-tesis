@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -57,6 +58,10 @@ public class DetallePresupuestoCurso implements Serializable {
     private String descripcionCatalogo;
     @Transient
     public BigDecimal CostoTotalUSD;
+    
+    @Transient
+    Collection<PresupuestoDetalle> lstCuentasPresupuesto;
+    
     public DetallePresupuestoCurso() {
     }
 
@@ -190,6 +195,15 @@ public class DetallePresupuestoCurso implements Serializable {
 
 	public void setIdCuenta(String idCuenta) {
 		this.idCuenta = idCuenta;
+	}
+
+	public Collection<PresupuestoDetalle> getLstCuentasPresupuesto() {
+		return lstCuentasPresupuesto;
+	}
+
+	public void setLstCuentasPresupuesto(
+			Collection<PresupuestoDetalle> lstCuentasPresupuesto) {
+		this.lstCuentasPresupuesto = lstCuentasPresupuesto;
 	} 
 
 	

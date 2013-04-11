@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 public class PresupuestoDetallePK implements Serializable{
 	@Basic(optional = false)
     @Column(name = "pre_id")
-    private int preId;
+    private Integer preId;
     @Basic(optional = false)
     @Column(name = "id_cuenta")
     private String idCuenta;
@@ -19,16 +19,16 @@ public class PresupuestoDetallePK implements Serializable{
     public PresupuestoDetallePK() {
     }
 
-    public PresupuestoDetallePK(int preId, String idCuenta) {
+    public PresupuestoDetallePK(Integer preId, String idCuenta) {
         this.preId = preId;
         this.idCuenta = idCuenta;
     }
 
-    public int getPreId() {
+    public Integer getPreId() {
         return preId;
     }
 
-    public void setPreId(int preId) {
+    public void setPreId(Integer preId) {
         this.preId = preId;
     }
 
