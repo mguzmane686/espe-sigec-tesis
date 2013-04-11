@@ -272,8 +272,11 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 		try {
 			
 			for(PresupuestoDetalle presupuestoDetalle: presupuesto.getLstPresupuestoDetalles()){
-				presupuestoDetalle.getPresupuestoDetallePK().setPreId(presupuesto.getIdPresupuesto());
-				presupuestoDetalleFacadeLocal.create(presupuestoDetalle);
+				if(presupuestoDetalle.getPresupuestoDetallePK().getPreId() == null){
+					presupuestoDetalle.getPresupuestoDetallePK().setPreId(presupuesto.getIdPresupuesto());
+					presupuestoDetalleFacadeLocal.create(presupuestoDetalle);
+				}
+				
 			}
 			presupuesto.setLstPresupuestoDetalles(null);
 			presupuestoFacadeLocal.edit(presupuesto);

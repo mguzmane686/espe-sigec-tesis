@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import javax.ejb.Local;
 import org.espe.sigec.model.entities.DetallePresupuestoCurso;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 
 /**
  *
@@ -32,4 +33,6 @@ public interface DetallePresupuestoCursoFacadeLocal {
     int count();
     
     Collection<DetallePresupuestoCurso> findDetallePresupuestoCurso(BigDecimal idCursoPeriodo);
+    
+    Collection<PresupuestoDetalle> findDetallePresupuestoActual(int anioActual);
 }

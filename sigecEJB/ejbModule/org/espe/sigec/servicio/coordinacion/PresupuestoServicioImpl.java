@@ -15,6 +15,7 @@ import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.DetallePresupuestoCurso;
 import org.espe.sigec.model.entities.Presupuesto;
 import org.espe.sigec.model.entities.PresupuestoCurso;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.espe.sigec.model.sessionBeans.CatalogoSigecFacadeLocal;
 import org.espe.sigec.model.sessionBeans.DetallePresupuestoCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PresupuestoCursoFacadeLocal;
@@ -123,6 +124,10 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 		}
 		
 		
+	}
+	@Override
+	public Collection<PresupuestoDetalle> findDetallesPresupestoActual(int anioActual) {
+		return detallePresupuestoCursoFacadeLocal.findDetallePresupuestoActual(anioActual);
 	}
 	
 }
