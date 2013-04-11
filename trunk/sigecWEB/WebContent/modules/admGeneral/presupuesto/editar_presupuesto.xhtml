@@ -87,14 +87,17 @@
 	        			<f:facet name="header">
 	        				#{msg.nombre}
 	        			</f:facet>
-	        			<sigecComp:textField value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="#{administrarPresupuestoController.editMode}"></sigecComp:textField>
+	        			<sigecComp:textField value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null)}"></sigecComp:textField>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.etiqueta_valor_inicial}
 	        			</f:facet>
-	        			<sigecComp:textField value="#{detPresupuesto.preDetValorInicial}" required="true" label="#{msg.etiqueta_valor_inicial}" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null) }"></sigecComp:textField>
+	        			<!--sigecComp:textField value="" required="true" label="#{msg.etiqueta_valor_inicial}" editMode=""></sigecComp:textField-->
+	        			<h:inputText value="#{detPresupuesto.preDetValorInicial}" required="true" requiredMessage="El campo es requerido" rendered="#{administrarPresupuestoController.editMode  and (detPresupuesto.presupuestoDetallePK.idCuenta == null)}">
+	        				<f:converter converterId="javax.faces.BigDecimal"/>
+	        			</h:inputText>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
