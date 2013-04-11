@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -15,11 +16,13 @@ import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
 import org.apache.commons.beanutils.BeanComparator;
+import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.CatalogoSigec;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.DetallePresupuestoCurso;
 import org.espe.sigec.model.entities.DetallePresupuestoCursoPK;
 import org.espe.sigec.model.entities.PresupuestoCurso;
+import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.espe.sigec.servicio.coordinacion.PresupuestoServicio;
 import org.espe.sigec.utils.SigecConstantes;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -84,7 +87,17 @@ public class PresupuestoController implements Serializable {
 			loadCatalogoPresupuesto();
 			setEditMode(Boolean.FALSE);
 			setInformePresupuesto(new InformePresupuesto(BigDecimal.ZERO,0,0,0));
+			cargarCuentasPresupuesto();
 		}
+	}
+	
+	private void cargarCuentasPresupuesto(){
+		Collection<PresupuestoDetalle> lstCuentasPresupuesto = presupuestoServicio.findDetallesPresupestoActual(Calendar.getInstance().get(Calendar.YEAR));
+		for(DetallePresupuestoCurso detallePresupuestoCurso: getLstDetallePresupuestoCursos()){
+			detallePresupuestoCurso.setLstCuentasPresupuesto((Collection<PresupuestoDetalle>) SerializationUtils.clone((Serializable)lstCuentasPresupuesto));
+			detallePresupuestoCurso.setIdCuenta( SerializationUtils.clone(((List<PresupuestoDetalle>) lstCuentasPresupuesto).get(0).getPresupuestoDetallePK().getIdCuenta()));
+		}
+		
 	}
 	
 	private void loadCatalogoPresupuesto(){
