@@ -45,8 +45,10 @@ public class AdministrarPresupuestoController {
 		setLstPresupuestoDetalles(admGeneralServicio.findBuscarDetallePresupuesto(getPresupuesto().getIdPresupuesto()));
 	}
 	public void btnAgregarDetalle(){
-		getLstPresupuestoDetalles().add(new PresupuestoDetalle(new PresupuestoDetallePK()));
-		SerializationUtils.clone(getPresupuesto());
+		PresupuestoDetalle presupuestoDetalle = new PresupuestoDetalle();
+		presupuestoDetalle.setPresupuestoDetallePK(new PresupuestoDetallePK());
+		presupuestoDetalle.setEditMode(Boolean.TRUE);
+		getLstPresupuestoDetalles().add(presupuestoDetalle);
 	}
 	
 	public void btnEliminarDetalle(PresupuestoDetalle presupuestoDetalle){

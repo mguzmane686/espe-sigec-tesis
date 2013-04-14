@@ -48,7 +48,6 @@ public class PresupuestoController implements Serializable{
 	public void btnAgregarPresupuesto(){
 		PresupuestoDetalle presupuestoDetalle = new PresupuestoDetalle();
 		presupuestoDetalle.setPresupuestoDetallePK(new PresupuestoDetallePK());
-		System.out.println(presupuestoDetalle.hashCode());
 		getPresupuesto().getLstPresupuestoDetalles().add(presupuestoDetalle);
 	}
 	

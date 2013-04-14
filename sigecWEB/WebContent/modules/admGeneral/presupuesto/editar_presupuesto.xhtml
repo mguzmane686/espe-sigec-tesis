@@ -23,7 +23,7 @@
 	       			</h:panelGrid>
 	        			
 	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarPresupuestoController.editMode}">
-	       				<a4j:commandButton value="#{msg['editar']}" render="pnlMenuPresupuesto, pnlDatosPresupuesto" actionListener="#{administrarPresupuestoController.btnEdit}" execute="@this" 
+	       				<a4j:commandButton value="#{msg['editar']}" render="pnlMenuPresupuesto, pnlDatosPresupuesto, pnlDetallePre" actionListener="#{administrarPresupuestoController.btnEdit}" execute="@this" 
 	       					 image="/resources/images/edit.png"/>
 	       				<h:outputLabel value="#{msg['editar']}" />
 	       			</h:panelGrid>
@@ -69,7 +69,7 @@
         		</h:panelGrid>
         	</rich:collapsiblePanel>
         	
-        	<rich:collapsiblePanel header="#{msg['datos_presupuesto']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+        	<rich:collapsiblePanel id="pnlDetallePre" header="#{msg['datos_presupuesto']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        	<a4j:commandButton action="#{administrarPresupuestoController.btnAgregarDetalle}" execute="@this tblDetalle" value="Agregar detalle" 
 	        		render="tblDetalle" limitRender="true" rendered="#{administrarPresupuestoController.editMode}"/>
@@ -80,24 +80,22 @@
 						<f:facet name="header">
 							#{msg.etiqueta_codigo}
 						</f:facet>
-						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null) }"></sigecComp:textField>
+						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.editMode) }"></sigecComp:textField>
 					</rich:column>
 						
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.nombre}
 	        			</f:facet>
-	        			<sigecComp:textField value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.presupuestoDetallePK.idCuenta == null)}"></sigecComp:textField>
+	        			<sigecComp:textField id="txtDescripcion" value="#{detPresupuesto.preDetDescripcion}" required="true" label="#{msg.nombre}" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.editMode)}"></sigecComp:textField>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
 	        			<f:facet name="header">
 	        				#{msg.etiqueta_valor_inicial}
 	        			</f:facet>
-	        			<!--sigecComp:textField value="" required="true" label="#{msg.etiqueta_valor_inicial}" editMode=""></sigecComp:textField-->
-	        			<h:inputText value="#{detPresupuesto.preDetValorInicial}" required="true" requiredMessage="El campo es requerido" rendered="#{administrarPresupuestoController.editMode  and (detPresupuesto.presupuestoDetallePK.idCuenta == null)}">
-	        				<f:converter converterId="javax.faces.BigDecimal"/>
-	        			</h:inputText>
+	        			
+	        			<sigecComp:textField value="#{detPresupuesto.preDetValorInicial}" required="true" label="Valor" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.editMode)}" onkeypressScript="return validateNumPP(event);"/>
 	        		</rich:column>
 	        		
 	        		<rich:column style="text-align:center;">
