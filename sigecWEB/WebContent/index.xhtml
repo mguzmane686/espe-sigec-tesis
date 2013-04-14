@@ -12,11 +12,29 @@
 		<ui:define name="title">Login</ui:define>
 
 		<ui:define name="body">
-				
+			<script type="text/javascript">
+			/*<![CDATA[*/
+				var count=#{session.maxInactiveInterval};
+	
+				var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+	
+				function timer() {
+				  count=count-1;
+				  if (count <= 0) {
+				     //clearInterval(counter);
+				     window.location = '#{facesContext.externalContext.requestContextPath}/salir.html';
+				     //counter ended, do something here
+				     return;
+				  }
+				  
+				  //Do code for showing the number of seconds here
+				}
+				/*]]>*/
+			</script>
 			<h:outputStylesheet library="css" name="stylelog.css"/>
 			
 			<rich:panel header="Ingresar al sistema" style="background-image:url('#{resource['images:loginpage_02.jpg']}'); background-color: #E5E5E5;">
-			
+			<span id="timer" class="timer"></span>
 				<h:form prependId="false">
 					<h:inputHidden value="#{homeSessionController.allowNavigate}" />
 					<h:panelGroup layout="block" id="layer01_holder">
