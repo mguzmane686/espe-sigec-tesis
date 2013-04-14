@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "sgct_fcn_pres_det")
-public class PresupuestoDetalle implements Serializable {
+public class PresupuestoDetalle extends SigecUtilDto implements Serializable {
 	private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected PresupuestoDetallePK presupuestoDetallePK;
