@@ -36,6 +36,26 @@
 	        			return true;
 	        	}
 	        }
+
+	        
+	        var count=#{session.maxInactiveInterval};
+	    	
+			var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+			function timer() {
+			  count=count-1;
+			  if (count <= 0) {
+			     //clearInterval(counter);
+			     window.location = '#{facesContext.externalContext.requestContextPath}/salir.html';
+			     //counter ended, do something here
+			     return;
+			  }
+			  //Do code for showing the number of seconds here
+			}
+
+			function renovarTiempo(){
+				count=#{session.maxInactiveInterval};
+		    }
 	        /*]]>*/
         </script>
         <script type="text/javascript">
@@ -65,13 +85,14 @@
     </h:head>
 
     <h:body style="background-image: url('#{resource['images:Bottom_texture.jpg']}');" onkeydown="if(bloquearTeclas(event)) return false;">
-
+		
         <h:panelGroup layout="block" id="top" style="text-align:center; width:100%" styleClass="roundSigec">
         	<h:panelGrid columns="3" style="text-align:center" width="100%">
         		<h:outputLabel value="#{msg['sigec']}" style="font-size:24px; color:#183637;" rendered="false"/>
         		<h:panelGrid columns="2">
         			<h:outputLabel value="Bienvenido :" style="color: blue;"/>
         			<h:outputText value="#{homeSessionController.usuarioPerfil.persona.primerNombre} #{homeSessionController.usuarioPerfil.persona.primerApellido}"  style="float:right; color: blue;"/>
+        			<span id="timer" class="timer"/>
         		</h:panelGrid>
         		
             	<a4j:commandButton value="#{msg['cerrar_sesion']}" action="#{loginController.btnLogOut}" styleClass="btnAux logoutBtn"
@@ -99,13 +120,13 @@
             </ui:insert>
         </h:panelGroup>
 
-	<a4j:status onstart="#{rich:component('statusPanel')}.show();" onstop="#{rich:component('statusPanel')}.hide();" />
+	<a4j:status onstart="#{rich:component('statusPanel')}.show();" onstop="#{rich:component('statusPanel')}.hide(); renovarTiempo();" />
     
     <rich:popupPanel id="statusPanel" autosized="true" header="#{msg.status_procesando}">
 		<h:graphicImage library="images" name="ajax_status.gif" />
 	</rich:popupPanel>
 	
-	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+	<p:ajaxStatus onstart="statusDialog.show();" oncomplete="statusDialog.hide(); renovarTiempo();"/>  
 	<p:dialog modal="true" widgetVar="statusDialog" header="#{msg.status_procesando}" draggable="false" closable="false">
 		<h:graphicImage library="images" name="ajax_status.gif" />
 	</p:dialog> 
