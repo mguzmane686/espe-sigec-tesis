@@ -94,16 +94,9 @@
 	        	
 	        		
 		        		<h:panelGroup layout="block">
-		   					<a4j:commandButton id="btnNuevoTema" rendered="#{edicionCursoController.renderEditButtons}" limitRender="true" 
-		   						value="Nuevo #{msg.etiqueta_modulo}" oncomplete="#{rich:component('popupNuevoModulo')}.show()" execute="@this tblTemario" render="tblTemario"/>
-		   					<script>
-		   						$("#frmCurso\\:btnNuevoTema").live('click',function(){
-		   							$("#frmNuevoCurso\\:txtNomTem").attr('value','');
-		   							$("#frmNuevoCurso\\:txtDetTem").attr('value','');
-		   							$("#frmNuevoCurso\\:txtNivMod").attr('value','');
-		   							$("#frmNuevoCurso\\:txtNomTem").focus();
-			   					});
-		   					</script>
+		   					<a4j:commandButton id="btnNuevoTema" limitRender="true" actionListener="#{edicionCursoController.btnAddModuloCurso}" 
+		   						value="Nuevo #{msg.etiqueta_modulo}" render="@form"/>
+		   					
 		   				</h:panelGroup>
 		        		
 		        		
@@ -136,7 +129,7 @@
 	        		
 	        	</rich:collapsiblePanel>
 	        	
-				<rich:popupPanel id="popupNuevoModulo" header="#{msg.etiqueta_agregar_modulos_curso}" modal="true" resizeable="false" autosized="true" domElementAttachment="form">
+				<rich:popupPanel id="popupNuevoModulo" header="#{msg.etiqueta_agregar_modulos_curso}" modal="true" resizeable="false" autosized="true" domElementAttachment="form" rendered="false">
 		        
 			        <f:facet name="controls">
 			            <h:outputLink value="#" onclick="#{rich:component('popupNuevoModulo')}.hide(); return false;">

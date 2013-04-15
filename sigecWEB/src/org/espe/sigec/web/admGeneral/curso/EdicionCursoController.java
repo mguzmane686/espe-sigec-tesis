@@ -79,8 +79,10 @@ public class EdicionCursoController {
 	}
 	
 	public void btnAddModuloCurso(ActionEvent e){
-		getCurso().getPensumAcademicoCollection().add(getPensumAcademicoNuevo());
-		setPensumAcademicoNuevo(new PensumAcademico());
+//		getCurso().getPensumAcademicoCollection().add(getPensumAcademicoNuevo());
+		PensumAcademico pensumAcademico = new PensumAcademico();
+		getCurso().getPensumAcademicoCollection().add(pensumAcademico);
+//		setPensumAcademicoNuevo(new PensumAcademico());
 	}
 	
 	public void btnAtras(ActionEvent e){
