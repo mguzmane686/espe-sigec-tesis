@@ -125,99 +125,108 @@
 		<rich:panel header="Detalle presupuesto">
 			
 			<rich:collapsiblePanel header="Costos y gastos"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
-					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">	
-
-				<rich:dataTable id="tblDetalles" value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle" iterationStatusVar="numRow" style="width:100%">
-					<rich:column rendered="false">
-						<f:facet name="header">
-							<h:outputLabel value="Codigo" />
-						</f:facet>
-						<h:outputText value="#{detalle.codElemento}" />
-					</rich:column>
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">	
 					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="N#" />
-						</f:facet>
-						<h:panelGroup layout="block" style="text-align:center;">
-							<h:outputText value="#{numRow.index+1}" />
-						</h:panelGroup>
-					</rich:column>
-					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="#{msg.descripcion}" />
-						</f:facet>
-						<h:outputText value="#{detalle.detalle}" />
-					</rich:column>
-					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="Unidad" />
-						</f:facet>
-						<h:panelGroup layout="block" style="text-align:center;">
-							<h:selectOneRadio value="#{detalle.unidad}" style="width:100%" rendered="#{!presupuestoController.editMode}">
-								<f:selectItem itemLabel="Horas" itemValue="HORA"/>
-								<f:selectItem itemLabel="Total" itemValue="TOTAL"/>
-								<f:selectItem itemLabel="Unidades" itemValue="UNIDAD"/>
-								<f:selectItem itemLabel="Participantes" itemValue="PARTICIPANTE"/>
-							</h:selectOneRadio>
-							
-							<h:outputText value="#{detalle.unidad}" rendered="#{presupuestoController.editMode}"/>
-						</h:panelGroup>
-					</rich:column>
-					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="Cantidad" />
-						</f:facet>
-						<h:panelGroup layout="block" style="text-align:center;">
-							<h:inputText value="#{detalle.cantidad}" rendered="#{!presupuestoController.editMode}" style="text-align:right" size="10"/>
-							<h:outputText value="#{detalle.cantidad}" rendered="#{presupuestoController.editMode}"/>
-						</h:panelGroup>
-					</rich:column>
-					
-					<rich:column>
-						<f:facet name="header">
-							<h:outputLabel value="Costo unitario USD." />
-						</f:facet>
-						<h:panelGroup layout="block" style="text-align:center;">
-							<h:inputText value="#{detalle.costoUnitario}" rendered="#{!presupuestoController.editMode}" style="text-align:right" size="10"/>
-							<h:outputText value="#{detalle.costoUnitario}" rendered="#{presupuestoController.editMode}" style="text-align:right" converter="org.espe.sigec.numberConverter"/>
-						</h:panelGroup>
-					</rich:column>
-					
-					<rich:column style="text-align:right;">
-						<f:facet name="header">
-							<h:outputLabel value="Costo total USD." />
-						</f:facet>
-						<h:outputText value="#{detalle.costoTotalUSD} $"/>
-					</rich:column>
-					
-					
-					<rich:column style="text-align:right;" rendered="#{!presupuestoController.editMode}">
-						<f:facet name="header">
-							<h:outputLabel value="Cuenta" />
-						</f:facet>
-						<rich:select  value="#{detalle.idCuenta}" selectFirst="true" onlistmouseover="console.log(event)">
-							<f:selectItems itemLabel="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}" itemValue="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}" 
-								var="cuentasPresupuesto" value="#{detalle.lstCuentasPresupuesto}" itemDescription="#{cuentasPresupuesto.preDetDescripcion}"/>
-						</rich:select>
-					</rich:column>
-					
-					<f:facet name="footer">
-			            <rich:columnGroup>
-			                <rich:column colspan="5" style="text-align:right" styleClass="rf-dt-shdr-c">
-			                	<h:outputLabel value="Total" /> 
-			                </rich:column>
-			                
-			                <rich:column style="text-align:right">
-			                    <h:outputText id="txtTotal" value="#{presupuestoController.totalLista}" converter="org.espe.sigec.numberConverter"/>
-			                </rich:column>
-			                <rich:column styleClass="rf-dt-shdr-c" rendered="#{!presupuestoController.editMode}"/>
-			            </rich:columnGroup>
-			        </f:facet>
-				</rich:dataTable>
+				<h:panelGroup layout="block" style="width:100%">
+					<rich:dataTable id="tblDetalles" value="#{presupuestoController.lstDetallePresupuestoCursos}" var="detalle" iterationStatusVar="numRow">
+						<rich:column rendered="false">
+							<f:facet name="header">
+								<h:outputLabel value="Codigo" />
+							</f:facet>
+							<h:outputText value="#{detalle.codElemento}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="N#" />
+							</f:facet>
+							<h:panelGroup layout="block" style="text-align:center;">
+								<h:outputText value="#{numRow.index+1}" />
+							</h:panelGroup>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="#{msg.descripcion}" />
+							</f:facet>
+							<h:outputText value="#{detalle.detalle}" />
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="Unidad" />
+							</f:facet>
+							<h:panelGroup layout="block" style="text-align:center;">
+								<h:selectOneRadio value="#{detalle.unidad}" style="width:100%" rendered="#{!presupuestoController.editMode}">
+									<f:selectItem itemLabel="Horas" itemValue="HORA"/>
+									<f:selectItem itemLabel="Total" itemValue="TOTAL"/>
+									<f:selectItem itemLabel="Unidades" itemValue="UNIDAD"/>
+									<f:selectItem itemLabel="Participantes" itemValue="PARTICIPANTE"/>
+								</h:selectOneRadio>
+								
+								<h:outputText value="#{detalle.unidad}" rendered="#{presupuestoController.editMode}"/>
+							</h:panelGroup>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="Cantidad" />
+							</f:facet>
+							<h:panelGroup layout="block" style="text-align:center;">
+								<h:inputText value="#{detalle.cantidad}" rendered="#{!presupuestoController.editMode}" style="text-align:right" size="8"/>
+								<h:outputText value="#{detalle.cantidad}" rendered="#{presupuestoController.editMode}"/>
+							</h:panelGroup>
+						</rich:column>
+						
+						<rich:column>
+							<f:facet name="header">
+								<h:outputLabel value="Costo unitario USD." />
+							</f:facet>
+							<h:panelGroup layout="block" style="text-align:center;">
+								<h:inputText value="#{detalle.costoUnitario}" rendered="#{!presupuestoController.editMode}" style="text-align:right" size="10"/>
+								<h:outputText value="#{detalle.costoUnitario}" rendered="#{presupuestoController.editMode}" style="text-align:right" converter="org.espe.sigec.numberConverter"/>
+							</h:panelGroup>
+						</rich:column>
+						
+						<rich:column style="text-align:right;">
+							<f:facet name="header">
+								<h:outputLabel value="Costo total USD." />
+							</f:facet>
+							<h:outputText value="#{detalle.costoTotalUSD} $"/>
+						</rich:column>
+						
+						
+						<rich:column style="text-align:right;" rendered="#{!presupuestoController.editMode}">
+							<f:facet name="header">
+								<h:outputLabel value="Cuenta" />
+							</f:facet>
+							<rich:select  value="#{detalle.idCuenta}" selectFirst="true"  selectItemClass="claseSeleccionada"  onlistmouseover="addTitileSelect(this)" >
+								<f:selectItems itemLabel="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta} - #{cuentasPresupuesto.preDetDescripcion}" itemValue="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}"  
+									var="cuentasPresupuesto" value="#{detalle.lstCuentasPresupuesto}" itemDescription="#{cuentasPresupuesto.preDetDescripcion}"/>
+							</rich:select>
+						</rich:column>
+						
+						<f:facet name="footer">
+				            <rich:columnGroup>
+				                <rich:column colspan="5" style="text-align:right" styleClass="rf-dt-shdr-c">
+				                	<h:outputLabel value="Total" /> 
+				                </rich:column>
+				                
+				                <rich:column style="text-align:right">
+				                    <h:outputText id="txtTotal" value="#{presupuestoController.totalLista}" converter="org.espe.sigec.numberConverter"/>
+				                </rich:column>
+				                <rich:column styleClass="rf-dt-shdr-c" rendered="#{!presupuestoController.editMode}"/>
+				            </rich:columnGroup>
+				        </f:facet>
+					</rich:dataTable>
+				</h:panelGroup>
+				<script type="text/javascript">
+					/*<![CDATA[*/
+						function addTitileSelect(elemento){
+							jQuery(elemento).find('.claseSeleccionada').next().attr('title',jQuery(elemento).find('.claseSeleccionada').next().text());
+						}
+					/*]]>*/
+				</script>
 			</rich:collapsiblePanel>
 			
 			<rich:collapsiblePanel header="Detalle"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
