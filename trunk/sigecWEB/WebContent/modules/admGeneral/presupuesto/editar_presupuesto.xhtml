@@ -73,9 +73,20 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        	<a4j:commandButton action="#{administrarPresupuestoController.btnAgregarDetalle}" execute="@this tblDetalle" value="Agregar detalle" 
 	        		render="tblDetalle" limitRender="true" rendered="#{administrarPresupuestoController.editMode}"/>
+	        	
+	        	
 	        	<rich:dataTable id="tblDetalle" value="#{administrarPresupuestoController.lstPresupuestoDetalles}" var="detPresupuesto"
-	        		noDataLabel="Sin registros" style="width:100%">
+	        		noDataLabel="Sin registros" style="width:100%;" rows="5" iterationStatusVar="numRow">
+	        		<f:facet name="header">
+	        			<rich:dataScroller for="tblDetalle" renderIfSinglePage="false" fastControls="hide"></rich:dataScroller>
+	        		</f:facet>
 	        		
+	        		<rich:column>
+	        			<f:facet name="header">
+	        				N.
+	        			</f:facet>
+	        			#{numRow.index}
+	        		</rich:column>
 	        		<rich:column style="text-align:center; margin:auto;">
 						<f:facet name="header">
 							#{msg.etiqueta_codigo}

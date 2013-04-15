@@ -199,9 +199,10 @@
 						<f:facet name="header">
 							<h:outputLabel value="Cuenta" />
 						</f:facet>
-						<h:selectOneMenu  value="#{detalle.idCuenta}" selectFirst="true">
-							<f:selectItems itemLabel="#{cuentasPresupuesto.preDetDescripcion}" itemValue="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}" var="cuentasPresupuesto" value="#{detalle.lstCuentasPresupuesto}"></f:selectItems>
-						</h:selectOneMenu>
+						<rich:select  value="#{detalle.idCuenta}" selectFirst="true" onlistmouseover="console.log(event)">
+							<f:selectItems itemLabel="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}" itemValue="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}" 
+								var="cuentasPresupuesto" value="#{detalle.lstCuentasPresupuesto}" itemDescription="#{cuentasPresupuesto.preDetDescripcion}"/>
+						</rich:select>
 					</rich:column>
 					
 					<f:facet name="footer">
