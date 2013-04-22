@@ -4,6 +4,7 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -28,5 +29,7 @@ public interface PresupuestoDetalleFacadeLocal {
     List<PresupuestoDetalle> findAll();
 
     List<PresupuestoDetalle> findRange(int[] range);
+    
+    Collection<PresupuestoDetalle> findDetallesByRestrictionIN(Collection<String> idCuentas);
 
 }

@@ -5,6 +5,10 @@ import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -19,6 +23,7 @@ import org.espe.sigec.model.entities.PresupuestoDetalle;
 import org.espe.sigec.model.sessionBeans.CatalogoSigecFacadeLocal;
 import org.espe.sigec.model.sessionBeans.DetallePresupuestoCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PresupuestoCursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.PresupuestoDetalleFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PresupuestoFacadeLocal;
 
 public class PresupuestoServicioImpl implements PresupuestoServicio{
@@ -31,6 +36,9 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 	private DetallePresupuestoCursoFacadeLocal detallePresupuestoCursoFacadeLocal;
 	@EJB
 	private CatalogoSigecFacadeLocal catalogoSigecFacadeLocal;
+	@EJB
+	private PresupuestoDetalleFacadeLocal presupuestoDetalleFacadeLocal;
+	
 	@Resource
 	private UserTransaction userTransaction;
 	@Override
@@ -68,6 +76,41 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 						editarPresupuesto = editarPresupuesto.add(objDetPresCurso.getCostoTotalUSD());
 						detallePresupuestoCursoFacadeLocal.create(objDetPresCurso);
 						i++;
+					}
+					
+					
+					Set<String> lstCodigoCuentasSeleccionadas = new HashSet<String>();
+					for (DetallePresupuestoCurso objDetPresCurso:lstDetPreCur){
+						lstCodigoCuentasSeleccionadas.add(objDetPresCurso.getIdCuenta());
+					}
+					
+					
+					
+					Map<String, BigDecimal> mapCuentasResta = new HashMap<String, BigDecimal>();
+					for(String codigoCuenta: lstCodigoCuentasSeleccionadas){
+						System.out.println(codigoCuenta);
+						BigDecimal bigDecimal = new BigDecimal(0);
+						bigDecimal = BigDecimal.ZERO;
+						
+						for(DetallePresupuestoCurso objDetPresCurso:lstDetPreCur){
+							if(codigoCuenta.equals(objDetPresCurso.getIdCuenta())){
+								bigDecimal = bigDecimal.add(objDetPresCurso.getCostoUnitario().multiply(BigDecimal.valueOf(objDetPresCurso.getCantidad())));
+							}
+						}
+						System.out.println(bigDecimal);
+						mapCuentasResta.put(codigoCuenta, bigDecimal);
+					}
+					
+					for(Map.Entry<String, BigDecimal> objMap: mapCuentasResta.entrySet() ){
+						System.out.println(objMap.getKey() + "  "+ objMap.getValue());
+					}
+					
+					Collection<PresupuestoDetalle> lst = presupuestoDetalleFacadeLocal.findDetallesByRestrictionIN(lstCodigoCuentasSeleccionadas);
+					for(PresupuestoDetalle presupuestoDetalle: lst){
+						System.out.println(presupuestoDetalle);
+						BigDecimal preDetValorVariable = presupuestoDetalle.getPreDetValorVariable().subtract(mapCuentasResta.get(presupuestoDetalle.getPresupuestoDetallePK().getIdCuenta()));
+						presupuestoDetalle.setPreDetValorVariable(preDetValorVariable);
+						presupuestoDetalleFacadeLocal.edit(presupuestoDetalle);
 					}
 					
 					int val = presupuesto.getRecursoActual().compareTo(presupuesto.getRecursoActual().subtract(BigDecimal.valueOf(presupuestoCurso.getDineroAsignado())));
