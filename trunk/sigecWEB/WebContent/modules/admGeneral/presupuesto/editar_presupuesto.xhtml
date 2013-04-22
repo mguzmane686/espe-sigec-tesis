@@ -80,18 +80,18 @@
 	        		<f:facet name="header">
 	        			<rich:dataScroller for="tblDetalle" renderIfSinglePage="false" fastControls="hide"></rich:dataScroller>
 	        		</f:facet>
-	        		<a4j:ajax event="rowclick" execute="@this"></a4j:ajax>
+	        		
 	        		<rich:column>
 	        			<f:facet name="header">
 	        				N.
 	        			</f:facet>
-	        			#{numRow.index}
+	        			#{numRow.index +1}
 	        		</rich:column>
 	        		<rich:column style="text-align:center; margin:auto;">
 						<f:facet name="header">
 							#{msg.etiqueta_codigo}
 						</f:facet>
-						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.editMode) }"></sigecComp:textField>
+						<sigecComp:textField value="#{detPresupuesto.presupuestoDetallePK.idCuenta}" required="true" label="Nombre" editMode="#{administrarPresupuestoController.editMode and (detPresupuesto.editMode) }" inputTextStyle="text-transform:uppercase"/>
 					</rich:column>
 						
 	        		<rich:column style="text-align:center;">
