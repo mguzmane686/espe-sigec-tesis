@@ -62,7 +62,7 @@
 		</rich:panel>
 
 		<rich:panel header="#{msg.datos_curso}" >
-			<h:panelGrid columns="2" columnClasses="espacioCustom," frame="box" style="width:100%;" >
+			<h:panelGrid columns="2" columnClasses="espacioCustom," >
 				<h:outputLabel value="#{msg.etiqueta_especialidad} :" />
 				<h:outputText value="#{presupuestoController.cursoPeriodo.curso.especialidad.nombre}" />
 				
@@ -201,7 +201,7 @@
 								<h:outputLabel value="Cuenta" />
 							</f:facet>
 							<rich:select  value="#{detalle.idCuenta}" selectFirst="true"  selectItemClass="claseSeleccionada"  onlistmouseover="addTitileSelect(this)" >
-								<f:selectItems itemLabel="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta} - #{cuentasPresupuesto.preDetDescripcion}" itemValue="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}"  
+								<f:selectItems itemLabel="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta} - #{cuentasPresupuesto.preDetValorVariable} - #{cuentasPresupuesto.preDetDescripcion}" itemValue="#{cuentasPresupuesto.presupuestoDetallePK.idCuenta}"  
 									var="cuentasPresupuesto" value="#{detalle.lstCuentasPresupuesto}" itemDescription="#{cuentasPresupuesto.preDetDescripcion}"/>
 							</rich:select>
 						</rich:column>
