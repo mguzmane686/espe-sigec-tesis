@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
     	<h:outputStylesheet library="css" name="textos.css"/>    
@@ -41,14 +42,55 @@
 	        			</h:panelGrid>
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarCursoController.editMode}">
+	        				<a4j:commandButton value="Inscritos" execute="@this" oncomplete="#{rich:component('rppInscritos')}.show();" 
+	        					actionListener="#{administrarCursoController.btnInscritos}" render="rppInscritos"
+	        					 image="/resources/images/user_group_colored.png"/>
+	        				<h:outputLabel value="Inscritos" />
+	        			</h:panelGrid>
+	        			
+	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarCursoController.editMode}">
 	        				<a4j:commandButton value="Atras" render="pnlCurso" immediate="true" 
 	        					actionListener="#{administrarCursoController.btnReturnCursosAbiertos}" image="/resources/images/go-back.png"/>
 	        				<h:outputLabel value="Atras" />
 	        			</h:panelGrid>
+	        			
+	        			
 	        		</h:panelGrid>
         		</h:panelGroup>
         	</rich:panel>
         	
+        	<rich:popupPanel id="rppInscritos" domElementAttachment="form" header="Inscitos al curso" autosized="true">
+	        	<f:facet name="controls">
+					<h:outputLink value="#" onclick="#{rich:component('rppInscritos')}.hide(); return false;">
+		                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
+		            </h:outputLink>
+				</f:facet>
+				<p:dataTable id="tblInscritos" value="#{administrarCursoController.lstInscritos}" var="inscritos" paginatorAlwaysVisible="false"
+					emptyMessage="No existen inscritos" paginator="true" paginatorPosition="top" rows="10" rowIndexVar="numRow">
+					<p:column>
+						<f:facet name="header">
+							#
+						</f:facet>
+						<h:outputText value="#{numRow + 1}" />
+					</p:column>
+					
+					<p:column>
+						<f:facet name="header">
+							#{msg.cedula} estudiante
+						</f:facet>
+						<h:outputText value="#{inscritos.estudiante.persona.cedula}" />
+					</p:column>
+					
+					
+					<p:column>
+						<f:facet name="header">
+							Nombre
+						</f:facet>
+						<h:outputText value="#{inscritos.estudiante.persona.nombreCompleto}" />
+					</p:column>
+					
+				</p:dataTable>
+        	</rich:popupPanel>
         	<rich:panel header="Administrar curso" id="pnlLanCur">
         		<h:panelGroup rendered="#{(administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaAsignacionProfesor == '1') and 
         		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0') and (administrarCursoController.cursoPeriodo.idProfesor == null)}">

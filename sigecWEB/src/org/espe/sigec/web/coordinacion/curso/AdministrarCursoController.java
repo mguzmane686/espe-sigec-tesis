@@ -10,10 +10,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.InvitacionDocente;
-import org.espe.sigec.model.entities.InvitacionDocentePK;
 import org.espe.sigec.model.entities.Profesor;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.web.utils.FacesUtils;
@@ -33,6 +33,8 @@ public class AdministrarCursoController {
 	private int numeroAlumnosInscritos;
 	private Collection<InvitacionDocente> itemsProfesor;
 	private Profesor profesorSelected;
+	
+	private Collection<CursoEstudiante> lstInscritos;
 	
 	public AdministrarCursoController() {
 		setCursoPeriodo((CursoPeriodo) FacesContext.getCurrentInstance().getExternalContext().getFlash().get("curso"));
@@ -86,6 +88,11 @@ public class AdministrarCursoController {
 			e1.printStackTrace();
 		}
 	}
+	
+	public void btnInscritos(ActionEvent event){
+		setLstInscritos(coordinacionServicio.estudiantesInscritosCurso(getCursoPeriodo().getIdCursoPeriodo()));
+	}
+	
 	public CursoPeriodo getCursoPeriodo() {
 		return cursoPeriodo;
 	}
@@ -126,6 +133,14 @@ public class AdministrarCursoController {
 
 	public void setProfesorSelected(Profesor profesorSelected) {
 		this.profesorSelected = profesorSelected;
+	}
+
+	public Collection<CursoEstudiante> getLstInscritos() {
+		return lstInscritos;
+	}
+
+	public void setLstInscritos(Collection<CursoEstudiante> lstInscritos) {
+		this.lstInscritos = lstInscritos;
 	}
 	
 }
