@@ -65,10 +65,10 @@
 
 			<rich:collapsiblePanel header="#{msg.etiqueta_modulos_curso}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-			
+				<a4j:commandButton id="btnNuevoModulo" value="Nuevo #{msg.etiqueta_modulo}" onclick="#{rich:component('popupNuevoModulo')}.show(); return false;" immediate="true" limitRender="true"/>
 				<a4j:outputPanel ajaxRendered="true">
 					<h:panelGroup layout="block">
-						<a4j:commandButton id="btnNuevoModulo" value="Nuevo #{msg.etiqueta_modulo}" onclick="#{rich:component('popupNuevoModulo')}.show()" immediate="true" />
+						
 						<script>
 							$("#frmCurso\\:btnNuevoModulo").live('click',function(){
 								$("#frmNuevoCurso\\:txtNomTem").attr('value','');
