@@ -176,7 +176,7 @@
 			
 			<rich:collapsiblePanel header="#{msg.estudios_complementarios}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-				<a4j:commandLink value="Agregar" execute="@this" oncomplete="#{rich:component('rppEstCompl')}.show();" 
+				<a4j:commandLink value="Agregar" execute="@this" oncomplete="#{rich:component('rppEstCompl')}.show();" limitRender="true"
 					style="float:right;" action="#{registroDocenteController.btnShowPopupAgragarEstudioComplemetario}" render="rppEstCompl, pgPopEstCompl">
 					<f:setPropertyActionListener target="#{registroDocenteController.renderPopupEstComp}" value="true"></f:setPropertyActionListener>
 				</a4j:commandLink>
