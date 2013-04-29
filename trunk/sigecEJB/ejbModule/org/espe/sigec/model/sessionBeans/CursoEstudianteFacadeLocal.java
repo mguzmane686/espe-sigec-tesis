@@ -34,5 +34,6 @@ public interface CursoEstudianteFacadeLocal {
     int count();
     
     Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante);
+    Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo);
     
 }

@@ -9,6 +9,7 @@ import javax.transaction.UserTransaction;
 
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
+import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
@@ -148,6 +149,12 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	@Override
 	public Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo) {
 		return profesorFacadeLocal.findProfesoresSeleccionados(idCursoPeriodo);
+	}
+
+	@Override
+	public Collection<CursoEstudiante> estudiantesInscritosCurso(
+			BigDecimal idCursoPeriodo) {
+		return cursoEstudianteFacadeLocal.estudiantesInscritosCurso(idCursoPeriodo);
 	}
 	
 }
