@@ -43,6 +43,6 @@
 	background-repeat:repeat-x;
 }
 
-
-
-
+th .ui-dt-c span{
+	color: #0090FF !important;
+}
