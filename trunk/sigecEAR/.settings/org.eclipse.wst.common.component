@@ -7,5 +7,9 @@
         <dependent-module archiveName="sigecWEB.war" deploy-path="/" handle="module:/resource/sigecWEB/sigecWEB">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="espeUEC.war" deploy-path="/" handle="module:/resource/espeUEC/espeUEC">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
