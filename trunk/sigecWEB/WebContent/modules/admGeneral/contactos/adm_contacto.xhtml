@@ -52,8 +52,8 @@
 				
 				<h:panelGrid columns="2">
 					<h:outputLabel value="#{msg['cedula']} :"  style="padding-right:50px" />
-					<sigecComp:textField value="#{admContactoController.persona.primerNombre}" required="false" editMode="true" label="#{msg['cedula']}" onkeypressScript="return validateNumPP(event);">
-						<f:validator for="Input" validatorId="cedulaValidator" />
+					<sigecComp:textField value="#{admContactoController.persona.cedula}" required="false" editMode="true" label="#{msg['cedula']}" onkeypressScript="return validateNumPP(event);">
+						<f:validator for="Input" validatorId="cedulaValidator" disabled="#{admContactoController.persona.cedula ne ''}"/>
 					</sigecComp:textField>
 					
 					<h:outputLabel value="#{msg['nombres']} :" />
