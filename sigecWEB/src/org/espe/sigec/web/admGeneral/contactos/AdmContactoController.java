@@ -32,7 +32,9 @@ public class AdmContactoController implements Serializable{
 		try {
 			getPersona().setEsContacto("1");
 			admGeneralServicio.crearContacto(getPersona());
+			setPersona(new Persona());
 			FacesUtils.addInfoMessage("Contacto creado correctamente");
+			
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurio un error al crear el contacto");
 			e.printStackTrace();
