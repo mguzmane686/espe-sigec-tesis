@@ -21,11 +21,12 @@
 	<composite:attribute name="size"/>
 	<composite:attribute name="inputTextClass"/>
 	<composite:attribute name="inputTextStyle"/>
+	<composite:attribute name="containerStyle" default="margin:auto; "/>
 	
 </composite:interface>
 <composite:implementation>
 	<div id="#{cc.clientId}">
-		<h:panelGrid columns="2" cellpadding="0" cellspacing="0" style="margin:auto; ">
+		<h:panelGrid columns="2" cellpadding="0" cellspacing="0" style="#{cc.attrs.containerStyle}">
 			<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
 			<h:inputText id="Input" value="#{cc.attrs.value}" styleClass="#{cc.attrs.inputTextClass} #{((cc.attrs.required == 'true') ? 'cajaRequerida' : '') }" size="#{cc.attrs.size}" style="#{cc.attrs.inputTextStyle}"
 				onkeypress="#{cc.attrs.onkeypressScript}" 
