@@ -25,11 +25,12 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 					
 					<h:panelGrid columns="3" id="pgCritBusqInv">
-						<h:outputText value="Fiiltrar por" />
+						<h:outputText value="Filtrar por: " style="font-weight:bold;"/>
 						<p:selectOneMenu value="#{invitacionEmitidaController.estadoInvFilter}">
 		        			<f:selectItem itemLabel="Emitida" itemValue="#{msg_client['doc_estado_invitacion_emitida']}"/>
 		        			<f:selectItem itemLabel="Aceptada" itemValue="#{msg_client['doc_estado_invitacion_aceptada']}"/>
 		        			<f:selectItem itemLabel="Rechazada" itemValue="#{msg_client['doc_estado_invitacion_rechazada']}"/>
+		        			<f:selectItem itemLabel="Anulada" itemValue="#{msg_client['doc_estado_invitacion_anulada']}"/>
 		        			<f:selectItem itemLabel="Todas" itemValue="ALL"/>
 		        		</p:selectOneMenu>
 		        		<p:commandButton value="Buscar" process="@this pgCritBusqInv"
@@ -39,7 +40,7 @@
 					<p:dataTable id="tblInvitaciones" value="#{invitacionEmitidaController.lstInvitacionDocentes}" 
 						var="invitacion" paginator="true" rows="10" rowIndexVar="num_row" emptyMessage="#{msg.empty_collection}" paginatorAlwaysVisible="false">
 	        			
-	        			<p:column headerText="Num.">
+	        			<p:column headerText="Num." style="text-align:center;">
 	        				<h:panelGroup layout="block" style="margin:auto;">
 	        				 <p:commandLink value="#{num_row+1}" process="@this" oncomplete="detalleInvitacion.show()" update="@form">
 	        				 	<f:setPropertyActionListener target="#{invitacionEmitidaController.invitacionDocenteSelected}" value="#{invitacion}"></f:setPropertyActionListener>
@@ -67,14 +68,20 @@
 	        		<h:panelGrid id="pgChgEstadoInv" columns="1">
 		        		
 		        		<h:panelGroup layout="block" id="detalleInvitacion">
-		        			<h:outputText value="#{invitacionEmitidaController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" />
+		        			<h:panelGrid columns="2">
+			        			<h:outputLabel value="Curso:" style="font-weight:bold;"/>
+			        			<h:outputText value="#{invitacionEmitidaController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" />
+			        			<h:outputLabel value="Profesor:" style="font-weight:bold;"/>
+			        			<h:outputText value="#{invitacionEmitidaController.invitacionDocenteSelected.profesor.persona.nombreCompleto}" />
+		        			</h:panelGrid>
 		        		</h:panelGroup>
 		        		<h:panelGrid columns="2">
-		        			<h:outputText value="Cambiar a estado.." /> 
+		        			<h:outputText value="Cambiar a estado: " style="font-weight:bold;"/> 
 			        		<p:selectOneMenu value="#{invitacionEmitidaController.invitacionDocenteSelected.estado}">
-			        			<f:selectItem itemLabel="Emitida" itemValue="#{msg_client['doc_estado_invitacion_emitida']}"/>
-			        			<f:selectItem itemLabel="Aceptada" itemValue="#{msg_client['doc_estado_invitacion_aceptada']}"/>
-			        			<f:selectItem itemLabel="Rechazada" itemValue="#{msg_client['doc_estado_invitacion_rechazada']}"/>
+			        			<f:selectItem itemLabel="Emitida" itemValue="#{msg_client['doc_estado_invitacion_emitida']}" itemDisabled="true"/>
+			        			<f:selectItem itemLabel="Aceptada" itemValue="#{msg_client['doc_estado_invitacion_aceptada']}" itemDisabled="true"/>
+			        			<f:selectItem itemLabel="Rechazada" itemValue="#{msg_client['doc_estado_invitacion_rechazada']}" itemDisabled="true"/>
+			        			<f:selectItem itemLabel="Anulada" itemValue="#{msg_client['doc_estado_invitacion_anulada']}"/>
 			        		</p:selectOneMenu>
 		        		</h:panelGrid>
 	        		</h:panelGrid>

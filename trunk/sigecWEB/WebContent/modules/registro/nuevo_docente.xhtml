@@ -155,10 +155,10 @@
                 		<h:panelGrid columns="2">
                 			<h:outputLabel value="#{msg.primaria}: " />
                 			
-                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="40" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.primaria}" />
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcPrimaria}" size="40" required="false" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.primaria}" />
                 			
                 			<h:outputLabel value="#{msg.secundaria}: " />
-                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="40" required="true" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.secundaria}" />
+                			<sigecComp:textField value="#{registroDocenteController.profesor.persona.educacionFormacion.edcSecundaria}" size="40" required="false" editMode="#{registroDocenteController.renderEditionButtons}" label="#{msg.secundaria}" />
                 			
                 			<h:outputLabel value="#{msg.universitaria}: " />
                 			<h:inputText value="#{registroDocenteController.profesor.persona.educacionFormacion.edcUniversitaria}" size="40" rendered="#{registroDocenteController.renderEditionButtons}"/>
