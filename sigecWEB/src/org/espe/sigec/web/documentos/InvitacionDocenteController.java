@@ -133,6 +133,7 @@ public class InvitacionDocenteController implements Serializable{
 		lstMemos.add(getMemo());
 		try {
 			ReporteGenerico.getResource().generarReporteSimpleAsByte("invitacionProveedor",  lstMemos);
+			ReporteGenerico.getResource().generarReporteSimpleAsByte("invitacionProveedor",  lstMemos);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
