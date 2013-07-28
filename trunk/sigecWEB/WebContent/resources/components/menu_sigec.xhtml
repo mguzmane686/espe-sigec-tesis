@@ -244,6 +244,12 @@
             <rich:panelMenuItem action="doc_invitacion_emitida.jsf?faces-redirect=true" execute="@this">
             	<a4j:commandLink value="#{msg.invitacion_emitida}" action="doc_invitacion_emitida.jsf?faces-redirect=true"/>
             </rich:panelMenuItem>
+            
+            
+            <rich:panelMenuItem action="doc_invitacion_emitida.jsf?faces-redirect=true" execute="@this">
+            	<a4j:commandLink value="Generar flujo contrato" action="doc_generar_flujo_contrato.jsf?faces-redirect=true"/>
+            </rich:panelMenuItem>
+            
         </rich:panelMenuGroup>
         
         <rich:panelMenuGroup label="Ayuda" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
