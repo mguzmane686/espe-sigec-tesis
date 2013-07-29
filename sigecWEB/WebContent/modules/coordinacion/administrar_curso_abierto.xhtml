@@ -70,7 +70,7 @@
 						<h:graphicImage library="images/button" name="ms-excel.png" style="width: 14px; height:14px;"/>
 						<h:outputText value="Reporte inscritos" />
 					</h:panelGrid>
-        			<p:dataExporter target="tblInscritos" type="xls" fileName="ssd" ></p:dataExporter>
+        			<p:dataExporter target="tblInscritos" type="xls" fileName="Reporte_alumnos_inscritos_#{administrarCursoController.cursoPeriodo.curso.nombreCurso}" ></p:dataExporter>
         		</h:commandLink>
         		
 				<p:dataTable id="tblInscritos" value="#{administrarCursoController.lstInscritos}" var="inscritos" paginatorAlwaysVisible="false"

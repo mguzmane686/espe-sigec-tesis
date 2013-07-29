@@ -2,6 +2,7 @@ package org.espe.sigec.web.documentos;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -139,7 +140,7 @@ public class InvitacionDocenteController implements Serializable{
 		}
 	}
 
-	private CursoPeriodo findCursoSelected(BigInteger idCursoPeriodo){
+	private CursoPeriodo findCursoSelected(BigDecimal idCursoPeriodo){
 		for(CursoPeriodo cursoPeriodo: getLstCursoPeriodos()){
 			if(cursoPeriodo.getIdCursoPeriodo().toString().equals(idCursoPeriodo.toString())){
 				return cursoPeriodo;
