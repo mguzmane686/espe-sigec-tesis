@@ -37,7 +37,7 @@
 			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" excludeColumns="0"/>  
 			        </h:commandLink>
 					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow" 
-						var="contacto" rows="15" paginator="true" style="width:700px; overflow-x:auto;">
+						var="contacto" rows="15" paginator="true" style="width:700px; overflow-x:auto;" scrollWidth="200" scrollHeight="500">
 						
 						<p:column style="text-align:center;">
 							<f:facet name="header">
@@ -126,7 +126,7 @@
      			</h:panelGrid>
      			
      			<h:outputLabel value="#{msg.cedula} :" />
-     			<h:outputText value="#{listadoContactosController.personaSelected.cedula}" />
+     			<sigecComp:textField value="#{listadoContactosController.personaSelected.cedula}" editMode="#{listadoContactosController.editContactMode}" />
      			
      			<h:outputLabel value="#{msg.direccion} :" />
      			<sigecComp:textField value="#{listadoContactosController.personaSelected.direccion}" editMode="#{listadoContactosController.editContactMode}" />
