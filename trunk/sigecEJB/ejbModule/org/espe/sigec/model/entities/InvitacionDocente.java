@@ -79,7 +79,7 @@ public class InvitacionDocente  implements Serializable {
         this.docValorPagar = docValorPagar;
     }
 
-    public InvitacionDocente(String docNumInvit, int prfIdProfesor, BigInteger idCursoPeriodo) {
+    public InvitacionDocente(String docNumInvit, int prfIdProfesor, BigDecimal idCursoPeriodo) {
         this.invitacionDocentePK = new InvitacionDocentePK(docNumInvit, prfIdProfesor, idCursoPeriodo);
     }
 

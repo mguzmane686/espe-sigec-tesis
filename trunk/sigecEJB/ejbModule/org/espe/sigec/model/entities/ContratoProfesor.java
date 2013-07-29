@@ -43,13 +43,13 @@ public class ContratoProfesor implements Serializable{
         @JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false),
         @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false)})
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private InvitacionDocente sgctDocInvitacionPorf;
+    private InvitacionDocente invitacionDocente;
     
     @Column(name = "prf_id_profesor")
     private int  idProfesor;
     
     @Column(name = "id_curso_periodo")
-    private BigInteger idCursoPeriodo;
+    private BigDecimal idCursoPeriodo;
 
     public ContratoProfesor() {
     }
@@ -110,15 +110,16 @@ public class ContratoProfesor implements Serializable{
         this.ctrLugarDictarse = ctrLugarDictarse;
     }
 
+
     public InvitacionDocente getInvitacionDocente() {
-        return sgctDocInvitacionPorf;
-    }
+		return invitacionDocente;
+	}
 
-    public void setInvitacionDocente(InvitacionDocente sgctDocInvitacionPorf) {
-        this.sgctDocInvitacionPorf = sgctDocInvitacionPorf;
-    }
+	public void setInvitacionDocente(InvitacionDocente invitacionDocente) {
+		this.invitacionDocente = invitacionDocente;
+	}
 
-    @Override
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (sgctDocContratoProfPK != null ? sgctDocContratoProfPK.hashCode() : 0);
@@ -151,14 +152,12 @@ public class ContratoProfesor implements Serializable{
 		this.idProfesor = idProfesor;
 	}
 
-	public BigInteger getIdCursoPeriodo() {
+	public BigDecimal getIdCursoPeriodo() {
 		return idCursoPeriodo;
 	}
 
-	public void setIdCursoPeriodo(BigInteger idCursoPeriodo) {
+	public void setIdCursoPeriodo(BigDecimal idCursoPeriodo) {
 		this.idCursoPeriodo = idCursoPeriodo;
 	}
-    
-    
-    
+
 }

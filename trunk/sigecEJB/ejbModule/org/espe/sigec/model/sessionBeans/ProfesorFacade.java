@@ -5,12 +5,14 @@
 package org.espe.sigec.model.sessionBeans;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.espe.sigec.model.entities.ContratoProfesor;
 import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.Profesor;
 import org.hibernate.Criteria;
@@ -57,20 +59,33 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
 	@Override
 	public Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo) {
 		
-		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
-		crit.createAlias("cursoPeriodo", "cursoPeriodoA");
-		crit.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
-		crit.add(Restrictions.eq("cursoPeriodoA.idCursoPeriodo", idCursoPeriodo));
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(ContratoProfesor.class);
+		crit.add(Restrictions.eq("idCursoPeriodo", idCursoPeriodo));
+		crit.createAlias("invitacionDocente", "invitacionDocenteA");
+		crit.setFetchMode("invitacionDocenteA", FetchMode.JOIN);
 		
-		crit.createAlias("profesor", "profesorA");
-		crit.setFetchMode("profesorA", FetchMode.JOIN);
-		
+//		crit.createAlias("invitacionDocenteA.cursoPeriodo", "cursoPeriodoA");
+//		crit.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+//		crit.add(Restrictions.eq("idCursoPeriodo", idCursoPeriodo));
+//		
+		crit.createAlias("invitacionDocenteA.profesor", "profesorA");
+		crit.setFetchMode("profesorA", FetchMode.SELECT);
+
 		crit.createAlias("profesorA.persona", "personaA");
-    	crit.setFetchMode("personaA", FetchMode.JOIN);
+    	crit.setFetchMode("personaA", FetchMode.SELECT);
     	@SuppressWarnings("unchecked")
-		Collection<InvitacionDocente> lst = crit.list();
+		Collection<ContratoProfesor> lst = crit.list();
+    	Collection<InvitacionDocente> lstInvitacionDocentes = new ArrayList<InvitacionDocente>();
+    	for(ContratoProfesor contratoProfesor: lst){
+    		try {
+    			lstInvitacionDocentes.add(contratoProfesor.getInvitacionDocente());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+    		
+    	}
     			 
-		return lst;
+		return lstInvitacionDocentes;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -16,7 +16,6 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.InvitacionDocente;
-import org.espe.sigec.model.entities.InvitacionDocentePK;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
