@@ -13,6 +13,7 @@ public class Memo {
 	private String nombreElaborador;
 	private String nombreDirectora;
 	private String cuerpoMemo;
+	private String resource;
 	
 	public Memo() {
 		super();
@@ -77,7 +78,10 @@ public class Memo {
 	public void setCuerpoMemo(String cuerpoMemo) {
 		this.cuerpoMemo = cuerpoMemo;
 	}
-	
-	
-	
+	public String getResource() {
+		return resource;
+	}
+	public void setResource(String resource) {
+		this.resource = resource;
+	}	
 }
