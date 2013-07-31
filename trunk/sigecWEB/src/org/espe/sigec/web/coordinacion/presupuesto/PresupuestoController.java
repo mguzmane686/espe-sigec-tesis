@@ -77,6 +77,8 @@ public class PresupuestoController implements Serializable {
 				}
 				
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
+				cargarCuentasPresupuesto();
+				
 				setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes(), getPresupuestoCurso().getPorcentageUtiEspe() , getPresupuestoCurso().getPorcentageMatOfi()));
 				getInformePresupuesto().calculoPuntoEquilibrio(PresupuestoUtil.getPresupuestoUtil().getValorManuales(getLstDetallePresupuestoCursos()), PresupuestoUtil.getPresupuestoUtil().getValorRefrigerios(getLstDetallePresupuestoCursos()));
 				
