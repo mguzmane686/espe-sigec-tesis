@@ -77,7 +77,7 @@ public class PresupuestoController implements Serializable {
 				}
 				
 				setLstDetallePresupuestoCursos(presupuestoCurso.getDetallePresupuestoCursoCollection());
-				cargarCuentasPresupuesto();
+				cargarCuentasPresupuesto(Boolean.FALSE);
 				
 				setInformePresupuesto(new InformePresupuesto(getTotalLista(), getCursoPeriodo().getMaximoEstudiantes(), getPresupuestoCurso().getPorcentageUtiEspe() , getPresupuestoCurso().getPorcentageMatOfi()));
 				getInformePresupuesto().calculoPuntoEquilibrio(PresupuestoUtil.getPresupuestoUtil().getValorManuales(getLstDetallePresupuestoCursos()), PresupuestoUtil.getPresupuestoUtil().getValorRefrigerios(getLstDetallePresupuestoCursos()));
@@ -89,15 +89,17 @@ public class PresupuestoController implements Serializable {
 			loadCatalogoPresupuesto();
 			setEditMode(Boolean.FALSE);
 			setInformePresupuesto(new InformePresupuesto(BigDecimal.ZERO,0,0,0));
-			cargarCuentasPresupuesto();
+			cargarCuentasPresupuesto(Boolean.TRUE);
 		}
 	}
 	
-	private void cargarCuentasPresupuesto(){
+	private void cargarCuentasPresupuesto(boolean putIdCuenta){
 		Collection<PresupuestoDetalle> lstCuentasPresupuesto = presupuestoServicio.findDetallesPresupestoActual(Calendar.getInstance().get(Calendar.YEAR));
 		for(DetallePresupuestoCurso detallePresupuestoCurso: getLstDetallePresupuestoCursos()){
 			detallePresupuestoCurso.setLstCuentasPresupuesto((Collection<PresupuestoDetalle>) SerializationUtils.clone((Serializable)lstCuentasPresupuesto));
-			detallePresupuestoCurso.setIdCuenta( SerializationUtils.clone(((List<PresupuestoDetalle>) lstCuentasPresupuesto).get(0).getPresupuestoDetallePK().getIdCuenta()));
+			if(putIdCuenta){
+				detallePresupuestoCurso.setIdCuenta( SerializationUtils.clone(((List<PresupuestoDetalle>) lstCuentasPresupuesto).get(0).getPresupuestoDetallePK().getIdCuenta()));
+			}
 		}
 		
 	}
