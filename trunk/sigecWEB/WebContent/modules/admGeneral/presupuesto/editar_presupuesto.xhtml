@@ -47,16 +47,16 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
         		<h:panelGrid columns="2">
         		
-        			<h:outputText value="#{msg['etiqueta_codigo']}" />
+        			<h:outputText value="#{msg['etiqueta_codigo']}: " styleClass="label-bold"/>
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.idPrefijoPresupuesto}" />
         			
-        			<h:outputLabel value="Fecha Inicio" />
+        			<h:outputLabel value="Fecha inicio: " styleClass="label-bold"/>
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.fechaInicio}" />
         				
-        			<h:outputLabel value="Fecha Finalizacion" />
+        			<h:outputLabel value="#{msg['fecha_finalizacion']}: " styleClass="label-bold"/>
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.fechaFin}" />
         			
-        			<h:outputLabel value="#{msg['etiqueta_anio']}" />
+        			<h:outputLabel value="#{msg['etiqueta_anio']}: " styleClass="label-bold"/>
         			<h:outputText value="#{administrarPresupuestoController.presupuesto.codigoAnio}" />
         			
         			<!-- 			

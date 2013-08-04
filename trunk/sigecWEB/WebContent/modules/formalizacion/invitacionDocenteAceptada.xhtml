@@ -18,7 +18,7 @@
     		
         <h:form id="frmInvitacionAceptada">
         	
-        	<rich:panel header="#{msg.invitaciones_aceptadas}">
+        	<rich:panel header="#{msg.invitaciones_aceptadas}" rendered="false">
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
 	        		<h:panelGrid columns="4" rendered="false">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
