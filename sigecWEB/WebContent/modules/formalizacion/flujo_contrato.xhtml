@@ -27,25 +27,14 @@
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 					
-					<h:panelGrid columns="3" id="pgCritBusqInv">
-						<h:outputText value="Fiiltrar por" />
-						<p:selectOneMenu value="#{invitacionEmitidaController.estadoInvFilter}">
-		        			<f:selectItem itemLabel="Emitida" itemValue="#{msg_client['doc_estado_invitacion_emitida']}"/>
-		        			<f:selectItem itemLabel="Aceptada" itemValue="#{msg_client['doc_estado_invitacion_aceptada']}"/>
-		        			<f:selectItem itemLabel="Rechazada" itemValue="#{msg_client['doc_estado_invitacion_rechazada']}"/>
-		        			<f:selectItem itemLabel="Todas" itemValue="ALL"/>
-		        		</p:selectOneMenu>
-		        		<p:commandButton value="Buscar" process="@this pgCritBusqInv"
-		        			action="#{invitacionEmitidaController.btnBuscarInvitacion}" 
-		        			update="tblInvitaciones"></p:commandButton>
-					</h:panelGrid>
-					<p:dataTable id="tblInvitaciones" value="#{invitacionEmitidaController.lstInvitacionDocentes}" 
+					
+					<p:dataTable id="tblInvitaciones" value="#{generacionFlujoContratoController.lstInvitacionDocentes}" 
 						var="invitacion" paginator="true" rows="10" rowIndexVar="num_row" emptyMessage="#{msg.empty_collection}" paginatorAlwaysVisible="false">
 	        			
 	        			<p:column headerText="Num.">
 	        				<h:panelGroup layout="block" style="margin:auto;">
 	        				 <p:commandLink value="#{num_row+1}" process="@this" oncomplete="detalleInvitacion.show()" update="@form">
-	        				 	<f:setPropertyActionListener target="#{invitacionEmitidaController.invitacionDocenteSelected}" value="#{invitacion}"></f:setPropertyActionListener>
+	        				 	<!-- f:setPropertyActionListener target="#{invitacionEmitidaController.invitacionDocenteSelected}" value="#{invitacion}"></f:setPropertyActionListener-->
 	        				 </p:commandLink>
 	        				 </h:panelGroup>
 	        			</p:column>
@@ -66,30 +55,8 @@
 	        	</rich:collapsiblePanel>
 	        	
 	        	<p:dialog widgetVar="detalleInvitacion" modal="true" header="Cambio de estado!!" 
-	        		rendered="#{invitacionEmitidaController.invitacionDocenteSelected != null}">
-	        		<h:panelGrid id="pgChgEstadoInv" columns="1">
-		        		
-		        		<h:panelGroup layout="block" id="detalleInvitacion">
-		        			<h:outputText value="#{invitacionEmitidaController.invitacionDocenteSelected.cursoPeriodo.curso.nombreCurso}" />
-		        		</h:panelGroup>
-		        		<h:panelGrid columns="2">
-		        			<h:outputText value="Cambiar a estado.." /> 
-			        		<p:selectOneMenu value="#{invitacionEmitidaController.invitacionDocenteSelected.estado}">
-			        			<f:selectItem itemLabel="Emitida" itemValue="#{msg_client['doc_estado_invitacion_emitida']}"/>
-			        			<f:selectItem itemLabel="Aceptada" itemValue="#{msg_client['doc_estado_invitacion_aceptada']}"/>
-			        			<f:selectItem itemLabel="Rechazada" itemValue="#{msg_client['doc_estado_invitacion_rechazada']}"/>
-			        		</p:selectOneMenu>
-		        		</h:panelGrid>
-	        		</h:panelGrid>
+	        		>
 	        		
-	        		<h:panelGroup layout="block" style="width:100%" styleClass="rf-pp-hdr">
-	        			<h:panelGrid columns="2" style="margin:auto;">
-			        		<p:commandLink value="Aceptar" oncomplete="detalleInvitacion.hide()" 
-			        			action="#{invitacionEmitidaController.btnAceptarCambioEstadoInv}" process="@this pgChgEstadoInv" update="tblInvitaciones"/>
-			        		<p:commandLink value="Cancelar" oncomplete="detalleInvitacion.hide()" 
-			        			action="#{invitacionEmitidaController.btnCancelarCambioEstadoInv}" process="@this" />
-		        		</h:panelGrid>
-	        		</h:panelGroup> 
 	        	</p:dialog>
         	</rich:panel>
         </h:form>

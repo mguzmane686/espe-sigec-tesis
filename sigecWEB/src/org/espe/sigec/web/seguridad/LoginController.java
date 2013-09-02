@@ -12,10 +12,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SigecCryptoUtil;
 
 
 @SuppressWarnings("serial")
@@ -33,15 +35,16 @@ public class LoginController implements Serializable{
 		usuario = new Usuario();
 		usuario.setIdentificador("");
 		usuario.setClave("");
-//		authenticationService = new AuthenticationServiceImpl();
 	}
 	
 	public void btnSignIn(ActionEvent e) {
 		
-		boolean success = authenticationService.login(getUsuario().getIdentificador(), getUsuario().getClave());
+		
+		String clave = SigecCryptoUtil.getInstance().encodeString(getUsuario().getClave());
+		boolean success = authenticationService.login(getUsuario().getIdentificador(), clave);
 		
 		if (success){
-			Usuario usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), getUsuario().getClave());
+			Usuario usuario = loginServicio.validateLogin(getUsuario().getIdentificador(), clave);
 			if(null != usuario){
 				Collection<UsuarioPerfil> usuarioPerfil = loginServicio.getUsuarioPerfil(usuario);
 				
