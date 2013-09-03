@@ -67,7 +67,7 @@
 				
 				<h:commandLink>
 					<h:panelGrid columns="2">
-						<h:graphicImage library="images/button" name="ms-excel.png" style="width: 14px; height:14px;"/>
+						<h:graphicImage library="images/button" name="ms-excel.png" style="width: 14px; height:14px; border:0px;" />
 						<h:outputText value="Reporte inscritos" />
 					</h:panelGrid>
         			<p:dataExporter target="tblInscritos" type="xls" fileName="Reporte_alumnos_inscritos_#{administrarCursoController.cursoPeriodo.curso.nombreCurso}" ></p:dataExporter>
@@ -123,7 +123,7 @@
 			        			<h:outputLabel value="Profesor :" style="display:block; width:120px;"/>
 			        			<rich:select value="#{administrarCursoController.cursoPeriodo.idProfesor}">
 			        				<f:selectItems value="#{administrarCursoController.itemsProfesor}" var="prof"
-			        					itemLabel="#{prof.profesor.persona.primerNombre}" itemValue="#{prof.profesor.idProfesor}"/>
+			        					itemLabel="#{prof.profesor.persona.nombreCompleto}" itemValue="#{prof.profesor.idProfesor}"/>
 			        					
 			        			</rich:select>
 		        			</h:panelGrid>
