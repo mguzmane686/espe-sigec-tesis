@@ -40,7 +40,8 @@ public class LoginController implements Serializable{
 	public void btnSignIn(ActionEvent e) {
 		
 		
-		String clave = SigecCryptoUtil.getInstance().encodeString(getUsuario().getClave());
+//		String clave = SigecCryptoUtil.getInstance().encodeString(getUsuario().getClave());
+		String clave = getUsuario().getClave();
 		boolean success = authenticationService.login(getUsuario().getIdentificador(), clave);
 		
 		if (success){
