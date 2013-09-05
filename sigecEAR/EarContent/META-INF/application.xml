@@ -10,4 +10,10 @@
   <module>
     <ejb>sigecEJB.jar</ejb>
   </module>
+  <module>
+    <web>
+      <web-uri>espeUEC.war</web-uri>
+      <context-root>espeUEC</context-root>
+    </web>
+  </module>
 </application>
