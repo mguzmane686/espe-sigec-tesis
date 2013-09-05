@@ -2,12 +2,10 @@
     <wb-module deploy-name="sigecEAR">
         <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
         <dependent-module archiveName="sigecEJB.jar" deploy-path="/" handle="module:/resource/sigecEJB/sigecEJB">
+            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="sigecWEB.war" deploy-path="/" handle="module:/resource/sigecWEB/sigecWEB">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="espeUEC.war" deploy-path="/" handle="module:/resource/espeUEC/espeUEC">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
