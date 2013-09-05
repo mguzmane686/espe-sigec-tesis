@@ -12,12 +12,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
-import org.espe.sigec.web.utils.SigecCryptoUtil;
 
 
 @SuppressWarnings("serial")
