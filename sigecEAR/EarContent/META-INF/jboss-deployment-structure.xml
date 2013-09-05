@@ -1,10 +1,16 @@
 <jboss-deployment-structure>
 
 	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
-
+	
 	<deployment>
 		<dependencies>
 			<module name="org.apache.commons.lang3" export="true" />
+			<module name="org.apache.commons.collections" export="true" />
+			<module name="org.apache.commons.logging" slot="1.1" export="true" />
+			<module name="org.apache.commons.beanutils" slot="main" export="true" />
+			<module name="org.apache.commons.digester" export="true" />
+			<module name="org.apache.commons.discovery" />
+			<module name="org.apache.poi" slot="main" />
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>
