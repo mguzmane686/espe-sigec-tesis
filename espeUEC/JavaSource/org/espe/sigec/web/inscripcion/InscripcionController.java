@@ -8,6 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
@@ -74,13 +75,18 @@ public class InscripcionController implements Serializable{
 	//getter & setters
 	public void btnGuardarInscripcion(){
 		System.out.println(getCursoPeriodo());
-		try {
-			inscripcionServicio.inscripcionEstudianteCurso(getPersona(), getCursoPeriodo());
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha inscrito al curso", null));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getLocalizedMessage(), null));
-			e.printStackTrace();
+		if(StringUtils.isNotEmpty(getPersona().getCedula())){
+			try {
+				inscripcionServicio.inscripcionEstudianteCurso(getPersona(), getCursoPeriodo());
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Se ha inscrito al curso", null));
+			} catch (Exception e){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
+				e.printStackTrace();
+			}
+		}else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "No existe un estudiante a ser inscrito", null));
 		}
+		
 		
 	}
 	public CursoPeriodo getCursoPeriodo() {
