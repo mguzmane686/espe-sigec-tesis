@@ -9,10 +9,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.servicio.portal.PortalServicio;
+import org.espe.sigec.web.inscripcion.InscripcionController;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author Roberto
@@ -42,6 +45,9 @@ public class ProgramasController implements Serializable{
 	
 	public void btnAceptar(){
 //		System.out.println(getCursoPeriodoSeleccionado().getModuloCursoPeriodoCollection());
+		((InscripcionController)FacesUtils.getManagedBean("inscripcionController")).btnNewEstudent();
+		((InscripcionController)FacesUtils.getManagedBean("inscripcionController")).setFindMode(Boolean.TRUE);
+		((InscripcionController)FacesUtils.getManagedBean("inscripcionController")).setCedulaUsr(StringUtils.EMPTY);
 	}
 	public void btnShowProgramaDetalle(){
 		System.out.println("Uno");
