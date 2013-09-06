@@ -7,7 +7,10 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
+import org.espe.sigec.exception.CupoNoDisponibleException;
+import org.espe.sigec.exception.EstudianteDobleInscripcionException;
 import org.espe.sigec.exception.UserValidateException;
+import org.espe.sigec.exception.UsuarioNoNuevoException;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.CursoEstudiantePK;
 import org.espe.sigec.model.entities.CursoPeriodo;
@@ -146,7 +149,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 					
 					estudianteFacadeLocal.create(estudiante);
 				}else{
-					throw new Exception("El identificador ya existe");
+					throw new UsuarioNoNuevoException("El identificador ya existe");
 				}
 			}else{
 				UsuarioPerfilPK usuarioPerfilPK = new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST");
@@ -184,7 +187,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 				
 				CursoEstudiante cursoEstudianteTMP = cursoEstudianteFacadeLocal.find(cursoEstudiante.getCursoEstudiantePK());
 				if(cursoEstudianteTMP != null){
-					throw new Exception("El estudiante ya se encuentra inscrito en ese curso");
+					throw new EstudianteDobleInscripcionException("El estudiante ya se encuentra inscrito en ese curso");
 				}
 				
 				cursoEstudianteFacadeLocal.create(cursoEstudiante);
@@ -196,16 +199,23 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 				
 				userTransaction.commit();
 			}else{
-				throw new Exception("Ya no quedan cupos para el curso");
+				throw new CupoNoDisponibleException("Ya no quedan cupos para el curso");
+				
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			userTransaction.rollback();
-			if(e.getMessage().contains("El identificador ya existe")){
-				throw new UserValidateException("UserValidateException");
-			}else{
-				throw new Exception(e);
+			if(e instanceof CupoNoDisponibleException){
+				throw new CupoNoDisponibleException(e.getMessage());
+			}else if(e instanceof UsuarioNoNuevoException){
+				throw new UsuarioNoNuevoException(e.getMessage());
+			}else if (e instanceof EstudianteDobleInscripcionException){
+				throw new EstudianteDobleInscripcionException(e.getMessage());
+			}else if (e instanceof UserValidateException){
+				throw new EstudianteDobleInscripcionException(e.getMessage());
+			}else {
+				throw new Exception("Lo sentimos ocurrio un error en el proceso");
 			}
 		}
 		
