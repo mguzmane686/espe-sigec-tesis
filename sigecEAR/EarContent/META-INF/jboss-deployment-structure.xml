@@ -10,7 +10,8 @@
 			<module name="org.apache.commons.beanutils" slot="main" export="true" />
 			<module name="org.apache.commons.digester" export="true" />
 			<module name="org.apache.commons.discovery" />
-			<module name="org.apache.poi" slot="main" />
+			<module name="org.apache.poi" slot="main" export="true"/>
+			<module name="org.primefaces" slot="main" export="true"/>
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>
