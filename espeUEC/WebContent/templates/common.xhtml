@@ -48,16 +48,16 @@
 	
 	<h:form style="background-color:white; margin:3px;" styleClass="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
 		<p:panelGrid columns="5" style="margin:auto;">
-			<p:commandLink value="#{msg.etiqueta_Inicio}" icon="#{resource['images/icons:home.png']}" 
-				action="/pages/index.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
-			<p:commandLink value="#{msg.etiqueta_nosotros}" icon="#{resource['images/icons:nosotros.png']}" 
-				action="/pages/about.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
-			<p:commandLink value="#{msg.etiqueta_programas}" icon="#{resource['images/icons:programa.png']}" 
-				action="/pages/programas.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
-			<p:commandLink value="#{msg.etiqueta_encuesta}" icon="#{resource['images/icons:encuesta.png']}" 
-				action="/pages/encuesta.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
-			<p:commandLink value="#{msg.etiqueta_contacto}" icon="#{resource['images/icons:contacto.png']}" 
-				action="/pages/contact.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+			<p:commandLink value="#{msg.etiqueta_Inicio}" icon="#{resource['images/icons:home.png']}" immediate="true"
+				action="/pages/index.jsf" process="@this" ajax="false" style="color:#0379BD; font-size:14px;"/>  
+			<p:commandLink value="#{msg.etiqueta_nosotros}" icon="#{resource['images/icons:nosotros.png']}" immediate="true" 
+				action="/pages/about.jsf" process="@this" ajax="false" style="color:#0379BD; font-size:14px;"/>  
+			<p:commandLink value="#{msg.etiqueta_programas}" icon="#{resource['images/icons:programa.png']}" immediate="true" 
+				action="/pages/programas.jsf" process="@this" ajax="false" style="color:#0379BD; font-size:14px;"/>
+			<p:commandLink value="#{msg.etiqueta_encuesta}" icon="#{resource['images/icons:encuesta.png']}" immediate="true"
+				action="/pages/encuesta.jsf" process="@this" ajax="false" style="color:#0379BD; font-size:14px;"/>
+			<p:commandLink value="#{msg.etiqueta_contacto}" icon="#{resource['images/icons:contacto.png']}" immediate="true"
+				action="/pages/contact.jsf" process="@this" ajax="false" style="color:#0379BD; font-size:14px;"/>
 		</p:panelGrid>
 	</h:form>
 
