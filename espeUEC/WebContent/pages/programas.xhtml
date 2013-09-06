@@ -21,7 +21,7 @@
 			<h:panelGroup layout="block" id="services">
 				<p>
 				<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso??" widgetVar="prograDialog" maximizable="false" minimizable="false"
-					showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true"> 
+					showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true" resizable="false"> 
 				        
 			        <p:outputPanel id="documentPanel" autoUpdate="true">
 				        <p:panel>
@@ -40,11 +40,11 @@
 				        
 				        
 				        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
-					        <p:commandLink  value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
+					        <p:commandButton  value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
 					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
 					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
-					        </p:commandLink>
-					        <p:commandLink onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
+					        </p:commandButton>
+					        <p:commandButton onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
 				        </h:panelGrid>
 			        </p:outputPanel>  
 			    </p:dialog>
