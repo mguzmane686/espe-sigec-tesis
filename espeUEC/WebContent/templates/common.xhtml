@@ -4,32 +4,32 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
 <h:head>
 	<title><ui:insert name="pageTitle">Page Title</ui:insert></title>
 	<script>
         /*<![CDATA[*/
-	        function bloquearTeclas(e){
-	        	var tecla;
-	        	if (window.event) {
-	        		//IE
-	        		tecla = window.event.keyCode;
-	        		if(tecla == 116 || tecla == 13){
-	        			event.keyCode=0;
-	        			event.returnValue=false;
-	        		}
-	        	}else{
-	        		//firefox
-	        		tecla = e.which;
-	        		if(tecla == 116 || tecla==13)
-	        			return true;
-	        	}
-	        }
-	        /*]]>*/
-        </script>
+        function bloquearTeclas(e){
+        	var tecla;
+        	if (window.event) {
+        		//IE
+        		tecla = window.event.keyCode;
+        		if(tecla == 116 || tecla == 13){
+        			event.keyCode=0;
+        			event.returnValue=false;
+        		}
+        	}else{
+        		//firefox
+        		tecla = e.which;
+        		if(tecla == 116 || tecla==13){
+        			return true;
+        		}
+        	}
+        }
+        /*]]>*/
+	</script>
 </h:head>
 
-<p:dock position="top">
+<!--p:dock position="top">
 	<p:menuitem value="#{msg.etiqueta_Inicio}" icon="#{resource['images/icons:home.png']}" 
 		url="/pages/index.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
 	<p:menuitem value="#{msg.etiqueta_nosotros}" icon="#{resource['images/icons:nosotros.png']}" 
@@ -40,34 +40,48 @@
 		url="/pages/encuesta.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
 	<p:menuitem value="#{msg.etiqueta_contacto}" icon="#{resource['images/icons:contacto.png']}" 
 		url="/pages/contact.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
-</p:dock>
+</p:dock-->
 
-<h:body style="background-color: rgb(12,38,53)" onkeydown="if(bloquearTeclas(event)) return false;">
-	<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
-              
-	<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false" draggable="false" closable="false">  
-		<h:graphicImage library="images" name="ajax-loader.gif"/>  
-	</p:dialog> 
-	  
-	<h:panelGroup layout="block" style="width: 960px;
-		margin: auto; text-align:center; padding: 40px 0; position: relative;">
+	<h:panelGroup layout="block" style="width: 960px; margin: auto; text-align:center; position: relative;">
 		<h:graphicImage library="images" name="logo.jpg" alt="LOGO" style="border:0px; margin:auto;"/>
 	</h:panelGroup>
 	
-	<h:panelGroup layout="block" style="width:100%; background: url('#{resource['images:bg-content.gif']}') repeat;">	
-		<h:panelGrid id="pgContent" style="width:100%; ">
-			<ui:insert name="pageHeader">Page Header</ui:insert>
-			<ui:insert name="body">Page Body</ui:insert>
-		</h:panelGrid>
-		
-		<h:panelGroup  layout="block" style=" padding: 20px 0 20px; width:100%; color: #fdfffa;"/>
+	<h:form style="background-color:white; margin:3px;" styleClass="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+		<p:panelGrid columns="5" style="margin:auto;">
+			<p:commandLink value="#{msg.etiqueta_Inicio}" icon="#{resource['images/icons:home.png']}" 
+				action="/pages/index.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
+			<p:commandLink value="#{msg.etiqueta_nosotros}" icon="#{resource['images/icons:nosotros.png']}" 
+				action="/pages/about.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>  
+			<p:commandLink value="#{msg.etiqueta_programas}" icon="#{resource['images/icons:programa.png']}" 
+				action="/pages/programas.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+			<p:commandLink value="#{msg.etiqueta_encuesta}" icon="#{resource['images/icons:encuesta.png']}" 
+				action="/pages/encuesta.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+			<p:commandLink value="#{msg.etiqueta_contacto}" icon="#{resource['images/icons:contacto.png']}" 
+				action="/pages/contact.jsf" process="@this" ajax="false" style="color:red; font-size:14px;"/>
+		</p:panelGrid>
+	</h:form>
+
+	<h:body style="background-color: rgb(12,38,53)" onkeydown="if(bloquearTeclas(event)) return false;">
+		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+	              
+		<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false" draggable="false" closable="false">  
+			<h:graphicImage library="images" name="ajax-loader.gif"/>  
+		</p:dialog> 
+		  
+		<h:panelGroup layout="block" style="width:100%; background: url('#{resource['images:bg-content.gif']}') repeat;">	
+			<h:panelGrid id="pgContent" style="width:100%; ">
+				<ui:insert name="pageHeader">Page Header</ui:insert>
+				<ui:insert name="body">Page Body</ui:insert>
+			</h:panelGrid>
 			
-		<p:panel>
-			<ui:include src="/pages/footerPage.xhtml" />
-		</p:panel>
-	</h:panelGroup>
-	
-	<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" showSummary="false" />  
-</h:body>
+			<h:panelGroup  layout="block" style=" padding: 20px 0 20px; width:100%; color: #fdfffa;"/>
+			
+			<p:panel>
+				<ui:include src="/pages/footerPage.xhtml" />
+			</p:panel>
+		</h:panelGroup>
+		
+		<p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true" showSummary="false" />  
+	</h:body>
 
 </html>

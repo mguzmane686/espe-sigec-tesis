@@ -20,7 +20,7 @@
 			<h:panelGroup layout="block" styleClass="background">
 				<h:panelGroup id="pgEncuesta" layout="block">
 					
-					<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" process="@this @form" update="@form"></p:commandButton>
+					
 						<!--p:panel header="#{msg.etiqueta_evaluacion_eventos}"-->
 					<uec:groupPanel style="text-align:center;">
 						<h:outputText value="#{msg.etiqueta_ESPE}" style="font-size:20px; text-align:center;" styleClass="label-bold"/>
@@ -157,7 +157,10 @@
 						</h:panelGrid>
 					</uec:groupPanel>
 				<!--/p:panel-->
-					
+					<h:panelGroup layout="block" style="margin:auto; text-align:center;" styleClass="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+						<p:commandButton value="guardar" action="#{encuestaController.btnGuardarEncuesta}" style="margin:auto;" 
+							process="@this @form" update="@form"></p:commandButton>
+					</h:panelGroup>
 				</h:panelGroup>
 			</h:panelGroup>
 		</h:panelGroup> <!-- /#contents -->
