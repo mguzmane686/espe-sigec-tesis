@@ -23,10 +23,8 @@
        			</h:panelGrid>
        		</h:panelGroup>
        		
-       		<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_especialidad']}" styleClass="titulo"/>
-        		</legend>
+        	<rich:collapsiblePanel header="#{msg['datos_especialidad']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
         		<h:panelGrid columns="2">
         			<h:outputLabel value="#{msg['nombre']}:" />
         			<sigecComp:textField value="#{especialidadController.especialidad.nombre}" required="true" editMode="true" size="72" label="#{msg['nombre']}"></sigecComp:textField>
@@ -34,7 +32,7 @@
         			<h:outputLabel value="#{msg['descripcion']}:"/>
         			<h:inputText value="#{especialidadController.especialidad.descripcion}" size="72" />
         		</h:panelGrid>
-        	</fieldset>	
+        	</rich:collapsiblePanel>
        	</rich:panel>
        	
        </h:form>
