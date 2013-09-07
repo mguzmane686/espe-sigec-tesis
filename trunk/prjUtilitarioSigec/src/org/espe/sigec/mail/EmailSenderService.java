@@ -14,6 +14,10 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * @author roberto
+ *
+ */
 public class EmailSenderService {
 	private static final EmailSenderService EMAIL_SENDER_SERVICE = new EmailSenderService();
 	
