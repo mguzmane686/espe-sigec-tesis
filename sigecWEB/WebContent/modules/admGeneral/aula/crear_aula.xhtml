@@ -13,7 +13,8 @@
    	
    		<h:form id="frmAula">
        	
-       	<rich:panel header="#{msg['creacion_aula']}">
+       	
+       	<rich:panel header="#{msg['creacion_aula']}" id="pnlAula">
        		<h:panelGroup layout="block" styleClass="roundCorner">
        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
        				<a4j:commandButton value="#{msg['guardar']}" render="pnlAula" 
@@ -21,9 +22,6 @@
        				<h:outputLabel value="#{msg['guardar']}" />
        			</h:panelGrid>
        		</h:panelGroup>
-       	</rich:panel>
-       	
-       	<rich:panel header="#{msg['creacion_aula']}" id="pnlAula">
        		
        		<rich:collapsiblePanel header="#{msg['datos_aula']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">

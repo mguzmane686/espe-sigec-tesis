@@ -13,7 +13,7 @@
 
 	<h:form id="frmPrograma">
 
-		<rich:panel header="#{msg['creacion_curso']}">
+		<rich:panel header="#{msg.etiqueta_detalle_programa}" id="pnlPrograma">
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="2" id="pgBotones">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!administrarProgramaController.editMode}">
@@ -41,9 +41,6 @@
 	       			</h:panelGrid>
        			</h:panelGrid>
 			</h:panelGroup>
-		</rich:panel>
-
-		<rich:panel header="#{msg.etiqueta_detalle_programa}" id="pnlPrograma">
 			
 			<rich:collapsiblePanel header="#{msg.etiqueta_datos_programa}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
