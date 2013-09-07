@@ -16,40 +16,18 @@
 	<h:outputScript library="js" name="jquery.effects.blind.js" />
     <h:outputStylesheet library="css" name="componentsCss.css" />
     <h:outputScript  library="js" name="componentsJs.js" />
-    
-   	<h:outputStylesheet>
-   		.alinearLeft{
-   			text-align:left;
-   			font-weight: bold;
-   		}
-   		.alinearCenter{
-   			text-align:center;
-   			font-weight: bold;
-   		}
-   		.rmsg-tef .rf-msg-err{		   
-		   background-image: url('#{resource['images:circle-alert.png']}');
-		   visibility: visible;
-		   height: 14px;
-		   width: 14px;
-		}
-        
-        .rmsg-tef .rf-msg-det {
-            visibility: hidden;
-        }
-   	</h:outputStylesheet>
    	<h:outputStylesheet library="css" name="tables.css" />
    	
 	<h:form>
-		<rich:panel header="#{msg['etiqueta_nuevo_usuario']}">
+		
+		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
 					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{creacionUsuarioController.btnCrearUsuario}" image="/resources/images/save.png" render="pnlDocente"/>
 					<h:outputLabel value="#{msg['guardar']}" />
 				</h:panelGrid>
 			</h:panelGroup>
-		</rich:panel>
-
-		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
+			
 			<rich:collapsiblePanel header="#{msg['usuario']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				

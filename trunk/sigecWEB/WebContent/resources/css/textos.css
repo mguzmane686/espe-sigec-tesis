@@ -11,3 +11,12 @@
 .espacioDetalle{
 	padding-right: 40px;
 }
+
+.alinearLeft{
+	text-align:left;
+	font-weight: bold;
+}
+.alinearCenter{
+	text-align:center;
+	font-weight: bold;
+}

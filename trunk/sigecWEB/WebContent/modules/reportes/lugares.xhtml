@@ -16,7 +16,7 @@
         	<rich:panel header="#{msg['lugares_registrados']}">
         			<a4j:outputPanel ajaxRendered="true">
 	        		<h:commandLink>
-			            <p:graphicImage value="/resources/images/button/pdf.png" />  
+			            <p:graphicImage value="/resources/images/button/pdf.png" style="border:0px;"/>  
 			            <p:dataExporter type="pdf" target="tblLugares" fileName="cars" />  
 			        </h:commandLink>
 		        		<p:dataTable id="tblLugares" style="width:100%" value="#{reporteLugarController.lstLugares}" var="lugar" rows="15" paginator="true" 
