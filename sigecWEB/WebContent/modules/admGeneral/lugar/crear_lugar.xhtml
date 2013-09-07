@@ -24,10 +24,10 @@
         </rich:panel>
        	
         <rich:panel header="#{msg['creacion_establecimiento']}" id="pnlLugar">
-       		<fieldset>
-        		<legend>
-        			<h:outputLabel value="#{msg['datos_lugar']}" styleClass="titulo"/>
-        		</legend>
+       		
+       		<rich:collapsiblePanel header="Establecimeinto"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				
         		<h:panelGrid columns="2">
         			<h:outputLabel value="#{msg['nombre']}:" style="display:block; width:70px;"/>
         			<sigecComp:textField value="#{lugarController.lugarCurso.nombre}" size="72" required="true" label="#{msg['nombre']}" editMode="true"/>
@@ -35,7 +35,8 @@
         			<h:outputLabel value="#{msg['direccion']}:"/>
         			<sigecComp:textField value="#{lugarController.lugarCurso.direccion}" size="72" required="true" label="#{msg['direccion']}" editMode="true"/>
         		</h:panelGrid>
-        	</fieldset>	
+       		</rich:collapsiblePanel>
+        	
        	</rich:panel>
        	
        </h:form>
