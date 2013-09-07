@@ -19,7 +19,7 @@
         <h:form id="frmCurso">
         	
         	
-        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
+        	<rich:panel header="#{msg.invitacion_docente}" id="pnlLanCur">
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
 	        		<h:panelGrid columns="4">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
@@ -40,7 +40,7 @@
 	        			</h:panelGrid>
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{invitacionDocenteController.savedInvitacion}">
-	        				<a4j:commandButton value="Nueva invitacion" action="#{invitacionDocenteController.btnNuevaInvitacion}"  
+	        				<a4j:commandButton value="Nueva #{msg.invitacion}" action="#{invitacionDocenteController.btnNuevaInvitacion}"  
 	        					 image="/resources/images/button/new_invitacion.png" render="@form" />
 	        				<h:outputLabel value="Nueva invitacion" />
 	        			</h:panelGrid>
@@ -49,7 +49,7 @@
 	        		</h:panelGrid>
         		</h:panelGroup>
         		
-	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+	        	<rich:collapsiblePanel header="#{msg.invitacion_docente}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        		
 	        		<h:panelGrid columns="2">
