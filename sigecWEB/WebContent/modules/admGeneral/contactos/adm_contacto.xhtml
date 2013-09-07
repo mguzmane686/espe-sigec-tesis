@@ -10,43 +10,18 @@
 	<h:outputStylesheet library="css" name="textos.css" />    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
-   	<h:outputScript library="js" name="validaciones.js" target="head"/>
-
-   	<h:outputStylesheet>
-   		.alinearLeft{
-   			text-align:left;
-   			font-weight: bold;
-   		}
-   		.alinearCenter{
-   			text-align:center;
-   			font-weight: bold;
-   		}
-   		.rmsg-tef .rf-msg-err{		   
-		   background-image: url('#{resource['images:circle-alert.png']}');
-		   visibility: visible;
-		   height: 14px;
-		   width: 14px;
-		}
-        
-        .rmsg-tef .rf-msg-det {
-            visibility: hidden;
-        }
-   	</h:outputStylesheet>
-   	
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>  	
    	<h:outputStylesheet library="css" name="tables.css" />
 
 	<h:form>
-		<rich:panel header="#{msg['etiqueta_contactos']}">
+		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
 			<h:panelGroup layout="block" styleClass="roundCorner">
 				<h:panelGrid columns="1" style="padding-left:10px; text-align:center;">
 					<a4j:commandButton value="#{msg['guardar']}" actionListener="#{admContactoController.btnSaveContact}" image="/resources/images/save.png" render="pnlDocente"/>
 					<h:outputLabel value="#{msg['guardar']}" />
 				</h:panelGrid>
 			</h:panelGroup>
-		</rich:panel>
-
-		<rich:panel header="#{msg.etiqueta_datos_principales}" id="pnlDocente">
-						
+									
 			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				

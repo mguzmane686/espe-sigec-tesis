@@ -31,15 +31,30 @@
 		<rich:panel header="#{msg['etiqueta_lista_contactos']}">
 			
 			
-				<h:panelGroup layout="block" style="width:100%;" id="pgTableContainer">
+				<h:panelGroup layout="block" id="pgTableContainer">
 					<h:commandLink>
 			            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
 			            <p:dataExporter type="xls" target="tblContactos" fileName="contactos" excludeColumns="0"/>  
 			        </h:commandLink>
-					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow" 
-						var="contacto" rows="15" paginator="true" style="width:700px; overflow-x:auto;" scrollWidth="200" scrollHeight="500">
-						
-						<p:column style="text-align:center;">
+			        
+			        <p:panel id="scriptPnl">
+			        <script type="text/javascript">
+				        (function($) {
+				            $.fn.hasScrollBar = function() {
+				                return this.get(0).scrollHeight > this.height();
+				            }
+				        })(jQuery);
+				        
+			        	$(function(){
+				        	$('.ui-datatable-scrollable-header').children().css({'width':$('.ui-datatable-scrollable-body').width()-18});
+				        });
+			        	
+			        </script>
+			        </p:panel>
+					<p:dataTable id="tblContactos" value="#{listadoContactosController.lstPersonas}" rowIndexVar="numRow" paginatorPosition="top" 
+						var="contacto" rows="15" paginator="true" style="width:100%;" scrollHeight="400" scrollable="true" >
+						<p:ajax event="page" process="@none" update=":frmContactos:scriptPnl"/>
+						<p:column style="text-align:center; width:80px" >
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.numero}" />
 							</f:facet>
@@ -51,7 +66,7 @@
 						</p:column>
 						
 						<p:column filterBy="#{contacto.primerApellido}" sortBy="#{contacto.primerApellido}"
-			                filterExpression="contains" >
+			                filterExpression="contains" style="width:100px">
 							<f:facet name="header">
 								<h:outputLabel value="Apellido" />
 							</f:facet>
@@ -59,35 +74,35 @@
 						</p:column>
 						
 						<p:column sortBy="#{contacto.primerNombre}" filterBy="#{contacto.primerNombre}"
-							filterExpression="contains" >
+							filterExpression="contains" style="width:100px">
 							<f:facet name="header">
 								<h:outputLabel value="Nombre" />
 							</f:facet>
 							<h:outputText value="#{contacto.primerNombre} #{contacto.segundoNombre}" />
 						</p:column>
 						
-						<p:column>
+						<p:column style="width:100px">
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.etiqueta_telefono_convencional}" />
 							</f:facet>
 							<h:outputText value="#{contacto.telefonoConvencional}" />
 						</p:column>
 						
-						<p:column>
+						<p:column style="width:100px">
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.celular}" />
 							</f:facet>
 							<h:outputText value="#{contacto.telefonoCelular}" />
 						</p:column>
 						
-						<p:column filterBy="#{contacto.mail}" filterMatchMode="contains">
+						<p:column filterBy="#{contacto.mail}" filterMatchMode="contains" style="width:100px">
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.e_mail}" />
 							</f:facet>
 							<h:outputText value="#{contacto.mail}" />
 						</p:column>
 						
-						<p:column>
+						<p:column style="width:100px">
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.etiqueta_referencia}" />
 							</f:facet>
