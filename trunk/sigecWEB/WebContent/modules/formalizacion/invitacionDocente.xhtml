@@ -18,7 +18,8 @@
     		
         <h:form id="frmCurso">
         	
-        	<rich:panel header="Administrar curso">
+        	
+        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
         		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
 	        		<h:panelGrid columns="4">
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
@@ -47,9 +48,6 @@
 	        			
 	        		</h:panelGrid>
         		</h:panelGroup>
-        	</rich:panel>
-        	
-        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
         		
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">

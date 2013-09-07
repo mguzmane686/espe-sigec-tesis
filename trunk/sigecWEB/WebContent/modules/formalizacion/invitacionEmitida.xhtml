@@ -19,9 +19,9 @@
     		
         <h:form id="frmCurso">
         	
-        	<rich:panel header="Invitacion proveedor" id="pnlLanCur">
+        	<rich:panel header="#{msg.inivitacion} emitida" id="pnlLanCur">
         		
-	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+	        	<rich:collapsiblePanel header="#{msg.inivitacion}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
 					
 					<h:panelGrid columns="3" id="pgCritBusqInv">

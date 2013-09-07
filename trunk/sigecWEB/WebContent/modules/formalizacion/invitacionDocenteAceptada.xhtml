@@ -18,9 +18,9 @@
     		
         <h:form id="frmInvitacionAceptada">
         	
-        	<rich:panel header="#{msg.invitaciones_aceptadas}" rendered="false">
-        		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
-	        		<h:panelGrid columns="4" rendered="false">
+        	<rich:panel header="#{msg.invitaciones_aceptadas}" id="pnlInvitacionDocente">
+        		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso" rendered="false">
+	        		<h:panelGrid columns="4" >
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        				<a4j:commandButton id="btnUno" value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
 	        					 image="/resources/images/save.png" type="submit" render="@form" >
@@ -47,9 +47,6 @@
 	        			
 	        		</h:panelGrid>
         		</h:panelGroup>
-        	</rich:panel>
-        	
-        	<rich:panel header="Invitacion proveedor" id="pnlInvitacionDocente">
         		
 	        	<rich:collapsiblePanel header="Inivitacion"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">

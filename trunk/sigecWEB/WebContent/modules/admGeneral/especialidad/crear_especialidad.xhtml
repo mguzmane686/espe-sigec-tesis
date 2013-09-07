@@ -13,17 +13,16 @@
    	
         <h:form id="frmEspecialidad">
        	
-        <rich:panel header="#{msg['creacion_especialidad']}">
-       		<h:panelGroup layout="block" styleClass="roundCorner">
+        
+        <rich:panel header="#{msg['creacion_especialidad']}" id="pnlEspecialidad">
+        	<h:panelGroup layout="block" styleClass="roundCorner">
        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
        				<a4j:commandButton value="#{msg['guardar']}" render="pnlEspecialidad" 
        					actionListener="#{especialidadController.btnSaveEspecialidad}" image="/resources/images/save.png"/>
        				<h:outputLabel value="#{msg['guardar']}" />
        			</h:panelGrid>
        		</h:panelGroup>
-        </rich:panel>
-       	
-        <rich:panel header="#{msg['creacion_especialidad']}" id="pnlEspecialidad">
+       		
        		<fieldset>
         		<legend>
         			<h:outputLabel value="#{msg['datos_especialidad']}" styleClass="titulo"/>

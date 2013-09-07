@@ -13,7 +13,7 @@
    	<h:outputScript library="js" name="validaciones.js" target="head"/>
     <h:form id="frmPresupuesto">
        	
-        <rich:panel header="#{msg['creacion_presupuesto']}">
+        <rich:panel header="#{msg['creacion_presupuesto']}" id="pnlPresupuesto">
        		<h:panelGroup layout="block" styleClass="roundCorner">
        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
        				<a4j:commandButton value="#{msg['guardar']}" render="pnlPresupuesto" 
@@ -21,10 +21,7 @@
        				<h:outputLabel value="#{msg['guardar']}" />
        			</h:panelGrid>
        		</h:panelGroup>
-        </rich:panel>
-       	
-        <rich:panel header="#{msg['creacion_presupuesto']}" id="pnlPresupuesto">
-       		
+       			
        		<rich:collapsiblePanel header="#{msg['datos_presupuesto']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				

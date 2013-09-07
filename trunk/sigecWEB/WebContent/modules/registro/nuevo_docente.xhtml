@@ -11,25 +11,9 @@
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
    	<h:outputScript library="js" name="validaciones.js" target="head"/>
-   	<h:outputStylesheet>
-   		.alinearLeft{
-   			text-align:left;
-   			font-weight: bold;
-   		}
-   		.alinearCenter{
-   			text-align:center;
-   			font-weight: bold;
-   		}
-   		
-   		.alinear-vertical-top{
-   			vertical-align:top;
-   		}
-   		
-   		
-   	</h:outputStylesheet>
-
+   	
 	<h:form>
-		<rich:panel header="#{msg['creacion_curso']}">
+		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
 			<h:panelGroup layout="block" styleClass="roundCorner" id="pnlBtnProf">
 				<h:panelGrid columns="3">
 					<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{registroDocenteController.renderEditionButtons}">
@@ -55,9 +39,7 @@
 					</h:panelGrid>
 				</h:panelGrid>
 			</h:panelGroup>
-		</rich:panel>
-
-		<rich:panel header="#{msg['registro_de_docente']}" id="pnlDocente">
+			
 			<rich:collapsiblePanel header="#{msg['datos_personales']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				<h:panelGrid columns="2" columnClasses="alinear-vertical-top, alinear-vertical-top">
