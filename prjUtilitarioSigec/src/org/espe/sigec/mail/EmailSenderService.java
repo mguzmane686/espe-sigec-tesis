@@ -64,7 +64,7 @@ public class EmailSenderService {
 		}
 	}
 	public static void main(String[] args) {
-		EmailSenderService.getInstance().sendMessage("subject", "hola mundo", "maniac787@hotmail.com, maniac7872@yahoo.com");
+		EmailSenderService.getInstance().sendMessage("subject", "hola mundo", "maniac787@hotmail.com");
 		 
 		
 	}
