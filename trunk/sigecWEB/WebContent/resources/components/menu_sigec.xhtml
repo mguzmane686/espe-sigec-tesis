@@ -171,6 +171,10 @@
 	        	<rich:panelMenuItem action="coor_reporte_curso_abierto.jsf?faces-redirect=true">
 	            	<a4j:commandLink value="Cursos abiertos" action="coor_reporte_curso_abierto.jsf?faces-redirect=true" execute="@this"/>
 	            </rich:panelMenuItem>
+	            
+	            <rich:panelMenuItem action="coor_inscritos_curso_abierto.jsf?faces-redirect=true">
+	            	<a4j:commandLink value="Inscritos" action="coor_inscritos_curso_abierto.jsf?faces-redirect=true" execute="@this"/>
+	            </rich:panelMenuItem>
             </rich:panelMenuGroup>
             
             <rich:panelMenuGroup label="Docente" id="pmgCoordinacionDocente" execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}">
@@ -230,7 +234,7 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
-        <rich:panelMenuGroup id="pmgContratoAutomatico" label="#{msg.contratacion}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
+        <rich:panelMenuGroup id="pmgContratoAutomatico" label="#{msg.contratacion} memos/ Autorizacion " rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         	<f:attribute name="idMenuPanelGroup" value="pmgContratoAutomatico"/>
         	<rich:panelMenuItem action="doc_invitacion_docente.jsf?faces-redirect=true" execute="@this">
