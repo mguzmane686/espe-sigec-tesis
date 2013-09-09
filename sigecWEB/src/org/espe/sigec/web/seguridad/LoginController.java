@@ -16,6 +16,7 @@ import org.espe.sigec.model.entities.Usuario;
 import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SigecCryptoUtil;
 
 
 @SuppressWarnings("serial")
@@ -36,10 +37,7 @@ public class LoginController implements Serializable{
 	}
 	
 	public void btnSignIn(ActionEvent e) {
-		
-		
-//		String clave = SigecCryptoUtil.getInstance().encodeString(getUsuario().getClave());
-		String clave = getUsuario().getClave();
+		String clave = SigecCryptoUtil.getInstance().encodeString(getUsuario().getClave());
 		boolean success = authenticationService.login(getUsuario().getIdentificador(), clave);
 		
 		if (success){
