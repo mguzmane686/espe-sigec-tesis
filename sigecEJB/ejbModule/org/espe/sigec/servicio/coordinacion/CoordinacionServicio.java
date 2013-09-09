@@ -30,4 +30,5 @@ public interface CoordinacionServicio {
 	int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo);
 	Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo);
 	Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo);
+	public void actualizarCursoEstudiante(CursoEstudiante cursoEstudiante) throws Exception;
 }

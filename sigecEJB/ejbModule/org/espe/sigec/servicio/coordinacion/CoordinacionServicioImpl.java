@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoEstudiante;
@@ -151,9 +152,18 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	}
 
 	@Override
-	public Collection<CursoEstudiante> estudiantesInscritosCurso(
-			BigDecimal idCursoPeriodo) {
+	public Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo) {
 		return cursoEstudianteFacadeLocal.estudiantesInscritosCurso(idCursoPeriodo);
+	}
+
+	@Override
+	public void actualizarCursoEstudiante(CursoEstudiante cursoEstudiante) throws Exception {
+		CursoEstudiante cursoEstudianteTMP = SerializationUtils.clone(cursoEstudiante);
+//		cursoEstudianteTMP.setAsistenciaEstudianteCollection(null);
+//		cursoEstudianteTMP.setCalificacionEstudianteCollection(null);
+//		cursoEstudianteTMP.setProgramaCurso(null);
+		cursoEstudianteFacadeLocal.edit(cursoEstudianteTMP);
+		
 	}
 	
 }
