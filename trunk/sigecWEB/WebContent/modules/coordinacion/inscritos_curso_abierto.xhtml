@@ -11,22 +11,8 @@
     	<h:outputStylesheet library="css" name="textos.css"/>    
     	<h:outputStylesheet library="css" name="bordes.css"/>
     	<h:outputStylesheet library="css" name="botones.css"/>
-    		
+    	
         <h:form id="frmInscritoCurso">
-        	
-        	<rich:panel header="Administrar curso">
-        		<h:panelGroup layout="block" styleClass="roundCorner" id="pnlCurso">
-	        		<h:panelGrid columns="4">
-	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-	        				<a4j:commandButton value="#{msg['guardar']}" render="pnlCurso, pnlLanCur"  image="/resources/images/save.png"/>
-	        				<h:outputLabel value="#{msg['guardar']}" />
-	        			</h:panelGrid>
-	        		</h:panelGrid>
-        		</h:panelGroup>
-        	</rich:panel>
-        	
-
-        	
         	
         	<rich:panel header="Inscritos al curso" id="pnlLanCur">
         		
@@ -37,8 +23,8 @@
 	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos"/>
 	        		</rich:select>
 	        		
-	        		<h:panelGrid id="pgPrgCursos" columns="1">
-		        		<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" ></rich:dataScroller>
+	        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%">
+		        		<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center; width:100%;" boundaryControls="hide"/>
 		        		<rich:dataTable id="tblPrgCursos" value="#{inscritosCursoController.lstProgramaCursos}" var="itemsProgramaCurso"
 		        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
 		        			<rich:column>
@@ -86,6 +72,15 @@
 									oncomplete="#{rich:component('rppInscritos')}.show();" />
 							</p:column>
 							
+							<p:column headerText="Cupo">
+								<f:facet name="header">
+									<h:outputText value="Cupo" />
+								</f:facet>
+								
+								<a4j:commandLink value="#{inscritos.estadoCupo}" execute="@this" action="#{inscritosCursoController.btnCambiarEstadoPago(inscritos)}" render="pgEstudiantePago" 
+									oncomplete="#{rich:component('rppInscritos')}.show();" />
+							</p:column>
+							
 						</p:dataTable>
 						
 						<rich:popupPanel id="rppInscritos" domElementAttachment="form" header="Inscitos al curso" autosized="true">
@@ -99,16 +94,30 @@
 								<h:panelGrid columns="2" id="pgEstudiantePago">
 									<h:outputText value="Estudiante" />
 									<h:outputText value="#{inscritosCursoController.estudianteInscrito.estudiante.persona.nombreCompleto}" />
+									
+									<h:outputText value="Estado cupo" />
+									<rich:select value="#{inscritosCursoController.estudianteInscrito.estadoCupo}">
+										<f:selectItem itemValue="CUPO-VIGENTE" itemLabel="CUPO-VIGENTE" />
+										<f:selectItem itemValue="CUPO-ANULADO" itemLabel="CUPO-ANULADO" />
+									</rich:select>
+									
 									<h:outputText value="Estado pago" />
-									<p:selectOneMenu value="#{inscritosCursoController.estudianteInscrito.estadoPago}">
+									<rich:select value="#{inscritosCursoController.estudianteInscrito.estadoPago}">
 										<f:selectItem itemValue="DEBE" itemLabel="DEBE" />
 										<f:selectItem itemValue="PAGADO" itemLabel="PAGADO"/>
-									</p:selectOneMenu>
+										<f:selectItem itemValue="DEVOLUCION" itemLabel="DEVOLUCION" />
+									</rich:select>
+									
+									
 								</h:panelGrid>
 								
-								<a4j:commandLink value="Actualizar datos" execute="pgEstudiantePago" render="tblInscritos"
-									action="#{inscritosCursoController.btnActualizarEstadoPago}"
-									oncomplete="#{rich:component('rppInscritos')}.hide();"/>
+								<h:panelGrid style="margin:auto; text-align:center;" columns="2">
+									<a4j:commandButton value="Actualizar datos" execute="pgEstudiantePago" render="tblInscritos"
+										action="#{inscritosCursoController.btnActualizarEstadoPago}"
+										oncomplete="#{rich:component('rppInscritos')}.hide();"/>
+										
+									<a4j:commandButton value="Cancelar" onclick="#{rich:component('rppInscritos')}.hide(); return false;"/>
+								</h:panelGrid>
 							</rich:collapsiblePanel>
 							
 						</rich:popupPanel>
