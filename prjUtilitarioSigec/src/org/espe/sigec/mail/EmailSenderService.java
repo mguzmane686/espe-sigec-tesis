@@ -47,7 +47,7 @@ public class EmailSenderService {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("maniac787@gmail.com"));
 			
-			Collection<InternetAddress> addressTo = new ArrayList<>(); 
+			Collection<InternetAddress> addressTo = new ArrayList<InternetAddress>(); 
 
 			for (int i = 0; i < destinatariosList.length; i++) {
 			    addressTo.add(new InternetAddress(destinatariosList[i]));
