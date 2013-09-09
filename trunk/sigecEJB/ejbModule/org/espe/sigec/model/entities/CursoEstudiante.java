@@ -47,11 +47,11 @@ public class CursoEstudiante implements Serializable {
 //    @ManyToOne(optional = false, fetch = FetchType.LAZY)
 //    private ModuloCursoPeriodo moduloCursoPeriodo;
     @JoinColumn(name = "est_id_estudiante", referencedColumnName = "est_id_estudiante", insertable = false, updatable = false)
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
     private Estudiante estudiante;
     @OneToMany(mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
     private Collection<CalificacionEstudiante> calificacionEstudianteCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
+    @OneToMany( mappedBy = "cursoEstudiante", fetch = FetchType.LAZY)
     private Collection<AsistenciaEstudiante> asistenciaEstudianteCollection;
 
     @JoinColumns({

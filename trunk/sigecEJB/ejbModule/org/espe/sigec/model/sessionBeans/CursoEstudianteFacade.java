@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.CursoEstudiante;
-import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -45,6 +44,10 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 		return lstUsuarios.size();
 	}
 
+	@Override
+	public void editCursosEstudiante(CursoEstudiante cursoEstudiante) throws Exception{
+		getEntityManager().merge(cursoEstudiante);
+	}
 	
 	@Override
 	public Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante) {

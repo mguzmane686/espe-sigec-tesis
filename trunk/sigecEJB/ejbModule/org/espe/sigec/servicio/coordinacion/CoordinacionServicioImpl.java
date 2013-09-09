@@ -159,10 +159,12 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	@Override
 	public void actualizarCursoEstudiante(CursoEstudiante cursoEstudiante) throws Exception {
 		CursoEstudiante cursoEstudianteTMP = SerializationUtils.clone(cursoEstudiante);
-//		cursoEstudianteTMP.setAsistenciaEstudianteCollection(null);
-//		cursoEstudianteTMP.setCalificacionEstudianteCollection(null);
-//		cursoEstudianteTMP.setProgramaCurso(null);
-		cursoEstudianteFacadeLocal.edit(cursoEstudianteTMP);
+		cursoEstudianteTMP.setAsistenciaEstudianteCollection(null);
+		cursoEstudianteTMP.setCalificacionEstudianteCollection(null);
+		cursoEstudianteTMP.setProgramaCurso(null);
+		cursoEstudianteTMP.getEstudiante().setCursoEstudianteCollection(null);
+		cursoEstudianteTMP.getEstudiante().setPersona(null);
+		cursoEstudianteFacadeLocal.editCursosEstudiante(cursoEstudianteTMP);
 		
 	}
 	
