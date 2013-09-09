@@ -14,11 +14,8 @@
     	
         <h:form id="frmRepCurso">
         	<rich:panel header="#{msg['cursos_disponibles']}">
-        	
-	        	<fieldset>
-	        		<legend>
-	        			<h:outputLabel value="#{msg['cursos_disponibles']}" styleClass="titulo"/>
-	        		</legend>
+        		<rich:collapsiblePanel header="#{msg['cursos_disponibles']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        			
@@ -103,7 +100,7 @@
 		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
 		        		</center>
 	        		</a4j:outputPanel>
-	        	</fieldset>	
+	        	</rich:collapsiblePanel>	
         	</rich:panel>
         	
         </h:form>
