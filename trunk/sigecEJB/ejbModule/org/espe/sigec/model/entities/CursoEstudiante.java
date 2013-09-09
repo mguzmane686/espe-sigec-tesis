@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -37,6 +36,10 @@ public class CursoEstudiante implements Serializable {
     @Size(max = 10)
     @Column(name = "estado_pago")
     private String estadoPago;
+    
+    @Size(max = 30)
+    @Column(name = "estado_cupo")
+    private String estadoCupo;
     
     @Column(name = "prg_id")
     private Integer idPrograma; 
@@ -153,14 +156,13 @@ public class CursoEstudiante implements Serializable {
 		this.idPrograma = idPrograma;
 	}
 
-	
+	public String getEstadoCupo() {
+		return estadoCupo;
+	}
 
-//	public ModuloCursoPeriodo getModuloCursoPeriodo() {
-//		return moduloCursoPeriodo;
-//	}
-//
-//	public void setModuloCursoPeriodo(ModuloCursoPeriodo moduloCursoPeriodo) {
-//		this.moduloCursoPeriodo = moduloCursoPeriodo;
-//	}
-    
+	public void setEstadoCupo(String estadoCupo) {
+		this.estadoCupo = estadoCupo;
+	}
+	
+	
 }

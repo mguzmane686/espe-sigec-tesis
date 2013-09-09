@@ -97,6 +97,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 //				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
 				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
 				cursoEstudiante.setEstadoPago("DEBE");
+				cursoEstudiante.setEstadoCupo("CUPO-VIGENTE");
 				cursoEstudianteFacadeLocal.create(cursoEstudiante);
 				
 				if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())) >= cursoPeriodo.getMinimoEstudiantes()){
@@ -182,6 +183,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(new BigInteger(cursoPeriodo.getIdCursoPeriodo().toString()));
 				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
 				cursoEstudiante.setEstadoPago("DEBE");
+				cursoEstudiante.setEstadoCupo("CUPO-VIGENTE");
 				//ojo
 				cursoEstudiante.setIdPrograma(cursoPeriodo.getProgramaCurso().getProgramaCursoPK().getIdPrograma());
 				
