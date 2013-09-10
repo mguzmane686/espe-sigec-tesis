@@ -36,7 +36,7 @@
 					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.identificador}" required="true" editMode="true" label="#{msg['identificador']}" />
 					
 					<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
-					<sigecComp:textField value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" editMode="true" label="#{msg['clave']}" />
+					<h:inputSecret value="#{creacionUsuarioController.usuarioPerfil.usuario.clave}" required="true" requiredMessage="El campo clave es requerido"/>
 				</h:panelGrid>
 			</rich:collapsiblePanel>
 			
