@@ -1,5 +1,6 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Collection;
 
@@ -135,5 +136,20 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 			return lst.iterator().next();
 		}
 		return null;
+	}
+
+	@Override
+	public boolean validarUnicidadInivtacionDocente(BigDecimal idCursoPeriodo, Integer idProfesor) throws Exception {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
+		criteria.add(Restrictions.eq("invitacionDocentePK.idCursoPeriodo", idCursoPeriodo));
+		criteria.add(Restrictions.eq("invitacionDocentePK.prfIdProfesor", idProfesor));
+		criteria.add(Restrictions.ne("estado", "ANULADA"));
+		
+		Collection<InvitacionDocente> lst = criteria.list(); 
+		if(lst != null && !lst.isEmpty()){
+			return Boolean.FALSE;
+		}
+		
+		return Boolean.TRUE;
 	}
 }

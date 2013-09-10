@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
@@ -90,6 +91,20 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 			lstPersonas = new ArrayList<Persona>();
 		}
 		return lstPersonas;
+	}
+
+	@Override
+	public boolean validarUnicidadCedula(String cedula) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(Persona.class);
+		
+		criteria.add(Restrictions.eq("cedula", cedula));
+		
+		Collection<Persona> lst =  criteria.list();
+		
+		if(CollectionUtils.isNotEmpty(lst)){
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
 	}
 	
 }

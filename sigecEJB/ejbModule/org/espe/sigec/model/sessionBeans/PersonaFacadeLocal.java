@@ -39,4 +39,6 @@ public interface PersonaFacadeLocal {
     
     Collection<Persona> findPersonByCriteria(String creiterio, String valor); 
     
+    boolean validarUnicidadCedula(String cedula);
+    
 }
