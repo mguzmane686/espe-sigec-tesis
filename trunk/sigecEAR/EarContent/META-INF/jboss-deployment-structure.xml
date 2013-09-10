@@ -15,7 +15,7 @@
 			<module name="net.sourceforge.cssparser" slot="main" export="true" />
 			<module name="com.google.guava" slot="main" export="true" />
 			<module name="org.w3c.css.sac" slot="main" export="true" />
-			<!--module name="net.sf.jasperreports" export="true" /-->
+			<module name="net.sf.jasperreports" export="true" />
 			<module name="org.espe.sigec" export="true" />
 			
 		</dependencies>
