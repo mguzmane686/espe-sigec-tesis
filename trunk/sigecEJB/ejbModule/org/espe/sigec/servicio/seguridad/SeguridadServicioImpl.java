@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
+import org.espe.sigec.exception.UserValidateException;
 import org.espe.sigec.model.entities.Estudiante;
 import org.espe.sigec.model.entities.Modulo;
 import org.espe.sigec.model.entities.Perfil;
@@ -118,6 +119,11 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 				usuarioPerfil.getPersona().setUsuario(usuarioPerfil.getUsuario());
 				//se crea la persona
 				elimiarEspaciosPersona(usuarioPerfil.getPersona());
+				
+				if(!personaFacadeLocal.validarUnicidadCedula(usuarioPerfil.getPersona().getCedula())){
+					throw new UserValidateException("Ya existe una persona con ese numero de documento");
+				}
+				
 				personaFacadeLocal.create(usuarioPerfil.getPersona());
 				usuarioPerfil.getUsuarioPerfilPK().setIdUsuario(usuarioPerfil.getUsuario().getIdUsuario());
 				for (Perfil perfil : usuarioPerfil.getLstPerfils()) {
@@ -138,11 +144,11 @@ public class SeguridadServicioImpl implements SeguridadServicio{
 						profesorFacadeLocal.create(profesor);
 					}
 				}
-				
-				
-				
 			}
 			userTransaction.commit();
+		}catch (UserValidateException e) {
+			userTransaction.rollback();
+			throw new Exception(e.getMessage());
 		} catch (Exception e) {
 			userTransaction.rollback();
 			throw new Exception("Ha ocurrido un error al crear el usuario", e);

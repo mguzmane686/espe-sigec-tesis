@@ -33,15 +33,21 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 	public void crearInivtacionDocente(InvitacionDocente invitacionDocente) throws Exception{
 		try {
 			userTransaction.begin();
-			int secuencial = invitacionDocenteFacadeLocal.count();
-			invitacionDocente.getInvitacionDocentePK().setDocNumInvit("SGCINV"+secuencial);
-			invitacionDocente.setEstado(SigecConstantes.INVITACION_EMITIDA);
-			invitacionDocenteFacadeLocal.create(invitacionDocente);
+			if(invitacionDocenteFacadeLocal.validarUnicidadInivtacionDocente(invitacionDocente.getInvitacionDocentePK().getIdCursoPeriodo(), invitacionDocente.getInvitacionDocentePK().getPrfIdProfesor())){
+				int secuencial = invitacionDocenteFacadeLocal.count();
+				invitacionDocente.getInvitacionDocentePK().setDocNumInvit("SGCINV"+secuencial);
+				invitacionDocente.setEstado(SigecConstantes.INVITACION_EMITIDA);
+				invitacionDocenteFacadeLocal.create(invitacionDocente);
+			}else{
+				throw new Exception("Existe una inivitacion ya emitida");
+			}
 			userTransaction.commit();
+			
 		} catch (Exception e) {
 			invitacionDocente.getInvitacionDocentePK().setDocNumInvit(null);
 			e.printStackTrace();
 			userTransaction.rollback();
+			throw new Exception("Existe una inivitacion ya emitida");
 		}
 	}
 	@Override
