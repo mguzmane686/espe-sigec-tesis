@@ -3,7 +3,6 @@ package org.espe.sigec.web.documentos;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -17,7 +16,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
+import org.espe.sigec.mail.EmailSenderService;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.InvitacionDocentePK;
@@ -100,7 +101,7 @@ public class InvitacionDocenteController implements Serializable{
 			getMemo().setNombreElaborador(elaboradoPor);
 			
 			Profesor profesor =  findProfesorSelected();
-			getMemo().setNombreProveedor(profesor.getPersona().getPrimerApellido()+" "+profesor.getPersona().getPrimerNombre());
+			getMemo().setNombreProveedor(profesor.getPersona().getNombreCompleto());
 			getMemo().setNumeroInivitacion("000001");
 			getMemo().setCuerpoMemo(resolvedString);
 			
@@ -112,13 +113,23 @@ public class InvitacionDocenteController implements Serializable{
 				getMemo().setNumeroInivitacion(getInvitacionDocente().getInvitacionDocentePK().getDocNumInvit());
 				
 				FacesUtils.addInfoMessage("Se genero exitosamente la invitacion");
-//				FacesUtils.refresh();
-//				
+				
+				if(profesor != null && profesor.getPersona() != null && StringUtils.isNotEmpty(profesor.getPersona().getMail())){
+					try {
+						EmailSenderService.getInstance().sendMessage("ESPE-UEC/PUREBAS", 
+								"Estimado "+profesor.getPersona().getNombreCompleto()+" se le ha considerado como profesor al curso de "+cursoPeriodo.getCurso().getNombreCurso()+
+								" por favor, comuniquese de inmediato con la Unidad de educacion continua de la ESPE", "maniac787@gmail.com");
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+					
+				}
+				
 				setSavedInvitacion(Boolean.TRUE);
 				initController();
 				
 			} catch (Exception e1) {
-				FacesUtils.addErrorMessage("Ocurrio un error al guardar la invitacion");
+				FacesUtils.addErrorMessage(e1.getMessage());
 				e1.printStackTrace();
 			}
 		

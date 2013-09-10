@@ -19,6 +19,7 @@ import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
 import org.espe.sigec.web.utils.FacesUtils;
+import org.espe.sigec.web.utils.SigecCryptoUtil;
 import org.richfaces.event.DataScrollEvent;
 
 /**
@@ -75,9 +76,10 @@ public class CreacionUsuarioController implements Serializable{
 			}
 			
 			if(CollectionUtils.isEmpty(getUsuarioPerfil().getLstPerfils())){
-				FacesUtils.addErrorMessage("Seleccione al menos un perfil");
+//				FacesUtils.addErrorMessage("Seleccione al menos un perfil");
 				throw new Exception("Seleccione al menos un perfil");
 			}
+			getUsuarioPerfil().getUsuario().setClave(SigecCryptoUtil.getInstance().encodeString(getUsuarioPerfil().getUsuario().getClave()));
 			seguridadServicio.crearUsuario(getUsuarioPerfil());
 			FacesUtils.addInfoMessage("Usuario creado");
 			initEntities();
@@ -85,7 +87,7 @@ public class CreacionUsuarioController implements Serializable{
 				perfil.setSelected(Boolean.FALSE);
 			}
 		} catch (Exception e) {
-			FacesUtils.addErrorMessage("Ocurrio un error al guardar el usuario");
+			FacesUtils.addErrorMessage(e.getMessage());
 		}
 	}
 	
@@ -108,6 +110,7 @@ public class CreacionUsuarioController implements Serializable{
 					}
 				}
 			}
+			getPersonaSeleccionada().getUsuario().setClave(SigecCryptoUtil.getInstance().encodeString(getPersonaSeleccionada().getUsuario().getClave()));
 			seguridadServicio.actualizarUsuarioPerfil(getPersonaSeleccionada(), lstPerfilTMP);
 			FacesUtils.addInfoMessage("Usuario actualizado");
 		} catch (Exception e) {

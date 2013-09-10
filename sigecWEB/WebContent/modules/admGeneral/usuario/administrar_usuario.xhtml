@@ -125,7 +125,8 @@
 							
 							<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
 							<h:panelGroup>
-								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" label="#{msg['clave']}" editMode="true"/>
+								
+								<h:inputSecret value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" requiredMessage="El campo clave es requerido"/>
 							</h:panelGroup>
 						</h:panelGrid>
 						
