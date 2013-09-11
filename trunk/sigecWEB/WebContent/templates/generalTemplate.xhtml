@@ -9,14 +9,14 @@
 
     <h:head>
         <meta http-equiv="content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet library="css" name="cssLayout.css"> </h:outputStylesheet>
-        <h:outputStylesheet library="css" name="default.css"> </h:outputStylesheet>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <h:outputStylesheet library="css" name="default.css"/>
         
-        <h:outputStylesheet library="css" name="bordes.css"></h:outputStylesheet>
-        <h:outputStylesheet library="css" name="botones.css"></h:outputStylesheet>
-        <h:outputScript library="org.richfaces.staticResource" name="jquery-alternative-version.js"></h:outputScript>
-        <h:outputScript library="js" name="jquery.validate.js"></h:outputScript>
-        <h:outputStylesheet library="css" name="componentsCss.css"> </h:outputStylesheet>
+        <h:outputStylesheet library="css" name="bordes.css"/>
+        <h:outputStylesheet library="css" name="botones.css"/>
+        <h:outputScript library="org.richfaces.staticResource" name="jquery-alternative-version.js" target="head"/>
+        <h:outputScript library="js" name="jquery.validate.js"/>
+        <h:outputStylesheet library="css" name="componentsCss.css"/>
         <title>Sigec</title>
         <script>
         /*<![CDATA[*/
@@ -62,7 +62,7 @@
 			if(history.forward(1)){
 				history.replace(history.forward(1));
 			}
-			document.oncontextmenu = new Function("return false");
+			//document.oncontextmenu = new Function("return false");
 		</script>
 		
         <a4j:outputPanel ajaxRendered="true">
