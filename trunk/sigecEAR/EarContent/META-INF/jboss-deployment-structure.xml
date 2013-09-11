@@ -32,6 +32,7 @@
 			<module name="org.w3c.css.sac" slot="main" export="true" />
 			<module name="net.sf.jasperreports" export="true" />
 			<module name="org.espe.sigec" export="true" />
+			<module name="org.aopalliance" slot="1.0" export="true" />
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>
