@@ -9,6 +9,12 @@
 					<include path="**"/>
 				</imports>
 			</module>
+			
+			<module name="org.primefaces" slot="main" export="true" meta-inf="export">
+				<imports>
+					<include path="META-INF" />
+				</imports>
+			</module>
 		</dependencies>
 	</sub-deployment>
 	
@@ -27,8 +33,6 @@
 			<module name="org.w3c.css.sac" slot="main" export="true" />
 			<module name="net.sf.jasperreports" export="true" />
 			<module name="org.espe.sigec" export="true" />
-			
-			
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>
