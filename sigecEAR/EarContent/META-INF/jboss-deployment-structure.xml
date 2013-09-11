@@ -1,7 +1,17 @@
 <jboss-deployment-structure>
 
 	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
-
+	
+	<sub-deployment name="sigecWEB.war">
+		<dependencies>
+			<module name="org.richfaces" slot="main" export="true" meta-inf="export">
+				<imports>
+					<include path="**"/>
+				</imports>
+			</module>
+		</dependencies>
+	</sub-deployment>
+	
 	<deployment>
 		<dependencies>
 			<module name="org.apache.commons.lang3" export="true" />
@@ -17,6 +27,7 @@
 			<module name="org.w3c.css.sac" slot="main" export="true" />
 			<module name="net.sf.jasperreports" export="true" />
 			<module name="org.espe.sigec" export="true" />
+			
 			
 		</dependencies>
 	</deployment>
