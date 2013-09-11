@@ -24,5 +24,6 @@
 	<classpathentry kind="lib" path="C:/servers/jboss-as-7.1.1.Final/modules/org/richfaces/main/richfaces-core-impl-4.2.3.Final.jar"/>
 	<classpathentry kind="lib" path="C:/servers/jboss-as-7.1.1.Final/modules/org/richfaces/main/richfaces-primefaces-fix-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="C:/servers/jboss-as-7.1.1.Final/modules/org/espe/sigec/main/prjUtilitarioSigec.jar"/>
+	<classpathentry kind="lib" path="C:/servers/jboss-as-7.1.1.Final/modules/org/aopalliance/1.0/aopalliance-1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
