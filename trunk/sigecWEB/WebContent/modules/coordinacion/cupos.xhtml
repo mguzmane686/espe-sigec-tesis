@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+        <h:form id="frmInscritoCurso">
+        	
+        	<rich:panel header="Inscritos al curso" id="pnlLanCur">
+        		
+	        	<rich:collapsiblePanel header="Filtro curso"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        		<rich:select value="#{cuposController.programa.idPrograma}" valueChangeListener="#{cuposController.rsCargarCursosPrograma}"> 
+	        			<f:selectItems value="#{cuposController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
+	        		</rich:select>
+	        		
+	        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%">
+	        			<h:panelGroup styleClass="rf-p-hdr" layout="block" style="margin:auto;text-align:center; width:100%;">
+		        			<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center;" boundaryControls="hide"/>
+		        		</h:panelGroup>
+		        		<rich:dataTable id="tblPrgCursos" value="#{cuposController.lstProgramaCursos}" var="itemsProgramaCurso"
+		        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+		        			<rich:column>
+		        				<f:facet name="header">
+		        					Cursos del programa
+		        				</f:facet>
+		        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
+		        					action="#{cuposController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+		        			</rich:column>
+		        		</rich:dataTable>
+		        		
+		        		
+		        		<p:dataTable id="tblInscritos" value="#{cuposController.lstInscritos}" var="inscritos" paginatorAlwaysVisible="false"
+							emptyMessage="No existen inscritos" paginator="true" paginatorPosition="top" rows="10" rowIndexVar="numRow">
+							<f:facet name="header">
+								Estudiantes inscritos
+							</f:facet>
+							<p:column>
+								<f:facet name="header">
+									<h:outputText value="#" />
+								</f:facet>
+								<h:outputText value="#{numRow + 1}" />
+							</p:column>
+							
+							<p:column headerText="#{msg.cedula} estudiante">
+								<f:facet name="header">
+									<h:outputText value="#{msg.cedula}" />
+								</f:facet>
+								<h:outputText value="#{inscritos.estudiante.persona.cedula}" />
+							</p:column>
+							
+							<p:column headerText="Nombre">
+								<f:facet name="header">
+									<h:outputText value="Nombre" />
+								</f:facet>
+								<h:outputText value="#{inscritos.estudiante.persona.nombreCompleto}" />
+							</p:column>
+							
+							<p:column headerText="Estado de pago">
+								<f:facet name="header">
+									<h:outputText value="Estado de pago" />
+								</f:facet>
+								
+								<h:outputText value="#{inscritos.estadoPago}" />
+							</p:column>
+							
+							<p:column headerText="Cupo">
+								<f:facet name="header">
+									<h:outputText value="Cupo" />
+								</f:facet>
+								
+								<h:outputText value="#{inscritos.estadoCupo}"/>
+							</p:column>
+						</p:dataTable>
+	        		</h:panelGrid>
+	        		
+	        		<h:panelGroup id="pgDetalleCupos" >
+	        			<rich:panel header="Detalles del curso" rendered="#{cuposController.programaCursoSeleccionado != null}">
+			        		<h:panelGrid columns="2">
+			        			<h:outputText value="El curso tiene una capacidad de cupos de: " styleClass="label-bold"/>
+			        			<sigecComp:textField value="#{cuposController.programaCursoSeleccionado.cursoPeriodo.maximoEstudiantes}" label="Cupos para el curso" required="true"/>
+			        		</h:panelGrid>
+		        		</rich:panel>
+	        		</h:panelGroup>
+        		</rich:collapsiblePanel>	
+        	</rich:panel>
+        </h:form>
+</ui:composition>
