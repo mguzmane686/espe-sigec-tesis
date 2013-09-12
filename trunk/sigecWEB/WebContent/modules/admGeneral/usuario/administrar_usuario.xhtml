@@ -19,29 +19,9 @@
     <h:outputStylesheet library="css" name="componentsCss.css" />
     <h:outputScript  library="js" name="componentsJs.js" />
     
-   	<h:outputStylesheet>
-   		.alinearLeft{
-   			text-align:left;
-   			font-weight: bold;
-   		}
-   		.alinearCenter{
-   			text-align:center;
-   			font-weight: bold;
-   		}
-   		.rmsg-tef .rf-msg-err{		   
-		   background-image: url('#{resource['images:circle-alert.png']}');
-		   visibility: visible;
-		   height: 14px;
-		   width: 14px;
-		}
-        
-        .rmsg-tef .rf-msg-det {
-            visibility: hidden;
-        }
-   	</h:outputStylesheet>
    	<h:outputStylesheet library="css" name="tables.css" />
 
-	<h:form>
+	<h:form id="frmAdmUsr">
 		
 
 		<rich:panel header="#{msg.administracion_de_usuarios}" id="pnlDocente">
@@ -87,8 +67,9 @@
 							<f:facet name="header">
 								<h:outputLabel value="#{msg.cedula}" />
 							</f:facet>
-							<a4j:commandLink value="#{lstPersona.cedula}" oncomplete="#{rich:component('popup')}.show()" execute="@this" render="popup pnlDatosPersona">
-								<f:setPropertyActionListener target="#{creacionUsuarioController.personaSeleccionadaBucarPerfil}" value="#{lstPersona}"></f:setPropertyActionListener>
+							<a4j:commandLink value="#{lstPersona.cedula}" execute="@this" render="tblPerfilesEdit pnlDatosPersona" 
+								action="#{creacionUsuarioController.personaSeleccionadaBucarPerfil(lstPersona)}"
+								oncomplete="#{rich:component('popup')}.show()" >
 							</a4j:commandLink>
 						</rich:column>
 						
@@ -121,31 +102,28 @@
 					<h:panelGroup id="pnlDatosPersona">
 						<h:panelGrid columns="2">
 							<h:outputLabel value="#{msg['identificador']} :"  style="float:left; width:150px;" />
-							<h:outputText value="#{creacionUsuarioController.personaSeleccionada.usuario.identificador}" required="true" requiredMessage="El campo #{msg['identificador']} es obligatorio" styleClass="campoRequerido"/>
+							<h:outputText value="#{creacionUsuarioController.personaSeleccionada.usuario.identificador}"/>
 							
 							<h:outputLabel value="#{msg['clave']} :"  style="float:left; width:150px;" />
-							<h:panelGroup>
-								
-								<h:inputSecret value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}" required="true" requiredMessage="El campo clave es requerido"/>
-							</h:panelGroup>
+							<h:inputSecret value="#{creacionUsuarioController.personaSeleccionada.usuario.clave}"/>
 						</h:panelGrid>
 						
 						<h:panelGrid columns="2" columnClasses=",colRemoveSpace">
 							<h:outputLabel value="#{msg['cedula']} :"  style="width:150px; display:block;" />
 							
-							<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.cedula}" required="true" label="#{msg['cedula']}" editMode="true" onkeypressScript="return validateNumPP(event);">
-								<f:validator  for="Input" validatorId="cedulaValidator"></f:validator>
+							<sigecComp:textField id="txtCedula" maxLength="10" inputTextClass="cajaRequerida" value="#{creacionUsuarioController.personaSeleccionada.cedula}" required="false" label="#{msg['cedula']}" editMode="true" onkeypressScript="return validateNumPP(event);">
+								<!--f:validator  for="Input" validatorId="cedulaValidator"></f:validator-->
 							</sigecComp:textField>
 		
 							<h:outputLabel value="#{msg['nombres']} :" />
 							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.primerNombre}" required="true" label="El campo #{msg['nombre']} es obligatorio" editMode="true"/>
-								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoNombre}"/>
+								<sigecComp:textField inputTextClass="cajaRequerida" value="#{creacionUsuarioController.personaSeleccionada.primerNombre}" required="false" label="El campo #{msg['nombre']} es obligatorio" editMode="true"/>
+								<h:inputText id="txtNombDos" value="#{creacionUsuarioController.personaSeleccionada.segundoNombre}"/>
 							</h:panelGrid>	
 							
 							<h:outputLabel value="#{msg['apellidos']} :" />
 							<h:panelGrid columns="2" styleClass="removeSpacesTable" columnClasses="colRemoveSpace">
-								<sigecComp:textField value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="true" label="#{msg['apellidos']}" editMode="true"/>
+								<sigecComp:textField inputTextClass="cajaRequerida" value="#{creacionUsuarioController.personaSeleccionada.primerApellido}" required="false" label="#{msg['apellidos']}" editMode="true"/>
 								<h:inputText value="#{creacionUsuarioController.personaSeleccionada.segundoApellido}" />
 							</h:panelGrid>
 		
@@ -200,8 +178,12 @@
 	        
 	        <h:panelGroup layout="block" style="width:100%; margin:auto; " styleClass="rf-pp-hdr">
 	        	<h:panelGrid columns="2" style="margin:auto;">
-	        		<a4j:commandLink value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popup')}.hide();" execute="pnlDatosPersona, tblPerfilesEdit" render="tblPersonas pnlDatosPersona" action="#{creacionUsuarioController.btnActualizarUsuario}"></a4j:commandLink>
-	        		<a4j:commandLink value="Cancelar" oncomplete="#{rich:component('popup')}.hide();" execute="@this"></a4j:commandLink>
+	        		<a4j:commandLink value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popup')}.hide();" 
+	        			execute="pnlDatosPersona, tblPerfilesEdit, tblUsuarios" render="pnlDatosPersona" 
+	        			action="#{creacionUsuarioController.btnActualizarUsuario}"/>
+	        		<a4j:commandLink value="Cancelar" oncomplete="" execute="@form" immediate="true" 
+	        			action="#{creacionUsuarioController.btnCancelarEdicion}" 
+	        			render="popup"/>
 	        	</h:panelGrid>
 	        </h:panelGroup>
         </rich:popupPanel>
