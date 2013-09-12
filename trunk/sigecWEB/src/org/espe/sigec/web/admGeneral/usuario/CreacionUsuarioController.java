@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.Perfil;
 import org.espe.sigec.model.entities.Persona;
 import org.espe.sigec.model.entities.Usuario;
@@ -18,6 +19,7 @@ import org.espe.sigec.model.entities.UsuarioPerfil;
 import org.espe.sigec.model.entities.UsuarioPerfilPK;
 import org.espe.sigec.servicio.admGeneral.AdmGeneralServicio;
 import org.espe.sigec.servicio.seguridad.SeguridadServicio;
+import org.espe.sigec.validacion.CedulaValidacion;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.SigecCryptoUtil;
 import org.richfaces.event.DataScrollEvent;
@@ -95,7 +97,18 @@ public class CreacionUsuarioController implements Serializable{
 	 * Metodo para actualizar el usuario y su perfil
 	 */
 	public void btnActualizarUsuario(){
+		
 		try {
+			if(StringUtils.isEmpty(getPersonaSeleccionada().getUsuario().getClave()) || StringUtils.isEmpty(getPersonaSeleccionada().getCedula()) || 
+					StringUtils.isEmpty(getPersonaSeleccionada().getPrimerNombre())|| 
+					StringUtils.isEmpty(getPersonaSeleccionada().getPrimerApellido())){
+				throw new Exception("Error en campos obligatorios");
+			}
+			
+			if(!CedulaValidacion.getInstancia().validarCedula(getPersonaSeleccionada().getCedula())){
+				throw new Exception("Cedula invalida");
+			}
+			
 			Collection<Perfil> lstPerfilTMP = new ArrayList<Perfil>();
 			for(UsuarioPerfil usuarioPerfil: getLstPerfilesUsuario()){
 				if(usuarioPerfil.isSelected()){
@@ -114,8 +127,43 @@ public class CreacionUsuarioController implements Serializable{
 			seguridadServicio.actualizarUsuarioPerfil(getPersonaSeleccionada(), lstPerfilTMP);
 			FacesUtils.addInfoMessage("Usuario actualizado");
 		} catch (Exception e) {
-			FacesUtils.addErrorMessage("Ocurrio un error al guardar el usuario");
+			FacesUtils.addErrorMessage(e.getMessage());
 		}
+	}
+	
+	public void btnCancelarEdicion(){
+		personaSeleccionada = new Persona();
+		personaSeleccionada.setUsuario(new Usuario());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void personaSeleccionadaBucarPerfil(Persona personaSeleccionada) {
+		setLstPerfilesUsuario(new ArrayList<UsuarioPerfil>());
+		try {
+			Collection<UsuarioPerfil> lstUsrPerfil = seguridadServicio.findPerfilesUsuario(personaSeleccionada.getUsuario().getIdUsuario());
+			for(Perfil perfil: getLstPerfils()){
+				UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil( );
+				usuarioPerfilTMP.setUsuarioPerfilPK(new UsuarioPerfilPK(personaSeleccionada.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
+				usuarioPerfilTMP.setPerfil(perfil);
+				for(UsuarioPerfil usuarioPerfil: lstUsrPerfil){
+					if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals(perfil.getIdPerfil())){
+						usuarioPerfilTMP.setSelected(Boolean.TRUE);
+						usuarioPerfilTMP.getPerfil().setExistInBase(Boolean.TRUE);
+						usuarioPerfilTMP.getPerfil().setSelected(Boolean.TRUE);
+					}
+				}
+				getLstPerfilesUsuario().add(usuarioPerfilTMP);
+				
+			}
+			lstPerfilesUsuarioClone =  (Collection<UsuarioPerfil>) SerializationUtils.clone((Serializable)getLstPerfilesUsuario()); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.personaSeleccionada = SerializationUtils.clone(personaSeleccionada);
+	}
+	
+	public void btnFindUsr(){
+		setLstPersonas(admGeneralServicio.findPersonByCriteria(getFiltroBusqueda(), StringUtils.trim(getTxtFiltroBusqueda())));
 	}
 	
 	public void scrollListener(DataScrollEvent e){
@@ -124,9 +172,7 @@ public class CreacionUsuarioController implements Serializable{
 		System.out.println("New "+e.getNewScrolVal());
 		System.out.println(e);
 	}
-	public void btnFindUsr(){
-		setLstPersonas(admGeneralServicio.findPersonByCriteria(getFiltroBusqueda(), getTxtFiltroBusqueda().trim()));
-	}
+	
 	
 	public UsuarioPerfil getUsuarioPerfil() {
 		return usuarioPerfil;
@@ -176,32 +222,6 @@ public class CreacionUsuarioController implements Serializable{
 		this.personaSeleccionada = personaSeleccionada;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public void setPersonaSeleccionadaBucarPerfil(Persona personaSeleccionada) {
-		setLstPerfilesUsuario(new ArrayList<UsuarioPerfil>());
-		try {
-			Collection<UsuarioPerfil> lstUsrPerfil = seguridadServicio.findPerfilesUsuario(personaSeleccionada.getUsuario().getIdUsuario());
-			for(Perfil perfil: getLstPerfils()){
-				UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil( );
-				usuarioPerfilTMP.setUsuarioPerfilPK(new UsuarioPerfilPK(personaSeleccionada.getUsuario().getIdUsuario(), perfil.getIdPerfil()));
-				usuarioPerfilTMP.setPerfil(perfil);
-				for(UsuarioPerfil usuarioPerfil: lstUsrPerfil){
-					if(usuarioPerfil.getUsuarioPerfilPK().getIdPerfil().equals(perfil.getIdPerfil())){
-						usuarioPerfilTMP.setSelected(Boolean.TRUE);
-						usuarioPerfilTMP.getPerfil().setExistInBase(Boolean.TRUE);
-						usuarioPerfilTMP.getPerfil().setSelected(Boolean.TRUE);
-					}
-				}
-				getLstPerfilesUsuario().add(usuarioPerfilTMP);
-				
-			}
-			lstPerfilesUsuarioClone =  (Collection<UsuarioPerfil>) SerializationUtils.clone((Serializable)getLstPerfilesUsuario()); 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		this.personaSeleccionada = personaSeleccionada;
-	}
-
 	public Collection<UsuarioPerfil> getLstPerfilesUsuario() {
 		return lstPerfilesUsuario;
 	}
