@@ -167,5 +167,17 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 		cursoEstudianteFacadeLocal.editCursosEstudiante(cursoEstudianteTMP);
 		
 	}
+
+	@Override
+	public Collection<CursoEstudiante> estudiantesInscritosCurso(
+			BigDecimal idCursoPeriodo, String estadoCupo) {
+		return cursoEstudianteFacadeLocal.estudiantesInscritosCurso(idCursoPeriodo, estadoCupo);
+	}
+
+	@Override
+	public Collection<CursoEstudiante> estudiantesInscritosCurso(
+			BigDecimal idCursoPeriodo, String estadoCupo, String estadoPago) {
+		return cursoEstudianteFacadeLocal.estudiantesInscritosCurso(idCursoPeriodo, estadoCupo, estadoPago);
+	}
 	
 }

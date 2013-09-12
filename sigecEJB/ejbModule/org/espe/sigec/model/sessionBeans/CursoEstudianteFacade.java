@@ -78,4 +78,33 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 		Collection<CursoEstudiante> lstUsuarios = criteria.list();
 		return lstUsuarios;
 	}
+
+	@Override
+	public Collection<CursoEstudiante> estudiantesInscritosCurso(
+			BigDecimal idCursoPeriodo, String estadoCupo) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class, "cursoEstudianteA");
+		criteria.add(Restrictions.eq("cursoEstudianteA.cursoEstudiantePK.idCursoPeriodo", new BigInteger(String.valueOf(idCursoPeriodo))));
+		criteria.add(Restrictions.eq("estadoCupo", estadoCupo));
+		criteria.createAlias("cursoEstudianteA.estudiante", "estudianteA");
+		criteria.setFetchMode("estudianteA", FetchMode.JOIN);
+		criteria.createAlias("estudianteA.persona", "personaA");
+		criteria.setFetchMode("personaA", FetchMode.JOIN);
+		Collection<CursoEstudiante> lstUsuarios = criteria.list();
+		return lstUsuarios;
+	}
+
+	@Override
+	public Collection<CursoEstudiante> estudiantesInscritosCurso(
+			BigDecimal idCursoPeriodo, String estadoCupo, String estadoPago) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class, "cursoEstudianteA");
+		criteria.add(Restrictions.eq("cursoEstudianteA.cursoEstudiantePK.idCursoPeriodo", new BigInteger(String.valueOf(idCursoPeriodo))));
+		criteria.add(Restrictions.eq("estadoPago", estadoPago));
+		criteria.add(Restrictions.eq("estadoCupo", estadoCupo));
+		criteria.createAlias("cursoEstudianteA.estudiante", "estudianteA");
+		criteria.setFetchMode("estudianteA", FetchMode.JOIN);
+		criteria.createAlias("estudianteA.persona", "personaA");
+		criteria.setFetchMode("personaA", FetchMode.JOIN);
+		Collection<CursoEstudiante> lstUsuarios = criteria.list();
+		return lstUsuarios;
+	}
 }

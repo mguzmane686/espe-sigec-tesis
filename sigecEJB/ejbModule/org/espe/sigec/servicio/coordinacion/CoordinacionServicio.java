@@ -29,6 +29,8 @@ public interface CoordinacionServicio {
 	void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception;
 	int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo);
 	Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo);
+	Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo, String estadoCupo);
+	Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo, String estadoCupo, String estadoPago);
 	Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo);
 	public void actualizarCursoEstudiante(CursoEstudiante cursoEstudiante) throws Exception;
 }

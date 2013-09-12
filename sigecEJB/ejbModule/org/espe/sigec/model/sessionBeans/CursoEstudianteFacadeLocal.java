@@ -35,6 +35,8 @@ public interface CursoEstudianteFacadeLocal {
     
     Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante);
     Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo);
+    Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo, String estadoCupo);
+    Collection<CursoEstudiante> estudiantesInscritosCurso(BigDecimal idCursoPeriodo, String estadoCupo, String estadoPago);
     void editCursosEstudiante(CursoEstudiante cursoEstudiante) throws Exception;
     
 }
