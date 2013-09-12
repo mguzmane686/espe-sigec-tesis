@@ -22,6 +22,8 @@
 	<composite:attribute name="inputTextClass"/>
 	<composite:attribute name="inputTextStyle"/>
 	<composite:attribute name="containerStyle" default=""/>
+	<composite:attribute name="maxLength" default="1024"/>
+	<composite:editableValueHolder name="text" targets="Input" />
 	
 </composite:interface>
 <composite:implementation>
@@ -30,7 +32,7 @@
 			<h:outputText value="#{cc.attrs.value}" rendered="#{!cc.attrs.editMode}"/>
 			<h:inputText id="Input" value="#{cc.attrs.value}" styleClass="#{cc.attrs.inputTextClass} #{((cc.attrs.required == 'true') ? 'cajaRequerida' : '') }" size="#{cc.attrs.size}" style="#{cc.attrs.inputTextStyle}"
 				onkeypress="#{cc.attrs.onkeypressScript}" 
-				rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}" requiredMessage="El campo #{cc.attrs.label} es obligatorio">
+				rendered="#{cc.attrs.editMode}" required="#{cc.attrs.required}" requiredMessage="El campo #{cc.attrs.label} es obligatorio" maxlength="#{cc.attrs.maxLength}">
 				<composite:insertChildren />
 			</h:inputText>
 			<rich:message for="Input" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
