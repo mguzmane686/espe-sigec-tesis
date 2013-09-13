@@ -9,11 +9,15 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.Programa;
+import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.servicio.curso.CursoServicio;
+import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
 import org.espe.sigec.web.seguridad.HomeSessionController;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.richfaces.component.SortOrder;
@@ -25,6 +29,8 @@ public class ReporteCursoAbiertoController implements Serializable{
 
 	@Inject
 	private CursoServicio cursoServicio;
+	@Inject
+	private PlanificacionServicio planificacionServicio;
 	
 	private Collection<CursoPeriodo> lstCursoPeriodos;
 	
@@ -32,6 +38,12 @@ public class ReporteCursoAbiertoController implements Serializable{
 	private String nameFilter;
 	
 	private Collection<SelectItem> itemsEstado;
+	
+	private Collection<Programa> lstProgramas;
+	private Collection<ProgramaCurso> lstProgramaCursos;
+	
+	private Integer idPrograma;
+	
 	public ReporteCursoAbiertoController() {
 		setLstCursoPeriodos(new ArrayList<CursoPeriodo>());
 	}
@@ -44,6 +56,14 @@ public class ReporteCursoAbiertoController implements Serializable{
 		getItemsEstado().add(new SelectItem(null, "TODOS"));
 		getItemsEstado().add(new SelectItem("ABIERTO", "ABIERTO"));
 		getItemsEstado().add(new SelectItem("EJECUCION", "EJECUCION"));
+		
+		setLstProgramas(planificacionServicio.buscarPrograma());
+		
+	}
+	
+	public void rsCargarCursosPrograma(ValueChangeEvent valueChangeEvent){
+		setLstProgramaCursos(planificacionServicio.buscarCursosAsignadosPrograma(Integer.parseInt(String.valueOf(valueChangeEvent.getNewValue())), 
+				((HomeSessionController) FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getIdPersona()));
 		
 	}
 	
@@ -107,5 +127,31 @@ public class ReporteCursoAbiertoController implements Serializable{
 	public void setItemsEstado(Collection<SelectItem> itemsEstado) {
 		this.itemsEstado = itemsEstado;
 	}
+
+	public Collection<Programa> getLstProgramas() {
+		return lstProgramas;
+	}
+
+	public void setLstProgramas(Collection<Programa> lstProgramas) {
+		this.lstProgramas = lstProgramas;
+	}
+
+	public Integer getIdPrograma() {
+		return idPrograma;
+	}
+
+	public void setIdPrograma(Integer idPrograma) {
+		this.idPrograma = idPrograma;
+	}
+
+	public Collection<ProgramaCurso> getLstProgramaCursos() {
+		return lstProgramaCursos;
+	}
+
+	public void setLstProgramaCursos(Collection<ProgramaCurso> lstProgramaCursos) {
+		this.lstProgramaCursos = lstProgramaCursos;
+	}
+	
+	
 	
 }

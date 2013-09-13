@@ -17,16 +17,25 @@
         		<rich:collapsiblePanel header="#{msg['cursos_disponibles']}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
+	        		<h:panelGrid columns="2">
+	        			<h:outputText value="Programa: " />
+	        			<rich:select value="#{reporteCursoAbiertoController.idPrograma}" valueChangeListener="#{reporteCursoAbiertoController.rsCargarCursosPrograma}"> 
+		        			<f:selectItems value="#{reporteCursoAbiertoController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+		        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
+		        		</rich:select>
+	        		</h:panelGrid>
+	        		
 	        		<a4j:outputPanel ajaxRendered="true">
 	        			<h:panelGroup layout="block" style="margin:auto; text-align:center;" styleClass="rf-p-hdr">
 		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
 		        		</h:panelGroup>
-        					<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="10" rendered="#{!empty reporteCursoController.lstCursos}">
+        					<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstProgramaCursos}" var="progcurso" 
+        						rows="10" rendered="#{!empty reporteCursoAbiertoController.lstProgramaCursos}">
 			        			<f:facet name="header">
 			        				<h:outputLabel value="Cursos" />
 			        			</f:facet>
 			        			
-			        			<rich:column sortBy="#{curso.curso.nombreCurso}" sortOrder="#{reporteCursoAbiertoController.namesOrder}" styleClass="colNombreDet">
+			        			<rich:column sortBy="#{progcurso.cursoPeriodo.curso.nombreCurso}" sortOrder="#{reporteCursoAbiertoController.namesOrder}" styleClass="colNombreDet">
 				        			<f:facet name="header">
 				        				<h:panelGrid columns="2">
 				        					<h:outputLabel value="#{msg['nombre']}" />
@@ -38,8 +47,8 @@
 			        						</h:panelGroup>
 				        				</h:panelGrid>
 				        			</f:facet>
-				        			<a4j:commandLink value="#{curso.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(curso)}">
-				        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{curso}"/>
+				        			<a4j:commandLink value="#{progcurso.cursoPeriodo.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(progcurso.cursoPeriodo)}">
+				        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{progcurso.cursoPeriodo}"/>
 				        			</a4j:commandLink>
 			        			</rich:column>
 			        			
@@ -47,7 +56,7 @@
 				        			<f:facet name="header">
 				        				<h:outputLabel value="#{msg['descripcion']}" />
 				        			</f:facet>
-				        			<h:outputText value="#{curso.curso.generalidadesCurso}" />
+				        			<h:outputText value="#{progcurso.cursoPeriodo.curso.generalidadesCurso}" />
 			        			</rich:column>
 			        			
 			        			<rich:column>
@@ -55,7 +64,7 @@
 				        				<h:outputLabel value="Inicio del curso" />
 				        			</f:facet>
 				        			
-			        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
+			        				<h:outputText value="#{progcurso.cursoPeriodo.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
 			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
 			        				</h:outputText>
 			        			</rich:column>
@@ -65,7 +74,7 @@
 				        				<h:outputLabel value="Fin del curso" />
 				        			</f:facet>
 				        			
-			        				<h:outputText value="#{curso.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
+			        				<h:outputText value="#{progcurso.cursoPeriodo.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
 			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
 			        				</h:outputText>
 				        			
@@ -75,12 +84,12 @@
 				        			<f:facet name="header">
 				        				<h:outputLabel value="Lugar" />
 				        			</f:facet>
-				        			<h:outputText value="#{curso.lugarCapacitacion}" />
+				        			<h:outputText value="#{progcurso.cursoPeriodo.lugarCapacitacion}" />
 			        			</rich:column>
 			        			
 			        			
 			        			<rich:column filterValue="#{reporteCursoAbiertoController.nameFilter}"
-	                				filterExpression="#{fn:containsIgnoreCase(curso.estadoProceso, reporteCursoAbiertoController.nameFilter)}">
+	                				filterExpression="#{fn:containsIgnoreCase(progcurso.cursoPeriodo.estadoProceso, reporteCursoAbiertoController.nameFilter)}">
 				        			<f:facet name="header">
 				        				<h:panelGrid columns="2" style="width:100%;">
 				        					<h:outputLabel value="Estado" />
@@ -92,7 +101,7 @@
 				        				</h:panelGrid>
 				        			</f:facet>
 				        			<center>
-				        				<h:outputText value="#{curso.estadoProceso}" />
+				        				<h:outputText value="#{progcurso.cursoPeriodo.estadoProceso}" />
 				        			</center>
 			        			</rich:column>
 			        			
