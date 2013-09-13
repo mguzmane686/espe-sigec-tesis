@@ -198,7 +198,7 @@
             </rich:panelMenuItem>
             
             
-            <rich:panelMenuGroup id="pmgLogistica" label="#{msg.logistica}" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}"
+            <rich:panelMenuGroup id="pmgLogistica" label="#{msg.logistica}" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')} and false"
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgLogistica"/>
 	        		
@@ -299,22 +299,22 @@
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         
-        
+        <!-- ESTADISTICAS -->
         <rich:panelMenuGroup id="pmgEstadisticas" label="Estadisticas" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
         	<f:attribute name="idMenuPanelGroup" value="pmgEstadisticas"/>
         	<rich:panelMenuGroup id="pmgAnalisis" label="#{msg.analisis_de_resultados}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
 	        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
 	        	<f:attribute name="idMenuPanelGroup" value="pmgAnalisis"/>
-	        	<rich:panelMenuItem action="doc_invitacion_docente.jsf?faces-redirect=true" execute="@this">
-	            	<a4j:commandLink value="Profesores" action="doc_invitacion_docente.jsf?faces-redirect=true"/>
+	        	<rich:panelMenuItem action="est_profesores.jsf?faces-redirect=true" execute="@this">
+	            	<a4j:commandLink value="Profesores" action="est_profesores.jsf?faces-redirect=true"/>
 	            </rich:panelMenuItem>
 	            
-	            <rich:panelMenuItem action="pla_listado_programas.jsf?faces-redirect=true">
-	            	<a4j:commandLink value="Alumnos" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
+	            <rich:panelMenuItem action="est_alumnos.jsf?faces-redirect=true">
+	            	<a4j:commandLink value="Alumnos" action="est_alumnos.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
 	            
-	            <rich:panelMenuItem action="pla_listado_programas.jsf?faces-redirect=true">
-	            	<a4j:commandLink value="Cursos" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
+	            <rich:panelMenuItem action="est_cursos.jsf?faces-redirect=true">
+	            	<a4j:commandLink value="Cursos" action="est_cursos.jsf?faces-redirect=true"></a4j:commandLink>
 	            </rich:panelMenuItem>
 			</rich:panelMenuGroup>
         </rich:panelMenuGroup>
