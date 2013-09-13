@@ -12,10 +12,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.ProgramaCurso;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -135,6 +139,11 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	if(listaIdCursosAsignados != null){
     		crit.add(Restrictions.not(Restrictions.in("curso.idCurso", listaIdCursosAsignados)));
     	}
+    	
+    	DetachedCriteria valueCrit = DetachedCriteria.forClass(ProgramaCurso.class, "aProgramaCurso");
+    	valueCrit.createAlias("cursoPeriodo", "aCursoPeriodo");
+    	valueCrit.setProjection(Projections.property("aCursoPeriodo.curso.idCurso"));
+    	crit.add(Restrictions.not(Property.forName("curso.idCurso").in(valueCrit)));
     	
     	Collection<CursoPeriodo> lst = crit.list();
 		return lst;
