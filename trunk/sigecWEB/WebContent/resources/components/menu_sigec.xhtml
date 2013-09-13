@@ -288,7 +288,7 @@
         </rich:panelMenuGroup>
         
 		<!-- EJECUCION Y SEGUIMIENTO -->
-         <rich:panelMenuGroup id="pmgEjecucion" label="Ejecucion y seguimiento" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
+         <rich:panelMenuGroup id="pmgEjecucion" label="#{msg.ejecucion_seguimiento}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
         	<f:attribute name="idMenuPanelGroup" value="pmgEjecucion"/>
             <rich:panelMenuItem action="pla_admistrar_programa.jsf?faces-redirect=true">
             	<a4j:commandLink value="Aistencia" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
@@ -300,7 +300,7 @@
         </rich:panelMenuGroup>
         
         <!-- ESTADISTICAS -->
-        <rich:panelMenuGroup id="pmgEstadisticas" label="Estadisticas" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
+        <rich:panelMenuGroup id="pmgEstadisticas" label="#{msg.estadisticas}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
         	<f:attribute name="idMenuPanelGroup" value="pmgEstadisticas"/>
         	<rich:panelMenuGroup id="pmgAnalisis" label="#{msg.analisis_de_resultados}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
 	        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
