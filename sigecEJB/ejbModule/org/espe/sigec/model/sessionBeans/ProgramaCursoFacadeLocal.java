@@ -30,4 +30,5 @@ public interface ProgramaCursoFacadeLocal {
     
     List<ProgramaCurso> cargarProgramaPortal();
     Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Programa programa);
+    Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Integer idPrograma, Integer idPersona);
 }
