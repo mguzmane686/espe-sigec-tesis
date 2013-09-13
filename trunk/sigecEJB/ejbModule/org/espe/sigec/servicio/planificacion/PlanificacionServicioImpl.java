@@ -207,4 +207,9 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	public Collection<CursoPeriodo> cargarCursoPerdiodoPorAsignar(Integer[] listaIdCursosAsignados) {
 		return cursoPeriodoFacadeLocal.cargarCursosPeriodoPorasignarPrograma(listaIdCursosAsignados);
 	}
+
+	@Override
+	public Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Integer idPrograma, Integer idPersona) {
+		return programaCursoFacadeLocal.buscarCursosAsignadosPrograma(idPrograma, idPersona);
+	}
 }
