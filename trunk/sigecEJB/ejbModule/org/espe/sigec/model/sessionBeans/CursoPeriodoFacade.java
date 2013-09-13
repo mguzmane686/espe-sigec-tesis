@@ -143,6 +143,8 @@ public class CursoPeriodoFacade extends AbstractFacade<CursoPeriodo> implements 
     	DetachedCriteria valueCrit = DetachedCriteria.forClass(ProgramaCurso.class, "aProgramaCurso");
     	valueCrit.createAlias("cursoPeriodo", "aCursoPeriodo");
     	valueCrit.setProjection(Projections.property("aCursoPeriodo.curso.idCurso"));
+    	valueCrit.add(Restrictions.ne("estado", "0"));
+    	
     	crit.add(Restrictions.not(Property.forName("curso.idCurso").in(valueCrit)));
     	
     	Collection<CursoPeriodo> lst = crit.list();
