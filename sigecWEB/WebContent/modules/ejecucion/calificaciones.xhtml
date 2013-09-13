@@ -7,11 +7,19 @@
 	xmlns:rich="http://richfaces.org/rich"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
-   	<h:outputStylesheet library="css" name="textos.css"/>    
+   	<h:outputStylesheet library="css" name="textos.css" />    
    	<h:outputStylesheet library="css" name="bordes.css"/>
    	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
    	
-   		<h:form id="frmAsistencia">
+   	<h:outputScript library="js" name="jquery.effects.core.js" />
+	<h:outputScript library="js" name="jquery.effects.blind.js" />
+    <h:outputStylesheet library="css" name="componentsCss.css" />
+    <h:outputScript  library="js" name="componentsJs.js" />
+    
+   	<h:outputStylesheet library="css" name="tables.css" />
+   	
+   	<h:form id="frmAsistencia">
        	
        	
        	<rich:panel header="#{msg.calificaciones}" id="pnlAula">
