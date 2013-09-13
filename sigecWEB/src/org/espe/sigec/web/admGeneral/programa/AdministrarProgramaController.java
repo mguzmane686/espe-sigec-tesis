@@ -129,27 +129,13 @@ public class AdministrarProgramaController implements Serializable{
 						}
 					}
 				}
-				
-//				for(int i=0; i<lstProgramaCursosClone.size();i++){
-//					if(!((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
-//						lstInactivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
-//					}
-//					i++;
-//				}
 				Collection<ProgramaCurso> lstActivar = new ArrayList<ProgramaCurso>();
-//				for(int i=lstProgramaCursosClone.size(); i<lstProgramaCursos.size();i++){
-//					if(((List<ProgramaCurso>)lstProgramaCursos).get(i).isSelected()){
-//						lstActivar.add(((List<ProgramaCurso>)lstProgramaCursos).get(i));
-//					}
-//					i++;
-//				}
 				
 				for(ProgramaCurso programaCurso: lstProgramaCursos){
 					if(programaCurso.isSelected()){
 						lstActivar.add(programaCurso);
 					}
 				}
-				
 				
 				planificacionServicio.editarPrograma(getPrograma(), lstActivar, lstInactivar);
 				Collection<ProgramaCurso> lst = new ArrayList<ProgramaCurso>();
@@ -178,6 +164,8 @@ public class AdministrarProgramaController implements Serializable{
 				}
 				if(lst.size()>0){
 					planificacionServicio.crearPrograma(getPrograma(), lst);
+					setLstProgramaCursos(new ArrayList<ProgramaCurso>());
+					setLstProgramaCursos(lst);
 					setNewProgram(Boolean.FALSE);
 					setEditMode(Boolean.FALSE);
 					FacesUtils.addInfoMessage("Programa creado");

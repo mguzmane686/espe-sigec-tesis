@@ -18,87 +18,87 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
 	        		<a4j:outputPanel ajaxRendered="true">
-	        			
-	        					<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="10" rendered="#{!empty reporteCursoController.lstCursos}">
+	        			<h:panelGroup layout="block" style="margin:auto; text-align:center;" styleClass="rf-p-hdr">
+		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
+		        		</h:panelGroup>
+        					<rich:dataTable id="tblCursos" style="width:100%" value="#{reporteCursoAbiertoController.lstCursoPeriodos}" var="curso" rows="10" rendered="#{!empty reporteCursoController.lstCursos}">
+			        			<f:facet name="header">
+			        				<h:outputLabel value="Cursos" />
+			        			</f:facet>
+			        			
+			        			<rich:column sortBy="#{curso.curso.nombreCurso}" sortOrder="#{reporteCursoAbiertoController.namesOrder}" styleClass="colNombreDet">
 				        			<f:facet name="header">
-				        				<h:outputLabel value="Cursos" />
+				        				<h:panelGrid columns="2">
+				        					<h:outputLabel value="#{msg['nombre']}" />
+				        					
+				        					<h:panelGroup layout="block" style="float:right">
+			        							 <a4j:commandLink render="tblCursos" action="#{reporteCursoAbiertoController.sortByNames}" >
+			        							 	<h:graphicImage library="images/button" name="sortArrow.png" height="12" style="border:0px;"/>
+			        							 </a4j:commandLink>
+			        						</h:panelGroup>
+				        				</h:panelGrid>
+				        			</f:facet>
+				        			<a4j:commandLink value="#{curso.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(curso)}">
+				        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{curso}"/>
+				        			</a4j:commandLink>
+			        			</rich:column>
+			        			
+			        			<rich:column>
+				        			<f:facet name="header">
+				        				<h:outputLabel value="#{msg['descripcion']}" />
+				        			</f:facet>
+				        			<h:outputText value="#{curso.curso.generalidadesCurso}" />
+			        			</rich:column>
+			        			
+			        			<rich:column>
+				        			<f:facet name="header">
+				        				<h:outputLabel value="Inicio del curso" />
 				        			</f:facet>
 				        			
-				        			<rich:column sortBy="#{curso.curso.nombreCurso}" sortOrder="#{reporteCursoAbiertoController.namesOrder}" styleClass="colNombreDet">
-					        			<f:facet name="header">
-					        				<h:panelGrid columns="2">
-					        					<h:outputLabel value="#{msg['nombre']}" />
-					        					
-					        					<h:panelGroup layout="block" style="float:right">
-				        							 <a4j:commandLink render="tblCursos" action="#{reporteCursoAbiertoController.sortByNames}" >
-				        							 	<h:graphicImage library="images/button" name="sortArrow.png" height="12" style="border:0px;"/>
-				        							 </a4j:commandLink>
-				        						</h:panelGroup>
-					        				</h:panelGrid>
-					        			</f:facet>
-					        			<a4j:commandLink value="#{curso.curso.nombreCurso}" action="#{reporteCursoAbiertoController.btnAdministrarCursoAbierto(curso)}">
-					        				<f:setPropertyActionListener target="#{administrarCursoController.cursoPeriodo}" value="#{curso}"/>
-					        			</a4j:commandLink>
-				        			</rich:column>
+			        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
+			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+			        				</h:outputText>
+			        			</rich:column>
+			        			
+			        			<rich:column>
+				        			<f:facet name="header">
+				        				<h:outputLabel value="Fin del curso" />
+				        			</f:facet>
 				        			
-				        			<rich:column>
-					        			<f:facet name="header">
-					        				<h:outputLabel value="#{msg['descripcion']}" />
-					        			</f:facet>
-					        			<h:outputText value="#{curso.curso.generalidadesCurso}" />
-				        			</rich:column>
+			        				<h:outputText value="#{curso.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
+			        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
+			        				</h:outputText>
 				        			
-				        			<rich:column>
-					        			<f:facet name="header">
-					        				<h:outputLabel value="Inicio del curso" />
-					        			</f:facet>
-					        			
-				        				<h:outputText value="#{curso.periodoAcademico.fechaInicio}" style="white-space:nowrap; text-align:center;">
-				        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-				        				</h:outputText>
-				        			</rich:column>
-				        			
-				        			<rich:column>
-					        			<f:facet name="header">
-					        				<h:outputLabel value="Fin del curso" />
-					        			</f:facet>
-					        			
-				        				<h:outputText value="#{curso.periodoAcademico.fechaFin}" style="white-space:nowrap; text-align:center;">
-				        					<f:convertDateTime pattern="#{msg['dd_MMM_yyyy']}"/>
-				        				</h:outputText>
-					        			
-				        			</rich:column>
-				        			
-				        			<rich:column>
-					        			<f:facet name="header">
-					        				<h:outputLabel value="Lugar" />
-					        			</f:facet>
-					        			<h:outputText value="#{curso.lugarCapacitacion}" />
-				        			</rich:column>
-				        			
-				        			
-				        			<rich:column filterValue="#{reporteCursoAbiertoController.nameFilter}"
-		                				filterExpression="#{fn:containsIgnoreCase(curso.estadoProceso, reporteCursoAbiertoController.nameFilter)}">
-					        			<f:facet name="header">
-					        				<h:panelGrid columns="2" style="width:100%;">
-					        					<h:outputLabel value="Estado" />
-					        					
-					        					<rich:select value="#{reporteCursoAbiertoController.nameFilter}" defaultLabel="Seleccione" >
-						                           <f:selectItems value="#{reporteCursoAbiertoController.itemsEstado}" />
-						                           <a4j:ajax render="tblCursos" execute="@this" event="selectitem" />
-						                       </rich:select>
-					        				</h:panelGrid>
-					        			</f:facet>
-					        			<center>
-					        				<h:outputText value="#{curso.estadoProceso}" />
-					        			</center>
-				        			</rich:column>
-				        			
-				        		</rich:dataTable>
+			        			</rich:column>
+			        			
+			        			<rich:column>
+				        			<f:facet name="header">
+				        				<h:outputLabel value="Lugar" />
+				        			</f:facet>
+				        			<h:outputText value="#{curso.lugarCapacitacion}" />
+			        			</rich:column>
+			        			
+			        			
+			        			<rich:column filterValue="#{reporteCursoAbiertoController.nameFilter}"
+	                				filterExpression="#{fn:containsIgnoreCase(curso.estadoProceso, reporteCursoAbiertoController.nameFilter)}">
+				        			<f:facet name="header">
+				        				<h:panelGrid columns="2" style="width:100%;">
+				        					<h:outputLabel value="Estado" />
+				        					
+				        					<rich:select value="#{reporteCursoAbiertoController.nameFilter}" defaultLabel="Seleccione" >
+					                           <f:selectItems value="#{reporteCursoAbiertoController.itemsEstado}" />
+					                           <a4j:ajax render="tblCursos" execute="@this" event="selectitem" />
+					                       </rich:select>
+				        				</h:panelGrid>
+				        			</f:facet>
+				        			<center>
+				        				<h:outputText value="#{curso.estadoProceso}" />
+				        			</center>
+			        			</rich:column>
+			        			
+			        		</rich:dataTable>
 	        				
-		        		<center>
-		        			<rich:dataScroller for="tblCursos" renderIfSinglePage="false" fastControls="hide"/>
-		        		</center>
+		        		
 	        		</a4j:outputPanel>
 	        	</rich:collapsiblePanel>	
         	</rich:panel>
