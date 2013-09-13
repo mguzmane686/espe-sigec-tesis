@@ -288,14 +288,15 @@
         </rich:panelMenuGroup>
         
 		<!-- EJECUCION Y SEGUIMIENTO -->
-         <rich:panelMenuGroup id="pmgEjecucion" label="#{msg.ejecucion_seguimiento}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
+         <rich:panelMenuGroup id="pmgEjecucion" label="#{msg.ejecucion_seguimiento}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
+         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         	<f:attribute name="idMenuPanelGroup" value="pmgEjecucion"/>
-            <rich:panelMenuItem action="pla_admistrar_programa.jsf?faces-redirect=true">
-            	<a4j:commandLink value="Aistencia" action="pla_admistrar_programa.jsf?faces-redirect=true" immediate="true" execute="@this"/>
+            <rich:panelMenuItem action="eje_seg_asistencia.jsf?faces-redirect=true">
+            	<a4j:commandLink value="Aistencia" action="eje_seg_asistencia.jsf?faces-redirect=true" immediate="true" execute="@this"/>
             </rich:panelMenuItem>
             
-            <rich:panelMenuItem action="pla_listado_programas.jsf?faces-redirect=true">
-            	<a4j:commandLink value="Calificaciones" action="pla_listado_programas.jsf?faces-redirect=true"></a4j:commandLink>
+            <rich:panelMenuItem action="eje_seg_calificaciones.jsf?faces-redirect=true">
+            	<a4j:commandLink value="Calificaciones" action="eje_seg_calificaciones.jsf?faces-redirect=true"></a4j:commandLink>
             </rich:panelMenuItem>
         </rich:panelMenuGroup>
         

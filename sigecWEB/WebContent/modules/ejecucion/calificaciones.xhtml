@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+   	<h:outputStylesheet library="css" name="textos.css"/>    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	
+   		<h:form id="frmAsistencia">
+       	
+       	
+       	<rich:panel header="#{msg.calificaciones}" id="pnlAula">
+       		<h:panelGroup layout="block" styleClass="roundCorner">
+       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+       				<a4j:commandButton value="#{msg['guardar']}" render="pnlAula" image="/resources/images/save.png"/>
+       				<h:outputLabel value="#{msg['guardar']}" />
+       			</h:panelGrid>
+       		</h:panelGroup>
+       		
+       		<rich:collapsiblePanel header="#{msg.calificaciones}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+        	
+        	</rich:collapsiblePanel>	
+       	</rich:panel>
+       	
+       </h:form>
+</ui:composition>
