@@ -23,8 +23,10 @@
 	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos"/>
 	        		</rich:select>
 	        		
-	        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%">
-		        		<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center; width:100%;" boundaryControls="hide"/>
+	        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%;" cellpadding="0" cellspacing="0" >
+		        		<h:panelGroup layout="block" style="margins:auto; width:100%; text-align:center;" rendered="#{!empty inscritosCursoController.lstProgramaCursos }" styleClass="rf-p-hdr">
+		        			<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center;" boundaryControls="hide"/>
+		        		</h:panelGroup>
 		        		<rich:dataTable id="tblPrgCursos" value="#{inscritosCursoController.lstProgramaCursos}" var="itemsProgramaCurso"
 		        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
 		        			<rich:column>
