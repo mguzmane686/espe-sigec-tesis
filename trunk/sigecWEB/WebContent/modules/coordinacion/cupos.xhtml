@@ -14,14 +14,19 @@
     	
         <h:form id="frmInscritoCurso">
         	
-        	<rich:panel header="Inscritos al curso" id="pnlLanCur">
+        	<rich:panel header="Cupos" id="pnlLanCur">
         		
 	        	<rich:collapsiblePanel header="Filtro curso"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-	        		<rich:select value="#{cuposController.programa.idPrograma}" valueChangeListener="#{cuposController.rsCargarCursosPrograma}"> 
-	        			<f:selectItems value="#{cuposController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
-	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
-	        		</rich:select>
+	        		
+	        		<h:panelGrid columns="2">
+	        			<h:outputText value="Programa: " />
+	        			<rich:select value="#{cuposController.programa.idPrograma}" valueChangeListener="#{cuposController.rsCargarCursosPrograma}"> 
+		        			<f:selectItems value="#{cuposController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+		        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
+		        		</rich:select>
+	        		</h:panelGrid>
+	        		
 	        		
 	        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%; border-collapse:collapse;" cellpadding="0" cellspacing="0">
 	        			<h:panelGroup styleClass="rf-p-hdr" layout="block" style="margin:auto;text-align:center; width:100%;" rendered="#{!empty cuposController.lstProgramaCursos }">
