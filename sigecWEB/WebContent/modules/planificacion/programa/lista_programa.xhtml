@@ -20,7 +20,8 @@
 			<rich:collapsiblePanel header="#{msg.etiqueta_lista_programas}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 				
-				<p:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;" rows="15" paginator="true">
+				<p:dataTable value="#{listaProgramaController.lstProgramas}" var="programa" style="width:100%;" rows="15" paginator="true" 
+					paginatorPosition="top" paginatorAlwaysVisible="false">
 					<p:column>
 						<f:facet name="header">
 							<h:outputLabel value="#{msg.nombre}" />
@@ -43,9 +44,7 @@
 		
 		<rich:popupPanel id="popupPrograma" modal="true" autosized="true" resizeable="false" domElementAttachment="parent" header="Detalle programa">
 	        <f:facet name="controls">
-	            <h:outputLink value="#" onclick="#{rich:component('popupPrograma')}.hide(); return false;">
-	                X
-	            </h:outputLink>
+	        	<a4j:commandLink value="X" onclick="#{rich:component('popupPrograma')}.hide(); return false;"/>
 	        </f:facet>
 	        <h:panelGrid columns="2">
 	        	<h:outputLabel value="#{msg.nombre }" />
