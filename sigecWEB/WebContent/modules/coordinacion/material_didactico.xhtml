@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+    	<h:outputStylesheet library="css" name="textos.css"/>    
+    	<h:outputStylesheet library="css" name="bordes.css"/>
+    	<h:outputStylesheet library="css" name="botones.css"/>
+    	
+        <h:form id="frmMaterialDid">
+        	
+        	<rich:panel header="#{msg.material_didactico}" id="pnlMatDid">
+        		
+	        	<rich:collapsiblePanel header="#{msg.material_didactico}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+	        		
+	        		<h:panelGrid columns="2">
+	        			<h:outputText value="Programa: " />
+	        			<rich:select value="#{asignacionMaterialController.programa.idPrograma}" valueChangeListener="#{asignacionMaterialController.rsCargarCursosPrograma}"> 
+		        			<f:selectItems value="#{asignacionMaterialController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+		        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos"/>
+		        		</rich:select>
+	        		</h:panelGrid>
+	        		
+	        		
+	        		<h:panelGrid columns="1" id="pgPrgCursos" style="width:100%;">
+	        			<h:panelGroup styleClass="rf-p-hdr" layout="block" style="margin:auto;text-align:center; width:100%;" rendered="#{!empty cuposController.lstProgramaCursos }">
+		        			<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center;" boundaryControls="hide"/>
+		        		</h:panelGroup>
+		        		<rich:dataTable id="tblPrgCursos" value="#{asignacionMaterialController.lstProgramaCursos}" var="itemsProgramaCurso"
+		        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+		        			<rich:column>
+		        				<f:facet name="header">
+		        					Cursos del programa
+		        				</f:facet>
+		        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
+		        					action="#{cuposController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+		        			</rich:column>
+		        		</rich:dataTable>
+		        		
+		        		
+		        		<rich:dataTable id="tblMaterialDidactico" value="#{asignacionMaterialController.lstMaterialDidacticos}" var="itemsMaterialDidactico"
+		        			noDataLabel="No existen material asignado al curso" rows="2" style="width:100%;">
+		        			<rich:column>
+		        				<f:facet name="header">
+		        					Material didactico
+		        				</f:facet>
+		        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
+		        					action="#{cuposController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+		        			</rich:column>
+		        		</rich:dataTable>
+	        		</h:panelGrid>
+	        		
+        		</rich:collapsiblePanel>
+        	</rich:panel>
+        </h:form>
+</ui:composition>
