@@ -63,6 +63,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.EstudioComplementario</class>
 		<class>org.espe.sigec.model.entities.Encuesta</class>
 		<class>org.espe.sigec.model.entities.EncuestaPK</class>
+		<class>org.espe.sigec.model.entities.MaterialDidacticoCatalogo</class>
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
 		</properties>
