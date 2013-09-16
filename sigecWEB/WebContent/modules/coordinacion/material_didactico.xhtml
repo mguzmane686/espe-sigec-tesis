@@ -46,7 +46,7 @@
 		        		</rich:dataTable>
 		        		
 		        		<h:panelGrid id="pgBotonesAccion" columns="#{!asignacionMaterialController.editMode ?1:2}">
-		        			<a4j:commandButton value="Editar materiales" action="#{asignacionMaterialController.btnAgregarMaterial}" execute="@this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{!asignacionMaterialController.editMode}" limitRender="true" />
+		        			<a4j:commandButton value="Editar materiales" action="#{asignacionMaterialController.btnAgregarMaterial}" execute="@this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{!asignacionMaterialController.editMode and asignacionMaterialController.programaCursoSeleccionado !=null}" limitRender="true" />
 		        			<a4j:commandButton value="Guardar materiales" action="#{asignacionMaterialController.btnGuardarAgregarMaterial}" execute="tblMaterialDidactico @this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{asignacionMaterialController.editMode}"/>
 		        			<a4j:commandButton value="Cancelar" action="#{asignacionMaterialController.btnCancelarAgregarMaterial}" execute="@this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{asignacionMaterialController.editMode}"/>
 		        		</h:panelGrid>
