@@ -34,24 +34,42 @@
 		        		</h:panelGroup>
 		        		<rich:dataTable id="tblPrgCursos" value="#{asignacionMaterialController.lstProgramaCursos}" var="itemsProgramaCurso"
 		        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+		        			
 		        			<rich:column>
 		        				<f:facet name="header">
 		        					Cursos del programa
 		        				</f:facet>
+		        				
 		        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
-		        					action="#{cuposController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+		        					action="#{asignacionMaterialController.btnCargarMaterialesCurso(itemsProgramaCurso)}" render="tblMaterialDidactico pgBotonesAccion"/>
 		        			</rich:column>
 		        		</rich:dataTable>
 		        		
+		        		<h:panelGrid id="pgBotonesAccion" columns="#{!asignacionMaterialController.editMode ?1:2}">
+		        			<a4j:commandButton value="Editar materiales" action="#{asignacionMaterialController.btnAgregarMaterial}" execute="@this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{!asignacionMaterialController.editMode}" limitRender="true" />
+		        			<a4j:commandButton value="Guardar materiales" action="#{asignacionMaterialController.btnGuardarAgregarMaterial}" execute="tblMaterialDidactico @this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{asignacionMaterialController.editMode}"/>
+		        			<a4j:commandButton value="Cancelar" action="#{asignacionMaterialController.btnCancelarAgregarMaterial}" execute="@this" render="tblMaterialDidactico pgBotonesAccion" rendered="#{asignacionMaterialController.editMode}"/>
+		        		</h:panelGrid>
 		        		
-		        		<rich:dataTable id="tblMaterialDidactico" value="#{asignacionMaterialController.lstMaterialDidacticos}" var="itemsMaterialDidactico"
-		        			noDataLabel="No existen material asignado al curso" rows="2" style="width:100%;">
+		        		<rich:dataTable id="tblMaterialDidactico" value="#{asignacionMaterialController.lstMaterialDidacticosCursos}" var="itemsMaterialDidactico"
+		        			noDataLabel="No existen material asignado al curso" style="width:100%;">
+		        			
+		        			<f:facet name="header">
+		        				<h:outputText value="#{asignacionMaterialController.programaCursoSeleccionado.cursoPeriodo.curso.nombreCurso}" styleClass="label-bold"/>
+		        			</f:facet>
+		        			
+		        			<rich:column rendered="#{asignacionMaterialController.editMode}">
+		        				<f:facet name="header">
+		        					Material didactico
+		        				</f:facet>
+		        				<h:selectBooleanCheckbox value="#{itemsMaterialDidactico.selected}"/>
+		        			</rich:column>
+		        			
 		        			<rich:column>
 		        				<f:facet name="header">
 		        					Material didactico
 		        				</f:facet>
-		        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
-		        					action="#{cuposController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+		        				<h:outputText value="#{itemsMaterialDidactico.materialDidacticoCatalogo.nombre}" />
 		        			</rich:column>
 		        		</rich:dataTable>
 	        		</h:panelGrid>
