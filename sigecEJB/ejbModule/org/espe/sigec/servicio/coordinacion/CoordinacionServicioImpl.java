@@ -7,7 +7,10 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.transaction.UserTransaction;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.SerializationUtils;
+import org.espe.sigec.exception.SigecException;
 import org.espe.sigec.model.entities.Aula;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.CursoEstudiante;
@@ -17,6 +20,8 @@ import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
 import org.espe.sigec.model.entities.InvitacionDocente;
+import org.espe.sigec.model.entities.MaterialDidacticoCatalogo;
+import org.espe.sigec.model.entities.MaterialDidacticoCurso;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.model.sessionBeans.AulaFacadeLocal;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
@@ -27,6 +32,8 @@ import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.HistoricoCursoEstadoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.InvitacionDocenteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.MaterialDidacticoCatalogoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.MaterialDidacticoCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
 import org.espe.sigec.utils.SigecClientResourceBoundle;
@@ -58,6 +65,12 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	private ProfesorFacadeLocal profesorFacadeLocal;
 	@EJB
 	private InvitacionDocenteFacadeLocal invitacionDocenteFacadeLocal; 
+	@EJB
+	private MaterialDidacticoCatalogoFacadeLocal materialDidacticoCatalogoFacadeLocal;
+	
+	@EJB
+	private MaterialDidacticoCursoFacadeLocal materialDidacticoCursoFacadeLocal;
+	
 	@Resource
 	private UserTransaction userTransaction;
 	@Override
@@ -179,5 +192,80 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 			BigDecimal idCursoPeriodo, String estadoCupo, String estadoPago) {
 		return cursoEstudianteFacadeLocal.estudiantesInscritosCurso(idCursoPeriodo, estadoCupo, estadoPago);
 	}
+
+	@Override
+	public Collection<MaterialDidacticoCatalogo> findMaterialDidacticoCatalogos(Integer[] listaIdCursosAsignados, String estado) throws Exception {
+		return materialDidacticoCatalogoFacadeLocal.findMaterialDidacticoCatalogos(listaIdCursosAsignados, estado);
+	}
 	
+	@Override
+	public Collection<MaterialDidacticoCurso> findMaterialDidacticoAsignado(BigDecimal idCursoPeriodo) throws Exception {
+		return materialDidacticoCatalogoFacadeLocal.findMaterialDidacticoAsignado(idCursoPeriodo);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.espe.sigec.servicio.coordinacion.CoordinacionServicio#actualizarListaMaterialesCurso(java.util.Collection, java.util.Collection)
+	 */
+	@Override
+	public void actualizarListaMaterialesCurso(
+			Collection<MaterialDidacticoCurso> lstMaterialDidacticoOriginal,
+			Collection<MaterialDidacticoCurso> lstMaterialDidacticoModificada) throws SigecException, Exception {
+		int tamOriginal = CollectionUtils.size(lstMaterialDidacticoOriginal);
+		userTransaction.begin();
+		try {
+			
+			if(tamOriginal ==0){
+	//			Todos los elementos agregados son nuevos
+				for(MaterialDidacticoCurso materialDidacticoCursoAgregado: lstMaterialDidacticoModificada){
+					if(materialDidacticoCursoAgregado.isSelected()){
+						System.out.println("Agregando: "+materialDidacticoCursoAgregado);
+						materialDidacticoCursoAgregado.setEstado("ACT");
+						try {
+							if(materialDidacticoCursoFacadeLocal.find(materialDidacticoCursoAgregado.getMaterialDidacticoCursoPK())==null){
+								materialDidacticoCursoFacadeLocal.create(materialDidacticoCursoAgregado);
+							}else{
+								materialDidacticoCursoFacadeLocal.edit(materialDidacticoCursoAgregado);
+							}
+						} catch (Exception e) {
+								e.printStackTrace();
+						}
+					}
+				}
+			}else{
+	//			Elementos que existian en la coleccion y fueron modificados de estado
+				for(int numItem = 0; numItem < tamOriginal; numItem++){
+					MaterialDidacticoCurso materialDidacticoCursoORG = (MaterialDidacticoCurso) CollectionUtils.get(lstMaterialDidacticoOriginal, numItem);
+					MaterialDidacticoCurso materialDidacticoCursoMOD = (MaterialDidacticoCurso) CollectionUtils.get(lstMaterialDidacticoModificada, numItem);
+					
+	//				Se cambio el estado del elemento y se lo actualiza
+					if(!(materialDidacticoCursoORG.isSelected() && materialDidacticoCursoMOD.isSelected())){
+						System.out.println("Editando: "+ materialDidacticoCursoMOD);
+						
+						materialDidacticoCursoMOD.setEstado(BooleanUtils.toString(materialDidacticoCursoMOD.isSelected(), "ACT", "INA"));
+						materialDidacticoCursoFacadeLocal.edit(materialDidacticoCursoMOD);
+					}
+				}
+				
+				for(int numItem = tamOriginal; numItem < lstMaterialDidacticoModificada.size(); numItem++){
+					MaterialDidacticoCurso materialDidacticoCursoMOD = (MaterialDidacticoCurso) CollectionUtils.get(lstMaterialDidacticoModificada, numItem);
+					materialDidacticoCursoMOD.setEstado(BooleanUtils.toString(materialDidacticoCursoMOD.isSelected(), "ACT", "INA"));
+					System.out.println("Editando: "+ materialDidacticoCursoMOD);
+					if(materialDidacticoCursoMOD.isSelected()){
+						try {
+							if(materialDidacticoCursoFacadeLocal.find(materialDidacticoCursoMOD.getMaterialDidacticoCursoPK())==null){
+								materialDidacticoCursoFacadeLocal.edit(materialDidacticoCursoMOD);
+							}else{
+								materialDidacticoCursoFacadeLocal.edit(materialDidacticoCursoMOD);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();							
+						}
+					}
+				}
+			}
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+		}
+	}
 }
