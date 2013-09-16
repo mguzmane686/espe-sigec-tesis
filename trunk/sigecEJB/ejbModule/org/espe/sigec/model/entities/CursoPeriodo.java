@@ -86,7 +86,7 @@ public class CursoPeriodo implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Curso curso;
     @OneToMany(mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
-    private Collection<MaterialDidactico> materialDidacticoCollection;
+    private Collection<MaterialDidacticoCurso> materialDidacticoCollection;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cursoPeriodo", fetch = FetchType.LAZY)
     private Collection<ProgramaCurso> programaCursoCollection;
@@ -157,11 +157,11 @@ public class CursoPeriodo implements Serializable {
         this.curso = curso;
     }
     
-    public Collection<MaterialDidactico> getMaterialDidacticoCollection() {
+    public Collection<MaterialDidacticoCurso> getMaterialDidacticoCollection() {
         return materialDidacticoCollection;
     }
 
-    public void setMaterialDidacticoCollection(Collection<MaterialDidactico> materialDidacticoCollection) {
+    public void setMaterialDidacticoCollection(Collection<MaterialDidacticoCurso> materialDidacticoCollection) {
         this.materialDidacticoCollection = materialDidacticoCollection;
     }
 

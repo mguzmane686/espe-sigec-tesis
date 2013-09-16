@@ -5,6 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.*;
@@ -55,7 +56,7 @@ public class ProgramaCurso implements Serializable {
         this.programaCursoPK = programaCursoPK;
     }
 
-    public ProgramaCurso(int idPrograma, BigInteger idCursoPeriodo) {
+    public ProgramaCurso(int idPrograma, BigDecimal idCursoPeriodo) {
         this.programaCursoPK = new ProgramaCursoPK(idPrograma, idCursoPeriodo);
     }
 

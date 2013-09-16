@@ -25,7 +25,8 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.PensumAcademico</class>
 		<class>org.espe.sigec.model.entities.Opcion</class>
 		<class>org.espe.sigec.model.entities.Modulo</class>
-		<class>org.espe.sigec.model.entities.MaterialDidactico</class>
+		<class>org.espe.sigec.model.entities.MaterialDidacticoCurso</class>
+		<class>org.espe.sigec.model.entities.MaterialDidacticoCursoPK</class>
 		<class>org.espe.sigec.model.entities.Establecimiento</class>
 		<class>org.espe.sigec.model.entities.HorarioCursoPeriodo</class>
 		<class>org.espe.sigec.model.entities.HistoricoCursoEstado</class>
@@ -64,6 +65,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 		<class>org.espe.sigec.model.entities.Encuesta</class>
 		<class>org.espe.sigec.model.entities.EncuestaPK</class>
 		<class>org.espe.sigec.model.entities.MaterialDidacticoCatalogo</class>
+		
 		<properties>
 		    <property name="hibernate.ejb.cfgfile" value="META-INF/hibernate.cfg.xml"/>
 		</properties>
