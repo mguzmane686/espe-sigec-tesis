@@ -23,12 +23,9 @@ public class ReporteFlujoContrato {
 	public void reporteContratoP1() {
 		XWPFParagraph paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
 		XWPFRun paragraphOneRunOne = paragraphOne.createRun();
+		ReportesUtil.getInstance().agregarEstilos(paragraphOneRunOne);
 
-		paragraphOneRunOne.setItalic(Boolean.TRUE);
-		paragraphOneRunOne.setFontFamily("Bookman Old Style");
-		paragraphOneRunOne.setFontSize(12);
-
-		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 7);
+		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 6);
 		
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"Sangolquí, ${fecha_de_invitacion}");
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"Oficio No. ${${N_invitacion}");
@@ -36,27 +33,32 @@ public class ReporteFlujoContrato {
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"${nombre_del_proveedor}");
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"Presente.-");
 
-		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 2);
+		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 1);
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"De mi consideración:");
-		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 2);
 		
-		ReportesUtil.getInstance().createNewPragraph(xwpfDocumentFlujoContra, paragraphOne, paragraphOneRunOne, ParagraphAlignment.THAI_DISTRIBUTE);
-		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
 		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
+		
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"Luego de expresar a usted un cordial saludo deseo extender la invitación para que participe como facilitador en el curso de  “${NOMBRE_DEL_CURSO}”,  del ${fecha_curso}, con una duración de ${n_horas} horas,  a impartirse en el ${lugar_a_dictarse},  por este servicio de capacitación se le reconocerá el valor total de $   ${valor_a_pagar} ${pp} menos retenciones de Ley.");
 		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 1);
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"El contenido del curso deberá ser propuesto por el facilitador en función de los lineamientos proporcionados por la Unidad de Educación Continua, así como también el original del material de apoyo para los estudiantes el cual será previamente revisado y aprobado.");
 		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 1);
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"El instructor se sujetará al Reglamento de la ESPE, en lo que corresponda al régimen disciplinario, deberes y derechos.");
+		ReportesUtil.getInstance().agregarEstilos(paragraphOneRunOne);
 		
-		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
 		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.LEFT);
 		
 		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 2);
 		paragraphOneRunOne.setText("Atentamente,");
 		ReportesUtil.getInstance().addBreakSpace(paragraphOneRunOne, 4);
 		ReportesUtil.getInstance().addText(paragraphOneRunOne,"Ing. Karla Benavides");
 		paragraphOneRunOne.setText("DIRECTORA UNIDAD DE EDUCACIÓN CONTINUA");
+		
+		ReportesUtil.getInstance().agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak(BreakType.PAGE);
 	}
 	
@@ -417,7 +419,7 @@ public class ReporteFlujoContrato {
 	public void generarContrato(String filename) throws IOException{
 		
 		
-		xwpfDocumentFlujoContra.write(FacesUtils.getTempletaDescargaReporte("reportepoi.doc"));
+		xwpfDocumentFlujoContra.write(FacesUtils.getTempletaDescargaReporte(filename));
 	    FacesContext facesContext = FacesContext.getCurrentInstance();
 	    facesContext.responseComplete();
 	    

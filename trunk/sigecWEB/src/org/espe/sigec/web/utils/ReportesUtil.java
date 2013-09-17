@@ -36,7 +36,7 @@ public class ReportesUtil {
 	}
 	
 	
-	public XWPFParagraph createNewPragraph(XWPFDocument xwpfDocumentFlujoContra, XWPFParagraph xwpfParagraph,  XWPFRun xwpfRun, ParagraphAlignment paragraphAlignment){
+	/*public XWPFParagraph createNewPragraph(XWPFDocument xwpfDocumentFlujoContra, XWPFParagraph xwpfParagraph,  XWPFRun xwpfRun, ParagraphAlignment paragraphAlignment){
 		xwpfParagraph =  xwpfDocumentFlujoContra.createParagraph();
 		if(paragraphAlignment!=null){
 			xwpfParagraph.setAlignment(paragraphAlignment);
@@ -44,5 +44,11 @@ public class ReportesUtil {
 		
 		xwpfRun.setItalic(Boolean.TRUE);
 		return xwpfParagraph;
+	}*/
+	
+	public void agregarEstilos(XWPFRun xwpfRun){
+		xwpfRun.setItalic(true);
+		xwpfRun.setFontFamily("Bookman Old Style");
+		xwpfRun.setFontSize(12);
 	}
 }
