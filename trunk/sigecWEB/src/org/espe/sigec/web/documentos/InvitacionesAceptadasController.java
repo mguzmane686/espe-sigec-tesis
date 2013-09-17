@@ -42,22 +42,15 @@ public class InvitacionesAceptadasController implements Serializable{
 		}
 	}
 
-	public void btnAecptarGenerarContrato(){
+	public void btnAceptarGenerarContrato(){
 		System.out.println("Generar Contrato");
 		
 		try {
 			getInvitacionDocenteSelected().setContratoGenerado(SigecConstantes.ESTADO_ACTIVO_BOOLEANO);
+			getInvitacionDocenteSelected().setEstado("SEL");
 			documentoServicio.actualizarInvitacion(getInvitacionDocenteSelected());
 			
-			ContratoProfesor contratoProfesor = new ContratoProfesor();
-			contratoProfesor.setIdCursoPeriodo(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo());
-			contratoProfesor.setIdProfesor(getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
-			contratoProfesor.setInvitacionDocente(getInvitacionDocenteSelected());
-			contratoProfesor.setContratoProfesorPK(new ContratoProfesorPK());
-//			contratoProfesor.getContratoProfesorPK().setCtrNumContrato(1);
-			contratoProfesor.getContratoProfesorPK().setDocNumInvit(getInvitacionDocenteSelected().getInvitacionDocentePK().getDocNumInvit());
-			documentoServicio.crearContratoDocente(contratoProfesor);
-			FacesUtils.addInfoMessage("En contrato se genero correctamente");
+			FacesUtils.addInfoMessage("En docente ha sido seleccionado");
 			loadInvitacionesAceptadas();
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurrio un error al generar el contrato");
