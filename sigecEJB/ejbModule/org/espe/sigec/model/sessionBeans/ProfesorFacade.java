@@ -59,7 +59,23 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
 	@Override
 	public Collection<InvitacionDocente> findProfesoresSeleccionados(BigDecimal idCursoPeriodo) {
 		
-		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(ContratoProfesor.class);
+		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
+		crit.add(Restrictions.eq("invitacionDocentePK.idCursoPeriodo", idCursoPeriodo));
+		crit.add(Restrictions.eq("estado", "SEL"));
+		
+//		
+		crit.createAlias("profesor", "profesorA");
+		crit.setFetchMode("profesorA", FetchMode.SELECT);
+
+		crit.createAlias("profesorA.persona", "personaA");
+    	crit.setFetchMode("personaA", FetchMode.SELECT);
+    	@SuppressWarnings("unchecked")
+		Collection<InvitacionDocente> lst = crit.list();
+    			 
+		return lst;
+		
+		
+		/*Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(ContratoProfesor.class);
 		crit.add(Restrictions.eq("idCursoPeriodo", idCursoPeriodo));
 		crit.createAlias("invitacionDocente", "invitacionDocenteA");
 		crit.setFetchMode("invitacionDocenteA", FetchMode.JOIN);
@@ -85,7 +101,7 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
     		
     	}
     			 
-		return lstInvitacionDocentes;
+		return lstInvitacionDocentes;*/
 	}
 
 	@SuppressWarnings("unchecked")

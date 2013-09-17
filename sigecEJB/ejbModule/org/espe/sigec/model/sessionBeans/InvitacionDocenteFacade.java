@@ -126,7 +126,7 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 
 	@Override
 	public InvitacionDocente verificarUltimaInivtacionDocente(
-			BigInteger idCursoPeriodo, Integer idProfesor) throws Exception {
+			BigDecimal idCursoPeriodo, Integer idProfesor) throws Exception {
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
 		criteria.add(Restrictions.eq("invitacionDocentePK.idCursoPeriodo", idCursoPeriodo));
 		criteria.add(Restrictions.eq("invitacionDocentePK.prfIdProfesor", idProfesor));

@@ -132,6 +132,7 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 
 	@Override
 	public void administrarCurso(CursoPeriodo cursoPeriodo) throws Exception {		
+		userTransaction.begin();
 		if(cursoPeriodo.getHistoricoCursoEstadoCollection().getCursoPeriodo()==null){
 			cursoPeriodo.getHistoricoCursoEstadoCollection().setCursoPeriodo(cursoPeriodo);
 			historicoCursoEstadoFacadeLocal.create(cursoPeriodo.getHistoricoCursoEstadoCollection());
@@ -142,16 +143,24 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 			InvitacionDocente invitacionDocente = null;
 			
 			try {
-				invitacionDocente = invitacionDocenteFacadeLocal.verificarUltimaInivtacionDocente(cursoPeriodo.getIdCursoPeriodo().toBigInteger(), cursoPeriodo.getIdProfesor().intValue());
+				invitacionDocente = invitacionDocenteFacadeLocal.verificarUltimaInivtacionDocente(cursoPeriodo.getIdCursoPeriodo(), cursoPeriodo.getIdProfesor().intValue());
 				if(invitacionDocente!=null){
-					invitacionDocente.setEstado(SigecClientResourceBoundle.getString("doc_estado_invitacion_prof_seleccionado"));
+					invitacionDocente.setEstado("PCT");
 					invitacionDocenteFacadeLocal.edit(invitacionDocente);
 				}
+				
 			} catch (Exception e) {
 				e.printStackTrace();
+				userTransaction.rollback();
 			}
 			
 		}
+		try {
+			userTransaction.commit();
+		} catch (Exception e) {
+			userTransaction.rollback();
+		}
+		
 	}
 
 	@Override
@@ -267,5 +276,11 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 		} catch (Exception e) {
 			userTransaction.rollback();
 		}
+	}
+
+	@Override
+	public InvitacionDocente verificarUltimaInivtacionDocente(BigDecimal idCursoPeriodo, Integer idProfesor) throws Exception {
+		
+		return invitacionDocenteFacadeLocal.verificarUltimaInivtacionDocente(idCursoPeriodo, idProfesor);
 	}
 }
