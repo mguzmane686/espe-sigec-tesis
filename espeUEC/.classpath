@@ -9,8 +9,8 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1.1 Runtime"/>
-	<classpathentry kind="lib" path="C:/servers/jboss-as-7.1.1.Final/modules/org/apache/commons/lang3/main/commons-lang3-3.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/servers/jboss-as-7.1.1.Final/modules/org/espe/sigec/main/prjUtilitarioSigec.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1.1 Runtime Server"/>
+	<classpathentry kind="lib" path="C:/software/servers/jboss-as-7.1.1.Final/modules/org/apache/commons/lang3/main/commons-lang3-3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/software/servers/jboss-as-7.1.1.Final/modules/org/espe/sigec/main/prjUtilitarioSigec.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
