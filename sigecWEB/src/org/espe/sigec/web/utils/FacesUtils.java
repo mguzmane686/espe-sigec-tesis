@@ -33,6 +33,7 @@
 package org.espe.sigec.web.utils;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Map;
 
@@ -272,5 +273,13 @@ public class FacesUtils {
 	}
     public static void redirectPage(String page) throws IOException{
     	getExternalContext().redirect(page);
+    }
+    
+    public static OutputStream getTempletaDescargaReporte(String nombreArchivoDoc) throws IOException{
+    	FacesContext facesContext = FacesContext.getCurrentInstance();
+	    ExternalContext externalContext = facesContext.getExternalContext();
+	    externalContext.setResponseContentType("application/vnd.ms-word");
+	    externalContext.setResponseHeader("Content-Disposition", "attachment; filename=\""+nombreArchivoDoc+"\"");
+	    return externalContext.getResponseOutputStream();
     }
 }
