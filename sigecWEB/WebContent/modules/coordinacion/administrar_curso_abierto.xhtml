@@ -108,7 +108,7 @@
         	
         	<rich:panel header="Administrar curso" id="pnlLanCur">
         		<h:panelGroup rendered="#{(administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaAsignacionProfesor == '1') and 
-        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0') and (administrarCursoController.cursoPeriodo.idProfesor == null)}">
+        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0') and administrarCursoController.permitirAsignarProfesor}">
         			<fieldset style="border-color:red">
 		        		<legend>
 		        			<h:outputLabel value="Alerta!!!" styleClass="titulo" style="color:#1394EB;"/>
@@ -128,7 +128,7 @@
 	        		<h:panelGroup rendered="#{administrarCursoController.editMode}">
 		        			<h:panelGrid columns="2">
 			        			<h:outputLabel value="Profesor :" style="display:block; width:120px;"/>
-			        			<rich:select value="#{administrarCursoController.cursoPeriodo.idProfesor}">
+			        			<rich:select value="#{administrarCursoController.cursoPeriodo.idProfesor}" selectFirst="true">
 			        				<f:selectItems value="#{administrarCursoController.itemsProfesor}" var="prof"
 			        					itemLabel="#{prof.profesor.persona.nombreCompleto}" itemValue="#{prof.profesor.idProfesor}"/>
 			        					

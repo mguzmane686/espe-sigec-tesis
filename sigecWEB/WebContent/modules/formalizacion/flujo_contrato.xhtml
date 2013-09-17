@@ -25,18 +25,14 @@
         		#{request.scheme}://#{request.serverName}:#{request.serverPort}#{request.contextPath}
         		-->
 	        	<rich:collapsiblePanel header="Contratos"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
-					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client" rendered="#{!invitacionDocenteController.savedInvitacion}">
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 					
 					
 					<p:dataTable id="tblInvitaciones" value="#{generacionFlujoContratoController.lstInvitacionDocentes}" 
 						var="invitacion" paginator="true" rows="10" rowIndexVar="num_row" emptyMessage="#{msg.empty_collection}" paginatorAlwaysVisible="false">
 	        			
 	        			<p:column headerText="Num.">
-	        				<h:panelGroup layout="block" style="margin:auto;">
-	        				 <p:commandLink value="#{num_row+1}" process="@this" oncomplete="detalleInvitacion.show()" update="@form">
-	        				 	<!-- f:setPropertyActionListener target="#{invitacionEmitidaController.invitacionDocenteSelected}" value="#{invitacion}"></f:setPropertyActionListener-->
-	        				 </p:commandLink>
-	        				 </h:panelGroup>
+	        				 <h:commandLink value="#{num_row+1}" action="#{generacionFlujoContratoController.btnGenerarDocumento(invitacion)}" />
 	        			</p:column>
 	        			
 	        			<p:column headerText="#{msg.etiqueta_curso}">

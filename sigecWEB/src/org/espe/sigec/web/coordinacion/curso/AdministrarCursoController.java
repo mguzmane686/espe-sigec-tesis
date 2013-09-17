@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
@@ -34,6 +35,8 @@ public class AdministrarCursoController {
 	private Collection<InvitacionDocente> itemsProfesor;
 	private Profesor profesorSelected;
 	
+	private boolean permitirAsignarProfesor;
+	
 	private Collection<CursoEstudiante> lstInscritos;
 	
 	public AdministrarCursoController() {
@@ -47,11 +50,26 @@ public class AdministrarCursoController {
 	public void cargarNumeroEstudiantesInscritos(){
 		try {
 			setNumeroAlumnosInscritos(coordinacionServicio.numeroEstudiantesInscritos(getCursoPeriodo().getIdCursoPeriodo()));
+			validarEstadoContratoProfesor();
 		} catch (Exception e) {
 			System.out.println("Error al cargar el numero de estudiantes inscritos");
 		}		
 	}
 	
+	private void validarEstadoContratoProfesor(){
+		try {
+			InvitacionDocente invitacionDocente = coordinacionServicio.verificarUltimaInivtacionDocente(getCursoPeriodo().getIdCursoPeriodo(), getCursoPeriodo().getIdProfesor().intValue());
+			if(StringUtils.equals(invitacionDocente.getEstado(), "PCT")){
+				setPermitirAsignarProfesor(Boolean.TRUE);
+			}else{
+				setPermitirAsignarProfesor(Boolean.FALSE);
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 	public void btnEdit(ActionEvent e){
 		setEditMode(Boolean.TRUE);
 		setItemsProfesor(coordinacionServicio.findProfesoresSeleccionados(getCursoPeriodo().getIdCursoPeriodo()));
@@ -142,5 +160,15 @@ public class AdministrarCursoController {
 	public void setLstInscritos(Collection<CursoEstudiante> lstInscritos) {
 		this.lstInscritos = lstInscritos;
 	}
+
+	public boolean isPermitirAsignarProfesor() {
+		return permitirAsignarProfesor;
+	}
+
+	public void setPermitirAsignarProfesor(boolean permitirAsignarProfesor) {
+		this.permitirAsignarProfesor = permitirAsignarProfesor;
+	}
+
+	
 	
 }
