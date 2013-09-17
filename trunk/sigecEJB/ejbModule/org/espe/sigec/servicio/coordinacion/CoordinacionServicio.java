@@ -45,4 +45,5 @@ public interface CoordinacionServicio {
      * @throws Exception
      */
 	void actualizarListaMaterialesCurso(Collection<MaterialDidacticoCurso> lstMaterialDidacticoOriginal, Collection<MaterialDidacticoCurso> lstMaterialDidacticoModificada) throws SigecException ,Exception;
+	InvitacionDocente verificarUltimaInivtacionDocente(BigDecimal idCursoPeriodo, Integer idProfesor) throws Exception;
 }
