@@ -33,6 +33,8 @@
 			<module name="net.sf.jasperreports" export="true" />
 			<module name="org.espe.sigec" export="true" />
 			<module name="org.aopalliance" slot="1.0" export="true" />
+			<module name="org.dom4j" export="true"/>
+			
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>
