@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.inject.New;
 import javax.faces.context.FacesContext;
 
 import org.apache.poi.xwpf.usermodel.BreakType;
@@ -156,27 +155,45 @@ public class ReporteFlujoContrato {
 
 		XWPFParagraph paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
 		XWPFRun paragraphOneRunOne = paragraphOne.createRun();
+		
+		
+		paragraphOne.setAlignment(ParagraphAlignment.CENTER);
+		
 		reportesUtil.addText(paragraphOneRunOne,"CONTRATO No. ${numero_de_contrato} -SC-ESPE-UEC");
 		paragraphOneRunOne.setFontFamily("Bookman Old Style");
 		
 		paragraphOneRunOne.addBreak();
-		reportesUtil.addText(paragraphOneRunOne,"CONTRATO DE PRESTACIÓN DE SERVICIOS PROFESIONALES DE EDUCACIÓN CONTINUA A CELEBRARSE ENTRE LA ESCUELA POLITÉCNICA DEL EJÉRCITO Y EL (LA) ${nombre_del_proveedor}");
+		reportesUtil.addText(paragraphOneRunOne,"CONTRATO DE PRESTACIÓN DE SERVICIOS PROFESIONALES DE EDUCACIÓN CONTINUA A CELEBRARSE ENTRE LA ESCUELA POLITÉCNICA DEL EJÉRCITO Y ${nombre_del_proveedor}");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
 		reportesUtil.addText(paragraphOneRunOne,"Intervienen en la celebración del presente contrato, por una parte, la Escuela Politécnica del Ejército, legalmente representada por el señor Cnel. E.M.C.,${nombre_sr_Vicerrector} en calidad de Vicerrector Académico;  y delegado del rector representante legal de la ESPE; y, de otro lado, el (la), ${nombre_del_proveedor}, de nacionalidad ecuatoriana,  quien en lo posterior se denominará el (la) contratado (a), partes legalmente capaces para contraer obligaciones, que convienen en celebrar el presente contrato, al tenor de las siguientes cláusulas:");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"PRIMERA.- ANTECEDENTES:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
 
-		reportesUtil.addText(paragraphOneRunOne,"1.	Invitación formulada mediante oficio No.${N_invitacion} ");
+		reportesUtil.addText(paragraphOneRunOne,"1.	Invitación formulada mediante oficio No.${N_invitacion}");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"2.	Aceptación de los contratistas");
 		paragraphOneRunOne.addBreak();
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"3.	Certificación Presupuestaria No. ,${N_certificacion}  del, ${fecha_de_certificacion} mediante la cual se informa que existe disponibilidad económica en la Partida Presupuestaria No.${NOMBRE_D_ELA_PP_}, por el valor de U.S.D. $ ${valor} ${F9} para financiar el pago de la contratación al personal de instructores que participarán en la capacitación continua.");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
 		
-
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"SEGUNDA.- DOCUMENTOS HABILITANTES:");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"1.	Certificación Presupuestaria No. ${N_certificacion}");
@@ -184,35 +201,67 @@ public class ReporteFlujoContrato {
 		reportesUtil.addText(paragraphOneRunOne,"2.	Los demás que constan en la cláusula Antecedentes; y, ");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"3.	Documentos del contratista");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
 
 
 		reportesUtil.addText(paragraphOneRunOne,"TERCERA.- OBJETO:");
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Con los antecedentes expuestos, la ESPE contrata los servicios del (la) ${nombre_del_proveedor}, en calidad de instructor para que dicte la materia de, ${NOMBRE_DEL_CURSO} en el ${lugar_a_dictarse}");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"CUARTA.- PRECIO:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Por los servicios de instructor que se contrata, la Escuela Politécnica del Ejército pagará al (la) Contratado (a), el valor único de U.S.D. ${valor_a_pagar} ${pp} sujeto a retenciones de Ley.  Este valor se pagará al finalizar la capacitación previo informe del Coordinador de Unidad de Educación Continua y la Orden de Pago del Vicerrector Académico.");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"QUINTA.- DURACIÓN:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"La capacitación  se desarrollará a partir del ${fecha_curso} con una duración de ${n_horas} horas, tiempo en el cual el (la) contratado (a) se compromete a ejecutar las actividades a él (ella) encomendadas.");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"La duración puede ser prorrogada por parte de la ESPE, de considerar que han existido causas no imputables al (la) contratado (a), en el cumplimiento del plazo, tales como caso fortuito y fuerza mayor de acuerdo a los términos del Art. 30 del Código Civil."); 
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"La Unidad de Educación Continua, en virtud de este contrato, resolverá sobre las peticiones de ampliación o prórroga de plazo.");
 		paragraphOneRunOne.addBreak();
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"SEXTA: CONSTANCIA.");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Conste por el presente, que la contratación se realiza por la capacidad y experiencia del contratado (a).  Por la naturaleza del contrato, no existe dependencia laboral entre las partes.");
 		paragraphOneRunOne.addBreak();
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"SÉPTIMA.- TERMINACIÓN:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"El contrato en condiciones normales terminará por el cumplimiento cabal de las obligaciones contractuales; para el efecto el Director de la Unidad de Educación Continua presentará un informe final de cumplimiento del objeto del contrato."); 
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"Adicionalmente el contrato podrá terminar por las siguientes causas:");
@@ -230,34 +279,72 @@ public class ReporteFlujoContrato {
 
 		reportesUtil.addText(paragraphOneRunOne,"La ESPE podrá también dar por terminado este contrato unilateralmente, si el (la) contratado (a),  no cumpliere a satisfacción las actividades a él (ella) asignadas, resultantes de este instrumento, o por incumplimiento de la Ley, para cuyo efecto deberá preceder el trámite correspondiente.");
 		paragraphOneRunOne.addBreak();
-
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"OCTAVA.- OBLIGACIONES TRIBUTARIAS:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"El (la) contratado (a) se obliga a cumplir todas las obligaciones tributarias que las leyes ecuatorianas imponen, así como las que devengan del presente instrumento y la ESPE, actuará como agente de retención en los casos y montos que se determinen en la Ley y reglamentos correspondientes.");
 		paragraphOneRunOne.addBreak();
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"NOVENA.- DEFINICIÓN E interpretación DE TÉRMINOS:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"La intención de los términos contenidos en este contrato o en cualquier documento o instrumento relativo a él (la), es el cumplimiento y ejecución del objeto del contrato.");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"La interpretación de términos será al tenor de la Ley y a falta de definición legal se estará al significado técnico de los mismos y al significado natural y obvio, de conformidad con el objeto contractual y la intención de los contratantes.");
 		paragraphOneRunOne.addBreak();
-
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"DÉCIMA.- DIVERGENCIAS");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"En caso de suscitarse controversias en la aplicación e interpretación de este contrato, las partes convienen en sujetar toda controversia, a la solución mediante trato directo, para el caso de no llegar a un acuerdo en el término de quince días, se someterán a lo dispuesto en la Ley de Arbitraje y Mediación, para lo cual la partes se obligan a buscar una solución con la intervención del Centro de Mediación de la Procuraduría General del Estado. En el caso de que las partes no lleguen a un acuerdo acudirán a la vía judicial, para tal efecto se sujetan a los jueces de la ciudad de Quito.");
 		paragraphOneRunOne.addBreak();
-
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"DÉCIMO PRIMERA.- NOTIFICACIONES:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Las notificaciones que sean necesarias realizar entre las partes durante la ejecución de este contrato se realizarán por escrito, al contratado, en el lugar donde se desarrolla el objeto del contrato; y, a la ESPE, en las oficinas de la Dirección de la Unidad de Educación Continua.");
 		paragraphOneRunOne.addBreak();
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"DÉCIMO SEGUNDA.- RATIFICACIÓN:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Para constancia de todo cuanto queda estipulado, en fe de aceptación y conformidad, las partes suscriben el presente contrato, en dos ejemplares de igual tenor y valor, en Sangolquí, a ${fecha_contrato}");
 		paragraphOneRunOne.addBreak();
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
  
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"CRNL. EMC. ${nombre_sr_Vicerrector}");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"VICERRECTOR ACADÉMICO ESPE");
@@ -266,6 +353,7 @@ public class ReporteFlujoContrato {
 		reportesUtil.addText(paragraphOneRunOne,"${nombre_del_proveedor}");
 		paragraphOneRunOne.addBreak();
 		reportesUtil.addText(paragraphOneRunOne,"${cedula} ");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak(BreakType.PAGE);
 
 	}
@@ -276,9 +364,14 @@ public class ReporteFlujoContrato {
 		XWPFRun paragraphOneRunOne = paragraphOne.createRun();
 		paragraphOneRunOne.setFontFamily("Bookman Old Style");
 		
+		paragraphOne.setAlignment(ParagraphAlignment.CENTER);
 		reportesUtil.addText(paragraphOneRunOne,"UNIDAD DE EDUCACION CONTINUA");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"No. ${n_de_memo_legalizacion_contrato}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 
@@ -291,13 +384,19 @@ public class ReporteFlujoContrato {
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 
 		reportesUtil.addText(paragraphOneRunOne,"ASUNTO  Legalización de contrato.");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		paragraphOneRunOne.addBreak();
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Para la respectiva legalización me permito remitir a usted, el contrato N° ${numero_de_contrato} del  ${nombre_del_proveedor} que dictará  el curso de \"${NOMBRE_DEL_CURSO}\", del ${fecha_curso}.");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 5);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
 
-
-
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"Atentamente,");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 
@@ -308,10 +407,12 @@ public class ReporteFlujoContrato {
 		reportesUtil.addText(paragraphOneRunOne,"DIRECTORA UEC	");
 		paragraphOneRunOne.addBreak();
 		paragraphOneRunOne.addBreak(BreakType.PAGE);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 	}
 	
-	
+	@Deprecated
 	public void reporteContratoP5(){
+		/*
 		XWPFParagraph paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
 		XWPFRun paragraphOneRunOne = paragraphOne.createRun();
 
@@ -334,10 +435,6 @@ public class ReporteFlujoContrato {
 		reportesUtil.addText(paragraphOneRunOne,"Adjunto copia de la certificación presupuestaria Nº.${N_partida_presupuestria_imprenta}, de fecha  ${fecha_memmo_imprenta} por el valor de ${valor_imprenta}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 
-
-
-
-
 		reportesUtil.addText(paragraphOneRunOne,"Atentamente,");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 
@@ -347,7 +444,7 @@ public class ReporteFlujoContrato {
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 		reportesUtil.addText(paragraphOneRunOne,"Directora de la UEC");
 		paragraphOneRunOne.addBreak(BreakType.PAGE);
-
+		 */
 	}
 	
 	public void reporteContratoP6(){
