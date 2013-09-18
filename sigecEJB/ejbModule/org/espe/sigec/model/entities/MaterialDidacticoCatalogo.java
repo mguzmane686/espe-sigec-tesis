@@ -8,10 +8,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -28,6 +31,8 @@ public class MaterialDidacticoCatalogo implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "mtdt_id_material")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="material_seq")
+    @SequenceGenerator(name="material_seq", sequenceName="material_seq", allocationSize = 1)
     private Integer idMaterial;
     @Column(name = "mtdt_nombre")
     private String nombre;
@@ -35,7 +40,7 @@ public class MaterialDidacticoCatalogo implements Serializable {
     private String descripcion;
     @Column(name = "mtdt_estado")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialDidacticoCatalogo", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "materialDidacticoCatalogo", fetch = FetchType.LAZY)
     private Collection<MaterialDidacticoCurso> lstMaterialDidacticoCursos;
 
     public MaterialDidacticoCatalogo() {

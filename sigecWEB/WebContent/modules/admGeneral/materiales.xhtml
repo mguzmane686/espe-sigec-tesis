@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+   	<h:outputStylesheet library="css" name="textos.css"/>    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	
+   		<h:form id="frmMaterial">
+       	
+       	
+       	<rich:panel header="#{msg['creacion_aula']}" id="pnlAula">
+       		<h:panelGroup layout="block" styleClass="roundCorner">
+       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+       				<a4j:commandButton value="#{msg['guardar']}" action="#{administrarMaterialController.btnCrearNuevoMaterial}" 
+       					image="/resources/images/save.png" render="tblMateriales pgMaterial"/>
+       				<h:outputLabel value="#{msg['guardar']}" />
+       			</h:panelGrid>
+       		</h:panelGroup>
+       		
+       		
+       		<rich:collapsiblePanel header="nuevo material"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+				<h:panelGrid columns="2" id="pgMaterial">
+					<h:outputLabel value="Nombre: " styleClass="label-bold"/>
+					<sigecComp:textField value="#{administrarMaterialController.materialDidacticoCatalogo.nombre}" label="Nombre" required="true" editMode="true"/>
+					<h:outputLabel value="#{msg.descripcion}: " styleClass="label-bold"/>
+					<sigecComp:textField value="#{administrarMaterialController.materialDidacticoCatalogo.descripcion}" label="#{msg.descripcion}" required="true" editMode="true"/>
+				</h:panelGrid>
+			</rich:collapsiblePanel>
+			
+       		<rich:collapsiblePanel header="Lista materiales"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+        		
+        		
+        		<p:dataTable id="tblMateriales" value="#{administrarMaterialController.lstMaterialDidacticoCatalogos}" var="items" rows="10" 
+        			paginatorPosition="top" paginatorAlwaysVisible="false" paginator="true">
+        			<p:column>
+        				<f:facet name="header">
+        					Nombre
+        				</f:facet>
+        				<p:commandLink value="#{items.nombre}" process="@this" update="@this" oncomplete=""/>
+        			</p:column>
+        			
+        			<p:column>
+        				<f:facet name="header">
+        					#{msg.descripcion}
+        				</f:facet>
+        				<h:outputLabel value="#{items.descripcion}" />
+        			</p:column>
+        			
+        			<p:column>
+        				<f:facet name="header">
+        					Estado
+        				</f:facet>
+        				<h:outputLabel value="#{items.estado=='ACT'?'Activo':'Inactivo'}" />
+        			</p:column>
+        		</p:dataTable>
+        	</rich:collapsiblePanel>	
+       	</rich:panel>
+       	
+       </h:form>
+</ui:composition>

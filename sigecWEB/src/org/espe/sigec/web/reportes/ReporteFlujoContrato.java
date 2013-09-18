@@ -587,14 +587,10 @@ public class ReporteFlujoContrato {
 
 		reportesUtil.addText(paragraphOneRunOne,"Valor hora clase:	${V_HORA_CLASE}");
 
-		reportesUtil.addText(paragraphOneRunOne,"Total a pagar:");
-		reportesUtil.addText(paragraphOneRunOne,"Banco:");
-		reportesUtil.addText(paragraphOneRunOne,"No. de Cuentas:	$ ${valor_a_pagar},oo ${pp}");
-		reportesUtil.addText(paragraphOneRunOne,"${Banco}");
-		reportesUtil.addText(paragraphOneRunOne,"${N_cta}");
-
-		reportesUtil.addText(paragraphOneRunOne,"No. Ticket de avión:	");
-		reportesUtil.addText(paragraphOneRunOne,"${plan}");
+		reportesUtil.addText(paragraphOneRunOne,"Total a pagar: $ ${valor_a_pagar},oo ${pp}");
+		reportesUtil.addText(paragraphOneRunOne,"Banco: ${Banco}");
+		reportesUtil.addText(paragraphOneRunOne,"No. de Cuentas: ${N_cta}");
+		reportesUtil.addText(paragraphOneRunOne,"No. Ticket de avión: ${plan}");
 		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
