@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.collections.CollectionUtils;
 import org.espe.sigec.model.entities.ContratoProfesor;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -33,6 +34,26 @@ public class ContratoProfesorFacade extends AbstractFacade<ContratoProfesor> imp
 		criteria.add(Restrictions.eq("idCursoPeriodo", idCursoPeriodo));
 		criteria.add(Restrictions.eq("idProfesor", idProfesor));
 		criteria.addOrder(Order.desc("sgctDocContratoProfPK.docNumInvit"));
+		
+		criteria.createAlias("invitacionDocente", "invitacionDocenteA");
+		criteria.setFetchMode("invitacionDocenteA", FetchMode.JOIN);
+		
+		criteria.createAlias("invitacionDocenteA.cursoPeriodo", "cursoPeriodoA");
+		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.periodoAcademico", "periodoAcademicoA");
+		criteria.setFetchMode("periodoAcademicoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.profesor", "profesorA");
+		criteria.setFetchMode("profesorA", FetchMode.JOIN);
+		
+		criteria.createAlias("profesorA.persona", "personaA");
+		criteria.setFetchMode("personaA", FetchMode.JOIN);
+		
+		
+		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
+		criteria.setFetchMode("cursoA", FetchMode.JOIN);
+		
 		@SuppressWarnings("unchecked")
 		Collection<ContratoProfesor> lstContratoProfesors = criteria.list();
 		if(CollectionUtils.isNotEmpty(lstContratoProfesors)){
