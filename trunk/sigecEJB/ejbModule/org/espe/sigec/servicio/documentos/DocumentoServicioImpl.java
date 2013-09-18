@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.documentos;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -69,13 +70,18 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 		return invitacionDocenteFacadeLocal.verificarInivtacionAceptada();
 	}
 	@Override
-	public void crearContratoDocente(ContratoProfesor contratoProfesor)
-			throws Exception {
+	public void crearContratoDocente(ContratoProfesor contratoProfesor) throws Exception {
 		contratoProfesorFacadeLocal.create(contratoProfesor);
 	}
 	@Override
 	public Collection<InvitacionDocente> findInvitacionesByEstado(
 			String estadoInvitacion) throws Exception {
 		return invitacionDocenteFacadeLocal.findInvitacionesByEstado(estadoInvitacion);
+	}
+	@Override
+	public ContratoProfesor obtenerContratoDocente(BigDecimal idCursoPeriodo,
+			int idProfesor) throws Exception {
+		// TODO Auto-generated method stub
+		return contratoProfesorFacadeLocal.obtenerContratoDocente(idCursoPeriodo, idProfesor);
 	}
 }

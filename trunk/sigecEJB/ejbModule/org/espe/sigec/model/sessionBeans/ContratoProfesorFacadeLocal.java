@@ -1,5 +1,6 @@
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -21,4 +22,6 @@ public interface ContratoProfesorFacadeLocal {
     List<ContratoProfesor> findRange(int[] range);
     
     int count();
+    
+    ContratoProfesor obtenerContratoDocente(BigDecimal idCursoPeriodo, int idProfesor) throws Exception;
 }

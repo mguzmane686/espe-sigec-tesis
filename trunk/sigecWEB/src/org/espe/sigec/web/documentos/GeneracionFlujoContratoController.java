@@ -31,14 +31,18 @@ public class GeneracionFlujoContratoController implements Serializable{
 	
 	public void btnGenerarDocumento(InvitacionDocente invitacionDocente){
 		setInvitacionDocenteSelected(invitacionDocente);
-		ContratoProfesor contratoProfesor = new ContratoProfesor();
-		contratoProfesor.setIdCursoPeriodo(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo());
-		contratoProfesor.setIdProfesor(getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
-		contratoProfesor.setInvitacionDocente(getInvitacionDocenteSelected());
-		contratoProfesor.setContratoProfesorPK(new ContratoProfesorPK());
-		contratoProfesor.getContratoProfesorPK().setDocNumInvit(getInvitacionDocenteSelected().getInvitacionDocentePK().getDocNumInvit());
+		ContratoProfesor contratoProfesor =null;
 		try {
-			documentoServicio.crearContratoDocente(contratoProfesor);
+			contratoProfesor = documentoServicio.obtenerContratoDocente(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo(), getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
+			if(contratoProfesor ==null){
+				contratoProfesor = new ContratoProfesor();
+				contratoProfesor.setIdCursoPeriodo(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo());
+				contratoProfesor.setIdProfesor(getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
+				contratoProfesor.setInvitacionDocente(getInvitacionDocenteSelected());
+				contratoProfesor.setContratoProfesorPK(new ContratoProfesorPK());
+				contratoProfesor.getContratoProfesorPK().setDocNumInvit(getInvitacionDocenteSelected().getInvitacionDocentePK().getDocNumInvit());
+				documentoServicio.crearContratoDocente(contratoProfesor);
+			}
 			generarReporte();
 		} catch (Exception e1) {
 			e1.printStackTrace();
