@@ -13,6 +13,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.espe.sigec.model.entities.ContratoProfesor;
+import org.espe.sigec.web.seguridad.HomeSessionController;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.ReportesUtil;
 
@@ -61,7 +62,7 @@ public class ReporteFlujoContrato {
 		mapaSub.put("fecha_contrato", reportesUtil.convertirFecha(new Date()));
 		mapaSub.put("n_de_memo_legalizacion_contrato", "____________");
 		mapaSub.put("fecha_memmo_imprenta", reportesUtil.convertirFecha(new Date()));
-		mapaSub.put("NOMBRE_COORDINADOR", "____________");
+		mapaSub.put("NOMBRE_COORDINADOR", ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getNombreCompleto());
 		mapaSub.put("nombre_coordinador", "____________");
 		mapaSub.put("HORARIO_DE_CLASES", "____________");
 		mapaSub.put("fecha_carta_de_pago", reportesUtil.convertirFecha(new Date()));
@@ -451,17 +452,26 @@ public class ReporteFlujoContrato {
 		XWPFParagraph paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
 		XWPFRun paragraphOneRunOne = paragraphOne.createRun();
 		
-		paragraphOneRunOne.setFontFamily("Bookman Old Style");
-		
+		;
+		paragraphOne.setAlignment(ParagraphAlignment.CENTER);
 		reportesUtil.addText(paragraphOneRunOne,"UNIDAD DE EDUCACIÓN CONTINUA");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
-		reportesUtil.addText(paragraphOneRunOne,"INFORME QUE PRESENTA LA ${NOMBRE_COORDINADOR}, COORDINADOR (A) DE EVENTOS DE LA UNIDAD EDUCACIÒN CONTINUA, SOBRE  LA  PRESTACIÓN DE SERVICIOS PROFESIONALES DE LA ${NOMBRE_DEL_PROVEEDOR}");
+		reportesUtil.addText(paragraphOneRunOne,"INFORME QUE PRESENTA ${NOMBRE_COORDINADOR}, COORDINADOR (A) DE EVENTOS DE LA UNIDAD EDUCACIÒN CONTINUA, SOBRE  LA  PRESTACIÓN DE SERVICIOS PROFESIONALES DE LA ${NOMBRE_DEL_PROVEEDOR}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"ANTECEDENTES");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
 		reportesUtil.addText(paragraphOneRunOne,"${actividades}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"La ejecución del evento de capacitación de \"${NOMBRE_DEL_CURSO}\" se ejecutó en la semana del ${fecha_curso}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
 
@@ -484,6 +494,11 @@ public class ReporteFlujoContrato {
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 		reportesUtil.addText(paragraphOneRunOne,"Una vez devengado el servicio de capacitación del curso \"${NOMBRE_DEL_CURSO}\", en las fechas estipuladas y contando con la Certificación Presupuestaria Nº ${N_certificacion} y  toda la documentación solicitada por la Dirección Financiera se recomienda se proceda con el tramite respectivo.");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"Sangolquí, ${fecha_carta_de_pago}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
 		reportesUtil.addText(paragraphOneRunOne,"____________________________________");
@@ -492,13 +507,23 @@ public class ReporteFlujoContrato {
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
 		reportesUtil.addText(paragraphOneRunOne,"Coordinador (a) de Capacitación UEC");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Después del informe presentado por la Coordinadora de la Capacitación, ${nombre_coordinador} y la revisión de los documentos  por el Ing. Edison Cabezas,   yo como Directora de la Unidad de Educación Continua, recomiendo que se proceda con los trámites correspondientes.");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne = xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 3);
 		reportesUtil.addText(paragraphOneRunOne,"_____________________");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
 		reportesUtil.addText(paragraphOneRunOne,"Ing. Karla Benavides ");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
 		reportesUtil.addText(paragraphOneRunOne,"Directora UEC");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
 
 		paragraphOneRunOne.addBreak(BreakType.PAGE);
@@ -507,9 +532,7 @@ public class ReporteFlujoContrato {
 	public void reporteContratoP7(){
 		XWPFParagraph paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
 		XWPFRun paragraphOneRunOne = paragraphOne.createRun();
-		
-		paragraphOneRunOne.setFontFamily("Bookman Old Style");
-		
+		paragraphOne.setAlignment(ParagraphAlignment.CENTER);
 		reportesUtil.addText(paragraphOneRunOne,"VICERRECTORADO ACADEMICO");
 		reportesUtil.addText(paragraphOneRunOne,"UNIDAD DE EDUCACIÓN CONTINUA");
 		reportesUtil.addText(paragraphOneRunOne,"MEMORANDO");
@@ -517,7 +540,10 @@ public class ReporteFlujoContrato {
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
 		reportesUtil.addText(paragraphOneRunOne,"No. -${N_MEMO}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"Sangolquí ${fecha_carta_de_pago}");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
 		reportesUtil.addText(paragraphOneRunOne,"DE:	CRNL. E.M.C. ${nombre_sr_Vicerrector}");
@@ -526,8 +552,17 @@ public class ReporteFlujoContrato {
 		reportesUtil.addText(paragraphOneRunOne,"	DIRECTORA FINANCIERA");
 		reportesUtil.addText(paragraphOneRunOne,"En:  	      Su despacho.-");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Mucho agradeceré a usted, señora Directora, ordenar y disponer a quien corresponda el pago por servicios de capacitación, de acuerdo al siguiente detalle:");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
+		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"Instructor:	${nombre_del_proveedor}");
 
 		reportesUtil.addText(paragraphOneRunOne,"Función:	${tipo_relacion_loboral}");
@@ -554,21 +589,42 @@ public class ReporteFlujoContrato {
 
 		reportesUtil.addText(paragraphOneRunOne,"No. Ticket de avión:	");
 		reportesUtil.addText(paragraphOneRunOne,"${plan}");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 1);
+		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.BOTH);
 		reportesUtil.addText(paragraphOneRunOne,"Para el efecto adjunto la Certificación de Fondos No.${N_certificacion} de  fecha ${fecha_de_certificacion} Además, informo que cumplió la capacitación con total satisfacción del cliente.");     
-
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
+		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.CENTER);
 		reportesUtil.addText(paragraphOneRunOne,"DIOS, PATRIA Y LIBERTAD,");
 
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
 		reportesUtil.addText(paragraphOneRunOne,"____________________________________");
 		reportesUtil.addText(paragraphOneRunOne,"${nombre_sr_Vicerrector}");
 		reportesUtil.addText(paragraphOneRunOne,"CRNL. E.M.C.");
-		reportesUtil.addText(paragraphOneRunOne,"                           VICERRECTOR ACADEMICO");
+		reportesUtil.addText(paragraphOneRunOne,"VICERRECTOR ACADEMICO");
 		reportesUtil.addBreakSpace(paragraphOneRunOne, 2);
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
 		reportesUtil.addText(paragraphOneRunOne,"Adjunto:   documentación");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
+		
+		paragraphOne =  xwpfDocumentFlujoContra.createParagraph();
+		paragraphOneRunOne = paragraphOne.createRun();
+		paragraphOne.setAlignment(ParagraphAlignment.RIGHT);
 		reportesUtil.addText(paragraphOneRunOne,"Elaborado por: Ing. E. Cabezas");
 		reportesUtil.addText(paragraphOneRunOne,"Revisado por: Ing. K. Benavides");
+		reportesUtil.agregarEstilos(paragraphOneRunOne);
 
 		
 	}
