@@ -19,6 +19,7 @@ import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
 import org.espe.sigec.model.entities.HistoricoCursoEstado;
+import org.espe.sigec.model.entities.HorarioCursoPeriodo;
 import org.espe.sigec.model.entities.InvitacionDocente;
 import org.espe.sigec.model.entities.MaterialDidacticoCatalogo;
 import org.espe.sigec.model.entities.MaterialDidacticoCurso;
@@ -30,13 +31,13 @@ import org.espe.sigec.model.sessionBeans.CursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EdificioFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EspecialidadFacadeLocal;
 import org.espe.sigec.model.sessionBeans.HistoricoCursoEstadoFacadeLocal;
+import org.espe.sigec.model.sessionBeans.HorarioCursoPeriodoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.InvitacionDocenteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.LugarCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.MaterialDidacticoCatalogoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.MaterialDidacticoCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.PeriodoAcademicoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProfesorFacadeLocal;
-import org.espe.sigec.utils.SigecClientResourceBoundle;
 
 /**
  * @author roberto
@@ -70,6 +71,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 	
 	@EJB
 	private MaterialDidacticoCursoFacadeLocal materialDidacticoCursoFacadeLocal;
+	@EJB
+	private HorarioCursoPeriodoFacadeLocal horarioCursoPeriodoFacadeLocal;
 	
 	@Resource
 	private UserTransaction userTransaction;
@@ -102,6 +105,9 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 			historicoCursoEstado.setEtapaEjecutado("0");
 			historicoCursoEstado.setEtapaFinalizado("0");
 			historicoCursoEstadoFacadeLocal.create(historicoCursoEstado);
+			
+			cursoPeriodo.getHorarioCursoPeriodo().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+			horarioCursoPeriodoFacadeLocal.create(cursoPeriodo.getHorarioCursoPeriodo());
 			userTransaction.commit();
 		} catch (Exception e) {
 			userTransaction.rollback();

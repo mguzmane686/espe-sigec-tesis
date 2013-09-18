@@ -18,6 +18,7 @@ import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Edificio;
 import org.espe.sigec.model.entities.Especialidad;
 import org.espe.sigec.model.entities.Establecimiento;
+import org.espe.sigec.model.entities.HorarioCursoPeriodo;
 import org.espe.sigec.model.entities.PeriodoAcademico;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.utils.SigecConstantes;
@@ -55,6 +56,7 @@ public class AbrirCurso implements Serializable{
 		setPeriodoAcademico(new PeriodoAcademico());
 		setCursoPeriodo(new CursoPeriodo());
 		getCursoPeriodo().setCurso(new Curso());
+		getCursoPeriodo().setHorarioCursoPeriodo(new HorarioCursoPeriodo());
 //		getCursoPeriodo().setAula(new Aula());
 		getCursoPeriodo().setTipoCurso(SigecConstantes.TIPO_CURSO_INDIVIDUAL);
 		loadParametrosGenerales();

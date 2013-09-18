@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
     
@@ -101,9 +102,61 @@
         					<f:selectItem itemLabel="Virtual" itemValue="VIRTUAL"/>
         				</rich:select>
         				
+        				<h:outputLabel value="#{msg.numero_de_horas}"/>
+        				<h:inputText value="#{planearCursoController.cursoPeriodo.numeroHoras}" />
+        				
         			</h:panelGrid>
         		
-        		</rich:collapsiblePanel>	
+        			
+        			
+        		</rich:collapsiblePanel>
+        		
+        		<rich:collapsiblePanel header="Horario"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+					<h:panelGrid columns="4" rendered="true">
+        				<h:outputLabel value="Lunes"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.lunesDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.lunesHasta}"  />  
+        				</h:panelGrid>
+        				
+        				<h:outputLabel value="Martes"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.martesDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.martesHasta}"  />  
+        				</h:panelGrid>
+        				
+        				<h:outputLabel value="#{msg.miercoles}"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.miercolesDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.miercolesHasta}"  />  
+        				</h:panelGrid>
+        				
+        				<h:outputLabel value="Jueves"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.juevesDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.juevesHasta}"  />  
+        				</h:panelGrid>
+        				
+        				<h:outputLabel value="Viernes"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.viernesDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.viernesHasta}"  />  
+        				</h:panelGrid>
+        				
+        				<h:outputLabel value="#{msg.sabado}"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.sabadoDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.sabadoHasta}"  />  
+        				</h:panelGrid>
+        				
+        				<h:outputLabel value="Domingo"/>
+        				<h:panelGrid columns="2">
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.domingoDesde}"  />
+        					<h:inputText value="#{planearCursoController.cursoPeriodo.horarioCursoPeriodo.domingoHasta}"  />  
+        				</h:panelGrid>
+        			</h:panelGrid>
+				</rich:collapsiblePanel>	
         	</rich:panel>
         	
         </h:form>
