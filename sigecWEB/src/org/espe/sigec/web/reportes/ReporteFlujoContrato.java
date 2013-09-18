@@ -9,6 +9,7 @@ import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.espe.sigec.model.entities.ContratoProfesor;
 import org.espe.sigec.web.utils.FacesUtils;
 import org.espe.sigec.web.utils.ReportesUtil;
 
@@ -17,6 +18,10 @@ public class ReporteFlujoContrato {
 	private XWPFDocument xwpfDocumentFlujoContra;
 
 	public ReporteFlujoContrato() {
+		xwpfDocumentFlujoContra = new XWPFDocument();
+	}
+	
+	public ReporteFlujoContrato(ContratoProfesor contratoProfesor){
 		xwpfDocumentFlujoContra = new XWPFDocument();
 	}
 
