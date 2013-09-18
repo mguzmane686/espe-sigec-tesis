@@ -79,9 +79,7 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 		return invitacionDocenteFacadeLocal.findInvitacionesByEstado(estadoInvitacion);
 	}
 	@Override
-	public ContratoProfesor obtenerContratoDocente(BigDecimal idCursoPeriodo,
-			int idProfesor) throws Exception {
-		// TODO Auto-generated method stub
+	public ContratoProfesor obtenerContratoDocente(BigDecimal idCursoPeriodo, int idProfesor) throws Exception {
 		return contratoProfesorFacadeLocal.obtenerContratoDocente(idCursoPeriodo, idProfesor);
 	}
 }
