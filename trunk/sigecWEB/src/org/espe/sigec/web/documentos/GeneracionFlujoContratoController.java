@@ -60,7 +60,6 @@ public class GeneracionFlujoContratoController implements Serializable{
 		reporteFlujoContrato.reporteContratoP2();
 		reporteFlujoContrato.reporteContratoP3();
 		reporteFlujoContrato.reporteContratoP4();
-//		reporteFlujoContrato.reporteContratoP5();
 		reporteFlujoContrato.reporteContratoP6();
 		reporteFlujoContrato.reporteContratoP7();
 		
