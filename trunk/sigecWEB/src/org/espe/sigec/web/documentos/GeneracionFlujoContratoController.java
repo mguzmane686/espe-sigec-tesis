@@ -42,7 +42,10 @@ public class GeneracionFlujoContratoController implements Serializable{
 				contratoProfesor.setContratoProfesorPK(new ContratoProfesorPK());
 				contratoProfesor.getContratoProfesorPK().setDocNumInvit(getInvitacionDocenteSelected().getInvitacionDocentePK().getDocNumInvit());
 				documentoServicio.crearContratoDocente(contratoProfesor);
+				contratoProfesor = documentoServicio.obtenerContratoDocente(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo(), getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
+				
 			}
+			
 			generarReporte(contratoProfesor);
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -52,12 +55,12 @@ public class GeneracionFlujoContratoController implements Serializable{
 	}
 	
 	private void generarReporte(ContratoProfesor contratoProfesor){
-		ReporteFlujoContrato reporteFlujoContrato = new ReporteFlujoContrato();
+		ReporteFlujoContrato reporteFlujoContrato = new ReporteFlujoContrato(contratoProfesor);
 		reporteFlujoContrato.reporteContratoP1();
 		reporteFlujoContrato.reporteContratoP2();
 		reporteFlujoContrato.reporteContratoP3();
 		reporteFlujoContrato.reporteContratoP4();
-		reporteFlujoContrato.reporteContratoP5();
+//		reporteFlujoContrato.reporteContratoP5();
 		reporteFlujoContrato.reporteContratoP6();
 		reporteFlujoContrato.reporteContratoP7();
 		
