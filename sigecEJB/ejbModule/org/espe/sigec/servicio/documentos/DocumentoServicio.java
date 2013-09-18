@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.documentos;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import org.espe.sigec.model.entities.ContratoProfesor;
@@ -16,4 +17,6 @@ public interface DocumentoServicio {
 	
 	void crearContratoDocente(ContratoProfesor contratoProfesor) throws Exception;
 	Collection<InvitacionDocente> findInvitacionesByEstado(String estadoInvitacion) throws Exception;
+	
+	ContratoProfesor obtenerContratoDocente(BigDecimal idCursoPeriodo, int  idProfesor) throws Exception;
 }
