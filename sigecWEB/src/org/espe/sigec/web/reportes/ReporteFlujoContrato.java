@@ -1,6 +1,7 @@
 package org.espe.sigec.web.reportes;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class ReporteFlujoContrato {
 		mapaSub.put("nombre_del_proveedor", contratoProfesor.getInvitacionDocente().getCursoPeriodo().getProfesor().getPersona().getNombreCompleto());
 		mapaSub.put("NOMBRE_DEL_PROVEEDOR", contratoProfesor.getInvitacionDocente().getCursoPeriodo().getProfesor().getPersona().getNombreCompleto());
 		
-		mapaSub.put("n_horas","____________");
+		mapaSub.put("n_horas",contratoProfesor.getInvitacionDocente().getCursoPeriodo().getNumeroHoras());
 		mapaSub.put("N_invitacion",contratoProfesor.getInvitacionDocente().getInvitacionDocentePK().getDocNumInvit());
 		mapaSub.put("N_inivitacion",contratoProfesor.getInvitacionDocente().getInvitacionDocentePK().getDocNumInvit());
 		
@@ -63,15 +64,20 @@ public class ReporteFlujoContrato {
 		mapaSub.put("n_de_memo_legalizacion_contrato", "____________");
 		mapaSub.put("fecha_memmo_imprenta", reportesUtil.convertirFecha(new Date()));
 		mapaSub.put("NOMBRE_COORDINADOR", ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getNombreCompleto());
-		mapaSub.put("nombre_coordinador", "____________");
+		mapaSub.put("nombre_coordinador", ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getNombreCompleto());
 		mapaSub.put("HORARIO_DE_CLASES", "____________");
 		mapaSub.put("fecha_carta_de_pago", reportesUtil.convertirFecha(new Date()));
 		mapaSub.put("actividades", "____________");
 		mapaSub.put("M__terna", "____________");
 		mapaSub.put("NOMBRE_D_ELA_PP_", "____________");
-		mapaSub.put("valor", "____________");
+		mapaSub.put("valor", contratoProfesor.getInvitacionDocente().getDocValorPagar());
 		mapaSub.put("F9", "____________");
-		mapaSub.put("V_HORA_CLASE", "____________");
+		try {
+			mapaSub.put("V_HORA_CLASE", contratoProfesor.getInvitacionDocente().getDocValorPagar().divide(new BigDecimal(contratoProfesor.getInvitacionDocente().getCursoPeriodo().getNumeroHoras())));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		mapaSub.put("N_MEMO", "____________");
 		mapaSub.put("tipo_relacion_loboral", "____________");
 		mapaSub.put("Banco", "____________");
