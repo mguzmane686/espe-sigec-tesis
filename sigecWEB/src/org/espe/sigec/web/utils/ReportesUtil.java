@@ -1,9 +1,11 @@
 package org.espe.sigec.web.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
+import org.apache.commons.lang3.text.StrSubstitutor;
 import org.apache.poi.xwpf.usermodel.BreakClear;
-import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 /**
@@ -12,7 +14,7 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
  */
 public class ReportesUtil {
 	private static final ReportesUtil REPORTES_UTIL = new ReportesUtil();
-
+	private Map<String, Object> mapaSub; 
 	public static ReportesUtil getInstance() {
 		return REPORTES_UTIL;
 	}
@@ -31,10 +33,9 @@ public class ReportesUtil {
 	}
 	
 	public void addText(XWPFRun xwpfRunParagraph, String textToAdd){
-		xwpfRunParagraph.setText(textToAdd);
+		xwpfRunParagraph.setText(resolveString(textToAdd));
 		xwpfRunParagraph.addBreak();
 	}
-	
 	
 	/*public XWPFParagraph createNewPragraph(XWPFDocument xwpfDocumentFlujoContra, XWPFParagraph xwpfParagraph,  XWPFRun xwpfRun, ParagraphAlignment paragraphAlignment){
 		xwpfParagraph =  xwpfDocumentFlujoContra.createParagraph();
@@ -51,4 +52,26 @@ public class ReportesUtil {
 		xwpfRun.setFontFamily("Bookman Old Style");
 		xwpfRun.setFontSize(12);
 	}
+	
+	
+	public String resolveString(String texto){
+		StrSubstitutor sub = new StrSubstitutor(getMapaSub());
+		String resolvedString = sub.replace(texto);
+		System.out.println(resolvedString);
+		return resolvedString;
+	}
+
+	public Map<String, Object> getMapaSub() {
+		return mapaSub;
+	}
+
+	public void setMapaSub(Map<String, Object> mapaSub) {
+		this.mapaSub = mapaSub;
+	}
+	
+	public String convertirFecha(Date fecha){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-YYYY") ;
+		return simpleDateFormat.format(fecha);
+	}
+	
 }
