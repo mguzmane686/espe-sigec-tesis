@@ -57,7 +57,7 @@ public class ReportesUtil {
 	public String resolveString(String texto){
 		StrSubstitutor sub = new StrSubstitutor(getMapaSub());
 		String resolvedString = sub.replace(texto);
-		System.out.println(resolvedString);
+//		System.out.println(resolvedString);
 		return resolvedString;
 	}
 
