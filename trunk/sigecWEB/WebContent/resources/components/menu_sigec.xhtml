@@ -92,15 +92,18 @@
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralAulas"/>
         		
         		<rich:panelMenuItem action="adm_aula.jsf?faces-redirect=true">
-            		<a4j:commandLink value="Crear Aula" action="adm_aula.jsf?faces-redirect=true" execute="@this"/>
+            		<a4j:commandLink value="Crear aula" action="adm_aula.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
             
             	<rich:panelMenuItem action="adm_reporte_aula.jsf?faces-redirect=true">
-            		<a4j:commandLink value="Administrar Aulas" action="adm_reporte_aula.jsf?faces-redirect=true" execute="@this"/>
+            		<a4j:commandLink value="Administrar aulas" action="adm_reporte_aula.jsf?faces-redirect=true" execute="@this"/>
             	</rich:panelMenuItem>
-            	
-        	</rich:panelMenuGroup>    
+        	</rich:panelMenuGroup> 
         	
+        	<rich:panelMenuItem action="adm_administrar_materiales.jsf?faces-redirect=true">
+           		<a4j:commandLink value="Administrar materiales" action="adm_administrar_materiales.jsf?faces-redirect=true" execute="@this"/>
+           	</rich:panelMenuItem>
+            	
         	<rich:panelMenuGroup id="pmgAdmGeneralEspecialidades" label="Especialidades" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}" 
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
         		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralEspecialidades"/>
