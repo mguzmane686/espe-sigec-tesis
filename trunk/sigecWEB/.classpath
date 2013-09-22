@@ -29,5 +29,6 @@
 	<classpathentry kind="lib" path="C:/software/servers/jboss-as-7.1.1.Final/modules/org/apache/poi/main/poi-ooxml-3.9.jar"/>
 	<classpathentry kind="lib" path="C:/software/servers/jboss-as-7.1.1.Final/modules/org/apache/poi/main/poi-ooxml-schemas-3.9.jar"/>
 	<classpathentry kind="lib" path="C:/software/servers/jboss-as-7.1.1.Final/modules/org/primefaces/main/primefaces-3.2.jar"/>
+	<classpathentry kind="lib" path="C:/software/servers/jboss-as-7.1.1.Final/modules/org/apache/xmlbeans/2.3.0/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
