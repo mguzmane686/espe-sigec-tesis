@@ -116,7 +116,7 @@ public class InvitacionDocenteController implements Serializable{
 				
 				if(profesor != null && profesor.getPersona() != null && StringUtils.isNotEmpty(profesor.getPersona().getMail())){
 					try {
-						EmailSenderService.getInstance().sendMessage("ESPE-UEC/PUREBAS", 
+						EmailSenderService.getInstance().sendMessage("ESPE-UEC", 
 								"Estimado "+profesor.getPersona().getNombreCompleto()+" usted esta dentro de un proceso de seleeción de docentes, al curso de "+cursoPeriodo.getCurso().getNombreCurso()+
 								", no significa un compromiso directo. Por favor, comuniquese de inmediato con la Unidad de Educación Continua.", "maniac787@gmail.com");
 					} catch (Exception e2) {
