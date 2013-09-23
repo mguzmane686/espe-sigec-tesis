@@ -58,9 +58,14 @@ public class AdministrarCursoController {
 	
 	private void validarEstadoContratoProfesor(){
 		try {
-			InvitacionDocente invitacionDocente = coordinacionServicio.verificarUltimaInivtacionDocente(getCursoPeriodo().getIdCursoPeriodo(), getCursoPeriodo().getIdProfesor().intValue());
-			if(StringUtils.equals(invitacionDocente.getEstado(), "PCT")){
-				setPermitirAsignarProfesor(Boolean.TRUE);
+			if(getCursoPeriodo().getIdProfesor() !=null){
+				InvitacionDocente invitacionDocente = coordinacionServicio.verificarUltimaInivtacionDocente(getCursoPeriodo().getIdCursoPeriodo(), getCursoPeriodo().getIdProfesor().intValue());
+				
+				if(invitacionDocente!= null && StringUtils.equals(invitacionDocente.getEstado(), "PCT")){
+					setPermitirAsignarProfesor(Boolean.TRUE);
+				}else{
+					setPermitirAsignarProfesor(Boolean.FALSE);
+				}
 			}else{
 				setPermitirAsignarProfesor(Boolean.FALSE);
 			}
