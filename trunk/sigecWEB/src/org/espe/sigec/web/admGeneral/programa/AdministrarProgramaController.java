@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Programa;
@@ -157,9 +158,11 @@ public class AdministrarProgramaController implements Serializable{
 				
 			}else{
 				Collection<ProgramaCurso> lst = new ArrayList<ProgramaCurso>();
-				for(ProgramaCurso obj: lstProgramaCursos){
-					if(obj.isSelected()){
-						lst.add(obj);
+				if(CollectionUtils.isNotEmpty(lstProgramaCursos)){
+					for(ProgramaCurso obj: lstProgramaCursos){
+						if(obj.isSelected()){
+							lst.add(obj);
+						}
 					}
 				}
 				if(lst.size()>0){
