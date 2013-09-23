@@ -9,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.Curso;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.servicio.curso.CursoServicio;
@@ -25,6 +26,7 @@ public class EdicionCursoController {
 	private PensumAcademico pensumAcademicoNuevo;
 //	private ContenidoCurso moduloCurso;
 	private Curso curso;
+	private Curso cursoClone;
 	private boolean renderEditButtons;
 	@Inject
 	private PlanificacionServicio planificacionServicio;
@@ -51,10 +53,12 @@ public class EdicionCursoController {
 	
 	public void btnEditCurso(ActionEvent e){
 		setRenderEditButtons(Boolean.TRUE);
+		this.cursoClone = SerializationUtils.clone(getCurso());
 	}
 	
 	public void btnCancelEditCurso(ActionEvent e){
 		setRenderEditButtons(Boolean.FALSE);
+		setCurso(this.cursoClone);
 	}
 	public void btnSaveEditCurso(ActionEvent e){
 		try {
