@@ -135,74 +135,80 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 		try {
 			userTransaction.begin();
 			
-			Estudiante estudiante = null;
-			
-			if(persona.getIdPersona()==null){
-				if(usuarioFacade.isIdentificadorvalida(persona.getUsuario().getIdentificador())){
-					usuarioFacade.create(persona.getUsuario());
-					UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
-					usuarioPerfilFacadeLocal.create(usuarioPerfil);
-					personaFacadeLocal.create(persona);
-					
-					estudiante = new Estudiante();
-					estudiante.setPersona(persona);
-					
-					estudianteFacadeLocal.create(estudiante);
-				}else{
-					throw new UsuarioNoNuevoException("El identificador ya existe");
-				}
-			}else{
-				UsuarioPerfilPK usuarioPerfilPK = new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST");
-				UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.find(usuarioPerfilPK);
-				if(usuarioPerfil==null){
-					UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
-					usuarioPerfilFacadeLocal.create(usuarioPerfilTMP);
-					
-					estudiante = new Estudiante();
-					estudiante.setPersona(persona);
-					Estudiante estudianteTMP = estudianteFacadeLocal.buscarEstudinateByCedula(persona.getCedula());
-					if(estudianteTMP == null){
-						estudianteFacadeLocal.create(estudiante);
-					}else{
-						estudiante = estudianteTMP;
-					}
-					
-					
-				}else{
-					Estudiante estudianteTMP = estudianteFacadeLocal.buscarEstudinateByCedula(persona.getCedula());
-					estudiante = estudianteTMP;
-				}
-			}
-			//Validacion maximo estudiantes
 			int numeroEstudiantesInscritos = cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo());
 			if(numeroEstudiantesInscritos < cursoPeriodo.getMaximoEstudiantes()){
-				CursoEstudiante cursoEstudiante = new CursoEstudiante();
-				cursoEstudiante.setEstudiante(estudiante);
-//				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
-				cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
-				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
-				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
-				cursoEstudiante.setEstadoPago("DEBE");
-				cursoEstudiante.setEstadoCupo("CUPO-VIGENTE");
-				//ojo
-				cursoEstudiante.setIdPrograma(cursoPeriodo.getProgramaCurso().getProgramaCursoPK().getIdPrograma());
 				
-				CursoEstudiante cursoEstudianteTMP = cursoEstudianteFacadeLocal.find(cursoEstudiante.getCursoEstudiantePK());
-				if(cursoEstudianteTMP != null){
-					throw new EstudianteDobleInscripcionException("El estudiante ya se encuentra inscrito en ese curso");
+				Estudiante estudiante = null;
+				
+				if(persona.getIdPersona()==null){
+					if(usuarioFacade.isIdentificadorvalida(persona.getUsuario().getIdentificador())){
+						usuarioFacade.create(persona.getUsuario());
+						UsuarioPerfil usuarioPerfil = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
+						usuarioPerfilFacadeLocal.create(usuarioPerfil);
+						personaFacadeLocal.create(persona);
+						
+						estudiante = new Estudiante();
+						estudiante.setPersona(persona);
+						
+						estudianteFacadeLocal.create(estudiante);
+					}else{
+						throw new UsuarioNoNuevoException("El identificador ya existe");
+					}
+				}else{
+					UsuarioPerfilPK usuarioPerfilPK = new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST");
+					UsuarioPerfil usuarioPerfil = usuarioPerfilFacadeLocal.find(usuarioPerfilPK);
+					if(usuarioPerfil==null){
+						UsuarioPerfil usuarioPerfilTMP = new UsuarioPerfil(new UsuarioPerfilPK(persona.getUsuario().getIdUsuario(), "EST"));
+						usuarioPerfilFacadeLocal.create(usuarioPerfilTMP);
+						
+						estudiante = new Estudiante();
+						estudiante.setPersona(persona);
+						Estudiante estudianteTMP = estudianteFacadeLocal.buscarEstudinateByCedula(persona.getCedula());
+						if(estudianteTMP == null){
+							estudianteFacadeLocal.create(estudiante);
+						}else{
+							estudiante = estudianteTMP;
+						}
+						
+						
+					}else{
+						Estudiante estudianteTMP = estudianteFacadeLocal.buscarEstudinateByCedula(persona.getCedula());
+						estudiante = estudianteTMP;
+					}
 				}
+				//Validacion maximo estudiantes
 				
-				cursoEstudianteFacadeLocal.create(cursoEstudiante);
-				
-				if(numeroEstudiantesInscritos+1 >= cursoPeriodo.getMinimoEstudiantes()){
-					cursoPeriodo.getHistoricoCursoEstadoCollection().setEtapaAsignacionProfesor("1");
-					historicoCursoEstadoFacadeLocal.edit(cursoPeriodo.getHistoricoCursoEstadoCollection());
+				if(numeroEstudiantesInscritos < cursoPeriodo.getMaximoEstudiantes()){
+					CursoEstudiante cursoEstudiante = new CursoEstudiante();
+					cursoEstudiante.setEstudiante(estudiante);
+	//				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
+					cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
+					cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
+					cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
+					cursoEstudiante.setEstadoPago("DEBE");
+					cursoEstudiante.setEstadoCupo("CUPO-VIGENTE");
+					//ojo
+					cursoEstudiante.setIdPrograma(cursoPeriodo.getProgramaCurso().getProgramaCursoPK().getIdPrograma());
+					
+					CursoEstudiante cursoEstudianteTMP = cursoEstudianteFacadeLocal.find(cursoEstudiante.getCursoEstudiantePK());
+					if(cursoEstudianteTMP != null){
+						throw new EstudianteDobleInscripcionException("El estudiante ya se encuentra inscrito en ese curso");
+					}
+					
+					cursoEstudianteFacadeLocal.create(cursoEstudiante);
+					
+					if(numeroEstudiantesInscritos+1 >= cursoPeriodo.getMinimoEstudiantes()){
+						cursoPeriodo.getHistoricoCursoEstadoCollection().setEtapaAsignacionProfesor("1");
+						historicoCursoEstadoFacadeLocal.edit(cursoPeriodo.getHistoricoCursoEstadoCollection());
+					}
+					
+					userTransaction.commit();
+				}else{
+					throw new CupoNoDisponibleException("Ya no quedan cupos para el curso");
+					
 				}
-				
-				userTransaction.commit();
 			}else{
 				throw new CupoNoDisponibleException("Ya no quedan cupos para el curso");
-				
 			}
 			
 		} catch (Exception e) {
