@@ -7,10 +7,12 @@ import javax.ejb.EJB;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.Encuesta;
 import org.espe.sigec.model.entities.EncuestaPK;
+import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.model.sessionBeans.CursoEstudianteFacadeLocal;
 import org.espe.sigec.model.sessionBeans.EncuestaFacadeLocal;
+import org.espe.sigec.model.sessionBeans.PensumAcademicoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaCursoFacadeLocal;
 import org.espe.sigec.model.sessionBeans.ProgramaFacadeLocal;
 
@@ -26,6 +28,10 @@ public class PortalServicioImpl implements PortalServicio{
 	
 	@EJB
 	private CursoEstudianteFacadeLocal cursoEstudianteFacadeLocal;
+	
+	@EJB
+	private PensumAcademicoFacadeLocal pensumAcademicoFacadeLocal;
+	
 	
 	@Override
 	public Collection<ProgramaCurso> buscarPrograma() {
@@ -55,6 +61,11 @@ public class PortalServicioImpl implements PortalServicio{
 	public Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante) {
 		// TODO Auto-generated method stub
 		return cursoEstudianteFacadeLocal.buscarCursosEstudiante(idEstudiante);
+	}
+
+	@Override
+	public Collection<PensumAcademico> buscarPensumCurso(Integer idCurso) throws Exception {
+		return pensumAcademicoFacadeLocal.findTemasModulo(idCurso);
 	}
 
 	
