@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -38,10 +39,15 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 	@Override
 	public int numeroEstudiantesInscritos(BigDecimal idCursoPeriodo) {
 		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class);
-		criteria.add(Restrictions.eq("cursoEstudiantePK.idCursoPeriodo", new BigInteger(String.valueOf(idCursoPeriodo))));
+		criteria.add(Restrictions.eq("cursoEstudiantePK.idCursoPeriodo", idCursoPeriodo));
 		@SuppressWarnings("unchecked")
 		Collection<CursoEstudiante> lstUsuarios = criteria.list();
-		return lstUsuarios.size();
+		int numeroInscritos = 0;
+		if(lstUsuarios!=null && CollectionUtils.isNotEmpty(lstUsuarios)){
+			numeroInscritos = lstUsuarios.size();
+		}
+		
+		return numeroInscritos;
 	}
 
 	@Override

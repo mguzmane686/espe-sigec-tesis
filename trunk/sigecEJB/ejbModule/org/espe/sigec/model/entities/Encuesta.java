@@ -1,7 +1,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -110,7 +110,7 @@ public class Encuesta implements Serializable{
         this.encuestaPK = encuestaPK;
     }
 
-    public Encuesta(int prgId, BigInteger idCursoPeriodo, int estIdEstudiante) {
+    public Encuesta(int prgId, BigDecimal idCursoPeriodo, int estIdEstudiante) {
         this.encuestaPK = new EncuestaPK(prgId, idCursoPeriodo, estIdEstudiante);
     }
 

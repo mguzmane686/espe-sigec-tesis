@@ -5,6 +5,7 @@
 package org.espe.sigec.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import javax.persistence.Basic;
@@ -24,12 +25,12 @@ public class CursoEstudiantePK implements Serializable {
 	    private int idEstudiante;
 	    @Basic(optional = false)
 	    @Column(name = "id_curso_periodo")
-	    private BigInteger idCursoPeriodo;
+	    private BigDecimal idCursoPeriodo;
 
 	    public CursoEstudiantePK() {
 	    }
 
-	    public CursoEstudiantePK(int idEstudiante, BigInteger idCursoPeriodo) {
+	    public CursoEstudiantePK(int idEstudiante, BigDecimal idCursoPeriodo) {
 	        this.idEstudiante = idEstudiante;
 	        this.idCursoPeriodo = idCursoPeriodo;
 	    }
@@ -43,11 +44,11 @@ public class CursoEstudiantePK implements Serializable {
 			this.idEstudiante = idEstudiante;
 		}
 
-		public BigInteger getIdCursoPeriodo() {
+		public BigDecimal getIdCursoPeriodo() {
 			return idCursoPeriodo;
 		}
 
-		public void setIdCursoPeriodo(BigInteger idCursoPeriodo) {
+		public void setIdCursoPeriodo(BigDecimal idCursoPeriodo) {
 			this.idCursoPeriodo = idCursoPeriodo;
 		}
 

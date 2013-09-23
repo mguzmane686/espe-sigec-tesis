@@ -1,6 +1,5 @@
 package org.espe.sigec.servicio.inscripcion;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import javax.annotation.Resource;
@@ -174,13 +173,14 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 					estudiante = estudianteTMP;
 				}
 			}
-			
-			if(cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo()) < cursoPeriodo.getMaximoEstudiantes()){
+			//Validacion maximo estudiantes
+			int numeroEstudiantesInscritos = cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo());
+			if(numeroEstudiantesInscritos < cursoPeriodo.getMaximoEstudiantes()){
 				CursoEstudiante cursoEstudiante = new CursoEstudiante();
 				cursoEstudiante.setEstudiante(estudiante);
 //				cursoEstudiante.setCursoPeriodo(cursoPeriodo);
 				cursoEstudiante.setCursoEstudiantePK(new CursoEstudiantePK());
-				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(new BigInteger(cursoPeriodo.getIdCursoPeriodo().toString()));
+				cursoEstudiante.getCursoEstudiantePK().setIdCursoPeriodo(cursoPeriodo.getIdCursoPeriodo());
 				cursoEstudiante.getCursoEstudiantePK().setIdEstudiante(estudiante.getIdEstudiante());
 				cursoEstudiante.setEstadoPago("DEBE");
 				cursoEstudiante.setEstadoCupo("CUPO-VIGENTE");
@@ -194,7 +194,7 @@ public class InscripcionServicioImpl implements InscripcionServicio{
 				
 				cursoEstudianteFacadeLocal.create(cursoEstudiante);
 				
-				if( (cursoEstudianteFacadeLocal.numeroEstudiantesInscritos(cursoPeriodo.getIdCursoPeriodo())) >= cursoPeriodo.getMinimoEstudiantes()){
+				if(numeroEstudiantesInscritos+1 >= cursoPeriodo.getMinimoEstudiantes()){
 					cursoPeriodo.getHistoricoCursoEstadoCollection().setEtapaAsignacionProfesor("1");
 					historicoCursoEstadoFacadeLocal.edit(cursoPeriodo.getHistoricoCursoEstadoCollection());
 				}
