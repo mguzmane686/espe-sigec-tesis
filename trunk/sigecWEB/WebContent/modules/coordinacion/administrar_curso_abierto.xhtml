@@ -108,7 +108,7 @@
         	
         	<rich:panel header="Administrar curso" id="pnlLanCur">
         		<h:panelGroup rendered="#{(administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaAsignacionProfesor == '1') and 
-        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0') and administrarCursoController.permitirAsignarProfesor}">
+        		 (administrarCursoController.cursoPeriodo.historicoCursoEstadoCollection.etapaEjecutado == '0')}">
         			<fieldset style="border-color:red">
 		        		<legend>
 		        			<h:outputLabel value="Alerta!!!" styleClass="titulo" style="color:#1394EB;"/>
@@ -126,15 +126,20 @@
 					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
 	        		
 	        		<h:panelGroup rendered="#{administrarCursoController.editMode}">
-		        			<h:panelGrid columns="2">
-			        			<h:outputLabel value="Profesor :" style="display:block; width:120px;"/>
+	        			<h:panelGrid columns="2">
+		        			<h:outputLabel value="Profesor :" style="display:block; width:120px;"/>
+		        			
+			        		<h:panelGrid>
 			        			<rich:select value="#{administrarCursoController.cursoPeriodo.idProfesor}" selectFirst="true">
+			        				<f:selectItem itemLabel="Seleccione" itemValue=""/>
 			        				<f:selectItems value="#{administrarCursoController.itemsProfesor}" var="prof"
 			        					itemLabel="#{prof.profesor.persona.nombreCompleto}" itemValue="#{prof.profesor.idProfesor}"/>
 			        					
 			        			</rich:select>
-		        			</h:panelGrid>
-		        		</h:panelGroup>
+			        			<h:outputText value="Seleccione un profesor de las invitaciones realizadas" rendered="#{!administrarCursoController.permitirAsignarProfesor}"/>
+			        		</h:panelGrid>
+	        			</h:panelGrid>
+	        		</h:panelGroup>
 		        		
 	        		<h:panelGrid columns="2"  columnClasses="espacioDetalle">
 	        			<h:outputLabel value="#{msg.etiqueta_usuarios_inscritos} :" style="font-weight:bold;"/>
