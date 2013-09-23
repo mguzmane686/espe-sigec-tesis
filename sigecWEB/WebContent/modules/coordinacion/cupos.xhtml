@@ -93,6 +93,9 @@
 			        		<h:panelGrid columns="2">
 			        			<h:outputText value="El curso tiene una capacidad de cupos de: " styleClass="label-bold"/>
 			        			<sigecComp:textField value="#{cuposController.programaCursoSeleccionado.cursoPeriodo.maximoEstudiantes}" label="Cupos para el curso" required="true"/>
+			        			
+			        			<h:outputText value="Cupos disponibles: " styleClass="label-bold"/>
+			        			<h:outputText value="#{cuposController.cuposRestantes}" />
 			        		</h:panelGrid>
 		        		</rich:panel>
 	        		</h:panelGroup>
