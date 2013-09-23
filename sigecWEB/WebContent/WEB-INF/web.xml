@@ -54,7 +54,7 @@
   <url-pattern>/faces/*</url-pattern>
  </servlet-mapping>
  <session-config>
-  <session-timeout>30</session-timeout>
+  <session-timeout>240</session-timeout>
  </session-config>
  <mime-mapping>
   <extension>ecss</extension>
