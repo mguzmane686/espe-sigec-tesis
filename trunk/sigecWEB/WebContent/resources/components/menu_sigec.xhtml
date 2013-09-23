@@ -137,6 +137,19 @@
        <rich:panelMenuGroup id="pmgPlanificacion" label="#{msg.etiqueta_planificacion}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
         	
         	<f:attribute name="idMenuPanelGroup" value="pmgPlanificacion"/>
+
+        	<rich:panelMenuGroup id="pmgAdmGeneralPresupuesto" label="Presupuesto" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}"
+        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
+        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralPresupuesto"/>
+
+        		<rich:panelMenuItem action="adm_presupuesto.jsf?faces-redirect=true">
+            		<a4j:commandLink value="Crear Presupuesto" action="adm_presupuesto.jsf?faces-redirect=true" execute="@this"/>
+            	</rich:panelMenuItem>
+            
+            	<rich:panelMenuItem action="adm_reporte_presupuesto.jsf?faces-redirect=true">
+            		<a4j:commandLink value="Administrar Presupuesto" action="adm_reporte_presupuesto.jsf?faces-redirect=true" execute="@this"/>
+            	</rich:panelMenuItem>
+        	</rich:panelMenuGroup>
         	
         	<rich:panelMenuGroup id="pmgAdmGeneralProgramas" label="#{msg.etiqueta_programa}"
         		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
@@ -169,21 +182,7 @@
         <rich:panelMenuGroup id="pmgCoordinacion" label="#{msg['etiqueta_coordinacion']}" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}"
         	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" style="overflow-y:auto; max-height:400px;">
         	<f:attribute name="idMenuPanelGroup" value="pmgCoordinacion"/>
-        	
-        	<rich:panelMenuGroup id="pmgAdmGeneralPresupuesto" label="Presupuesto" rendered="#{fn:contains(homeSessionController.idPerfiles ,'ADM')}"
-        		execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
-        		<f:attribute name="idMenuPanelGroup" value="pmgAdmGeneralPresupuesto"/>
-
-        		<rich:panelMenuItem action="adm_presupuesto.jsf?faces-redirect=true">
-            		<a4j:commandLink value="Crear Presupuesto" action="adm_presupuesto.jsf?faces-redirect=true" execute="@this"/>
-            	</rich:panelMenuItem>
-            
-            	<rich:panelMenuItem action="adm_reporte_presupuesto.jsf?faces-redirect=true">
-            		<a4j:commandLink value="Administrar Presupuesto" action="adm_reporte_presupuesto.jsf?faces-redirect=true" execute="@this"/>
-            	</rich:panelMenuItem>
-        	</rich:panelMenuGroup>
-        	
-	        		
+        			
         	<rich:panelMenuItem action="coor_cupos.jsf?faces-redirect=true">
             	<a4j:commandLink value="Cupos" action="coor_cupos.jsf?faces-redirect=true" execute="@this"/>
             </rich:panelMenuItem>

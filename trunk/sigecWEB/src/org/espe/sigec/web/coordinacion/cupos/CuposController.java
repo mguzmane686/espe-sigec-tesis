@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.Programa;
@@ -37,6 +38,9 @@ public class CuposController implements Serializable{
 	
 	private Collection<CursoEstudiante> lstInscritos;
 	private CursoEstudiante estudianteInscrito;
+	
+	private Integer cuposRestantes;
+	
 	public CuposController() {
 		super();
 	}
@@ -58,6 +62,13 @@ public class CuposController implements Serializable{
 	public void btnCargarInscritos(ProgramaCurso programaCursoSelected){
 		setLstInscritos(coordinacionServicio.estudiantesInscritosCurso(programaCursoSelected.getCursoPeriodo().getIdCursoPeriodo(), "CUPO-VIGENTE"));
 		setProgramaCursoSeleccionado(SerializationUtils.clone(programaCursoSelected));
+		
+		try {
+			
+			setCuposRestantes(getProgramaCursoSeleccionado().getCursoPeriodo().getMaximoEstudiantes() - CollectionUtils.size(getLstInscritos()));
+		} catch (Exception e) {
+			setCuposRestantes(null);
+		}
 		
 	}
 	
@@ -118,6 +129,14 @@ public class CuposController implements Serializable{
 
 	public void setProgramaCursoSeleccionado(ProgramaCurso programaCursoSeleccionado) {
 		this.programaCursoSeleccionado = programaCursoSeleccionado;
+	}
+
+	public Integer getCuposRestantes() {
+		return cuposRestantes;
+	}
+
+	public void setCuposRestantes(Integer cuposRestantes) {
+		this.cuposRestantes = cuposRestantes;
 	}
 	
 }
