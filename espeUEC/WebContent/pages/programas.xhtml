@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	
-	<ui:composition template="/templates/common.xhtml"
-		xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
-		xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/common.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 	
 	<ui:define name="pageTitle">Inicio</ui:define>
 
@@ -14,58 +14,73 @@
 	
 	<ui:define name="body">
 	
-	<h:form>
-	<h:panelGroup layout="block" id="contents">
-		
-		<h:panelGroup layout="block" class="background">
-			<h:panelGroup layout="block" id="services">
-				<p>
-				<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso??" widgetVar="prograDialog" maximizable="false" minimizable="false"
-					showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true" resizable="false"> 
-				        
-			        <p:outputPanel id="documentPanel" autoUpdate="true">
-				        <p:panel>
-					        <h:panelGrid id="display" columns="2" cellpadding="4">  
-					            <h:outputText value="Nombre del curso: " />
-					            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.nombreCurso}" />
-					            
-					            <h:outputText value="Generalidades del curso: " />
-					            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.generalidadesCurso}" />
-					            
-					            <h:outputText value="Perfil del participante: " />
-					            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" />
-					        </h:panelGrid>
-				        
-				        </p:panel>
-				        
-				        
-				        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
-					        <p:commandButton  value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
-					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
-					        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
-					        </p:commandButton>
-					        <p:commandButton onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
-				        </h:panelGrid>
-			        </p:outputPanel>  
-			    </p:dialog>
-			    
-				<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
-	                <p:column  headerText="Programas" >
-						<p:dataTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">
-							<p:column headerText="#{programaCurso.nombre}">  
-				                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
-									<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
-									<f:setPropertyActionListener target="#{programasController.programaCursoSeleccionado}" value="#{curso}"></f:setPropertyActionListener>
-								</p:commandLink>
-				            </p:column>
+		<h:form>
+			<h:panelGroup layout="block" id="contents">
+				
+				<h:panelGroup layout="block" class="background">
+					<h:panelGroup layout="block" id="services">
+						
+						<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso??" widgetVar="prograDialog" maximizable="false" minimizable="false"
+							showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true" resizable="false"> 
+						        
+					        <p:outputPanel id="documentPanel" autoUpdate="true">
+						        <p:panel>
+							        <h:panelGrid id="display" columns="2" cellpadding="4">  
+							            <h:outputText value="Nombre del curso: " />
+							            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.nombreCurso}" />
+							            
+							            <h:outputText value="Generalidades del curso: " />
+							            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.generalidadesCurso}" />
+							            
+							            <h:outputText value="Perfil del participante: " />
+							            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" />
+							        </h:panelGrid>
+							        
+							        <h:panelGrid style="width:100%;">
+							        	<p:dataTable value="#{programasController.lstPensumAcademicos}" var="itemsPensum" paginatorPosition="top" 
+							        		paginatorAlwaysVisible="false" rows="10" style="width:100%;">
+							        		<p:column headerText="Tema">
+							        			<h:outputText value="#{itemsPensum.tema}" />
+							        		</p:column>
+							        		
+							        		<p:column headerText="#{msg.descripcion}">
+							        			<h:outputText value="#{itemsPensum.descripcion}" />
+							        		</p:column>
+							        		
+							        	</p:dataTable>
+							        </h:panelGrid>
+						        
+						        </p:panel>
+						        
+						        
+						        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
+							        <p:commandButton  value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
+							        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
+							        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
+							        </p:commandButton>
+							        <p:commandButton onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
+						        </h:panelGrid>
+					        </p:outputPanel>  
+					    </p:dialog>
+					    
+						<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
+			                <p:column  headerText="Programas" >
+								<p:dataTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">
+									<p:column headerText="#{programaCurso.nombre}">
+						                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
+											<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
+											<f:setPropertyActionListener target="#{programasController.programaCursoSeleccionado}" value="#{curso}"></f:setPropertyActionListener>
+										</p:commandLink>
+						            </p:column>
+						            
+								</p:dataTable>
+							</p:column>
 						</p:dataTable>
-					</p:column>
-				</p:dataTable>
-				</p>
+						
+					</h:panelGroup>
+				</h:panelGroup>
 			</h:panelGroup>
-		</h:panelGroup>
-	</h:panelGroup> <!-- /#contents -->
-	</h:form>
+		</h:form>
 	</ui:define>
 	</ui:composition>
 </html>

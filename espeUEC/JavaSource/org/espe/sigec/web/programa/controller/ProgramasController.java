@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.servicio.portal.PortalServicio;
@@ -31,6 +32,8 @@ public class ProgramasController implements Serializable{
 	private CursoPeriodo cursoPeriodoSeleccionado;
 	private ProgramaCurso programaCursoSeleccionado;
 	
+	private Collection<PensumAcademico> lstPensumAcademicos;
+	
 	private Collection<Programa> lstProgramaCursos;
 	
 	public ProgramasController() {
@@ -44,10 +47,14 @@ public class ProgramasController implements Serializable{
 	}
 	
 	public void btnAceptar(){
-//		System.out.println(getCursoPeriodoSeleccionado().getModuloCursoPeriodoCollection());
 		((InscripcionController)FacesUtils.getManagedBean("inscripcionController")).btnNewEstudent();
 		((InscripcionController)FacesUtils.getManagedBean("inscripcionController")).setFindMode(Boolean.TRUE);
 		((InscripcionController)FacesUtils.getManagedBean("inscripcionController")).setCedulaUsr(StringUtils.EMPTY);
+		try {
+			setLstPensumAcademicos(portalServicio.buscarPensumCurso(cursoPeriodoSeleccionado.getCurso().getIdCurso()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public void btnShowProgramaDetalle(){
 		System.out.println("Uno");
@@ -84,6 +91,14 @@ public class ProgramasController implements Serializable{
 	public void setProgramaCursoSeleccionado(ProgramaCurso programaCursoSeleccionado) {
 		this.programaCursoSeleccionado = programaCursoSeleccionado;
 	}
-	
+
+	public Collection<PensumAcademico> getLstPensumAcademicos() {
+		return lstPensumAcademicos;
+	}
+
+	public void setLstPensumAcademicos(
+			Collection<PensumAcademico> lstPensumAcademicos) {
+		this.lstPensumAcademicos = lstPensumAcademicos;
+	}	
 	
 }
