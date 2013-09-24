@@ -142,6 +142,8 @@ public class CoordinacionServicioImpl implements CoordinacionServicio{
 		if(cursoPeriodo.getHistoricoCursoEstadoCollection().getCursoPeriodo()==null){
 			cursoPeriodo.getHistoricoCursoEstadoCollection().setCursoPeriodo(cursoPeriodo);
 			historicoCursoEstadoFacadeLocal.create(cursoPeriodo.getHistoricoCursoEstadoCollection());
+		}else{
+			historicoCursoEstadoFacadeLocal.edit(cursoPeriodo.getHistoricoCursoEstadoCollection());
 		}
 		cursoPeriodoFacadeLocal.edit(cursoPeriodo);
 		

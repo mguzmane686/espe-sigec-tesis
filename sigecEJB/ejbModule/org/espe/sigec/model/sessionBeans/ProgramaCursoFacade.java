@@ -7,13 +7,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.espe.sigec.model.entities.CursoPeriodo;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 /**
  * @author roberto
@@ -94,6 +92,33 @@ public class ProgramaCursoFacade extends AbstractFacade<ProgramaCurso>  implemen
 		criteria.createAlias("cursoPeriodo", "cursoPeriodoA");
 		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
 		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.periodoAcademico", "periodoAcademicoA");
+		criteria.setFetchMode("periodoAcademicoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoA.especialidad", "especialidadA");
+		criteria.setFetchMode("especialidadA", FetchMode.JOIN);
+		
+		criteria.setFetchMode("programaA", FetchMode.JOIN);
+		criteria.setFetchMode("cursoA", FetchMode.JOIN);
+		return criteria.list();
+	}
+
+	@Override
+	public Collection<ProgramaCurso> buscarCursosAsignadosProgramaParaFinalizar(Integer idPrograma) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(ProgramaCurso.class);
+		criteria.add(Restrictions.eq("programaCursoPK.idPrograma", idPrograma));
+		criteria.createAlias("programa", "programaA");
+		criteria.add(Restrictions.eq("programaA.estado", "1"));
+		criteria.add(Restrictions.eq("estado", "1"));
+		criteria.createAlias("cursoPeriodo", "cursoPeriodoA");
+		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
+		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.historicoCursoEstadoCollection", "historicoCursoEstadoA");
+		criteria.add(Restrictions.ne("historicoCursoEstadoA.etapaFinalizado", "1"));
+		criteria.add(Restrictions.eq("historicoCursoEstadoA.etapaEjecutado", "1"));
+		criteria.setFetchMode("historicoCursoEstadoA", FetchMode.JOIN);
 		
 		criteria.createAlias("cursoPeriodoA.periodoAcademico", "periodoAcademicoA");
 		criteria.setFetchMode("periodoAcademicoA", FetchMode.JOIN);

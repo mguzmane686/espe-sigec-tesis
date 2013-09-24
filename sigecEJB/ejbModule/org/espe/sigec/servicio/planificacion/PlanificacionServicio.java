@@ -25,6 +25,7 @@ public interface PlanificacionServicio {
 	Collection<Programa> buscarPrograma();
 	
 	public Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Programa programa);
+	public Collection<ProgramaCurso> buscarCursosAsignadosProgramaParaFinalizar(Integer idPrograma);
 	public Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Integer IdPrograma, Integer idPersona);
 	public Collection<CursoPeriodo> cargarCursoPerdiodoPorAsignar(Integer[] listaIdCursosAsignados);
 }
