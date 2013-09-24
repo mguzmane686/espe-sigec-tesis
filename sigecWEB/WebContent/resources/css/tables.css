@@ -21,3 +21,7 @@
 .colRemoveSpace{
 	padding-left: 0px;
 }
+
+.ui-dt-c div table, .ui-dt-c div table tr, .ui-dt-c div table tr td{
+	border: 0px !important;
+}
