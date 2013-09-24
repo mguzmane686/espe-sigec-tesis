@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
    	<h:outputStylesheet library="css" name="textos.css" />    
@@ -32,7 +33,65 @@
        		
        		<rich:collapsiblePanel header="#{msg.asistencia}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-        	
+        		
+        		<h:panelGrid columns="2">
+        			<h:outputText value="Programa: " />
+        			<rich:select value="#{asistenciaController.programa.idPrograma}" valueChangeListener="#{asistenciaController.rsCargarCursosPrograma}"> 
+	        			<f:selectItems value="#{asistenciaController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
+	        		</rich:select>
+        		</h:panelGrid>
+        		
+        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%; border-collapse:collapse;" cellpadding="0" cellspacing="0">
+        			<h:panelGroup styleClass="rf-p-hdr" layout="block" style="margin:auto;text-align:center; width:100%;" rendered="#{!empty asistenciaController.lstProgramaCursos }">
+	        			<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center;" boundaryControls="hide"/>
+	        		</h:panelGroup>
+	        		<rich:dataTable id="tblPrgCursos" value="#{asistenciaController.lstProgramaCursos}" var="itemsProgramaCurso"
+	        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+	        			<rich:column>
+	        				<f:facet name="header">
+	        					Cursos del programa
+	        				</f:facet>
+	        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
+	        					action="#{asistenciaController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+	        			</rich:column>
+	        		</rich:dataTable>
+	        		
+	        		<p:dataTable id="tblInscritos" value="#{asistenciaController.lstInscritos}" var="asistencia" paginatorAlwaysVisible="false"
+						emptyMessage="No existen inscritos" paginator="true" paginatorPosition="top" rows="10" rowIndexVar="numRow">
+						<f:facet name="header">
+							Estudiantes inscritos
+						</f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#" />
+							</f:facet>
+							<h:outputText value="#{numRow + 1}" />
+						</p:column>
+						
+						<p:column headerText="#{msg.cedula} estudiante">
+							<f:facet name="header">
+								<h:outputText value="#{msg.cedula}" />
+							</f:facet>
+							<h:outputText value="#{asistencia.estudiante.persona.cedula}" />
+						</p:column>
+						
+						<p:column headerText="Nombre">
+							<f:facet name="header">
+								<h:outputText value="Nombre" />
+							</f:facet>
+							<h:outputText value="#{asistencia.estudiante.persona.nombreCompleto}" />
+						</p:column>
+						
+						<p:column headerText="Estado de pago">
+							<f:facet name="header">
+								<h:outputText value="Estado de pago" />
+							</f:facet>
+							
+							<h:outputText value="#{asistencia.estadoPago}" />
+						</p:column>
+					</p:dataTable>
+	        	</h:panelGrid>
         	</rich:collapsiblePanel>	
        	</rich:panel>
        	
