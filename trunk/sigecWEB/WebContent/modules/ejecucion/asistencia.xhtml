@@ -90,6 +90,14 @@
 							
 							<h:outputText value="#{asistencia.estadoPago}" />
 						</p:column>
+						
+						<p:column headerText="#{msg.num_asistencias}" style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{msg.num_asistencias}" />
+							</f:facet>
+							
+							<h:inputText value="#{asistencia.numeroAsistencias}" />
+						</p:column>
 					</p:dataTable>
 	        	</h:panelGrid>
         	</rich:collapsiblePanel>	
