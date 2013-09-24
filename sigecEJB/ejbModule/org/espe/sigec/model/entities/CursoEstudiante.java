@@ -25,12 +25,12 @@ import javax.validation.constraints.Size;
  *
  * @author roberto
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "sgct_acd_cur_est")
 @NamedQueries({
     @NamedQuery(name = "CursoEstudiante.findAll", query = "SELECT c FROM CursoEstudiante c")})
 public class CursoEstudiante implements Serializable {
-    private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CursoEstudiantePK cursoEstudiantePK;
     @Size(max = 10)
@@ -43,6 +43,9 @@ public class CursoEstudiante implements Serializable {
     
     @Column(name = "prg_id")
     private Integer idPrograma; 
+    
+    @Column(name = "num_asistencias")
+    private Integer numeroAsistencias; 
     
 //    @JoinColumns({
 //        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
@@ -162,6 +165,14 @@ public class CursoEstudiante implements Serializable {
 
 	public void setEstadoCupo(String estadoCupo) {
 		this.estadoCupo = estadoCupo;
+	}
+
+	public Integer getNumeroAsistencias() {
+		return numeroAsistencias;
+	}
+
+	public void setNumeroAsistencias(Integer numeroAsistencias) {
+		this.numeroAsistencias = numeroAsistencias;
 	}
 	
 	
