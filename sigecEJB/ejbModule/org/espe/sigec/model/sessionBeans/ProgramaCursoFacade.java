@@ -93,6 +93,9 @@ public class ProgramaCursoFacade extends AbstractFacade<ProgramaCurso>  implemen
 		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
 		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
 		
+		criteria.createAlias("cursoPeriodoA.persona", "personaA");
+		criteria.add(Restrictions.eq("personaA.idPersona", idPersona));
+    	
 		criteria.createAlias("cursoPeriodoA.periodoAcademico", "periodoAcademicoA");
 		criteria.setFetchMode("periodoAcademicoA", FetchMode.JOIN);
 		
