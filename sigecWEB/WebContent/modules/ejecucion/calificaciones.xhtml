@@ -5,6 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
     xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
     
    	<h:outputStylesheet library="css" name="textos.css" />    
@@ -19,20 +20,106 @@
     
    	<h:outputStylesheet library="css" name="tables.css" />
    	
-   	<h:form id="frmAsistencia">
+	<h:form id="frmAsistencia">
        	
-       	
-       	<rich:panel header="#{msg.calificaciones}" id="pnlAula">
-       		<h:panelGroup layout="block" styleClass="roundCorner">
-       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-       				<a4j:commandButton value="#{msg['guardar']}" render="pnlAula" image="/resources/images/save.png"/>
-       				<h:outputLabel value="#{msg['guardar']}" />
-       			</h:panelGrid>
+       	<rich:panel header="#{msg.asistencia}" id="pnlAsistencia">
+	       	<h:panelGroup id="pgBotones" >
+	       		<h:panelGroup  layout="block" styleClass="roundCorner" rendered="#{calificacionesController.programaCursoSeleccionado != null}">
+	       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
+	       				<a4j:commandButton value="#{msg['guardar']}" image="/resources/images/save.png" action="#{calificacionesController.btnGuardarAsistencias}" 
+	       					execute="@form" render="tblPrgCursos tblInscritos pgBotones" />
+	       				<h:outputLabel value="#{msg['guardar']}" />
+	       			</h:panelGrid>
+	       		</h:panelGroup>
        		</h:panelGroup>
        		
-       		<rich:collapsiblePanel header="#{msg.calificaciones}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+       		<rich:collapsiblePanel header="#{msg.asistencia}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
-        	
+        		
+        		<h:panelGrid columns="2">
+        			<h:outputText value="Programa: " />
+        			<rich:select value="#{calificacionesController.programa.idPrograma}" valueChangeListener="#{calificacionesController.rsCargarCursosPrograma}"> 
+	        			<f:selectItems value="#{calificacionesController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
+	        		</rich:select>
+        		</h:panelGrid>
+        		
+        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%; border-collapse:collapse;" cellpadding="0" cellspacing="0">
+        			<h:panelGroup styleClass="rf-p-hdr" layout="block" style="margin:auto;text-align:center; width:100%;" rendered="#{!empty calificacionesController.lstProgramaCursos }">
+	        			<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center;" boundaryControls="hide"/>
+	        		</h:panelGroup>
+	        		<rich:dataTable id="tblPrgCursos" value="#{calificacionesController.lstProgramaCursos}" var="itemsProgramaCurso"
+	        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+	        			<f:facet name="header">
+	        				<h:outputText value="Cursos del programa" />
+	        			</f:facet>
+	        			<rich:column>
+	        				<f:facet name="header">
+	        					Nombre
+	        				</f:facet>
+	        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
+	        					action="#{calificacionesController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos tblPrgCursos pgBotones"/>
+	        			</rich:column>
+	        			
+	        			<rich:column id="cmlMin" style="text-align:center">
+	        				<f:facet name="header">
+	        					Nota minima
+	        				</f:facet>
+	        				<sigecComp:textField id="txtMinEst" value="#{itemsProgramaCurso.cursoPeriodo.minimoCalificacionEstudiante}" editMode="#{itemsProgramaCurso.selected}" required="true" label="Minimo de asistencias requeridas" containerStyle="margin:auto;" inputTextStyle="text-align:right;"/>
+	        			</rich:column>
+	        			
+	        			<rich:column id="cmlMax" style="text-align:center">
+	        				<f:facet name="header">
+	        					Nota completa
+	        				</f:facet>
+	        				<sigecComp:textField id="txtMaxEst" value="#{itemsProgramaCurso.cursoPeriodo.maximoCalificacionEstudiante}" editMode="#{itemsProgramaCurso.selected}" required="true" label="Maximo de asistencias requeridas" containerStyle="margin:auto;" inputTextStyle="text-align:right;"/>
+	        			</rich:column>
+	        			
+	        		</rich:dataTable>
+	        		
+	        		<p:dataTable id="tblInscritos" value="#{calificacionesController.lstInscritos}" var="asistencia" paginatorAlwaysVisible="false"
+						emptyMessage="No existen inscritos" paginator="true" paginatorPosition="top" rows="10" rowIndexVar="numRow">
+						<f:facet name="header">
+							Estudiantes inscritos
+						</f:facet>
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="#" />
+							</f:facet>
+							<h:outputText value="#{numRow + 1}" />
+						</p:column>
+						
+						<p:column headerText="#{msg.cedula} estudiante">
+							<f:facet name="header">
+								<h:outputText value="#{msg.cedula}" />
+							</f:facet>
+							<h:outputText value="#{asistencia.estudiante.persona.cedula}" />
+						</p:column>
+						
+						<p:column headerText="Nombre">
+							<f:facet name="header">
+								<h:outputText value="Nombre" />
+							</f:facet>
+							<h:outputText value="#{asistencia.estudiante.persona.nombreCompleto}" />
+						</p:column>
+						
+						<p:column headerText="Estado de pago">
+							<f:facet name="header">
+								<h:outputText value="Estado de pago" />
+							</f:facet>
+							
+							<h:outputText value="#{asistencia.estadoPago}" />
+						</p:column>
+						
+						<p:column headerText="#{msg.calificacion}" style="text-align:center;">
+							<f:facet name="header">
+								<h:outputText value="#{msg.calificacion}" />
+							</f:facet>
+							
+							<sigecComp:textField id="txtMinEst" value="#{asistencia.calificacion}" editMode="true" required="true" label="#{msg.calificacion}" containerStyle="margin:auto;" inputTextStyle="text-align:right;"/>
+						</p:column>
+					</p:dataTable>
+	        	</h:panelGrid>
         	</rich:collapsiblePanel>	
        	</rich:panel>
        	
