@@ -53,6 +53,7 @@ public class FinalizarCursoController implements Serializable{
 
 	public void btnAceptarFinalizarCurso(){
 		try {
+			getProgramaCursoSeleccionado().getCursoPeriodo().getHistoricoCursoEstadoCollection().setEtapaFinalizado("1");
 			ejecucionServicio.finalizarCurso(getProgramaCursoSeleccionado().getCursoPeriodo().getHistoricoCursoEstadoCollection());
 			FacesUtils.addInfoMessage("El curso fue finalizado");
 		} catch (Exception e) {
