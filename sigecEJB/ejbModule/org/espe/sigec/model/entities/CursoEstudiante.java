@@ -47,6 +47,9 @@ public class CursoEstudiante implements Serializable {
     @Column(name = "num_asistencias")
     private Integer numeroAsistencias; 
     
+    @Column(name = "calificacion")
+    private BigDecimal calificacion;
+    
 //    @JoinColumns({
 //        @JoinColumn(name = "id_curso_periodo", referencedColumnName = "id_curso_periodo", insertable = false, updatable = false),
 //        @JoinColumn(name = "id_modulo_curso", referencedColumnName = "id_modulo_curso", insertable = false, updatable = false)})
@@ -174,6 +177,12 @@ public class CursoEstudiante implements Serializable {
 	public void setNumeroAsistencias(Integer numeroAsistencias) {
 		this.numeroAsistencias = numeroAsistencias;
 	}
-	
-	
+
+	public BigDecimal getCalificacion() {
+		return calificacion;
+	}
+
+	public void setCalificacion(BigDecimal calificacion) {
+		this.calificacion = calificacion;
+	}
 }

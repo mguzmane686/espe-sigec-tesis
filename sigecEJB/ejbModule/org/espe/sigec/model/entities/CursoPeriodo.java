@@ -62,11 +62,18 @@ public class CursoPeriodo implements Serializable {
 	@Column(name = "prf_id_profesor")
 	private BigDecimal idProfesor;
 	
-	@Column(name = "minimo_asistencia_alumno")
+	@Column(name = "minimo_asistencia_estudiante")
 	private Integer minimoAsistenciaEstudiante;
 	
-	@Column(name = "maximo_asistencia_alumno")
+	@Column(name = "maximo_asistencia_estudiante")
 	private Integer maximoAsistenciaEstudiante;
+	
+	@Column(name = "minimo_calificacion_estudiante")
+	private BigDecimal minimoCalificacionEstudiante;
+	
+	@Column(name = "maximo_calificacion_estudiante")
+	private BigDecimal maximoCalificacionEstudiante;
+	
 
 	@JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -339,6 +346,24 @@ public class CursoPeriodo implements Serializable {
 
 	public void setMaximoAsistenciaEstudiante(Integer maximoAsistenciaEstudiante) {
 		this.maximoAsistenciaEstudiante = maximoAsistenciaEstudiante;
+	}
+
+	public BigDecimal getMinimoCalificacionEstudiante() {
+		return minimoCalificacionEstudiante;
+	}
+
+	public void setMinimoCalificacionEstudiante(
+			BigDecimal minimoCalificacionEstudiante) {
+		this.minimoCalificacionEstudiante = minimoCalificacionEstudiante;
+	}
+
+	public BigDecimal getMaximoCalificacionEstudiante() {
+		return maximoCalificacionEstudiante;
+	}
+
+	public void setMaximoCalificacionEstudiante(
+			BigDecimal maximoCalificacionEstudiante) {
+		this.maximoCalificacionEstudiante = maximoCalificacionEstudiante;
 	}
 
 }
