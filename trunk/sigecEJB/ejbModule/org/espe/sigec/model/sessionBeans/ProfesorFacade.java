@@ -18,6 +18,9 @@ import org.espe.sigec.model.entities.Profesor;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.Conjunction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -61,7 +64,8 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
 		
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(InvitacionDocente.class);
 		crit.add(Restrictions.eq("invitacionDocentePK.idCursoPeriodo", idCursoPeriodo));
-		crit.add(Restrictions.eq("estado", "SEL"));
+//		crit.add(Restrictions.eq("estado", "SEL"));
+		crit.add(Restrictions.or(Restrictions.eq("estado", "SEL"), Restrictions.eq("estado", "PCT")));
 		
 //		
 		crit.createAlias("profesor", "profesorA");

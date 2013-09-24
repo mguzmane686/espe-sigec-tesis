@@ -212,4 +212,9 @@ public class PlanificacionServicioImpl implements PlanificacionServicio{
 	public Collection<ProgramaCurso> buscarCursosAsignadosPrograma(Integer idPrograma, Integer idPersona) {
 		return programaCursoFacadeLocal.buscarCursosAsignadosPrograma(idPrograma, idPersona);
 	}
+
+	@Override
+	public Collection<ProgramaCurso> buscarCursosAsignadosProgramaParaFinalizar(Integer idPrograma) {
+		return programaCursoFacadeLocal.buscarCursosAsignadosProgramaParaFinalizar(idPrograma);
+	}
 }
