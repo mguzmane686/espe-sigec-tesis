@@ -50,7 +50,7 @@
 				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
         	
         			<h:panelGrid columns="2">
-        				<h:outputLabel value="Lugar" />
+        				<h:outputLabel value="#{msg.establecimientos}" />
         				<rich:select required="true" requiredMessage="El campo Lugar es obligatorio" styleClass="customSelect" defaultLabel="Seleccione"
         					valueChangeListener="#{planearCursoController.somChangeLugarCurso}">
         					<f:selectItems value="#{planearCursoController.itemLugarCurso}"/>
@@ -94,7 +94,7 @@
         					<f:selectItem itemLabel="Abierto" itemValue="IND"/>
         				</h:selectOneRadio>
         				
-        				<h:outputLabel value="#{msg['tipo_curso']}"/>
+        				<h:outputLabel value="Modalidad"/>
         				<rich:select value="#{planearCursoController.cursoPeriodo.modalidad}" defaultLabel="Seleccione">
         					<f:selectItem itemLabel="Presencial" itemValue="PRESENCIAL"/>
         					<f:selectItem itemLabel="Distancia" itemValue="DISTANCIA"/>
