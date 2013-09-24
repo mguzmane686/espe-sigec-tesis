@@ -9,6 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang3.SerializationUtils;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.Programa;
@@ -16,6 +18,7 @@ import org.espe.sigec.model.entities.ProgramaCurso;
 import org.espe.sigec.servicio.coordinacion.CoordinacionServicio;
 import org.espe.sigec.servicio.ejecucion.EjecucionServicio;
 import org.espe.sigec.servicio.planificacion.PlanificacionServicio;
+import org.espe.sigec.web.utils.FacesUtils;
 
 /**
  * @author roberto
@@ -58,9 +61,39 @@ public class AsistenciaController implements Serializable {
 	}
 	
 	public void btnCargarInscritos(ProgramaCurso programaCursoSelected){
+		
+		for(ProgramaCurso programaCurso: lstProgramaCursos){
+			programaCurso.setSelected(Boolean.FALSE);
+		}
+		
+		programaCursoSelected.setSelected(Boolean.TRUE);
+		
 		setLstInscritos(coordinacionServicio.estudiantesInscritosCurso(programaCursoSelected.getCursoPeriodo().getIdCursoPeriodo(), "CUPO-VIGENTE", "PAGADO"));
 		setProgramaCursoSeleccionado(SerializationUtils.clone(programaCursoSelected));
 		
+	}
+	
+	public void btnGuardarAsistencias(){
+		try {
+			Predicate predicate = new Predicate() {
+				
+				@Override
+				public boolean evaluate(Object arg0) {
+					ProgramaCurso programaCurso = (ProgramaCurso) arg0;
+					if(programaCurso.equals(getProgramaCursoSeleccionado())){
+						return true;
+					}
+					return false;
+				}
+			};
+			ProgramaCurso programaCurso = (ProgramaCurso) CollectionUtils.find(getLstProgramaCursos(), predicate);
+			ejecucionServicio.actualizarAsistenciasEstudianteCurso(programaCurso.getCursoPeriodo(), getLstInscritos());
+			setProgramaCursoSeleccionado(null);
+			FacesUtils.addInfoMessage("Se actualizaron las asitencias al curso");
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage("Ocurrio un error al actualizar las asistencias al curso");
+			e.printStackTrace();
+		}
 	}
 	
 	public Collection<Programa> getLstProgramas() {

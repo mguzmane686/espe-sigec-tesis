@@ -24,9 +24,10 @@
        	
        	
        	<rich:panel header="#{msg.asistencia}" id="pnlAsistencia">
-       		<h:panelGroup layout="block" styleClass="roundCorner">
-       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
-       				<a4j:commandButton value="#{msg['guardar']}" render="pnlAula" image="/resources/images/save.png"/>
+       		<h:panelGroup id="pgBotones" layout="block" styleClass="roundCorner">
+       			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{asistenciaController.programaCursoSeleccionado != null}">
+       				<a4j:commandButton value="#{msg['guardar']}" image="/resources/images/save.png" action="#{asistenciaController.btnGuardarAsistencias}" 
+       					execute="@form" render="tblPrgCursos tblInscritos pgBotones" />
        				<h:outputLabel value="#{msg['guardar']}" />
        			</h:panelGrid>
        		</h:panelGroup>
@@ -48,13 +49,31 @@
 	        		</h:panelGroup>
 	        		<rich:dataTable id="tblPrgCursos" value="#{asistenciaController.lstProgramaCursos}" var="itemsProgramaCurso"
 	        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+	        			<f:facet name="header">
+	        				<h:outputText value="Cursos del programa" />
+	        			</f:facet>
 	        			<rich:column>
 	        				<f:facet name="header">
-	        					Cursos del programa
+	        					Nombre
 	        				</f:facet>
 	        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" execute="@this" 
-	        					action="#{asistenciaController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos"/>
+	        					action="#{asistenciaController.btnCargarInscritos(itemsProgramaCurso)}" render="tblInscritos pgDetalleCupos tblPrgCursos pgBotones"/>
 	        			</rich:column>
+	        			
+	        			<rich:column id="cmlMin" style="text-align:center">
+	        				<f:facet name="header">
+	        					Asistencias minimas
+	        				</f:facet>
+	        				<sigecComp:textField id="txtMinEst" value="#{itemsProgramaCurso.cursoPeriodo.minimoAsistenciaEstudiante}" editMode="#{itemsProgramaCurso.selected}" required="true" label="Minimo de asistencias requeridas" containerStyle="margin:auto;" inputTextStyle="text-align:right;"/>
+	        			</rich:column>
+	        			
+	        			<rich:column id="cmlMax" style="text-align:center">
+	        				<f:facet name="header">
+	        					Asistencias Completas
+	        				</f:facet>
+	        				<sigecComp:textField id="txtMaxEst" value="#{itemsProgramaCurso.cursoPeriodo.maximoAsistenciaEstudiante}" editMode="#{itemsProgramaCurso.selected}" required="true" label="Maximo de asistencias requeridas" containerStyle="margin:auto;" inputTextStyle="text-align:right;"/>
+	        			</rich:column>
+	        			
 	        		</rich:dataTable>
 	        		
 	        		<p:dataTable id="tblInscritos" value="#{asistenciaController.lstInscritos}" var="asistencia" paginatorAlwaysVisible="false"
@@ -96,7 +115,7 @@
 								<h:outputText value="#{msg.num_asistencias}" />
 							</f:facet>
 							
-							<h:inputText value="#{asistencia.numeroAsistencias}" />
+							<sigecComp:textField id="txtMinEst" value="#{asistencia.numeroAsistencias}" editMode="true" required="true" label="#{msg.num_asistencias}" containerStyle="margin:auto;" inputTextStyle="text-align:right;"/>
 						</p:column>
 					</p:dataTable>
 	        	</h:panelGrid>
