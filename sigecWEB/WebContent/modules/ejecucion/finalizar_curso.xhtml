@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:sigecComp="http://java.sun.com/jsf/composite/components">
+    
+   	<h:outputStylesheet library="css" name="textos.css" />    
+   	<h:outputStylesheet library="css" name="bordes.css"/>
+   	<h:outputStylesheet library="css" name="botones.css"/>
+   	<h:outputScript library="js" name="validaciones.js" target="head"/>
+   	
+   	<h:outputScript library="js" name="jquery.effects.core.js" />
+	<h:outputScript library="js" name="jquery.effects.blind.js" />
+    <h:outputStylesheet library="css" name="componentsCss.css" />
+    <h:outputScript  library="js" name="componentsJs.js" />
+    
+   	<h:outputStylesheet library="css" name="tables.css" />
+   	
+	<h:form id="frmAsistencia">
+       	
+       	
+       	<rich:panel header="#{msg.asistencia}" id="pnlAsistencia">
+       		
+       		
+       		<rich:collapsiblePanel header="#{msg.asistencia}"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+				leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+        		<h:panelGrid columns="2">
+        			<h:outputText value="Programa: " />
+        			<rich:select value="#{finalizarCursoController.programa.idPrograma}" valueChangeListener="#{finalizarCursoController.rsCargarCursosPrograma}"> 
+	        			<f:selectItems value="#{finalizarCursoController.lstProgramas}" var="itemPrograma" itemLabel="#{itemPrograma.nombre}" itemValue="#{itemPrograma.idPrograma}"/>
+	        			<a4j:ajax event="selectitem" execute="@this" render="pgPrgCursos, pgDetalleCupos"/>
+	        		</rich:select>
+        		</h:panelGrid>
+        		
+        		<h:panelGrid id="pgPrgCursos" columns="1" style="margins:auto; width:100%; border-collapse:collapse;" cellpadding="0" cellspacing="0">
+        			<h:panelGroup styleClass="rf-p-hdr" layout="block" style="margin:auto;text-align:center; width:100%;" rendered="#{!empty finalizarCursoController.lstProgramaCursos }">
+	        			<rich:dataScroller id="rdsPrgCursos" for="tblPrgCursos" renderIfSinglePage="false" style="margin:auto;text-align:center;" boundaryControls="hide"/>
+	        		</h:panelGroup>
+	        		<rich:dataTable id="tblPrgCursos" value="#{finalizarCursoController.lstProgramaCursos}" var="itemsProgramaCurso"
+	        			noDataLabel="No existen cursos asignados a el programa" rows="2" style="width:100%;">
+	        			<rich:column>
+	        				<f:facet name="header">
+	        					Cursos del programa
+	        				</f:facet>
+	        				<a4j:commandLink value="#{itemsProgramaCurso.cursoPeriodo.curso.nombreCurso}" oncomplete="#{rich:component('rppmensajeFinalizacion')}.show();">
+	        					<f:setPropertyActionListener target="#{finalizarCursoController.programaCursoSeleccionado}" value="#{itemsProgramaCurso}"></f:setPropertyActionListener>
+	        				</a4j:commandLink>
+	        			</rich:column>
+	        		</rich:dataTable>
+        		</h:panelGrid>
+        	</rich:collapsiblePanel>
+        	<rich:popupPanel id="rppmensajeFinalizacion" domElementAttachment="form" header="Finalizar curso" autosized="true">
+        		 <f:facet name="controls">
+		             <h:outputLink value="#" onclick="#{rich:component('rppmensajeFinalizacion')}.hide(); return false;">
+		                <h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
+		            </h:outputLink>
+		        </f:facet>
+		        <rich:panel>
+			        <h:panelGroup layout="block">
+			        	Esta usted seguro de finalizar el curso?
+			        </h:panelGroup>
+        		</rich:panel>
+        		
+        		<h:panelGroup layout="block" style="margin:auto; width:100%;">
+	        		<h:panelGrid columns="2" style="margin:auto;">
+		        		<a4j:commandButton value="Si" action="#{finalizarCursoController.btnAceptarFinalizarCurso}" execute="@this" oncomplete="#{rich:component('rppmensajeFinalizacion')}.hide();"/>
+		        		<a4j:commandButton value="No" onclick="#{rich:component('rppmensajeFinalizacion')}.hide(); return false;"/>
+	        		</h:panelGrid>
+        		</h:panelGroup>
+        	</rich:popupPanel>
+       	</rich:panel>
+       	
+       </h:form>
+</ui:composition>
