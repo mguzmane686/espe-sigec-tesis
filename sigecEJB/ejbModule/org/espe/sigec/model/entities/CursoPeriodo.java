@@ -32,11 +32,11 @@ import javax.validation.constraints.Size;
  * 
  * @author roberto
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "sgct_acd_cur_per")
 @NamedQueries({ @NamedQuery(name = "CursoPeriodo.findAll", query = "SELECT c FROM CursoPeriodo c") })
 public class CursoPeriodo implements Serializable {
-	private static final long serialVersionUID = 1L;
 	// @Max(value=?) @Min(value=?)//if you know range of your decimal fields
 	// consider using these annotations to enforce field validation
 	@Id
@@ -61,6 +61,12 @@ public class CursoPeriodo implements Serializable {
 
 	@Column(name = "prf_id_profesor")
 	private BigDecimal idProfesor;
+	
+	@Column(name = "minimo_asistencia_alumno")
+	private Integer minimoAsistenciaEstudiante;
+	
+	@Column(name = "maximo_asistencia_alumno")
+	private Integer maximoAsistenciaEstudiante;
 
 	@JoinColumn(name = "prf_id_profesor", referencedColumnName = "prf_id_profesor", insertable = false, updatable = false)
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -317,6 +323,22 @@ public class CursoPeriodo implements Serializable {
 
 	public void setHorarioCursoPeriodo(HorarioCursoPeriodo horarioCursoPeriodo) {
 		this.horarioCursoPeriodo = horarioCursoPeriodo;
+	}
+
+	public Integer getMinimoAsistenciaEstudiante() {
+		return minimoAsistenciaEstudiante;
+	}
+
+	public void setMinimoAsistenciaEstudiante(Integer minimoAsistenciaEstudiante) {
+		this.minimoAsistenciaEstudiante = minimoAsistenciaEstudiante;
+	}
+
+	public Integer getMaximoAsistenciaEstudiante() {
+		return maximoAsistenciaEstudiante;
+	}
+
+	public void setMaximoAsistenciaEstudiante(Integer maximoAsistenciaEstudiante) {
+		this.maximoAsistenciaEstudiante = maximoAsistenciaEstudiante;
 	}
 
 }
