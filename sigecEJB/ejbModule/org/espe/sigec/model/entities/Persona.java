@@ -29,6 +29,9 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
+
 /**
  *
  * @author roberto
@@ -38,6 +41,7 @@ import javax.validation.constraints.Size;
 @Table(name = "sgct_rh_persona")
 @NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p")})
+@Audited
 public class Persona implements Serializable {
     
     @Id
@@ -117,9 +121,11 @@ public class Persona implements Serializable {
    
     @JoinColumn(name = "usr_id_usuario", referencedColumnName = "usr_id_usuario")
     @ManyToOne(fetch = FetchType.LAZY)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private Usuario usuario;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     private EducacionFormacion educacionFormacion;
     
     public Persona() {

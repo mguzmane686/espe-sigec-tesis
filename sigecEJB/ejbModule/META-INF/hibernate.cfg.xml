@@ -10,7 +10,18 @@
   <property name="hibernate.default_schema">public</property>
   <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
   <property name="hibernate.show_sql">true</property>
-  <property name="hibernate.format_sql">false</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  
 <!--   <property name="jboss.entity.manager.factory.jndi.name">jdbc/sigec_pool</property> -->
+
+  <property name="org.hibernate.envers.default_schema">public</property>
+  <listener class="org.hibernate.envers.event.AuditEventListener" type="post-insert"/>
+  <listener class="org.hibernate.envers.event.AuditEventListener" type="post-update"/>
+  <listener class="org.hibernate.envers.event.AuditEventListener" type="post-delete"/>
+  <listener class="org.hibernate.envers.event.AuditEventListener" type="pre-collection-update"/>
+  <listener class="org.hibernate.envers.event.AuditEventListener" type="pre-collection-remove"/>
+  <listener class="org.hibernate.envers.event.AuditEventListener" type="post-collection-recreate"/>
+
  </session-factory>
 </hibernate-configuration>

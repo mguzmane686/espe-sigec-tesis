@@ -19,6 +19,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.RelationTargetAuditMode;
+
 /**
  *
  * @author roberto
@@ -27,6 +30,7 @@ import javax.validation.constraints.Size;
 @Table(name = "sgct_ifr_aula")
 @NamedQueries({
     @NamedQuery(name = "Aula.findAll", query = "SELECT a FROM Aula a")})
+@Audited
 public class Aula implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,6 +47,7 @@ public class Aula implements Serializable {
     private String descripcionAula;
     @Column(name = "aul_capacidad")
     private Integer capacidad;
+    @Audited(targetAuditMode = RelationTargetAuditMode.NOT_AUDITED)
     @JoinColumn(name = "edf_id_edificio", referencedColumnName = "edf_id_edificio")
     @ManyToOne(fetch = FetchType.LAZY)
     private Edificio edificio;
