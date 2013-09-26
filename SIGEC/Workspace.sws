@@ -4,9 +4,8 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{D0D72CB8-38C5-460F-BBD5-2D1FEB9AFC6B}" Name="SIGEC" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="SIGEC.prj"/>
-		<Model Expanded="Yes" ID="{2E90AE57-AC4E-4B79-8AC3-20EEE7CB7981}" Name="Ejemplos" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="../ejemplosPD/Ejemplos/Ejemplos.prj"/>
-		<Model Expanded="Yes" ID="{50C4D1EF-2B15-42A4-9F0C-AB439846172A}" Name="sigec_modelo" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="sigec_modelo/sigec_modelo.prj"/>
+		<Model ID="{D0D72CB8-38C5-460F-BBD5-2D1FEB9AFC6B}" Name="SIGEC" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="SIGEC.prj"/>
+		<Model Expanded="Yes" ID="{50C4D1EF-2B15-42A4-9F0C-AB439846172A}" Name="sigec_modelo" Selected="Yes" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="sigec_modelo/sigec_modelo.prj"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
