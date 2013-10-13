@@ -5,9 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -18,9 +15,9 @@ public class ContratoProfesorPK implements Serializable{
     @NotNull
     @Column(name = "ctr_num_contrato")
 	
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="invprof_seq")
-    @SequenceGenerator(name="num_contrato_sec", sequenceName="num_contrato_sec", allocationSize = 1)
-    private int ctrNumContrato;
+//	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="invprof_seq")
+//    @SequenceGenerator(name="num_contrato_sec", sequenceName="num_contrato_sec", allocationSize = 1)
+    private String numeroContrato;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
@@ -30,20 +27,20 @@ public class ContratoProfesorPK implements Serializable{
     public ContratoProfesorPK() {
     }
 
-    public ContratoProfesorPK(int ctrNumContrato, String docNumInvit) {
-        this.ctrNumContrato = ctrNumContrato;
+    public ContratoProfesorPK(String numeroContrato, String docNumInvit) {
+        this.numeroContrato = numeroContrato;
         this.docNumInvit = docNumInvit;
     }
 
-    public int getCtrNumContrato() {
-        return ctrNumContrato;
-    }
+    public String getNumeroContrato() {
+		return numeroContrato;
+	}
 
-    public void setCtrNumContrato(int ctrNumContrato) {
-        this.ctrNumContrato = ctrNumContrato;
-    }
+	public void setNumeroContrato(String numeroContrato) {
+		this.numeroContrato = numeroContrato;
+	}
 
-    public String getDocNumInvit() {
+	public String getDocNumInvit() {
         return docNumInvit;
     }
 
@@ -51,32 +48,20 @@ public class ContratoProfesorPK implements Serializable{
         this.docNumInvit = docNumInvit;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (int) ctrNumContrato;
-        hash += (docNumInvit != null ? docNumInvit.hashCode() : 0);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ContratoProfesorPK)) {
-            return false;
-        }
-        ContratoProfesorPK other = (ContratoProfesorPK) object;
-        if (this.ctrNumContrato != other.ctrNumContrato) {
-            return false;
-        }
-        if ((this.docNumInvit == null && other.docNumInvit != null) || (this.docNumInvit != null && !this.docNumInvit.equals(other.docNumInvit))) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
 
-    @Override
-    public String toString() {
-        return "org.espe.sigec.model.entities.ContratoProfesorPK[ ctrNumContrato=" + ctrNumContrato + ", docNumInvit=" + docNumInvit + " ]";
-    }
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+    
 }

@@ -118,7 +118,7 @@ public class InvitacionDocenteFacade extends AbstractFacade<InvitacionDocente> i
 			criteria.add(Restrictions.eq("estado", estadoInvitacion));
 		}
 		
-		criteria.add(Restrictions.isNull("contratoGenerado"));
+//		criteria.add(Restrictions.isNull("contratoGenerado"));
 		@SuppressWarnings("unchecked")
 		Collection<InvitacionDocente> lst = criteria.list(); 
 		return lst;
