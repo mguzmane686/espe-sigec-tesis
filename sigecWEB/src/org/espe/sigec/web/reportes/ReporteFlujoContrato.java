@@ -42,7 +42,7 @@ public class ReporteFlujoContrato {
 		mapaSub = new HashMap<String, Object>();
 		mapaSub.put("NOMBRE_DEL_CURSO", contratoProfesor.getInvitacionDocente().getCursoPeriodo().getCurso().getNombreCurso());
 		mapaSub.put("fecha_curso", reportesUtil.convertirFecha(contratoProfesor.getInvitacionDocente().getCursoPeriodo().getPeriodoAcademico().getFechaInicio()));
-		mapaSub.put("lugar_a_dictarse", "Espe");
+		mapaSub.put("lugar_a_dictarse", contratoProfesor.getInvitacionDocente().getCursoPeriodo().getLugarCapacitacion());
 		mapaSub.put("valor_a_pagar", contratoProfesor.getInvitacionDocente().getDocValorPagar());
 		mapaSub.put("pp", "USD");
 		mapaSub.put("fecha_de_invitacion", reportesUtil.convertirFecha(contratoProfesor.getInvitacionDocente().getFechaInvitacion()));
@@ -56,21 +56,21 @@ public class ReporteFlujoContrato {
 		
 		mapaSub.put("fecha_de_aceptacion", reportesUtil.convertirFecha(contratoProfesor.getInvitacionDocente().getFechaInvitacion()));
 		mapaSub.put("cedula", contratoProfesor.getInvitacionDocente().getCursoPeriodo().getProfesor().getPersona().getCedula());
-		mapaSub.put("numero_de_contrato", contratoProfesor.getContratoProfesorPK().getCtrNumContrato());
+		mapaSub.put("numero_de_contrato", contratoProfesor.getContratoProfesorPK().getNumeroContrato());
 		mapaSub.put("nombre_sr_Vicerrector", "____________");
-		mapaSub.put("N_certificacion", "____________");
-		mapaSub.put("fecha_de_certificacion", "____________");
+		mapaSub.put("N_certificacion", contratoProfesor.getNumeroCertificacion());
+		mapaSub.put("fecha_de_certificacion", contratoProfesor.getFechaCertificacion());
 		mapaSub.put("fecha_contrato", reportesUtil.convertirFecha(new Date()));
-		mapaSub.put("n_de_memo_legalizacion_contrato", "____________");
+		mapaSub.put("n_de_memo_legalizacion_contrato", contratoProfesor.getNumeroMemo());
 		mapaSub.put("fecha_memmo_imprenta", reportesUtil.convertirFecha(new Date()));
 		mapaSub.put("NOMBRE_COORDINADOR", ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getNombreCompleto());
 		mapaSub.put("nombre_coordinador", ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getNombreCompleto());
 		mapaSub.put("HORARIO_DE_CLASES", "____________");
 		mapaSub.put("fecha_carta_de_pago", reportesUtil.convertirFecha(new Date()));
-		mapaSub.put("actividades", "____________");
+		mapaSub.put("actividades", contratoProfesor.getActividades());
 		mapaSub.put("M__terna", "____________");
-		mapaSub.put("NOMBRE_D_ELA_PP_", "____________");
-		mapaSub.put("valor", contratoProfesor.getInvitacionDocente().getDocValorPagar());
+		mapaSub.put("NOMBRE_D_ELA_PP_", contratoProfesor.getNombrePartidaPresupuestaria());
+		mapaSub.put("valor", contratoProfesor.getValorPartidaPresupuestaria());
 		mapaSub.put("F9", "____________");
 		try {
 			mapaSub.put("V_HORA_CLASE", contratoProfesor.getInvitacionDocente().getDocValorPagar().divide(new BigDecimal(contratoProfesor.getInvitacionDocente().getCursoPeriodo().getNumeroHoras())));
@@ -78,11 +78,11 @@ public class ReporteFlujoContrato {
 			e.printStackTrace();
 		}
 		
-		mapaSub.put("N_MEMO", "____________");
-		mapaSub.put("tipo_relacion_loboral", "____________");
-		mapaSub.put("Banco", "____________");
-		mapaSub.put("N_cta", "____________");
-		mapaSub.put("plan", "____________");
+		mapaSub.put("N_MEMO", contratoProfesor.getNumeroMemo());
+		mapaSub.put("tipo_relacion_loboral", contratoProfesor.getTipoRelacionLaboral());
+		mapaSub.put("Banco", contratoProfesor.getBanco());
+		mapaSub.put("N_cta", contratoProfesor.getNumeroCuenta());
+		mapaSub.put("plan", contratoProfesor.getPlan());
 	}
 
 	public void reporteContratoP1() {

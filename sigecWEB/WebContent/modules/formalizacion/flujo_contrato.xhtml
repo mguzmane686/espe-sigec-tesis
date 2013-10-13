@@ -16,6 +16,12 @@
     			width:300px !important;
     		}
     	</h:outputStylesheet>
+    	
+    	<h:outputScript target="head">
+    		function lanzarReporte(){
+    			$('.btnreporte').trigger('click');
+    		}
+    	</h:outputScript>
     		
         <h:form id="frmCurso">
         	
@@ -32,7 +38,7 @@
 						var="invitacion" paginator="true" rows="10" rowIndexVar="num_row" emptyMessage="#{msg.empty_collection}" paginatorAlwaysVisible="false">
 	        			
 	        			<p:column headerText="Num.">
-	        				 <h:commandLink value="#{num_row+1}" action="#{generacionFlujoContratoController.btnGenerarDocumento(invitacion)}" />
+	        				 <a4j:commandLink value="#{num_row+1}" action="#{generacionFlujoContratoController.btnSeleccionarInvitacion(invitacion)}" execute="@this" render="pgContrato"/>
 	        			</p:column>
 	        			
 	        			<p:column headerText="#{msg.etiqueta_curso}">
@@ -40,7 +46,7 @@
 	        			</p:column>
 	        			
 	        			<p:column headerText="Docente">
-	        				 <h:outputText value="#{invitacion.profesor.persona.primerNombre} #{invitacion.profesor.persona.primerApellido}" />
+	        				 <h:outputText value="#{invitacion.profesor.persona.nombreCompleto}" />
 	        			</p:column>
 	        			
 	        			<p:column headerText="Estado">
@@ -50,10 +56,45 @@
 	        		
 	        	</rich:collapsiblePanel>
 	        	
-	        	<p:dialog widgetVar="detalleInvitacion" modal="true" header="Cambio de estado!!" 
-	        		>
-	        		
-	        	</p:dialog>
+	        	<rich:collapsiblePanel header="Detalles del contrato"  headerClass="headerDivCollap" styleClass="mainDivCollap" 
+					leftCollapsedIcon="triangleDown" leftExpandedIcon="triangleUp" switchType="client">
+					<h:panelGroup layout="block" id="pgContrato"> 
+					
+						<h:panelGrid columns="2" rendered="#{generacionFlujoContratoController.invitacionDocenteSelected != null}">
+							<h:outputText value="#{msg.num_contrato}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.contratoProfesorPK.numeroContrato}" required="true" editMode="true" label="#{msg.actividades}"/>
+							
+							<h:outputText value="#{msg.actividades}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.actividades}" required="true" editMode="true" label="#{msg.actividades}"/>
+							
+							<h:outputText value="#{msg.fecha_carta_de_pago}" />
+							<rich:calendar value="#{generacionFlujoContratoController.contratoProfesor.fechaCartaPago}" required="true" requiredMessage="El campo #{msg.fecha_carta_de_pago} es requerido"/>
+							
+							<h:outputText value="#{msg.num_memo}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.numeroMemo}" required="true" editMode="true" label="#{msg.num_memo}"/>
+							
+							<h:outputText value="#{msg.valor_hora_clase}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.valorHoraClase}" required="true" editMode="true" label="#{msg.valor_hora_clase}"/>
+							
+							<h:outputText value="#{msg.tipo_relacion_laboral}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.tipoRelacionLaboral}" required="true" editMode="true" label="#{msg.tipo_relacion_laboral}"/>
+							
+							<h:outputText value="#{msg.banco}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.banco}" required="true" editMode="true" label="#{msg.banco}"/>
+							
+							<h:outputText value="#{msg.num_cuenta}" />
+							<sigecComp:textField value="#{generacionFlujoContratoController.contratoProfesor.numeroCuenta}" required="true" editMode="true" label="#{msg.num_cuenta}"/>
+						</h:panelGrid>
+						
+						<h:panelGroup rendered="#{generacionFlujoContratoController.invitacionDocenteSelected != null}">
+							<a4j:commandButton action="#{generacionFlujoContratoController.btnGenerarFlujoContrato}" value="Generar flujo contrato" render="@form"/>
+							<h:commandButton  action="#{generacionFlujoContratoController.btnGenerarFlujoContrato}" styleClass="btnreporte"/>
+						</h:panelGroup>
+						
+					</h:panelGroup>
+					
+				</rich:collapsiblePanel>
+	        	
         	</rich:panel>
         </h:form>
 </ui:composition>

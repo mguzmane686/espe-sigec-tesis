@@ -28,30 +28,56 @@ public class GeneracionFlujoContratoController implements Serializable{
 	
 	private Collection<InvitacionDocente> lstInvitacionDocentes;
 	private InvitacionDocente invitacionDocenteSelected;
+	private ContratoProfesor contratoProfesor;
+	
+	public GeneracionFlujoContratoController() {
+		instanciarEntidades();
+	}
+
+	public void btnGenerarFlujoContrato(){
+		btnGenerarDocumento(getInvitacionDocenteSelected());
+		
+	}
+	
+	private void instanciarEntidades(){
+		setContratoProfesor(new ContratoProfesor());
+		getContratoProfesor().setContratoProfesorPK(new ContratoProfesorPK());
+	}
 	
 	public void btnGenerarDocumento(InvitacionDocente invitacionDocente){
 		setInvitacionDocenteSelected(invitacionDocente);
-		ContratoProfesor contratoProfesor =null;
+		ContratoProfesor contratoProfesorTMP =null;
 		try {
-			contratoProfesor = documentoServicio.obtenerContratoDocente(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo(), getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
-			if(contratoProfesor ==null){
-				contratoProfesor = new ContratoProfesor();
+			contratoProfesorTMP = documentoServicio.obtenerContratoDocente(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo(), getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
+			if(contratoProfesorTMP ==null){
+//				contratoProfesor = new ContratoProfesor();
 				contratoProfesor.setIdCursoPeriodo(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo());
 				contratoProfesor.setIdProfesor(getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
 				contratoProfesor.setInvitacionDocente(getInvitacionDocenteSelected());
-				contratoProfesor.setContratoProfesorPK(new ContratoProfesorPK());
 				contratoProfesor.getContratoProfesorPK().setDocNumInvit(getInvitacionDocenteSelected().getInvitacionDocentePK().getDocNumInvit());
 				documentoServicio.crearContratoDocente(contratoProfesor);
 				contratoProfesor = documentoServicio.obtenerContratoDocente(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo(), getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor());
-				
 			}
-			
 			generarReporte(contratoProfesor);
+			instanciarEntidades();
+			setInvitacionDocenteSelected(null);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	public void btnSeleccionarInvitacion(InvitacionDocente invitacionDocente){
+		setInvitacionDocenteSelected(invitacionDocente);
 		
-		
+		try {
+			setContratoProfesor(documentoServicio.obtenerContratoDocente(getInvitacionDocenteSelected().getInvitacionDocentePK().getIdCursoPeriodo(), getInvitacionDocenteSelected().getInvitacionDocentePK().getPrfIdProfesor()));
+			if(getContratoProfesor() == null){
+				instanciarEntidades();
+			}
+		} catch (Exception e) {
+			instanciarEntidades();
+			e.printStackTrace();
+		}
 	}
 	
 	private void generarReporte(ContratoProfesor contratoProfesor){
@@ -97,6 +123,12 @@ public class GeneracionFlujoContratoController implements Serializable{
 			InvitacionDocente invitacionDocenteSelected) {
 		this.invitacionDocenteSelected = invitacionDocenteSelected;
 	}
-	
-	
+
+	public ContratoProfesor getContratoProfesor() {
+		return contratoProfesor;
+	}
+
+	public void setContratoProfesor(ContratoProfesor contratoProfesor) {
+		this.contratoProfesor = contratoProfesor;
+	}
 }
