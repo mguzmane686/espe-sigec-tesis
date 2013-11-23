@@ -15,6 +15,13 @@
 					<include path="META-INF" />
 				</imports>
 			</module>
+			
+			<module name="org.spring.core" slot="3.0.5.RELEASE" export="true" meta-inf="export">
+				<imports>
+					<include path="META-INF" />
+				</imports>
+			</module>
+			
 		</dependencies>
 	</sub-deployment>
 	
