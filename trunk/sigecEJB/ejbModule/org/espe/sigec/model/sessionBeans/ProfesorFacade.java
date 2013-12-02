@@ -10,6 +10,7 @@ import java.util.Collection;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OrderBy;
 import javax.persistence.PersistenceContext;
 
 import org.espe.sigec.model.entities.ContratoProfesor;
@@ -112,7 +113,10 @@ public class ProfesorFacade extends AbstractFacade<Profesor> implements Profesor
 	@Override
 	public Collection<Profesor> cargarProfesores() {
 		Criteria crit = ((Session)getEntityManager().getDelegate()).createCriteria(Profesor.class);
-		crit.setFetchMode("persona", FetchMode.JOIN);
+		crit.createAlias("persona", "personaA");
+		crit.setFetchMode("personaa", FetchMode.JOIN);
+		
+		crit.addOrder(Order.asc("personaA.primerApellido"));
     	    	
 		return crit.list();
 	}

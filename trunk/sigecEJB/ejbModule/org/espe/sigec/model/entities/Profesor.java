@@ -7,6 +7,7 @@ package org.espe.sigec.model.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -30,12 +31,12 @@ import javax.validation.constraints.Size;
  *
  * @author roberto
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "sgct_rh_profesor")
 @NamedQueries({
     @NamedQuery(name = "Profesor.findAll", query = "SELECT p FROM Profesor p")})
 public class Profesor implements Serializable {
-    private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
@@ -87,6 +88,8 @@ public class Profesor implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "profesor", fetch = FetchType.LAZY)
     private Collection<EstudioComplementario> estudiosComplementarios;
+    @Transient
+    private boolean selected;
     
     public Profesor() {
     }
@@ -245,6 +248,14 @@ public class Profesor implements Serializable {
 	public void setCursoProfesorCollection(
 			Collection<CursoProfesor> cursoProfesorCollection) {
 		this.cursoProfesorCollection = cursoProfesorCollection;
+	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	}
 
 //	public Collection<RangoAcademicoProfesor> getLstRangoAcademicoProfesor() {
