@@ -74,9 +74,13 @@ public class InvitacionDocenteController implements Serializable{
 	}
 	
 	public void btnGenerarInvitacion(ActionEvent e) throws IOException{
+		btnGenerarMultiplesInvitaciones();
+	}
+	
+	public void generarInivitacion(Profesor profesor){
 		if(getInvitacionDocente().getInvitacionDocentePK().getDocNumInvit()==null){
 			CursoPeriodo cursoPeriodo = findCursoSelected(getInvitacionDocente().getInvitacionDocentePK().getIdCursoPeriodo());
-			
+			getInvitacionDocente().getInvitacionDocentePK().setPrfIdProfesor(profesor.getIdProfesor().intValue());
 			Collection<Memo> lstMemos = new ArrayList<Memo>(1);
 			Map<String, Object> valuesMap = new HashMap<String, Object>();
 			valuesMap.put("NOMBRE_DEL_CURSO", cursoPeriodo.getCurso().getNombreCurso());
@@ -96,11 +100,10 @@ public class InvitacionDocenteController implements Serializable{
 			setMemo(new Memo());
 			getMemo().setFechaInivitacion(new Date());
 			getMemo().setNombreDirectora("Ing. Karla Benavides");
-			String elaboradoPor =  ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getPrimerApellido() +" "+
-					((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getPrimerNombre();
+			String elaboradoPor =  ((HomeSessionController)FacesUtils.getManagedBean("homeSessionController")).getUsuarioPerfil().getPersona().getNombreCompleto();
 			getMemo().setNombreElaborador(elaboradoPor);
 			
-			Profesor profesor =  findProfesorSelected();
+//			Profesor profesor =  findProfesorSelected();
 			getMemo().setNombreProveedor(profesor.getPersona().getNombreCompleto());
 			getMemo().setNumeroInivitacion("000001");
 			getMemo().setCuerpoMemo(resolvedString);
@@ -126,14 +129,28 @@ public class InvitacionDocenteController implements Serializable{
 				}
 				
 				setSavedInvitacion(Boolean.TRUE);
-				initController();
+				getInvitacionDocente().getInvitacionDocentePK().setDocNumInvit(null);
+//				initController();
 				
 			} catch (Exception e1) {
 				FacesUtils.addErrorMessage(e1.getMessage());
 				e1.printStackTrace();
 			}
-		
 		}
+	}
+	
+	public void btnGenerarMultiplesInvitaciones(){
+		
+		for(Profesor profesor: getLstProfesors()){
+			if(profesor.isSelected()){
+				System.out.println(profesor.getPersona().getNombreCompleto());
+				generarInivitacion(profesor);
+			}
+		}
+		
+		initController();
+		
+		
 	}
 	
 	public void btnNuevaInvitacion(){
