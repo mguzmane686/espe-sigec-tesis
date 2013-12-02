@@ -25,19 +25,11 @@
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{!invitacionDocenteController.savedInvitacion}">
 	        				<a4j:commandButton id="btnUno" value="#{msg['guardar']}" actionListener="#{invitacionDocenteController.btnGenerarInvitacion}"   
 	        					 image="/resources/images/save.png" type="submit" render="@form" >
-	        					 
 	        				</a4j:commandButton>
-	        				
-	        				
 	        				<h:outputLabel value="#{msg['guardar']}" />
 	        			</h:panelGrid>
 	        			
-	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{invitacionDocenteController.savedInvitacion}">
-	        				<h:commandButton value="Generar PDF"  
-	        					 image="/resources/images/button/pdf.png" action="#{invitacionDocenteController.lanzarPdfMemo}" >
-	        				</h:commandButton>
-	        				<h:outputLabel value="Generar PDF" />
-	        			</h:panelGrid>
+	        			
 	        			
 	        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" rendered="#{invitacionDocenteController.savedInvitacion}">
 	        				<a4j:commandButton value="Nueva #{msg.invitacion}" action="#{invitacionDocenteController.btnNuevaInvitacion}"  
@@ -64,11 +56,28 @@
 	        			
 	        			<h:outputLabel value="Proveedor: " />
 	        			<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
-	        				<rich:select id="rsProveedor" value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.prfIdProfesor}" enableManualInput="true" 
+	        				<!-- rich:select id="rsProveedor" value="#{invitacionDocenteController.invitacionDocente.invitacionDocentePK.prfIdProfesor}" enableManualInput="true" 
 	        					required="true" requiredMessage="El campo Proveedor es obligarotio" validatorMessage="El campo Proveedor es obligarotio">
 		        				<f:selectItems value="#{invitacionDocenteController.lstProfesors}" 
 			        				var="prof" itemLabel="#{prof.persona.primerApellido} #{prof.persona.primerNombre}" itemValue="#{prof.idProfesor}" />
-		        			</rich:select>
+		        			</rich:select-->
+		        			<h:panelGroup layout="block" style="height:200px; overflow-y:auto;">
+			        			<rich:dataTable value="#{invitacionDocenteController.lstProfesors}" var="prof">
+		        					<rich:column style="text-align:center; margin:auto;">
+		        						<f:facet name="header">
+		        							<h:outputText value="Seleccionar" />
+		        						</f:facet>
+		        						<h:selectBooleanCheckbox value="#{prof.selected}" style="text-align:center;"/>
+		        					</rich:column>
+		        					
+		        					<rich:column style="width:300px;" styleClass="clmNombreProfInv">
+		        						<f:facet name="header">
+		        							<h:outputText value="Nombre" />
+		        						</f:facet>
+		        						<h:outputText value="#{prof.persona.nombreCompleto}" />
+		        					</rich:column>
+		        				</rich:dataTable>
+	        				</h:panelGroup>
 	        				<rich:message for="rsProveedor" ajaxRendered="true" styleClass="rmsg-parent-cmp" >
 								<rich:tooltip value="#{msg.etiqueta_campo_obligatorio}" verticalOffset="2"></rich:tooltip>
 							</rich:message>
