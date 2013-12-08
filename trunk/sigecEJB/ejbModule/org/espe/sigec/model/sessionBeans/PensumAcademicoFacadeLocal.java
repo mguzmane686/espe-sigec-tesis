@@ -4,9 +4,13 @@
  */
 package org.espe.sigec.model.sessionBeans;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
+
 import javax.ejb.Local;
+
+import org.espe.sigec.model.entities.HorarioCursoPeriodo;
 import org.espe.sigec.model.entities.PensumAcademico;
 
 /**
@@ -31,4 +35,6 @@ public interface PensumAcademicoFacadeLocal {
     int count();
 
     Collection<PensumAcademico> findTemasModulo(Integer idModulo);
+    
+    HorarioCursoPeriodo buscarHorarioCurso(BigDecimal idCursoPeriodo) throws Exception;
 }

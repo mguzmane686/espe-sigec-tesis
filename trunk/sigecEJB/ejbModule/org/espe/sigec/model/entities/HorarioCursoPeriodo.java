@@ -273,5 +273,35 @@ public class HorarioCursoPeriodo implements Serializable {
 	public void setDomingoHasta(String domingoHasta) {
 		this.domingoHasta = domingoHasta;
 	}
+	
+	
+	/*Horarios WEB*/
+	public String getHorarioLunes(){
+		return getLunesDesde() +" - " +getLunesHasta();
+	}
+	
+	public String getHorarioMartes(){
+		return getMartesDesde() +" - " +getMartesHasta();
+	}
+	
+	public String getHorarioMiercoles(){
+		return getMiercolesDesde() +" - " +getMiercolesHasta();
+	}
+	
+	public String getHorarioJueves(){
+		return getJuevesDesde() +" - " +getJuevesHasta();
+	}
+	
+	public String getHorarioViernes(){
+		return getViernesDesde() +" - " +getViernesHasta();
+	}
+	
+	public String getHorarioSabado(){
+		return getSabadoDesde() +" - " +getSabadoHasta();
+	}
+	
+	public String getHorarioDomingo(){
+		return getDomingoDesde() +" - " +getDomingoHasta();
+	}
     
 }
