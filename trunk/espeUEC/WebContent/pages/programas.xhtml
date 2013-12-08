@@ -151,9 +151,54 @@
 								            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" styleClass="uec-pf-label-normal"/>
 								        </h:panelGrid>
 								        
+								        <h:panelGroup styleClass="ui-datatable ui-widget">
+								        	<table>
+								        		<thead>
+								        			<th class="ui-state-default uec-pf-label-bold">Lunes</th>
+								        			<th class="ui-state-default uec-pf-label-bold">Martes</th>
+								        			<th class="ui-state-default uec-pf-label-bold">Miércoles</th>
+								        			<th class="ui-state-default uec-pf-label-bold">Jueves</th>
+								        			<th class="ui-state-default uec-pf-label-bold">Viernes</th>
+								        			<th class="ui-state-default uec-pf-label-bold">Sábado</th>
+								        			<th class="ui-state-default uec-pf-label-bold">Domingo</th>
+								        		</thead>
+								        		<tbody class="ui-datatable-data ui-widget-content">
+									        		<tr class="ui-widget-content ui-datatable-even">
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioLunes}" />
+									        			</td>
+									        			
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioMartes}" />
+									        			</td>
+									        			
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioMiercoles}" />
+									        			</td>
+									        			
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioJueves}" />
+									        			</td>
+									        			
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioViernes}" />
+									        			</td>
+									        			
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioSabado}" />
+									        			</td>
+									        			
+									        			<td style="text-align: center">
+									        				<h:outputText value="#{programasController.horarioCursoPeriodo.horarioDomingo}" />
+									        			</td>
+									        		</tr>
+								        		</tbody>
+								        	</table>
+								        </h:panelGroup>
+								        <p:spacer height="20px"></p:spacer>
 								        <h:panelGrid style="width:100%;">
 								        	<p:dataTable value="#{programasController.lstPensumAcademicos}" var="itemsPensum" paginatorPosition="top" 
-								        		paginatorAlwaysVisible="false" rows="10" style="width:100%;">
+								        		paginatorAlwaysVisible="false" rows="10" style="width:100%;" emptyMessage="Aún no se registran detalles">
 								        		<p:column headerText="Tema" styleClass="uec-pf-label-bold">
 								        			<h:outputText value="#{itemsPensum.tema}" styleClass="uec-pf-label-normal"/>
 								        		</p:column>

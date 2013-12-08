@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.espe.sigec.model.entities.CursoPeriodo;
+import org.espe.sigec.model.entities.HorarioCursoPeriodo;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
@@ -36,9 +37,12 @@ public class ProgramasController implements Serializable{
 	
 	private Collection<Programa> lstProgramaCursos;
 	
+	private HorarioCursoPeriodo horarioCursoPeriodo;
+	
 	public ProgramasController() {
 		setLstProgramaCursos(new ArrayList<Programa>());
 		programaCursoSelected = new Programa();
+		horarioCursoPeriodo = new HorarioCursoPeriodo();
 	}
 	
 	@PostConstruct
@@ -53,6 +57,13 @@ public class ProgramasController implements Serializable{
 		try {
 			setLstPensumAcademicos(portalServicio.buscarPensumCurso(cursoPeriodoSeleccionado.getCurso().getIdCurso()));
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			setHorarioCursoPeriodo(portalServicio.buscarHorarioCurso(cursoPeriodoSeleccionado.getIdCursoPeriodo()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -99,6 +110,14 @@ public class ProgramasController implements Serializable{
 	public void setLstPensumAcademicos(
 			Collection<PensumAcademico> lstPensumAcademicos) {
 		this.lstPensumAcademicos = lstPensumAcademicos;
+	}
+
+	public HorarioCursoPeriodo getHorarioCursoPeriodo() {
+		return horarioCursoPeriodo;
+	}
+
+	public void setHorarioCursoPeriodo(HorarioCursoPeriodo horarioCursoPeriodo) {
+		this.horarioCursoPeriodo = horarioCursoPeriodo;
 	}	
 	
 }
