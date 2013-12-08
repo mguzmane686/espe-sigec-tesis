@@ -102,7 +102,7 @@
 					</fieldset>
 				</div>
 				<h2>
-					Fresh <span>News</span>
+					Noticias
 				</h2>
 				<ul class="news">
 					<li><strong>June 30, 2010</strong>
@@ -134,6 +134,20 @@
 					<h2>
 						Programas vigentes
 					</h2>
+					<h:panelGrid columns="2" style="margin:auto; text-align:center;">
+							<p:commandButton value="Estudiante nuevo" id="btnNuevoAlumno"
+								action="#{inscripcionController.btnNewEstudent}" process="@this"
+								update="pnlDatosEstCur" >
+								<p:tooltip for="btnNuevoAlumno" value="Estudiante nuevo" />
+							</p:commandButton>
+							<p:commandButton id="btnBuscarEstudiante" value="Estudiante registrado"
+								action="#{inscripcionController.btnFindStudent}" process="@this"
+								update="pnlDatosEstCur" >
+								<p:tooltip for="btnBuscarEstudiante" value="Estudiante registrado"/>
+							</p:commandButton>
+							
+					</h:panelGrid>
+					
 					<h:panelGroup layout="block">
 						<h:panelGroup layout="block">
 							<h:panelGroup layout="block">
@@ -146,19 +160,7 @@
 										<f:facet name="header">
 											<h:panelGrid columns="1" style="margin:auto; text-align:center;">
 												<h:outputText value="Curso : #{inscripcionController.cursoPeriodo.curso.nombreCurso}" />
-												<h:panelGrid columns="2" style="margin:auto; text-align:center;">
-													<p:commandButton value="Nuevo" id="btnNuevoAlumno"
-														action="#{inscripcionController.btnNewEstudent}" process="@this"
-														update="pnlDatosEstCur" >
-														<p:tooltip for="btnNuevoAlumno" value="Estudiante nuevo" />
-													</p:commandButton>
-													<p:commandButton id="btnBuscarEstudiante" value="Buscar"
-														action="#{inscripcionController.btnFindStudent}" process="@this"
-														update="pnlDatosEstCur" >
-														<p:tooltip for="btnBuscarEstudiante" value="Estudiante ya registrado"/>
-													</p:commandButton>
-													
-												</h:panelGrid>
+												
 											</h:panelGrid>
 										</f:facet>
 										
@@ -178,9 +180,9 @@
 										<h:panelGrid columns="3" rendered="#{inscripcionController.findMode}" id="pnlFindFilter">
 											<h:outputLabel value="#{msg.etiqueta_cedula}" style="margin-right: 56px;" />
 											<p:inputText id="txtCedulaFilter" value="#{inscripcionController.cedulaUsr}"
-												validator="cedulaValidator" required="true"
+												validator="cedulaValidator" required="true" style="height:18px;"
 												requiredMessage="El documento es obligatorio"/>
-											<p:commandButton value="Buscar" action="#{inscripcionController.btnBuscarPorCedula}"
+											<p:commandButton value="Buscar" action="#{inscripcionController.btnBuscarPorCedula}" style="height:28px;"
 												process="@this txtCedulaFilter" update="pnlDatosEst"/>
 										</h:panelGrid>
 										
