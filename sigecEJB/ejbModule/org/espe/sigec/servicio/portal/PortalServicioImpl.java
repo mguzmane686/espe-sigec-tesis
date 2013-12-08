@@ -1,5 +1,6 @@
 package org.espe.sigec.servicio.portal;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 
 import javax.ejb.EJB;
@@ -7,6 +8,7 @@ import javax.ejb.EJB;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.model.entities.Encuesta;
 import org.espe.sigec.model.entities.EncuestaPK;
+import org.espe.sigec.model.entities.HorarioCursoPeriodo;
 import org.espe.sigec.model.entities.PensumAcademico;
 import org.espe.sigec.model.entities.Programa;
 import org.espe.sigec.model.entities.ProgramaCurso;
@@ -66,6 +68,12 @@ public class PortalServicioImpl implements PortalServicio{
 	@Override
 	public Collection<PensumAcademico> buscarPensumCurso(Integer idCurso) throws Exception {
 		return pensumAcademicoFacadeLocal.findTemasModulo(idCurso);
+	}
+
+	@Override
+	public HorarioCursoPeriodo buscarHorarioCurso(BigDecimal idCursoPeriodo) throws Exception {
+		// TODO Auto-generated method stub
+		return pensumAcademicoFacadeLocal.buscarHorarioCurso(idCursoPeriodo);
 	}
 
 	
