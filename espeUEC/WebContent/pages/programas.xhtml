@@ -1,86 +1,232 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-	
-<ui:composition template="/templates/common.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" 
-	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<ui:define name="pageTitle">Inicio</ui:define>
+<h:head>
+	<title>Home - #{msg.etiqueta_Inicio} | Student's Site - Free Website
+		Template from Templates.com</title>
+	<meta charset="utf-8" />
+	<meta name="description" content="Place your description here" />
+	<meta name="keywords" content="put, your, keyword, here" />
+	<meta name="author" content="Templates.com - website templates provider" />
 
-	<ui:define name="pageHeader">
+
 	
-	</ui:define>
+	<h:outputStylesheet library="css" name="reset.css" />
+	<h:outputStylesheet library="css" name="style-uec.css" />
+
+	<h:outputScript library="primefaces/jquery" name="jquery.js" />
+
+	<h:outputScript library="js" name="cufon-yui.js" />
+	<h:outputScript library="js" name="cufon-replace.js" />
+	<h:outputScript library="js" name="Myriad_Pro_300.font.js" />
+	<h:outputScript library="js" name="Myriad_Pro_400.font.js" />
+	<h:outputScript library="js" name="script.js" />
 	
-	<ui:define name="body">
 	
-		<h:form>
-			<h:panelGroup layout="block" id="contents">
-				
-				<h:panelGroup layout="block" class="background">
-					<h:panelGroup layout="block" id="services">
+
+</h:head>
+
+<h:body id="page1">
+<form jsfc="h:form">
+	<div class="wrap">
+		<!-- header -->
+		<div class="header">
+			<h:panelGroup layout="block" class="container">
+				<h1>
+					<h:commandLink value="Student's site" icon="#{resource['images/icons:home.png']}" action="/pages/index.jsf"/>
+					
+				</h1>
+				<nav>
+					<ul>
+						<li class="current">
+							<h:commandLink value="#{msg.etiqueta_Inicio}" action="/pages/index.jsf" styleClass="m1"/>
+						</li>
 						
-						<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso?" widgetVar="prograDialog" maximizable="false" minimizable="false"
-							showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true" resizable="false"> 
-						        
-					        <p:outputPanel id="documentPanel" autoUpdate="true">
-						        <p:panel>
-							        <h:panelGrid id="display" columns="2" cellpadding="4">  
-							            <h:outputText value="Nombre del curso: " />
-							            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.nombreCurso}" />
-							            
-							            <h:outputText value="Generalidades del curso: " />
-							            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.generalidadesCurso}" />
-							            
-							            <h:outputText value="Perfil del participante: " />
-							            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" />
-							        </h:panelGrid>
-							        
-							        <h:panelGrid style="width:100%;">
-							        	<p:dataTable value="#{programasController.lstPensumAcademicos}" var="itemsPensum" paginatorPosition="top" 
-							        		paginatorAlwaysVisible="false" rows="10" style="width:100%;">
-							        		<p:column headerText="Tema">
-							        			<h:outputText value="#{itemsPensum.tema}" />
-							        		</p:column>
-							        		
-							        		<p:column headerText="#{msg.descripcion}">
-							        			<h:outputText value="#{itemsPensum.descripcion}" />
-							        		</p:column>
-							        		
-							        	</p:dataTable>
-							        </h:panelGrid>
-						        
-						        </p:panel>
-						        
-						        
-						        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
-							        <p:commandButton  value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
-							        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
-							        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
-							        </p:commandButton>
-							        <p:commandButton onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
-						        </h:panelGrid>
-					        </p:outputPanel>  
-					    </p:dialog>
-					    
-						<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
-			                <p:column  headerText="Programas" >
-								<p:dataTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">
-									<p:column headerText="#{programaCurso.nombre}">
-						                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
-											<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
-											<f:setPropertyActionListener target="#{programasController.programaCursoSeleccionado}" value="#{curso}"></f:setPropertyActionListener>
-										</p:commandLink>
-						            </p:column>
-						            
-								</p:dataTable>
-							</p:column>
-						</p:dataTable>
+						<li>
+							<h:commandLink value="#{msg.etiqueta_nosotros}" action="/pages/about.jsf" styleClass="m2"/>
+						</li>
 						
-					</h:panelGroup>
-				</h:panelGroup>
+						<li>
+							<h:commandLink value="Our Articles" action="/pages/articles.jsf" styleClass="m3"/>
+						</li>
+						<li>
+							<h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf" styleClass="m4"/>
+						</li>
+						<li class="last">
+							<a href="sitemap.html" class="m5">Site Map</a>
+						</li>
+					</ul>
+				</nav>
+				<div id="search-form">
+					<fieldset>
+						<div class="rowElem">
+							<input type="text" /> <a href="#"
+								onClick="document.getElementById('search-form').submit()">Search</a>
+						</div>
+					</fieldset>
+				</div>
 			</h:panelGroup>
-		</h:form>
-	</ui:define>
-	</ui:composition>
+		</div>
+		<div class="container" >
+			<!-- aside -->
+			
+			<div class ="aside">
+				<h3>Categories</h3>
+				<ul class="categories">
+					<li>
+						<span>
+							<h:commandLink value="#{msg.etiqueta_programas}" action="/pages/programas.jsf?faces-redirect=true" title="Programas que la UEC ofrece" />
+						</span>
+					</li>
+					<li><span><a href="#">Student Info</a></span></li>
+					<li><span><a href="#">Teachers</a></span></li>
+					<li><span><a href="#">Descriptions</a></span></li>
+					<li><span><a href="#">Administrators</a></span></li>
+					<li><span><a href="#">Basic Information</a></span></li>
+					<li><span><a href="#">Vacancies</a></span></li>
+					<li class="last"><span><a href="#">Calendar</a></span></li>
+				</ul>
+				<div id="newsletter-form">
+					<fieldset>
+						<div class="rowElem">
+							<h2>Newsletter</h2>
+							<input type="email" value="Enter Your Email Here"
+								onFocus="if(this.value=='Enter Your Email Here'){this.value=''}"
+								onBlur="if(this.value==''){this.value='Enter Your Email Here'}" />
+							<div class="clear">
+								<a href="#" class="fleft">Unsubscribe</a><a href="#"
+									class="fright"
+									onClick="document.getElementById('newsletter-form').submit()">Submit</a>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<h2>
+					Fresh <span>News</span>
+				</h2>
+				<ul class="news">
+					<li><strong>June 30, 2010</strong>
+						<h4>
+							<a href="#">Sed ut perspiciatis unde</a>
+						</h4> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+						accusantium doloremque.</li>
+					<li><strong>June 14, 2010</strong>
+						<h4>
+							<a href="#">Neque porro quisquam est</a>
+						</h4> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+						aut fugit consequuntur magni.</li>
+					<li><strong>May 29, 2010</strong>
+						<h4>
+							<a href="#">Minima veniam, quis nostrum</a>
+						</h4> Uis autem vel eum iure reprehenderit qui in ea voluptate velit
+						esse quam nihil molestiae.</li>
+				</ul>
+			</div>
+			<!-- content -->
+			<div class="section" id="content">
+				<div id="banner">
+					<h2>
+						Professional <span>Online Education <span>Since 1992</span></span>
+					</h2>
+				</div>
+				<div class="ic">More Website Templates at TemplateMonster.com!</div>
+				<div class="inside">
+					<h2>
+						Programas vigentes
+					</h2>
+					<h:panelGroup layout="block">
+						<h:panelGroup layout="block" id="services">
+							
+							<p:dialog id="dialogPro" header="Le gustaria inscribirse al curso?" widgetVar="prograDialog" maximizable="false" minimizable="false"
+								showEffect="explode" hideEffect="explode" modal="true" dynamic="true" appendToBody="true" resizable="false" styleClass="uec-pf-label-normal"> 
+							        
+						        <p:outputPanel id="documentPanel" autoUpdate="true">
+							        <p:panel>
+								        <h:panelGrid id="display" columns="2" cellpadding="4">  
+								            <h:outputText value="Nombre del curso: " styleClass="uec-pf-label-bold"/>
+								            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.nombreCurso}" styleClass="uec-pf-label-normal"/>
+								            
+								            <h:outputText value="Generalidades del curso: " styleClass="uec-pf-label-bold"/>
+								            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.generalidadesCurso}" styleClass="uec-pf-label-normal"/>
+								            
+								            <h:outputText value="Perfil del participante: " styleClass="uec-pf-label-bold"/>
+								            <h:outputText value="#{programasController.cursoPeriodoSeleccionado.curso.perfilParticipante}" styleClass="uec-pf-label-normal"/>
+								        </h:panelGrid>
+								        
+								        <h:panelGrid style="width:100%;">
+								        	<p:dataTable value="#{programasController.lstPensumAcademicos}" var="itemsPensum" paginatorPosition="top" 
+								        		paginatorAlwaysVisible="false" rows="10" style="width:100%;">
+								        		<p:column headerText="Tema" styleClass="uec-pf-label-bold">
+								        			<h:outputText value="#{itemsPensum.tema}" styleClass="uec-pf-label-normal"/>
+								        		</p:column>
+								        		
+								        		<p:column headerText="#{msg.descripcion}" styleClass="uec-pf-label-bold">
+								        			<h:outputText value="#{itemsPensum.descripcion}" styleClass="uec-pf-label-normal"/>
+								        		</p:column>
+								        		
+								        	</p:dataTable>
+								        </h:panelGrid>
+							        
+							        </p:panel>
+							        
+							        
+							        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
+								        <p:commandLink value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
+								        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
+								        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
+								        </p:commandLink>
+								        <p:commandLink onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
+							        </h:panelGrid>
+						        </p:outputPanel>  
+						    </p:dialog>
+						    
+							<p:dataTable value="#{programasController.lstProgramaCursos}" var="programaCurso" >
+				                <p:column  headerText="Programas" >
+									<p:dataTable var="curso" value="#{programaCurso.programaCursoCollection}" id="tblPrograma">
+										<p:column headerText="#{programaCurso.nombre}">
+							                <p:commandLink value="#{curso.cursoPeriodo.curso.nombreCurso}" process="@this" action="#{programasController.btnAceptar}" oncomplete="prograDialog.show();">
+												<f:setPropertyActionListener target="#{programasController.cursoPeriodoSeleccionado}" value="#{curso.cursoPeriodo}"></f:setPropertyActionListener>
+												<f:setPropertyActionListener target="#{programasController.programaCursoSeleccionado}" value="#{curso}"></f:setPropertyActionListener>
+											</p:commandLink>
+							            </p:column>
+							            
+									</p:dataTable>
+								</p:column>
+							</p:dataTable>
+							
+						</h:panelGroup>
+					</h:panelGroup>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="inside">
+				<div class="wrapper">
+					<div class="fleft">
+						24/7 Customer Service <span>8.800.146.56.7</span>
+					</div>
+					<div class="aligncenter">
+						<a rel="nofollow" href="http://www.templatemonster.com"
+							class="new_window">Website template</a> designed by
+						TemplateMonster.com<br /> <a
+							href="http://www.templates.com/product/3d-models/"
+							class="new_window">3D Models</a> provided by Templates.com
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<h:outputScript>
+		Cufon.now(); 
+	</h:outputScript>
+	</form>
+</h:body>
 </html>

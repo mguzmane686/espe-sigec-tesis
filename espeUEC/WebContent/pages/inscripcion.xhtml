@@ -1,136 +1,278 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-
-<ui:composition template="/templates/common.xhtml"
-	xmlns:uec="http://java.sun.com/jsf/composite/components"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Home - #{msg.etiqueta_Inicio} | Student's Site - Free Website
+		Template from Templates.com</title>
+	<meta charset="utf-8" />
+	<meta name="description" content="Place your description here" />
+	<meta name="keywords" content="put, your, keyword, here" />
+	<meta name="author" content="Templates.com - website templates provider" />
 
-	<ui:define name="pageTitle">Inicio</ui:define>
 
-	<ui:define name="pageHeader">
+	<h:outputStylesheet library="css" name="reset.css" />
+	<h:outputStylesheet library="css" name="style-uec.css" />
 
-	</ui:define>
+	<h:outputScript library="primefaces/jquery" name="jquery.js" />
 
-	<ui:define name="body">
+	<h:outputScript library="js" name="cufon-yui.js" />
+	<h:outputScript library="js" name="cufon-replace.js" />
+	<h:outputScript library="js" name="Myriad_Pro_300.font.js" />
+	<h:outputScript library="js" name="Myriad_Pro_400.font.js" />
+	<h:outputScript library="js" name="script.js" />
 
-		<h:panelGroup layout="block">
-			<h:panelGroup layout="block">
-				<h:panelGroup layout="block">
-					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+</h:head>
 
-					<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false" draggable="false" closable="false">
-						<h:graphicImage library="images" name="ajax-loader.gif" />
-					</p:dialog>
-					<h:form id="frmInscripcion">
-						<p:panel id="pnlDatosEstCur">
-							<f:facet name="header">
-								<h:panelGrid columns="1" style="margin:auto; text-align:center;">
-									<h:outputText value="Curso : #{inscripcionController.cursoPeriodo.curso.nombreCurso}" />
-									<h:panelGrid columns="2" style="margin:auto; text-align:center;">
-										<p:commandButton value="Nuevo" id="btnNuevoAlumno"
-											action="#{inscripcionController.btnNewEstudent}" process="@this"
-											update="pnlDatosEstCur" >
-											<p:tooltip for="btnNuevoAlumno" value="Estudiante nuevo" />
-										</p:commandButton>
-										<p:commandButton id="btnBuscarEstudiante" value="Buscar"
-											action="#{inscripcionController.btnFindStudent}" process="@this"
-											update="pnlDatosEstCur" >
-											<p:tooltip for="btnBuscarEstudiante" value="Estudiante ya registrado"/>
-										</p:commandButton>
-										
-									</h:panelGrid>
-								</h:panelGrid>
-							</f:facet>
-							
-							<f:facet name="footer">
-								<h:panelGroup style="text-align:center;" layout="block">
-									<p:commandButton id="btnGuardarInscripcion" value="Inscribirse"
-										action="#{inscripcionController.btnGuardarInscripcion}"
-										process="@this pnlDatosEst" update="pnlDatosEstCur">
-										<p:tooltip for="btnGuardarInscripcion" value="Inscribirse al curso: #{inscripcionController.cursoPeriodo.curso.nombreCurso}"/>
-									</p:commandButton>
-								</h:panelGroup>
-							</f:facet>
+<h:body id="page1">
+<form jsfc="h:form">
+	<div class="wrap">
+		<!-- header -->
+		<div class="header">
+			<h:panelGroup layout="block" class="container">
+				<h1>
+					<h:commandLink value="Student's site" icon="#{resource['images/icons:home.png']}" action="/pages/index.jsf"/>
+					
+				</h1>
+				<nav>
+					<ul>
+						<li class="current">
+							<h:commandLink value="#{msg.etiqueta_Inicio}" action="/pages/index.jsf" styleClass="m1"/>
+						</li>
 						
-							<p:messages id="msgs" autoUpdate="true" />
-							
-							<h:panelGrid style="margin:auto;">
-							<h:panelGrid columns="3" rendered="#{inscripcionController.findMode}" id="pnlFindFilter">
-								<h:outputLabel value="#{msg.etiqueta_cedula}" style="margin-right: 56px;" />
-								<p:inputText id="txtCedulaFilter" value="#{inscripcionController.cedulaUsr}"
-									validator="cedulaValidator" required="true"
-									requiredMessage="El documento es obligatorio"/>
-								<p:commandButton value="Buscar" action="#{inscripcionController.btnBuscarPorCedula}"
-									process="@this txtCedulaFilter" update="pnlDatosEst"/>
-							</h:panelGrid>
-							
-							<h:panelGrid columns="2" id="pnlDatosEst">
-								<h:outputText value="Identificador: " styleClass="tamanioLabel" rendered="#{!inscripcionController.findMode}" />
-								<p:inputText value="#{inscripcionController.persona.usuario.identificador}" rendered="#{!inscripcionController.findMode}" />
-
-								<h:outputText value="Clave" styleClass="tamanioLabel" style="display:block; width:200px;" rendered="#{!inscripcionController.findMode}" />
-								<p:password value="#{inscripcionController.persona.usuario.clave}" rendered="#{!inscripcionController.findMode}" />
-
-								<h:outputText value="#{msg.etiqueta_cedula}: " />
-								<p:inputText value="#{inscripcionController.persona.cedula}"
-									required="true" rendered="#{!inscripcionController.findMode}" validator="cedulaValidator"
-									validatorMessage="Documento invalido" requiredMessage="El campo documento es obligatorio" />
-
-								<h:outputText value="#{inscripcionController.persona.cedula}" rendered="#{inscripcionController.findMode}" />
-
-								<h:outputText value="Nombre: " />
-								<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
-									<p:inputText  value="#{inscripcionController.persona.primerNombre}" rendered="#{!inscripcionController.findMode}" />
-									<p:inputText value="#{inscripcionController.persona.segundoNombre}" rendered="#{!inscripcionController.findMode}" />
-
-									<h:outputText style="padding-right: 10px;" value="#{inscripcionController.persona.primerNombre}" rendered="#{inscripcionController.findMode}" />
-									<h:outputText value="#{inscripcionController.persona.segundoNombre}" rendered="#{inscripcionController.findMode}" />
-								</h:panelGrid>
-
-
-								<h:outputText value="Apellido: " />
-								<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
-									<p:inputText value="#{inscripcionController.persona.primerApellido}" rendered="#{!inscripcionController.findMode}" />
-									<p:inputText value="#{inscripcionController.persona.segundoApellido}" rendered="#{!inscripcionController.findMode}" />
-
-									<h:outputText style="padding-right: 10px;" value="#{inscripcionController.persona.primerApellido}" rendered="#{inscripcionController.findMode}" />
-									<h:outputText value="#{inscripcionController.persona.segundoApellido}" rendered="#{inscripcionController.findMode}" />
-								</h:panelGrid>
-
-								<h:outputText value="Fecha nacimiento: " />
-								<p:calendar value="#{inscripcionController.persona.fechaNacimiento}"
-									rendered="#{!inscripcionController.findMode}"
-									pattern="yyyy-MM-dd" navigator="true" />
-								<h:outputText value="#{inscripcionController.persona.fechaNacimiento}" rendered="#{inscripcionController.findMode}" />
-
-								<h:outputText value="Nacionalidad: " />
-								<p:inputText value="#{inscripcionController.persona.nacionalidad}" rendered="#{!inscripcionController.findMode}" />
-								<h:outputText value="#{inscripcionController.persona.nacionalidad}" rendered="#{inscripcionController.findMode}" />
-
-								<h:outputText value="#{msg.etiqueta_direccion}: " />
-								<p:inputText value="#{inscripcionController.persona.direccion}" rendered="#{!inscripcionController.findMode}" />
-								<h:outputText value="#{inscripcionController.persona.direccion}" rendered="#{inscripcionController.findMode}" />
-
-								<h:outputText value="E-mail: " />
-								<p:inputText value="#{inscripcionController.persona.mail}" rendered="#{!inscripcionController.findMode}" />
-								<h:outputText value="#{inscripcionController.persona.mail}" rendered="#{inscripcionController.findMode}" />
-
-								<h:outputText value="#{msg.etiqueta_telefono}: " />
-								<p:inputText value="#{inscripcionController.persona.telefonoCelular}" rendered="#{!inscripcionController.findMode}" />
-								<h:outputText value="#{inscripcionController.persona.telefonoCelular}" rendered="#{inscripcionController.findMode}" />
-							</h:panelGrid>
-							
-							</h:panelGrid>
-						</p:panel>
-					</h:form>
-				</h:panelGroup>
+						<li>
+							<h:commandLink value="#{msg.etiqueta_nosotros}" action="/pages/about.jsf" styleClass="m2"/>
+						</li>
+						
+						<li>
+							<h:commandLink value="Our Articles" action="/pages/articles.jsf" styleClass="m3"/>
+						</li>
+						<li>
+							<h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf" styleClass="m4"/>
+						</li>
+						<li class="last">
+							<a href="sitemap.html" class="m5">Site Map</a>
+						</li>
+					</ul>
+				</nav>
+				<div id="search-form">
+					<fieldset>
+						<div class="rowElem">
+							<input type="text" /> <a href="#"
+								onClick="document.getElementById('search-form').submit()">Search</a>
+						</div>
+					</fieldset>
+				</div>
 			</h:panelGroup>
-		</h:panelGroup>
-
-	</ui:define>
-</ui:composition>
+		</div>
+		<div class="container" >
+			<!-- aside -->
+			
+			<div class ="aside">
+				<h3>Categories</h3>
+				<ul class="categories">
+					<li>
+						<span>
+							<h:commandLink value="#{msg.etiqueta_programas}" action="/pages/programas.jsf?faces-redirect=true" title="Programas que la UEC ofrece" />
+						</span>
+					</li>
+					<li><span><a href="#">Student Info</a></span></li>
+					<li><span><a href="#">Teachers</a></span></li>
+					<li><span><a href="#">Descriptions</a></span></li>
+					<li><span><a href="#">Administrators</a></span></li>
+					<li><span><a href="#">Basic Information</a></span></li>
+					<li><span><a href="#">Vacancies</a></span></li>
+					<li class="last"><span><a href="#">Calendar</a></span></li>
+				</ul>
+				<div id="newsletter-form">
+					<fieldset>
+						<div class="rowElem">
+							<h2>Newsletter</h2>
+							<input type="email" value="Enter Your Email Here"
+								onFocus="if(this.value=='Enter Your Email Here'){this.value=''}"
+								onBlur="if(this.value==''){this.value='Enter Your Email Here'}" />
+							<div class="clear">
+								<a href="#" class="fleft">Unsubscribe</a><a href="#"
+									class="fright"
+									onClick="document.getElementById('newsletter-form').submit()">Submit</a>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<h2>
+					Fresh <span>News</span>
+				</h2>
+				<ul class="news">
+					<li><strong>June 30, 2010</strong>
+						<h4>
+							<a href="#">Sed ut perspiciatis unde</a>
+						</h4> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+						accusantium doloremque.</li>
+					<li><strong>June 14, 2010</strong>
+						<h4>
+							<a href="#">Neque porro quisquam est</a>
+						</h4> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+						aut fugit consequuntur magni.</li>
+					<li><strong>May 29, 2010</strong>
+						<h4>
+							<a href="#">Minima veniam, quis nostrum</a>
+						</h4> Uis autem vel eum iure reprehenderit qui in ea voluptate velit
+						esse quam nihil molestiae.</li>
+				</ul>
+			</div>
+			<!-- content -->
+			<div class="section" id="content">
+				<div id="banner">
+					<h2>
+						Professional <span>Online Education <span>Since 1992</span></span>
+					</h2>
+				</div>
+				<div class="ic">More Website Templates at TemplateMonster.com!</div>
+				<div class="inside">
+					<h2>
+						Programas vigentes
+					</h2>
+					<h:panelGroup layout="block">
+						<h:panelGroup layout="block">
+							<h:panelGroup layout="block">
+								<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+			
+								<p:dialog modal="true" widgetVar="statusDialog" header="Status" showHeader="false" draggable="false" closable="false">
+									<h:graphicImage library="images" name="ajax-loader.gif" />
+								</p:dialog>
+									<p:panel id="pnlDatosEstCur">
+										<f:facet name="header">
+											<h:panelGrid columns="1" style="margin:auto; text-align:center;">
+												<h:outputText value="Curso : #{inscripcionController.cursoPeriodo.curso.nombreCurso}" />
+												<h:panelGrid columns="2" style="margin:auto; text-align:center;">
+													<p:commandButton value="Nuevo" id="btnNuevoAlumno"
+														action="#{inscripcionController.btnNewEstudent}" process="@this"
+														update="pnlDatosEstCur" >
+														<p:tooltip for="btnNuevoAlumno" value="Estudiante nuevo" />
+													</p:commandButton>
+													<p:commandButton id="btnBuscarEstudiante" value="Buscar"
+														action="#{inscripcionController.btnFindStudent}" process="@this"
+														update="pnlDatosEstCur" >
+														<p:tooltip for="btnBuscarEstudiante" value="Estudiante ya registrado"/>
+													</p:commandButton>
+													
+												</h:panelGrid>
+											</h:panelGrid>
+										</f:facet>
+										
+										<f:facet name="footer">
+											<h:panelGroup style="text-align:center;" layout="block">
+												<p:commandButton id="btnGuardarInscripcion" value="Inscribirse"
+													action="#{inscripcionController.btnGuardarInscripcion}"
+													process="@this pnlDatosEst" update="pnlDatosEstCur">
+													<p:tooltip for="btnGuardarInscripcion" value="Inscribirse al curso: #{inscripcionController.cursoPeriodo.curso.nombreCurso}"/>
+												</p:commandButton>
+											</h:panelGroup>
+										</f:facet>
+									
+										<p:messages id="msgs" autoUpdate="true" />
+										
+										<h:panelGrid style="margin:auto;">
+										<h:panelGrid columns="3" rendered="#{inscripcionController.findMode}" id="pnlFindFilter">
+											<h:outputLabel value="#{msg.etiqueta_cedula}" style="margin-right: 56px;" />
+											<p:inputText id="txtCedulaFilter" value="#{inscripcionController.cedulaUsr}"
+												validator="cedulaValidator" required="true"
+												requiredMessage="El documento es obligatorio"/>
+											<p:commandButton value="Buscar" action="#{inscripcionController.btnBuscarPorCedula}"
+												process="@this txtCedulaFilter" update="pnlDatosEst"/>
+										</h:panelGrid>
+										
+										<h:panelGrid columns="2" id="pnlDatosEst">
+											<h:outputText value="Identificador: " styleClass="tamanioLabel" rendered="#{!inscripcionController.findMode}" />
+											<p:inputText value="#{inscripcionController.persona.usuario.identificador}" rendered="#{!inscripcionController.findMode}" />
+			
+											<h:outputText value="Clave" styleClass="tamanioLabel" style="display:block; width:200px;" rendered="#{!inscripcionController.findMode}" />
+											<p:password value="#{inscripcionController.persona.usuario.clave}" rendered="#{!inscripcionController.findMode}" />
+			
+											<h:outputText value="#{msg.etiqueta_cedula}: " />
+											<p:inputText value="#{inscripcionController.persona.cedula}"
+												required="true" rendered="#{!inscripcionController.findMode}" validator="cedulaValidator"
+												validatorMessage="Documento invalido" requiredMessage="El campo documento es obligatorio" />
+			
+											<h:outputText value="#{inscripcionController.persona.cedula}" rendered="#{inscripcionController.findMode}" />
+			
+											<h:outputText value="Nombre: " />
+											<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+												<p:inputText  value="#{inscripcionController.persona.primerNombre}" rendered="#{!inscripcionController.findMode}" />
+												<p:inputText value="#{inscripcionController.persona.segundoNombre}" rendered="#{!inscripcionController.findMode}" />
+			
+												<h:outputText style="padding-right: 10px;" value="#{inscripcionController.persona.primerNombre}" rendered="#{inscripcionController.findMode}" />
+												<h:outputText value="#{inscripcionController.persona.segundoNombre}" rendered="#{inscripcionController.findMode}" />
+											</h:panelGrid>
+			
+			
+											<h:outputText value="Apellido: " />
+											<h:panelGrid cellpadding="0" cellspacing="0" columns="2">
+												<p:inputText value="#{inscripcionController.persona.primerApellido}" rendered="#{!inscripcionController.findMode}" />
+												<p:inputText value="#{inscripcionController.persona.segundoApellido}" rendered="#{!inscripcionController.findMode}" />
+			
+												<h:outputText style="padding-right: 10px;" value="#{inscripcionController.persona.primerApellido}" rendered="#{inscripcionController.findMode}" />
+												<h:outputText value="#{inscripcionController.persona.segundoApellido}" rendered="#{inscripcionController.findMode}" />
+											</h:panelGrid>
+			
+											<h:outputText value="Fecha nacimiento: " />
+											<p:calendar value="#{inscripcionController.persona.fechaNacimiento}"
+												rendered="#{!inscripcionController.findMode}"
+												pattern="yyyy-MM-dd" navigator="true" />
+											<h:outputText value="#{inscripcionController.persona.fechaNacimiento}" rendered="#{inscripcionController.findMode}" />
+			
+											<h:outputText value="Nacionalidad: " />
+											<p:inputText value="#{inscripcionController.persona.nacionalidad}" rendered="#{!inscripcionController.findMode}" />
+											<h:outputText value="#{inscripcionController.persona.nacionalidad}" rendered="#{inscripcionController.findMode}" />
+			
+											<h:outputText value="#{msg.etiqueta_direccion}: " />
+											<p:inputText value="#{inscripcionController.persona.direccion}" rendered="#{!inscripcionController.findMode}" />
+											<h:outputText value="#{inscripcionController.persona.direccion}" rendered="#{inscripcionController.findMode}" />
+			
+											<h:outputText value="E-mail: " />
+											<p:inputText value="#{inscripcionController.persona.mail}" rendered="#{!inscripcionController.findMode}" />
+											<h:outputText value="#{inscripcionController.persona.mail}" rendered="#{inscripcionController.findMode}" />
+			
+											<h:outputText value="#{msg.etiqueta_telefono}: " />
+											<p:inputText value="#{inscripcionController.persona.telefonoCelular}" rendered="#{!inscripcionController.findMode}" />
+											<h:outputText value="#{inscripcionController.persona.telefonoCelular}" rendered="#{inscripcionController.findMode}" />
+										</h:panelGrid>
+										
+										</h:panelGrid>
+									</p:panel>
+							</h:panelGroup>
+						</h:panelGroup>
+					</h:panelGroup>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="inside">
+				<div class="wrapper">
+					<div class="fleft">
+						24/7 Customer Service <span>8.800.146.56.7</span>
+					</div>
+					<div class="aligncenter">
+						<a rel="nofollow" href="http://www.templatemonster.com"
+							class="new_window">Website template</a> designed by
+						TemplateMonster.com<br /> <a
+							href="http://www.templates.com/product/3d-models/"
+							class="new_window">3D Models</a> provided by Templates.com
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<h:outputScript>
+		Cufon.now(); 
+	</h:outputScript>
+	</form>
+</h:body>
 </html>
