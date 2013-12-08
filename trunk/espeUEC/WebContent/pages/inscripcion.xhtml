@@ -5,8 +5,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Home - #{msg.etiqueta_Inicio} | Student's Site - Free Website
-		Template from Templates.com</title>
+	<title>#{msg.etiqueta_UEC}</title>
 	<meta charset="utf-8" />
 	<meta name="description" content="Place your description here" />
 	<meta name="keywords" content="put, your, keyword, here" />
@@ -78,13 +77,11 @@
 							<h:commandLink value="#{msg.etiqueta_programas}" action="/pages/programas.jsf?faces-redirect=true" title="Programas que la UEC ofrece" immediate="true"/>
 						</span>
 					</li>
-					<li><span><a href="#">Student Info</a></span></li>
-					<li><span><a href="#">Teachers</a></span></li>
+					<li><span><a href="#">Información del estudiante</a></span></li>
+					<li><span><a href="#">Profesores</a></span></li>
 					<li><span><a href="#">Descriptions</a></span></li>
-					<li><span><a href="#">Administrators</a></span></li>
-					<li><span><a href="#">Basic Information</a></span></li>
-					<li><span><a href="#">Vacancies</a></span></li>
-					<li class="last"><span><a href="#">Calendar</a></span></li>
+					<li><span><a href="#">Administradores</a></span></li>
+					<li><span><h:commandLink value="Información" action="/pages/about.jsf" styleClass="m2" /></span></li>
 				</ul>
 				<div id="newsletter-form">
 					<fieldset>
