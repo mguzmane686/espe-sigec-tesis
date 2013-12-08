@@ -39,18 +39,18 @@
 				<nav>
 					<ul>
 						<li class="current">
-							<h:commandLink value="#{msg.etiqueta_Inicio}" action="/pages/index.jsf" styleClass="m1"/>
+							<h:commandLink value="#{msg.etiqueta_Inicio}" action="/pages/index.jsf" styleClass="m1" immediate="true"/>
 						</li>
 						
 						<li>
-							<h:commandLink value="#{msg.etiqueta_nosotros}" action="/pages/about.jsf" styleClass="m2"/>
+							<h:commandLink value="#{msg.etiqueta_nosotros}" action="/pages/about.jsf" styleClass="m2" immediate="true"/>
 						</li>
 						
 						<li>
-							<h:commandLink value="Artículos" action="/pages/articles.jsf" styleClass="m3"/>
+							<h:commandLink value="Artículos" action="/pages/articles.jsf" styleClass="m3" immediate="true"/>
 						</li>
 						<li>
-							<h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf" styleClass="m4"/>
+							<h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf" styleClass="m4" immediate="true"/>
 						</li>
 						<li class="last">
 							<a href="sitemap.html" class="m5">Site Map</a>
@@ -75,7 +75,7 @@
 				<ul class="categories">
 					<li>
 						<span>
-							<h:commandLink value="#{msg.etiqueta_programas}" action="/pages/programas.jsf?faces-redirect=true" title="Programas que la UEC ofrece" />
+							<h:commandLink value="#{msg.etiqueta_programas}" action="/pages/programas.jsf?faces-redirect=true" title="Programas que la UEC ofrece" immediate="true"/>
 						</span>
 					</li>
 					<li><span><a href="#">Student Info</a></span></li>
@@ -126,7 +126,7 @@
 			<div class="section" id="content">
 				<div id="banner">
 					<h2>
-						Professional <span>Online Education <span>Since 1992</span></span>
+						
 					</h2>
 				</div>
 				<div class="ic">More Website Templates at TemplateMonster.com!</div>
