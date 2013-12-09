@@ -76,5 +76,12 @@ public class PortalServicioImpl implements PortalServicio{
 		return pensumAcademicoFacadeLocal.buscarHorarioCurso(idCursoPeriodo);
 	}
 
+	@Override
+	public Collection<CursoEstudiante> buscarHistorialEstudiante(String cedula) throws Exception {
+		// TODO Auto-generated method stub
+		
+		return cursoEstudianteFacadeLocal.buscarHistorialEstudiante(cedula);
+	}
+
 	
 }

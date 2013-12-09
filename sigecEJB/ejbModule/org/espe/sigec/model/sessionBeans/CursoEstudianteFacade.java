@@ -113,4 +113,39 @@ public class CursoEstudianteFacade extends AbstractFacade<CursoEstudiante> imple
 		Collection<CursoEstudiante> lstUsuarios = criteria.list();
 		return lstUsuarios;
 	}
+
+	@Override
+	public Collection<CursoEstudiante> buscarHistorialEstudiante(String cedula) {
+		Criteria criteria = ((Session)getEntityManager().getDelegate()).createCriteria(CursoEstudiante.class, "cursoEstudianteA");
+		
+		
+		criteria.createAlias("cursoEstudianteA.estudiante", "estudianteA");
+		criteria.setFetchMode("estudianteA", FetchMode.JOIN);
+		
+		criteria.createAlias("estudianteA.persona", "personaA");
+		criteria.setFetchMode("personaA", FetchMode.JOIN);
+		
+		criteria.add(Restrictions.eq("personaA.cedula", cedula));
+		
+		
+		criteria.createAlias("cursoEstudianteA.programaCurso", "programaCursoA");
+		criteria.setFetchMode("programaCursoA", FetchMode.JOIN);
+		
+		
+		
+		
+		criteria.createAlias("programaCursoA.cursoPeriodo", "cursoPeriodoA");
+		criteria.setFetchMode("cursoPeriodoA", FetchMode.JOIN);
+		
+		criteria.createAlias("cursoPeriodoA.periodoAcademico", "periodoAcademicoA");
+		criteria.setFetchMode("periodoAcademicoA", FetchMode.JOIN);
+		
+		
+		criteria.createAlias("cursoPeriodoA.curso", "cursoA");
+		criteria.setFetchMode("cursoA", FetchMode.JOIN);
+		
+		@SuppressWarnings("unchecked")
+		Collection<CursoEstudiante> lstCursosEstudiante = criteria.list();
+		return lstCursosEstudiante;
+	}
 }
