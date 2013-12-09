@@ -9,8 +9,7 @@
 	<meta charset="utf-8" />
 	<meta name="description" content="Place your description here" />
 	<meta name="keywords" content="put, your, keyword, here" />
-	<meta name="author"
-		content="Templates.com - website templates provider" />
+	
 
 
 	<h:outputStylesheet library="css" name="reset.css" />
@@ -74,9 +73,7 @@
 									onFocus="if(this.value=='Enter Your Email Here'){this.value=''}"
 									onBlur="if(this.value==''){this.value='Enter Your Email Here'}" />
 								<div class="clear">
-									<a href="#" class="fleft">Unsubscribe</a><a href="#"
-										class="fright"
-										onClick="document.getElementById('newsletter-form').submit()">Submit</a>
+									<a href="#" class="fleft">Unsubscribe</a><a href="#" class="fright" onClick="document.getElementById('newsletter-form').submit()">Submit</a>
 								</div>
 							</div>
 						</fieldset>
@@ -112,15 +109,30 @@
 					<p:panel>
 						<h:panelGrid columns="3">
 							<h:outputText value="#{msg.etiqueta_cedula}" /> 
-							<h:inputText value="#{historialEstudiante.cedula}" />
-							<p:commandButton value="Buscar" style="height:28px;"></p:commandButton> 
+							<h:inputText id="txtCedula" value="#{historialEstudianteController.cedula}" />
+							<p:commandButton value="Buscar" style="height:28px;" process="@this txtCedula" update="tblCursosEstudiante" action="#{historialEstudianteController.cargarHistorialEstudiante}"></p:commandButton> 
 						</h:panelGrid>
+						
+						<p:spacer height="20px"></p:spacer>
+						<p:dataTable id="tblCursosEstudiante" value="#{historialEstudianteController.lstCursoEstudiantes}" var="item" paginatorAlwaysVisible="false" rows="10" emptyMessage="No existen cursos registrados">
+							<f:facet name="header">
+								Cursos tomados
+							</f:facet>
+							<p:column headerText="Nombre">
+								<h:outputText value="#{item.programaCurso.cursoPeriodo.curso.nombreCurso}" />
+							</p:column>
+							
+							<p:column headerText="Fecha" style="text-align:center">
+								<h:outputText value="#{item.programaCurso.cursoPeriodo.periodoAcademico.fechaInicio}" />
+							</p:column>
+						</p:dataTable>
 					</p:panel>
 				</div>
 
 			</div>
 		</div>
 		<!-- footer -->
+		<h:panelGroup rendered="false">
 		<div class="footer">
 			<div class="container">
 				<div class="inside">
@@ -139,7 +151,7 @@
 				</div>
 			</div>
 		</div>
-
+		</h:panelGroup>
 		<h:outputScript>
 		Cufon.now(); 
 	</h:outputScript>
