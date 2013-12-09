@@ -21,4 +21,5 @@ public interface PortalServicio {
 	Collection<CursoEstudiante> buscarCursosEstudiante(int idEstudiante);
 	Collection<PensumAcademico> buscarPensumCurso(Integer idCurso) throws Exception;
 	HorarioCursoPeriodo buscarHorarioCurso(BigDecimal idCursoPeriodo) throws Exception;
+	Collection<CursoEstudiante> buscarHistorialEstudiante(String cedula) throws Exception;
 }
