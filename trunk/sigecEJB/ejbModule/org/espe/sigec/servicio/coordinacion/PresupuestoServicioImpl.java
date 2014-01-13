@@ -113,7 +113,13 @@ public class PresupuestoServicioImpl implements PresupuestoServicio{
 						presupuestoDetalleFacadeLocal.edit(presupuestoDetalle);
 					}
 					
-					int val = presupuesto.getRecursoActual().compareTo(presupuesto.getRecursoActual().subtract(BigDecimal.valueOf(presupuestoCurso.getDineroAsignado())));
+					int val = 0;
+					try {
+						presupuesto.getRecursoActual().compareTo(presupuesto.getRecursoActual().subtract(BigDecimal.valueOf(presupuestoCurso.getDineroAsignado())));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+							
 					if(val >= 0){
 						presupuesto.setRecursoActual(presupuesto.getRecursoActual().subtract(BigDecimal.valueOf(presupuestoCurso.getDineroAsignado())));
 					}else{
