@@ -247,6 +247,7 @@ public class AdmGeneralServicioImpl implements AdmGeneralServicio{
 				recursoInicial = recursoInicial.add(presupuestoDetalle.getPreDetValorInicial());
 			}
 			presupuesto.setRecursoInicial(recursoInicial.plus());
+			presupuesto.setRecursoActual(presupuesto.getRecursoInicial());
 			presupuesto.setIdPrefijoPresupuesto("PRE".concat(presupuesto.getCodigoAnio()));
 			presupuestoFacadeLocal.create(presupuesto);
 			
