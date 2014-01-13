@@ -98,7 +98,12 @@ public class PresupuestoController implements Serializable {
 		for(DetallePresupuestoCurso detallePresupuestoCurso: getLstDetallePresupuestoCursos()){
 			detallePresupuestoCurso.setLstCuentasPresupuesto((Collection<PresupuestoDetalle>) SerializationUtils.clone((Serializable)lstCuentasPresupuesto));
 			if(putIdCuenta){
-				detallePresupuestoCurso.setIdCuenta( SerializationUtils.clone(((List<PresupuestoDetalle>) lstCuentasPresupuesto).get(0).getPresupuestoDetallePK().getIdCuenta()));
+				try {
+					detallePresupuestoCurso.setIdCuenta( SerializationUtils.clone(((List<PresupuestoDetalle>) lstCuentasPresupuesto).get(0).getPresupuestoDetallePK().getIdCuenta()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 		}
 		
