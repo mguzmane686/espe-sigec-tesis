@@ -80,7 +80,14 @@
 	        		<p:dataTable id="tblInscritos" value="#{calificacionesController.lstInscritos}" var="asistencia" paginatorAlwaysVisible="false"
 						emptyMessage="No existen inscritos" paginator="true" paginatorPosition="top" rows="10" rowIndexVar="numRow">
 						<f:facet name="header">
-							Estudiantes inscritos
+							<h:panelGrid columns="2">
+								Estudiantes inscritos
+								
+								<h:commandLink>
+						            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
+						            <p:dataExporter type="xls" target="tblInscritos" fileName="contactos" excludeColumns="4"/>  
+						        </h:commandLink>
+							</h:panelGrid>
 						</f:facet>
 						<p:column>
 							<f:facet name="header">

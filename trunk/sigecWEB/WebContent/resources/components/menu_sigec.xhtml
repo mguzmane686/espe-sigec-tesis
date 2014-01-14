@@ -307,7 +307,7 @@
         </rich:panelMenuGroup>
         
         <!-- ESTADISTICAS -->
-        <rich:panelMenuGroup id="pmgEstadisticas" label="#{msg.estadisticas}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}">
+        <rich:panelMenuGroup id="pmgEstadisticas" label="#{msg.estadisticas}" rendered="false">
         	<f:attribute name="idMenuPanelGroup" value="pmgEstadisticas"/>
         	<rich:panelMenuGroup id="pmgAnalisis" label="#{msg.analisis_de_resultados}" rendered="#{fn:contains(homeSessionController.idPerfiles , 'ADM')}"
 	        	execute="@this" actionListener="#{homeSessionController.pmiSeleccionPanel}" immediate="true">
