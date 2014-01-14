@@ -39,10 +39,21 @@
 		        		</rich:dataTable>
 		        		
 		        		
+		        		
+				        
+		        		
 		        		<p:dataTable id="tblInscritos" value="#{inscritosCursoController.lstInscritos}" var="inscritos" paginatorAlwaysVisible="false"
 							emptyMessage="No existen inscritos" paginator="true" paginatorPosition="top" rows="10" rowIndexVar="numRow">
 							<f:facet name="header">
-								Estudiantes inscritos
+								<h:panelGrid columns="2">
+									Estudiantes inscritos
+								
+								
+								<h:commandLink>
+						            <h:graphicImage library="images/button" name="ms-excel.png" style="border:0px;"/>  
+						            <p:dataExporter type="xls" target="tblInscritos" fileName="contactos" excludeColumns="3,4"/>  
+						        </h:commandLink>
+								</h:panelGrid>
 							</f:facet>
 							<p:column>
 								<f:facet name="header">
@@ -65,7 +76,7 @@
 								<h:outputText value="#{inscritos.estudiante.persona.nombreCompleto}" />
 							</p:column>
 							
-							<p:column headerText="Estado de pago">
+							<p:column headerText="Estado de pago" exportable="false">
 								<f:facet name="header">
 									<h:outputText value="Estado de pago" />
 								</f:facet>
@@ -74,7 +85,7 @@
 									oncomplete="#{rich:component('rppInscritos')}.show();" />
 							</p:column>
 							
-							<p:column headerText="Cupo">
+							<p:column headerText="Cupo" exportable="false">
 								<f:facet name="header">
 									<h:outputText value="Cupo" />
 								</f:facet>
