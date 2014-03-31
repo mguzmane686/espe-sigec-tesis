@@ -89,7 +89,7 @@ public class CalificacionesController implements Serializable{
 			ProgramaCurso programaCurso = (ProgramaCurso) CollectionUtils.find(getLstProgramaCursos(), predicate);
 			ejecucionServicio.actualizarAsistenciasEstudianteCurso(programaCurso.getCursoPeriodo(), getLstInscritos());
 			setProgramaCursoSeleccionado(null);
-			FacesUtils.addInfoMessage("Se actualizaron las asitencias al curso");
+			FacesUtils.addInfoMessage("Se actualizaron las calificaciones");
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage("Ocurrio un error al actualizar las asistencias al curso");
 			e.printStackTrace();
