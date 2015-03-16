@@ -39,6 +39,7 @@
     	<module>../sigecEJB</module>
     	<module>../sigecWEB</module>
     	<module>../sigecEAR</module>
+    	<module>../espeUEC</module>
     </modules>
 
     <properties>
