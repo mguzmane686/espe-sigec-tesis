@@ -17,6 +17,7 @@ import org.espe.sigec.model.entities.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -78,11 +79,11 @@ public class PersonaFacade extends AbstractFacade<Persona> implements PersonaFac
 		criteria.createAlias("usuario", "usrPer");
 		criteria.setFetchMode("usrPer", FetchMode.JOIN);
 		if(criterio.equals("usr")){
-			criteria.add(Restrictions.like("usrPer.identificador", valor));
+			criteria.add(Restrictions.ilike("usrPer.identificador", valor, MatchMode.ANYWHERE));
 		}else if(criterio.equals("ced")){
 			criteria.add(Restrictions.eq("cedula", valor));
 		}else if(criterio.equals("ape")){
-			criteria.add(Restrictions.like("primerApellido", "%"+valor+"%"));
+			criteria.add(Restrictions.ilike("primerApellido", "%"+valor+"%", MatchMode.ANYWHERE));
 		}
 		
 		
