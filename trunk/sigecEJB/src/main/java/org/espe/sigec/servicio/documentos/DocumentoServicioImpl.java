@@ -40,7 +40,7 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 				invitacionDocente.setEstado(SigecConstantes.INVITACION_EMITIDA);
 				invitacionDocenteFacadeLocal.create(invitacionDocente);
 			}else{
-				throw new Exception("Existe una inivitación ya emitida");
+				throw new Exception("Existe una inivitacion ya emitida");
 			}
 			userTransaction.commit();
 			
@@ -48,7 +48,7 @@ public class DocumentoServicioImpl implements DocumentoServicio{
 			invitacionDocente.getInvitacionDocentePK().setDocNumInvit(null);
 			e.printStackTrace();
 			userTransaction.rollback();
-			throw new Exception("Existe una inivitación ya emitida");
+			throw new Exception("Existe una inivitacion ya emitida");
 		}
 	}
 	@Override
