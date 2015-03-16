@@ -136,8 +136,16 @@ public class CreacionUsuarioController implements Serializable{
 		personaSeleccionada.setUsuario(new Usuario());
 	}
 	
+	public void encerarListaPerfiles(){
+		for(Perfil perfil: getLstPerfils()){
+			perfil.setSelected(Boolean.FALSE);
+		}
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void personaSeleccionadaBucarPerfil(Persona personaSeleccionada) {
+		encerarListaPerfiles();
 		setLstPerfilesUsuario(new ArrayList<UsuarioPerfil>());
 		try {
 			Collection<UsuarioPerfil> lstUsrPerfil = seguridadServicio.findPerfilesUsuario(personaSeleccionada.getUsuario().getIdUsuario());
