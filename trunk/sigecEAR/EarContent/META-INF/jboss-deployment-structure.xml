@@ -2,7 +2,7 @@
 
 	<ear-subdeployments-isolated>false</ear-subdeployments-isolated>
 	
-	<sub-deployment name="sigecWEB.war">
+	<sub-deployment name="espe-uec-web.war">
 		<dependencies>
 			<module name="org.richfaces" slot="main" export="true" meta-inf="export">
 				<imports>

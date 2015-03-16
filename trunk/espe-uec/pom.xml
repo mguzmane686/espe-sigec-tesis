@@ -37,6 +37,8 @@
 <!--         <module>web</module> -->
 <!--         <module>ear</module> -->
     	<module>../sigecEJB</module>
+    	<module>../sigecWEB</module>
+    	<module>../sigecEAR</module>
     </modules>
 
     <properties>
