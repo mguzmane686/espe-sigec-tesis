@@ -22,7 +22,7 @@
 	<artifactId>espe-uec-ear</artifactId>
 	<packaging>ear</packaging>
 
-	<name>espe-uec - ear</name>
+	<name>espe-uec-ear</name>
 
 	<url>http://jboss.org/jbossas</url>
 	<licenses>
@@ -45,6 +45,12 @@
 			<groupId>org.espe.sigec</groupId>
 			<artifactId>espe-uec-ejb</artifactId>
 			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>org.espe.sigec</groupId>
+			<artifactId>espe-uec-portal</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>war</type>
 		</dependency>
 	</dependencies>
 

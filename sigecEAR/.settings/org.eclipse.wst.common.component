@@ -24,6 +24,10 @@
         <dependent-module archiveName="commons-lang3.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="espe-uec-portal.war" deploy-path="/" handle="module:/resource/espeUEC/espeUEC">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="component.exclusion.patterns" value="**.jar"/>
     </wb-module>
 </project-modules>
