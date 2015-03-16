@@ -22,7 +22,7 @@
 	<artifactId>espe-uec-ejb</artifactId>
 	<packaging>ejb</packaging>
 
-	<name>espe-uec - ejb</name>
+	<name>espe-uec-ejb</name>
 
 	<url>http://jboss.org/jbossas</url>
 	<licenses>
