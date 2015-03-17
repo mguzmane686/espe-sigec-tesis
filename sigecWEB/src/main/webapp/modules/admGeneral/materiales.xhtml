@@ -45,9 +45,8 @@
         				<f:facet name="header">
         					Nombre
         				</f:facet>
-        				<a4j:commandLink value="#{items.nombre}" execute="@this" render="pgDatMat" oncomplete="#{rich:component('popupEdMat')}.show();">
-        					<f:setPropertyActionListener target="#{administrarMaterialController.materialDidacticoCatalogoSelected}" 
-        					value="#{items}"/>
+        				<a4j:commandLink value="#{items.nombre}" execute="@this" render="@form" 
+        					oncomplete="#{rich:component('popupEdMat')}.show();" action="#{administrarMaterialController.btnSeleccionarElemento(items)}">
         				</a4j:commandLink>
         			</p:column>
         			
@@ -66,33 +65,32 @@
         			</p:column>
         		</p:dataTable>
         	</rich:collapsiblePanel>
-        	
-        	<rich:popupPanel id="popupEdMat" header="Edicion materiales">
-				<f:facet name="controls">
-        			<h:outputLink value="#" onclick="#{rich:component('popupEdMat')}.hide(); return false;">
-						<h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
-					</h:outputLink>
-				</f:facet>
-        		
-        		<h:panelGroup>
-	        		<h:panelGrid columns="2" id="pgDatMat">
-        				<h:outputText  value="Nombre" styleClass="label-bold"/>
-        				<h:inputText id="txtNombre" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.nombre}" />
-        				<h:outputText value="Descripcion" styleClass="label-bold"/>
-        				<h:inputText id="txtDesc" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.descripcion}" />
-        				<h:outputText value="Estado" styleClass="label-bold"/>
-        				<h:inputText id="txtEst" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.estado}" />
-        			</h:panelGrid>
-        			
-        			<h:panelGroup layout="block" style="width:100%; margin:auto; " styleClass="rf-pp-hdr">
-			        	<h:panelGrid columns="2" style="margin:auto;">
-			        		<a4j:commandButton value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popupEdMat')}.hide();" 
-			        			execute="txtNombre,txtDesc,txtEst" action="#{administrarMaterialController.btnActalizarMterial}"/>
-			        		<a4j:commandButton value="Cancelar" onclick="#{rich:component('popupEdMat')}.hide(); return false;"/>
-			        	</h:panelGrid>
-			        </h:panelGroup>
-        		</h:panelGroup>
-			</rich:popupPanel>
 		</rich:panel>
+		
+		<rich:popupPanel id="popupEdMat" header="Edicion materiales" domElementAttachment="form" modal="true" onmaskclick="#{rich:component('popupEdMat')}.hide();">
+			<f:facet name="controls">
+       			<h:outputLink value="#" onclick="#{rich:component('popupEdMat')}.hide(); return false;">
+					<h:graphicImage library="org.richfaces" name="close_act.gif" style="border:0px;"/>
+				</h:outputLink>
+			</f:facet>
+			<rich:panel>
+        		<h:panelGrid columns="2" id="pgDatMat">
+       				<h:outputText  value="Nombre" styleClass="label-bold"/>
+       				<h:inputText id="txtNombre" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.nombre}" />
+       				<h:outputText value="Descripcion" styleClass="label-bold"/>
+       				<h:inputText id="txtDesc" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.descripcion}" />
+       				<h:outputText value="Estado" styleClass="label-bold"/>
+       				<h:inputText id="txtEst" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.estado}" />
+       			</h:panelGrid>
+       			
+       			<h:panelGroup layout="block" style="width:100%; margin:auto; " styleClass="rf-pp-hdr">
+		        	<h:panelGrid columns="2" style="margin:auto;">
+		        		<a4j:commandButton value="Aceptar" oncomplete="if(#{facesContext.maximumSeverity.ordinal !=2}) #{rich:component('popupEdMat')}.hide();" 
+		        			execute="txtNombre,txtDesc,txtEst" action="#{administrarMaterialController.btnActalizarMterial}" render="tblMateriales"/>
+		        		<a4j:commandButton value="Cancelar" onclick="#{rich:component('popupEdMat')}.hide(); return false;"/>
+		        	</h:panelGrid>
+		        </h:panelGroup>
+		     </rich:panel>   
+		</rich:popupPanel>
 	</h:form>
 </ui:composition>

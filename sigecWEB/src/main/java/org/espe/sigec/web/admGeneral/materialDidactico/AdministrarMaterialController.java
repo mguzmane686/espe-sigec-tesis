@@ -37,9 +37,13 @@ public class AdministrarMaterialController {
 		setLstMaterialDidacticoCatalogos(materialDidacticoCatalogoFacadeLocal.findAll());
 	}
 	
+	public void btnSeleccionarElemento(MaterialDidacticoCatalogo materialDidacticoCatalogo ){
+		setMaterialDidacticoCatalogoSelected(materialDidacticoCatalogo);
+	}
 	public void btnActalizarMterial(){
 		try {
 			materialDidacticoCatalogoFacadeLocal.edit(materialDidacticoCatalogoSelected);
+			setMaterialDidacticoCatalogoSelected(new MaterialDidacticoCatalogo());
 			FacesUtils.addInfoMessage("Material actualizado correctamente");
 		} catch (Exception e) {
 			FacesUtils.addInfoMessage("Ocurrio un error al guardar el Material");
