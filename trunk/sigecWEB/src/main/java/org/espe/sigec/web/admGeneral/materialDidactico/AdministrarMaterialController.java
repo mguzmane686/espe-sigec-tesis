@@ -21,6 +21,7 @@ import org.espe.sigec.web.utils.FacesUtils;
 public class AdministrarMaterialController {
 	private Collection<MaterialDidacticoCatalogo> lstMaterialDidacticoCatalogos;
 	private MaterialDidacticoCatalogo materialDidacticoCatalogo;
+	private MaterialDidacticoCatalogo materialDidacticoCatalogoSelected;
 	
 	@EJB
 	MaterialDidacticoCatalogoFacadeLocal materialDidacticoCatalogoFacadeLocal;
@@ -36,6 +37,15 @@ public class AdministrarMaterialController {
 		setLstMaterialDidacticoCatalogos(materialDidacticoCatalogoFacadeLocal.findAll());
 	}
 	
+	public void btnActalizarMterial(){
+		try {
+			materialDidacticoCatalogoFacadeLocal.edit(materialDidacticoCatalogoSelected);
+			FacesUtils.addInfoMessage("Material actualizado correctamente");
+		} catch (Exception e) {
+			FacesUtils.addInfoMessage("Ocurrio un error al guardar el Material");
+			e.printStackTrace();
+		}
+	}
 	public void btnCrearNuevoMaterial(){
 		try {
 			getMaterialDidacticoCatalogo().setEstado("ACT");
@@ -43,9 +53,9 @@ public class AdministrarMaterialController {
 			lstMaterialDidacticoCatalogos.add(getMaterialDidacticoCatalogo());
 			setMaterialDidacticoCatalogo(new MaterialDidacticoCatalogo());
 			
-			FacesUtils.addInfoMessage("Item creado correctamente");
+			FacesUtils.addInfoMessage("Material creado correctamente");
 		} catch (Exception e) {
-			FacesUtils.addInfoMessage("Ocurrio un error al guardar el item");
+			FacesUtils.addInfoMessage("Ocurrio un error al guardar el Material");
 			e.printStackTrace();
 		}
 	}
@@ -66,6 +76,15 @@ public class AdministrarMaterialController {
 	public void setMaterialDidacticoCatalogo(
 			MaterialDidacticoCatalogo materialDidacticoCatalogo) {
 		this.materialDidacticoCatalogo = materialDidacticoCatalogo;
+	}
+
+	public MaterialDidacticoCatalogo getMaterialDidacticoCatalogoSelected() {
+		return materialDidacticoCatalogoSelected;
+	}
+
+	public void setMaterialDidacticoCatalogoSelected(
+			MaterialDidacticoCatalogo materialDidacticoCatalogoSelected) {
+		this.materialDidacticoCatalogoSelected = materialDidacticoCatalogoSelected;
 	}
 	
 	
