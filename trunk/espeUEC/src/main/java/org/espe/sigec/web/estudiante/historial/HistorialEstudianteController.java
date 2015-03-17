@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.espe.sigec.model.entities.CursoEstudiante;
 import org.espe.sigec.servicio.portal.PortalServicio;
 
@@ -36,11 +39,11 @@ public class HistorialEstudianteController implements Serializable{
 		
 		try {
 			setLstCursoEstudiantes(portalServicio.buscarHistorialEstudiante(getCedula()));
-			if(getLstCursoEstudiantes()== null){
+			if(getLstCursoEstudiantes()== null || CollectionUtils.isEmpty(getLstCursoEstudiantes())){
 				setLstCursoEstudiantes(new ArrayList<CursoEstudiante>(1));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "No se encontraron resultados", null));
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

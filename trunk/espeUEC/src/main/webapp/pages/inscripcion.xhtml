@@ -56,14 +56,7 @@
 						</li>
 					</ul>
 				</nav>
-				<div id="search-form">
-					<fieldset>
-						<div class="rowElem">
-							<input type="text" /> <a href="#"
-								onClick="document.getElementById('search-form').submit()">Search</a>
-						</div>
-					</fieldset>
-				</div>
+				
 			</h:panelGroup>
 		</div>
 		<div class="container" >
@@ -78,55 +71,11 @@
 						</span>
 					</li>
 					<li><span><h:commandLink value="#{msg.informacion_estudiante}" action="/pages/ficha-estudiante.jsf" /> </span></li>
-					<li><span><a href="#">Profesores</a></span></li>
-					<li><span><a href="#">Descriptions</a></span></li>
-					<li><span><a href="#">Administradores</a></span></li>
 					<li><span><h:commandLink value="Información" action="/pages/about.jsf" styleClass="m2" /></span></li>
-				</ul>
-				<div id="newsletter-form">
-					<fieldset>
-						<div class="rowElem">
-							<h2>Newsletter</h2>
-							<input type="email" value="Enter Your Email Here"
-								onFocus="if(this.value=='Enter Your Email Here'){this.value=''}"
-								onBlur="if(this.value==''){this.value='Enter Your Email Here'}" />
-							<div class="clear">
-								<a href="#" class="fleft">Unsubscribe</a><a href="#"
-									class="fright"
-									onClick="document.getElementById('newsletter-form').submit()">Submit</a>
-							</div>
-						</div>
-					</fieldset>
-				</div>
-				<h2>
-					Noticias
-				</h2>
-				<ul class="news">
-					<li><strong>June 30, 2010</strong>
-						<h4>
-							<a href="#">Sed ut perspiciatis unde</a>
-						</h4> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-						accusantium doloremque.</li>
-					<li><strong>June 14, 2010</strong>
-						<h4>
-							<a href="#">Neque porro quisquam est</a>
-						</h4> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-						aut fugit consequuntur magni.</li>
-					<li><strong>May 29, 2010</strong>
-						<h4>
-							<a href="#">Minima veniam, quis nostrum</a>
-						</h4> Uis autem vel eum iure reprehenderit qui in ea voluptate velit
-						esse quam nihil molestiae.</li>
 				</ul>
 			</div>
 			<!-- content -->
 			<div class="section" id="content">
-				<div id="banner">
-					<h2>
-						
-					</h2>
-				</div>
-				<div class="ic">More Website Templates at TemplateMonster.com!</div>
 				<div class="inside">
 					<h2>
 						Programas vigentes
@@ -174,15 +123,16 @@
 										<p:messages id="msgs" autoUpdate="true" />
 										
 										<h:panelGrid style="margin:auto;">
-										<h:panelGrid columns="3" rendered="#{inscripcionController.findMode}" id="pnlFindFilter">
-											<h:outputLabel value="#{msg.etiqueta_cedula}" style="margin-right: 56px;" />
-											<p:inputText id="txtCedulaFilter" value="#{inscripcionController.cedulaUsr}"
-												validator="cedulaValidator" required="true" style="height:18px;"
-												requiredMessage="El documento es obligatorio"/>
-											<p:commandButton value="Buscar" action="#{inscripcionController.btnBuscarPorCedula}" style="height:28px;"
-												process="@this txtCedulaFilter" update="pnlDatosEst"/>
-										</h:panelGrid>
-										
+										<p:panel>
+											<h:panelGrid columns="3" rendered="#{inscripcionController.findMode}" id="pnlFindFilter" columnClasses="td-bottom,td-bottom,td-bottom">
+												<h:outputLabel value="#{msg.etiqueta_cedula}: " styleClass="uec-pf-label-bold" />
+												<p:inputText id="txtCedulaFilter" value="#{inscripcionController.cedulaUsr}"
+													validator="cedulaValidator" required="true" style="height:18px;"
+													requiredMessage="El documento es obligatorio"/>
+												<p:commandButton value="Buscar" action="#{inscripcionController.btnBuscarPorCedula}" style="height:28px;"
+													process="@this txtCedulaFilter" update="pnlDatosEst"/>
+											</h:panelGrid>
+										</p:panel>
 										<h:panelGrid columns="2" id="pnlDatosEst">
 											<h:outputText value="Identificador: " styleClass="tamanioLabel" rendered="#{!inscripcionController.findMode}" />
 											<p:inputText value="#{inscripcionController.persona.usuario.identificador}" rendered="#{!inscripcionController.findMode}" />
@@ -254,16 +204,7 @@
 		<div class="container">
 			<div class="inside">
 				<div class="wrapper">
-					<div class="fleft">
-						24/7 Customer Service <span>8.800.146.56.7</span>
-					</div>
-					<div class="aligncenter">
-						<a rel="nofollow" href="http://www.templatemonster.com"
-							class="new_window">Website template</a> designed by
-						TemplateMonster.com<br /> <a
-							href="http://www.templates.com/product/3d-models/"
-							class="new_window">3D Models</a> provided by Templates.com
-					</div>
+					
 				</div>
 			</div>
 		</div>
