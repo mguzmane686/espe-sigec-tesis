@@ -15,7 +15,7 @@
    	<h:form id="frmMaterial">
        	
        	
-       	<rich:panel header="#{msg['creacion_aula']}" id="pnlAula">
+       	<rich:panel header="Materiales" id="pnlAula">
        		<h:panelGroup layout="block" styleClass="roundCorner">
        			<h:panelGrid columns="1" style="padding-left:10px; text-align:center;" >
        				<a4j:commandButton execute="pgMaterial" value="#{msg['guardar']}" action="#{administrarMaterialController.btnCrearNuevoMaterial}" 
@@ -76,9 +76,9 @@
 			<rich:panel>
         		<h:panelGrid columns="2" id="pgDatMat">
        				<h:outputText  value="Nombre" styleClass="label-bold"/>
-       				<h:inputText id="txtNombre" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.nombre}" />
+       				<sigecComp:textField id="txtNombre" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.nombre}" label="Nombre" required="true" editMode="true"/>
        				<h:outputText value="Descripcion" styleClass="label-bold"/>
-       				<h:inputText id="txtDesc" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.descripcion}" />
+       				<sigecComp:textField id="txtDesc" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.descripcion}" label="Descripcion" required="true" editMode="true"/>
        				<h:outputText value="Estado" styleClass="label-bold"/>
        				<h:selectOneRadio id="txtEst" value="#{administrarMaterialController.materialDidacticoCatalogoSelected.estado}">
        					<f:selectItem itemLabel="Activo" itemValue="ACT"/>

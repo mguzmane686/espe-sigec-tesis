@@ -41,30 +41,23 @@
 				<nav>
 					<ul>
 						<li class="current">
-							<h:commandLink value="#{msg.etiqueta_Inicio}" action="/pages/index.jsf" styleClass="m1"/>
+							<h:commandLink value="#{msg.etiqueta_Inicio}" action="/pages/index.jsf?faces-redirect=true" styleClass="m1"/>
 						</li>
 						
 						<li>
-							<h:commandLink value="#{msg.etiqueta_nosotros}" action="/pages/about.jsf" styleClass="m2"/>
+							<h:commandLink value="#{msg.etiqueta_nosotros}" action="/pages/about.jsf?faces-redirect=true" styleClass="m2"/>
 						</li>
 						
 						<li>
-							<h:commandLink value="Artículos" action="/pages/articles.jsf" styleClass="m3"/>
+							<h:commandLink value="Artículos" action="/pages/articles.jsf?faces-redirect=true" styleClass="m3"/>
 						</li>
 						<li>
-							<h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf" styleClass="m4"/>
+							<h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf?faces-redirect=true" styleClass="m4"/>
 						</li>
 <!-- 						<li class="last"> <a href="sitemap.html" class="m5">Site Map</a> </li> -->
 					</ul>
 				</nav>
-				<div id="search-form">
-					<fieldset>
-						<div class="rowElem">
-							<input type="text" /> <a href="#"
-								onClick="document.getElementById('search-form').submit()">Search</a>
-						</div>
-					</fieldset>
-				</div>
+				
 			</h:panelGroup>
 		</div>
 		<div class="container" >
@@ -79,54 +72,14 @@
 						</span>
 					</li>
 					<li><span><h:commandLink value="#{msg.informacion_estudiante}" action="/pages/ficha-estudiante.jsf" /> </span></li>
-					<li><span><a href="#">Profesores</a></span></li>
-					<li><span><a href="#">Descriptions</a></span></li>
-					<li><span><a href="#">Administradores</a></span></li>
 					<li><span><h:commandLink value="Información" action="/pages/about.jsf" styleClass="m2" /></span></li>
 				</ul>
-				<div id="newsletter-form">
-					<fieldset>
-						<div class="rowElem">
-							<h2>Newsletter</h2>
-							<input type="email" value="Enter Your Email Here"
-								onFocus="if(this.value=='Enter Your Email Here'){this.value=''}"
-								onBlur="if(this.value==''){this.value='Enter Your Email Here'}" />
-							<div class="clear">
-								<a href="#" class="fleft">Unsubscribe</a><a href="#"
-									class="fright"
-									onClick="document.getElementById('newsletter-form').submit()">Submit</a>
-							</div>
-						</div>
-					</fieldset>
-				</div>
-				<h2>
-					Noticias
-				</h2>
-				<ul class="news">
-					<li><strong>June 30, 2010</strong>
-						<h4>
-							<a href="#">Sed ut perspiciatis unde</a>
-						</h4> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-						accusantium doloremque.</li>
-					<li><strong>June 14, 2010</strong>
-						<h4>
-							<a href="#">Neque porro quisquam est</a>
-						</h4> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-						aut fugit consequuntur magni.</li>
-					<li><strong>May 29, 2010</strong>
-						<h4>
-							<a href="#">Minima veniam, quis nostrum</a>
-						</h4> Uis autem vel eum iure reprehenderit qui in ea voluptate velit
-						esse quam nihil molestiae.</li>
-				</ul>
+				
+				
 			</div>
 			<!-- content -->
 			<div class="section" id="content">
-				<div id="banner">
-					<h2>
-						
-					</h2>
-				</div>
+				
 				<div class="ic">More Website Templates at TemplateMonster.com!</div>
 				<div class="inside">
 					<h2>
@@ -213,12 +166,12 @@
 							        </p:panel>
 							        
 							        
-							        <h:panelGrid columns="2" style="width:100%; text-align:center;" columnClasses="centrarCelda, centrarCelda">
-								        <p:commandLink value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
+							        <h:panelGrid columns="2" columnClasses="centrarCelda, centrarCelda">
+								        <p:commandButton value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
 								        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
 								        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
-								        </p:commandLink>
-								        <p:commandLink onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
+								        </p:commandButton>
+								        <p:commandButton onclick="prograDialog.hide();" value="Cancelar" styleClass="cancelar" style="width:100px"/>
 							        </h:panelGrid>
 						        </p:outputPanel>  
 						    </p:dialog>
@@ -245,26 +198,21 @@
 		</div>
 	</div>
 	<!-- footer -->
-	<h:panelGroup rendered="false">
 	<div class="footer">
 		<div class="container">
 			<div class="inside">
 				<div class="wrapper">
 					<div class="fleft">
-						24/7 Customer Service <span>8.800.146.56.7</span>
+						
 					</div>
 					<div class="aligncenter">
-						<a rel="nofollow" href="http://www.templatemonster.com"
-							class="new_window">Website template</a> designed by
-						TemplateMonster.com<br /> <a
-							href="http://www.templates.com/product/3d-models/"
-							class="new_window">3D Models</a> provided by Templates.com
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</h:panelGroup>
+	
 	<h:outputScript>
 		Cufon.now(); 
 	</h:outputScript>

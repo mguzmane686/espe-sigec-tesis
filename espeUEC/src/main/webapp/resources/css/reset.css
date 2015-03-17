@@ -48,3 +48,6 @@ img {
 embed { 
 	vertical-align:top;
 }
+.td-bottom{
+	vertical-align: bottom !important;
+}

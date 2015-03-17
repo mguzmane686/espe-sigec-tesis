@@ -42,13 +42,7 @@
 						<li><h:commandLink value="#{msg.etiqueta_contacto}" action="/pages/contact.jsf" styleClass="m4" /></li>
 					</ul>
 					</nav>
-					<div id="search-form">
-						<fieldset>
-							<div class="rowElem">
-								<input type="text" /> <a href="#" onClick="document.getElementById('search-form').submit()">Search</a>
-							</div>
-						</fieldset>
-					</div>
+					
 				</h:panelGroup>
 			</div>
 			<div class="container">
@@ -60,58 +54,22 @@
 						<li><span> <h:commandLink value="#{msg.etiqueta_programas}" action="/pages/programas.jsf?faces-redirect=true" title="Programas que la UEC ofrece" />
 						</span></li>
 						<li><span><h:commandLink value="#{msg.informacion_estudiante}" action="/pages/ficha-estudiante.jsf" /> </span></li>
-						<li><span><a href="#">Profesores</a></span></li>
-						<li><span><a href="#">Descriptions</a></span></li>
-						<li><span><a href="#">Administradores</a></span></li>
 						<li><span><h:commandLink value="Información" action="/pages/about.jsf" /></span></li>
-					</ul>
-					<div id="newsletter-form">
-						<fieldset>
-							<div class="rowElem">
-								<h2>Newsletter</h2>
-								<input type="email" value="Enter Your Email Here"
-									onFocus="if(this.value=='Enter Your Email Here'){this.value=''}"
-									onBlur="if(this.value==''){this.value='Enter Your Email Here'}" />
-								<div class="clear">
-									<a href="#" class="fleft">Unsubscribe</a><a href="#" class="fright" onClick="document.getElementById('newsletter-form').submit()">Submit</a>
-								</div>
-							</div>
-						</fieldset>
-					</div>
-					<h2>
-						Noticias
-					</h2>
-					<ul class="news">
-						<li><strong>June 30, 2010</strong>
-							<h4>
-								<a href="#">Sed ut perspiciatis unde</a>
-							</h4> Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-							accusantium doloremque.</li>
-						<li><strong>June 14, 2010</strong>
-							<h4>
-								<a href="#">Neque porro quisquam est</a>
-							</h4> Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
-							aut fugit consequuntur magni.</li>
-						<li><strong>May 29, 2010</strong>
-							<h4>
-								<a href="#">Minima veniam, quis nostrum</a>
-							</h4> Uis autem vel eum iure reprehenderit qui in ea voluptate velit
-							esse quam nihil molestiae.</li>
 					</ul>
 				</div>
 				<!-- content -->
 				<div class="section" id="content">
-					<div id="banner">
-					<h2></h2>
-						
-					</div>
 					
-					<p:panel>
-						<h:panelGrid columns="3">
-							<h:outputText value="#{msg.etiqueta_cedula}" /> 
-							<h:inputText id="txtCedula" value="#{historialEstudianteController.cedula}" />
-							<p:commandButton value="Buscar" style="height:28px;" process="@this txtCedula" update="tblCursosEstudiante" action="#{historialEstudianteController.cargarHistorialEstudiante}"></p:commandButton> 
-						</h:panelGrid>
+					<p:messages id="msgs" autoUpdate="true" />
+<!-- 					<p:panel> -->
+						
+						<table >
+							<tr>
+								<td style="vertical-align: bottom; font-weight: bold;"><h:outputLabel value="#{msg.etiqueta_cedula}: " /> </td>
+								<td><h:inputText id="txtCedula" value="#{historialEstudianteController.cedula}" /></td>
+								<td><p:commandButton value="Buscar" style="height:23px;" process="@this txtCedula" update="tblCursosEstudiante" action="#{historialEstudianteController.cargarHistorialEstudiante}"></p:commandButton></td>
+							</tr>
+						</table>
 						
 						<p:spacer height="20px"></p:spacer>
 						<p:dataTable id="tblCursosEstudiante" value="#{historialEstudianteController.lstCursoEstudiantes}" var="item" paginatorAlwaysVisible="false" rows="10" emptyMessage="No existen cursos registrados">
@@ -126,7 +84,7 @@
 								<h:outputText value="#{item.programaCurso.cursoPeriodo.periodoAcademico.fechaInicio}" />
 							</p:column>
 						</p:dataTable>
-					</p:panel>
+<!-- 					</p:panel> -->
 				</div>
 
 			</div>
