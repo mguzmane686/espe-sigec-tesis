@@ -166,7 +166,7 @@
 							        </p:panel>
 							        
 							        
-							        <h:panelGrid columns="2" columnClasses="centrarCelda, centrarCelda">
+							        <h:panelGrid columns="2" style="width: 100%; text-align: center; border-top-width: 60px; padding-top: 20px; border-top-style: hidden;" columnClasses="centrarCelda, centrarCelda">
 								        <p:commandButton value="Aceptar" styleClass="aceptar" style="width:100px" oncomplete="prograDialog.hide();" action="inscripcion?faces-redirect=true" ajax="true" process="@this">
 								        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo}" value="#{programasController.cursoPeriodoSeleccionado}"></f:setPropertyActionListener>
 								        	<f:setPropertyActionListener target="#{inscripcionController.cursoPeriodo.programaCurso}" value="#{programasController.programaCursoSeleccionado}"></f:setPropertyActionListener>
