@@ -27,8 +27,8 @@ public class EmailSenderService
   
   public void sendMessage(String subject, String text, String destinatario)
   {
-    String username = "maniac787@gmail.com";
-    String password = "wxr787gmx";
+    String username = "desarrollosigec@gmail.com";
+    String password = "Password_01";
     String[] destinatariosList = StringUtils.split(destinatario, ",");
     
     Properties props = new Properties();
